@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LINE公式アカウント構築デモ｜からだ整えラボ 大宮院(架空)</title>
+<style>
+  :root{
+    --green:#06C755;
+    --green-dark:#049c43;
+    --green-pale:#e8f9ef;
+    --ink:#1c2a24;
+    --gray:#5f6f68;
+    --line-bg:#7f9ec7;
+    --bubble-out:#8de055;
+    --orange:#f08a1d;
+    --orange-pale:#fdf3e4;
+    --card-shadow:0 10px 30px rgba(16,60,38,.08);
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Hiragino Kaku Gothic ProN","Noto Sans JP",Meiryo,sans-serif;
+    color:var(--ink);
+    background:#fbfdfc;
+    line-height:1.7;
+    overflow-x:hidden;
+  }
+  img{max-width:100%;}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 24px;}
+
+  /* ===== hero ===== */
+  .hero{
+    background:linear-gradient(135deg,#04b04b 0%,#06C755 55%,#3ddc7f 100%);
+    color:#fff;
+    padding:64px 0 150px;
+    position:relative;
+    overflow:hidden;
+  }
+  .hero::after{
+    content:"";
+    position:absolute;left:50%;bottom:-1px;transform:translateX(-50%);
+    width:120%;height:90px;background:#fbfdfc;
+    border-radius:100% 100% 0 0;
+  }
+  .hero .wrap{position:relative;z-index:2;}
+  .hero-badge{
+    display:inline-block;background:rgba(255,255,255,.18);
+    border:1px solid rgba(255,255,255,.55);
+    border-radius:999px;padding:4px 18px;font-size:13px;font-weight:700;letter-spacing:.08em;
+    margin-bottom:20px;
+  }
+  .hero h1{
+    font-size:38px;line-height:1.45;font-weight:800;letter-spacing:.02em;
+    margin-bottom:16px;
+  }
+  .hero p.lead{font-size:16px;max-width:640px;opacity:.96;}
+  .hero .demo-note{
+    margin-top:22px;display:inline-block;background:#fff;color:var(--green-dark);
+    font-weight:700;font-size:13px;border-radius:10px;padding:8px 16px;
+    box-shadow:0 6px 18px rgba(0,0,0,.12);
+  }
+
+  /* ===== section common ===== */
+  section{padding:72px 0;}
+  .sec-label{
+    display:flex;align-items:center;gap:12px;
+    color:var(--green-dark);font-weight:800;font-size:13px;letter-spacing:.22em;
+    margin-bottom:10px;
+  }
+  .sec-label::before{content:"";width:34px;height:3px;background:var(--green);border-radius:2px;}
+  h2{font-size:28px;font-weight:800;margin-bottom:12px;letter-spacing:.02em;}
+  .sec-desc{color:var(--gray);font-size:15px;max-width:760px;margin-bottom:40px;}
+  .term{
+    background:var(--green-pale);border-radius:12px;padding:14px 18px;
+    font-size:13.5px;color:#20583c;margin:-20px 0 40px;max-width:760px;
+  }
+  .term b{color:var(--green-dark);}
+
+  /* ===== phones ===== */
+  .phones{
+    display:flex;gap:56px;justify-content:center;align-items:flex-start;flex-wrap:wrap;
+  }
+  .phone-set{width:320px;display:flex;flex-direction:column;align-items:center;}
+  .phone{
+    width:302px;background:#101216;border-radius:48px;padding:11px;
+    box-shadow:0 30px 60px rgba(10,40,25,.22);
+  }
+  .screen{
+    border-radius:38px;overflow:hidden;height:845px;
+    display:flex;flex-direction:column;position:relative;background:var(--line-bg);
+  }
+  .notch{
+    position:absolute;top:9px;left:50%;transform:translateX(-50%);
+    width:104px;height:24px;background:#101216;border-radius:14px;z-index:9;
+  }
+  .lheader{
+    background:var(--green);color:#fff;
+    padding:38px 14px 10px;display:flex;align-items:center;gap:8px;
+    font-size:14.5px;font-weight:700;flex-shrink:0;
+  }
+  .lheader .back{font-size:19px;font-weight:400;line-height:1;}
+  .lheader .hicons{margin-left:auto;font-size:13px;letter-spacing:6px;opacity:.9;}
+  .chatbody{
+    flex:1;padding:10px 10px 12px;overflow:hidden;
+    display:flex;flex-direction:column;gap:7px;
+  }
+  .datechip,.stepchip{align-self:center;font-size:10px;border-radius:999px;padding:2px 12px;}
+  .datechip{background:rgba(20,40,70,.28);color:#fff;}
+  .stepchip{
+    background:#fff;color:var(--green-dark);font-weight:700;
+    box-shadow:0 1px 4px rgba(0,0,0,.15);
+  }
+  .msg{display:flex;align-items:flex-end;gap:6px;}
+  .msg.in{padding-right:26px;}
+  .msg.out{justify-content:flex-end;padding-left:40px;}
+  .avatar{
+    width:30px;height:30px;border-radius:50%;background:#fff;flex-shrink:0;
+    display:flex;align-items:center;justify-content:center;
+    color:var(--green-dark);font-weight:800;font-size:13px;
+    border:2px solid var(--green);align-self:flex-start;
+  }
+  .bubble{
+    background:#fff;border-radius:16px;padding:9px 12px;
+    font-size:12px;line-height:1.6;max-width:200px;
+    box-shadow:0 1px 2px rgba(0,0,0,.12);
+  }
+  .msg.out .bubble{background:var(--bubble-out);}
+  .time{font-size:9px;color:#eaf1fb;flex-shrink:0;line-height:1.4;}
+  .msg.out .time{text-align:right;}
+
+  /* carousel card in chat */
+  .ccard{
+    background:#fff;border-radius:16px;overflow:hidden;width:206px;
+    box-shadow:0 1px 3px rgba(0,0,0,.15);flex-shrink:0;
+  }
+  .ccard-hd{
+    background:linear-gradient(135deg,#0bb551,#3ddc7f);color:#fff;
+    font-size:12.5px;font-weight:800;padding:9px 12px;
+  }
+  .ccard-bd{font-size:11px;color:var(--gray);padding:7px 12px 4px;}
+  .ccard .cbtn{
+    display:block;width:calc(100% - 20px);margin:6px auto;
+    border:1.5px solid var(--green);color:var(--green-dark);background:#fff;
+    border-radius:9px;padding:6px 4px;font-size:11.5px;font-weight:700;text-align:center;
+    font-family:inherit;
+  }
+  .ccard .cbtn.primary{background:var(--green);color:#fff;margin-bottom:10px;}
+  .ccard .price{
+    padding:2px 12px 4px;font-size:11px;color:var(--ink);
+  }
+  .ccard .price b{font-size:15px;color:var(--green-dark);}
+  .ccard .price s{color:#a0a8a4;font-size:10px;}
+  .peek{
+    width:14px;border-radius:12px 0 0 12px;background:#fff;opacity:.75;flex-shrink:0;
+    align-self:stretch;
+  }
+  .inputbar{
+    background:#f4f5f7;padding:8px 12px 14px;display:flex;align-items:center;gap:8px;
+    flex-shrink:0;color:#9aa3ad;font-size:16px;
+  }
+  .inputbar .field{
+    flex:1;background:#fff;border:1px solid #dfe3e8;border-radius:999px;
+    font-size:11px;padding:5px 12px;color:#aab2ba;
+  }
+
+  /* rich menu */
+  .rm-toggle{
+    background:#f4f5f7;color:#6a7680;font-size:11px;font-weight:700;
+    text-align:center;padding:5px 0;flex-shrink:0;border-bottom:1px solid #e3e7ea;
+  }
+  .richmenu{
+    background:#e9edf1;padding:5px;flex-shrink:0;
+    display:grid;grid-template-columns:repeat(3,1fr);gap:5px;
+  }
+  .rm-cell{
+    background:#fff;border-radius:10px;height:118px;
+    display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;
+    font-size:11px;font-weight:700;color:var(--ink);text-align:center;
+    position:relative;border:1px solid #eef1f4;
+  }
+  .rm-cell .ric{font-size:26px;line-height:1;}
+  .rm-cell small{font-weight:600;color:var(--gray);font-size:9px;display:block;line-height:1.3;}
+  .rm-cell.hot{
+    background:var(--green);color:#fff;border-color:var(--green);
+  }
+  .rm-cell.hot small{color:#dfffe9;}
+  .tapmark{
+    position:absolute;right:6px;bottom:6px;font-size:16px;
+  }
+  .tapring{
+    position:absolute;right:2px;bottom:2px;width:30px;height:30px;border-radius:50%;
+    border:2px solid #fff;opacity:.7;animation:pulse 1.6s infinite;
+  }
+  @keyframes pulse{
+    0%{transform:scale(.6);opacity:.8;}
+    100%{transform:scale(1.25);opacity:0;}
+  }
+  .phone-cap{
+    margin-top:20px;background:#fff;border-radius:14px;padding:16px 18px;
+    box-shadow:var(--card-shadow);font-size:13px;color:var(--gray);width:100%;
+  }
+  .phone-cap b{color:var(--ink);display:block;margin-bottom:4px;font-size:14px;}
+  .phone-cap b span{color:var(--green-dark);}
+
+  /* ===== flow ===== */
+  .flow-box{
+    background:#fff;border-radius:20px;box-shadow:var(--card-shadow);
+    padding:44px 24px 40px;
+  }
+  .flow{display:flex;flex-direction:column;align-items:center;}
+  .fnode{
+    background:#fff;border:2px solid var(--green);border-radius:14px;
+    padding:12px 22px;text-align:center;max-width:460px;
+    font-weight:700;font-size:14.5px;box-shadow:0 4px 12px rgba(6,199,85,.10);
+  }
+  .fnode small{display:block;font-weight:600;color:var(--gray);font-size:12px;margin-top:2px;}
+  .fnode.start{background:var(--green);border-color:var(--green);color:#fff;}
+  .fnode.start small{color:#dfffe9;}
+  .fnode.goal{background:var(--green-pale);border-color:var(--green-dark);}
+  .fconn{
+    width:2px;height:46px;background:#9fb8a8;position:relative;
+  }
+  .fconn::after{
+    content:"";position:absolute;bottom:-2px;left:50%;transform:translateX(-50%);
+    border:6px solid transparent;border-top:8px solid #9fb8a8;
+  }
+  .fconn .flabel{
+    position:absolute;left:12px;top:50%;transform:translateY(-50%);
+    white-space:nowrap;background:var(--green-pale);color:var(--green-dark);
+    font-size:11.5px;font-weight:700;padding:2px 12px;border-radius:999px;
+  }
+  .fbranch{width:100%;max-width:720px;}
+  .fbranch .stub{width:2px;height:26px;background:#9fb8a8;margin:0 auto;}
+  .fbranch .hline{height:2px;background:#9fb8a8;margin:0 25%;}
+  .fcols{display:flex;}
+  .fcol{
+    flex:1;display:flex;flex-direction:column;align-items:center;padding:0 8px;
+  }
+  .fcol .fconn{height:24px;}
+  .fcol .fconn.long{height:40px;}
+  .branch-chip{
+    border-radius:999px;padding:4px 18px;font-size:13px;font-weight:800;margin:2px 0;
+  }
+  .fcol.yes .branch-chip{background:var(--green);color:#fff;}
+  .fcol.no .branch-chip{background:var(--orange);color:#fff;}
+  .fcol.no .fnode{border-color:var(--orange);box-shadow:0 4px 12px rgba(240,138,29,.12);}
+  .fcol.no .fconn{background:#d8b285;}
+  .fcol.no .fconn::after{border-top-color:#d8b285;}
+  .fcol .fnode{font-size:13px;padding:10px 14px;max-width:300px;}
+  .fcol .fnode small{font-size:11px;}
+  .fcol-note{
+    margin-top:14px;font-size:11.5px;color:var(--gray);text-align:center;max-width:280px;
+    background:var(--orange-pale);border-radius:10px;padding:8px 12px;
+  }
+  .flow-note{margin-top:30px;text-align:center;font-size:13px;color:var(--gray);}
+
+  /* ===== table ===== */
+  .table-scroll{overflow-x:auto;border-radius:16px;box-shadow:var(--card-shadow);background:#fff;}
+  table{border-collapse:collapse;width:100%;min-width:760px;font-size:13.5px;}
+  thead th{
+    background:var(--green);color:#fff;font-weight:700;text-align:left;
+    padding:13px 16px;white-space:nowrap;
+  }
+  thead th:first-child{border-radius:0;}
+  tbody td{padding:13px 16px;border-bottom:1px solid #eef3f0;vertical-align:top;}
+  tbody tr:last-child td{border-bottom:none;}
+  tbody tr:nth-child(even){background:#f7fbf8;}
+  td.no{font-weight:800;color:var(--green-dark);white-space:nowrap;}
+  td .tag{
+    display:inline-block;background:var(--green-pale);color:var(--green-dark);
+    border-radius:6px;font-size:11.5px;font-weight:700;padding:1px 8px;white-space:nowrap;
+  }
+  td .tag.or{background:var(--orange-pale);color:#b5690f;}
+  .kpi{white-space:nowrap;font-weight:700;}
+  .kpi span{color:var(--green-dark);}
+  .kpi i{font-style:normal;color:#b0bcb5;margin:0 4px;}
+  .table-note{font-size:12.5px;color:var(--gray);margin-top:14px;}
+  .swipe-hint{display:none;font-size:12px;color:var(--green-dark);font-weight:700;margin-bottom:8px;}
+  @media (max-width:820px){.swipe-hint{display:block;}}
+
+  /* ===== effects ===== */
+  .effects{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
+  .ecard{
+    background:#fff;border-radius:18px;padding:30px 26px;box-shadow:var(--card-shadow);
+    border-top:4px solid var(--green);
+  }
+  .ecard .eicon{
+    width:56px;height:56px;border-radius:16px;background:var(--green-pale);
+    display:flex;align-items:center;justify-content:center;font-size:28px;margin-bottom:16px;
+  }
+  .ecard h3{font-size:17px;margin-bottom:10px;line-height:1.5;}
+  .ecard p{font-size:13.5px;color:var(--gray);}
+  .ecard .foot{
+    margin-top:14px;font-size:11.5px;color:#93a09a;border-top:1px dashed #e0e8e3;padding-top:10px;
+  }
+
+  /* ===== cta / footer ===== */
+  .closing{
+    background:linear-gradient(135deg,#04b04b,#06C755);color:#fff;
+    border-radius:24px;padding:48px 40px;text-align:center;
+  }
+  .closing h2{color:#fff;margin-bottom:10px;}
+  .closing p{font-size:14.5px;opacity:.95;max-width:640px;margin:0 auto;}
+  footer{
+    margin-top:72px;background:#17231d;color:#c3d2c9;padding:40px 0 48px;
+    font-size:13px;text-align:center;
+  }
+  footer .store{margin-bottom:14px;line-height:1.9;}
+  footer .disclaimer{
+    display:inline-block;background:#22332a;border-radius:10px;padding:10px 20px;
+    color:#e6f3ea;font-size:12.5px;
+  }
+
+  /* ===== responsive ===== */
+  @media (max-width:640px){
+    .hero{padding:48px 0 120px;}
+    .hero h1{font-size:26px;}
+    h2{font-size:22px;}
+    section{padding:52px 0;}
+    .wrap{padding:0 16px;}
+    .phones{gap:44px;}
+    .effects{grid-template-columns:1fr;}
+    .fcol{padding:0 3px;}
+    .fcol .fnode{font-size:11.5px;padding:8px 8px;}
+    .fcol .fnode small{font-size:10px;}
+    .branch-chip{font-size:11.5px;padding:3px 12px;}
+    .fnode{font-size:13px;padding:10px 14px;}
+    .fconn .flabel{left:8px;font-size:10.5px;padding:2px 8px;}
+    .flow-box{padding:32px 10px 30px;}
+    .closing{padding:36px 20px;}
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ HERO ============ -->
+<div class="hero">
+  <div class="wrap">
+    <span class="hero-badge">LINE公式アカウント 構築サンプル</span>
+    <h1>友だち追加から予約まで、<br>LINEが自動で接客する仕組み。</h1>
+    <p class="lead">架空の整体院「からだ整えラボ 大宮院」を題材に、あいさつメッセージ・自動診断・ステップ配信・予約リマインドまでを組み込んだ構築デモです。実際のトーク画面イメージと設計図でご覧いただけます。</p>
+    <span class="demo-note">※ 本ページは提案用の構築サンプル(デモ)です。店舗・数値はすべて架空です。</span>
+  </div>
+</div>
+
+<!-- ============ 01 PHONES ============ -->
+<section id="mock">
+  <div class="wrap">
+    <div class="sec-label">SECTION 01</div>
+    <h2>実機イメージ ── お客様のスマホにはこう届きます</h2>
+    <p class="sec-desc">左は友だち追加直後の自動接客トーク、右はトーク画面の下に常時表示される「リッチメニュー」です。スタッフが1通も手打ちしなくても、この流れがすべて自動で動きます。</p>
+
+    <div class="phones">
+      <!-- phone 1 : talk -->
+      <div class="phone-set">
+        <div class="phone">
+          <div class="screen">
+            <div class="notch"></div>
+            <div class="lheader"><span class="back">‹</span> からだ整えラボ 大宮院 <span class="hicons">☎ ≡</span></div>
+            <div class="chatbody">
+              <div class="datechip">今日</div>
+              <div class="stepchip">① 友だち追加の直後に自動送信</div>
+              <div class="msg in">
+                <div class="avatar">整</div>
+                <div class="bubble">友だち追加ありがとうございます😊<br>まずは30秒のお悩み診断をどうぞ。</div>
+                <span class="time">10:00</span>
+              </div>
+              <div class="stepchip">② ボタンをタップするだけで診断</div>
+              <div class="msg in">
+                <div class="avatar">整</div>
+                <div class="ccard">
+                  <div class="ccard-hd">30秒お悩み診断</div>
+                  <div class="ccard-bd">近いお悩みをタップしてください</div>
+                  <button class="cbtn">肩こり・首のこり</button>
+                  <button class="cbtn">腰痛・骨盤まわり</button>
+                  <button class="cbtn" style="margin-bottom:10px;">その他の不調</button>
+                </div>
+                <div class="peek"></div>
+              </div>
+              <div class="msg out">
+                <span class="time">既読<br>10:01</span>
+                <div class="bubble">腰痛・骨盤まわり</div>
+              </div>
+              <div class="stepchip">③ 回答に合わせて自動返信 → そのまま予約へ</div>
+              <div class="msg in">
+                <div class="avatar">整</div>
+                <div class="bubble">腰痛でお悩みなのですね。デスクワークの方に多いお悩みです。初回は<b>姿勢チェック+骨盤調整60分</b>がおすすめです。</div>
+                <span class="time">10:01</span>
+              </div>
+              <div class="msg in">
+                <div class="avatar">整</div>
+                <div class="ccard">
+                  <div class="ccard-hd">友だち限定 初回クーポン</div>
+                  <div class="price"><b>60分 3,980円</b> <s>通常6,600円</s></div>
+                  <button class="cbtn primary">空き枠を見て予約する</button>
+                </div>
+                <span class="time">10:01</span>
+              </div>
+            </div>
+            <div class="inputbar"><span>＋</span><span class="field">メッセージを入力</span><span>🎤</span></div>
+          </div>
+        </div>
+        <div class="phone-cap">
+          <b><span>トーク画面:</span>あいさつ → 診断 → 予約が全自動</b>
+          お客様がボタンを押すたびに、回答に合わせた返信が自動で届きます。深夜の問い合わせでも取りこぼしません。①〜③のラベルは説明用で、実際の画面には表示されません。
+        </div>
+      </div>
+
+      <!-- phone 2 : rich menu -->
+      <div class="phone-set">
+        <div class="phone">
+          <div class="screen">
+            <div class="notch"></div>
+            <div class="lheader"><span class="back">‹</span> からだ整えラボ 大宮院 <span class="hicons">☎ ≡</span></div>
+            <div class="chatbody">
+              <div class="datechip">今日</div>
+              <div class="msg in">
+                <div class="avatar">整</div>
+                <div class="bubble">ご予約・アクセス・ご質問は、下のメニューからいつでもどうぞ。</div>
+                <span class="time">10:05</span>
+              </div>
+              <div class="msg out">
+                <span class="time">既読<br>10:06</span>
+                <div class="bubble">駐車場はありますか?</div>
+              </div>
+              <div class="stepchip">よくある質問はキーワードに自動で回答</div>
+              <div class="msg in">
+                <div class="avatar">整</div>
+                <div class="bubble">はい、店舗前に提携駐車場が2台分ございます。満車の場合は近隣のコインパーキングをご利用ください(30分無料券をお渡しします)。</div>
+                <span class="time">10:06</span>
+              </div>
+              <div class="stepchip" style="margin-top:auto;">▼ 画面下半分が「リッチメニュー」</div>
+            </div>
+            <div class="rm-toggle">メニュー ▾</div>
+            <div class="richmenu">
+              <div class="rm-cell"><span class="ric">🎁</span>初回限定<small>クーポン配布</small></div>
+              <div class="rm-cell hot">
+                <span class="ric">📅</span>予約する<small>24時間受付</small>
+                <span class="tapring"></span><span class="tapmark">👆</span>
+              </div>
+              <div class="rm-cell"><span class="ric">📍</span>アクセス<small>大宮駅 徒歩5分</small></div>
+              <div class="rm-cell"><span class="ric">❓</span>よくある質問<small>自動で回答</small></div>
+              <div class="rm-cell"><span class="ric">⭐</span>お客様の声<small>改善事例</small></div>
+              <div class="rm-cell"><span class="ric">🤝</span>友だち紹介<small>特典あり</small></div>
+            </div>
+          </div>
+        </div>
+        <div class="phone-cap">
+          <b><span>リッチメニュー:</span>お店の「顔」になる固定メニュー</b>
+          トーク画面の下に常に表示される画像メニューです。6つの枠はそれぞれタップでき、予約ページ・地図・自動回答など行き先を自由に設定できます(デザイン制作込み)。
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 02 FLOW ============ -->
+<section id="flow" style="background:#f2f8f4;">
+  <div class="wrap">
+    <div class="sec-label">SECTION 02</div>
+    <h2>シナリオ設計図 ── 裏側では、この流れが自動で動いています</h2>
+    <p class="sec-desc">友だち追加をきっかけに、決めておいたメッセージが決めておいた日に自動で届く仕組みを「ステップ配信」と呼びます。予約した方・まだの方で、その後に届く内容が自動で切り替わります。</p>
+
+    <div class="flow-box">
+      <div class="flow">
+        <div class="fnode start">友だち追加<small>店頭POP・ショップカード・Instagramから</small></div>
+        <div class="fconn"><span class="flabel">直後</span></div>
+        <div class="fnode">あいさつメッセージ+30秒お悩み診断<small>回答に合わせて初回メニューを自動でご案内</small></div>
+        <div class="fconn"><span class="flabel">3日後</span></div>
+        <div class="fnode">ステップ配信①  セルフケア動画<small>「腰痛の方に」など診断結果に合わせて出し分け</small></div>
+        <div class="fconn"><span class="flabel">7日後</span></div>
+        <div class="fnode">ステップ配信②  初回限定オファー<small>友だち限定価格+予約ボタンつき</small></div>
+
+        <div class="fbranch">
+          <div class="stub"></div>
+          <div class="hline"></div>
+          <div class="fcols">
+            <div class="fcol yes">
+              <div class="fconn long"></div>
+              <span class="branch-chip">予約した方</span>
+              <div class="fconn"></div>
+              <div class="fnode">前日リマインド<small>日時・持ち物・地図を自動送信</small></div>
+              <div class="fconn"></div>
+              <div class="fnode">ご来店</div>
+              <div class="fconn"></div>
+              <div class="fnode goal">来店後お礼+次回のご案内<small>口コミのお願い・2回目クーポンで再来店へ</small></div>
+            </div>
+            <div class="fcol no">
+              <div class="fconn long"></div>
+              <span class="branch-chip">まだ予約していない方</span>
+              <div class="fconn"></div>
+              <div class="fnode">14日後  掘り起こし配信<small>お客様の声+今月の空き枠をご案内</small></div>
+              <div class="fcol-note">ここで予約が入れば、自動で左側の「リマインド→来店」の流れに合流します。</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <p class="flow-note">配信の日数・回数・文面は、お店の客層に合わせて自由に調整できます(納品後の変更方法もレクチャーします)。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 03 TABLE ============ -->
+<section id="plan">
+  <div class="wrap">
+    <div class="sec-label">SECTION 03</div>
+    <h2>配信設計表 ── 1通ごとに「目的」と「見る数字」を決めて設計します</h2>
+    <p class="sec-desc">感覚で配信するのではなく、各メッセージの目的とKPI(開封→タップ→予約の割合)をあらかじめ決め、配信後に数字を見て文面を改善していきます。月額運用ではこの表を毎月更新してご報告します。</p>
+
+    <p class="swipe-hint">← 表は横にスクロールできます →</p>
+    <div class="table-scroll">
+      <table>
+        <thead>
+          <tr><th>#</th><th>配信</th><th>タイミング</th><th>目的</th><th>KPIの目安(開封→タップ→予約)</th></tr>
+        </thead>
+        <tbody>
+          <tr><td class="no">1</td><td>あいさつ+お悩み診断</td><td><span class="tag">追加直後</span></td><td>第一印象づくり・お悩みの把握(タグ付け)</td><td class="kpi"><span>85%</span><i>→</i><span>45%</span><i>→</i><span>—</span></td></tr>
+          <tr><td class="no">2</td><td>ステップ①  セルフケア動画</td><td><span class="tag">3日後</span></td><td>役立つ情報で信頼づくり(売り込まない回)</td><td class="kpi"><span>60%</span><i>→</i><span>25%</span><i>→</i><span>—</span></td></tr>
+          <tr><td class="no">3</td><td>ステップ②  初回限定オファー</td><td><span class="tag">7日後</span></td><td>初回予約の獲得(このシナリオの山場)</td><td class="kpi"><span>55%</span><i>→</i><span>20%</span><i>→</i><span>8%</span></td></tr>
+          <tr><td class="no">4</td><td>予約前日リマインド</td><td><span class="tag">予約前日 18時</span></td><td>無断キャンセル・うっかり忘れの防止</td><td class="kpi"><span>90%</span><i>→</i><span>—</span><i>→</i><span>—</span></td></tr>
+          <tr><td class="no">5</td><td>来店後お礼+口コミ依頼</td><td><span class="tag">来店翌日</span></td><td>口コミ獲得・2回目予約への橋渡し</td><td class="kpi"><span>70%</span><i>→</i><span>30%</span><i>→</i><span>15%</span></td></tr>
+          <tr><td class="no">6</td><td>掘り起こし配信</td><td><span class="tag or">14日後(未予約の方のみ)</span></td><td>迷っている方の後押し(お客様の声+空き枠)</td><td class="kpi"><span>50%</span><i>→</i><span>15%</span><i>→</i><span>4%</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="table-note">※ KPIの数値は本デモ用の架空の設計値です。実際は業種・客層により異なるため、運用開始後の実測値をもとに毎月チューニングします。</p>
+  </div>
+</section>
+
+<!-- ============ 04 EFFECTS ============ -->
+<section id="effect" style="background:#f2f8f4;">
+  <div class="wrap">
+    <div class="sec-label">SECTION 04</div>
+    <h2>導入効果のイメージ</h2>
+    <p class="sec-desc">LINE公式アカウントの自動化で狙う効果は、大きくこの3つです。</p>
+    <div class="effects">
+      <div class="ecard">
+        <div class="eicon">⏰</div>
+        <h3>無断キャンセル・<br>うっかり忘れの削減</h3>
+        <p>予約前日に日時・地図つきのリマインドが自動で届くため、「忘れていた」によるキャンセルを防ぎます。一般に、リマインド配信は無断キャンセルの削減に効果があると言われています。</p>
+        <div class="foot">※ 効果は店舗の状況により異なります(本デモは架空の設計例です)。</div>
+      </div>
+      <div class="ecard">
+        <div class="eicon">🔁</div>
+        <h3>「1回きり」で終わらせない<br>再来店の仕組み</h3>
+        <p>来店後のお礼・セルフケア情報・次回クーポンが自動で届き続けるため、お客様との接点が切れません。一般に、既存のお客様の再来店は新規集客より低コストと言われています。</p>
+        <div class="foot">※ 配信内容・頻度は客層に合わせて設計します。</div>
+      </div>
+      <div class="ecard">
+        <div class="eicon">📞</div>
+        <h3>予約・よくある質問の<br>対応を自動化</h3>
+        <p>24時間いつでもLINEから予約でき、営業時間・駐車場などのよくある質問には自動で回答。施術中に電話を取れず予約を逃す、という機会損失を減らします。</p>
+        <div class="foot">※ 自動応答で解決しないご質問は通常のトークに引き継げます。</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CLOSING ============ -->
+<section id="closing">
+  <div class="wrap">
+    <div class="closing">
+      <h2>ここまでの一式を、設計から運用まで。</h2>
+      <p>リッチメニューのデザイン、シナリオ設計、配信文面の作成、開設・各種設定までを構築としてお引き受けし、公開後は数字を見ながら毎月の配信改善まで伴走します。本ページと同様のデモを、貴店の業種・メニューに合わせてお作りすることも可能です。</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="store">
+      からだ整えラボ 大宮院(架空の店舗です)<br>
+      埼玉県さいたま市大宮区◯◯町1-2-3(ダミー住所)  TEL 048-000-0000(ダミー番号)
+    </div>
+    <div class="disclaimer">※ 本ページはLINE公式アカウントの構築サンプル(デモ)です。店舗・配信内容・数値はすべて架空です。</div>
+  </div>
+</footer>
+
+<script>
+  // デモ用: リッチメニューのセルをタップ(クリック)すると軽く沈む
+  document.querySelectorAll('.rm-cell').forEach(function(cell){
+    cell.addEventListener('pointerdown',function(){cell.style.transform='scale(.96)';});
+    cell.addEventListener('pointerup',function(){cell.style.transform='';});
+    cell.addEventListener('pointerleave',function(){cell.style.transform='';});
+  });
+</script>
+</body>
+</html>

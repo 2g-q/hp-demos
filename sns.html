@@ -1,0 +1,879 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Instagram運用サンプルパック|粉と麦 浦和店(デモ)</title>
+<style>
+  :root{
+    --cream:#FBF8F2;
+    --beige:#F3EADB;
+    --sand:#E8DCC8;
+    --brown:#5E4430;
+    --brown-soft:#7A5C44;
+    --caramel:#C89B6C;
+    --ink:#3A2E24;
+    --save:#6B7F5E;   /* 保存狙い */
+    --reach:#7A8CA3;  /* リーチ狙い */
+    --visit:#B0714D;  /* 来店転換 */
+    --serif:"Hiragino Mincho ProN","Yu Mincho","YuMincho",serif;
+    --sans:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic",sans-serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html,body{overflow-x:hidden;}
+  body{
+    font-family:var(--sans);
+    background:var(--cream);
+    color:var(--ink);
+    line-height:1.8;
+    font-size:15px;
+  }
+  .wrap{max-width:1080px;margin:0 auto;padding:0 20px;}
+
+  /* ===== hero ===== */
+  .hero{
+    background:linear-gradient(180deg,#FFFFFF 0%,var(--cream) 100%);
+    border-bottom:1px solid var(--sand);
+    padding:64px 0 48px;
+    text-align:center;
+  }
+  .hero .kicker{
+    display:inline-block;
+    font-size:12px;letter-spacing:.28em;
+    color:var(--brown-soft);
+    border:1px solid var(--caramel);
+    border-radius:999px;
+    padding:4px 18px;
+    margin-bottom:22px;
+    background:#fff;
+  }
+  .hero h1{
+    font-family:var(--serif);
+    font-size:clamp(24px,4.2vw,38px);
+    font-weight:600;
+    color:var(--brown);
+    letter-spacing:.06em;
+    line-height:1.5;
+  }
+  .hero .sub{
+    margin-top:14px;
+    color:var(--brown-soft);
+    font-size:14px;
+    letter-spacing:.05em;
+  }
+  .hero .badges{margin-top:26px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap;}
+  .hero .badges span{
+    background:var(--beige);
+    color:var(--brown);
+    border-radius:6px;
+    font-size:12.5px;
+    padding:6px 14px;
+    letter-spacing:.04em;
+  }
+
+  /* ===== section base ===== */
+  section{padding:64px 0;}
+  section.alt{background:#fff;border-top:1px solid var(--sand);border-bottom:1px solid var(--sand);}
+  .sec-head{text-align:center;margin-bottom:40px;}
+  .sec-head .num{
+    font-family:var(--serif);
+    color:var(--caramel);
+    font-size:13px;
+    letter-spacing:.3em;
+    display:block;
+    margin-bottom:8px;
+  }
+  .sec-head h2{
+    font-family:var(--serif);
+    font-size:clamp(20px,3vw,27px);
+    color:var(--brown);
+    font-weight:600;
+    letter-spacing:.08em;
+  }
+  .sec-head p{margin-top:10px;font-size:13.5px;color:var(--brown-soft);}
+
+  /* ===== phone mock ===== */
+  .grid-flex{display:flex;gap:48px;align-items:flex-start;justify-content:center;flex-wrap:wrap;}
+  .phone{
+    width:375px;max-width:100%;
+    background:#111;
+    border-radius:42px;
+    padding:12px;
+    box-shadow:0 24px 60px rgba(62,44,28,.25);
+    flex-shrink:0;
+  }
+  .screen{
+    background:#fff;
+    border-radius:32px;
+    overflow:hidden;
+  }
+  .notch{height:28px;background:#fff;position:relative;}
+  .notch::after{
+    content:"";position:absolute;left:50%;top:8px;transform:translateX(-50%);
+    width:110px;height:16px;background:#111;border-radius:999px;
+  }
+  .ig-bar{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:8px 14px;border-bottom:1px solid #efefef;
+  }
+  .ig-bar .uname{font-weight:700;font-size:15px;letter-spacing:.02em;}
+  .ig-bar .icons{font-size:15px;color:#333;letter-spacing:6px;}
+  .profile{padding:14px 14px 4px;}
+  .p-top{display:flex;align-items:center;gap:20px;}
+  .avatar{
+    width:74px;height:74px;border-radius:50%;
+    background:radial-gradient(circle at 32% 28%,#fff 0%,var(--beige) 55%,var(--sand) 100%);
+    border:2px solid var(--caramel);
+    display:flex;align-items:center;justify-content:center;
+    flex-direction:column;
+    font-family:var(--serif);color:var(--brown);
+    flex-shrink:0;
+  }
+  .avatar .a1{font-size:15px;font-weight:700;letter-spacing:.1em;line-height:1.2;}
+  .avatar .a2{font-size:7px;letter-spacing:.24em;margin-top:2px;color:var(--brown-soft);}
+  .stats{display:flex;gap:22px;flex:1;justify-content:space-around;text-align:center;}
+  .stats b{display:block;font-size:16px;}
+  .stats span{font-size:11.5px;color:#555;}
+  .bio{margin-top:10px;font-size:12.5px;line-height:1.65;}
+  .bio .bname{font-weight:700;font-size:13px;}
+  .bio .btag{color:#3b6ea5;}
+  .p-btns{display:flex;gap:6px;margin-top:10px;}
+  .p-btns span{
+    flex:1;text-align:center;font-size:12px;font-weight:600;
+    background:#efefef;border-radius:8px;padding:6px 0;
+  }
+  .hl-row{display:flex;gap:14px;padding:12px 14px 10px;overflow:hidden;}
+  .hl{text-align:center;font-size:10px;color:#444;flex-shrink:0;}
+  .hl i{
+    display:block;width:52px;height:52px;border-radius:50%;
+    border:1.5px solid var(--caramel);
+    background:var(--beige);
+    margin:0 auto 4px;
+    font-style:normal;font-family:var(--serif);
+    color:var(--brown);font-size:16px;
+    line-height:52px;
+  }
+  .tab-row{
+    display:flex;border-top:1px solid #efefef;
+    color:#999;font-size:15px;
+  }
+  .tab-row span{flex:1;text-align:center;padding:7px 0;}
+  .tab-row span:first-child{color:#111;border-bottom:1.5px solid #111;}
+
+  /* 3x3 grid */
+  .ig-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:#fff;}
+  .tile{
+    position:relative;aspect-ratio:1/1;overflow:hidden;
+    background:var(--beige);
+  }
+  .tile img{
+    position:absolute;inset:0;width:100%;height:100%;
+    object-fit:cover;
+    filter:sepia(.14) saturate(.94) brightness(.98);
+  }
+  .tile .shade{
+    position:absolute;inset:0;
+    background:linear-gradient(180deg,rgba(46,32,20,.30) 0%,rgba(46,32,20,0) 34%,rgba(46,32,20,0) 55%,rgba(46,32,20,.42) 100%);
+  }
+  .tile .logo{
+    position:absolute;top:7px;left:8px;
+    font-family:var(--serif);
+    color:#fff;font-size:9px;letter-spacing:.22em;
+    text-shadow:0 1px 3px rgba(0,0,0,.45);
+  }
+  .tile .cap{
+    position:absolute;left:8px;right:8px;bottom:7px;
+    font-family:var(--serif);
+    color:#fff;
+  }
+  .tile .cap .chip{
+    display:inline-block;
+    background:rgba(243,234,219,.94);
+    color:var(--brown);
+    font-size:8.5px;letter-spacing:.12em;
+    padding:2px 7px;border-radius:2px;
+    margin-bottom:4px;font-weight:600;
+  }
+  .tile .cap .t{
+    font-size:11.5px;font-weight:600;line-height:1.45;
+    letter-spacing:.05em;
+    text-shadow:0 1px 4px rgba(0,0,0,.55);
+  }
+  /* text tiles (voice / notice) */
+  .tile.txt{
+    background:var(--beige);
+    display:flex;align-items:center;justify-content:center;
+  }
+  .tile.txt .frame{
+    position:absolute;inset:7px;
+    border:1px solid var(--caramel);
+    outline:1px solid rgba(200,155,108,.4);
+    outline-offset:2px;
+  }
+  .tile.txt .inner{
+    position:relative;text-align:center;padding:0 10px;
+    font-family:var(--serif);color:var(--brown);
+  }
+  .tile.txt .q{font-size:22px;color:var(--caramel);line-height:1;font-weight:700;}
+  .tile.txt .body{font-size:11px;line-height:1.7;font-weight:600;letter-spacing:.04em;margin-top:2px;}
+  .tile.txt .who{font-size:8.5px;margin-top:5px;color:var(--brown-soft);letter-spacing:.1em;}
+  .tile.txt .chip2{
+    display:inline-block;background:var(--brown);color:#fff;
+    font-size:8.5px;letter-spacing:.16em;padding:2px 8px;border-radius:2px;margin-bottom:5px;
+  }
+  .tile.txt.dark{background:var(--brown);}
+  .tile.txt.dark .frame{border-color:rgba(255,255,255,.55);outline-color:rgba(255,255,255,.22);}
+  .tile.txt.dark .inner{color:#F6EFE3;}
+  .tile.txt.dark .chip2{background:var(--caramel);color:#fff;}
+  .tile.txt.dark .big{font-family:var(--serif);font-size:13px;font-weight:700;letter-spacing:.03em;line-height:1.6;}
+  .tile.txt.dark .small{font-size:9px;margin-top:5px;letter-spacing:.08em;color:#E2D3BE;}
+
+  /* tonmana note */
+  .tonmana{flex:1;min-width:280px;max-width:440px;}
+  .tonmana h3{
+    font-family:var(--serif);color:var(--brown);
+    font-size:17px;letter-spacing:.08em;margin-bottom:16px;
+    border-left:3px solid var(--caramel);padding-left:12px;
+  }
+  .ton-item{
+    background:#fff;border:1px solid var(--sand);border-radius:10px;
+    padding:14px 16px;margin-bottom:12px;
+  }
+  .ton-item b{color:var(--brown);font-size:13.5px;display:block;margin-bottom:4px;}
+  .ton-item p{font-size:12.5px;color:#5c5044;line-height:1.7;}
+  .swatches{display:flex;gap:8px;margin-top:8px;}
+  .sw{width:40px;height:40px;border-radius:8px;border:1px solid rgba(0,0,0,.08);position:relative;}
+  .sw small{position:absolute;top:44px;left:50%;transform:translateX(-50%);font-size:9px;color:#8a7b6b;white-space:nowrap;}
+  .type-legend{
+    margin-top:26px;
+    display:grid;grid-template-columns:repeat(3,1fr);gap:8px;
+  }
+  .type-legend div{
+    background:var(--beige);border-radius:8px;
+    font-size:11px;padding:8px 6px;text-align:center;color:var(--brown);
+    line-height:1.5;
+  }
+  .type-legend div b{display:block;font-size:11.5px;}
+  .type-legend div small{color:#8a7b6b;font-size:10px;}
+
+  /* ===== captions ===== */
+  .cap-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:22px;}
+  .cap-card{
+    background:#fff;border:1px solid var(--sand);border-radius:14px;
+    overflow:hidden;
+    box-shadow:0 6px 20px rgba(94,68,48,.06);
+  }
+  .cap-card .head{
+    background:var(--beige);
+    padding:12px 18px;
+    display:flex;align-items:center;justify-content:space-between;
+  }
+  .cap-card .head b{font-family:var(--serif);color:var(--brown);font-size:14.5px;letter-spacing:.05em;}
+  .cap-card .aim{
+    font-size:10.5px;color:#fff;border-radius:999px;padding:3px 10px;letter-spacing:.06em;white-space:nowrap;
+  }
+  .aim-save{background:var(--save);}
+  .aim-reach{background:var(--reach);}
+  .aim-visit{background:var(--visit);}
+  .cap-card .body{padding:16px 18px;}
+  .cap-card .text{
+    font-size:12.8px;line-height:1.95;
+    background:var(--cream);
+    border:1px solid var(--sand);
+    border-radius:10px;
+    padding:14px 15px;
+    white-space:pre-line;
+  }
+  .tags{margin-top:14px;}
+  .tag-tier{margin-bottom:9px;}
+  .tag-tier .tier{
+    display:inline-block;font-size:10px;font-weight:700;letter-spacing:.08em;
+    border-radius:3px;padding:2px 8px;margin-bottom:5px;color:#fff;
+  }
+  .tier-big{background:var(--brown);}
+  .tier-mid{background:var(--brown-soft);}
+  .tier-small{background:var(--caramel);}
+  .tag-tier .ts{display:flex;flex-wrap:wrap;gap:5px;}
+  .tag-tier .ts span{
+    font-size:11px;color:#3b6ea5;background:#f2f6fa;
+    border-radius:4px;padding:2px 7px;
+  }
+  .tag-note{font-size:11px;color:#8a7b6b;margin-top:6px;line-height:1.6;}
+
+  /* ===== calendar ===== */
+  .cal-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;padding-bottom:6px;}
+  .cal{min-width:720px;border-collapse:separate;border-spacing:5px;width:100%;}
+  .cal th{
+    font-family:var(--serif);
+    background:var(--brown);color:#F6EFE3;
+    font-size:12.5px;font-weight:600;letter-spacing:.14em;
+    padding:8px 0;border-radius:6px;
+  }
+  .cal th.sat{background:#5C6E86;}
+  .cal th.sun{background:#96604A;}
+  .cal td{
+    background:#fff;border:1px solid var(--sand);border-radius:8px;
+    vertical-align:top;padding:7px 8px;height:86px;width:14.28%;
+  }
+  .cal td.off{background:transparent;border:none;}
+  .cal td.story{background:var(--cream);}
+  .cal .d{font-family:var(--serif);font-size:12.5px;color:var(--brown);font-weight:700;}
+  .cal .pt{font-size:11px;font-weight:600;color:var(--ink);line-height:1.45;margin-top:3px;}
+  .cal .am{
+    display:inline-block;margin-top:5px;
+    font-size:9.5px;color:#fff;border-radius:3px;padding:1px 7px;letter-spacing:.05em;
+  }
+  .cal .am.save{background:var(--save);}
+  .cal .am.reach{background:var(--reach);}
+  .cal .am.visit{background:var(--visit);}
+  .cal .am.story{background:#B4A78F;}
+  .cal-legend{
+    display:flex;gap:14px;flex-wrap:wrap;justify-content:center;
+    margin-top:18px;font-size:12px;color:#5c5044;
+  }
+  .cal-legend i{
+    display:inline-block;width:12px;height:12px;border-radius:3px;
+    margin-right:5px;vertical-align:-1px;font-style:normal;
+  }
+  .cal-point{
+    max-width:780px;margin:26px auto 0;
+    background:var(--beige);border-radius:12px;
+    padding:18px 24px;font-size:13px;line-height:1.9;color:var(--brown);
+  }
+  .cal-point b{display:block;font-family:var(--serif);margin-bottom:4px;font-size:14px;}
+
+  /* ===== flow & report ===== */
+  .flow{display:flex;gap:0;align-items:stretch;justify-content:center;flex-wrap:wrap;margin-bottom:14px;}
+  .fstep{
+    background:#fff;border:1px solid var(--sand);border-radius:12px;
+    width:178px;padding:18px 14px;text-align:center;
+    box-shadow:0 5px 16px rgba(94,68,48,.06);
+    margin:8px 0;
+  }
+  .fstep .fn{
+    font-family:var(--serif);
+    width:30px;height:30px;line-height:30px;border-radius:50%;
+    background:var(--brown);color:#fff;font-size:13px;
+    margin:0 auto 8px;
+  }
+  .fstep b{display:block;font-size:13.5px;color:var(--brown);margin-bottom:5px;letter-spacing:.03em;}
+  .fstep p{font-size:11.5px;color:#6d6154;line-height:1.65;}
+  .farrow{
+    align-self:center;color:var(--caramel);font-size:20px;
+    padding:0 7px;font-weight:700;
+  }
+  .flow-note{
+    text-align:center;font-size:12.5px;color:var(--brown-soft);
+    margin-bottom:44px;
+  }
+  .flow-note b{color:var(--brown);}
+
+  .report{
+    max-width:860px;margin:0 auto;
+    background:#fff;border:1px solid var(--sand);border-radius:16px;
+    box-shadow:0 10px 30px rgba(94,68,48,.08);
+    overflow:hidden;
+  }
+  .report .r-head{
+    background:var(--brown);color:#F6EFE3;
+    padding:14px 24px;
+    display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:6px;
+  }
+  .report .r-head b{font-family:var(--serif);letter-spacing:.1em;font-size:15px;}
+  .report .r-head span{font-size:11.5px;color:#D9C8B0;}
+  .r-body{padding:22px 24px 26px;}
+  .kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-bottom:24px;}
+  .kpi{
+    background:var(--cream);border:1px solid var(--sand);border-radius:10px;
+    padding:12px 14px;text-align:center;
+  }
+  .kpi span{font-size:11px;color:#8a7b6b;display:block;letter-spacing:.06em;}
+  .kpi b{font-family:var(--serif);font-size:21px;color:var(--brown);}
+  .kpi small{font-size:11px;color:var(--save);font-weight:700;}
+  .charts{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:22px;}
+  .chart h4{
+    font-size:12.5px;color:var(--brown);letter-spacing:.06em;
+    margin-bottom:10px;border-left:3px solid var(--caramel);padding-left:8px;
+  }
+  .bars{display:flex;align-items:flex-end;gap:7px;height:110px;
+    border-bottom:1.5px solid var(--sand);padding:0 4px;}
+  .bar{flex:1;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;height:100%;}
+  .bar i{
+    width:100%;max-width:26px;border-radius:4px 4px 0 0;
+    background:linear-gradient(180deg,var(--caramel),var(--brown-soft));
+    font-style:normal;
+  }
+  .bar.g i{background:linear-gradient(180deg,#8FA37E,var(--save));}
+  .bar.b i{background:linear-gradient(180deg,#9DB0C6,var(--reach));}
+  .bar b{font-size:9px;color:#6d6154;font-weight:600;margin-bottom:3px;}
+  .bar span{font-size:9.5px;color:#8a7b6b;margin-top:4px;}
+  .r-comment{
+    margin-top:22px;background:var(--beige);border-radius:10px;
+    padding:14px 18px;font-size:12.5px;line-height:1.85;color:var(--brown);
+  }
+  .r-comment b{font-size:12.5px;}
+
+  /* footer */
+  footer{
+    background:var(--brown);color:#D9C8B0;
+    padding:34px 0;text-align:center;font-size:12px;line-height:2;
+  }
+  footer .fl{font-family:var(--serif);color:#F6EFE3;font-size:16px;letter-spacing:.3em;margin-bottom:8px;}
+
+  @media (max-width:640px){
+    section{padding:46px 0;}
+    .grid-flex{gap:32px;}
+    .phone{width:330px;border-radius:36px;padding:9px;}
+    .stats{gap:10px;}
+    .type-legend{grid-template-columns:repeat(3,1fr);}
+    .farrow{display:none;}
+    .fstep{width:46%;min-width:150px;margin:5px 3px;}
+    .tile .cap .t{font-size:10px;}
+    .tile.txt .body{font-size:10px;}
+    .tile.txt.dark .big{font-size:12px;}
+    .tile.txt .who{font-size:8px;}
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ HERO ============ -->
+<header class="hero">
+  <div class="wrap">
+    <span class="kicker">INSTAGRAM 運用サンプルパック(デモ)</span>
+    <h1>架空のベーカリーカフェ「粉と麦 浦和店」<br>1ヶ月まるごと運用設計サンプル</h1>
+    <p class="sub">投稿画像のトンマナ設計 × キャプション × 30日カレンダー × 週次レポートまで。<br>「この品質で丸ごと任せられるか」をこの1ページでご確認いただけます。</p>
+    <div class="badges">
+      <span>① 9投稿のフィード設計</span>
+      <span>② キャプション全文3本</span>
+      <span>③ 30日投稿カレンダー</span>
+      <span>④ 運用フロー+週次レポート</span>
+    </div>
+  </div>
+</header>
+
+<!-- ============ 1. FEED ============ -->
+<section>
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="num">SAMPLE 01</span>
+      <h2>フィード9投稿 — トンマナ統一デザイン</h2>
+      <p>フォント・色・ロゴ位置・帯のルールを固定し、プロフィールに並んだ時に「世界観がある」状態を作ります。</p>
+    </div>
+
+    <div class="grid-flex">
+      <!-- phone mock -->
+      <div class="phone">
+        <div class="screen">
+          <div class="notch"></div>
+          <div class="ig-bar">
+            <span class="uname">konatomugi_urawa</span>
+            <span class="icons">＋ ☰</span>
+          </div>
+          <div class="profile">
+            <div class="p-top">
+              <div class="avatar"><span class="a1">粉と麦</span><span class="a2">URAWA</span></div>
+              <div class="stats">
+                <div><b>128</b><span>投稿</span></div>
+                <div><b>1,297</b><span>フォロワー</span></div>
+                <div><b>86</b><span>フォロー中</span></div>
+              </div>
+            </div>
+            <div class="bio">
+              <div class="bname">粉と麦 浦和店|国産小麦のベーカリーカフェ</div>
+              🥐 毎朝6時から店内窯で焼き上げ<br>
+              🌾 北海道産小麦「ゆめちから」使用<br>
+              📍 浦和駅西口 徒歩5分/7:30-18:00(火定休)<br>
+              <span class="btag">#粉と麦のある朝</span> で焼きたて情報を毎日更新
+            </div>
+            <div class="p-btns"><span>フォロー中</span><span>メッセージ</span><span>メール</span></div>
+          </div>
+          <div class="hl-row">
+            <div class="hl"><i>🥖</i>今日のパン</div>
+            <div class="hl"><i>🕰</i>営業時間</div>
+            <div class="hl"><i>🗺</i>アクセス</div>
+            <div class="hl"><i>🎁</i>限定情報</div>
+            <div class="hl"><i>👩‍🍳</i>スタッフ</div>
+          </div>
+          <div class="tab-row"><span>▦</span><span>▶</span><span>◎</span></div>
+
+          <div class="ig-grid">
+            <!-- 1 新商品 -->
+            <div class="tile">
+              <img src="https://images.unsplash.com/photo-1555507036-ab1f4038808a?w=600&q=80" alt="">
+              <div class="shade"></div>
+              <div class="logo">粉と麦</div>
+              <div class="cap"><span class="chip">新商品</span><div class="t">発酵バターの<br>クロワッサン</div></div>
+            </div>
+            <!-- 2 製法こだわり -->
+            <div class="tile">
+              <img src="https://images.unsplash.com/photo-1549931319-a545dcf3bc73?w=600&q=80" alt="">
+              <div class="shade"></div>
+              <div class="logo">粉と麦</div>
+              <div class="cap"><span class="chip">こだわり</span><div class="t">じっくり18時間<br>低温発酵の理由</div></div>
+            </div>
+            <!-- 3 雰囲気 -->
+            <div class="tile">
+              <img src="https://images.unsplash.com/photo-1559925393-8be0ec4767c8?w=600&q=80" alt="">
+              <div class="shade"></div>
+              <div class="logo">粉と麦</div>
+              <div class="cap"><span class="chip">店内風景</span><div class="t">朝7時半、<br>窯出しの香り</div></div>
+            </div>
+            <!-- 4 お客様の声(テキストタイル) -->
+            <div class="tile txt">
+              <div class="frame"></div>
+              <div class="inner">
+                <span class="chip2">お客様の声</span>
+                <div class="q">“</div>
+                <div class="body">朝の楽しみが<br>ひとつ<br>増えました</div>
+                <div class="who">— 30代・お客様</div>
+              </div>
+            </div>
+            <!-- 5 限定情報 -->
+            <div class="tile">
+              <img src="https://images.unsplash.com/photo-1568254183919-78a4f43a2877?w=600&q=80" alt="">
+              <div class="shade"></div>
+              <div class="logo">粉と麦</div>
+              <div class="cap"><span class="chip">週末限定</span><div class="t">あんバターサンド<br>土日だけ</div></div>
+            </div>
+            <!-- 6 HowTo -->
+            <div class="tile">
+              <img src="https://images.unsplash.com/photo-1509440159596-0249088772ff?w=600&q=80" alt="">
+              <div class="shade"></div>
+              <div class="logo">粉と麦</div>
+              <div class="cap"><span class="chip">保存版</span><div class="t">ハード系パンの<br>温め直しのコツ</div></div>
+            </div>
+            <!-- 7 スタッフ -->
+            <div class="tile">
+              <img src="https://images.unsplash.com/photo-1506459225024-1428097a7e18?w=600&q=80" alt="">
+              <div class="shade"></div>
+              <div class="logo">粉と麦</div>
+              <div class="cap"><span class="chip">スタッフ</span><div class="t">職人アオイの<br>朝の手しごと</div></div>
+            </div>
+            <!-- 8 告知(テキストタイル) -->
+            <div class="tile txt dark">
+              <div class="frame"></div>
+              <div class="inner">
+                <span class="chip2">EVENT</span>
+                <div class="big">10/12(土)<br>朝市マルシェ<br>出店します</div>
+                <div class="small">浦和駅前広場にて</div>
+              </div>
+            </div>
+            <!-- 9 レビュー/UGC -->
+            <div class="tile">
+              <img src="https://images.unsplash.com/photo-1470337458703-46ad1756a187?w=600&q=80" alt="">
+              <div class="shade"></div>
+              <div class="logo">粉と麦</div>
+              <div class="cap"><span class="chip">ご紹介</span><div class="t">レビューご紹介<br>★4.8 感謝です</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- tonmana notes -->
+      <div class="tonmana">
+        <h3>トンマナ設計ルール(全投稿共通)</h3>
+        <div class="ton-item">
+          <b>カラーパレット</b>
+          <p>クラフト感のあるベージュ×ブラウンの4色に固定。写真も暖色寄りに統一補正します。</p>
+          <div class="swatches" style="margin-bottom:18px;">
+            <div class="sw" style="background:#FBF8F2;"><small>生成り</small></div>
+            <div class="sw" style="background:#F3EADB;"><small>ベージュ</small></div>
+            <div class="sw" style="background:#C89B6C;"><small>キャラメル</small></div>
+            <div class="sw" style="background:#5E4430;"><small>ブラウン</small></div>
+          </div>
+        </div>
+        <div class="ton-item">
+          <b>文字入れのルール</b>
+          <p>ロゴは全投稿「左上」固定・明朝体。ラベル帯は「左下」にベージュ地+こげ茶文字で統一。1枚に入れる文字は2行まで(小さな画面での可読性優先)。</p>
+        </div>
+        <div class="ton-item">
+          <b>写真とテキストタイルの配置</b>
+          <p>9枚中テキストタイルは2枚(お客様の声・告知)まで。グリッド上で対角に配置し、写真の世界観を崩さずリズムを作ります。</p>
+        </div>
+        <h3 style="margin-top:28px;">9投稿の「型」と狙い</h3>
+        <div class="type-legend">
+          <div><b>① 新商品</b><small>リーチ・話題化</small></div>
+          <div><b>② 製法こだわり</b><small>信頼・差別化</small></div>
+          <div><b>③ 雰囲気</b><small>世界観・保存</small></div>
+          <div><b>④ お客様の声</b><small>来店の後押し</small></div>
+          <div><b>⑤ 限定情報</b><small>来店転換</small></div>
+          <div><b>⑥ HowTo</b><small>保存・拡散</small></div>
+          <div><b>⑦ スタッフ</b><small>親近感・固定客化</small></div>
+          <div><b>⑧ 告知</b><small>イベント集客</small></div>
+          <div><b>⑨ レビュー紹介</b><small>社会的証明</small></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 2. CAPTIONS ============ -->
+<section class="alt">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="num">SAMPLE 02</span>
+      <h2>キャプション例 — 全文3本</h2>
+      <p>絵文字は各投稿3〜5個の適量に。ハッシュタグは「ビッグ/ミドル/スモール」の3層設計で、大手と競合せず地域のお客様に届く配分にします。</p>
+    </div>
+
+    <div class="cap-grid">
+      <!-- caption 1 -->
+      <div class="cap-card">
+        <div class="head"><b>① 新商品(クロワッサン)</b><span class="aim aim-reach">リーチ狙い</span></div>
+        <div class="body">
+          <div class="text">🥐 新作、焼き上がりました。
+
+「発酵バターのクロワッサン」(280円)
+フランス産発酵バターを27層に折り込み、外はざくっと、中はしっとり。
+
+朝イチの窯から、7:30の開店に合わせて焼きたてを並べます。数に限りがあるので、確実にご希望の方は開店1時間前までのお電話取り置きが安心です☺️
+
+今週は毎日焼きます。香りだけでも嗅ぎにきてください🌾</div>
+          <div class="tags">
+            <div class="tag-tier">
+              <span class="tier tier-big">ビッグ(投稿数10万〜)</span>
+              <div class="ts"><span>#パン</span><span>#クロワッサン</span><span>#パン好きな人と繋がりたい</span></div>
+            </div>
+            <div class="tag-tier">
+              <span class="tier tier-mid">ミドル(1万〜10万)</span>
+              <div class="ts"><span>#焼きたてパン</span><span>#パン屋さん巡り</span><span>#発酵バター</span></div>
+            </div>
+            <div class="tag-tier">
+              <span class="tier tier-small">スモール/地域(〜1万)</span>
+              <div class="ts"><span>#浦和パン屋</span><span>#浦和カフェ</span><span>#浦和グルメ</span><span>#粉と麦のある朝</span></div>
+            </div>
+            <div class="tag-note">※ 地域タグを厚めに。新商品は発見タブ流入を狙いビッグも3本まで併用。</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- caption 2 -->
+      <div class="cap-card">
+        <div class="head"><b>② HowTo(温め直し)</b><span class="aim aim-save">保存狙い</span></div>
+        <div class="body">
+          <div class="text">📌 保存しておくと便利です。
+
+【ハード系パンの温め直し、3ステップ】
+① 表面にさっと霧吹き(水道水でOK)
+② トースターを2分予熱してから入れる
+③ 焼くのは3分。取り出して1分待つ
+
+これだけで、翌日のバゲットが「窯出し8割」まで戻ります🔥
+ポイントは③の「待つ1分」。蒸気が落ち着いて、皮のパリッと感が復活します。
+
+冷凍したパンの場合は、凍ったまま①→②→4分でどうぞ。
+「試してみたら変わった!」の声、コメントでお待ちしています🥖</div>
+          <div class="tags">
+            <div class="tag-tier">
+              <span class="tier tier-big">ビッグ(投稿数10万〜)</span>
+              <div class="ts"><span>#パンのある暮らし</span><span>#バゲット</span></div>
+            </div>
+            <div class="tag-tier">
+              <span class="tier tier-mid">ミドル(1万〜10万)</span>
+              <div class="ts"><span>#パンの保存方法</span><span>#ハードパン</span><span>#パン好きさんと繋がりたい</span></div>
+            </div>
+            <div class="tag-tier">
+              <span class="tier tier-small">スモール/地域(〜1万)</span>
+              <div class="ts"><span>#浦和パン屋</span><span>#パンの温め直し</span><span>#粉と麦のある朝</span></div>
+            </div>
+            <div class="tag-note">※ HowToは保存率が伸びる型。冒頭に「保存しておくと便利」で保存を明示的に促す。</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- caption 3 -->
+      <div class="cap-card">
+        <div class="head"><b>③ 告知(朝市マルシェ)</b><span class="aim aim-visit">来店転換</span></div>
+        <div class="body">
+          <div class="text">🚩 10/12(土)、朝市マルシェに出店します。
+
+場所:浦和駅前広場(西口を出てすぐ)
+時間:8:00〜12:00 ※売り切れ次第終了
+
+当日はマルシェ限定の「ミニあんバター」を100個だけご用意。店頭では買えない一品です。
+
+いつも店内で会うお客様と、外で会えるのが楽しみです☀️
+「Instagram見ました」で、コーヒー1杯50円引きにします。ぜひスタッフに声をかけてください☕️</div>
+          <div class="tags">
+            <div class="tag-tier">
+              <span class="tier tier-big">ビッグ(投稿数10万〜)</span>
+              <div class="ts"><span>#マルシェ</span><span>#パン活</span></div>
+            </div>
+            <div class="tag-tier">
+              <span class="tier tier-mid">ミドル(1万〜10万)</span>
+              <div class="ts"><span>#朝市</span><span>#パンイベント</span><span>#週末おでかけ</span></div>
+            </div>
+            <div class="tag-tier">
+              <span class="tier tier-small">スモール/地域(〜1万)</span>
+              <div class="ts"><span>#浦和イベント</span><span>#浦和駅</span><span>#さいたまグルメ</span><span>#粉と麦のある朝</span></div>
+            </div>
+            <div class="tag-note">※ 来店転換投稿は「Instagram見ました特典」で効果測定まで設計(来店数を計測可能に)。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 3. CALENDAR ============ -->
+<section>
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="num">SAMPLE 03</span>
+      <h2>30日投稿カレンダー</h2>
+      <p>フィード週5本+ストーリーズ毎日、を無理なく回す1ヶ月設計。曜日ごとに「型」と「狙い」を固定し、迷わず続く仕組みにします。</p>
+    </div>
+
+    <div class="cal-scroll">
+      <table class="cal">
+        <tr>
+          <th>月</th><th>火</th><th>水</th><th>木</th><th>金</th><th class="sat">土</th><th class="sun">日</th>
+        </tr>
+        <tr>
+          <td><span class="d">1</span><div class="pt">HowTo「温め直し3ステップ」</div><span class="am save">保存狙い</span></td>
+          <td class="story"><span class="d">2</span><div class="pt">ストーリーズのみ(定休日・仕込み裏側)</div><span class="am story">つなぎ</span></td>
+          <td><span class="d">3</span><div class="pt">新商品「発酵バターのクロワッサン」</div><span class="am reach">リーチ</span></td>
+          <td><span class="d">4</span><div class="pt">お客様の声(常連さんの一言)</div><span class="am visit">来店転換</span></td>
+          <td><span class="d">5</span><div class="pt">週末限定「あんバターサンド」予告</div><span class="am visit">来店転換</span></td>
+          <td><span class="d">6</span><div class="pt">リール:窯出しの瞬間(15秒)</div><span class="am reach">リーチ</span></td>
+          <td><span class="d">7</span><div class="pt">店内風景「朝7時半の光」</div><span class="am save">保存狙い</span></td>
+        </tr>
+        <tr>
+          <td><span class="d">8</span><div class="pt">製法こだわり「18時間低温発酵」</div><span class="am save">保存狙い</span></td>
+          <td class="story"><span class="d">9</span><div class="pt">ストーリーズのみ(スタッフのまかない)</div><span class="am story">つなぎ</span></td>
+          <td><span class="d">10</span><div class="pt">スタッフ紹介「職人アオイの朝仕込み」</div><span class="am reach">リーチ</span></td>
+          <td><span class="d">11</span><div class="pt">マルシェ出店 告知(1回目)</div><span class="am visit">来店転換</span></td>
+          <td><span class="d">12</span><div class="pt">マルシェ前日:限定品プレビュー</div><span class="am visit">来店転換</span></td>
+          <td><span class="d">13</span><div class="pt">マルシェ当日レポ(現地から)</div><span class="am reach">リーチ</span></td>
+          <td><span class="d">14</span><div class="pt">レビュー紹介+お礼投稿</div><span class="am visit">来店転換</span></td>
+        </tr>
+        <tr>
+          <td><span class="d">15</span><div class="pt">HowTo「パンの冷凍保存テク」</div><span class="am save">保存狙い</span></td>
+          <td class="story"><span class="d">16</span><div class="pt">ストーリーズのみ(質問箱:食べたいパン)</div><span class="am story">つなぎ</span></td>
+          <td><span class="d">17</span><div class="pt">新商品「季節のフルーツデニッシュ」</div><span class="am reach">リーチ</span></td>
+          <td><span class="d">18</span><div class="pt">お客様の声(親子のお客様)</div><span class="am visit">来店転換</span></td>
+          <td><span class="d">19</span><div class="pt">週末限定メニュー告知</div><span class="am visit">来店転換</span></td>
+          <td><span class="d">20</span><div class="pt">リール:サンドイッチ断面(シズル)</div><span class="am reach">リーチ</span></td>
+          <td><span class="d">21</span><div class="pt">店内風景「雨の日の店内」</div><span class="am save">保存狙い</span></td>
+        </tr>
+        <tr>
+          <td><span class="d">22</span><div class="pt">製法こだわり「国産小麦ゆめちから」</div><span class="am save">保存狙い</span></td>
+          <td class="story"><span class="d">23</span><div class="pt">ストーリーズのみ(明日の焼き上げ予告)</div><span class="am story">つなぎ</span></td>
+          <td><span class="d">24</span><div class="pt">スタッフ紹介「ホール担当の推しパン」</div><span class="am reach">リーチ</span></td>
+          <td><span class="d">25</span><div class="pt">質問箱の回答まとめ投稿</div><span class="am save">保存狙い</span></td>
+          <td><span class="d">26</span><div class="pt">月末感謝「今月の人気パンTOP3」</div><span class="am visit">来店転換</span></td>
+          <td><span class="d">27</span><div class="pt">リール:クロワッサン折り込み工程</div><span class="am reach">リーチ</span></td>
+          <td><span class="d">28</span><div class="pt">レビュー紹介+フォロワー1,300人お礼</div><span class="am visit">来店転換</span></td>
+        </tr>
+        <tr>
+          <td><span class="d">29</span><div class="pt">HowTo「翌朝おいしい買い方ガイド」</div><span class="am save">保存狙い</span></td>
+          <td class="story"><span class="d">30</span><div class="pt">ストーリーズのみ(来月の新作チラ見せ)</div><span class="am story">つなぎ</span></td>
+          <td class="off"></td><td class="off"></td><td class="off"></td><td class="off"></td><td class="off"></td>
+        </tr>
+      </table>
+    </div>
+    <div class="cal-legend">
+      <span><i style="background:var(--save);"></i>保存狙い(あとで見返す価値)</span>
+      <span><i style="background:var(--reach);"></i>リーチ狙い(新規に届ける)</span>
+      <span><i style="background:var(--visit);"></i>来店転換(足を運ばせる)</span>
+      <span><i style="background:#B4A78F;"></i>ストーリーズのみ(つなぎ)</span>
+    </div>
+    <div class="cal-point">
+      <b>設計のポイント</b>
+      月曜=保存されるHowTo/こだわり系で週初のエンゲージを確保 → 水曜=新商品・人でリーチ → 金曜=週末の来店導線 → 土曜=リールで新規リーチ、の週リズムを固定。イベント週(2週目)は告知→前日→当日→お礼の4連導線に組み替えます。定休日の火曜はストーリーズのみで「毎日の接点」だけ維持し、制作負荷を上げません。
+    </div>
+  </div>
+</section>
+
+<!-- ============ 4. FLOW & REPORT ============ -->
+<section class="alt">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="num">SAMPLE 04</span>
+      <h2>運用の型 — 制作フローと週次レポート</h2>
+      <p>AIで制作スピードと物量を確保し、公開前は必ず人が全件検品。「速い・安定・雑にならない」を両立する運用体制です。</p>
+    </div>
+
+    <div class="flow">
+      <div class="fstep"><div class="fn">1</div><b>企画(月次)</b><p>店舗の販促予定・季節ネタをヒアリングし、30日カレンダーを設計</p></div>
+      <span class="farrow">▶</span>
+      <div class="fstep"><div class="fn">2</div><b>AIで下書き量産</b><p>投稿文・デザイン案を1ヶ月分まとめて生成。制作時間を大幅短縮</p></div>
+      <span class="farrow">▶</span>
+      <div class="fstep"><div class="fn">3</div><b>人が全件検品</b><p>事実確認・トンマナ統一・撮影指示書の作成まで人の目で1件ずつ</p></div>
+      <span class="farrow">▶</span>
+      <div class="fstep"><div class="fn">4</div><b>予約投稿</b><p>最適時間帯に自動投稿。店舗様の日々の作業はゼロ</p></div>
+      <span class="farrow">▶</span>
+      <div class="fstep"><div class="fn">5</div><b>週次レポート</b><p>数字を見て翌週の投稿を調整。伸びた型を増やし、伸びない型を差し替え</p></div>
+    </div>
+    <p class="flow-note">AIで<b>速く・大量に</b>、人の検品で<b>正確に・世界観を崩さず</b>。この組み合わせが当方の運用の核です。</p>
+
+    <div class="report">
+      <div class="r-head">
+        <b>WEEKLY REPORT — 第3週(10/15〜10/21)</b>
+        <span>粉と麦 浦和店 様(サンプル)</span>
+      </div>
+      <div class="r-body">
+        <div class="kpis">
+          <div class="kpi"><span>週間リーチ</span><b>9,840</b><small>+18% (前週比)</small></div>
+          <div class="kpi"><span>保存数</span><b>214</b><small>+42%</small></div>
+          <div class="kpi"><span>プロフィール表示</span><b>486</b><small>+11%</small></div>
+          <div class="kpi"><span>フォロワー</span><b>1,297</b><small>+38人</small></div>
+        </div>
+        <div class="charts">
+          <div class="chart">
+            <h4>日別リーチ(投稿種別)</h4>
+            <div class="bars">
+              <div class="bar b"><b>1.2k</b><i style="height:44%;"></i><span>月</span></div>
+              <div class="bar b"><b>0.6k</b><i style="height:22%;"></i><span>火</span></div>
+              <div class="bar b"><b>1.8k</b><i style="height:66%;"></i><span>水</span></div>
+              <div class="bar b"><b>1.1k</b><i style="height:40%;"></i><span>木</span></div>
+              <div class="bar b"><b>1.4k</b><i style="height:51%;"></i><span>金</span></div>
+              <div class="bar b"><b>2.7k</b><i style="height:98%;"></i><span>土</span></div>
+              <div class="bar b"><b>1.0k</b><i style="height:37%;"></i><span>日</span></div>
+            </div>
+          </div>
+          <div class="chart">
+            <h4>日別保存数</h4>
+            <div class="bars">
+              <div class="bar g"><b>58</b><i style="height:96%;"></i><span>月</span></div>
+              <div class="bar g"><b>9</b><i style="height:16%;"></i><span>火</span></div>
+              <div class="bar g"><b>31</b><i style="height:52%;"></i><span>水</span></div>
+              <div class="bar g"><b>22</b><i style="height:37%;"></i><span>木</span></div>
+              <div class="bar g"><b>28</b><i style="height:47%;"></i><span>金</span></div>
+              <div class="bar g"><b>44</b><i style="height:74%;"></i><span>土</span></div>
+              <div class="bar g"><b>22</b><i style="height:37%;"></i><span>日</span></div>
+            </div>
+          </div>
+          <div class="chart">
+            <h4>フォロワー推移(週間)</h4>
+            <div class="bars">
+              <div class="bar"><b>1,259</b><i style="height:56%;"></i><span>月</span></div>
+              <div class="bar"><b>1,262</b><i style="height:60%;"></i><span>火</span></div>
+              <div class="bar"><b>1,271</b><i style="height:68%;"></i><span>水</span></div>
+              <div class="bar"><b>1,276</b><i style="height:73%;"></i><span>木</span></div>
+              <div class="bar"><b>1,282</b><i style="height:80%;"></i><span>金</span></div>
+              <div class="bar"><b>1,293</b><i style="height:92%;"></i><span>土</span></div>
+              <div class="bar"><b>1,297</b><i style="height:96%;"></i><span>日</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="r-comment">
+          <b>■ 今週の所見と翌週の打ち手(サンプル)</b><br>
+          月曜のHowTo投稿が保存58件と最高値。「保存される実用系」は月2→3本に増枠します。土曜リールのリーチ2.7kは新規流入の主力のため、窯出し系の続編を制作。火曜(定休日)はストーリーズのみで負荷を抑えつつ接点を維持できています。翌週は金曜の来店転換投稿に「Instagram見ました特典」を付け、来店計測を開始します。
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="fl">粉と麦</div>
+    ※本ページは運用サンプル(デモ)です。店舗・数値・アカウントは架空です。写真はイメージです。<br>
+    実在の店舗・団体とは一切関係ありません。
+  </div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>(株)サンプル商事 オンラインストア｜月次売上ダッシュボード【デモ】</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;700;800&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<style>
+  :root{
+    --bg:#f5f6f8;
+    --card:#ffffff;
+    --ink:#1b2333;
+    --muted:#69748c;
+    --line:#e6e9ef;
+    --accent:#2b5ce6;
+    --accent-soft:#eaf0fd;
+    --up:#128a5a;
+    --down:#d23c50;
+    --num:'Manrope','Noto Sans JP',sans-serif;
+    --jp:'Noto Sans JP','Hiragino Kaku Gothic ProN',sans-serif;
+    --shadow:0 1px 2px rgba(27,35,51,.05),0 4px 16px rgba(27,35,51,.06);
+    --radius:14px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{-webkit-text-size-adjust:100%}
+  body{
+    font-family:var(--jp);
+    background:var(--bg);
+    color:var(--ink);
+    font-size:14px;
+    line-height:1.6;
+  }
+  .wrap{max-width:1240px;margin:0 auto;padding:0 20px 48px}
+
+  /* ===== header ===== */
+  header{
+    background:var(--card);
+    border-bottom:1px solid var(--line);
+  }
+  .head-in{
+    max-width:1240px;margin:0 auto;padding:18px 20px 14px;
+    display:flex;flex-wrap:wrap;align-items:center;gap:10px 16px;
+  }
+  .brand{display:flex;align-items:center;gap:12px;min-width:0}
+  .brand-mark{
+    width:38px;height:38px;border-radius:10px;flex:0 0 auto;
+    background:linear-gradient(135deg,var(--accent),#5b83f0);
+    display:flex;align-items:center;justify-content:center;
+    color:#fff;font-family:var(--num);font-weight:800;font-size:17px;
+  }
+  .brand h1{font-size:16px;font-weight:700;letter-spacing:.02em;line-height:1.35}
+  .brand .sub{font-size:11.5px;color:var(--muted);font-weight:400}
+  .demo-note{
+    margin-left:auto;
+    background:var(--accent-soft);color:var(--accent);
+    border:1px solid #cfdcfa;border-radius:999px;
+    padding:5px 14px;font-size:12px;font-weight:500;white-space:nowrap;
+  }
+  .head-meta{
+    max-width:1240px;margin:0 auto;padding:0 20px 16px;
+    display:flex;flex-wrap:wrap;align-items:center;gap:10px 18px;
+  }
+  .updated{font-size:12px;color:var(--muted)}
+  .updated b{color:var(--ink);font-weight:500}
+
+  /* ===== period selector ===== */
+  .seg{
+    display:flex;gap:4px;background:#eef0f4;border-radius:10px;padding:4px;
+    overflow-x:auto;max-width:100%;
+  }
+  .seg button{
+    appearance:none;border:0;background:transparent;cursor:pointer;
+    font-family:var(--num);font-weight:700;font-size:13px;color:var(--muted);
+    padding:7px 15px;border-radius:8px;white-space:nowrap;transition:.15s;
+  }
+  .seg button:hover{color:var(--ink)}
+  .seg button.active{
+    background:var(--card);color:var(--accent);
+    box-shadow:0 1px 3px rgba(27,35,51,.12);
+  }
+  .seg .yr{font-size:10.5px;font-weight:500;display:block;line-height:1;margin-bottom:2px;color:inherit;opacity:.65}
+
+  /* ===== KPI cards ===== */
+  .kpis{
+    display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin:22px 0 16px;
+  }
+  .kpi{
+    background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);
+    padding:18px 20px 16px;position:relative;overflow:hidden;
+  }
+  .kpi::before{
+    content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--accent);opacity:.85;
+  }
+  .kpi .label{font-size:12px;color:var(--muted);font-weight:500;display:flex;align-items:center;gap:6px}
+  .kpi .label .ic{font-size:13px;opacity:.9}
+  .kpi .val{
+    font-family:var(--num);font-weight:800;font-size:29px;letter-spacing:-.01em;
+    margin-top:6px;line-height:1.15;font-variant-numeric:tabular-nums;
+  }
+  .kpi .val .unit{font-size:14px;font-weight:700;color:var(--muted);margin-left:2px;font-family:var(--jp)}
+  .kpi .delta{margin-top:7px;font-size:12px;display:flex;align-items:center;gap:6px;font-weight:500}
+  .kpi .delta .pill{
+    font-family:var(--num);font-weight:700;border-radius:999px;padding:2px 9px;font-size:12px;
+    display:inline-flex;align-items:center;gap:3px;
+  }
+  .kpi .delta .pill.up{background:#e4f4ec;color:var(--up)}
+  .kpi .delta .pill.down{background:#fbe9ec;color:var(--down)}
+  .kpi .delta .cap{color:var(--muted);font-size:11.5px}
+
+  /* ===== cards / grid ===== */
+  .grid{display:grid;gap:16px;margin-bottom:16px}
+  .g-main{grid-template-columns:minmax(0,7fr) minmax(0,5fr)}
+  .g-sub{grid-template-columns:minmax(0,7fr) minmax(0,5fr)}
+  .card{
+    background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);
+    padding:20px 22px 18px;min-width:0;
+  }
+  .card h2{
+    font-size:14px;font-weight:700;letter-spacing:.02em;
+    display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;
+  }
+  .card h2 .note{font-size:11.5px;color:var(--muted);font-weight:400}
+  .chart-box{position:relative;height:300px;margin-top:14px}
+  .chart-box.tall{height:320px}
+  .chart-box.donut{height:265px}
+  .chart-box.hbar{height:250px}
+  .donut-center{
+    position:absolute;inset:0;display:flex;flex-direction:column;
+    align-items:center;justify-content:center;pointer-events:none;
+    transform:translateY(-14px);
+  }
+  .donut-center .t{font-size:11px;color:var(--muted)}
+  .donut-center .v{font-family:var(--num);font-weight:800;font-size:21px;font-variant-numeric:tabular-nums}
+
+  /* ===== heatmap ===== */
+  .hm{margin-top:16px}
+  .hm-grid{
+    display:grid;
+    grid-template-columns:2.6em repeat(12,minmax(0,1fr));
+    gap:3px;align-items:stretch;
+  }
+  .hm-grid .lbl{
+    font-family:var(--num);font-size:10.5px;color:var(--muted);font-weight:500;
+    display:flex;align-items:center;justify-content:flex-end;padding-right:4px;
+  }
+  .hm-grid .col-lbl{
+    font-family:var(--num);font-size:9.5px;color:var(--muted);
+    display:flex;align-items:flex-end;justify-content:center;padding-bottom:1px;
+  }
+  .hm-cell{
+    aspect-ratio:1.55/1;border-radius:4px;background:var(--accent-soft);
+    position:relative;cursor:default;
+  }
+  .hm-cell:hover{outline:2px solid var(--accent);outline-offset:1px;z-index:2}
+  .hm-legend{
+    display:flex;align-items:center;gap:6px;justify-content:flex-end;
+    margin-top:10px;font-size:11px;color:var(--muted);
+  }
+  .hm-legend .sw{width:14px;height:10px;border-radius:2px;display:inline-block}
+
+  /* ===== table ===== */
+  .tbl-wrap{overflow-x:auto;margin-top:12px}
+  table{width:100%;border-collapse:collapse;min-width:640px}
+  thead th{
+    text-align:left;font-size:11.5px;color:var(--muted);font-weight:500;
+    border-bottom:1px solid var(--line);padding:8px 10px;white-space:nowrap;
+  }
+  thead th.sortable{cursor:pointer;user-select:none}
+  thead th.sortable:hover{color:var(--accent)}
+  thead th .arw{font-size:9px;margin-left:3px;opacity:.9;color:var(--accent)}
+  thead th.num,td.num{text-align:right}
+  tbody td{
+    padding:9px 10px;border-bottom:1px solid #f0f2f6;font-size:13px;white-space:nowrap;
+  }
+  tbody tr:last-child td{border-bottom:0}
+  tbody tr:hover{background:#fafbfd}
+  td.rank{font-family:var(--num);font-weight:700;color:var(--muted);width:2.4em}
+  tr.top3 td.rank{color:var(--accent)}
+  td.num{font-family:var(--num);font-weight:700;font-variant-numeric:tabular-nums}
+  td .cat{
+    font-size:10.5px;color:var(--muted);background:#f1f3f7;
+    border-radius:999px;padding:2px 9px;font-weight:400;
+  }
+  .share-bar{
+    display:inline-block;vertical-align:middle;height:6px;border-radius:3px;
+    background:var(--accent);opacity:.85;margin-right:8px;
+  }
+  td .share-num{font-family:var(--num);font-weight:700;font-size:12px}
+
+  .scroll-hint{display:none;font-size:11px;color:var(--muted);margin-top:8px}
+  @media (max-width:700px){.scroll-hint{display:block}}
+
+  /* ===== footer ===== */
+  footer{
+    text-wrap:balance;
+    margin-top:34px;padding-top:18px;border-top:1px solid var(--line);
+    color:var(--muted);font-size:12px;text-align:center;line-height:1.9;
+  }
+  footer .strong{font-weight:500;color:#535e78}
+
+  /* ===== responsive ===== */
+  @media (max-width:1000px){
+    .g-main,.g-sub{grid-template-columns:1fr}
+    .kpis{grid-template-columns:repeat(2,1fr)}
+  }
+  @media (max-width:560px){
+    .wrap{padding:0 12px 40px}
+    .head-in,.head-meta{padding-left:12px;padding-right:12px}
+    .kpis{grid-template-columns:1fr 1fr;gap:10px}
+    .kpi{padding:14px 14px 13px}
+    .kpi .val{font-size:22px}
+    .kpi .delta .cap{display:none}
+    .card{padding:16px 14px 14px}
+    .chart-box{height:250px}
+    .chart-box.donut{height:230px}
+    .demo-note{margin-left:0}
+    .hm-grid{grid-template-columns:2.2em repeat(12,minmax(0,1fr))}
+    .hm-grid .col-lbl{font-size:8px}
+    .hm-grid .lbl{font-size:9.5px}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="head-in">
+    <div class="brand">
+      <div class="brand-mark">S</div>
+      <div>
+        <h1>(株)サンプル商事 オンラインストア<span class="sub">　月次売上ダッシュボード</span></h1>
+        <div class="sub">Monthly Sales Dashboard — 2026年上半期</div>
+      </div>
+    </div>
+    <div class="demo-note">毎月CSVを置くだけで自動更新される想定のデモです</div>
+  </div>
+  <div class="head-meta">
+    <div class="seg" id="seg" role="tablist" aria-label="対象月の選択"></div>
+    <div class="updated">最終更新: <b id="updatedAt">—</b>（CSV取込 → 自動集計）</div>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <!-- KPI -->
+  <section class="kpis" aria-label="主要KPI">
+    <div class="kpi">
+      <div class="label"><span class="ic">💴</span>売上高</div>
+      <div class="val" id="kpiSales">—</div>
+      <div class="delta" id="kpiSalesD"></div>
+    </div>
+    <div class="kpi">
+      <div class="label"><span class="ic">🧾</span>注文数</div>
+      <div class="val" id="kpiOrders">—</div>
+      <div class="delta" id="kpiOrdersD"></div>
+    </div>
+    <div class="kpi">
+      <div class="label"><span class="ic">🛒</span>客単価</div>
+      <div class="val" id="kpiAov">—</div>
+      <div class="delta" id="kpiAovD"></div>
+    </div>
+    <div class="kpi">
+      <div class="label"><span class="ic">🔁</span>リピート率</div>
+      <div class="val" id="kpiRepeat">—</div>
+      <div class="delta" id="kpiRepeatD"></div>
+    </div>
+  </section>
+
+  <!-- trend + category -->
+  <section class="grid g-main">
+    <div class="card">
+      <h2>月次売上推移 <span class="note">棒=売上高／折れ線=注文数（選択月をハイライト）</span></h2>
+      <div class="chart-box tall"><canvas id="trendChart"></canvas></div>
+    </div>
+    <div class="card">
+      <h2>カテゴリ別売上構成 <span class="note" id="donutNote"></span></h2>
+      <div class="chart-box donut">
+        <canvas id="catChart"></canvas>
+        <div class="donut-center">
+          <div class="t">売上合計</div>
+          <div class="v" id="donutTotal">—</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- heatmap + channel -->
+  <section class="grid g-sub">
+    <div class="card">
+      <h2>曜日 × 時間帯 売上ヒートマップ <span class="note" id="hmNote"></span></h2>
+      <div class="hm">
+        <div class="hm-grid" id="hmGrid"></div>
+        <div class="hm-legend">
+          少ない
+          <span class="sw" style="background:#eef2fc"></span>
+          <span class="sw" style="background:#c8d6f8"></span>
+          <span class="sw" style="background:#87a5f0"></span>
+          <span class="sw" style="background:#4a74e9"></span>
+          <span class="sw" style="background:#2448b8"></span>
+          多い
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <h2>チャネル別売上 <span class="note" id="chNote"></span></h2>
+      <div class="chart-box hbar"><canvas id="chChart"></canvas></div>
+    </div>
+  </section>
+
+  <!-- top10 table -->
+  <section class="card">
+    <h2>商品別売上 TOP10 <span class="note" id="tblNote">（列見出しクリックで並べ替え）</span></h2>
+    <div class="scroll-hint">※ 表は横にスクロールできます</div>
+    <div class="tbl-wrap">
+      <table id="topTable">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>商品名</th>
+            <th>カテゴリ</th>
+            <th class="num sortable" data-key="units">販売数</th>
+            <th class="num sortable" data-key="price">単価</th>
+            <th class="num sortable" data-key="sales">売上<span class="arw" id="defArw">▼</span></th>
+            <th>構成比（TOP10内）</th>
+          </tr>
+        </thead>
+        <tbody id="topBody"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <footer>
+    <div>売上CSV（注文明細）を所定フォルダに置くだけで、集計・グラフ・前月比まで毎月自動で更新される仕組みを想定したサンプルです。</div>
+    <div class="strong">※本ページは制作サンプル（デモ）です。データはすべて架空です。実在の企業・店舗・商品とは一切関係ありません。</div>
+  </footer>
+
+</div>
+
+<script>
+/* =========================================================
+   架空データ（2026年1〜6月 + 前月比用に2025年12月）
+   実案件では CSV → 集計スクリプトがこの JSON を自動生成する想定
+   ========================================================= */
+const MONTH_KEYS = ["2026-01","2026-02","2026-03","2026-04","2026-05","2026-06"];
+const MONTH_LABELS = ["1月","2月","3月","4月","5月","6月"];
+
+const MONTHLY = {
+  // 2025-12 は前月比計算専用（初売り前のホリデー商戦で高水準）
+  prev:   { sales: 9120400, orders: 1352, repeat: 32.8 },
+  sales:  [ 8423500, 7138200, 8876900, 9654300, 10412800, 9412300 ],
+  orders: [ 1284, 1102, 1341, 1436, 1573, 1371 ],
+  repeat: [ 34.2, 33.6, 33.1, 35.4, 36.2, 37.8 ]
+};
+
+const CATEGORIES = ["ファッション","生活雑貨","食品・飲料","美容・健康","家電・ガジェット"];
+// カテゴリ構成比(%)。冬=家電(初売り)・2月=食品(バレンタイン)・春=ファッション/雑貨・6月=美容
+const CAT_SHARE = [
+  [24,18,21,14,23],
+  [22,19,26,15,18],
+  [28,20,18,16,18],
+  [27,22,17,15,19],
+  [25,21,20,16,18],
+  [23,19,18,21,19]
+];
+
+const CHANNELS = ["自社サイト","楽天市場","Amazon","Yahoo!ショッピング","その他"];
+// チャネル構成比(%)。自社サイト比率が半年でじわじわ改善するストーリー
+const CH_SHARE = [
+  [33,28,24,10,5],
+  [33,27,25,10,5],
+  [35,26,24,10,5],
+  [36,26,23,10,5],
+  [37,27,22,9,5],
+  [38,26,22,9,5]
+];
+
+// 商品マスタ: [商品名, カテゴリ, 単価, 月別販売数(1〜6月)]
+const PRODUCTS = [
+  ["ワイヤレスイヤホン ANC-Pro","家電・ガジェット",8980,[182,118,124,138,152,131]],
+  ["オーガニックコットンTシャツ","ファッション",3480,[96,88,142,168,214,196]],
+  ["スペシャルティコーヒー豆 200g","食品・飲料",1580,[248,232,214,206,218,224]],
+  ["保湿美容液 モイストリッチ 30mL","美容・健康",4620,[104,96,102,98,112,146]],
+  ["ステンレスタンブラー 450mL","生活雑貨",2180,[122,108,146,188,196,172]],
+  ["リネンブレンドシャツ","ファッション",5940,[42,38,88,116,134,118]],
+  ["スマートウォッチ Lite","家電・ガジェット",12800,[64,42,48,56,61,52]],
+  ["アロマディフューザー 木目調","生活雑貨",3960,[78,72,84,102,88,96]],
+  ["クラフトビール 飲み比べ6本","食品・飲料",3850,[92,64,78,86,124,102]],
+  ["酵素サプリメント 90粒","美容・健康",3240,[88,92,86,84,90,118]],
+  ["撥水トートバッグ","ファッション",4290,[58,52,74,96,84,112]],
+  ["プロテインバー 12本セット","食品・飲料",2480,[112,118,108,116,122,114]],
+  ["珪藻土バスマット","生活雑貨",2750,[66,58,72,94,78,84]],
+  ["モバイルバッテリー 10000mAh","家電・ガジェット",3480,[74,62,58,72,88,76]]
+];
+
+/* ================= ユーティリティ ================= */
+const yen = n => "¥" + Math.round(n).toLocaleString("ja-JP");
+const yenMan = n => (n/10000).toLocaleString("ja-JP",{maximumFractionDigits:0}) + "万";
+function mulberry32(seed){
+  return function(){
+    seed |= 0; seed = seed + 0x6D2B79F5 | 0;
+    let t = Math.imul(seed ^ seed >>> 15, 1 | seed);
+    t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t;
+    return ((t ^ t >>> 14) >>> 0) / 4294967296;
+  };
+}
+
+/* ================ ヒートマップ生成 ================
+   曜日×2時間刻み(12枠)。平日=夜ピーク / 週末=昼〜夜ピーク。
+   月ごとに固定シードの揺らぎを加え、月売上で正規化(合計=月売上)。 */
+const HM_DAYS = ["月","火","水","木","金","土","日"];
+const HM_SLOTS = ["0","2","4","6","8","10","12","14","16","18","20","22"];
+const HM_BASE_WEEKDAY = [0.7,0.3,0.2,0.5,1.0,1.5,1.8,1.4,1.6,2.4,3.2,2.2];
+const HM_BASE_WEEKEND = [0.9,0.4,0.3,0.6,1.4,2.6,2.8,2.4,2.2,2.6,2.9,1.8];
+const HEAT = MONTH_KEYS.map((k,mi)=>{
+  const rng = mulberry32(20260100 + mi*37);
+  const raw = [];
+  let sum = 0;
+  for(let d=0; d<7; d++){
+    const base = d>=5 ? HM_BASE_WEEKEND : HM_BASE_WEEKDAY;
+    const dayF = (d===4?1.15:1) * (d===5?1.2:1);   // 金曜・土曜は強め
+    raw[d] = base.map(b=>{
+      const v = b * dayF * (0.72 + rng()*0.56);
+      sum += v;
+      return v;
+    });
+  }
+  const scale = MONTHLY.sales[mi] / sum;           // 合計=月売上に正規化
+  return raw.map(row=>row.map(v=>v*scale));
+});
+
+/* ================ 状態 ================ */
+let cur = MONTH_KEYS.length - 1;      // 初期表示 = 最新月(6月)
+let sortKey = "sales", sortDir = -1;  // TOP10テーブル初期ソート=売上降順
+
+/* ================ KPI ================ */
+function deltaPill(cv, pv, {pt=false} = {}){
+  const diff = pt ? (cv - pv) : ((cv - pv) / pv * 100);
+  const up = diff >= 0;
+  const arrow = up ? "▲" : "▼";
+  const txt = pt
+    ? `${arrow} ${Math.abs(diff).toFixed(1)}pt`
+    : `${arrow} ${Math.abs(diff).toFixed(1)}%`;
+  return `<span class="pill ${up?"up":"down"}">${txt}</span><span class="cap">前月比</span>`;
+}
+function renderKPIs(){
+  const s  = MONTHLY.sales[cur],  ps = cur===0 ? MONTHLY.prev.sales  : MONTHLY.sales[cur-1];
+  const o  = MONTHLY.orders[cur], po = cur===0 ? MONTHLY.prev.orders : MONTHLY.orders[cur-1];
+  const r  = MONTHLY.repeat[cur], pr = cur===0 ? MONTHLY.prev.repeat : MONTHLY.repeat[cur-1];
+  const aov = s/o, pAov = ps/po;
+  document.getElementById("kpiSales").textContent  = yen(s);
+  document.getElementById("kpiOrders").innerHTML   = o.toLocaleString("ja-JP") + '<span class="unit">件</span>';
+  document.getElementById("kpiAov").textContent    = yen(aov);
+  document.getElementById("kpiRepeat").innerHTML   = r.toFixed(1) + '<span class="unit">%</span>';
+  document.getElementById("kpiSalesD").innerHTML   = deltaPill(s, ps);
+  document.getElementById("kpiOrdersD").innerHTML  = deltaPill(o, po);
+  document.getElementById("kpiAovD").innerHTML     = deltaPill(aov, pAov);
+  document.getElementById("kpiRepeatD").innerHTML  = deltaPill(r, pr, {pt:true});
+}
+
+/* ================ Chart.js 共通 ================ */
+Chart.defaults.font.family = "'Manrope','Noto Sans JP',sans-serif";
+Chart.defaults.font.size = 11.5;
+Chart.defaults.color = "#69748c";
+const gridColor = "#eef0f4";
+
+/* ---- 月次推移(棒+折れ線) ---- */
+let trendChart;
+function trendBarColors(){
+  return MONTH_KEYS.map((_,i)=> i===cur ? "#2b5ce6" : "#c9d6f8");
+}
+function buildTrend(){
+  trendChart = new Chart(document.getElementById("trendChart"),{
+    data:{
+      labels: MONTH_LABELS,
+      datasets:[
+        {
+          type:"bar", label:"売上高",
+          data: MONTHLY.sales,
+          backgroundColor: trendBarColors(),
+          borderRadius: 6, maxBarThickness: 46,
+          yAxisID:"y", order: 2
+        },
+        {
+          type:"line", label:"注文数",
+          data: MONTHLY.orders,
+          borderColor:"#1b2333", backgroundColor:"#1b2333",
+          borderWidth:2, pointRadius:3.5, pointHoverRadius:5,
+          pointBackgroundColor:"#fff", pointBorderWidth:2,
+          tension:.3, yAxisID:"y1", order: 1
+        }
+      ]
+    },
+    options:{
+      responsive:true, maintainAspectRatio:false,
+      interaction:{mode:"index", intersect:false},
+      plugins:{
+        legend:{position:"top", align:"end", labels:{boxWidth:10, boxHeight:10, usePointStyle:true}},
+        tooltip:{
+          callbacks:{
+            label: c => c.dataset.label === "売上高"
+              ? ` 売上高: ${yen(c.parsed.y)}`
+              : ` 注文数: ${c.parsed.y.toLocaleString("ja-JP")}件`
+          }
+        }
+      },
+      scales:{
+        x:{grid:{display:false}},
+        y:{
+          position:"left", grid:{color:gridColor},
+          ticks:{callback:v=>yenMan(v)},
+          suggestedMax: 11500000, beginAtZero:true
+        },
+        y1:{
+          position:"right", grid:{drawOnChartArea:false},
+          ticks:{callback:v=>v.toLocaleString("ja-JP")+"件"},
+          suggestedMax: 1800, beginAtZero:true
+        }
+      }
+    }
+  });
+}
+
+/* ---- カテゴリ別ドーナツ ---- */
+const CAT_COLORS = ["#2b5ce6","#5b83f0","#8da9f5","#bccbfa","#dfe6fd"];
+let catChart;
+function catData(){
+  const total = MONTHLY.sales[cur];
+  return CAT_SHARE[cur].map(p => Math.round(total*p/100));
+}
+function buildCat(){
+  catChart = new Chart(document.getElementById("catChart"),{
+    type:"doughnut",
+    data:{
+      labels: CATEGORIES,
+      datasets:[{
+        data: catData(),
+        backgroundColor: CAT_COLORS,
+        borderColor:"#ffffff", borderWidth:2, hoverOffset:6
+      }]
+    },
+    options:{
+      responsive:true, maintainAspectRatio:false,
+      cutout:"64%",
+      layout:{padding:{bottom:4}},
+      plugins:{
+        legend:{
+          position:"bottom",
+          labels:{boxWidth:10, boxHeight:10, usePointStyle:true, padding:14,
+            generateLabels(chart){
+              const base = Chart.overrides.doughnut.plugins.legend.labels.generateLabels(chart);
+              const ds = chart.data.datasets[0].data;
+              const sum = ds.reduce((a,b)=>a+b,0);
+              base.forEach((l,i)=>{ l.text = `${l.text}  ${(ds[i]/sum*100).toFixed(0)}%`; });
+              return base;
+            }
+          }
+        },
+        tooltip:{callbacks:{label: c => ` ${c.label}: ${yen(c.parsed)}`}}
+      }
+    }
+  });
+}
+
+/* ---- チャネル別 横棒 ---- */
+let chChart;
+function chData(){
+  const total = MONTHLY.sales[cur];
+  return CH_SHARE[cur].map(p => Math.round(total*p/100));
+}
+function buildCh(){
+  chChart = new Chart(document.getElementById("chChart"),{
+    type:"bar",
+    data:{
+      labels: CHANNELS,
+      datasets:[{
+        data: chData(),
+        backgroundColor:["#2b5ce6","#5b83f0","#8da9f5","#bccbfa","#dfe6fd"],
+        borderRadius:5, maxBarThickness:22
+      }]
+    },
+    options:{
+      indexAxis:"y",
+      responsive:true, maintainAspectRatio:false,
+      plugins:{
+        legend:{display:false},
+        tooltip:{callbacks:{label: c => ` ${yen(c.parsed.x)}`}}
+      },
+      scales:{
+        x:{grid:{color:gridColor}, ticks:{callback:v=>yenMan(v)}, beginAtZero:true},
+        y:{grid:{display:false}, ticks:{font:{family:"'Noto Sans JP',sans-serif", size:11.5}}}
+      }
+    }
+  });
+}
+
+/* ---- ヒートマップ(CSSグリッド) ---- */
+function heatColor(t){ // t: 0..1
+  // 薄い→濃いの5段階補間(accent系)
+  const stops = [
+    [238,242,252],[200,214,248],[135,165,240],[74,116,233],[36,72,184]
+  ];
+  const x = Math.min(.9999, Math.max(0, t)) * (stops.length-1);
+  const i = Math.floor(x), f = x - i;
+  const a = stops[i], b = stops[i+1];
+  const c = a.map((v,k)=>Math.round(v + (b[k]-v)*f));
+  return `rgb(${c[0]},${c[1]},${c[2]})`;
+}
+function renderHeatmap(){
+  const grid = document.getElementById("hmGrid");
+  const data = HEAT[cur];
+  const flat = data.flat();
+  const max = Math.max(...flat);
+  let html = '<div></div>';
+  HM_SLOTS.forEach(s=>{ html += `<div class="col-lbl">${s}時</div>`; });
+  data.forEach((row,d)=>{
+    html += `<div class="lbl">${HM_DAYS[d]}</div>`;
+    row.forEach((v,s)=>{
+      const t = v/max;
+      const label = `${HM_DAYS[d]}曜 ${HM_SLOTS[s]}〜${(+HM_SLOTS[s])+2}時: ${yen(v)}`;
+      html += `<div class="hm-cell" style="background:${heatColor(t)}" title="${label}"></div>`;
+    });
+  });
+  grid.innerHTML = html;
+  document.getElementById("hmNote").textContent =
+    `${MONTH_LABELS[cur]}・最も売れる時間帯 = ${peakSlot(data)}`;
+}
+function peakSlot(data){
+  let bd=0,bs=0,bv=-1;
+  data.forEach((row,d)=>row.forEach((v,s)=>{ if(v>bv){bv=v;bd=d;bs=s;} }));
+  return `${HM_DAYS[bd]}曜 ${HM_SLOTS[bs]}〜${(+HM_SLOTS[bs])+2}時`;
+}
+
+/* ---- TOP10テーブル ---- */
+function top10(){
+  return PRODUCTS
+    .map(([name,cat,price,units])=>({
+      name, cat, price,
+      units: units[cur],
+      sales: price * units[cur]
+    }))
+    .sort((a,b)=>b.sales-a.sales)
+    .slice(0,10);
+}
+function renderTable(){
+  const rows = top10();
+  const rankOf = new Map(rows.map((r,i)=>[r.name, i+1]));   // 売上順の順位は固定
+  const sorted = [...rows].sort((a,b)=>(a[sortKey]-b[sortKey])*sortDir); // -1=降順/1=昇順
+  const topSum = rows.reduce((a,r)=>a+r.sales,0);
+  const maxShare = Math.max(...rows.map(r=>r.sales/topSum));
+  const body = document.getElementById("topBody");
+  body.innerHTML = sorted.map(r=>{
+    const rank = rankOf.get(r.name);
+    const share = r.sales/topSum*100;
+    const w = Math.round(share/(maxShare*100)*110);
+    return `<tr class="${rank<=3?"top3":""}">
+      <td class="rank">${rank}</td>
+      <td>${r.name}</td>
+      <td><span class="cat">${r.cat}</span></td>
+      <td class="num">${r.units.toLocaleString("ja-JP")}</td>
+      <td class="num">${yen(r.price)}</td>
+      <td class="num">${yen(r.sales)}</td>
+      <td><span class="share-bar" style="width:${w}px"></span><span class="share-num">${share.toFixed(1)}%</span></td>
+    </tr>`;
+  }).join("");
+  // ソート矢印
+  document.querySelectorAll("#topTable thead th.sortable").forEach(th=>{
+    const base = th.dataset.key==="units" ? "販売数" : th.dataset.key==="price" ? "単価" : "売上";
+    th.innerHTML = base + (th.dataset.key===sortKey ? `<span class="arw">${sortDir===-1?"▼":"▲"}</span>` : "");
+  });
+}
+document.querySelectorAll("#topTable thead th.sortable").forEach(th=>{
+  th.addEventListener("click",()=>{
+    const k = th.dataset.key;
+    if(sortKey===k){ sortDir*=-1; } else { sortKey=k; sortDir=-1; }
+    renderTable();
+  });
+});
+
+/* ---- 期間セレクタ ---- */
+function buildSeg(){
+  const seg = document.getElementById("seg");
+  seg.innerHTML = MONTH_KEYS.map((k,i)=>
+    `<button role="tab" data-i="${i}" class="${i===cur?"active":""}">
+       <span class="yr">2026</span>${MONTH_LABELS[i]}
+     </button>`).join("");
+  seg.querySelectorAll("button").forEach(btn=>{
+    btn.addEventListener("click",()=>{ setMonth(+btn.dataset.i); });
+  });
+}
+function setMonth(i){
+  cur = i;
+  if(history.replaceState) history.replaceState(null,"","#"+MONTH_KEYS[cur]);
+  document.querySelectorAll("#seg button").forEach((b,bi)=>b.classList.toggle("active", bi===cur));
+  renderKPIs();
+  trendChart.data.datasets[0].backgroundColor = trendBarColors();
+  trendChart.update();
+  catChart.data.datasets[0].data = catData();
+  catChart.update();
+  document.getElementById("donutTotal").textContent = yen(MONTHLY.sales[cur]);
+  document.getElementById("donutNote").textContent = `${MONTH_LABELS[cur]}実績`;
+  chChart.data.datasets[0].data = chData();
+  chChart.update();
+  document.getElementById("chNote").textContent = `${MONTH_LABELS[cur]}実績`;
+  renderHeatmap();
+  renderTable();
+  const [y,m] = MONTH_KEYS[cur].split("-");
+  const lastDay = new Date(+y, +m, 0).getDate();
+  document.getElementById("updatedAt").textContent = `${y}/${m}/${String(lastDay).padStart(2,"0")} 23:59 集計分`;
+}
+
+/* ---- 初期化 ----
+   URLハッシュ(#2026-03 等)で表示月を深リンク可能。無指定は最新月。 */
+const hashIdx = MONTH_KEYS.indexOf((location.hash || "").replace("#",""));
+if(hashIdx >= 0) cur = hashIdx;
+buildSeg();
+buildTrend();
+buildCat();
+buildCh();
+setMonth(cur);
+</script>
+</body>
+</html>

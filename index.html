@@ -1,13 +1,108 @@
-<!DOCTYPE html><html lang="ja"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>ホームページ制作サンプル集</title>
-<style>body{font-family:sans-serif;max-width:760px;margin:40px auto;padding:0 20px;line-height:1.9;color:#233}
-h1{font-size:1.5rem}a.card{display:block;border:1px solid #e3e3e3;border-radius:14px;padding:18px 22px;margin:14px 0;text-decoration:none;color:#233;transition:.2s}
-a.card:hover{box-shadow:0 10px 30px -14px rgba(0,0,0,.3);transform:translateY(-2px)}
-a.card b{font-size:1.1rem}a.card span{color:#777;font-size:.9rem;display:block}</style></head>
-<body><h1>ホームページ制作サンプル集</h1>
-<p>実際に動く制作サンプルです(すべてレスポンシブ対応・スマホでもご覧いただけます)。</p>
-<a class="card" href="./dental-sakura.html"><b>歯科医院(訪問歯科)</b><span>白基調＋桜・訪問歯科を強みに打ち出す構成</span></a>
-<a class="card" href="./dental.html"><b>歯科医院(スタンダード)</b><span>予防を軸にした、やさしく清潔なデザイン</span></a>
-<a class="card" href="./salon.html"><b>ヘアサロン</b><span>大人の隠れ家サロン・上品な世界観</span></a>
-<a class="card" href="./corp.html"><b>コーポレート(人材会社)</b><span>信頼感のあるビジネス向けデザイン</span></a>
-</body></html>
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>制作サンプル集｜ホームページ・LP・ダッシュボード・デザイン</title>
+<meta name="description" content="実際に動く制作サンプル集。ホームページ・ランディングページ・経営ダッシュボード・バナーデザイン・LINE構築・SNS運用の実例をご覧いただけます。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#1f2733;--sub:#66707d;--line:#e8ebef;--accent:#2b5ce6;--bg:#f7f8fa}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:"Noto Sans JP",sans-serif;color:var(--ink);background:var(--bg);line-height:1.9;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1080px;margin:0 auto;padding:0 24px}
+header{padding:72px 0 40px;background:#fff;border-bottom:1px solid var(--line)}
+.eyebrow{font-family:Manrope;font-weight:700;font-size:.72rem;letter-spacing:.22em;color:var(--accent);text-transform:uppercase}
+h1{font-weight:900;font-size:clamp(1.7rem,4.5vw,2.4rem);line-height:1.4;margin:10px 0 14px}
+header p{color:var(--sub);font-size:.95rem;max-width:640px}
+.note{display:inline-block;margin-top:18px;background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:8px 16px;font-size:.8rem;color:var(--sub)}
+main{padding:48px 0 72px}
+.cat{margin-bottom:44px}
+.cat h2{font-size:1.05rem;font-weight:700;display:flex;align-items:center;gap:10px;margin-bottom:6px}
+.cat h2::before{content:"";width:22px;height:3px;border-radius:3px;background:var(--accent)}
+.cat > p{color:var(--sub);font-size:.85rem;margin-bottom:18px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px}
+a.card{display:block;background:#fff;border:1px solid var(--line);border-radius:16px;padding:22px 24px;text-decoration:none;color:var(--ink);transition:.25s;position:relative}
+a.card:hover{box-shadow:0 16px 40px -20px rgba(31,39,51,.35);transform:translateY(-3px);border-color:#c9d4f5}
+a.card b{font-size:1.02rem;font-weight:700;display:block;margin-bottom:4px}
+a.card span{color:var(--sub);font-size:.83rem;display:block;line-height:1.7}
+a.card .tag{position:absolute;right:18px;top:20px;font-family:Manrope;font-weight:700;font-size:.62rem;letter-spacing:.08em;color:var(--accent);background:#eef2fd;border-radius:100px;padding:3px 10px}
+a.card .go{display:inline-block;margin-top:10px;font-size:.78rem;font-weight:700;color:var(--accent)}
+a.card:hover .go{text-decoration:underline}
+footer{border-top:1px solid var(--line);background:#fff;padding:28px 0;font-size:.75rem;color:var(--sub)}
+@media(max-width:520px){header{padding:52px 0 32px}.grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <div class="eyebrow">Portfolio / Works</div>
+    <h1>制作サンプル集</h1>
+    <p>すべて実際にブラウザで動くサンプルです(レスポンシブ対応・スマホでもご覧いただけます)。ご依頼の業種・目的に合わせて、この品質でお作りします。</p>
+    <div class="note">※各サンプルの店舗名・人物・数値はすべて架空です。写真はイメージです。</div>
+  </div>
+</header>
+<main>
+  <div class="wrap">
+
+    <div class="cat">
+      <h2>ホームページ制作</h2>
+      <p>業種に合わせた設計・文章・写真選定まで一式。スマホ最適化・お問い合わせ導線・検索対策(構造化データ)込み。</p>
+      <div class="grid">
+        <a class="card" href="./dental-sakura.html"><span class="tag">HP</span><b>歯科医院(訪問歯科に強み)</b><span>白基調+桜色。訪問歯科の対象・エリア・費用・流れまで丁寧に設計した歯科サイト。</span><span class="go">サンプルを見る →</span></a>
+        <a class="card" href="./dental.html"><span class="tag">HP</span><b>歯科医院(予防歯科型)</b><span>「削るより、守る。」予防を軸にした、やさしく清潔なデザイン。</span><span class="go">サンプルを見る →</span></a>
+        <a class="card" href="./salon.html"><span class="tag">HP</span><b>ヘアサロン</b><span>大人の隠れ家サロン。上品な世界観とメニュー・予約導線。</span><span class="go">サンプルを見る →</span></a>
+        <a class="card" href="./corp.html"><span class="tag">HP</span><b>コーポレート(人材会社)</b><span>信頼感のあるビジネス向けデザイン。事業紹介・会社概要・問い合わせ。</span><span class="go">サンプルを見る →</span></a>
+      </div>
+    </div>
+
+    <div class="cat">
+      <h2>ランディングページ(LP)制作</h2>
+      <p>1ページで問い合わせ・応募につなげる構成設計(悩み共感→根拠→料金→行動導線)。広告出稿にそのまま使える作りです。</p>
+      <div class="grid">
+        <a class="card" href="./lp-gym.html"><span class="tag">集客LP</span><b>パーソナルジム 体験予約LP</b><span>料金プラン・比較表・お客様の声・FAQ・予約フォームまでのコンバージョン設計。</span><span class="go">サンプルを見る →</span></a>
+        <a class="card" href="./lp-recruit.html"><span class="tag">採用LP</span><b>介護スタッフ 採用LP</b><span>数字で見る職場・1日の流れ・先輩の声・募集要項。求職者の不安に正面から答える構成。</span><span class="go">サンプルを見る →</span></a>
+      </div>
+    </div>
+
+    <div class="cat">
+      <h2>データ集計・見える化(自動化)</h2>
+      <p>毎月のCSVやスプレッドシートから、経営会議にそのまま出せるレポート・ダッシュボードを自動生成します。</p>
+      <div class="grid">
+        <a class="card" href="./dashboard.html"><span class="tag">自動化</span><b>EC売上ダッシュボード</b><span>期間切替で全グラフが連動。KPI・売上推移・カテゴリ構成・時間帯ヒートマップ・商品TOP10。</span><span class="go">サンプルを見る →</span></a>
+      </div>
+    </div>
+
+    <div class="cat">
+      <h2>バナー・チラシ・画像デザイン(量産対応)</h2>
+      <p>メルマガヘッダー・SNS広告・チラシ・サムネイルを、トーン違い・訴求違いで素早く量産。全件人の目で検品してお渡しします。</p>
+      <div class="grid">
+        <a class="card" href="./design.html"><span class="tag">デザイン</span><b>デザイン制作サンプル集</b><span>メルマガヘッダー3種・Instagram広告4種・A4チラシ・YouTubeサムネイル2種。</span><span class="go">サンプルを見る →</span></a>
+      </div>
+    </div>
+
+    <div class="cat">
+      <h2>LINE公式アカウント構築</h2>
+      <p>友だち追加からのあいさつ・自動応答・ステップ配信・リッチメニューまで。予約や再来店につながる設計ごとお作りします。</p>
+      <div class="grid">
+        <a class="card" href="./line.html"><span class="tag">LINE</span><b>整体院のLINE構築デモ</b><span>トーク画面・リッチメニューの実物イメージ+配信シナリオ設計図・配信設計表。</span><span class="go">サンプルを見る →</span></a>
+      </div>
+    </div>
+
+    <div class="cat">
+      <h2>SNS運用(投稿制作)</h2>
+      <p>投稿画像のトンマナ統一・キャプション・ハッシュタグ設計・1ヶ月の投稿カレンダーまで丸ごと。</p>
+      <div class="grid">
+        <a class="card" href="./sns.html"><span class="tag">SNS</span><b>ベーカリーカフェのInstagram運用パック</b><span>フィード9枚デザイン・キャプション例・30日投稿カレンダー・週次レポート。</span><span class="go">サンプルを見る →</span></a>
+      </div>
+    </div>
+
+  </div>
+</main>
+<footer>
+  <div class="wrap">※本サイトはすべて制作サンプル(デモ)です。掲載の店舗・法人・人物・数値・お客様の声は架空です。写真はイメージ(Unsplash)です。</div>
+</footer>
+</body>
+</html>

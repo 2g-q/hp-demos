@@ -1,0 +1,920 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>バナー・ヘッダー・チラシ制作サンプル | 自動化のミナト</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Montserrat:wght@500;600;700;800&family=Noto+Sans+JP:wght@400;500;700;900&family=Noto+Serif+JP:wght@500;600;700&family=Zen+Maru+Gothic:wght@500;700;900&display=swap');
+
+:root{
+  --ink:#1F2933;
+  --sub:#5B6670;
+  --line:#E6E2DA;
+  --gold:#B08A3E;
+  --navy:#1B3450;
+  --ivory:#F7F2E9;
+  --green:#2F7D5A;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{
+  font-family:'Noto Sans JP',sans-serif;
+  background:#FBFAF7;
+  color:var(--ink);
+  -webkit-font-smoothing:antialiased;
+  line-height:1.7;
+}
+
+/* ===== page chrome ===== */
+.page{max-width:1200px;margin:0 auto;padding:72px 32px 0;}
+.hero{ text-align:center; padding-bottom:64px; border-bottom:1px solid var(--line); }
+.hero .eyebrow{
+  font-family:'Montserrat',sans-serif; font-size:11px; letter-spacing:.35em;
+  color:var(--gold); font-weight:600; margin-bottom:18px;
+}
+.hero h1{
+  font-family:'Noto Serif JP',serif; font-weight:600; font-size:34px;
+  letter-spacing:.08em; margin-bottom:16px;
+}
+.hero p{ font-size:14px; color:var(--sub); max-width:640px; margin:0 auto; }
+
+.group{ padding:72px 0 8px; }
+.group-head{ display:flex; align-items:baseline; gap:18px; margin-bottom:8px; }
+.group-head .num{
+  font-family:'Montserrat',sans-serif; font-size:13px; font-weight:700;
+  color:var(--gold); letter-spacing:.2em;
+}
+.group-head h2{
+  font-family:'Noto Serif JP',serif; font-weight:600; font-size:22px; letter-spacing:.06em;
+}
+.group-head .spec{
+  font-family:'Montserrat',sans-serif; font-size:11px; color:#98917F; letter-spacing:.08em;
+}
+.group-cap{ font-size:13px; color:var(--sub); max-width:760px; margin-bottom:36px; }
+.group-cap strong{ color:var(--ink); font-weight:700; }
+
+.works{ display:flex; flex-wrap:wrap; gap:40px 36px; align-items:flex-start; }
+.work{ display:block; }
+.frame{
+  position:relative; overflow:hidden; background:#fff;
+  width:calc(var(--w) * var(--s)); height:calc(var(--h) * var(--s));
+  box-shadow:0 1px 2px rgba(31,41,51,.06), 0 12px 32px -12px rgba(31,41,51,.18);
+  outline:1px solid rgba(31,41,51,.07);
+}
+.canvas{
+  position:absolute; top:0; left:0;
+  width:var(--w); height:var(--h);
+  transform:scale(var(--s)); transform-origin:top left;
+}
+figcaption{ margin-top:14px; }
+.cap-title{ font-size:13px; font-weight:700; letter-spacing:.04em; }
+.cap-meta{ display:flex; align-items:center; gap:8px; margin-top:6px; }
+.chip{
+  display:inline-block; font-family:'Montserrat',sans-serif; font-size:10px; font-weight:600;
+  letter-spacing:.06em; color:#7C7668; background:#F0EDE5; border-radius:3px; padding:3px 8px;
+}
+
+footer{
+  margin-top:88px; border-top:1px solid var(--line);
+  padding:36px 32px 48px; text-align:center;
+}
+footer p{ font-size:11.5px; color:#8A857A; }
+footer p + p{ margin-top:6px; }
+
+/* ===== sizes ===== */
+.mh{ --w:600px; --h:200px; --s:1; }
+.ig{ --w:1080px; --h:1080px; --s:.4; }
+.fl{ --w:794px;  --h:1123px; --s:.45; }
+.yt{ --w:1280px; --h:720px;  --s:.35; }
+
+@media (max-width:700px){
+  .page{ padding:56px 16px 0; }
+  .hero h1{ font-size:26px; }
+  .mh{ --s:.7; }
+}
+@media (max-width:520px){
+  .mh{ --s:.55; }
+  .ig{ --s:.31; }
+  .fl{ --s:.42; }
+  .yt{ --s:.26; }
+  .works{ gap:32px 20px; }
+}
+
+/* =========================================================
+   01  MAIL HEADERS  600x200  (Lueur)
+   ========================================================= */
+
+/* --- elegant --- */
+.mh1{ background:#F7F2E9; }
+.mh1 .photo{
+  position:absolute; top:0; right:0; width:47%; height:100%;
+  background:url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=900&q=80&auto=format&fit=crop') center/cover;
+}
+.mh1 .photo::before{
+  content:""; position:absolute; inset:0;
+  background:linear-gradient(90deg,#F7F2E9 0%,rgba(247,242,233,.55) 30%,rgba(247,242,233,0) 70%);
+}
+.mh1 .body{ position:absolute; left:36px; top:0; height:100%; display:flex; flex-direction:column; justify-content:center; }
+.mh1 .brand{
+  font-family:'Cormorant Garamond',serif; font-weight:600; font-size:19px;
+  letter-spacing:.14em; color:#8A6F3C;
+}
+.mh1 .brand small{
+  font-family:'Montserrat',sans-serif; font-weight:600; font-size:7.5px;
+  letter-spacing:.3em; color:#A79465; margin-left:10px; vertical-align:2px;
+}
+.mh1 h3{
+  font-family:'Noto Serif JP',serif; font-weight:600; font-size:24px;
+  line-height:1.5; letter-spacing:.06em; color:#233A52; margin:10px 0 14px;
+}
+.mh1 .meta{
+  display:flex; align-items:center; gap:10px;
+  font-family:'Montserrat',sans-serif; font-size:8.5px; font-weight:600;
+  letter-spacing:.22em; color:#9A8354;
+}
+.mh1 .meta i{ display:block; width:26px; height:1px; background:#C3A96B; }
+
+/* --- pop --- */
+.mh2{ background:linear-gradient(115deg,#37AEDF 0%,#6FC9EC 55%,#A8E0F4 100%); overflow:hidden; }
+.mh2 .sun{
+  position:absolute; top:-52px; right:52px; width:150px; height:150px; border-radius:50%;
+  background:radial-gradient(circle at 40% 40%, #FFE382 0%, #FFD23E 70%);
+  box-shadow:0 0 0 14px rgba(255,225,120,.25), 0 0 0 30px rgba(255,225,120,.12);
+}
+.mh2 .wave1,.mh2 .wave2{ position:absolute; border-radius:50%; background:rgba(255,255,255,.92); }
+.mh2 .wave1{ width:420px; height:120px; bottom:-86px; left:-60px; }
+.mh2 .wave2{ width:420px; height:120px; bottom:-96px; left:230px; background:rgba(255,255,255,.75); }
+.mh2 .brand{
+  position:absolute; left:26px; top:20px;
+  font-family:'Cormorant Garamond',serif; font-weight:600; font-size:16px;
+  letter-spacing:.14em; color:#fff;
+}
+.mh2 h3{
+  position:absolute; left:26px; top:52px;
+  font-family:'Zen Maru Gothic',sans-serif; font-weight:900; font-size:30px;
+  line-height:1.35; letter-spacing:.04em; color:#FFFFFF;
+  text-shadow:0 2px 0 rgba(23,94,133,.35);
+}
+.mh2 h3 em{ font-style:normal; color:#FFE066; }
+.mh2 .date{
+  position:absolute; left:28px; bottom:22px;
+  font-family:'Montserrat',sans-serif; font-weight:700; font-size:11px; letter-spacing:.12em;
+  color:#1C6E9C; background:#fff; border-radius:99px; padding:4px 14px;
+}
+.mh2 .off{
+  position:absolute; right:36px; top:44px; width:104px; height:104px; border-radius:50%;
+  background:#FF6B57; transform:rotate(8deg);
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  color:#fff; box-shadow:0 4px 0 rgba(23,94,133,.25);
+}
+.mh2 .off b{ font-family:'Montserrat',sans-serif; font-weight:800; font-size:26px; line-height:1; }
+.mh2 .off span{ font-family:'Zen Maru Gothic',sans-serif; font-weight:700; font-size:10.5px; margin-top:3px; }
+
+/* --- simple --- */
+.mh3{ background:#FFFFFF; }
+.mh3 .inner{
+  position:absolute; inset:12px; border:1px solid #DCD4C2;
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+}
+.mh3 .brand{
+  font-family:'Cormorant Garamond',serif; font-weight:500; font-size:26px;
+  letter-spacing:.2em; color:#8A6F3C;
+}
+.mh3 .rule{ width:26px; height:1px; background:#C3A96B; margin:10px 0; }
+.mh3 .en{
+  font-family:'Montserrat',sans-serif; font-weight:600; font-size:8.5px;
+  letter-spacing:.42em; color:#8B8578; text-indent:.42em;
+}
+.mh3 .jp{
+  font-family:'Noto Serif JP',serif; font-weight:500; font-size:13.5px;
+  letter-spacing:.24em; color:#3A3F45; margin-top:12px; text-indent:.24em;
+}
+
+/* =========================================================
+   02  INSTAGRAM 1080x1080  (Lueur)
+   ========================================================= */
+
+/* --- price --- */
+.ig1{ background:#F7F2E9; }
+.ig1 .glow{
+  position:absolute; right:-160px; top:120px; width:640px; height:640px; border-radius:50%;
+  background:radial-gradient(circle, rgba(195,169,107,.28) 0%, rgba(195,169,107,0) 68%);
+}
+.ig1 .brand{
+  position:absolute; left:72px; top:64px;
+  font-family:'Cormorant Garamond',serif; font-weight:600; font-size:56px;
+  letter-spacing:.14em; color:#8A6F3C;
+}
+.ig1 .tag{
+  position:absolute; right:72px; top:78px;
+  font-family:'Noto Sans JP',sans-serif; font-weight:700; font-size:26px; letter-spacing:.14em;
+  color:#1B3450; border:2px solid #1B3450; padding:10px 26px; border-radius:99px;
+}
+/* bottle */
+.ig1 .bottle{ position:absolute; left:130px; bottom:240px; width:210px; }
+.ig1 .cap{
+  width:130px; height:80px; margin:0 auto; border-radius:14px 14px 6px 6px;
+  background:linear-gradient(90deg,#A7853C,#D9BC79 45%,#A7853C);
+}
+.ig1 .bodyb{
+  width:210px; height:400px; margin-top:6px; border-radius:26px 26px 34px 34px;
+  background:linear-gradient(100deg,#FFFFFF 0%,#F4EDDD 55%,#E5D9BC 100%);
+  border:1px solid #E2D6BA;
+  display:flex; flex-direction:column; align-items:center; padding-top:64px;
+}
+.ig1 .bodyb .bl{
+  font-family:'Cormorant Garamond',serif; font-weight:600; font-size:40px;
+  letter-spacing:.12em; color:#8A6F3C;
+}
+.ig1 .bodyb .bn{
+  font-family:'Montserrat',sans-serif; font-weight:700; font-size:22px;
+  letter-spacing:.24em; color:#1B3450; margin-top:14px;
+}
+.ig1 .bodyb .bs{
+  font-family:'Montserrat',sans-serif; font-weight:600; font-size:16px;
+  letter-spacing:.14em; color:#8B8578; margin-top:10px;
+}
+.ig1 .shadow{
+  position:absolute; left:110px; bottom:212px; width:250px; height:34px; border-radius:50%;
+  background:radial-gradient(ellipse, rgba(31,41,51,.16), rgba(31,41,51,0) 70%);
+}
+/* right text */
+.ig1 .sale{
+  position:absolute; left:424px; top:258px;
+  font-family:'Montserrat',sans-serif; font-weight:700; font-size:38px;
+  letter-spacing:.34em; color:#B08A3E;
+}
+.ig1 .big{ position:absolute; left:412px; top:314px; line-height:1; white-space:nowrap; }
+.ig1 .big .n{ font-family:'Montserrat',sans-serif; font-weight:800; font-size:238px; color:#1B3450; letter-spacing:-.02em; }
+.ig1 .big .p{ font-family:'Montserrat',sans-serif; font-weight:700; font-size:96px; color:#1B3450; }
+.ig1 .big .o{ font-family:'Montserrat',sans-serif; font-weight:800; font-size:100px; color:#B08A3E; margin-left:14px; }
+.ig1 .price{ position:absolute; left:424px; top:640px; color:#3A3F45; }
+.ig1 .price .item{ font-size:30px; font-weight:500; letter-spacing:.08em; margin-bottom:14px; }
+.ig1 .price .row{ display:flex; align-items:baseline; gap:22px; }
+.ig1 .price .was{ font-family:'Montserrat',sans-serif; font-size:44px; font-weight:600; color:#9A948A; text-decoration:line-through; }
+.ig1 .price .arw{ font-size:36px; color:#B08A3E; }
+.ig1 .price .now{ font-family:'Montserrat',sans-serif; font-size:76px; font-weight:800; color:#1B3450; }
+.ig1 .price .tax{ font-size:24px; color:#6B7076; }
+.ig1 .band{
+  position:absolute; left:0; right:0; bottom:0; height:110px; background:#1B3450;
+  display:flex; align-items:center; justify-content:center; gap:26px;
+  color:#F2E8D5; font-size:30px; font-weight:500; letter-spacing:.1em;
+}
+.ig1 .band b{ color:#E5C878; font-weight:700; }
+
+/* --- benefit --- */
+.ig2{
+  background:url('https://images.unsplash.com/photo-1473496169904-658ba7c44d8a?w=1200&q=80&auto=format&fit=crop') center/cover;
+}
+.ig2 .ov{
+  position:absolute; inset:0;
+  background:linear-gradient(180deg, rgba(20,42,64,.18) 0%, rgba(20,42,64,0) 30%, rgba(20,42,64,.82) 78%);
+}
+.ig2 .brand{
+  position:absolute; left:72px; top:60px;
+  font-family:'Cormorant Garamond',serif; font-weight:600; font-size:54px;
+  letter-spacing:.14em; color:#fff; text-shadow:0 1px 12px rgba(20,42,64,.4);
+}
+.ig2 .spf{
+  position:absolute; right:72px; top:70px;
+  font-family:'Montserrat',sans-serif; font-weight:700; font-size:24px; letter-spacing:.16em;
+  color:#fff; border:2px solid rgba(255,255,255,.85); padding:10px 24px; border-radius:99px;
+  text-shadow:0 1px 8px rgba(20,42,64,.4);
+}
+.ig2 h3{
+  position:absolute; left:76px; bottom:400px;
+  font-family:'Noto Serif JP',serif; font-weight:600; font-size:92px;
+  line-height:1.42; letter-spacing:.06em; color:#fff;
+  text-shadow:0 2px 24px rgba(20,42,64,.45);
+}
+.ig2 .list{ position:absolute; left:80px; bottom:120px; display:flex; flex-direction:column; gap:30px; }
+.ig2 .li{ display:flex; align-items:center; gap:24px; color:#fff; font-size:38px; font-weight:500; letter-spacing:.06em; }
+.ig2 .li i{
+  width:52px; height:52px; border-radius:50%; background:#C9A45B; flex:0 0 52px;
+  display:flex; align-items:center; justify-content:center;
+  color:#fff; font-style:normal; font-size:30px; font-weight:700;
+}
+
+/* --- review --- */
+.ig3{ background:#FFFFFF; }
+.ig3 .frame-in{ position:absolute; inset:36px; border:1px solid #E4DCC8; }
+.ig3 .brand{
+  position:absolute; top:104px; left:0; right:0; text-align:center;
+  font-family:'Cormorant Garamond',serif; font-weight:600; font-size:46px;
+  letter-spacing:.2em; text-indent:.2em; color:#8A6F3C;
+}
+.ig3 .en{
+  position:absolute; top:186px; left:0; right:0; text-align:center;
+  font-family:'Montserrat',sans-serif; font-weight:700; font-size:30px;
+  letter-spacing:.4em; text-indent:.4em; color:#B08A3E;
+}
+.ig3 .score{ position:absolute; top:262px; left:0; right:0; display:flex; align-items:baseline; justify-content:center; gap:18px; }
+.ig3 .score .v{ font-family:'Montserrat',sans-serif; font-weight:700; font-size:200px; color:#1B3450; letter-spacing:-.02em; }
+.ig3 .score .d{ font-family:'Montserrat',sans-serif; font-weight:600; font-size:54px; color:#9A948A; }
+.ig3 .stars{
+  position:absolute; top:502px; left:0; right:0; text-align:center;
+  font-size:64px; letter-spacing:.18em; color:#D9B85F; text-indent:.18em;
+}
+.ig3 .stars .half{
+  background:linear-gradient(90deg,#D9B85F 62%,#E9E2D0 62%);
+  -webkit-background-clip:text; background-clip:text; color:transparent;
+}
+.ig3 .count{
+  position:absolute; top:588px; left:0; right:0; text-align:center;
+  font-size:30px; color:#6B7076; letter-spacing:.1em;
+}
+.ig3 .quote{
+  position:absolute; left:120px; right:120px; top:684px;
+  background:#F7F2E9; border-radius:20px; padding:58px 66px 44px;
+}
+.ig3 .quote .q{
+  position:absolute; top:-36px; left:54px;
+  font-family:'Cormorant Garamond',serif; font-size:140px; line-height:1; color:#C9A45B;
+}
+.ig3 .quote p{
+  font-family:'Noto Serif JP',serif; font-weight:500; font-size:38px;
+  line-height:1.7; letter-spacing:.04em; color:#2C3A48;
+}
+.ig3 .quote .who{ text-align:right; font-size:26px; color:#8B8578; margin-top:16px; letter-spacing:.08em; }
+
+/* --- urgency --- */
+.ig4{ background:radial-gradient(ellipse 900px 700px at 50% 18%, #23415F 0%, #14273C 62%); }
+.ig4 .frame-in{ position:absolute; inset:44px; border:2px solid rgba(201,164,91,.65); }
+.ig4 .en{
+  position:absolute; top:150px; left:0; right:0; text-align:center;
+  font-family:'Montserrat',sans-serif; font-weight:700; font-size:42px;
+  letter-spacing:.44em; text-indent:.44em; color:#C9A45B;
+}
+.ig4 .sub{
+  position:absolute; top:236px; left:0; right:0; text-align:center;
+  font-size:34px; font-weight:500; letter-spacing:.22em; text-indent:.22em; color:#EDE4D0;
+}
+.ig4 .big{
+  position:absolute; top:330px; left:0; right:0; text-align:center;
+  display:flex; align-items:baseline; justify-content:center; gap:8px;
+  font-family:'Noto Sans JP',sans-serif; font-weight:900; color:#fff;
+}
+.ig4 .big .t{ font-size:120px; letter-spacing:.06em; }
+.ig4 .big .n{ font-family:'Montserrat',sans-serif; font-weight:800; font-size:300px; line-height:1; color:#E8C878; margin:0 10px; }
+.ig4 .until{
+  position:absolute; top:706px; left:0; right:0; text-align:center;
+  font-size:44px; font-weight:700; letter-spacing:.1em; color:#E8C878;
+}
+.ig4 .cta{
+  position:absolute; left:250px; right:250px; top:820px; height:104px;
+  background:linear-gradient(90deg,#D9B462,#EAD08F 50%,#D9B462); border-radius:99px;
+  display:flex; align-items:center; justify-content:center; gap:20px;
+  color:#14273C; font-size:38px; font-weight:700; letter-spacing:.12em;
+}
+.ig4 .brand{
+  position:absolute; bottom:74px; left:0; right:0; text-align:center;
+  font-family:'Montserrat',sans-serif; font-weight:600; font-size:24px;
+  letter-spacing:.4em; text-indent:.4em; color:rgba(237,228,208,.55);
+}
+
+/* =========================================================
+   03  FLYER A4 794x1123  (みどり整骨院)
+   ========================================================= */
+.fl1{ background:#fff; font-family:'Noto Sans JP',sans-serif; }
+.fl1 .top{
+  position:absolute; left:0; right:0; top:0; height:64px; padding:0 34px;
+  display:flex; align-items:center; justify-content:space-between;
+  border-bottom:1px solid #E3EDE5;
+}
+.fl1 .logo{ display:flex; align-items:center; gap:10px; }
+.fl1 .leaf{
+  width:34px; height:34px; border-radius:50% 4px 50% 50%;
+  background:linear-gradient(135deg,#3E9A6F,#2F7D5A); transform:rotate(-14deg);
+}
+.fl1 .logo b{ font-size:20px; font-weight:900; letter-spacing:.1em; color:#24503C; }
+.fl1 .logo span{ font-size:10px; color:#5B8A6E; letter-spacing:.14em; margin-left:2px; }
+.fl1 .toptel{ font-size:11px; color:#456; letter-spacing:.06em; text-align:right; line-height:1.5; }
+.fl1 .toptel b{ font-family:'Montserrat',sans-serif; font-size:15px; color:#24503C; }
+
+.fl1 .fhero{ position:absolute; left:34px; right:34px; top:92px; text-align:center; }
+.fl1 .fhero .lead{ font-size:13px; font-weight:700; color:#2F7D5A; letter-spacing:.2em; margin-bottom:8px; }
+.fl1 .fhero h3{
+  font-size:38px; font-weight:900; line-height:1.45; letter-spacing:.04em; color:#22303B;
+}
+.fl1 .fhero h3 em{
+  font-style:normal;
+  background:linear-gradient(transparent 68%, #C9E9CF 68%);
+}
+.fl1 .fhero p{ font-size:13px; color:#4A555E; margin-top:10px; }
+
+.fl1 .photo{
+  position:absolute; left:34px; right:34px; top:268px; height:190px;
+  background:url('https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=1000&q=80&auto=format&fit=crop') center 35%/cover;
+  border-radius:8px;
+}
+.fl1 .photo .chip{
+  position:absolute; left:14px; bottom:14px;
+  background:#2F7D5A; color:#fff; font-size:12px; font-weight:700;
+  letter-spacing:.1em; padding:6px 14px; border-radius:4px;
+}
+
+.fl1 .feats{ position:absolute; left:34px; right:34px; top:482px; display:flex; gap:14px; }
+.fl1 .feat{ flex:1; background:#F1F7F2; border-radius:8px; padding:16px 14px 14px; text-align:center; }
+.fl1 .feat i{
+  display:flex; align-items:center; justify-content:center;
+  width:34px; height:34px; margin:0 auto 8px; border-radius:50%;
+  background:#2F7D5A; color:#fff; font-style:normal;
+  font-family:'Montserrat',sans-serif; font-weight:700; font-size:15px;
+}
+.fl1 .feat b{ display:block; font-size:13.5px; font-weight:900; color:#24503C; letter-spacing:.04em; }
+.fl1 .feat span{ display:block; font-size:10.5px; color:#56635C; margin-top:4px; line-height:1.55; }
+
+.fl1 .coupon{
+  position:absolute; left:34px; right:34px; top:614px; height:132px;
+  border:3px dashed #D98A3C; border-radius:10px; background:#FEF9EF;
+  display:flex; align-items:center;
+}
+.fl1 .coupon .lab{
+  flex:0 0 96px; align-self:stretch; margin:10px 0 10px 10px; border-radius:6px;
+  background:#D98A3C; color:#fff; display:flex; align-items:center; justify-content:center;
+  writing-mode:vertical-rl; font-size:16px; font-weight:900; letter-spacing:.3em;
+}
+.fl1 .coupon .cbody{ padding:0 22px; }
+.fl1 .coupon .ct{ font-size:13px; font-weight:700; color:#8A5A20; letter-spacing:.08em; }
+.fl1 .coupon .crow{ display:flex; align-items:baseline; gap:12px; margin-top:2px; }
+.fl1 .coupon .was{ font-family:'Montserrat',sans-serif; font-size:22px; font-weight:600; color:#9A948A; text-decoration:line-through; }
+.fl1 .coupon .arw{ font-size:16px; color:#D98A3C; }
+.fl1 .coupon .now{ font-family:'Montserrat',sans-serif; font-size:42px; font-weight:800; color:#C25E1E; line-height:1.1; }
+.fl1 .coupon .yen{ font-size:18px; font-weight:900; color:#C25E1E; }
+.fl1 .coupon .cnote{ font-size:9.5px; color:#7A756B; margin-top:4px; letter-spacing:.02em; }
+
+.fl1 .menu{ position:absolute; left:34px; right:34px; top:760px; }
+.fl1 .menu h4{
+  font-size:13px; font-weight:900; color:#24503C; letter-spacing:.16em; margin-bottom:8px;
+  display:flex; align-items:center; gap:10px;
+}
+.fl1 .menu h4::after{ content:""; flex:1; height:1px; background:#D8E6DB; }
+.fl1 .mrow{ display:flex; align-items:baseline; font-size:12.5px; line-height:1.5; color:#3A454E; padding:4px 0; }
+.fl1 .mrow .nm{ font-weight:700; }
+.fl1 .mrow .tm{ color:#7C8780; font-size:11px; margin-left:8px; }
+.fl1 .mrow .dots{ flex:1; margin:0 10px; border-bottom:1px dotted #BCC8BF; transform:translateY(-3px); }
+.fl1 .mrow .pr{ font-family:'Montserrat',sans-serif; font-weight:700; font-size:14px; color:#24503C; }
+
+.fl1 .access{ position:absolute; left:34px; right:34px; top:898px; display:flex; gap:18px; }
+.fl1 .map{
+  position:relative; flex:0 0 300px; height:164px; background:#EAF2EC;
+  border-radius:8px; overflow:hidden;
+}
+.fl1 .map .roadH{ position:absolute; left:0; right:0; top:96px; height:16px; background:#fff; }
+.fl1 .map .roadV{ position:absolute; top:0; bottom:0; left:170px; width:14px; background:#fff; }
+.fl1 .map .rail{
+  position:absolute; left:0; right:0; top:26px; height:6px;
+  background:repeating-linear-gradient(90deg,#5B6670 0 14px,#fff 14px 24px);
+}
+.fl1 .map .sta{
+  position:absolute; left:130px; top:12px; background:#5B6670; color:#fff;
+  font-size:10px; font-weight:700; padding:3px 10px; border-radius:3px; letter-spacing:.08em;
+}
+.fl1 .map .lm{
+  position:absolute; background:#fff; color:#56635C; font-size:9px;
+  padding:2px 6px; border-radius:3px; border:1px solid #D2DED4;
+}
+.fl1 .map .pin{
+  position:absolute; left:196px; top:118px;
+  background:#D9483C; color:#fff; font-size:11px; font-weight:900;
+  padding:4px 10px; border-radius:4px; letter-spacing:.1em;
+}
+.fl1 .map .pin::after{
+  content:""; position:absolute; left:12px; top:-8px;
+  border:5px solid transparent; border-bottom-color:#D9483C;
+}
+.fl1 .map .walk{
+  position:absolute; right:8px; bottom:8px; font-size:9px; color:#56635C;
+  background:rgba(255,255,255,.85); padding:2px 7px; border-radius:3px;
+}
+.fl1 .resv{ flex:1; display:flex; gap:14px; align-items:flex-start; }
+.fl1 .qr{
+  position:relative; flex:0 0 96px; height:96px; background:#fff;
+  border:1px solid #D7D2C6; padding:9px;
+}
+.fl1 .qr .noise{
+  position:absolute; inset:9px;
+  background:
+    repeating-conic-gradient(#20262B 0 25%, #fff 0 50%) 0 0/8px 8px,
+    repeating-conic-gradient(#20262B 0 25%, transparent 0 50%) 3px 2px/11px 11px;
+}
+.fl1 .qr .f{ position:absolute; width:22px; height:22px; border:5px solid #20262B; background:#fff; box-shadow:0 0 0 3px #fff; }
+.fl1 .qr .f i{ position:absolute; inset:2px; background:#20262B; }
+.fl1 .qr .f1{ left:6px; top:6px; } .fl1 .qr .f2{ right:6px; top:6px; } .fl1 .qr .f3{ left:6px; bottom:6px; }
+.fl1 .rtext{ flex:1; }
+.fl1 .rtext .r1{ font-size:12px; font-weight:900; color:#24503C; letter-spacing:.06em; }
+.fl1 .rtext .tel{ font-family:'Montserrat',sans-serif; font-size:25px; font-weight:800; color:#22303B; letter-spacing:.02em; margin-top:2px; }
+.fl1 .rtext .tel small{ font-size:12px; font-weight:700; color:#2F7D5A; margin-right:6px; }
+.fl1 .hours{ margin-top:8px; font-size:10px; color:#4A555E; border-collapse:collapse; }
+.fl1 .hours td{ border:1px solid #D8E0DA; padding:3px 8px; }
+.fl1 .hours td:first-child{ background:#F1F7F2; font-weight:700; }
+
+.fl1 .foot{
+  position:absolute; left:0; right:0; bottom:0; height:44px; background:#2F7D5A;
+  display:flex; align-items:center; justify-content:center; gap:22px;
+  color:#EAF5EE; font-size:10.5px; letter-spacing:.06em;
+}
+.fl1 .foot b{ font-size:12px; letter-spacing:.12em; }
+
+/* =========================================================
+   04  YOUTUBE THUMBS 1280x720
+   ========================================================= */
+
+/* --- A: benefit --- */
+.yt1{ background:linear-gradient(112deg,#0F2438 0%,#1A3A58 58%,#25517A 100%); overflow:hidden; }
+.yt1 .photo{
+  position:absolute; top:0; right:0; bottom:0; width:46%;
+  background:url('https://images.unsplash.com/photo-1560250097-0b93528c311a?w=900&q=80&auto=format&fit=crop') 65% 20%/cover;
+}
+.yt1 .photo::before{
+  content:""; position:absolute; inset:0;
+  background:linear-gradient(90deg,#132C44 0%, rgba(19,44,68,.4) 34%, rgba(19,44,68,0) 72%);
+}
+.yt1 .txt{ position:absolute; left:64px; top:58px; white-space:nowrap; }
+.yt1 .chip{
+  display:inline-block; background:#E2382F; color:#fff; border-radius:8px;
+  font-size:32px; font-weight:900; letter-spacing:.1em; padding:11px 28px;
+}
+.yt1 .l1{ font-size:52px; font-weight:900; color:#fff; margin-top:30px; letter-spacing:.02em;
+  text-shadow:0 4px 18px rgba(6,18,30,.6); }
+.yt1 .l2{ margin-top:6px; line-height:1.04; text-shadow:0 6px 24px rgba(6,18,30,.65); }
+.yt1 .l2 .n{ font-size:136px; font-weight:900; color:#FFD84D; letter-spacing:-.01em; }
+.yt1 .l2 .s{ font-size:64px; font-weight:900; color:#fff; }
+.yt1 .l3{ font-size:60px; font-weight:900; color:#fff; margin-top:14px; letter-spacing:.03em;
+  text-shadow:0 4px 18px rgba(6,18,30,.6); }
+.yt1 .l3 em{ font-style:normal; color:#7FD1FF; }
+.yt1 .date{
+  position:absolute; left:64px; bottom:48px;
+  font-family:'Montserrat',sans-serif; font-size:30px; font-weight:700; letter-spacing:.1em;
+  color:#fff; border:3px solid rgba(255,255,255,.8); border-radius:99px; padding:11px 32px;
+  background:rgba(15,36,56,.45);
+}
+
+/* --- B: loss aversion --- */
+.yt2{ background:radial-gradient(ellipse 1100px 800px at 26% 40%, #2A1517 0%, #120C0D 70%); overflow:hidden; }
+.yt2 .photo{
+  position:absolute; top:0; left:0; bottom:0; width:42%;
+  background:url('https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=900&q=80&auto=format&fit=crop') 40% 20%/cover;
+  filter:saturate(.7) contrast(1.05);
+}
+.yt2 .photo::before{
+  content:""; position:absolute; inset:0;
+  background:linear-gradient(270deg,#150E0F 0%, rgba(21,14,15,.35) 40%, rgba(21,14,15,0) 80%);
+}
+.yt2 .txt{ position:absolute; right:64px; top:80px; text-align:right; }
+.yt2 .chip{
+  display:inline-block; background:#FFD84D; color:#161011; border-radius:8px;
+  font-size:36px; font-weight:900; letter-spacing:.08em; padding:12px 30px;
+}
+.yt2 .l1{ font-size:74px; font-weight:900; color:#fff; margin-top:34px; letter-spacing:.04em;
+  text-shadow:0 4px 20px rgba(0,0,0,.7); }
+.yt2 .l2{ font-size:170px; font-weight:900; color:#FF4B3E; line-height:1.05; letter-spacing:.01em;
+  text-shadow:0 0 4px rgba(255,255,255,.25), 0 10px 30px rgba(0,0,0,.75); }
+.yt2 .l3{
+  display:inline-block; margin-top:30px; font-size:42px; font-weight:900; color:#161011;
+  background:#fff; padding:10px 26px; border-radius:6px;
+}
+.yt2 .caution{
+  position:absolute; left:0; right:0; bottom:0; height:22px;
+  background:repeating-linear-gradient(-45deg,#FFD84D 0 26px,#161011 26px 52px);
+}
+</style>
+</head>
+<body>
+
+<div class="page">
+
+  <header class="hero">
+    <div class="eyebrow">DESIGN SAMPLES — BANNER / HEADER / FLYER</div>
+    <h1>バナー・ヘッダー・チラシ制作サンプル</h1>
+    <p>同一キャンペーンの素材から、トーン違い・訴求違いのデザインを短時間で量産し、全件を人の目で検品して納品する制作フローのサンプル集です。</p>
+  </header>
+
+  <!-- ============ 01 mail headers ============ -->
+  <section class="group">
+    <div class="group-head">
+      <span class="num">01</span>
+      <h2>メルマガヘッダー — 3トーン展開</h2>
+      <span class="spec">600×200px</span>
+    </div>
+    <p class="group-cap">架空コスメブランド「Lueur(リュール)」夏のUVケアキャンペーン。<strong>同じ商品・同じ告知内容から「上品」「ポップ」「シンプル」の3トーンを短時間で量産</strong>し、配信リストやABテストに合わせて出し分けます。全件、人の目で文字組み・配色を検品してから納品します。</p>
+    <div class="works">
+
+      <figure class="work">
+        <div class="frame mh">
+          <div class="canvas mh1">
+            <div class="photo"></div>
+            <div class="body">
+              <div class="brand">Lueur<small>PARIS&nbsp;&mdash;&nbsp;UV CARE</small></div>
+              <h3>陽射しの季節も、<br>素肌は淑やかに。</h3>
+              <div class="meta"><i></i>SUMMER UV COLLECTION 2026&ensp;/&ensp;SPF50+・PA++++</div>
+            </div>
+          </div>
+        </div>
+        <figcaption>
+          <div class="cap-title">トーンA|上品(百貨店コスメ調)</div>
+          <div class="cap-meta"><span class="chip">600 × 200 px</span></div>
+        </figcaption>
+      </figure>
+
+      <figure class="work">
+        <div class="frame mh">
+          <div class="canvas mh2">
+            <div class="sun"></div>
+            <div class="wave1"></div><div class="wave2"></div>
+            <div class="brand">Lueur</div>
+            <h3>この夏は、<em>焼かない</em>宣言!</h3>
+            <div class="off"><b>20%</b><span>MAX OFF</span></div>
+            <div class="date">7.1 TUE − 7.21 TUE</div>
+          </div>
+        </div>
+        <figcaption>
+          <div class="cap-title">トーンB|ポップ(セール告知向け)</div>
+          <div class="cap-meta"><span class="chip">600 × 200 px</span></div>
+        </figcaption>
+      </figure>
+
+      <figure class="work">
+        <div class="frame mh">
+          <div class="canvas mh3">
+            <div class="inner">
+              <div class="brand">Lueur</div>
+              <div class="rule"></div>
+              <div class="en">UV CARE COLLECTION 2026</div>
+              <div class="jp">ひと塗りで、光をまとう。</div>
+            </div>
+          </div>
+        </div>
+        <figcaption>
+          <div class="cap-title">トーンC|シンプル(定期便・既存顧客向け)</div>
+          <div class="cap-meta"><span class="chip">600 × 200 px</span></div>
+        </figcaption>
+      </figure>
+
+    </div>
+  </section>
+
+  <!-- ============ 02 instagram ============ -->
+  <section class="group">
+    <div class="group-head">
+      <span class="num">02</span>
+      <h2>Instagram広告バナー — 4訴求展開</h2>
+      <span class="spec">1080×1080px</span>
+    </div>
+    <p class="group-cap">同キャンペーンのInstagram広告。<strong>「価格」「ベネフィット」「レビュー」「緊急性」の4訴求を同一トンマナで展開</strong>し、配信結果を見ながら勝ちクリエイティブに寄せていく運用を想定したセットです。ブランドカラー(ネイビー×ゴールド×アイボリー)は全案で統一しています。</p>
+    <div class="works">
+
+      <figure class="work">
+        <div class="frame ig">
+          <div class="canvas ig1">
+            <div class="glow"></div>
+            <div class="brand">Lueur</div>
+            <div class="tag">オンラインストア限定</div>
+            <div class="shadow"></div>
+            <div class="bottle">
+              <div class="cap"></div>
+              <div class="bodyb">
+                <div class="bl">Lueur</div>
+                <div class="bn">UV SHIELD</div>
+                <div class="bs">SPF50+ / PA++++</div>
+              </div>
+            </div>
+            <div class="sale">SUMMER SALE</div>
+            <div class="big"><span class="n">20</span><span class="p">%</span><span class="o">OFF</span></div>
+            <div class="price">
+              <div class="item">UVシールドミルク 50g</div>
+              <div class="row">
+                <span class="was">¥3,080</span><span class="arw">▶</span>
+                <span class="now">¥2,464</span><span class="tax">(税込)</span>
+              </div>
+            </div>
+            <div class="band">7/21(火)まで&ensp;/&ensp;<b>会員登録でさらに5%OFF</b>クーポン進呈</div>
+          </div>
+        </div>
+        <figcaption>
+          <div class="cap-title">訴求A|価格(セールオファー)</div>
+          <div class="cap-meta"><span class="chip">1080 × 1080 px</span></div>
+        </figcaption>
+      </figure>
+
+      <figure class="work">
+        <div class="frame ig">
+          <div class="canvas ig2">
+            <div class="ov"></div>
+            <div class="brand">Lueur</div>
+            <div class="spf">SPF50+ / PA++++</div>
+            <h3>夕方まで、<br>塗り直しゼロ。</h3>
+            <div class="list">
+              <div class="li"><i>✓</i>ウォータープルーフ処方</div>
+              <div class="li"><i>✓</i>トーンアップUV</div>
+              <div class="li"><i>✓</i>石けんでするんとオフ</div>
+            </div>
+          </div>
+        </div>
+        <figcaption>
+          <div class="cap-title">訴求B|ベネフィット(機能価値)</div>
+          <div class="cap-meta"><span class="chip">1080 × 1080 px</span></div>
+        </figcaption>
+      </figure>
+
+      <figure class="work">
+        <div class="frame ig">
+          <div class="canvas ig3">
+            <div class="frame-in"></div>
+            <div class="brand">Lueur</div>
+            <div class="en">USER REVIEW</div>
+            <div class="score"><span class="v">4.8</span><span class="d">/ 5.0</span></div>
+            <div class="stars">★★★★<span class="half">★</span></div>
+            <div class="count">公式ストアレビュー 1,248件</div>
+            <div class="quote">
+              <div class="q">&ldquo;</div>
+              <p>白浮きしないのに、しっかり守られている安心感。休日のレジャーでも頼りにしています。</p>
+              <div class="who">— 34歳・混合肌</div>
+            </div>
+          </div>
+        </div>
+        <figcaption>
+          <div class="cap-title">訴求C|レビュー(社会的証明)</div>
+          <div class="cap-meta"><span class="chip">1080 × 1080 px</span></div>
+        </figcaption>
+      </figure>
+
+      <figure class="work">
+        <div class="frame ig">
+          <div class="canvas ig4">
+            <div class="frame-in"></div>
+            <div class="en">SUMMER SALE</div>
+            <div class="sub">まもなく終了</div>
+            <div class="big"><span class="t">残り</span><span class="n">3</span><span class="t">日</span></div>
+            <div class="until">7/21(火) 23:59 まで</div>
+            <div class="cta">セール会場はこちら<span>→</span></div>
+            <div class="brand">LUEUR UV COLLECTION</div>
+          </div>
+        </div>
+        <figcaption>
+          <div class="cap-title">訴求D|緊急性(締切リマインド)</div>
+          <div class="cap-meta"><span class="chip">1080 × 1080 px</span></div>
+        </figcaption>
+      </figure>
+
+    </div>
+  </section>
+
+  <!-- ============ 03 flyer ============ -->
+  <section class="group">
+    <div class="group-head">
+      <span class="num">03</span>
+      <h2>A4チラシ — 店舗集客(整骨院)</h2>
+      <span class="spec">A4縦 210×297mm</span>
+    </div>
+    <p class="group-cap">架空の「みどり整骨院」新規集客チラシ。<strong>初回オファー・メニュー・地図・予約導線(電話/QR)まで1枚に整理</strong>。同じ雛形から店舗ごとの差し替え量産(内容・色・写真)に対応します。こちらも全件、人の目で誤字・料金・地図表記を検品します。</p>
+    <div class="works">
+
+      <figure class="work">
+        <div class="frame fl">
+          <div class="canvas fl1">
+            <div class="top">
+              <div class="logo">
+                <div class="leaf"></div>
+                <div><b>みどり整骨院</b><span>予約優先制</span></div>
+              </div>
+              <div class="toptel">ご予約・お問い合わせ<br><b>012-345-6789</b></div>
+            </div>
+
+            <div class="fhero">
+              <div class="lead">つらい痛み、そのままにしていませんか</div>
+              <h3>その<em>肩こり・腰痛</em>、<br>がまんは今日で終わりに。</h3>
+              <p>国家資格を持つ施術者が、原因から整える根本改善ケアをご提案します。</p>
+            </div>
+
+            <div class="photo">
+              <div class="chip">国家資格者がすべて担当</div>
+            </div>
+
+            <div class="feats">
+              <div class="feat"><i>1</i><b>国家資格者が施術</b><span>柔道整復師が<br>カウンセリングから担当</span></div>
+              <div class="feat"><i>2</i><b>土日も20時まで</b><span>お仕事帰り・週末も<br>通いやすい診療時間</span></div>
+              <div class="feat"><i>3</i><b>駅から徒歩3分</b><span>みどり駅南口すぐ<br>駐車場2台完備</span></div>
+            </div>
+
+            <div class="coupon">
+              <div class="lab">初回限定</div>
+              <div class="cbody">
+                <div class="ct">全身整体コース(60分)が</div>
+                <div class="crow">
+                  <span class="was">¥6,000</span><span class="arw">▶</span>
+                  <span class="now">3,000<span class="yen">円(税込)</span></span>
+                </div>
+                <div class="cnote">※本チラシをご持参の方・お一人様1回限り/2026年8月31日まで有効</div>
+              </div>
+            </div>
+
+            <div class="menu">
+              <h4>MENU / 料金</h4>
+              <div class="mrow"><span class="nm">全身整体コース</span><span class="tm">60分</span><span class="dots"></span><span class="pr">¥6,000</span></div>
+              <div class="mrow"><span class="nm">骨盤矯正</span><span class="tm">30分</span><span class="dots"></span><span class="pr">¥3,500</span></div>
+              <div class="mrow"><span class="nm">猫背・姿勢改善</span><span class="tm">30分</span><span class="dots"></span><span class="pr">¥3,500</span></div>
+            </div>
+
+            <div class="access">
+              <div class="map">
+                <div class="rail"></div>
+                <div class="sta">みどり駅</div>
+                <div class="roadH"></div>
+                <div class="roadV"></div>
+                <div class="lm" style="left:20px; top:64px;">コンビニ</div>
+                <div class="lm" style="left:214px; top:64px;">郵便局</div>
+                <div class="lm" style="left:36px; top:122px;">スーパー</div>
+                <div class="pin">当院</div>
+                <div class="walk">みどり駅南口より徒歩3分</div>
+              </div>
+              <div class="resv">
+                <div class="qr">
+                  <div class="noise"></div>
+                  <div class="f f1"><i></i></div><div class="f f2"><i></i></div><div class="f f3"><i></i></div>
+                </div>
+                <div class="rtext">
+                  <div class="r1">24時間ネット予約はQRから</div>
+                  <div class="tel"><small>TEL</small>012-345-6789</div>
+                  <table class="hours">
+                    <tr><td>平日</td><td>9:00〜13:00 / 15:00〜20:00</td></tr>
+                    <tr><td>土日</td><td>9:00〜20:00(休憩なし)</td></tr>
+                    <tr><td>休診</td><td>祝日</td></tr>
+                  </table>
+                </div>
+              </div>
+            </div>
+
+            <div class="foot"><b>みどり整骨院</b><span>〒000-0000 東京都みどり区みどり町1-2-3 サンプルビル1F</span></div>
+          </div>
+        </div>
+        <figcaption>
+          <div class="cap-title">店舗集客チラシ(初回オファー+地図+予約導線)</div>
+          <div class="cap-meta"><span class="chip">A4 210 × 297 mm</span></div>
+        </figcaption>
+      </figure>
+
+    </div>
+  </section>
+
+  <!-- ============ 04 youtube ============ -->
+  <section class="group">
+    <div class="group-head">
+      <span class="num">04</span>
+      <h2>YouTubeサムネイル — ABテスト2案</h2>
+      <span class="spec">1280×720px</span>
+    </div>
+    <p class="group-cap">架空のオンライン集客セミナー告知。<strong>同じ動画に対して「期待型(得られる未来)」「損失回避型(見ないと損)」の2案</strong>を用意し、クリック率で勝敗を判定するABテスト運用を想定しています。</p>
+    <div class="works">
+
+      <figure class="work">
+        <div class="frame yt">
+          <div class="canvas yt1">
+            <div class="photo"></div>
+            <div class="txt">
+              <span class="chip">無料オンラインセミナー</span>
+              <div class="l1">フォロワー1,000人でも</div>
+              <div class="l2"><span class="n">月20件</span><span class="s">の予約が入る</span></div>
+              <div class="l3"><em>Instagram</em>運用術</div>
+            </div>
+            <div class="date">7/15 WED 20:00 START</div>
+          </div>
+        </div>
+        <figcaption>
+          <div class="cap-title">A案|期待型(ベネフィット訴求)</div>
+          <div class="cap-meta"><span class="chip">1280 × 720 px</span></div>
+        </figcaption>
+      </figure>
+
+      <figure class="work">
+        <div class="frame yt">
+          <div class="canvas yt2">
+            <div class="photo"></div>
+            <div class="txt">
+              <span class="chip">9割が知らない</span>
+              <div class="l1">SNS集客の</div>
+              <div class="l2">落とし穴</div>
+              <br>
+              <span class="l3">アカウントを作る前に見てください</span>
+            </div>
+            <div class="caution"></div>
+          </div>
+        </div>
+        <figcaption>
+          <div class="cap-title">B案|損失回避型(注意喚起訴求)</div>
+          <div class="cap-meta"><span class="chip">1280 × 720 px</span></div>
+        </figcaption>
+      </figure>
+
+    </div>
+  </section>
+
+</div>
+
+<footer>
+  <p>※すべて制作サンプルです。ブランド・店舗・価格・キャンペーンは架空です。写真はイメージです。</p>
+  <p>本ページのバナー・チラシは画像書き出しではなく、写真素材を除きすべてHTML/CSSで実寸描画しています。</p>
+</footer>
+
+</body>
+</html>

@@ -16,16 +16,22 @@
 </script>
 <style>
 :root{
-  --ink:#453338; --sub:#8a757b; --line:#f0e4e6;
+  --ink:#453338; --sub:#7d666d; --line:#f0e4e6;
   --paper:#fffdfc; --sakura:#fdeef2; --wood:#f5ecde;
   --pink:#e78ba6; --pink-d:#d1698a; --gold:#c9a15a; --sage:#83bfa0; --ink2:#5a4147;
-  --shadow:0 26px 56px -28px rgba(120,70,90,.35);
+  --shadow:0 24px 48px -26px rgba(120,70,90,.30);
+  --shadow-sm:0 12px 28px -16px rgba(120,70,90,.20);
+  --r-lg:28px; --r-md:20px; --r-sm:14px;
 }
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{font-family:"Noto Sans JP",sans-serif;color:var(--ink);background:var(--paper);
   line-height:2;font-weight:400;font-size:16.5px;-webkit-font-smoothing:antialiased;overflow-x:hidden}
 .round{font-family:"Zen Maru Gothic",sans-serif}.mono{font-family:"Manrope",sans-serif}
+h1,h2,h3,h4{font-feature-settings:"palt";letter-spacing:.02em}
+::selection{background:#fadbe3}
+a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid var(--pink);outline-offset:2px}
+section[id]{scroll-margin-top:86px}
 img{display:block;width:100%;height:100%;object-fit:cover}
 a{color:inherit;text-decoration:none}
 .wrap{max-width:1140px;margin:0 auto;padding:0 28px}
@@ -34,10 +40,10 @@ a{color:inherit;text-decoration:none}
 .eye::before{content:"❀";color:var(--pink);font-size:.9rem;letter-spacing:0}
 .btn{display:inline-flex;align-items:center;gap:9px;padding:17px 32px;border-radius:100px;font-weight:700;
   font-size:.92rem;font-family:"Zen Maru Gothic";transition:.32s cubic-bezier(.2,.8,.2,1)}
-.btn-p{background:var(--pink);color:#fff;box-shadow:0 16px 30px -12px rgba(231,139,166,.6)}
-.btn-p:hover{background:var(--pink-d);transform:translateY(-3px)}
+.btn-p{background:var(--pink);color:#fff;box-shadow:0 14px 28px -12px rgba(231,139,166,.55)}
+.btn-p:hover{background:var(--pink-d);transform:translateY(-2px);box-shadow:0 18px 32px -12px rgba(209,105,138,.55)}
 .btn-o{background:#fff;color:var(--pink-d);border:1.5px solid var(--line)}
-.btn-o:hover{border-color:var(--pink);transform:translateY(-2px)}
+.btn-o:hover{border-color:var(--pink);transform:translateY(-2px);box-shadow:var(--shadow-sm)}
 .btn .a{transition:.3s}.btn:hover .a{transform:translateX(4px)}
 
 header{position:fixed;inset:0 0 auto 0;z-index:60;transition:.3s;padding:16px 0}
@@ -49,7 +55,9 @@ header.scrolled{background:rgba(255,253,252,.94);backdrop-filter:blur(10px);box-
 .brand small{display:block;font-family:"Manrope";font-size:.5rem;letter-spacing:.22em;color:var(--sub);font-weight:700}
 .right{display:flex;align-items:center;gap:22px}
 .menu{display:flex;gap:24px;align-items:center}
-.menu a{font-size:.85rem;font-weight:500}.menu a:hover{color:var(--pink-d)}
+.menu a{font-size:.85rem;font-weight:500;position:relative;padding:4px 2px;transition:color .25s}
+.menu a::after{content:"";position:absolute;left:2px;right:2px;bottom:-1px;height:2px;border-radius:2px;background:var(--pink);transform:scaleX(0);transform-origin:left;transition:transform .3s cubic-bezier(.2,.8,.2,1)}
+.menu a:hover{color:var(--pink-d)}.menu a:hover::after{transform:scaleX(1)}
 .tel{text-align:right;line-height:1.15}
 .tel b{font-family:"Manrope";font-weight:800;color:var(--ink2);font-size:1.3rem}
 .tel small{display:block;font-size:.6rem;color:var(--sub)}
@@ -61,10 +69,11 @@ header.scrolled{background:rgba(255,253,252,.94);backdrop-filter:blur(10px);box-
 /* hero */
 .hero{position:relative;padding:132px 0 96px;overflow:hidden;background:
   radial-gradient(120% 100% at 85% 0,var(--sakura),var(--paper) 60%)}
-.hero .petal{position:absolute;color:#f6cdd8;font-size:1.4rem;z-index:1;animation:fall 12s linear infinite;opacity:.8}
-@keyframes fall{0%{transform:translateY(-40px) rotate(0);opacity:0}10%{opacity:.8}100%{transform:translateY(760px) rotate(320deg);opacity:0}}
+.hero .petal{position:absolute;color:#f8d3de;font-size:1.25rem;z-index:1;animation:fall 14s linear infinite;opacity:0;will-change:transform}
+@keyframes fall{0%{transform:translate(0,-40px) rotate(0);opacity:0}8%{opacity:.65}55%{transform:translate(26px,400px) rotate(180deg);opacity:.55}100%{transform:translate(-18px,780px) rotate(340deg);opacity:0}}
+@media(prefers-reduced-motion:reduce){.hero .petal{animation:none}.reveal{opacity:1!important;transform:none!important}}
 .hero .grid{display:grid;grid-template-columns:1.08fr .92fr;gap:48px;align-items:center;position:relative;z-index:2}
-.hero h1{font-family:"Zen Maru Gothic";font-weight:900;font-size:clamp(2.3rem,5.6vw,4rem);line-height:1.36;margin:22px 0 22px}
+.hero h1{font-family:"Zen Maru Gothic";font-weight:900;font-size:clamp(2.15rem,5vw,3.55rem);line-height:1.4;margin:22px 0 22px}
 .hero h1 .p{color:var(--pink-d)}
 .hero h1 .u{position:relative;white-space:nowrap}
 .hero h1 .u::after{content:"";position:absolute;left:-2px;right:-2px;bottom:6px;height:13px;background:#fadbe3;z-index:-1;border-radius:8px}
@@ -76,19 +85,19 @@ header.scrolled{background:rgba(255,253,252,.94);backdrop-filter:blur(10px);box-
 .hero .trust .t span{font-size:.72rem;color:var(--sub)}
 .hero .trust .dv{width:1px;background:var(--line)}
 .hfig{position:relative}
-.hfig .ph{aspect-ratio:5/6;border-radius:170px 170px 28px 28px;overflow:hidden;box-shadow:var(--shadow)}
-.hfig .fl{position:absolute;background:#fff;border-radius:18px;padding:13px 17px;box-shadow:var(--shadow);display:flex;align-items:center;gap:10px;font-weight:700;font-size:.8rem}
+.hfig .ph{aspect-ratio:5/6;border-radius:170px 170px var(--r-lg) var(--r-lg);overflow:hidden;box-shadow:var(--shadow);border:6px solid #fff;outline:1px solid var(--line)}
+.hfig .fl{position:absolute;background:#fff;border-radius:16px;padding:13px 17px;box-shadow:var(--shadow);display:flex;align-items:center;gap:10px;font-weight:700;font-size:.8rem}
 .hfig .fl.a{left:-20px;top:52px}.hfig .fl.b{right:-16px;bottom:46px}
 .hfig .fl .d{width:34px;height:34px;border-radius:11px;display:grid;place-items:center;color:#fff;font-size:.95rem;flex:0 0 auto}
 
 section{padding:104px 0}
-.head{text-align:center;margin-bottom:54px}
-.head h2{font-family:"Zen Maru Gothic";font-weight:900;font-size:clamp(1.8rem,3.8vw,2.5rem);margin-top:12px;line-height:1.4}
-.head p{color:var(--sub);font-size:.95rem;margin-top:14px}
+.head{text-align:center;margin-bottom:60px}
+.head h2{font-family:"Zen Maru Gothic";font-weight:900;font-size:clamp(1.8rem,3.8vw,2.5rem);margin-top:14px;line-height:1.42}
+.head p{color:var(--sub);font-size:.95rem;margin-top:14px;max-width:640px;margin-left:auto;margin-right:auto}
 
 /* visit (訪問歯科=最重視) */
 .visit{background:linear-gradient(180deg,var(--wood),var(--paper) 90%)}
-.visit .box{background:#fff;border-radius:34px;box-shadow:var(--shadow);overflow:hidden;display:grid;grid-template-columns:1fr 1.1fr}
+.visit .box{background:#fff;border-radius:var(--r-lg);box-shadow:var(--shadow);overflow:hidden;display:grid;grid-template-columns:1fr 1.1fr}
 .visit .ph{position:relative;min-height:340px}
 .visit .ph .badge{position:absolute;left:22px;top:22px;background:var(--pink);color:#fff;font-family:"Zen Maru Gothic";font-weight:700;font-size:.78rem;padding:7px 16px;border-radius:100px}
 .visit .b{padding:52px 48px}
@@ -98,11 +107,11 @@ section{padding:104px 0}
 .vlist{display:grid;grid-template-columns:1fr 1fr;gap:10px 22px;margin:18px 0 24px}
 .vlist li{list-style:none;font-size:.86rem;font-weight:500;display:flex;align-items:center;gap:9px}
 .vlist li::before{content:"❀";color:var(--pink);font-size:.8rem}
-.visit .who{background:var(--sakura);border-radius:16px;padding:16px 20px;font-size:.82rem;color:var(--ink2)}
+.visit .who{background:var(--sakura);border-radius:var(--r-sm);padding:16px 20px;font-size:.82rem;color:var(--ink2)}
 .visit .who b{color:var(--pink-d)}
 .vsub{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:22px}
-.vcard{background:#fff;border:1px solid var(--line);border-radius:22px;padding:30px 28px;position:relative}
-.vno{position:absolute;right:22px;top:18px;color:var(--sakura);font-weight:800;font-size:2.2rem;line-height:1}
+.vcard{background:#fff;border:1px solid var(--line);border-radius:var(--r-md);padding:32px 30px;position:relative;box-shadow:var(--shadow-sm)}
+.vno{position:absolute;right:24px;top:20px;color:#f7d7e0;font-weight:800;font-size:2.2rem;line-height:1}
 .vcard h4{font-family:"Zen Maru Gothic";font-weight:700;font-size:1.14rem;margin-bottom:14px}
 .vdot{list-style:none;display:grid;gap:8px}.vdot.cols{grid-template-columns:1fr 1fr}
 .vdot li{font-size:.88rem;font-weight:500;display:flex;align-items:center;gap:9px}
@@ -110,63 +119,69 @@ section{padding:104px 0}
 .vnote{font-size:.78rem;color:var(--sub);margin-top:14px}
 .vflow{margin-top:30px}
 .vsteps{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:16px}
-.vstep{background:#fff;border:1px solid var(--line);border-radius:18px;padding:22px 20px;position:relative}
+.vstep{background:#fff;border:1px solid var(--line);border-radius:var(--r-md);padding:24px 22px;position:relative;box-shadow:var(--shadow-sm)}
 .vstep .s{color:var(--pink-d);font-weight:700;font-size:.68rem;letter-spacing:.08em}
 .vstep b{font-family:"Zen Maru Gothic";display:block;margin:6px 0 6px;font-size:1rem}
 .vstep p{font-size:.78rem;color:var(--sub)}
 .vcost{display:grid;grid-template-columns:1.1fr .9fr;gap:22px;margin-top:22px}
-.vcbox,.vfaq{background:#fff;border:1px solid var(--line);border-radius:22px;padding:30px 28px}
+.vcbox,.vfaq{background:#fff;border:1px solid var(--line);border-radius:var(--r-md);padding:32px 30px;box-shadow:var(--shadow-sm)}
 .vcbox h4{font-weight:900;font-size:1.2rem;margin:10px 0 12px}
 .vcbox p{font-size:.86rem;color:var(--sub)}
 .vprice{margin:16px 0 8px;display:grid;gap:10px}
-.vprice div{display:flex;justify-content:space-between;align-items:baseline;background:var(--sakura);border-radius:12px;padding:12px 16px;font-size:.86rem}
+.vprice div{display:flex;justify-content:space-between;align-items:baseline;background:var(--sakura);border-radius:var(--r-sm);padding:12px 16px;font-size:.86rem}
 .vprice b{color:var(--pink-d)}
 .vfaq details{border-bottom:1px solid var(--line);padding:12px 0}
-.vfaq summary{cursor:pointer;font-weight:700;font-size:.9rem;list-style:none;position:relative;padding-right:26px}
+.vfaq details:last-of-type{border-bottom:0}
+.vfaq summary{cursor:pointer;font-weight:700;font-size:.9rem;list-style:none;position:relative;padding-right:26px;transition:color .25s}
+.vfaq summary:hover{color:var(--pink-d)}
 .vfaq summary::-webkit-details-marker{display:none}
-.vfaq summary::after{content:"＋";position:absolute;right:2px;top:0;color:var(--pink);font-weight:700}
+.vfaq summary::after{content:"＋";position:absolute;right:2px;top:0;color:var(--pink);font-weight:700;transition:transform .3s}
 .vfaq details[open] summary::after{content:"−"}
 .vfaq details p{font-size:.84rem;color:var(--sub);margin-top:10px}
 .contact{background:var(--wood)}
 .cwrap{display:grid;grid-template-columns:.85fr 1.15fr;gap:30px;align-items:start}
 .cinfo{display:grid;gap:18px}
-.ctel{display:block;background:var(--pink);color:#fff;border-radius:22px;padding:28px 26px;box-shadow:var(--shadow);transition:.3s}
-.ctel:hover{background:var(--pink-d);transform:translateY(-3px)}
+.ctel{display:block;background:linear-gradient(135deg,var(--pink),var(--pink-d));color:#fff;border-radius:var(--r-md);padding:28px 26px;box-shadow:var(--shadow);transition:.3s}
+.ctel:hover{transform:translateY(-3px);box-shadow:0 26px 48px -22px rgba(209,105,138,.55)}
 .ctel span{font-size:.8rem;opacity:.95}.ctel b{display:block;font-size:2rem;line-height:1.2;letter-spacing:.02em}.ctel small{font-size:.72rem;opacity:.9}
-.cnote{background:#fff;border:1px solid var(--line);border-radius:16px;padding:18px 20px;font-size:.84rem;color:var(--sub)}
-.cform{background:#fff;border:1px solid var(--line);border-radius:24px;padding:32px;box-shadow:var(--shadow);display:grid;gap:16px}
+.cnote{background:#fff;border:1px solid var(--line);border-radius:var(--r-sm);padding:18px 20px;font-size:.84rem;color:var(--sub)}
+.cform{background:#fff;border:1px solid var(--line);border-radius:var(--r-md);padding:36px 34px;box-shadow:var(--shadow);display:grid;gap:16px}
 .cform .row2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
 .cform label{display:grid;gap:6px;font-size:.82rem;font-weight:700;color:var(--ink2)}
-.cform input,.cform select,.cform textarea{font-family:inherit;font-size:.9rem;padding:12px 14px;border:1px solid var(--line);border-radius:12px;background:var(--paper);color:var(--ink);width:100%}
-.cform input:focus,.cform select,.cform textarea:focus{outline:2px solid var(--pink);outline-offset:1px}
+.cform input,.cform select,.cform textarea{font-family:inherit;font-size:.9rem;padding:13px 15px;border:1px solid var(--line);border-radius:var(--r-sm);background:var(--paper);color:var(--ink);width:100%;transition:border-color .25s,box-shadow .25s}
+.cform input:hover,.cform select:hover,.cform textarea:hover{border-color:#e4cdd3}
+.cform input:focus,.cform select:focus,.cform textarea:focus{outline:2px solid var(--pink);outline-offset:1px;border-color:var(--pink)}
 .cform textarea{resize:vertical}
 .cprivacy{font-size:.72rem;color:var(--sub);text-align:center}
 
 /* reasons */
 .why{background:var(--sakura)}
 .rgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
-.rc{background:#fff;border:1px solid var(--line);border-radius:26px;padding:38px 30px;transition:.35s}
-.rc:hover{transform:translateY(-7px);box-shadow:var(--shadow)}
-.rc .no{font-family:"Manrope";font-weight:800;color:var(--pink);font-size:.86rem}
-.rc .ic{width:60px;height:60px;border-radius:20px;background:var(--sakura);display:grid;place-items:center;font-size:1.7rem;margin:14px 0 18px}
+.rc{background:#fff;border:1px solid var(--line);border-radius:var(--r-md);padding:38px 32px;transition:.35s;box-shadow:var(--shadow-sm)}
+.rc:hover{transform:translateY(-6px);box-shadow:var(--shadow)}
+.rc .no{font-family:"Manrope";font-weight:800;color:var(--pink);font-size:.86rem;letter-spacing:.1em}
+.rc .ic{width:60px;height:60px;border-radius:var(--r-md);background:var(--sakura);display:grid;place-items:center;font-size:1.7rem;margin:14px 0 18px;transition:.35s}
+.rc:hover .ic{transform:scale(1.08) rotate(-4deg)}
 .rc h3{font-family:"Zen Maru Gothic";font-weight:700;font-size:1.18rem;margin-bottom:12px}
 .rc p{font-size:.87rem;color:var(--sub)}
 
 /* care */
-.cgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
-.cc{border-radius:22px;overflow:hidden;background:#fff;border:1px solid var(--line);transition:.3s}
+.cgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.cc{border-radius:var(--r-md);overflow:hidden;background:#fff;border:1px solid var(--line);transition:.3s;box-shadow:var(--shadow-sm)}
 .cc:hover{transform:translateY(-5px);box-shadow:var(--shadow)}
-.cc .ph{aspect-ratio:16/10;position:relative}
-.cc .ph .lb{position:absolute;left:14px;top:14px;background:rgba(255,255,255,.95);color:var(--pink-d);font-family:"Zen Maru Gothic";font-weight:700;font-size:.72rem;padding:5px 13px;border-radius:100px}
-.cc .b{padding:24px}
+.cc .ph{aspect-ratio:16/10;position:relative;overflow:hidden}
+.cc .ph img{transition:transform .6s cubic-bezier(.2,.8,.2,1)}
+.cc:hover .ph img{transform:scale(1.05)}
+.cc .ph .lb{position:absolute;left:14px;top:14px;background:rgba(255,255,255,.95);color:var(--pink-d);font-family:"Zen Maru Gothic";font-weight:700;font-size:.72rem;padding:5px 13px;border-radius:100px;z-index:1;box-shadow:0 4px 12px -6px rgba(120,70,90,.35)}
+.cc .b{padding:26px 26px 28px}
 .cc h4{font-family:"Zen Maru Gothic";font-weight:700;font-size:1.1rem;margin-bottom:8px}
 .cc p{font-size:.84rem;color:var(--sub)}
 
 /* doctor */
 .doc{background:var(--wood)}
 .doc .grid{display:grid;grid-template-columns:.85fr 1.15fr;gap:52px;align-items:center}
-.doc .ph{aspect-ratio:4/5;border-radius:28px;overflow:hidden;box-shadow:var(--shadow);position:relative}
-.doc .ph .q{position:absolute;left:18px;bottom:18px;background:#fff;border-radius:14px;padding:11px 16px;font-family:"Zen Maru Gothic";font-weight:700;font-size:.8rem;box-shadow:var(--shadow)}
+.doc .ph{aspect-ratio:4/5;border-radius:var(--r-lg);overflow:hidden;box-shadow:var(--shadow);position:relative;border:6px solid #fff;outline:1px solid var(--line)}
+.doc .ph .q{position:absolute;left:18px;bottom:18px;background:#fff;border-radius:var(--r-sm);padding:11px 16px;font-family:"Zen Maru Gothic";font-weight:700;font-size:.8rem;box-shadow:var(--shadow)}
 .doc .ph .imgnote{position:absolute;right:12px;top:12px;background:rgba(0,0,0,.45);color:#fff;font-size:.62rem;padding:4px 9px;border-radius:8px}
 .doc h3{font-family:"Zen Maru Gothic";font-weight:900;font-size:clamp(1.6rem,3.2vw,2.1rem);margin:12px 0 8px;line-height:1.45}
 .doc .pos{color:var(--pink-d);font-weight:700;font-size:.9rem;margin-bottom:20px}
@@ -177,25 +192,26 @@ section{padding:104px 0}
 /* info */
 .info{background:var(--sakura)}
 .info .grid{display:grid;grid-template-columns:1fr 1fr;gap:52px;align-items:start}
-.htable{width:100%;border-collapse:collapse;font-size:.85rem;background:#fff;border-radius:18px;overflow:hidden;box-shadow:var(--shadow)}
-.htable th,.htable td{padding:13px 6px;text-align:center;border-bottom:1px solid var(--line)}
+.htable{width:100%;border-collapse:collapse;font-size:.85rem;background:#fff;border-radius:var(--r-md);overflow:hidden;box-shadow:var(--shadow)}
+.htable th,.htable td{padding:14px 6px;text-align:center;border-bottom:1px solid var(--line)}
+.htable tbody tr:last-child td{border-bottom:0}
 .htable thead th{background:var(--ink2);color:#fff;font-family:"Zen Maru Gothic";font-weight:700}
 .htable td:first-child{text-align:left;padding-left:18px;color:var(--sub);white-space:nowrap;font-weight:500}
 .htable .o{color:var(--pink);font-weight:800}.htable .x{color:#e0d3d6}
 .irow{margin-top:24px;display:grid;gap:14px}
 .irow .r{display:grid;grid-template-columns:96px 1fr;gap:16px;font-size:.92rem;padding-bottom:14px;border-bottom:1px solid var(--line)}
 .irow .r b{font-family:"Manrope";color:var(--pink-d);font-size:.7rem;font-weight:700;padding-top:4px}
-.map{aspect-ratio:1/1;border-radius:24px;overflow:hidden;background:#fff;box-shadow:var(--shadow)}
+.map{aspect-ratio:1/1;border-radius:var(--r-lg);overflow:hidden;background:#fff;box-shadow:var(--shadow);border:6px solid #fff}
 .map iframe{width:100%;height:100%;border:0}
 
-.cta{text-align:center;padding:110px 0;background:radial-gradient(120% 120% at 50% -20%,#f3a9bf,var(--pink-d));color:#fff;position:relative;overflow:hidden}
-.cta .eye{color:#ffe3ea;justify-content:center}.cta .eye::before{color:#fff}
-.cta h2{font-family:"Zen Maru Gothic";font-weight:900;font-size:clamp(2rem,4.6vw,3rem);margin:16px 0 14px;line-height:1.4}
-.cta p{opacity:.96;margin-bottom:30px}
-.cta .row{display:inline-flex;gap:15px;flex-wrap:wrap;justify-content:center;align-items:center}
-.cta .btn-w{background:#fff;color:var(--pink-d)}.cta .btn-w:hover{transform:translateY(-3px)}
-.cta .tel2{font-family:"Manrope";font-weight:800;font-size:1.7rem}
-.cta .tel2 span{display:block;font-family:"Noto Sans JP";font-size:.72rem;opacity:.9;font-weight:400}
+section.cta{text-align:center;padding:110px 0;background:radial-gradient(120% 120% at 50% -20%,#f3a9bf,var(--pink-d));color:#fff;position:relative;overflow:hidden}
+section.cta .eye{color:#ffe3ea;justify-content:center}section.cta .eye::before{color:#fff}
+section.cta h2{font-family:"Zen Maru Gothic";font-weight:900;font-size:clamp(2rem,4.6vw,3rem);margin:16px 0 14px;line-height:1.4}
+section.cta p{opacity:.96;margin-bottom:30px}
+section.cta .row{display:inline-flex;gap:15px;flex-wrap:wrap;justify-content:center;align-items:center}
+section.cta .btn-w{background:#fff;color:var(--pink-d)}section.cta .btn-w:hover{transform:translateY(-3px)}
+section.cta .tel2{font-family:"Manrope";font-weight:800;font-size:1.7rem}
+section.cta .tel2 span{display:block;font-family:"Noto Sans JP";font-size:.72rem;opacity:.9;font-weight:400}
 
 footer{background:var(--ink2);color:#c3aab1;padding:56px 0 28px;font-size:.84rem}
 .fg{display:flex;justify-content:space-between;flex-wrap:wrap;gap:30px;align-items:flex-start}
@@ -203,24 +219,45 @@ footer{background:var(--ink2);color:#c3aab1;padding:56px 0 28px;font-size:.84rem
 .fn{display:flex;gap:22px;flex-wrap:wrap}.fn a:hover{color:#f6cdd8}
 .copy{text-align:center;margin-top:40px;padding-top:22px;border-top:1px solid rgba(255,255,255,.1);font-size:.68rem}
 
-.reveal{opacity:0;transform:translateY(28px);transition:.85s cubic-bezier(.2,.8,.2,1)}
+.reveal{opacity:0;transform:translateY(22px);transition:.8s cubic-bezier(.2,.8,.2,1)}
 .reveal.in{opacity:1;transform:none}
+.rgrid.reveal>*,.cgrid.reveal>*,.vsub.reveal>*,.vsteps>*{opacity:0;transform:translateY(18px);transition:.7s cubic-bezier(.2,.8,.2,1)}
+.rgrid.reveal.in>*,.cgrid.reveal.in>*,.vsub.reveal.in>*,.in .vsteps>*{opacity:1;transform:none}
+.rgrid.reveal.in>*:nth-child(2),.cgrid.reveal.in>*:nth-child(2),.vsub.reveal.in>*:nth-child(2),.in .vsteps>*:nth-child(2){transition-delay:.1s}
+.rgrid.reveal.in>*:nth-child(3),.cgrid.reveal.in>*:nth-child(3),.in .vsteps>*:nth-child(3){transition-delay:.2s}
+.cgrid.reveal.in>*:nth-child(4),.in .vsteps>*:nth-child(4){transition-delay:.3s}
+.cgrid.reveal.in>*:nth-child(5){transition-delay:.4s}
+.cgrid.reveal.in>*:nth-child(6){transition-delay:.5s}
 @media(max-width:900px){
-  body{font-size:16px}section{padding:70px 0}
+  body{font-size:16px}section{padding:72px 0}
+  .head{margin-bottom:42px}
+  .brand{font-size:1.02rem;white-space:nowrap;gap:8px}
+  .leaf{width:32px;height:32px}.leaf::after{font-size:.95rem}
+  .brand small{font-size:.44rem}
+  .book{padding:10px 16px;font-size:.82rem;white-space:nowrap}
+  .right{gap:12px}
   .menu{position:fixed;inset:0 0 0 auto;width:82%;max-width:330px;background:var(--paper);flex-direction:column;
     justify-content:center;gap:24px;transform:translateX(100%);transition:.4s;box-shadow:var(--shadow)}
+  .menu a{font-size:1.05rem;padding:6px 14px}
   .menu.open{transform:none}.burger{display:flex}.tel{display:none}
+  .hero{padding:112px 0 72px}
   .hero .grid,.doc .grid,.info .grid,.visit .box{grid-template-columns:1fr}
+  .hero p{font-size:.98rem}
+  .hfig{margin-top:8px}
   .visit .ph{min-height:240px}.visit .b{padding:34px 28px}.vlist{grid-template-columns:1fr}
   .rgrid,.cgrid{grid-template-columns:1fr}
   .vsub,.vcost,.cwrap,.cform .row2{grid-template-columns:1fr}
   .vsteps{grid-template-columns:1fr 1fr}
-  body{padding-bottom:64px}
+  .cform{padding:28px 22px}
+  .cform input,.cform select,.cform textarea{font-size:16px;padding:14px 15px}
+  .btn{padding:16px 28px;width:100%;justify-content:center}
+  .hero .cta{gap:11px}
+  body{padding-bottom:68px}
   .mbar{display:flex !important}
 }
 /* sticky mobile CTA */
-.mbar{display:none;position:fixed;left:0;right:0;bottom:0;z-index:70;background:#fff;box-shadow:0 -6px 24px -14px rgba(120,70,90,.5);padding:8px;gap:8px}
-.mbar a{flex:1;text-align:center;padding:12px;border-radius:12px;font-family:"Zen Maru Gothic";font-weight:700;font-size:.9rem}
+.mbar{display:none;position:fixed;left:0;right:0;bottom:0;z-index:70;background:rgba(255,255,255,.96);backdrop-filter:blur(8px);box-shadow:0 -6px 24px -14px rgba(120,70,90,.5);padding:9px 10px calc(9px + env(safe-area-inset-bottom));gap:9px}
+.mbar a{flex:1;text-align:center;padding:14px 12px;border-radius:var(--r-sm);font-family:"Zen Maru Gothic";font-weight:700;font-size:.92rem}
 .mbar .m-tel{background:var(--sakura);color:var(--pink-d)}
 .mbar .m-book{background:var(--pink);color:#fff}
 </style>
@@ -241,12 +278,13 @@ footer{background:var(--ink2);color:#c3aab1;padding:56px 0 28px;font-size:.84rem
 </div></header>
 
 <section class="hero">
-  <span class="petal" style="left:12%;animation-delay:0s">❀</span><span class="petal" style="left:34%;animation-delay:3s">❀</span>
-  <span class="petal" style="left:62%;animation-delay:6s">❀</span><span class="petal" style="left:82%;animation-delay:1.5s">❀</span>
+  <span class="petal" style="left:12%;animation-delay:0s">❀</span><span class="petal" style="left:34%;animation-delay:3.5s;font-size:.95rem;animation-duration:16s">❀</span>
+  <span class="petal" style="left:50%;animation-delay:8s;font-size:.8rem;animation-duration:18s">❀</span>
+  <span class="petal" style="left:62%;animation-delay:6s;font-size:1.1rem">❀</span><span class="petal" style="left:82%;animation-delay:1.5s;animation-duration:15s">❀</span>
   <div class="wrap grid">
     <div>
       <span class="eye">さいたま市 西浦和 / 通院 & 訪問歯科</span>
-      <h1>お口の健康を、<br><span class="p u">おうちでも</span>まもる。</h1>
+      <h1>お口の健康を、<br><span class="p u">おうちでも</span><span style="white-space:nowrap">まもる。</span></h1>
       <p>西浦和のさくら駅前歯科は、通院はもちろん、通うのが難しい方へのご自宅・施設への<b>訪問歯科診療</b>にも力を入れています。ご家族もお気軽にご相談ください。</p>
       <div class="cta">
         <a href="#reserve" class="btn btn-p">24時間WEB予約 <span class="a">→</span></a>
@@ -259,7 +297,7 @@ footer{background:var(--ink2);color:#c3aab1;padding:56px 0 28px;font-size:.84rem
       </div>
     </div>
     <div class="hfig">
-      <div class="ph"><img src="https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?auto=format&fit=crop&w=800&q=80" alt="笑顔で受診する様子"></div>
+      <div class="ph"><img src="https://images.unsplash.com/photo-1662837625421-5fd8ed6131a0?auto=format&fit=crop&w=800&q=80" alt="笑顔で受診する様子"></div>
       <div class="fl a"><span class="d" style="background:var(--pink)">❀</span>やさしい・痛みに配慮</div>
       <div class="fl b"><span class="d" style="background:var(--sage)">🚗</span>訪問歯科に対応</div>
     </div>
@@ -269,7 +307,7 @@ footer{background:var(--ink2);color:#c3aab1;padding:56px 0 28px;font-size:.84rem
 <section id="visit" class="visit"><div class="wrap">
   <div class="head reveal"><span class="eye" style="justify-content:center">Home Visit Dental Care</span><h2>さいたま市の訪問歯科｜通えなくても、あきらめないで。</h2><p>「歯医者に行きたいけれど、通うのが難しい」——そんな方のご自宅・施設へ、歯科医師と歯科衛生士が伺います。西浦和・南区を中心に対応しています。</p></div>
   <div class="box reveal">
-    <div class="ph"><span class="badge">訪問歯科診療</span><img src="https://images.unsplash.com/photo-1576765607924-3f7b8410a787?auto=format&fit=crop&w=700&q=80" alt="ご自宅での訪問歯科診療の様子"></div>
+    <div class="ph"><span class="badge">訪問歯科診療</span><img loading="lazy" decoding="async" src="https://images.unsplash.com/photo-1765896387387-0538bc9f997e?auto=format&fit=crop&w=700&q=80" alt="ご自宅での訪問歯科診療の様子"></div>
     <div class="b">
       <span class="eye">訪問歯科とは</span>
       <h2 style="font-size:1.5rem">ご自宅・施設で、<span class="p">通院と同じ治療</span>を。</h2>
@@ -325,7 +363,7 @@ footer{background:var(--ink2);color:#c3aab1;padding:56px 0 28px;font-size:.84rem
 </div></section>
 
 <section id="why" class="why"><div class="wrap">
-  <div class="head reveal"><span class="eye" style="justify-content:center">Features</span><h2>さくら駅前歯科の、3つの安心</h2></div>
+  <div class="head reveal"><span class="eye" style="justify-content:center">Features</span><h2>さくら駅前歯科の、<span style="white-space:nowrap">3つの安心</span></h2></div>
   <div class="rgrid reveal">
     <div class="rc"><div class="no mono">01</div><div class="ic">🌸</div><h3>やさしく、痛みに配慮</h3><p>表面麻酔と電動麻酔で「チクッ」を抑えます。怖い方には、ひとつずつ声をかけながら進めます。</p></div>
     <div class="rc"><div class="no mono">02</div><div class="ic">🏠</div><h3>通院も、訪問も</h3><p>クリニックへの通院はもちろん、通うのが難しい方にはご自宅・施設へ伺います。</p></div>
@@ -336,17 +374,17 @@ footer{background:var(--ink2);color:#c3aab1;padding:56px 0 28px;font-size:.84rem
 <section id="care"><div class="wrap">
   <div class="head reveal"><span class="eye" style="justify-content:center">Menu</span><h2>診療案内</h2><p>一般的な治療から予防・審美・矯正、訪問歯科まで幅広く対応しています。</p></div>
   <div class="cgrid reveal">
-    <div class="cc"><div class="ph"><span class="lb">むし歯・根の治療</span><img src="https://images.unsplash.com/photo-1606811841689-23dfddce3e95?auto=format&fit=crop&w=600&q=80" alt=""></div><div class="b"><h4>一般歯科</h4><p>できるだけ削らない・抜かない。早期発見で通院回数も抑えます。</p></div></div>
-    <div class="cc"><div class="ph"><span class="lb">クリーニング</span><img src="https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&w=600&q=80" alt=""></div><div class="b"><h4>予防歯科</h4><p>定期検診で治療のいらないお口へ。担当衛生士制です。</p></div></div>
-    <div class="cc"><div class="ph"><span class="lb">入れ歯</span><img src="https://images.unsplash.com/photo-1571772996211-2f02c9727629?auto=format&fit=crop&w=600&q=80" alt=""></div><div class="b"><h4>入れ歯・義歯</h4><p>合わない入れ歯の調整・作製。よく噛める毎日を取り戻します。</p></div></div>
-    <div class="cc"><div class="ph"><span class="lb">目立たない</span><img src="https://images.unsplash.com/photo-1609840114035-3c981b782dfe?auto=format&fit=crop&w=600&q=80" alt=""></div><div class="b"><h4>矯正・審美</h4><p>マウスピース矯正やホワイトニング。自然な美しさを、歯を傷めずに。</p></div></div>
-    <div class="cc"><div class="ph"><span class="lb">お子様の歯</span><img src="https://images.unsplash.com/photo-1519689680058-324335c77eba?auto=format&fit=crop&w=600&q=80" alt=""></div><div class="b"><h4>小児歯科</h4><p>慣れることから始めます。フッ素塗布や歯みがき練習で予防を。</p></div></div>
-    <div class="cc"><div class="ph"><span class="lb">ご自宅・施設へ</span><img src="https://images.unsplash.com/photo-1576765607924-3f7b8410a787?auto=format&fit=crop&w=600&q=80" alt=""></div><div class="b"><h4>訪問歯科</h4><p>通院が難しい方へ、歯科医師がご自宅・施設へ伺います。</p></div></div>
+    <div class="cc"><div class="ph"><span class="lb">むし歯・根の治療</span><img loading="lazy" decoding="async" src="https://images.unsplash.com/photo-1606811841689-23dfddce3e95?auto=format&fit=crop&w=600&q=80" alt=""></div><div class="b"><h4>一般歯科</h4><p>できるだけ削らない・抜かない。早期発見で通院回数も抑えます。</p></div></div>
+    <div class="cc"><div class="ph"><span class="lb">クリーニング</span><img loading="lazy" decoding="async" src="https://images.unsplash.com/photo-1606811971618-4486d14f3f99?auto=format&fit=crop&w=600&q=80" alt=""></div><div class="b"><h4>予防歯科</h4><p>定期検診で治療のいらないお口へ。担当衛生士制です。</p></div></div>
+    <div class="cc"><div class="ph"><span class="lb">入れ歯</span><img loading="lazy" decoding="async" src="https://images.unsplash.com/photo-1530213709681-b7e537c923cc?auto=format&fit=crop&w=600&q=80" alt=""></div><div class="b"><h4>入れ歯・義歯</h4><p>合わない入れ歯の調整・作製。よく噛める毎日を取り戻します。</p></div></div>
+    <div class="cc"><div class="ph"><span class="lb">目立たない</span><img loading="lazy" decoding="async" src="https://images.unsplash.com/photo-1489278353717-f64c6ee8a4d2?auto=format&fit=crop&w=600&q=80" alt=""></div><div class="b"><h4>矯正・審美</h4><p>マウスピース矯正やホワイトニング。自然な美しさを、歯を傷めずに。</p></div></div>
+    <div class="cc"><div class="ph"><span class="lb">お子様の歯</span><img loading="lazy" decoding="async" src="https://images.unsplash.com/photo-1758205307836-0829c799890b?auto=format&fit=crop&w=600&q=80" alt=""></div><div class="b"><h4>小児歯科</h4><p>慣れることから始めます。フッ素塗布や歯みがき練習で予防を。</p></div></div>
+    <div class="cc"><div class="ph"><span class="lb">ご自宅・施設へ</span><img loading="lazy" decoding="async" src="https://images.unsplash.com/photo-1758691462321-9b6c98c40f7e?auto=format&fit=crop&w=600&q=80" alt=""></div><div class="b"><h4>訪問歯科</h4><p>通院が難しい方へ、歯科医師がご自宅・施設へ伺います。</p></div></div>
   </div>
 </div></section>
 
 <section id="doctor" class="doc"><div class="wrap grid">
-  <div class="ph reveal"><img src="https://images.unsplash.com/photo-1600880292089-90a7e086ee0c?auto=format&fit=crop&w=700&q=80" alt="院長イメージ">
+  <div class="ph reveal"><img loading="lazy" decoding="async" src="https://images.unsplash.com/photo-1622902046580-2b47f47f5471?auto=format&fit=crop&w=700&q=80" alt="院長イメージ">
     <div class="q">最後まで、自分の歯で。</div><span class="imgnote">※写真はイメージです</span></div>
   <div class="reveal">
     <span class="eye">Director</span>
