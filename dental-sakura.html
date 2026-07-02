@@ -37,7 +37,7 @@ a{color:inherit;text-decoration:none}
 .wrap{max-width:1140px;margin:0 auto;padding:0 28px}
 .eye{font-family:"Manrope";font-weight:700;letter-spacing:.24em;font-size:.68rem;color:var(--pink-d);
   text-transform:uppercase;display:inline-flex;align-items:center;gap:11px}
-.eye::before{content:"❀";color:var(--pink);font-size:.9rem;letter-spacing:0}
+.eye::before{content:"";width:20px;height:2px;border-radius:2px;background:var(--pink)}
 .btn{display:inline-flex;align-items:center;gap:9px;padding:17px 32px;border-radius:100px;font-weight:700;
   font-size:.92rem;font-family:"Zen Maru Gothic";transition:.32s cubic-bezier(.2,.8,.2,1)}
 .btn-p{background:var(--pink);color:#fff;box-shadow:0 14px 28px -12px rgba(231,139,166,.55)}
@@ -106,7 +106,7 @@ section{padding:104px 0}
 .visit .b p{color:var(--sub);font-size:.92rem;margin-bottom:18px}
 .vlist{display:grid;grid-template-columns:1fr 1fr;gap:10px 22px;margin:18px 0 24px}
 .vlist li{list-style:none;font-size:.86rem;font-weight:500;display:flex;align-items:center;gap:9px}
-.vlist li::before{content:"❀";color:var(--pink);font-size:.8rem}
+.vlist li::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--pink);flex:0 0 auto}
 .visit .who{background:var(--sakura);border-radius:var(--r-sm);padding:16px 20px;font-size:.82rem;color:var(--ink2)}
 .visit .who b{color:var(--pink-d)}
 .vsub{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:22px}
@@ -115,7 +115,7 @@ section{padding:104px 0}
 .vcard h4{font-family:"Zen Maru Gothic";font-weight:700;font-size:1.14rem;margin-bottom:14px}
 .vdot{list-style:none;display:grid;gap:8px}.vdot.cols{grid-template-columns:1fr 1fr}
 .vdot li{font-size:.88rem;font-weight:500;display:flex;align-items:center;gap:9px}
-.vdot li::before{content:"❀";color:var(--pink);font-size:.78rem}
+.vdot li::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--pink);flex:0 0 auto}
 .vnote{font-size:.78rem;color:var(--sub);margin-top:14px}
 .vflow{margin-top:30px}
 .vsteps{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:16px}
@@ -297,9 +297,9 @@ footer{background:var(--ink2);color:#c3aab1;padding:56px 0 28px;font-size:.84rem
       </div>
     </div>
     <div class="hfig">
-      <div class="ph"><img src="https://images.unsplash.com/photo-1662837625421-5fd8ed6131a0?auto=format&fit=crop&w=800&q=80" alt="笑顔で受診する様子"></div>
+      <div class="ph"><img src="https://images.unsplash.com/photo-1489278353717-f64c6ee8a4d2?auto=format&fit=crop&w=800&q=80" alt="笑顔で受診する様子"></div>
       <div class="fl a"><span class="d" style="background:var(--pink)">❀</span>やさしい・痛みに配慮</div>
-      <div class="fl b"><span class="d" style="background:var(--sage)">🚗</span>訪問歯科に対応</div>
+      <div class="fl b"><span class="d" style="background:var(--sage)"><svg viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-0.12em"><path d="M3 13l2-5h14l2 5v5h-3M3 13v5h3"/><circle cx="8" cy="18" r="1.8"/><circle cx="16" cy="18" r="1.8"/></svg></span>訪問歯科に対応</div>
     </div>
   </div>
 </section>
@@ -307,7 +307,7 @@ footer{background:var(--ink2);color:#c3aab1;padding:56px 0 28px;font-size:.84rem
 <section id="visit" class="visit"><div class="wrap">
   <div class="head reveal"><span class="eye" style="justify-content:center">Home Visit Dental Care</span><h2>さいたま市の訪問歯科｜通えなくても、あきらめないで。</h2><p>「歯医者に行きたいけれど、通うのが難しい」——そんな方のご自宅・施設へ、歯科医師と歯科衛生士が伺います。西浦和・南区を中心に対応しています。</p></div>
   <div class="box reveal">
-    <div class="ph"><span class="badge">訪問歯科診療</span><img loading="lazy" decoding="async" src="https://images.unsplash.com/photo-1765896387387-0538bc9f997e?auto=format&fit=crop&w=700&q=80" alt="ご自宅での訪問歯科診療の様子"></div>
+    <div class="ph"><span class="badge">訪問歯科診療</span><img loading="lazy" decoding="async" src="https://images.unsplash.com/photo-1580869318757-a6c605b061ed?auto=format&fit=crop&w=700&q=80" alt="訪問歯科でのケアのイメージ"></div>
     <div class="b">
       <span class="eye">訪問歯科とは</span>
       <h2 style="font-size:1.5rem">ご自宅・施設で、<span class="p">通院と同じ治療</span>を。</h2>
@@ -365,9 +365,9 @@ footer{background:var(--ink2);color:#c3aab1;padding:56px 0 28px;font-size:.84rem
 <section id="why" class="why"><div class="wrap">
   <div class="head reveal"><span class="eye" style="justify-content:center">Features</span><h2>さくら駅前歯科の、<span style="white-space:nowrap">3つの安心</span></h2></div>
   <div class="rgrid reveal">
-    <div class="rc"><div class="no mono">01</div><div class="ic">🌸</div><h3>やさしく、痛みに配慮</h3><p>表面麻酔と電動麻酔で「チクッ」を抑えます。怖い方には、ひとつずつ声をかけながら進めます。</p></div>
-    <div class="rc"><div class="no mono">02</div><div class="ic">🏠</div><h3>通院も、訪問も</h3><p>クリニックへの通院はもちろん、通うのが難しい方にはご自宅・施設へ伺います。</p></div>
-    <div class="rc"><div class="no mono">03</div><div class="ic">👨‍👩‍👧</div><h3>お子様からご高齢まで</h3><p>キッズスペース完備、バリアフリー設計。ご家族みんなで通える歯医者さんです。</p></div>
+    <div class="rc"><div class="no mono">01</div><div class="ic"><svg viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-0.12em"><circle cx="12" cy="12" r="2.6"/><path d="M12 3v4M12 17v4M3 12h4M17 12h4M6.5 6.5l2.6 2.6M14.9 14.9l2.6 2.6M17.5 6.5l-2.6 2.6M9.1 14.9l-2.6 2.6"/></svg></div><h3>やさしく、痛みに配慮</h3><p>表面麻酔と電動麻酔で「チクッ」を抑えます。怖い方には、ひとつずつ声をかけながら進めます。</p></div>
+    <div class="rc"><div class="no mono">02</div><div class="ic"><svg viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-0.12em"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/></svg></div><h3>通院も、訪問も</h3><p>クリニックへの通院はもちろん、通うのが難しい方にはご自宅・施設へ伺います。</p></div>
+    <div class="rc"><div class="no mono">03</div><div class="ic"><svg viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-0.12em"><circle cx="9" cy="8" r="3"/><circle cx="17" cy="10" r="2.4"/><path d="M4 20c0-3 2.2-5 5-5s5 2 5 5"/><path d="M14.6 20c.2-2.2 1.3-3.6 2.4-3.6s2.2 1.4 2.4 3.6"/></svg></div><h3>お子様からご高齢まで</h3><p>キッズスペース完備、バリアフリー設計。ご家族みんなで通える歯医者さんです。</p></div>
   </div>
 </div></section>
 
@@ -378,8 +378,8 @@ footer{background:var(--ink2);color:#c3aab1;padding:56px 0 28px;font-size:.84rem
     <div class="cc"><div class="ph"><span class="lb">クリーニング</span><img loading="lazy" decoding="async" src="https://images.unsplash.com/photo-1606811971618-4486d14f3f99?auto=format&fit=crop&w=600&q=80" alt=""></div><div class="b"><h4>予防歯科</h4><p>定期検診で治療のいらないお口へ。担当衛生士制です。</p></div></div>
     <div class="cc"><div class="ph"><span class="lb">入れ歯</span><img loading="lazy" decoding="async" src="https://images.unsplash.com/photo-1530213709681-b7e537c923cc?auto=format&fit=crop&w=600&q=80" alt=""></div><div class="b"><h4>入れ歯・義歯</h4><p>合わない入れ歯の調整・作製。よく噛める毎日を取り戻します。</p></div></div>
     <div class="cc"><div class="ph"><span class="lb">目立たない</span><img loading="lazy" decoding="async" src="https://images.unsplash.com/photo-1489278353717-f64c6ee8a4d2?auto=format&fit=crop&w=600&q=80" alt=""></div><div class="b"><h4>矯正・審美</h4><p>マウスピース矯正やホワイトニング。自然な美しさを、歯を傷めずに。</p></div></div>
-    <div class="cc"><div class="ph"><span class="lb">お子様の歯</span><img loading="lazy" decoding="async" src="https://images.unsplash.com/photo-1758205307836-0829c799890b?auto=format&fit=crop&w=600&q=80" alt=""></div><div class="b"><h4>小児歯科</h4><p>慣れることから始めます。フッ素塗布や歯みがき練習で予防を。</p></div></div>
-    <div class="cc"><div class="ph"><span class="lb">ご自宅・施設へ</span><img loading="lazy" decoding="async" src="https://images.unsplash.com/photo-1758691462321-9b6c98c40f7e?auto=format&fit=crop&w=600&q=80" alt=""></div><div class="b"><h4>訪問歯科</h4><p>通院が難しい方へ、歯科医師がご自宅・施設へ伺います。</p></div></div>
+    <div class="cc"><div class="ph"><span class="lb">お子様の歯</span><img loading="lazy" decoding="async" src="https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&w=600&q=80" alt=""></div><div class="b"><h4>小児歯科</h4><p>慣れることから始めます。フッ素塗布や歯みがき練習で予防を。</p></div></div>
+    <div class="cc"><div class="ph"><span class="lb">ご自宅・施設へ</span><img loading="lazy" decoding="async" src="https://images.unsplash.com/photo-1739932885175-5fdaa1bd5989?auto=format&fit=crop&w=600&q=80" alt=""></div><div class="b"><h4>訪問歯科</h4><p>通院が難しい方へ、歯科医師がご自宅・施設へ伺います。</p></div></div>
   </div>
 </div></section>
 
@@ -453,7 +453,8 @@ footer{background:var(--ink2);color:#c3aab1;padding:56px 0 28px;font-size:.84rem
     <nav class="fn"><a href="#visit">訪問歯科</a><a href="#why">当院の特徴</a><a href="#care">診療案内</a><a href="#doctor">院長紹介</a><a href="#info">アクセス</a><a href="#reserve">WEB予約</a></nav>
   </div>
   <div class="copy mono">© 2026 SAKURA Ekimae Dental Clinic. — Sample design.</div>
-</div></footer>
+</div><p style="margin-top:14px;font-size:.72rem;opacity:.65">※本ページは制作サンプル(デモ)です。店舗・人物・数値は架空で、写真はイメージです。実制作ではご提供写真や日本人モデルの素材に差し替えます。</p>
+</footer>
 
 <div class="mbar">
   <a class="m-tel" href="tel:0480000000">☎ 電話する</a>
