@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Atelier LUCE｜大人のための隠れ家サロン｜表参道</title>
+<meta name="description" content="表参道の隠れ家ヘアサロン Atelier LUCE。髪と頭皮の健康から整える、丁寧なカウンセリングとオーガニックケア。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;600;700&family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#2b2620; --sub:#6f665b; --line:#e7e0d6;
+  --cream:#f7f3ec; --paper:#fdfbf7; --gold:#b08d57; --gold-d:#96774a;
+  --shadow:0 18px 50px -20px rgba(60,48,32,.35);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:"Noto Sans JP",sans-serif; color:var(--ink);
+  background:var(--paper); line-height:1.9; font-weight:300;
+  -webkit-font-smoothing:antialiased; overflow-x:hidden;
+}
+.mincho{font-family:"Shippori Mincho",serif;font-weight:600;letter-spacing:.04em}
+img{display:block;width:100%;height:100%;object-fit:cover}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:1100px;margin:0 auto;padding:0 24px}
+.en{font-family:"Shippori Mincho",serif;letter-spacing:.28em;font-size:.72rem;color:var(--gold);text-transform:uppercase}
+
+/* header */
+header{position:fixed;inset:0 0 auto 0;z-index:50;padding:20px 0;
+  transition:.4s;mix-blend-mode:normal}
+header.scrolled{background:rgba(253,251,247,.92);backdrop-filter:blur(10px);
+  box-shadow:0 1px 0 var(--line);padding:12px 0}
+.nav{display:flex;align-items:center;justify-content:space-between}
+.brand{font-family:"Shippori Mincho",serif;font-size:1.35rem;font-weight:700;letter-spacing:.12em;color:#fff;transition:.4s}
+.brand small{display:block;font-size:.52rem;letter-spacing:.4em;font-weight:400;opacity:.8}
+header.scrolled .brand{color:var(--ink)}
+.menu{display:flex;gap:34px;align-items:center}
+.menu a{font-size:.82rem;letter-spacing:.14em;color:#fff;transition:.3s;position:relative}
+.menu a::after{content:"";position:absolute;left:0;bottom:-6px;width:0;height:1px;background:var(--gold);transition:.3s}
+.menu a:hover::after{width:100%}
+header.scrolled .menu a{color:var(--ink)}
+.book{border:1px solid rgba(255,255,255,.6);padding:9px 20px !important;border-radius:2px;font-weight:500}
+header.scrolled .book{border-color:var(--gold);color:var(--gold-d)}
+.book:hover{background:var(--gold);border-color:var(--gold);color:#fff !important}
+.burger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:6px}
+.burger span{width:26px;height:2px;background:#fff;transition:.3s}
+header.scrolled .burger span{background:var(--ink)}
+
+/* hero */
+.hero{position:relative;height:100vh;min-height:620px;display:flex;align-items:center;
+  background:#3a3128 url("https://images.unsplash.com/photo-1560066984-138dadb4c035?auto=format&fit=crop&w=1600&q=80") center/cover no-repeat}
+.hero::after{content:"";position:absolute;inset:0;background:linear-gradient(105deg,rgba(30,24,16,.62),rgba(30,24,16,.18))}
+.hero .wrap{position:relative;z-index:2;color:#fff}
+.hero .en{color:#e7c99a}
+.hero h1{font-family:"Shippori Mincho",serif;font-weight:600;
+  font-size:clamp(2.1rem,5.4vw,3.9rem);line-height:1.5;margin:18px 0 22px;letter-spacing:.03em;
+  text-shadow:0 2px 30px rgba(0,0,0,.3)}
+.hero p{max-width:420px;font-weight:300;opacity:.92;font-size:.98rem}
+.hero .cta{display:inline-flex;gap:14px;margin-top:38px;flex-wrap:wrap}
+.btn{display:inline-block;padding:15px 34px;border-radius:2px;font-size:.86rem;letter-spacing:.1em;font-weight:500;transition:.35s}
+.btn-gold{background:var(--gold);color:#fff}
+.btn-gold:hover{background:var(--gold-d);transform:translateY(-2px);box-shadow:var(--shadow)}
+.btn-line{border:1px solid rgba(255,255,255,.65);color:#fff}
+.btn-line:hover{background:#fff;color:var(--ink)}
+.scroll-ind{position:absolute;left:50%;bottom:28px;transform:translateX(-50%);z-index:2;color:#fff;font-size:.6rem;letter-spacing:.3em;opacity:.8}
+.scroll-ind::before{content:"";display:block;width:1px;height:44px;background:#fff;margin:0 auto 10px;animation:drop 2s infinite}
+@keyframes drop{0%{transform:scaleY(0);transform-origin:top}45%{transform:scaleY(1);transform-origin:top}55%{transform:scaleY(1);transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+
+/* sections */
+section{padding:110px 0}
+.head{text-align:center;margin-bottom:60px}
+.head h2{font-family:"Shippori Mincho",serif;font-weight:600;font-size:clamp(1.6rem,3.4vw,2.3rem);margin-top:12px;letter-spacing:.05em}
+.head p{color:var(--sub);font-size:.92rem;margin-top:14px}
+
+.concept{background:var(--cream)}
+.concept .grid{display:grid;grid-template-columns:1.05fr .95fr;gap:64px;align-items:center}
+.concept .txt .en{margin-bottom:14px;display:block}
+.concept h3{font-family:"Shippori Mincho",serif;font-weight:600;font-size:1.7rem;line-height:1.7;margin-bottom:24px}
+.concept p{color:var(--sub);margin-bottom:18px;font-size:.94rem}
+.concept .photo{aspect-ratio:4/5;border-radius:3px;overflow:hidden;box-shadow:var(--shadow);position:relative}
+.concept .photo::before{content:"since 2016";position:absolute;left:-14px;top:24px;z-index:2;
+  background:var(--gold);color:#fff;font-size:.62rem;letter-spacing:.2em;padding:8px 16px}
+
+/* menu */
+.menu-list{display:grid;grid-template-columns:1fr 1fr;gap:14px 56px;max-width:860px;margin:0 auto}
+.m-item{display:flex;justify-content:space-between;align-items:baseline;gap:16px;
+  padding:20px 4px;border-bottom:1px solid var(--line)}
+.m-item .l .name{font-weight:500;font-size:1.02rem}
+.m-item .l .desc{font-size:.78rem;color:var(--sub);font-weight:300}
+.m-item .price{font-family:"Shippori Mincho",serif;color:var(--gold-d);font-size:1.05rem;white-space:nowrap}
+.m-item .price small{font-size:.7rem;color:var(--sub)}
+.note{text-align:center;color:var(--sub);font-size:.78rem;margin-top:34px}
+
+/* gallery */
+.gallery{background:var(--cream)}
+.ggrid{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:200px;gap:12px}
+.ggrid figure{overflow:hidden;border-radius:2px;position:relative;background:#e4dccf}
+.ggrid figure img{transition:1.2s cubic-bezier(.2,.8,.2,1)}
+.ggrid figure:hover img{transform:scale(1.08)}
+.ggrid .big{grid-column:span 2;grid-row:span 2}
+
+/* stylist */
+.staff{display:grid;grid-template-columns:repeat(3,1fr);gap:34px}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:3px;overflow:hidden;transition:.4s}
+.card:hover{transform:translateY(-6px);box-shadow:var(--shadow)}
+.card .ph{aspect-ratio:1/1;background:#e4dccf}
+.card .body{padding:24px}
+.card .role{font-size:.66rem;letter-spacing:.24em;color:var(--gold)}
+.card h4{font-family:"Shippori Mincho",serif;font-size:1.2rem;margin:6px 0 12px}
+.card p{font-size:.82rem;color:var(--sub)}
+
+/* voice */
+.voice .head h2{color:var(--ink)}
+.vgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.v{padding:34px 28px;background:var(--cream);border-radius:3px;position:relative}
+.v::before{content:"“";font-family:"Shippori Mincho",serif;position:absolute;top:6px;left:20px;font-size:3.4rem;color:var(--gold);opacity:.4}
+.v p{font-size:.88rem;color:var(--ink);margin:18px 0 16px;position:relative;z-index:2}
+.v .who{font-size:.74rem;color:var(--sub)}
+.stars{color:var(--gold);letter-spacing:3px;font-size:.8rem}
+
+/* access / cta */
+.access{background:var(--ink);color:#efe9df}
+.access .grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
+.access .en{color:#e7c99a}
+.access h2{font-family:"Shippori Mincho",serif;font-size:2rem;margin:12px 0 26px}
+.info{display:grid;gap:14px;font-size:.9rem}
+.info .row{display:grid;grid-template-columns:92px 1fr;gap:16px;padding-bottom:14px;border-bottom:1px solid rgba(255,255,255,.12)}
+.info .row span:first-child{color:#b7ab99;letter-spacing:.1em;font-size:.78rem}
+.map{aspect-ratio:4/3;border-radius:3px;overflow:hidden;background:#3a3128;filter:grayscale(.2)}
+.map iframe{width:100%;height:100%;border:0}
+.cta-band{text-align:center;padding:86px 0;background:
+  linear-gradient(rgba(30,24,16,.72),rgba(30,24,16,.72)),
+  url("https://images.unsplash.com/photo-1633681926022-84c23e8cb2d6?auto=format&fit=crop&w=1600&q=80") center/cover fixed;color:#fff}
+.cta-band h2{font-family:"Shippori Mincho",serif;font-size:clamp(1.6rem,3.6vw,2.4rem);margin-bottom:14px}
+.cta-band p{opacity:.9;margin-bottom:30px;font-size:.92rem}
+
+footer{background:#241f19;color:#9a8f7e;padding:54px 0 30px;font-size:.8rem}
+.fgrid{display:flex;justify-content:space-between;flex-wrap:wrap;gap:30px;align-items:flex-start}
+.fbrand{font-family:"Shippori Mincho",serif;color:#efe9df;font-size:1.3rem;letter-spacing:.1em}
+.fbrand small{display:block;font-size:.55rem;letter-spacing:.35em;margin-top:4px;color:#9a8f7e}
+.fnav{display:flex;gap:26px;flex-wrap:wrap}
+.fnav a:hover{color:var(--gold)}
+.copy{text-align:center;margin-top:40px;padding-top:22px;border-top:1px solid rgba(255,255,255,.08);font-size:.7rem;letter-spacing:.1em}
+
+/* reveal */
+.reveal{opacity:0;transform:translateY(28px);transition:.9s cubic-bezier(.2,.8,.2,1)}
+.reveal.in{opacity:1;transform:none}
+
+@media(max-width:860px){
+  section{padding:74px 0}
+  .menu{position:fixed;inset:0 0 0 auto;width:78%;max-width:320px;background:var(--paper);
+    flex-direction:column;justify-content:center;gap:26px;transform:translateX(100%);transition:.4s;box-shadow:var(--shadow)}
+  .menu.open{transform:none}
+  .menu a{color:var(--ink) !important;font-size:1rem}
+  .menu .book{border-color:var(--gold);color:var(--gold-d) !important}
+  .burger{display:flex}
+  .concept .grid,.access .grid{grid-template-columns:1fr;gap:36px}
+  .menu-list,.staff,.vgrid{grid-template-columns:1fr}
+  .ggrid{grid-template-columns:1fr 1fr;grid-auto-rows:150px}
+  .cta-band{background-attachment:scroll}
+}
+</style>
+</head>
+<body>
+
+<header id="hd">
+  <div class="wrap nav">
+    <div class="brand mincho">Atelier LUCE<small>HAIR & SPA / OMOTESANDO</small></div>
+    <nav class="menu" id="mn">
+      <a href="#concept">Concept</a>
+      <a href="#menu">Menu</a>
+      <a href="#gallery">Gallery</a>
+      <a href="#staff">Stylist</a>
+      <a href="#access">Access</a>
+      <a href="#reserve" class="book">ご予約</a>
+    </nav>
+    <div class="burger" id="bg"><span></span><span></span><span></span></div>
+  </div>
+</header>
+
+<section class="hero" style="padding:0">
+  <div class="wrap">
+    <span class="en">A hideaway for grown-ups</span>
+    <h1>髪の"これから"を、<br>整えるサロン。</h1>
+    <p>流行を追うのではなく、あなたの髪質と骨格に静かに寄り添う。表参道の路地裏、1日6名限定の隠れ家で。</p>
+    <div class="cta">
+      <a href="#reserve" class="btn btn-gold">ネットで予約する</a>
+      <a href="#menu" class="btn btn-line">メニューを見る</a>
+    </div>
+  </div>
+  <div class="scroll-ind">SCROLL</div>
+</section>
+
+<section id="concept" class="concept">
+  <div class="wrap grid">
+    <div class="txt reveal">
+      <span class="en">Concept</span>
+      <h3>「今日」だけでなく、<br>三ヶ月先まで美しく。</h3>
+      <p>Atelier LUCE がこだわるのは、仕上がりの一瞬ではなく"伸びても綺麗"な設計です。骨格と生えぐせを読み、乾かすだけで決まるカットを組み立てます。</p>
+      <p>薬剤は髪と頭皮への負担を最小限に。オーガニック系のカラー・トリートメントを中心に、その日の髪の状態に合わせて調合します。所要も、無理に詰め込まず一人ひとりに。</p>
+      <p>だから、次にご来店いただくまでの毎日が、少し楽になる。それが私たちの目指すサロンです。</p>
+    </div>
+    <div class="photo reveal">
+      <img src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&w=900&q=80" alt="サロンの施術風景">
+    </div>
+  </div>
+</section>
+
+<section id="menu">
+  <div class="wrap">
+    <div class="head reveal">
+      <span class="en">Menu & Price</span>
+      <h2>メニュー</h2>
+      <p>すべて丁寧なカウンセリング・シャンプー・スタイリング込みの価格です。</p>
+    </div>
+    <div class="menu-list reveal">
+      <div class="m-item"><div class="l"><div class="name">カット</div><div class="desc">骨格診断＋乾かすだけで決まる設計</div></div><div class="price">¥5,500</div></div>
+      <div class="m-item"><div class="l"><div class="name">カット＋カラー</div><div class="desc">オーガニック系・白髪染めも同料金</div></div><div class="price">¥11,000</div></div>
+      <div class="m-item"><div class="l"><div class="name">カット＋パーマ</div><div class="desc">髪に優しいコスメ系薬剤を使用</div></div><div class="price">¥12,100</div></div>
+      <div class="m-item"><div class="l"><div class="name">髪質改善トリートメント</div><div class="desc">4回で手触りが変わる集中ケア</div></div><div class="price">¥8,800</div></div>
+      <div class="m-item"><div class="l"><div class="name">頭皮スパ 40分</div><div class="desc">首肩のほぐし＋炭酸クレンジング</div></div><div class="price">¥6,600</div></div>
+      <div class="m-item"><div class="l"><div class="name">ブライダル / 撮影</div><div class="desc">ヘアメイク・出張はご相談ください</div></div><div class="price">¥16,500<small>〜</small></div></div>
+    </div>
+    <p class="note">表示は税込価格です。ロング料金・指名料はいただいておりません。</p>
+  </div>
+</section>
+
+<section id="gallery" class="gallery">
+  <div class="wrap">
+    <div class="head reveal"><span class="en">Gallery</span><h2>スタイル集</h2></div>
+    <div class="ggrid reveal">
+      <figure class="big"><img src="https://images.unsplash.com/photo-1595476108010-b4d1f102b1b1?auto=format&fit=crop&w=900&q=80" alt="ヘアスタイル1"></figure>
+      <figure><img src="https://images.unsplash.com/photo-1560869713-7d0954430a6a?auto=format&fit=crop&w=500&q=80" alt="ヘアスタイル2"></figure>
+      <figure><img src="https://images.unsplash.com/photo-1600948836101-f9ffda59d250?auto=format&fit=crop&w=500&q=80" alt="ヘアスタイル3"></figure>
+      <figure><img src="https://images.unsplash.com/photo-1519699047748-de8e457a634e?auto=format&fit=crop&w=500&q=80" alt="ヘアスタイル4"></figure>
+      <figure><img src="https://images.unsplash.com/photo-1521590832167-7bcbfaa6381f?auto=format&fit=crop&w=500&q=80" alt="ヘアスタイル5"></figure>
+    </div>
+  </div>
+</section>
+
+<section id="staff">
+  <div class="wrap">
+    <div class="head reveal"><span class="en">Stylist</span><h2>スタイリスト</h2><p>少人数だから、いつも同じ担当があなたの髪を覚えています。</p></div>
+    <div class="staff reveal">
+      <div class="card"><div class="ph"><img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=500&q=80" alt="スタイリスト1"></div><div class="body"><div class="role">DIRECTOR</div><h4>三浦 遥</h4><p>骨格補正カットが得意。「扱いやすさ」を何より大切に、毎朝のセット時間を短くする提案をします。</p></div></div>
+      <div class="card"><div class="ph"><img src="https://images.unsplash.com/photo-1596815064285-45ed8a9c0463?auto=format&fit=crop&w=500&q=80" alt="スタイリスト2"></div><div class="body"><div class="role">COLORIST</div><h4>大和 千夏</h4><p>透明感のあるグレージュと白髪ぼかしが人気。髪の負担を抑えた薬剤設計を担当します。</p></div></div>
+      <div class="card"><div class="ph"><img src="https://images.unsplash.com/photo-1607990281513-2c110a25bd8c?auto=format&fit=crop&w=500&q=80" alt="スタイリスト3"></div><div class="body"><div class="role">SPA THERAPIST</div><h4>林 美咲</h4><p>頭皮ケアとヘッドスパのスペシャリスト。首肩のこわばりからほぐし、深いリラックスへ。</p></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="voice gallery">
+  <div class="wrap">
+    <div class="head reveal"><span class="en">Voice</span><h2>お客様の声</h2></div>
+    <div class="vgrid reveal">
+      <div class="v"><div class="stars">★★★★★</div><p>伸びても変にならないカットって本当にあるんだと感動。次の予約まで前髪だけで乗り切れました。</p><div class="who">30代・会社員 / 初回カット</div></div>
+      <div class="v"><div class="stars">★★★★★</div><p>白髪染めなのに全然ダメージを感じません。頭皮スパの気持ちよさで毎回寝てしまいます。</p><div class="who">40代・自営業 / カラー＋スパ</div></div>
+      <div class="v"><div class="stars">★★★★★</div><p>カウンセリングが丁寧で、なりたい雰囲気をちゃんと汲んでくれる。人に教えたくない隠れ家です。</p><div class="who">20代・デザイナー / 髪質改善</div></div>
+    </div>
+  </div>
+</section>
+
+<section id="access" class="access">
+  <div class="wrap grid">
+    <div class="reveal">
+      <span class="en">Access</span>
+      <h2>ご来店案内</h2>
+      <div class="info">
+        <div class="row"><span>住所</span><span>東京都渋谷区神宮前5-○-○ LUCEビル 2F</span></div>
+        <div class="row"><span>アクセス</span><span>表参道駅 A1出口より徒歩4分 / 明治神宮前駅 徒歩7分</span></div>
+        <div class="row"><span>営業時間</span><span>平日 11:00–20:00 / 土日祝 10:00–19:00</span></div>
+        <div class="row"><span>定休日</span><span>毎週火曜・第3月曜</span></div>
+        <div class="row"><span>ご予約</span><span>03-0000-0000 / ネット予約 24時間受付</span></div>
+      </div>
+    </div>
+    <div class="map reveal">
+      <iframe loading="lazy" src="https://www.google.com/maps?q=表参道&output=embed" title="地図"></iframe>
+    </div>
+  </div>
+</section>
+
+<section id="reserve" class="cta-band" style="padding:0"><div style="padding:86px 0" class="reveal">
+  <div class="wrap">
+    <h2 class="mincho">その髪、ずっと気持ちよく。</h2>
+    <p>初回はカウンセリングを長めに。まずはお気軽にご相談ください。</p>
+    <a href="#" class="btn btn-gold">24時間ネット予約はこちら</a>
+  </div>
+</div></section>
+
+<footer>
+  <div class="wrap fgrid">
+    <div class="fbrand mincho">Atelier LUCE<small>HAIR & SPA / OMOTESANDO</small></div>
+    <nav class="fnav">
+      <a href="#concept">Concept</a><a href="#menu">Menu</a><a href="#gallery">Gallery</a>
+      <a href="#staff">Stylist</a><a href="#access">Access</a><a href="#reserve">Reservation</a>
+    </nav>
+  </div>
+  <div class="copy">© 2026 Atelier LUCE. All rights reserved. — Sample design.</div>
+</footer>
+
+<script>
+const hd=document.getElementById('hd');
+addEventListener('scroll',()=>hd.classList.toggle('scrolled',scrollY>60));
+const bg=document.getElementById('bg'),mn=document.getElementById('mn');
+bg.onclick=()=>mn.classList.toggle('open');
+mn.querySelectorAll('a').forEach(a=>a.onclick=()=>mn.classList.remove('open'));
+const io=new IntersectionObserver((es)=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.15});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>

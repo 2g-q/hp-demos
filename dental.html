@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>このは歯科クリニック｜削るより、守る。◯◯駅前の歯医者</title>
+<meta name="description" content="◯◯駅前「このは歯科クリニック」。削るより守る、予防を中心にした歯科医院。痛みに配慮した治療・土曜診療・キッズスペース完備。家族みんなの、かかりつけ歯科。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@500;700;900&family=Noto+Sans+JP:wght@400;500;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#233a35; --sub:#61756f; --line:#e7efe9;
+  --paper:#fdfcf8; --mint:#eef7f2; --sand:#faf5ea;
+  --green:#2fb39a; --green-d:#1f9a83; --gold:#c69a4a; --ink2:#1c2f2b;
+  --shadow:0 26px 56px -28px rgba(35,80,70,.4);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:"Noto Sans JP",sans-serif;color:var(--ink);background:var(--paper);
+  line-height:2;font-weight:400;font-size:16.5px;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+.round{font-family:"Zen Maru Gothic",sans-serif}
+.mono{font-family:"Manrope",sans-serif}
+img{display:block;width:100%;height:100%;object-fit:cover}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:1140px;margin:0 auto;padding:0 28px}
+.eye{font-family:"Manrope";font-weight:700;letter-spacing:.24em;font-size:.68rem;color:var(--gold);
+  text-transform:uppercase;display:inline-flex;align-items:center;gap:11px}
+.eye::before{content:"";width:24px;height:2px;background:var(--gold);border-radius:2px}
+.btn{display:inline-flex;align-items:center;gap:9px;padding:17px 32px;border-radius:100px;font-weight:700;
+  font-size:.92rem;font-family:"Zen Maru Gothic";transition:.32s cubic-bezier(.2,.8,.2,1)}
+.btn-g{background:var(--green);color:#fff;box-shadow:0 16px 30px -12px rgba(47,179,154,.6)}
+.btn-g:hover{background:var(--green-d);transform:translateY(-3px)}
+.btn-o{background:#fff;color:var(--green-d);border:1.5px solid var(--line)}
+.btn-o:hover{border-color:var(--green);transform:translateY(-2px)}
+.btn .a{transition:.3s}.btn:hover .a{transform:translateX(4px)}
+
+/* header */
+header{position:fixed;inset:0 0 auto 0;z-index:60;transition:.3s;padding:16px 0}
+header.scrolled{background:rgba(253,252,248,.94);backdrop-filter:blur(10px);box-shadow:0 6px 26px -20px rgba(35,80,70,.6);padding:11px 0}
+.nav{display:flex;align-items:center;justify-content:space-between}
+.brand{display:flex;align-items:center;gap:11px;font-family:"Zen Maru Gothic";font-weight:900;font-size:1.32rem}
+.leaf{width:38px;height:38px;border-radius:50% 50% 50% 8px;background:linear-gradient(140deg,var(--green),#7fd8c6);transform:rotate(-8deg)}
+.brand small{display:block;font-family:"Manrope";font-size:.5rem;letter-spacing:.24em;color:var(--sub);font-weight:700}
+.right{display:flex;align-items:center;gap:22px}
+.menu{display:flex;gap:26px;align-items:center}
+.menu a{font-size:.86rem;font-weight:500}.menu a:hover{color:var(--green-d)}
+.tel{text-align:right;line-height:1.15}
+.tel b{font-family:"Manrope";font-weight:800;color:var(--ink2);font-size:1.32rem;letter-spacing:.02em}
+.tel small{display:block;font-size:.6rem;color:var(--sub)}
+.book{background:var(--green);color:#fff!important;padding:12px 22px;border-radius:100px;font-family:"Zen Maru Gothic";font-weight:700;box-shadow:0 12px 24px -10px rgba(47,179,154,.6)}
+.book:hover{background:var(--green-d)}
+.burger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:6px}
+.burger span{width:27px;height:2.5px;background:var(--ink);border-radius:2px;transition:.3s}
+
+/* hero */
+.hero{position:relative;padding:132px 0 96px;overflow:hidden;background:
+  radial-gradient(120% 100% at 88% 0,var(--mint),var(--paper) 62%)}
+.hero .grid{display:grid;grid-template-columns:1.08fr .92fr;gap:48px;align-items:center;position:relative;z-index:2}
+.hero h1{font-family:"Zen Maru Gothic";font-weight:900;font-size:clamp(2.4rem,6vw,4.3rem);
+  line-height:1.32;letter-spacing:.005em;margin:22px 0 24px}
+.hero h1 .g{color:var(--green-d)}
+.hero h1 .u{position:relative;white-space:nowrap}
+.hero h1 .u::after{content:"";position:absolute;left:-2px;right:-2px;bottom:6px;height:14px;background:#f4e2b4;z-index:-1;border-radius:8px}
+.hero p{color:var(--sub);max-width:430px;font-size:1.02rem;margin-bottom:32px}
+.hero .cta{display:flex;gap:14px;flex-wrap:wrap}
+.hero .trust{display:flex;gap:26px;margin-top:34px;flex-wrap:wrap}
+.hero .trust .t b{font-family:"Manrope";font-weight:800;font-size:1.7rem;color:var(--ink2);line-height:1}
+.hero .trust .t b i{font-size:.9rem;font-style:normal;color:var(--gold)}
+.hero .trust .t span{font-size:.72rem;color:var(--sub)}
+.hero .trust .dv{width:1px;background:var(--line)}
+.hfig{position:relative}
+.hfig .ph{aspect-ratio:5/6;border-radius:180px 180px 28px 28px;overflow:hidden;box-shadow:var(--shadow)}
+.hfig .fl{position:absolute;background:#fff;border-radius:18px;padding:14px 18px;box-shadow:var(--shadow);display:flex;align-items:center;gap:11px;font-weight:700;font-size:.82rem}
+.hfig .fl.a{left:-20px;top:56px}.hfig .fl.b{right:-16px;bottom:50px}
+.hfig .fl .d{width:36px;height:36px;border-radius:11px;display:grid;place-items:center;color:#fff;font-size:1rem;flex:0 0 auto}
+
+section{padding:104px 0}
+.head{text-align:center;margin-bottom:56px}
+.head h2{font-family:"Zen Maru Gothic";font-weight:900;font-size:clamp(1.8rem,3.8vw,2.5rem);margin-top:12px;line-height:1.4}
+.head p{color:var(--sub);font-size:.95rem;margin-top:14px}
+
+/* statement (bright, big type) */
+.stmt{background:var(--sand);text-align:center}
+.stmt .big{font-family:"Zen Maru Gothic";font-weight:900;font-size:clamp(1.7rem,4.4vw,3rem);line-height:1.6;letter-spacing:.01em;max-width:880px;margin:22px auto 0}
+.stmt .big .g{color:var(--green-d)}.stmt .big .gd{color:var(--gold)}
+.stmt p{color:var(--sub);max-width:560px;margin:26px auto 0;font-size:.96rem}
+
+/* reasons */
+.rgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
+.rc{background:#fff;border:1px solid var(--line);border-radius:26px;padding:40px 30px;transition:.35s}
+.rc:hover{transform:translateY(-7px);box-shadow:var(--shadow)}
+.rc .no{font-family:"Manrope";font-weight:800;color:var(--green);font-size:.86rem;letter-spacing:.1em}
+.rc .ic{width:60px;height:60px;border-radius:20px;background:var(--mint);display:grid;place-items:center;font-size:1.7rem;margin:14px 0 18px}
+.rc h3{font-family:"Zen Maru Gothic";font-weight:700;font-size:1.2rem;margin-bottom:12px}
+.rc p{font-size:.88rem;color:var(--sub)}
+
+/* care */
+.care{background:var(--mint)}
+.cgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.cc{border-radius:22px;overflow:hidden;background:#fff;border:1px solid var(--line);transition:.3s}
+.cc:hover{transform:translateY(-5px);box-shadow:var(--shadow)}
+.cc .ph{aspect-ratio:16/10;position:relative}
+.cc .ph .lb{position:absolute;left:14px;top:14px;background:rgba(255,255,255,.94);color:var(--green-d);font-family:"Zen Maru Gothic";font-weight:700;font-size:.72rem;padding:5px 13px;border-radius:100px}
+.cc .b{padding:24px}
+.cc h4{font-family:"Zen Maru Gothic";font-weight:700;font-size:1.12rem;margin-bottom:8px}
+.cc p{font-size:.85rem;color:var(--sub)}
+
+/* concept (one tinted, NOT dark) */
+.concept{background:#fff}
+.concept .box{background:linear-gradient(130deg,var(--ink2),#2a463f);color:#eef7f2;border-radius:34px;
+  padding:60px;display:grid;grid-template-columns:1.1fr .9fr;gap:52px;align-items:center;box-shadow:var(--shadow);position:relative;overflow:hidden}
+.concept .box::before{content:"";position:absolute;right:-60px;bottom:-80px;width:260px;height:260px;border-radius:50%;background:rgba(127,216,198,.16);filter:blur(10px)}
+.concept .eye{color:#8fe0cd}.concept .eye::before{background:#8fe0cd}
+.concept h3{font-family:"Zen Maru Gothic";font-weight:900;font-size:clamp(1.6rem,3.4vw,2.2rem);margin:16px 0 20px;line-height:1.5}
+.concept h3 .gd{color:#e9c877}
+.concept p{color:#c7ded6;font-size:.94rem;margin-bottom:14px;position:relative}
+.concept .ph{aspect-ratio:1/1;border-radius:24px;overflow:hidden;position:relative;z-index:2}
+
+/* doctor */
+.doc{background:var(--sand)}
+.doc .grid{display:grid;grid-template-columns:.85fr 1.15fr;gap:52px;align-items:center}
+.doc .ph{aspect-ratio:4/5;border-radius:28px;overflow:hidden;box-shadow:var(--shadow);position:relative}
+.doc .ph .q{position:absolute;left:18px;bottom:18px;background:#fff;border-radius:14px;padding:11px 16px;font-family:"Zen Maru Gothic";font-weight:700;font-size:.8rem;box-shadow:var(--shadow)}
+.doc h3{font-family:"Zen Maru Gothic";font-weight:900;font-size:clamp(1.6rem,3.2vw,2.2rem);margin:12px 0 8px;line-height:1.45}
+.doc .pos{color:var(--green-d);font-weight:700;font-size:.9rem;margin-bottom:20px}
+.doc p{color:var(--sub);margin-bottom:15px;font-size:.92rem}
+.doc .sign{font-family:"Zen Maru Gothic";font-weight:700;font-size:1.14rem;margin-top:10px}
+.doc .sign span{font-family:"Manrope";font-size:.66rem;color:var(--sub);letter-spacing:.08em;display:block;font-weight:600}
+
+/* price */
+.plist{display:grid;grid-template-columns:1fr 1fr;gap:2px 60px;max-width:900px;margin:0 auto}
+.pi{display:flex;justify-content:space-between;align-items:baseline;gap:16px;padding:22px 4px;border-bottom:1px solid var(--line)}
+.pi .nm{font-family:"Zen Maru Gothic";font-weight:700;font-size:1.06rem}
+.pi .ds{font-size:.76rem;color:var(--sub)}
+.pi .pr{font-family:"Manrope";font-weight:800;color:var(--green-d);font-size:1.1rem;white-space:nowrap}
+.pi .pr i{font-size:.66rem;color:var(--sub);font-style:normal;font-weight:600}
+.pnote{text-align:center;color:var(--sub);font-size:.8rem;margin-top:32px}
+
+/* info */
+.info{background:var(--mint)}
+.info .grid{display:grid;grid-template-columns:1fr 1fr;gap:52px;align-items:start}
+.htable{width:100%;border-collapse:collapse;font-size:.85rem;background:#fff;border-radius:18px;overflow:hidden;box-shadow:var(--shadow)}
+.htable th,.htable td{padding:13px 6px;text-align:center;border-bottom:1px solid var(--line)}
+.htable thead th{background:var(--ink2);color:#fff;font-family:"Zen Maru Gothic";font-weight:700}
+.htable td:first-child{text-align:left;padding-left:18px;color:var(--sub);white-space:nowrap;font-weight:500}
+.htable .o{color:var(--green);font-weight:800}.htable .x{color:#cdd8d3}
+.irow{margin-top:24px;display:grid;gap:14px}
+.irow .r{display:grid;grid-template-columns:96px 1fr;gap:16px;font-size:.92rem;padding-bottom:14px;border-bottom:1px solid var(--line)}
+.irow .r b{font-family:"Manrope";color:var(--gold);font-size:.7rem;letter-spacing:.08em;font-weight:700;padding-top:4px}
+.map{aspect-ratio:1/1;border-radius:24px;overflow:hidden;background:#fff;box-shadow:var(--shadow)}
+.map iframe{width:100%;height:100%;border:0}
+
+/* cta */
+.cta{text-align:center;padding:112px 0;background:radial-gradient(120% 120% at 50% -20%,#3ec8ad,var(--green-d));color:#fff;position:relative;overflow:hidden}
+.cta .eye{color:#fbe6bd;justify-content:center}.cta .eye::before{background:#fbe6bd}
+.cta h2{font-family:"Zen Maru Gothic";font-weight:900;font-size:clamp(2rem,4.6vw,3.1rem);margin:18px 0 14px;line-height:1.4}
+.cta p{opacity:.95;margin-bottom:32px}
+.cta .row{display:inline-flex;gap:15px;flex-wrap:wrap;justify-content:center;align-items:center}
+.cta .btn-w{background:#fff;color:var(--green-d)}.cta .btn-w:hover{transform:translateY(-3px)}
+.cta .tel2{font-family:"Manrope";font-weight:800;font-size:1.7rem;letter-spacing:.02em}
+.cta .tel2 span{display:block;font-family:"Noto Sans JP";font-size:.72rem;opacity:.9;font-weight:400}
+
+footer{background:var(--ink2);color:#93a8a1;padding:56px 0 28px;font-size:.84rem}
+.fg{display:flex;justify-content:space-between;flex-wrap:wrap;gap:30px;align-items:flex-start}
+.fb{font-family:"Zen Maru Gothic";color:#fff;font-weight:900;font-size:1.3rem;display:flex;align-items:center;gap:11px}
+.fn{display:flex;gap:24px;flex-wrap:wrap}.fn a:hover{color:#8fe0cd}
+.copy{text-align:center;margin-top:40px;padding-top:22px;border-top:1px solid rgba(255,255,255,.09);font-size:.68rem;letter-spacing:.08em}
+
+.reveal{opacity:0;transform:translateY(28px);transition:.85s cubic-bezier(.2,.8,.2,1)}
+.reveal.in{opacity:1;transform:none}
+@media(max-width:900px){
+  body{font-size:16px}
+  section{padding:70px 0}
+  .menu{position:fixed;inset:0 0 0 auto;width:82%;max-width:330px;background:var(--paper);flex-direction:column;
+    justify-content:center;gap:24px;transform:translateX(100%);transition:.4s;box-shadow:var(--shadow)}
+  .menu.open{transform:none}.burger{display:flex}.tel{display:none}
+  .hero .grid,.doc .grid,.info .grid,.concept .box{grid-template-columns:1fr;gap:34px}
+  .concept .box{padding:38px}
+  .rgrid,.cgrid,.plist{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<header id="hd"><div class="wrap nav">
+  <div class="brand"><span class="leaf"></span>このは歯科クリニック<small>KONOHA DENTAL</small></div>
+  <div class="right">
+    <nav class="menu" id="mn">
+      <a href="#why">当院の特徴</a><a href="#care">診療案内</a><a href="#concept">考え方</a>
+      <a href="#doctor">院長</a><a href="#info">アクセス</a>
+    </nav>
+    <div class="tel"><b class="mono">03-0000-0000</b><small>平日 9:00-19:00 / 土 9:00-17:00</small></div>
+    <a href="#reserve" class="book">WEB予約</a>
+    <div class="burger" id="bg"><span></span><span></span><span></span></div>
+  </div>
+</div></header>
+
+<section class="hero"><div class="wrap grid">
+  <div>
+    <span class="eye">◯◯駅 中央口 徒歩2分</span>
+    <h1>削るより、<br><span class="g u">守る</span>歯医者へ。</h1>
+    <p>「痛くなってから行く場所」を、「気持ちよく通う場所」へ。予防を中心に、家族みんなで通えるやさしい歯科医院です。</p>
+    <div class="cta">
+      <a href="#reserve" class="btn btn-g">24時間WEB予約 <span class="a">→</span></a>
+      <a href="#care" class="btn btn-o">診療案内を見る</a>
+    </div>
+    <div class="trust">
+      <div class="t"><b class="mono">4.9<i>★</i></b><span>Google口コミ 320件</span></div>
+      <div class="dv"></div>
+      <div class="t"><b class="mono">25<i>年</i></b><span>地域での診療実績</span></div>
+      <div class="dv"></div>
+      <div class="t"><b class="mono">土</b><span>土曜も診療</span></div>
+    </div>
+  </div>
+  <div class="hfig">
+    <div class="ph"><img src="https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?auto=format&fit=crop&w=800&q=80" alt="笑顔で受診する様子"></div>
+    <div class="fl a"><span class="d" style="background:var(--gold)">◎</span>痛みに配慮した治療</div>
+    <div class="fl b"><span class="d" style="background:var(--green)">👶</span>キッズスペース完備</div>
+  </div>
+</div></section>
+
+<section class="stmt"><div class="wrap">
+  <span class="eye reveal" style="justify-content:center">Our Belief</span>
+  <p class="big reveal">歯医者は<span class="gd">痛くなってから</span>行く場所、<br>と思われがちです。<br>でも本当に大事なのは、<span class="g">痛くならない毎日</span>のほう。</p>
+  <p class="reveal">だから私たちは、削って詰める治療より「予防」を中心に。一人ひとりのお口を記録し、生涯自分の歯で噛める毎日を一緒に守ります。</p>
+</div></section>
+
+<section id="why"><div class="wrap">
+  <div class="head reveal"><span class="eye" style="justify-content:center">Features</span><h2>このは歯科の、3つの安心</h2></div>
+  <div class="rgrid reveal">
+    <div class="rc"><div class="no mono">01</div><div class="ic">🌿</div><h3>痛みに配慮した治療</h3><p>表面麻酔と電動麻酔器で、注射の「チクッ」をできる限り抑えます。怖い方には、ひとつずつ確認しながら進めます。</p></div>
+    <div class="rc"><div class="no mono">02</div><div class="ic">👨‍👩‍👧</div><h3>家族みんなで通える</h3><p>キッズスペースとベビーカーOKの広い診療室。お子さま連れでも、気兼ねなくお越しいただけます。</p></div>
+    <div class="rc"><div class="no mono">03</div><div class="ic">💬</div><h3>わかりやすい説明</h3><p>お口の中をモニターでお見せし、治療の選択肢と費用を先にご提示。納得いただいてから始めます。</p></div>
+  </div>
+</div></section>
+
+<section id="care" class="care"><div class="wrap">
+  <div class="head reveal"><span class="eye" style="justify-content:center">Menu</span><h2>診療案内</h2><p>一般的な治療から予防・審美・矯正まで、幅広く対応しています。</p></div>
+  <div class="cgrid reveal">
+    <div class="cc"><div class="ph"><span class="lb">むし歯・根の治療</span><img src="https://images.unsplash.com/photo-1606811841689-23dfddce3e95?auto=format&fit=crop&w=600&q=80" alt=""></div><div class="b"><h4>一般歯科</h4><p>できるだけ削らない・抜かない方針。早期発見で通院回数も抑えます。</p></div></div>
+    <div class="cc"><div class="ph"><span class="lb">クリーニング</span><img src="https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&w=600&q=80" alt=""></div><div class="b"><h4>予防歯科</h4><p>3ヶ月ごとの定期検診で、治療のいらないお口へ。担当衛生士制です。</p></div></div>
+    <div class="cc"><div class="ph"><span class="lb">白い歯へ</span><img src="https://images.unsplash.com/photo-1571772996211-2f02c9727629?auto=format&fit=crop&w=600&q=80" alt=""></div><div class="b"><h4>審美・ホワイトニング</h4><p>自然な白さを、歯を傷めずに。ご自宅ケアと院内施術どちらも。</p></div></div>
+    <div class="cc"><div class="ph"><span class="lb">目立たない矯正</span><img src="https://images.unsplash.com/photo-1609840114035-3c981b782dfe?auto=format&fit=crop&w=600&q=80" alt=""></div><div class="b"><h4>マウスピース矯正</h4><p>透明で目立ちにくい矯正に対応。無料相談で費用の目安をご案内します。</p></div></div>
+    <div class="cc"><div class="ph"><span class="lb">失った歯に</span><img src="https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?auto=format&fit=crop&w=600&q=80" alt=""></div><div class="b"><h4>インプラント</h4><p>CT撮影による精密診断。他の歯を守る選択肢として丁寧にご説明します。</p></div></div>
+    <div class="cc"><div class="ph"><span class="lb">お子さまの歯</span><img src="https://images.unsplash.com/photo-1519689680058-324335c77eba?auto=format&fit=crop&w=600&q=80" alt=""></div><div class="b"><h4>小児歯科</h4><p>慣れることから始めます。フッ素塗布や歯みがき練習で、むし歯を予防。</p></div></div>
+  </div>
+</div></section>
+
+<section id="concept" class="concept"><div class="wrap"><div class="box reveal">
+  <div>
+    <span class="eye">Concept</span>
+    <h3 class="round">治療の"うまさ"の前に、<br><span class="gd">通いやすさ</span>を大切に。</h3>
+    <p>どんなに良い治療も、途中で足が遠のいてしまえば意味がありません。だから私たちは、痛みへの配慮・待たせない予約・分かる説明という当たり前を、ていねいに積み重ねます。</p>
+    <p>治療の前に費用と選択肢を必ずお伝えし、納得のうえで進めます。歯科医院が、あなたにとって"苦手な場所"でなくなるように。</p>
+    <a href="#reserve" class="btn btn-w" style="margin-top:10px">はじめての方へ <span class="a">→</span></a>
+  </div>
+  <div class="ph"><img src="https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&w=800&q=80" alt="明るく清潔な診療室"></div>
+</div></div></section>
+
+<section id="doctor" class="doc"><div class="wrap grid">
+  <div class="ph reveal"><img src="https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&w=700&q=80" alt="院長">
+    <div class="q">「怖い」を、なくすことから。</div></div>
+  <div class="reveal">
+    <span class="eye">Director</span>
+    <h3 class="round">担当は、ずっと私です。</h3>
+    <div class="pos">院長 / 歯科医師　木葉 悠</div>
+    <p>子どもの頃、歯医者が苦手でした。その気持ちがよくわかるから、当院は「痛くない・わかる・急がない」を大切にしています。</p>
+    <p>削って詰めるだけでは、また同じ場所が悪くなりがち。なぜそうなったのかを一緒に考え、通わなくて済むお口を目指します。地域のみなさんの"かかりつけ"として、長くお付き合いできれば嬉しいです。</p>
+    <div class="sign round">木葉 悠<span>Yu Konoha — Director / DDS</span></div>
+  </div>
+</div></section>
+
+<section id="price"><div class="wrap">
+  <div class="head reveal"><span class="eye" style="justify-content:center">Price</span><h2>料金のめやす</h2><p>保険適用外の主なメニュー(税込)。保険診療は3割負担が目安です。</p></div>
+  <div class="plist reveal">
+    <div class="pi"><div><div class="nm">PMTC クリーニング</div><div class="ds">歯科衛生士による60分ケア</div></div><div class="pr mono">¥6,600</div></div>
+    <div class="pi"><div><div class="nm">オフィスホワイトニング</div><div class="ds">その日に白く・1回</div></div><div class="pr mono">¥16,500</div></div>
+    <div class="pi"><div><div class="nm">セラミック(1歯)</div><div class="ds">自然な色調・金属を使わない</div></div><div class="pr mono">¥55,000<i> 〜</i></div></div>
+    <div class="pi"><div><div class="nm">マウスピース矯正</div><div class="ds">部分矯正・全体矯正あり</div></div><div class="pr mono">¥330,000<i> 〜</i></div></div>
+    <div class="pi"><div><div class="nm">インプラント(1本)</div><div class="ds">CT診断・上部構造込み</div></div><div class="pr mono">¥385,000<i> 〜</i></div></div>
+    <div class="pi"><div><div class="nm">初診カウンセリング</div><div class="ds">お悩み相談・お口の撮影</div></div><div class="pr mono">無料</div></div>
+  </div>
+  <p class="pnote">※分割払い(デンタルローン)にも対応しています。詳しくはお問い合わせください。</p>
+</div></section>
+
+<section id="info" class="info"><div class="wrap">
+  <div class="head reveal"><span class="eye" style="justify-content:center">Access</span><h2>診療時間・アクセス</h2></div>
+  <div class="grid reveal">
+    <div>
+      <table class="htable">
+        <thead><tr><th></th><th>月</th><th>火</th><th>水</th><th>木</th><th>金</th><th>土</th><th>日</th></tr></thead>
+        <tbody>
+          <tr><td>9:00–13:00</td><td class="o">●</td><td class="o">●</td><td class="o">●</td><td class="x">休</td><td class="o">●</td><td class="o">●</td><td class="x">休</td></tr>
+          <tr><td>14:30–19:00</td><td class="o">●</td><td class="o">●</td><td class="o">●</td><td class="x">休</td><td class="o">●</td><td class="o">▲</td><td class="x">休</td></tr>
+        </tbody>
+      </table>
+      <div class="irow">
+        <div class="r"><b>ADDRESS</b><span>◯◯県◯◯市中央1-○-○ このはビル2F</span></div>
+        <div class="r"><b>ACCESS</b><span>◯◯駅 中央口より徒歩2分 / 提携駐車場15台</span></div>
+        <div class="r"><b>TEL</b><span>03-0000-0000（休診時間は留守電へ）</span></div>
+        <div class="r"><b>休診日</b><span>木曜・日曜・祝日（▲土曜午後は14:00–17:00）</span></div>
+      </div>
+    </div>
+    <div class="map"><iframe loading="lazy" src="https://www.google.com/maps?q=中央&output=embed" title="地図"></iframe></div>
+  </div>
+</div></section>
+
+<section id="reserve" class="cta"><div class="wrap reveal">
+  <span class="eye">Reservation</span>
+  <h2 class="round">その一歩が、10年後の歯を守ります。</h2>
+  <p>初診はカウンセリングを長めに。お口の写真を撮って、今の状態から一緒に考えましょう。</p>
+  <div class="row">
+    <a href="#" class="btn btn-w">24時間WEB予約 <span class="a">→</span></a>
+    <div class="tel2 mono">03-0000-0000<span>受付 平日9:00-19:00 / 土9:00-17:00</span></div>
+  </div>
+</div></section>
+
+<footer><div class="wrap">
+  <div class="fg">
+    <div><div class="fb round"><span class="leaf" style="width:30px;height:30px"></span>このは歯科クリニック</div>
+      <div style="margin-top:12px;font-size:.8rem;max-width:290px">削るより、守る。予防を中心にした、家族みんなのかかりつけ歯科。</div></div>
+    <nav class="fn"><a href="#why">当院の特徴</a><a href="#care">診療案内</a><a href="#concept">考え方</a><a href="#doctor">院長紹介</a><a href="#info">アクセス</a><a href="#reserve">WEB予約</a></nav>
+  </div>
+  <div class="copy mono">© 2026 KONOHA DENTAL CLINIC. All rights reserved. — Sample design.</div>
+</div></footer>
+
+<script>
+const hd=document.getElementById('hd'),bg=document.getElementById('bg'),mn=document.getElementById('mn');
+addEventListener('scroll',()=>hd.classList.toggle('scrolled',scrollY>50));
+bg.onclick=()=>mn.classList.toggle('open');
+mn.querySelectorAll('a').forEach(a=>a.onclick=()=>mn.classList.remove('open'));
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.1});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>
