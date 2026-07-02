@@ -8,6 +8,12 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@500;700;900&family=Noto+Sans+JP:wght@400;500;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Dentist","name":"さくら駅前歯科","description":"さいたま市・西浦和の歯科医院。通院・訪問歯科診療に対応。","url":"https://example.com/","telephone":"+81-48-000-0000","priceRange":"¥¥","areaServed":["さいたま市桜区","さいたま市南区","西浦和","中浦和"],"address":{"@type":"PostalAddress","addressLocality":"さいたま市桜区","addressRegion":"埼玉県","streetAddress":"西浦和","addressCountry":"JP"},"openingHoursSpecification":[{"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Friday"],"opens":"09:00","closes":"19:00"},{"@type":"OpeningHoursSpecification","dayOfWeek":"Saturday","opens":"09:00","closes":"17:00"}],"medicalSpecialty":"Dentistry"}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"寝たきりでも訪問歯科で治療できますか？","acceptedAnswer":{"@type":"Answer","text":"はい。ベッドや車いすのままで受けられる体制で伺います。姿勢や体調に配慮しながら進めます。"}},{"@type":"Question","name":"家族や施設からの相談でも大丈夫ですか？","acceptedAnswer":{"@type":"Answer","text":"もちろんです。ご家族・ケアマネジャー様・施設のご担当者様からのご相談を多くいただいています。"}},{"@type":"Question","name":"訪問歯科の費用はどのくらいかかりますか？","acceptedAnswer":{"@type":"Answer","text":"医療保険・介護保険が使え、多くの方が1〜3割のご負担です。初回に治療計画とあわせてお見積りをお出しします。"}},{"@type":"Question","name":"どのエリアまで訪問してもらえますか？","acceptedAnswer":{"@type":"Answer","text":"さいたま市桜区・南区を中心に対応しています。周辺地域も伺える場合がありますので、まずはご相談ください。"}}]}
+</script>
 <style>
 :root{
   --ink:#453338; --sub:#8a757b; --line:#f0e4e6;
@@ -94,6 +100,47 @@ section{padding:104px 0}
 .vlist li::before{content:"❀";color:var(--pink);font-size:.8rem}
 .visit .who{background:var(--sakura);border-radius:16px;padding:16px 20px;font-size:.82rem;color:var(--ink2)}
 .visit .who b{color:var(--pink-d)}
+.vsub{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:22px}
+.vcard{background:#fff;border:1px solid var(--line);border-radius:22px;padding:30px 28px;position:relative}
+.vno{position:absolute;right:22px;top:18px;color:var(--sakura);font-weight:800;font-size:2.2rem;line-height:1}
+.vcard h4{font-family:"Zen Maru Gothic";font-weight:700;font-size:1.14rem;margin-bottom:14px}
+.vdot{list-style:none;display:grid;gap:8px}.vdot.cols{grid-template-columns:1fr 1fr}
+.vdot li{font-size:.88rem;font-weight:500;display:flex;align-items:center;gap:9px}
+.vdot li::before{content:"❀";color:var(--pink);font-size:.78rem}
+.vnote{font-size:.78rem;color:var(--sub);margin-top:14px}
+.vflow{margin-top:30px}
+.vsteps{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:16px}
+.vstep{background:#fff;border:1px solid var(--line);border-radius:18px;padding:22px 20px;position:relative}
+.vstep .s{color:var(--pink-d);font-weight:700;font-size:.68rem;letter-spacing:.08em}
+.vstep b{font-family:"Zen Maru Gothic";display:block;margin:6px 0 6px;font-size:1rem}
+.vstep p{font-size:.78rem;color:var(--sub)}
+.vcost{display:grid;grid-template-columns:1.1fr .9fr;gap:22px;margin-top:22px}
+.vcbox,.vfaq{background:#fff;border:1px solid var(--line);border-radius:22px;padding:30px 28px}
+.vcbox h4{font-weight:900;font-size:1.2rem;margin:10px 0 12px}
+.vcbox p{font-size:.86rem;color:var(--sub)}
+.vprice{margin:16px 0 8px;display:grid;gap:10px}
+.vprice div{display:flex;justify-content:space-between;align-items:baseline;background:var(--sakura);border-radius:12px;padding:12px 16px;font-size:.86rem}
+.vprice b{color:var(--pink-d)}
+.vfaq details{border-bottom:1px solid var(--line);padding:12px 0}
+.vfaq summary{cursor:pointer;font-weight:700;font-size:.9rem;list-style:none;position:relative;padding-right:26px}
+.vfaq summary::-webkit-details-marker{display:none}
+.vfaq summary::after{content:"＋";position:absolute;right:2px;top:0;color:var(--pink);font-weight:700}
+.vfaq details[open] summary::after{content:"−"}
+.vfaq details p{font-size:.84rem;color:var(--sub);margin-top:10px}
+.contact{background:var(--wood)}
+.cwrap{display:grid;grid-template-columns:.85fr 1.15fr;gap:30px;align-items:start}
+.cinfo{display:grid;gap:18px}
+.ctel{display:block;background:var(--pink);color:#fff;border-radius:22px;padding:28px 26px;box-shadow:var(--shadow);transition:.3s}
+.ctel:hover{background:var(--pink-d);transform:translateY(-3px)}
+.ctel span{font-size:.8rem;opacity:.95}.ctel b{display:block;font-size:2rem;line-height:1.2;letter-spacing:.02em}.ctel small{font-size:.72rem;opacity:.9}
+.cnote{background:#fff;border:1px solid var(--line);border-radius:16px;padding:18px 20px;font-size:.84rem;color:var(--sub)}
+.cform{background:#fff;border:1px solid var(--line);border-radius:24px;padding:32px;box-shadow:var(--shadow);display:grid;gap:16px}
+.cform .row2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.cform label{display:grid;gap:6px;font-size:.82rem;font-weight:700;color:var(--ink2)}
+.cform input,.cform select,.cform textarea{font-family:inherit;font-size:.9rem;padding:12px 14px;border:1px solid var(--line);border-radius:12px;background:var(--paper);color:var(--ink);width:100%}
+.cform input:focus,.cform select,.cform textarea:focus{outline:2px solid var(--pink);outline-offset:1px}
+.cform textarea{resize:vertical}
+.cprivacy{font-size:.72rem;color:var(--sub);text-align:center}
 
 /* reasons */
 .why{background:var(--sakura)}
@@ -120,6 +167,7 @@ section{padding:104px 0}
 .doc .grid{display:grid;grid-template-columns:.85fr 1.15fr;gap:52px;align-items:center}
 .doc .ph{aspect-ratio:4/5;border-radius:28px;overflow:hidden;box-shadow:var(--shadow);position:relative}
 .doc .ph .q{position:absolute;left:18px;bottom:18px;background:#fff;border-radius:14px;padding:11px 16px;font-family:"Zen Maru Gothic";font-weight:700;font-size:.8rem;box-shadow:var(--shadow)}
+.doc .ph .imgnote{position:absolute;right:12px;top:12px;background:rgba(0,0,0,.45);color:#fff;font-size:.62rem;padding:4px 9px;border-radius:8px}
 .doc h3{font-family:"Zen Maru Gothic";font-weight:900;font-size:clamp(1.6rem,3.2vw,2.1rem);margin:12px 0 8px;line-height:1.45}
 .doc .pos{color:var(--pink-d);font-weight:700;font-size:.9rem;margin-bottom:20px}
 .doc p{color:var(--sub);margin-bottom:15px;font-size:.92rem}
@@ -165,7 +213,16 @@ footer{background:var(--ink2);color:#c3aab1;padding:56px 0 28px;font-size:.84rem
   .hero .grid,.doc .grid,.info .grid,.visit .box{grid-template-columns:1fr}
   .visit .ph{min-height:240px}.visit .b{padding:34px 28px}.vlist{grid-template-columns:1fr}
   .rgrid,.cgrid{grid-template-columns:1fr}
+  .vsub,.vcost,.cwrap,.cform .row2{grid-template-columns:1fr}
+  .vsteps{grid-template-columns:1fr 1fr}
+  body{padding-bottom:64px}
+  .mbar{display:flex !important}
 }
+/* sticky mobile CTA */
+.mbar{display:none;position:fixed;left:0;right:0;bottom:0;z-index:70;background:#fff;box-shadow:0 -6px 24px -14px rgba(120,70,90,.5);padding:8px;gap:8px}
+.mbar a{flex:1;text-align:center;padding:12px;border-radius:12px;font-family:"Zen Maru Gothic";font-weight:700;font-size:.9rem}
+.mbar .m-tel{background:var(--sakura);color:var(--pink-d)}
+.mbar .m-book{background:var(--pink);color:#fff}
 </style>
 </head>
 <body>
@@ -177,7 +234,7 @@ footer{background:var(--ink2);color:#c3aab1;padding:56px 0 28px;font-size:.84rem
       <a href="#visit">訪問歯科</a><a href="#why">当院の特徴</a><a href="#care">診療案内</a>
       <a href="#doctor">院長</a><a href="#info">アクセス</a>
     </nav>
-    <div class="tel"><b class="mono">048-000-0000</b><small>平日9:00-19:00 / 土9:00-17:00</small></div>
+    <a class="tel" href="tel:0480000000"><b class="mono">048-000-0000</b><small>平日9:00-19:00 / 土9:00-17:00</small></a>
     <a href="#reserve" class="book">WEB予約</a>
     <div class="burger" id="bg"><span></span><span></span><span></span></div>
   </div>
@@ -210,19 +267,59 @@ footer{background:var(--ink2);color:#c3aab1;padding:56px 0 28px;font-size:.84rem
 </section>
 
 <section id="visit" class="visit"><div class="wrap">
-  <div class="head reveal"><span class="eye" style="justify-content:center">Home Visit</span><h2>通えなくても、あきらめないで。</h2><p>「歯医者に行きたいけれど、通うのが難しい」——そんな方のご自宅・施設へ、歯科医師が伺います。</p></div>
+  <div class="head reveal"><span class="eye" style="justify-content:center">Home Visit Dental Care</span><h2>さいたま市の訪問歯科｜通えなくても、あきらめないで。</h2><p>「歯医者に行きたいけれど、通うのが難しい」——そんな方のご自宅・施設へ、歯科医師と歯科衛生士が伺います。西浦和・南区を中心に対応しています。</p></div>
   <div class="box reveal">
-    <div class="ph"><span class="badge">訪問歯科診療</span><img src="https://images.unsplash.com/photo-1576765607924-3f7b8410a787?auto=format&fit=crop&w=700&q=80" alt="ご自宅での診療"></div>
+    <div class="ph"><span class="badge">訪問歯科診療</span><img src="https://images.unsplash.com/photo-1576765607924-3f7b8410a787?auto=format&fit=crop&w=700&q=80" alt="ご自宅での訪問歯科診療の様子"></div>
     <div class="b">
-      <span class="eye">West-Urawa Area</span>
-      <h2>ご自宅・施設で、<span class="p">通院と同じ治療</span>を。</h2>
-      <p>持ち運びできる専用機器で、むし歯・入れ歯・お口のケアまで、ご自宅や施設で対応します。さいたま市・西浦和を中心に、対応エリアを広げています。</p>
+      <span class="eye">訪問歯科とは</span>
+      <h2 style="font-size:1.5rem">ご自宅・施設で、<span class="p">通院と同じ治療</span>を。</h2>
+      <p>持ち運びできる専用機器で、むし歯・入れ歯・お口のケアまで、通院とほぼ同じ治療をご自宅や施設で受けられます。医療保険・介護保険が使え、多くの方が1割〜3割のご負担で利用されています。</p>
       <ul class="vlist">
         <li>むし歯・歯周病の治療</li><li>入れ歯の作製・調整</li>
         <li>飲み込み(嚥下)のケア</li><li>お口の清掃・予防</li>
         <li>ご家族への相談・指導</li><li>ケアマネ様との連携</li>
       </ul>
-      <div class="who">対象: <b>ご高齢の方・通院が難しい方</b>／ご家族・ケアマネジャー様・介護施設のご担当者様からのご相談も歓迎します。まずはお電話ください。</div>
+      <a href="#contact" class="btn btn-p" style="margin-top:8px">訪問歯科を相談する <span class="a">→</span></a>
+    </div>
+  </div>
+
+  <div class="vsub reveal">
+    <div class="vcard"><span class="vno mono">01</span><h4>訪問歯科の対象となる方</h4>
+      <ul class="vdot"><li>足腰が弱く、通院が難しい方</li><li>寝たきり・車いすの方</li><li>入院・入所中で歯科にかかれない方</li><li>飲み込み・食事にお悩みの方</li></ul>
+      <p class="vnote">ご本人はもちろん、ご家族・ケアマネジャー様・施設のご担当者様からのご相談も歓迎します。</p></div>
+    <div class="vcard"><span class="vno mono">02</span><h4>対応エリア</h4>
+      <p style="font-weight:700;color:var(--pink-d)">さいたま市 桜区・南区を中心に対応</p>
+      <ul class="vdot cols"><li>西浦和</li><li>中浦和</li><li>南浦和</li><li>武蔵浦和</li><li>浦和</li><li>与野本町</li></ul>
+      <p class="vnote">上記の周辺地域も伺える場合があります。まずはお電話でご相談ください（訪問可否を無料でお調べします）。</p></div>
+  </div>
+
+  <div class="vflow reveal">
+    <h3 class="mincho" style="font-family:'Zen Maru Gothic';font-weight:900;text-align:center;font-size:1.4rem;margin-bottom:8px">訪問歯科・ご利用の流れ</h3>
+    <div class="vsteps">
+      <div class="vstep"><span class="s mono">STEP 1</span><b>お問い合わせ</b><p>お電話またはフォームから。ご家族・ケアマネ様の代理相談もOK。</p></div>
+      <div class="vstep"><span class="s mono">STEP 2</span><b>訪問・お口の診察</b><p>ご希望日にご自宅・施設へ伺い、お口の状態を確認します。</p></div>
+      <div class="vstep"><span class="s mono">STEP 3</span><b>治療計画のご説明</b><p>治療内容・回数・費用をわかりやすくご説明します。</p></div>
+      <div class="vstep"><span class="s mono">STEP 4</span><b>訪問診療・ケア</b><p>ご都合に合わせて定期的に伺い、治療と予防を続けます。</p></div>
+    </div>
+  </div>
+
+  <div class="vcost reveal">
+    <div class="vcbox">
+      <span class="eye">費用について</span>
+      <h4 class="round">医療保険・介護保険が使えます</h4>
+      <p>訪問歯科は保険診療が基本です。お住まいや状況により、医療保険（1〜3割負担）か介護保険が適用され、これに交通費はかかりません。実際のご負担は状態によって変わりますので、初回にお見積りをお出しします。</p>
+      <div class="vprice">
+        <div><span>お口の診察・相談</span><b class="mono">初回無料</b></div>
+        <div><span>訪問診療（保険適用の目安）</span><b class="mono">1回 数百〜数千円</b></div>
+      </div>
+      <p class="vnote">※金額は保険の種類・治療内容により変わります。詳しくはお問い合わせください。</p>
+    </div>
+    <div class="vfaq">
+      <span class="eye">よくあるご質問</span>
+      <details><summary>寝たきりでも治療できますか？</summary><p>はい。ベッドや車いすのままで受けられる体制で伺います。姿勢や体調に配慮しながら進めます。</p></details>
+      <details><summary>家族や施設からの相談でも大丈夫ですか？</summary><p>もちろんです。ご本人に代わってご家族・ケアマネジャー様・施設のご担当者様からのご相談を多くいただいています。</p></details>
+      <details><summary>費用はどのくらいかかりますか？</summary><p>医療保険・介護保険が使え、多くの方が1〜3割のご負担です。初回に治療計画とあわせてお見積りをお出しします。</p></details>
+      <details><summary>どのエリアまで来てもらえますか？</summary><p>さいたま市桜区・南区を中心に対応しています。周辺地域も伺える場合がありますので、まずはご相談ください。</p></details>
     </div>
   </div>
 </div></section>
@@ -249,8 +346,8 @@ footer{background:var(--ink2);color:#c3aab1;padding:56px 0 28px;font-size:.84rem
 </div></section>
 
 <section id="doctor" class="doc"><div class="wrap grid">
-  <div class="ph reveal"><img src="https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&w=700&q=80" alt="院長">
-    <div class="q">最後まで、自分の歯で。</div></div>
+  <div class="ph reveal"><img src="https://images.unsplash.com/photo-1600880292089-90a7e086ee0c?auto=format&fit=crop&w=700&q=80" alt="院長イメージ">
+    <div class="q">最後まで、自分の歯で。</div><span class="imgnote">※写真はイメージです</span></div>
   <div class="reveal">
     <span class="eye">Director</span>
     <h3 class="round">おうちでも、笑顔で<br>食べられるように。</h3>
@@ -283,6 +380,24 @@ footer{background:var(--ink2);color:#c3aab1;padding:56px 0 28px;font-size:.84rem
   </div>
 </div></section>
 
+<section id="contact" class="contact"><div class="wrap">
+  <div class="head reveal"><span class="eye" style="justify-content:center">Contact</span><h2>ご相談・お問い合わせ</h2><p>通院のこと、訪問歯科のこと、費用のこと。ご家族・ケアマネジャー様からのご相談も歓迎します。</p></div>
+  <div class="cwrap reveal">
+    <div class="cinfo">
+      <a class="ctel" href="tel:0480000000"><span>お電話でのご相談</span><b class="mono">048-000-0000</b><small>平日9:00-19:00 / 土9:00-17:00</small></a>
+      <div class="cnote">訪問歯科は、まずお電話が確実です。「うちの親は対象になる？」といったご相談だけでも構いません。</div>
+    </div>
+    <form class="cform" onsubmit="return false">
+      <div class="row2"><label>お名前<input type="text" placeholder="山田 太郎"></label><label>ふりがな<input type="text" placeholder="やまだ たろう"></label></div>
+      <div class="row2"><label>電話番号<input type="tel" placeholder="048-000-0000"></label><label>ご相談の種類
+        <select><option>通院について</option><option>訪問歯科について</option><option>費用について</option><option>その他</option></select></label></div>
+      <label>お問い合わせ内容<textarea rows="4" placeholder="ご相談内容をご記入ください"></textarea></label>
+      <button class="btn btn-p" type="submit" style="width:100%;justify-content:center">この内容で送信する <span class="a">→</span></button>
+      <p class="cprivacy">送信いただいた情報は、ご相談への対応のみに使用します。</p>
+    </form>
+  </div>
+</div></section>
+
 <section id="reserve" class="cta"><div class="wrap reveal">
   <span class="eye">Contact</span>
   <h2 class="round">通院のことも、訪問のことも。</h2>
@@ -301,6 +416,11 @@ footer{background:var(--ink2);color:#c3aab1;padding:56px 0 28px;font-size:.84rem
   </div>
   <div class="copy mono">© 2026 SAKURA Ekimae Dental Clinic. — Sample design.</div>
 </div></footer>
+
+<div class="mbar">
+  <a class="m-tel" href="tel:0480000000">☎ 電話する</a>
+  <a class="m-book" href="#contact">相談・予約</a>
+</div>
 
 <script>
 const hd=document.getElementById('hd'),bg=document.getElementById('bg'),mn=document.getElementById('mn');
