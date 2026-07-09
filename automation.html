@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>自動化・データ処理 作品集｜自動化のミナト</title>
+<style>
+  :root{
+    --bg:#f4f6f9;
+    --card:#ffffff;
+    --ink:#1b2333;
+    --muted:#69748c;
+    --line:#e6e9ef;
+    --navy:#1e2a44;
+    --navy2:#26375a;
+    --accent:#2b5ce6;
+    --accent-soft:#eaf0fd;
+    --good:#128a5a;
+    --num:'Helvetica Neue','Segoe UI','Hiragino Kaku Gothic ProN',sans-serif;
+    --jp:'Hiragino Kaku Gothic ProN','Noto Sans JP','Yu Gothic',sans-serif;
+    --shadow:0 1px 2px rgba(27,35,51,.05),0 6px 20px rgba(27,35,51,.07);
+    --radius:14px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{-webkit-text-size-adjust:100%}
+  body{
+    font-family:var(--jp);
+    background:var(--bg);
+    color:var(--ink);
+    font-size:15px;
+    line-height:1.7;
+    overflow-x:hidden;
+  }
+  .wrap{max-width:1180px;margin:0 auto;padding:0 20px}
+
+  /* ===== header ===== */
+  header{
+    background:linear-gradient(160deg,var(--navy) 0%,var(--navy2) 100%);
+    color:#fff;
+  }
+  .head-in{
+    max-width:1180px;margin:0 auto;padding:40px 20px 44px;
+  }
+  .brand{display:flex;align-items:center;gap:14px;margin-bottom:22px}
+  .brand-mark{
+    width:44px;height:44px;border-radius:11px;flex:0 0 auto;
+    background:linear-gradient(135deg,var(--accent),#5b83f0);
+    display:flex;align-items:center;justify-content:center;
+    color:#fff;font-family:var(--num);font-weight:800;font-size:20px;
+  }
+  .brand .name{font-size:15px;font-weight:700;letter-spacing:.03em}
+  .brand .role{font-size:12px;color:#aeb9d4;font-weight:400}
+  header h1{
+    font-size:30px;font-weight:800;letter-spacing:.01em;line-height:1.35;
+    margin-bottom:12px;
+  }
+  header h1 .thin{font-weight:400;color:#c7d1e8;display:block;font-size:16px;margin-top:8px;letter-spacing:.02em}
+  header .lead{font-size:14.5px;color:#c7d1e8;max-width:640px;line-height:1.8}
+  .badges{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px}
+  .badge{
+    background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.16);
+    border-radius:999px;padding:6px 15px;font-size:12.5px;color:#e7ecf7;
+    font-weight:500;white-space:nowrap;
+  }
+  .badge b{color:#fff;font-family:var(--num);font-weight:700}
+
+  /* ===== section intro ===== */
+  .intro{padding:34px 0 6px}
+  .intro p{color:var(--muted);font-size:14px;max-width:760px}
+  .intro .count{font-family:var(--num);font-weight:800;color:var(--accent);font-size:15px}
+
+  /* ===== grid ===== */
+  .grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fill,minmax(340px,1fr));
+    gap:22px;
+    padding:24px 0 8px;
+  }
+  .card{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    box-shadow:var(--shadow);
+    overflow:hidden;
+    display:flex;flex-direction:column;
+  }
+  .card-head{padding:20px 20px 16px}
+  .kicker{
+    display:inline-block;
+    font-family:var(--num);font-weight:700;font-size:11px;letter-spacing:.08em;
+    color:var(--accent);background:var(--accent-soft);
+    border-radius:6px;padding:3px 9px;margin-bottom:11px;
+  }
+  .card h2{font-size:17px;font-weight:700;line-height:1.45;margin-bottom:12px}
+  .metric{
+    display:flex;align-items:baseline;flex-wrap:wrap;gap:6px 10px;
+    background:#f7f9fc;border:1px solid var(--line);border-radius:10px;
+    padding:12px 14px;margin-bottom:12px;
+  }
+  .metric .big{
+    font-family:var(--num);font-weight:800;font-size:26px;color:var(--navy);
+    letter-spacing:.01em;line-height:1.1;
+  }
+  .metric .arrow{font-family:var(--num);font-weight:700;color:var(--muted);font-size:18px}
+  .metric .unit{font-size:12.5px;color:var(--muted);font-weight:500;align-self:flex-end}
+  .card p.benefit{font-size:13.5px;color:#3a4560;line-height:1.7}
+
+  /* ===== image frames ===== */
+  .shot{
+    border-top:1px solid var(--line);
+    background:#eef1f6;
+    overflow-x:auto;
+    padding:14px;
+  }
+  .shot img{display:block;max-width:100%;height:auto;border-radius:8px;border:1px solid var(--line);background:#fff}
+  .shot.pair{display:flex;gap:12px;min-width:0}
+  .shot.pair img{flex:1 1 0;min-width:220px}
+  .shot .charts{display:flex;gap:10px;margin-top:12px;min-width:0}
+  .shot .charts img{flex:1 1 0;min-width:120px}
+  .shot-cap{font-size:11.5px;color:var(--muted);padding:0 14px 12px;margin-top:-4px;background:#eef1f6}
+
+  /* ===== quality strip ===== */
+  .qual{
+    margin:38px 0 8px;
+    background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+    box-shadow:var(--shadow);
+    padding:24px 24px;
+    display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px 26px;
+  }
+  .qual h3{grid-column:1/-1;font-size:16px;font-weight:700;margin-bottom:2px}
+  .qual .qi{display:flex;gap:12px;align-items:flex-start}
+  .qual .qi .dot{
+    width:30px;height:30px;border-radius:8px;flex:0 0 auto;margin-top:2px;
+    background:var(--accent-soft);color:var(--accent);
+    display:flex;align-items:center;justify-content:center;font-weight:800;font-family:var(--num);font-size:14px;
+  }
+  .qual .qi b{font-size:13.5px;display:block;margin-bottom:2px}
+  .qual .qi span{font-size:12.5px;color:var(--muted);line-height:1.6}
+
+  /* ===== footer ===== */
+  footer{
+    margin-top:40px;
+    border-top:1px solid var(--line);
+    background:var(--card);
+  }
+  .foot-in{
+    max-width:1180px;margin:0 auto;padding:30px 20px 40px;
+    display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px;
+  }
+  .foot-in .fnote{font-size:12.5px;color:var(--muted);line-height:1.7}
+  .foot-in .fnote b{color:var(--ink);font-weight:700}
+  .foot-link{
+    display:inline-flex;align-items:center;gap:8px;
+    background:var(--navy);color:#fff;text-decoration:none;
+    border-radius:10px;padding:12px 20px;font-size:14px;font-weight:700;
+    white-space:nowrap;transition:.15s;
+  }
+  .foot-link:hover{background:var(--navy2)}
+  .foot-link .ar{font-family:var(--num);font-weight:800}
+
+  @media(max-width:600px){
+    header h1{font-size:24px}
+    header .head-in{padding:32px 20px 36px}
+    .metric .big{font-size:22px}
+    .grid{grid-template-columns:1fr;gap:18px}
+    .shot.pair{flex-direction:column}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="head-in">
+    <div class="brand">
+      <div class="brand-mark">M</div>
+      <div>
+        <div class="name">自動化のミナト</div>
+        <div class="role">AI・自動化開発 / データ処理受託</div>
+      </div>
+    </div>
+    <h1>
+      自動化・データ処理 作品集
+      <span class="thin">AIで速く正確に、品質は全件人の目で検品。</span>
+    </h1>
+    <p class="lead">
+      本業でAI・自動化開発(Claude Code等を活用)。日々の手作業を、ワンクリックで終わる仕組みに置き換えます。
+      下は実際に動くツールの出力です。数字はすべて手元で計測した実測値です。
+    </p>
+    <div class="badges">
+      <span class="badge">クラウドワークス評価 <b>4.9</b></span>
+      <span class="badge">完了率 <b>100%</b></span>
+      <span class="badge">受託完了 <b>6件</b></span>
+      <span class="badge">納品物は<b>全件</b>人の目で検品</span>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <div class="intro">
+    <p><span class="count">7</span> 種類のツールを掲載しています。いずれも「手作業なら数十分〜数時間」の作業を、実行ボタン1つに置き換えたものです。</p>
+  </div>
+
+  <div class="grid">
+
+    <!-- 1. Scraping -->
+    <div class="card">
+      <div class="card-head">
+        <span class="kicker">01 SCRAPING</span>
+        <h2>Webスクレイピング・情報収集の自動化</h2>
+        <div class="metric">
+          <span class="big">100件</span>
+          <span class="arrow">→</span>
+          <span class="big">約10秒</span>
+          <span class="unit">手作業1時間以上を短縮</span>
+        </div>
+        <p class="benefit">公開サイトから書籍100件を約10秒で収集し、色付き見出し・フィルタ付きの整形済みExcelで納品します。転記のミスも起きません。</p>
+      </div>
+      <div class="shot">
+        <img src="auto-assets/scraping_output_preview.png" alt="スクレイピング結果を整形したExcelの出力プレビュー">
+      </div>
+      <div class="shot-cap">出力例:収集データを整形したExcel</div>
+    </div>
+
+    <!-- 2. GAS -->
+    <div class="card">
+      <div class="card-head">
+        <span class="kicker">02 GAS 自動化</span>
+        <h2>GAS業務自動化(フォーム→転記→集計→通知)</h2>
+        <div class="metric">
+          <span class="big">毎朝30分</span>
+          <span class="arrow">→</span>
+          <span class="big">0分</span>
+          <span class="unit">サーバー代不要</span>
+        </div>
+        <p class="benefit">フォーム回答が届いた瞬間に、整形転記・集計表の更新・担当者への内容入りメールまで全自動。毎朝の目視確認が不要になります。</p>
+      </div>
+      <div class="shot pair">
+        <img src="auto-assets/gas_before_after.png" alt="GAS導入前後の比較">
+        <img src="auto-assets/gas_flow_diagram.png" alt="フォームから通知までの自動化フロー図">
+      </div>
+      <div class="shot-cap">左:導入前後の比較 / 右:自動化フロー</div>
+    </div>
+
+    <!-- 3. PDF -->
+    <div class="card">
+      <div class="card-head">
+        <span class="kicker">03 PDF → EXCEL</span>
+        <h2>請求書・帳票PDF → Excel変換</h2>
+        <div class="metric">
+          <span class="big">10枚</span>
+          <span class="arrow">→</span>
+          <span class="big">0.12秒</span>
+          <span class="unit">1枚1行のExcelに</span>
+        </div>
+        <p class="benefit">溜まったPDFを一括で読み取り、番号・日付・金額をExcelに展開。読取不能は赤マーク、金額は自動で検算し、転記事故を防ぎます。</p>
+      </div>
+      <div class="shot">
+        <img src="auto-assets/pdf_before_after.png" alt="PDFからExcelへ変換した前後の比較">
+      </div>
+      <div class="shot-cap">PDF(左)を1枚1行のExcel(右)へ</div>
+    </div>
+
+    <!-- 4. Cleansing -->
+    <div class="card">
+      <div class="card-head">
+        <span class="kicker">04 名寄せ / CLEANSING</span>
+        <h2>企業リスト名寄せ・クレンジング</h2>
+        <div class="metric">
+          <span class="big">59行</span>
+          <span class="arrow">→</span>
+          <span class="big">29社</span>
+          <span class="unit">重複30件を0.1秒で除去</span>
+        </div>
+        <p class="benefit">複数ソースのCSVを表記ゆれ統一・重複除去・統合。3ソース59行を0.1秒で名寄せし、実体29社に整理します。</p>
+      </div>
+      <div class="shot">
+        <img src="auto-assets/cleansing_before_after.png" alt="名寄せ・クレンジングの前後比較">
+      </div>
+      <div class="shot-cap">表記ゆれ・重複を統一(前後比較)</div>
+    </div>
+
+    <!-- 5. API diff -->
+    <div class="card">
+      <div class="card-head">
+        <span class="kicker">05 API 差分</span>
+        <h2>API差分取得・変更検知</h2>
+        <div class="metric">
+          <span class="big">33件</span>
+          <span class="arrow">→</span>
+          <span class="big">変更16行</span>
+          <span class="unit">突合0.01秒</span>
+        </div>
+        <p class="benefit">外部システムから商品データをAPIで取得し、前回値と突合。変更行だけを色分け表示します(緑=新規 / 黄=価格 / 青=在庫 / 赤=廃番)。</p>
+      </div>
+      <div class="shot">
+        <img src="auto-assets/api_before_after.png" alt="API差分検知の前後比較と変更行の色分け">
+      </div>
+      <div class="shot-cap">変更行のみ色分けで抽出</div>
+    </div>
+
+    <!-- 6. Dashboard -->
+    <div class="card">
+      <div class="card-head">
+        <span class="kicker">06 ダッシュボード</span>
+        <h2>売上ダッシュボード自動生成</h2>
+        <div class="metric">
+          <span class="big">売上CSV</span>
+          <span class="arrow">→</span>
+          <span class="big">経営ダッシュボード</span>
+          <span class="unit">期間切替で全グラフ連動</span>
+        </div>
+        <p class="benefit">売上CSVを読み込むだけで、カテゴリ・月次・店舗別のグラフを自動生成。期間を切り替えると全グラフが連動します。</p>
+      </div>
+      <div class="shot">
+        <img src="auto-assets/dashboard_before_after.png" alt="売上CSVからダッシュボードを生成した前後比較">
+        <div class="charts">
+          <img src="auto-assets/dashboard_chart_category.png" alt="カテゴリ別グラフ">
+          <img src="auto-assets/dashboard_chart_monthly.png" alt="月次推移グラフ">
+          <img src="auto-assets/dashboard_chart_store.png" alt="店舗別グラフ">
+        </div>
+      </div>
+      <div class="shot-cap">CSVから自動生成 / カテゴリ・月次・店舗別</div>
+    </div>
+
+    <!-- 7. Classify -->
+    <div class="card">
+      <div class="card-head">
+        <span class="kicker">07 テキスト分類</span>
+        <h2>テキスト分類・アンケート集計</h2>
+        <div class="metric">
+          <span class="big">80件</span>
+          <span class="arrow">→</span>
+          <span class="big">0.031秒</span>
+          <span class="unit">80%を自動分類</span>
+        </div>
+        <p class="benefit">自由記述をカテゴリ自動分類し、ネガポジも判定。確信度の低いものはAIで補完し、最終は全件人の目で検品します。</p>
+      </div>
+      <div class="shot">
+        <img src="auto-assets/classify_category_chart.png" alt="テキスト分類のカテゴリ別集計グラフ">
+      </div>
+      <div class="shot-cap">カテゴリ別の自動分類結果</div>
+    </div>
+
+  </div>
+
+  <!-- quality strip -->
+  <div class="qual">
+    <h3>速さだけでなく、正確さのための仕組み</h3>
+    <div class="qi">
+      <div class="dot">1</div>
+      <div><b>AIで速く、人で正確に</b><span>生成AIで処理を高速化しつつ、納品物は全件人の目で検品します。</span></div>
+    </div>
+    <div class="qi">
+      <div class="dot">2</div>
+      <div><b>事故を防ぐ設計</b><span>読取不能は赤マーク、金額は自動検算など、間違いに気づける仕組みを入れます。</span></div>
+    </div>
+    <div class="qi">
+      <div class="dot">3</div>
+      <div><b>数字はすべて実測</b><span>掲載の処理時間・件数は誇張なく、手元で計測した実測値のみです。</span></div>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <div class="foot-in">
+    <div class="fnote">
+      <b>自動化のミナト</b> — AI・自動化開発 / クラウドソーシングで受託中<br>
+      掲載内容はサンプルデータでの実行結果です。ご要望に合わせて個別に構築します。
+    </div>
+    <a class="foot-link" href="index.html">
+      HP / LP・デザインの作品集はこちら <span class="ar">→</span>
+    </a>
+  </div>
+</footer>
+
+</body>
+</html>
