@@ -1,0 +1,42 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="UTF-8"><style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Hiragino Kaku Gothic ProN','Hiragino Sans GB',sans-serif}
+body{background:#fff;padding:22px;width:900px}
+.t{font-size:13px;color:#128a5a;margin-bottom:12px;font-weight:600}
+.wrap{display:grid;grid-template-columns:1.15fr .85fr;gap:18px;align-items:start}
+table{border-collapse:collapse;width:100%;font-size:12.5px}
+th{background:#eafaf908;background:#e8f6ef;color:#0f7a52;text-align:left;padding:8px 10px;border:1px solid #d3ece1;font-weight:700}
+td{padding:7px 10px;border:1px solid #ececec;color:#333}
+td.n{text-align:right;font-family:'Helvetica Neue';font-weight:700;color:#1e2a44;white-space:nowrap}
+.cat{font-weight:600;color:#1b2333}
+.bars{font-size:12px}
+.bar{display:flex;align-items:center;gap:8px;margin-bottom:9px}
+.bl{width:118px;color:#333;text-align:right;font-size:11.5px}
+.bt{flex:1;background:#eef1f6;border-radius:5px;height:16px;overflow:hidden}
+.bf{height:100%;background:linear-gradient(90deg,#1ba97a,#12905f);border-radius:5px}
+.bn{width:34px;font-size:11px;color:#69748c}
+.note{margin-top:14px;font-size:11.5px;color:#0f7a52;background:#f0faf5;border:1px solid #d3ece1;border-radius:8px;padding:8px 11px}
+</style></head><body>
+<div class="t">回答をAIで意味ごとに自動分類 → 表記ゆれを吸収してカテゴリ別に集計(グラフ化まで即日)</div>
+<div class="wrap">
+  <div>
+    <table>
+      <tr><th>カテゴリ(自動分類)</th><th>件数</th><th>比率</th></tr>
+      <tr><td class="cat">内容・満足度(良い)</td><td class="n">34</td><td class="n">43%</td></tr>
+      <tr><td class="cat">資料・実例の充実</td><td class="n">15</td><td class="n">19%</td></tr>
+      <tr><td class="cat">運営・スタッフ対応(良い)</td><td class="n">12</td><td class="n">15%</td></tr>
+      <tr><td class="cat">会場・設備の改善要望</td><td class="n">9</td><td class="n">11%</td></tr>
+      <tr><td class="cat">時間配分の改善要望</td><td class="n">7</td><td class="n">9%</td></tr>
+      <tr><td class="cat">その他(要人手確認)</td><td class="n">3</td><td class="n">3%</td></tr>
+    </table>
+  </div>
+  <div class="bars">
+    <div class="bar"><span class="bl">満足度(良い)</span><span class="bt"><span class="bf" style="width:100%"></span></span><span class="bn">34</span></div>
+    <div class="bar"><span class="bl">資料・実例</span><span class="bt"><span class="bf" style="width:44%"></span></span><span class="bn">15</span></div>
+    <div class="bar"><span class="bl">運営・対応</span><span class="bt"><span class="bf" style="width:35%"></span></span><span class="bn">12</span></div>
+    <div class="bar"><span class="bl">会場・設備</span><span class="bt"><span class="bf" style="width:26%"></span></span><span class="bn">9</span></div>
+    <div class="bar"><span class="bl">時間配分</span><span class="bt"><span class="bf" style="width:21%"></span></span><span class="bn">7</span></div>
+    <div class="bar"><span class="bl">その他</span><span class="bt"><span class="bf" style="width:9%"></span></span><span class="bn">3</span></div>
+  </div>
+</div>
+<div class="note">自由記述80件を約0.031秒で8割を自動分類。判断が要る残りだけ人の目で確認 → カテゴリ別集計とグラフをその日のうちに納品(数値はサンプルデータでの実測)。</div>
+</body></html>
