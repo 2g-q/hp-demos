@@ -1,0 +1,882 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>ガラスラボ | スマホ保護フィルム専門店(制作サンプル)</title>
+<meta name="description" content="貼るのは一瞬。守るのは毎日。全機種対応のスマホ保護フィルム専門店ストアの制作サンプルです。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Zen+Kaku+Gothic+New:wght@500;700;900&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#1b2430;
+    --ink-soft:#4a5568;
+    --paper:#faf9f6;
+    --paper-alt:#f1f0eb;
+    --line:#e4e2da;
+    --white:#ffffff;
+    --accent:#2e5cff;
+    --accent-deep:#1a3fd6;
+    --accent-soft:#e8edff;
+    --radius-lg:24px;
+    --radius-md:16px;
+    --radius-pill:100px;
+    --shadow-card:0 12px 32px -18px rgba(27,36,48,0.28);
+    --shadow-btn:0 10px 24px -10px rgba(46,92,255,0.55);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    font-family:"Noto Sans JP",sans-serif;
+    color:var(--ink);
+    background:var(--paper);
+    -webkit-font-smoothing:antialiased;
+    padding-bottom:76px;
+  }
+  h1,h2,h3,h4{
+    font-family:"Zen Kaku Gothic New","Noto Sans JP",sans-serif;
+    line-height:1.4;
+    margin:0;
+  }
+  p{line-height:1.9;margin:0;color:var(--ink-soft);}
+  .num{font-family:"Manrope","Noto Sans JP",sans-serif;font-weight:800;}
+  img,svg{max-width:100%;}
+  a{color:inherit;text-decoration:none;}
+  button{font-family:inherit;cursor:pointer;}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 24px;width:100%;}
+  section{padding:96px 0;}
+  @media (max-width:780px){
+    section{padding:64px 0;}
+    .wrap{padding:0 20px;}
+  }
+
+  /* ---------- header ---------- */
+  .site-header{
+    position:sticky;top:0;z-index:60;
+    background:rgba(250,249,246,0.96);
+    border-bottom:1px solid var(--line);
+  }
+  .header-inner{
+    max-width:1120px;margin:0 auto;padding:16px 24px;
+    display:flex;align-items:center;justify-content:space-between;
+  }
+  .brand{
+    display:flex;align-items:center;gap:10px;
+    font-weight:900;font-size:20px;letter-spacing:0.02em;
+  }
+  .brand-mark{
+    width:34px;height:34px;border-radius:10px;background:var(--accent);
+    display:flex;align-items:center;justify-content:center;flex-shrink:0;
+  }
+  .brand-mark svg{width:18px;height:18px;stroke:#fff;}
+  .nav-desktop{display:flex;gap:32px;font-weight:500;font-size:15px;}
+  .nav-desktop a{position:relative;padding:6px 0;}
+  .nav-desktop a::after{
+    content:"";position:absolute;left:0;bottom:0;width:0;height:2px;background:var(--accent);
+    transition:width .25s ease;
+  }
+  .nav-desktop a:hover::after{width:100%;}
+  .header-cta{display:flex;align-items:center;gap:16px;}
+  .btn{
+    display:inline-flex;align-items:center;justify-content:center;gap:8px;
+    padding:13px 28px;border-radius:var(--radius-pill);
+    font-weight:700;font-size:15px;border:none;
+    transition:transform .2s ease,box-shadow .2s ease;
+  }
+  .btn-primary{background:var(--accent);color:#fff;box-shadow:var(--shadow-btn);}
+  .btn-primary:hover{transform:translateY(-2px);box-shadow:0 16px 28px -12px rgba(46,92,255,0.6);}
+  .btn-ghost{background:transparent;color:var(--ink);border:1px solid var(--line);}
+  .btn-ghost:hover{border-color:var(--accent);color:var(--accent);}
+  .hamburger{
+    display:none;width:44px;height:44px;border-radius:12px;border:1px solid var(--line);
+    background:var(--white);align-items:center;justify-content:center;flex-shrink:0;
+  }
+  .hamburger span,.hamburger span::before,.hamburger span::after{
+    content:"";display:block;width:18px;height:2px;background:var(--ink);position:relative;
+    transition:transform .25s ease,opacity .25s ease;
+  }
+  .hamburger span::before{position:absolute;top:-6px;}
+  .hamburger span::after{position:absolute;top:6px;}
+  .hamburger.is-active span{background:transparent;}
+  .hamburger.is-active span::before{transform:translateY(6px) rotate(45deg);}
+  .hamburger.is-active span::after{transform:translateY(-6px) rotate(-45deg);}
+
+  /* mobile nav sits OUTSIDE header as an independent fixed layer */
+  .mobile-nav{
+    position:fixed;inset:0;z-index:70;
+    background:var(--paper);
+    display:flex;flex-direction:column;
+    padding:100px 28px 40px;
+    transform:translateY(-100%);
+    transition:transform .3s ease;
+  }
+  .mobile-nav.is-open{transform:translateY(0);}
+  .mobile-nav a{
+    font-size:22px;font-weight:700;padding:16px 0;border-bottom:1px solid var(--line);
+  }
+  .mobile-nav .btn{margin-top:24px;}
+
+  @media (max-width:900px){
+    .nav-desktop{display:none;}
+    .header-cta .btn-ghost{display:none;}
+    .hamburger{display:flex;}
+  }
+
+  /* ---------- reveal ---------- */
+  .reveal{opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s ease;}
+  .reveal.is-visible{opacity:1;transform:translateY(0);}
+  @media (prefers-reduced-motion:reduce){
+    .reveal{opacity:1;transform:none;transition:none;}
+    html{scroll-behavior:auto;}
+  }
+
+  /* ---------- hero ---------- */
+  .hero{padding:72px 0 88px;}
+  .hero-inner{
+    display:grid;grid-template-columns:1.05fr 0.95fr;gap:56px;align-items:center;
+  }
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:8px;
+    padding:7px 16px;border-radius:var(--radius-pill);
+    background:var(--accent-soft);color:var(--accent-deep);
+    font-size:13px;font-weight:700;letter-spacing:0.04em;
+  }
+  .hero h1{
+    font-size:clamp(32px,5vw,52px);font-weight:900;margin:20px 0 22px;
+    letter-spacing:0.01em;
+  }
+  .hero h1 span{color:var(--accent);}
+  .hero-lead{font-size:16px;max-width:46ch;}
+  .hero-actions{display:flex;flex-wrap:wrap;gap:14px;margin-top:32px;}
+  .hero-points{
+    display:flex;flex-wrap:wrap;gap:20px;margin-top:36px;font-size:13px;color:var(--ink-soft);
+  }
+  .hero-points li{list-style:none;display:flex;align-items:center;gap:6px;}
+  .hero-points svg{width:16px;height:16px;stroke:var(--accent);flex-shrink:0;}
+  .hero-points ul{display:flex;flex-wrap:wrap;gap:20px;padding:0;margin:0;}
+
+  /* device mock (CSS-drawn, no stock photography) */
+  .device-stage{
+    position:relative;display:flex;align-items:center;justify-content:center;
+    padding:20px;
+  }
+  .device-glow{
+    position:absolute;width:340px;height:340px;border-radius:50%;
+    background:radial-gradient(circle,var(--accent-soft) 0%,rgba(232,237,255,0) 70%);
+    z-index:0;
+  }
+  .phone{
+    position:relative;z-index:1;width:min(240px,60vw);aspect-ratio:9/18.5;
+    background:linear-gradient(155deg,#232b3a,#141822);
+    border-radius:38px;padding:10px;box-shadow:0 30px 60px -20px rgba(27,36,48,0.45);
+  }
+  .phone-screen{
+    position:relative;width:100%;height:100%;border-radius:28px;overflow:hidden;
+    background:linear-gradient(160deg,#eef2ff 0%,#dfe6ff 45%,#f6f8ff 100%);
+  }
+  .phone-notch{
+    position:absolute;top:8px;left:50%;transform:translateX(-50%);
+    width:60px;height:16px;border-radius:10px;background:#141822;
+  }
+  .phone-film-sheen{
+    position:absolute;inset:0;
+    background:linear-gradient(115deg,rgba(255,255,255,0) 30%,rgba(255,255,255,0.65) 46%,rgba(255,255,255,0) 62%);
+    animation:sheen 3.2s ease-in-out infinite;
+  }
+  @keyframes sheen{
+    0%,100%{transform:translateX(-30%);}
+    50%{transform:translateX(30%);}
+  }
+  @media (prefers-reduced-motion:reduce){ .phone-film-sheen{animation:none;} }
+  .phone-ui{
+    position:absolute;left:16px;right:16px;bottom:20px;top:56px;
+    display:flex;flex-direction:column;gap:10px;
+  }
+  .phone-ui .bar{height:10px;border-radius:6px;background:rgba(46,92,255,0.18);}
+  .phone-ui .bar:nth-child(1){width:70%;}
+  .phone-ui .bar:nth-child(2){width:92%;}
+  .phone-ui .bar:nth-child(3){width:55%;}
+  .badge-float{
+    position:absolute;z-index:2;background:var(--white);border-radius:16px;
+    padding:12px 16px;box-shadow:var(--shadow-card);display:flex;align-items:center;gap:10px;
+    font-size:13px;font-weight:700;
+  }
+  .badge-float svg{width:20px;height:20px;stroke:var(--accent);}
+  .badge-1{top:6%;right:-4%;}
+  .badge-2{bottom:10%;left:-8%;}
+  @media (max-width:900px){
+    .hero-inner{grid-template-columns:1fr;}
+    .badge-1{right:2%;}
+    .badge-2{left:2%;}
+  }
+
+  /* ---------- stat band ---------- */
+  .stat-band{background:var(--ink);color:#fff;padding:52px 0;}
+  .stat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;text-align:center;}
+  .stat-grid .num{display:block;font-size:clamp(26px,4vw,36px);color:#fff;}
+  .stat-grid .label{font-size:13px;color:rgba(255,255,255,0.7);margin-top:6px;}
+  .stat-note{text-align:center;font-size:12px;color:rgba(255,255,255,0.55);margin-top:28px;}
+  @media (max-width:700px){
+    .stat-grid{grid-template-columns:repeat(2,1fr);row-gap:32px;}
+  }
+
+  /* ---------- section heads ---------- */
+  .section-head{max-width:640px;margin:0 auto 52px;text-align:center;}
+  .section-head .eyebrow{margin-bottom:14px;}
+  .section-head h2{font-size:clamp(24px,3.4vw,34px);font-weight:900;}
+  .section-head p{margin-top:14px;font-size:15px;}
+
+  /* ---------- reasons ---------- */
+  .reason-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
+  .reason-card{
+    background:var(--white);border:1px solid var(--line);border-radius:var(--radius-lg);
+    padding:32px 28px;
+  }
+  .reason-icon{
+    width:52px;height:52px;border-radius:14px;background:var(--accent-soft);
+    display:flex;align-items:center;justify-content:center;margin-bottom:20px;
+  }
+  .reason-icon svg{width:26px;height:26px;stroke:var(--accent);}
+  .reason-card h3{font-size:18px;font-weight:700;margin-bottom:10px;}
+  .reason-card p{font-size:14px;}
+  @media (max-width:860px){ .reason-grid{grid-template-columns:1fr;} }
+
+  /* ---------- product grid ---------- */
+  .bg-alt{background:var(--paper-alt);}
+  .product-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;}
+  .product-card{
+    background:var(--white);border-radius:var(--radius-lg);overflow:hidden;
+    border:1px solid var(--line);display:flex;flex-direction:column;
+    transition:transform .25s ease,box-shadow .25s ease;
+  }
+  .product-card:hover{transform:translateY(-6px);box-shadow:var(--shadow-card);}
+  .product-thumb{
+    aspect-ratio:1/1;position:relative;display:flex;align-items:center;justify-content:center;
+    background:linear-gradient(150deg,var(--accent-soft),#f7f8ff);
+  }
+  .product-thumb .mini-phone{
+    width:64px;height:118px;border-radius:16px;background:#1c2331;padding:5px;
+  }
+  .product-thumb .mini-screen{
+    width:100%;height:100%;border-radius:11px;background:linear-gradient(160deg,#fff,#e3e9ff);
+    position:relative;overflow:hidden;
+  }
+  .product-thumb .mini-screen::after{
+    content:"";position:absolute;inset:0;
+    background:linear-gradient(120deg,rgba(255,255,255,0) 35%,rgba(255,255,255,0.8) 50%,rgba(255,255,255,0) 65%);
+  }
+  .product-tag{
+    position:absolute;top:12px;left:12px;background:var(--accent);color:#fff;
+    font-size:11px;font-weight:700;padding:5px 10px;border-radius:var(--radius-pill);
+  }
+  .product-body{padding:20px;display:flex;flex-direction:column;gap:8px;flex:1;}
+  .product-body h3{font-size:15px;font-weight:700;}
+  .product-body p{font-size:12.5px;}
+  .product-price{margin-top:auto;display:flex;align-items:baseline;gap:6px;padding-top:10px;}
+  .product-price .num{font-size:20px;color:var(--ink);}
+  .product-price .yen-note{font-size:11px;color:var(--ink-soft);}
+  @media (max-width:900px){ .product-grid{grid-template-columns:repeat(2,1fr);} }
+
+  /* ---------- guide steps ---------- */
+  .guide-list{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;counter-reset:step;}
+  .guide-card{
+    position:relative;background:var(--white);border:1px solid var(--line);
+    border-radius:var(--radius-lg);padding:36px 26px 28px;
+  }
+  .guide-card::before{
+    counter-increment:step;content:"0" counter(step);
+    font-family:"Manrope",sans-serif;font-weight:800;font-size:34px;color:var(--accent-soft);
+    -webkit-text-stroke:1.5px var(--accent);
+    display:block;margin-bottom:14px;
+  }
+  .guide-card h3{font-size:16px;font-weight:700;margin-bottom:8px;}
+  .guide-card p{font-size:13.5px;}
+  @media (max-width:860px){ .guide-list{grid-template-columns:1fr;} }
+
+  /* ---------- compare table ---------- */
+  .compat-table{width:100%;border-collapse:collapse;font-size:14px;background:var(--white);
+    border-radius:var(--radius-lg);overflow:hidden;border:1px solid var(--line);}
+  .compat-table th,.compat-table td{padding:16px 18px;text-align:left;border-bottom:1px solid var(--line);}
+  .compat-table th{background:var(--ink);color:#fff;font-weight:700;font-size:13px;}
+  .compat-table tr:last-child td{border-bottom:none;}
+  .compat-table td.yes{color:var(--accent-deep);font-weight:700;}
+  .table-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;}
+  .table-note{font-size:12px;color:var(--ink-soft);margin-top:14px;}
+
+  /* ---------- reviews ---------- */
+  .review-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;}
+  .review-card{
+    background:var(--white);border:1px solid var(--line);border-radius:var(--radius-lg);
+    padding:26px 24px;display:flex;flex-direction:column;gap:14px;
+  }
+  .review-stars{display:flex;gap:3px;}
+  .review-stars svg{width:15px;height:15px;fill:var(--accent);stroke:none;}
+  .review-card p{font-size:13.5px;}
+  .review-who{font-size:12px;color:var(--ink-soft);font-weight:700;}
+  @media (max-width:860px){ .review-grid{grid-template-columns:1fr;} }
+
+  /* ---------- image capability strip ---------- */
+  .capability{
+    display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;
+    background:var(--ink);color:#fff;border-radius:var(--radius-lg);
+    padding:48px;
+  }
+  .capability h2{font-size:clamp(22px,3vw,28px);color:#fff;margin-bottom:16px;}
+  .capability p{color:rgba(255,255,255,0.75);font-size:14px;}
+  .capability-list{list-style:none;padding:0;margin:22px 0 0;display:flex;flex-direction:column;gap:12px;}
+  .capability-list li{display:flex;gap:10px;align-items:flex-start;font-size:13.5px;color:rgba(255,255,255,0.85);}
+  .capability-list svg{width:18px;height:18px;stroke:var(--accent);flex-shrink:0;margin-top:2px;}
+  .capability-visual{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;}
+  .capability-visual .tile{
+    aspect-ratio:1/1;border-radius:14px;
+    background:linear-gradient(150deg,rgba(46,92,255,0.35),rgba(46,92,255,0.05));
+    border:1px solid rgba(255,255,255,0.12);
+  }
+  @media (max-width:860px){
+    .capability{grid-template-columns:1fr;padding:32px 24px;}
+  }
+
+  /* ---------- FAQ ---------- */
+  .faq-list{max-width:760px;margin:0 auto;display:flex;flex-direction:column;gap:12px;}
+  .faq-item{background:var(--white);border:1px solid var(--line);border-radius:var(--radius-md);overflow:hidden;}
+  .faq-q{
+    width:100%;text-align:left;background:none;border:none;padding:20px 24px;
+    display:flex;justify-content:space-between;align-items:center;font-weight:700;font-size:15px;
+  }
+  .faq-q .op{font-family:"Manrope",sans-serif;font-size:20px;color:var(--accent);flex-shrink:0;margin-left:16px;}
+  .faq-a{max-height:0;overflow:hidden;transition:max-height .3s ease;}
+  .faq-a p{padding:0 24px 20px;font-size:14px;}
+  .faq-item.is-open .faq-a{max-height:220px;}
+
+  /* ---------- contact / CTA ---------- */
+  .contact-panel{
+    display:grid;grid-template-columns:1fr 1fr;gap:40px;
+    background:var(--white);border:1px solid var(--line);border-radius:var(--radius-lg);
+    padding:44px;
+  }
+  .form-row{display:flex;flex-direction:column;gap:8px;margin-bottom:16px;}
+  .form-row label{font-size:13px;font-weight:700;}
+  .form-row input,.form-row select,.form-row textarea{
+    border:1px solid var(--line);border-radius:10px;padding:13px 14px;font-size:16px;
+    font-family:inherit;background:var(--paper);width:100%;
+  }
+  .form-row textarea{resize:vertical;min-height:96px;}
+  .contact-info h2{font-size:22px;font-weight:900;margin-bottom:14px;}
+  .contact-info p{font-size:14px;margin-bottom:20px;}
+  .contact-line{display:flex;gap:12px;align-items:flex-start;margin-bottom:16px;font-size:14px;}
+  .contact-line svg{width:18px;height:18px;stroke:var(--accent);flex-shrink:0;margin-top:2px;}
+  @media (max-width:860px){ .contact-panel{grid-template-columns:1fr;padding:28px 22px;} }
+
+  /* ---------- footer ---------- */
+  footer{background:var(--ink);color:rgba(255,255,255,0.75);padding:56px 0 32px;font-size:13px;}
+  .footer-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:32px;margin-bottom:36px;}
+  .footer-grid h4{color:#fff;font-size:14px;font-weight:700;margin-bottom:16px;}
+  .footer-grid ul{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:10px;}
+  .footer-brand p{color:rgba(255,255,255,0.6);margin-top:12px;max-width:36ch;}
+  .footer-bottom{
+    border-top:1px solid rgba(255,255,255,0.12);padding-top:24px;
+    display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;color:rgba(255,255,255,0.5);
+    font-size:12px;
+  }
+  .footer-disclaimer{
+    background:rgba(255,255,255,0.06);border-radius:12px;padding:16px 18px;
+    font-size:12px;color:rgba(255,255,255,0.65);margin-bottom:28px;line-height:1.8;
+  }
+  @media (max-width:780px){ .footer-grid{grid-template-columns:1fr;} }
+
+  /* ---------- sticky mobile CTA ---------- */
+  .sticky-cta{
+    display:none;position:fixed;left:0;right:0;bottom:0;z-index:50;
+    background:rgba(250,249,246,0.97);border-top:1px solid var(--line);
+    padding:12px 20px calc(12px + env(safe-area-inset-bottom));
+    gap:12px;
+  }
+  .sticky-cta .btn{flex:1;}
+  @media (max-width:780px){ .sticky-cta{display:flex;} }
+</style>
+</head>
+<body>
+
+<svg style="display:none">
+  <symbol id="icon-shield" viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 3v6c0 5-3.5 8.5-8 9-4.5-.5-8-4-8-9V6l8-3z"/><path d="M9 12l2 2 4-4"/></symbol>
+  <symbol id="icon-eye-off" viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3l18 18"/><path d="M10.6 10.6a2 2 0 002.8 2.8"/><path d="M6.5 6.6C4.3 8 2.8 10 2 12c1.8 4 5.5 7 10 7 1.6 0 3.1-.4 4.4-1.1"/><path d="M17.9 17.9C20 16.4 21.5 14.4 22 12c-1-2.2-2.6-4.1-4.6-5.5"/></symbol>
+  <symbol id="icon-camera" viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h3l2-2h6l2 2h3v11H4z"/><circle cx="12" cy="13.5" r="3.5"/></symbol>
+  <symbol id="icon-drop" viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3s7 7.5 7 12a7 7 0 11-14 0c0-4.5 7-12 7-12z"/></symbol>
+  <symbol id="icon-check" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12l5 5L20 6"/></symbol>
+  <symbol id="icon-truck" viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 6h11v10H2z"/><path d="M13 10h4l4 3v3h-8z"/><circle cx="6.5" cy="18.5" r="1.7"/><circle cx="17.5" cy="18.5" r="1.7"/></symbol>
+  <symbol id="icon-chat" viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16v11H8l-4 4z"/></symbol>
+  <symbol id="icon-mail" viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 5h18v14H3z"/><path d="M3 6l9 7 9-7"/></symbol>
+  <symbol id="icon-phone" viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 005 5L15 13l5 2v4a2 2 0 01-2.2 2C9.8 20.4 3.6 14.2 3 6.2A2 2 0 015 4z"/></symbol>
+  <symbol id="icon-image" viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16v14H4z"/><circle cx="9" cy="10" r="1.6"/><path d="M4 16l5-5 4 4 3-3 4 4"/></symbol>
+  <symbol id="icon-layers" viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l9 5-9 5-9-5 9-5z"/><path d="M3 13l9 5 9-5"/></symbol>
+  <symbol id="icon-star" viewBox="0 0 24 24"><path d="M12 2l2.9 6.6 7.1.7-5.4 4.8 1.6 7-6.2-3.7-6.2 3.7 1.6-7L2 9.3l7.1-.7z"/></symbol>
+</svg>
+
+<header class="site-header">
+  <div class="header-inner">
+    <div class="brand">
+      <span class="brand-mark"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><use href="#icon-shield"/></svg></span>
+      ガラスラボ
+    </div>
+    <nav class="nav-desktop">
+      <a href="#lineup">商品ラインナップ</a>
+      <a href="#compat">対応機種</a>
+      <a href="#voice">お客様の声</a>
+      <a href="#faq">よくある質問</a>
+      <a href="#contact">お問い合わせ</a>
+    </nav>
+    <div class="header-cta">
+      <a href="#contact" class="btn btn-ghost">お問い合わせ</a>
+      <a href="#lineup" class="btn btn-primary">今すぐ購入</a>
+      <button class="hamburger" id="hamburgerBtn" aria-label="メニューを開く" aria-expanded="false">
+        <span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<nav class="mobile-nav" id="mobileNav">
+  <a href="#lineup">商品ラインナップ</a>
+  <a href="#compat">対応機種</a>
+  <a href="#voice">お客様の声</a>
+  <a href="#faq">よくある質問</a>
+  <a href="#contact">お問い合わせ</a>
+  <a href="#lineup" class="btn btn-primary">今すぐ購入</a>
+</nav>
+
+<main>
+
+  <section class="hero">
+    <div class="wrap hero-inner">
+      <div>
+        <span class="eyebrow">全機種オーダーカット対応</span>
+        <h1>貼るのは一瞬。<br><span>守るのは毎日。</span></h1>
+        <p class="hero-lead">気泡が入らない極薄設計のスマホ保護フィルムと、周辺ガジェットを取り扱う専門ストアです。届いたその日に、指先まで心地よく貼れます。</p>
+        <div class="hero-actions">
+          <a href="#lineup" class="btn btn-primary">商品を見る</a>
+          <a href="#guide" class="btn btn-ghost">貼り方ガイドを見る</a>
+        </div>
+        <ul class="hero-points">
+          <li><svg viewBox="0 0 24 24" fill="none"><use href="#icon-check"/></svg>気泡ゼロ施工</li>
+          <li><svg viewBox="0 0 24 24" fill="none"><use href="#icon-check"/></svg>全機種オーダーカット</li>
+          <li><svg viewBox="0 0 24 24" fill="none"><use href="#icon-check"/></svg>3,000円以上送料無料</li>
+        </ul>
+      </div>
+      <div class="device-stage reveal">
+        <div class="device-glow"></div>
+        <div class="phone">
+          <div class="phone-screen">
+            <div class="phone-notch"></div>
+            <div class="phone-ui">
+              <div class="bar"></div>
+              <div class="bar"></div>
+              <div class="bar"></div>
+            </div>
+            <div class="phone-film-sheen"></div>
+          </div>
+        </div>
+        <div class="badge-float badge-1">
+          <svg viewBox="0 0 24 24" fill="none"><use href="#icon-shield"/></svg>耐衝撃9H硬度
+        </div>
+        <div class="badge-float badge-2">
+          <svg viewBox="0 0 24 24" fill="none"><use href="#icon-drop"/></svg>指紋・皮脂に強い
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="stat-band">
+    <div class="wrap">
+      <div class="stat-grid">
+        <div class="reveal"><span class="num">120<small style="font-size:16px;">+</small></span><span class="label">対応機種ラインナップ</span></div>
+        <div class="reveal"><span class="num">気泡ゼロ</span><span class="label">施工保証</span></div>
+        <div class="reveal"><span class="num">最短翌日</span><span class="label">発送対応</span></div>
+        <div class="reveal"><span class="num">30日</span><span class="label">交換保証</span></div>
+      </div>
+      <p class="stat-note">※上記の数値はサンプル用の仮の内容です。実際の対応機種数・保証条件は正式公開時に確定します。</p>
+    </div>
+  </section>
+
+  <section id="about">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow">選ばれる理由</span>
+        <h2>フィルム専門店だからこその、3つのこだわり</h2>
+        <p>量販店のついで買いフィルムとは違う、専門店ならではの精度と対応力です。</p>
+      </div>
+      <div class="reason-grid">
+        <div class="reason-card reveal">
+          <div class="reason-icon"><svg viewBox="0 0 24 24" fill="none"><use href="#icon-layers"/></svg></div>
+          <h3>気泡ゼロの密着設計</h3>
+          <p>特殊粘着層と極薄0.15mmガラスの組み合わせで、貼った瞬間から気泡が抜けていきます。不器用な方でも失敗しにくい設計です。</p>
+        </div>
+        <div class="reason-card reveal">
+          <div class="reason-icon"><svg viewBox="0 0 24 24" fill="none"><use href="#icon-shield"/></svg></div>
+          <h3>新機種も型紙データを随時追加</h3>
+          <p>発売直後の新機種にも順次対応。カメラ穴・センサー位置まで実機採寸したオーダーカットで、浮きや干渉を防ぎます。</p>
+        </div>
+        <div class="reason-card reveal">
+          <div class="reason-icon"><svg viewBox="0 0 24 24" fill="none"><use href="#icon-image"/></svg></div>
+          <h3>商品写真は自社スタジオ撮影+AI仕上げ</h3>
+          <p>質感が伝わる撮影に加え、AIによる画像仕上げで見やすさを底上げ。ページを開いた瞬間に商品の魅力が伝わります。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="lineup" class="bg-alt">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow">商品ラインナップ</span>
+        <h2>用途で選べる、4つの保護フィルム</h2>
+        <p>画面保護からカメラレンズまで、日常使いに合わせてラインナップしています。</p>
+      </div>
+      <div class="product-grid">
+        <div class="product-card reveal">
+          <div class="product-thumb">
+            <span class="product-tag">人気No.1</span>
+            <div class="mini-phone"><div class="mini-screen"></div></div>
+          </div>
+          <div class="product-body">
+            <h3>全面保護 強化ガラスフィルム</h3>
+            <p>9H硬度・飛散防止加工。指紋がつきにくいコーティング。</p>
+            <div class="product-price"><span class="num">¥1,480</span><span class="yen-note">税込・仮価格</span></div>
+          </div>
+        </div>
+        <div class="product-card reveal">
+          <div class="product-thumb">
+            <div class="mini-phone"><div class="mini-screen"></div></div>
+          </div>
+          <div class="product-body">
+            <h3>ブルーライトカットフィルム</h3>
+            <p>色味を損なわずブルーライトを軽減。夜間の使用が多い方向け。</p>
+            <div class="product-price"><span class="num">¥1,680</span><span class="yen-note">税込・仮価格</span></div>
+          </div>
+        </div>
+        <div class="product-card reveal">
+          <div class="product-thumb">
+            <div class="mini-phone"><div class="mini-screen"></div></div>
+          </div>
+          <div class="product-body">
+            <h3>覗き見防止プライバシーフィルム</h3>
+            <p>左右斜めからの視線を遮断。電車内や外出先での利用に。</p>
+            <div class="product-price"><span class="num">¥1,980</span><span class="yen-note">税込・仮価格</span></div>
+          </div>
+        </div>
+        <div class="product-card reveal">
+          <div class="product-thumb">
+            <div class="mini-phone" style="width:48px;height:48px;border-radius:14px;"><div class="mini-screen" style="border-radius:10px;"></div></div>
+          </div>
+          <div class="product-body">
+            <h3>カメラレンズ保護フィルム(2枚組)</h3>
+            <p>レンズ枠の傷・汚れを予防。画質への影響を抑えた薄型設計。</p>
+            <div class="product-price"><span class="num">¥980</span><span class="yen-note">税込・仮価格</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="guide">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow">貼り方ガイド</span>
+        <h2>3ステップで、気泡ゼロの仕上がりに</h2>
+      </div>
+      <div class="guide-list">
+        <div class="guide-card reveal">
+          <h3>画面をクリーニング</h3>
+          <p>付属のクロスで皮脂・ホコリを丁寧に拭き取ります。仕上がりの気泡は、ここでほぼ決まります。</p>
+        </div>
+        <div class="guide-card reveal">
+          <h3>ガイド枠を使って位置合わせ</h3>
+          <p>同梱の位置合わせガイドをカメラ穴に合わせて固定。ずれを気にせず貼り付けられます。</p>
+        </div>
+        <div class="guide-card reveal">
+          <h3>中央から外側へ圧着</h3>
+          <p>付属のヘラで中央から外側へ空気を押し出すように圧着。気泡は数分で自然に抜けていきます。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="compat" class="bg-alt">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow">対応機種</span>
+        <h2>主要シリーズに幅広く対応</h2>
+      </div>
+      <div class="table-scroll reveal">
+        <table class="compat-table">
+          <thead>
+            <tr><th>シリーズ</th><th>全面保護ガラス</th><th>プライバシーフィルム</th><th>カメラレンズ保護</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>iPhone 17 / 16 シリーズ</td><td class="yes">対応</td><td class="yes">対応</td><td class="yes">対応</td></tr>
+            <tr><td>iPhone 15 / 14 シリーズ</td><td class="yes">対応</td><td class="yes">対応</td><td class="yes">対応</td></tr>
+            <tr><td>Xperia 1 VII / 10 VII</td><td class="yes">対応</td><td class="yes">対応</td><td class="yes">対応</td></tr>
+            <tr><td>AQUOS sense9 / wish5</td><td class="yes">対応</td><td>順次対応</td><td class="yes">対応</td></tr>
+            <tr><td>Galaxy S25 シリーズ</td><td class="yes">対応</td><td class="yes">対応</td><td>順次対応</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="table-note">※対応表は制作サンプル用の仮の内容です(2026年7月時点の想定)。実際の対応機種は商品ページで随時更新します。</p>
+    </div>
+  </section>
+
+  <section id="voice">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow">お客様の声</span>
+        <h2>気泡が入らないと好評です</h2>
+      </div>
+      <div class="review-grid">
+        <div class="review-card reveal">
+          <div class="review-stars">
+            <svg viewBox="0 0 24 24"><use href="#icon-star"/></svg>
+            <svg viewBox="0 0 24 24"><use href="#icon-star"/></svg>
+            <svg viewBox="0 0 24 24"><use href="#icon-star"/></svg>
+            <svg viewBox="0 0 24 24"><use href="#icon-star"/></svg>
+            <svg viewBox="0 0 24 24"><use href="#icon-star"/></svg>
+          </div>
+          <p>不器用なので毎回気泡が入っていましたが、ガイド枠のおかげで一発できれいに貼れました。</p>
+          <div class="review-who">K.M様(20代・iPhoneシリーズ使用)</div>
+        </div>
+        <div class="review-card reveal">
+          <div class="review-stars">
+            <svg viewBox="0 0 24 24"><use href="#icon-star"/></svg>
+            <svg viewBox="0 0 24 24"><use href="#icon-star"/></svg>
+            <svg viewBox="0 0 24 24"><use href="#icon-star"/></svg>
+            <svg viewBox="0 0 24 24"><use href="#icon-star"/></svg>
+            <svg viewBox="0 0 24 24"><use href="#icon-star"/></svg>
+          </div>
+          <p>覗き見防止タイプを購入。電車での使用が多いので安心感が違います。画面の明るさもほぼ変わりません。</p>
+          <div class="review-who">R.T様(30代・Xperiaシリーズ使用)</div>
+        </div>
+        <div class="review-card reveal">
+          <div class="review-stars">
+            <svg viewBox="0 0 24 24"><use href="#icon-star"/></svg>
+            <svg viewBox="0 0 24 24"><use href="#icon-star"/></svg>
+            <svg viewBox="0 0 24 24"><use href="#icon-star"/></svg>
+            <svg viewBox="0 0 24 24"><use href="#icon-star"/></svg>
+            <svg viewBox="0 0 24 24"><use href="#icon-star"/></svg>
+          </div>
+          <p>発送が早く、翌日には届きました。カメラレンズ保護フィルムも一緒に頼んでよかったです。</p>
+          <div class="review-who">S.A様(40代)</div>
+        </div>
+      </div>
+      <p class="table-note" style="text-align:center;margin-top:8px;">※お客様の声は制作サンプル用の仮の内容です。</p>
+    </div>
+  </section>
+
+  <section class="bg-alt">
+    <div class="wrap">
+      <div class="capability reveal">
+        <div>
+          <span class="eyebrow" style="background:rgba(46,92,255,0.18);color:#c9d5ff;">商品画像制作について</span>
+          <h2>撮影+AI仕上げで、商品ページの見やすさを底上げ</h2>
+          <p>フィルムは透明で写真映えしにくい商材です。実物撮影を基本に、背景整理・質感補正・比較カットの生成までAIを活用し、購入判断に必要な情報を過不足なく見せます。</p>
+          <ul class="capability-list">
+            <li><svg viewBox="0 0 24 24" fill="none"><use href="#icon-check"/></svg>背景・余白を統一した商品一覧カット</li>
+            <li><svg viewBox="0 0 24 24" fill="none"><use href="#icon-check"/></svg>装着イメージ・角度違いのバリエーション生成</li>
+            <li><svg viewBox="0 0 24 24" fill="none"><use href="#icon-check"/></svg>サイズ・仕様比較用の見やすいカット割り</li>
+          </ul>
+        </div>
+        <div class="capability-visual">
+          <div class="tile"></div><div class="tile"></div><div class="tile"></div>
+          <div class="tile"></div><div class="tile"></div><div class="tile"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="faq">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow">よくある質問</span>
+        <h2>ご注文前によくいただく質問</h2>
+      </div>
+      <div class="faq-list reveal">
+        <div class="faq-item">
+          <button class="faq-q">どの機種に対応していますか?<span class="op">＋</span></button>
+          <div class="faq-a"><p>iPhone・Xperia・AQUOS・Galaxyの主要シリーズに対応しています。新機種は発売後、順次型紙データを追加します。対応状況は「対応機種」欄をご確認ください。</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">気泡が入らないか心配です<span class="op">＋</span></button>
+          <div class="faq-a"><p>位置合わせガイドと専用ヘラを同梱しており、中央から外側へ圧着することで気泡は自然に抜けていきます。貼り方ガイドの3ステップに沿って進めてください。</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">商品画像はAIで制作されたものですか?<span class="op">＋</span></button>
+          <div class="faq-a"><p>実物撮影を基本とし、背景整理・質感補正・バリエーション生成にAIを活用しています。商品そのものの仕様・機能を偽って表現することはありません。</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">送料や納期を教えてください<span class="op">＋</span></button>
+          <div class="faq-a"><p>3,000円以上のご注文で送料無料、最短翌日発送を想定しています(制作サンプルにつき仮の条件です。正式公開時に確定します)。</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">返品・交換はできますか?<span class="op">＋</span></button>
+          <div class="faq-a"><p>未使用・パッケージ未開封の商品に限り、到着後30日以内の交換に対応する想定です。詳細な条件は正式公開時に規約ページへ掲載します。</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="bg-alt">
+    <div class="wrap">
+      <div class="contact-panel reveal">
+        <div class="contact-info">
+          <span class="eyebrow">お問い合わせ</span>
+          <h2 style="margin-top:16px;">機種や仕様のご相談はこちらから</h2>
+          <p>お手持ちの機種名を教えていただければ、対応可否と最適な商品をご案内します。</p>
+          <div class="contact-line"><svg viewBox="0 0 24 24" fill="none"><use href="#icon-phone"/></svg>0120-000-000(受付 平日10:00-17:00・仮の窓口です)</div>
+          <div class="contact-line"><svg viewBox="0 0 24 24" fill="none"><use href="#icon-mail"/></svg>support@example-glasslab.jp(仮のアドレスです)</div>
+          <div class="contact-line"><svg viewBox="0 0 24 24" fill="none"><use href="#icon-truck"/></svg>全国配送・3,000円以上で送料無料(仮)</div>
+        </div>
+        <form onsubmit="return false;">
+          <div class="form-row">
+            <label for="f-name">お名前</label>
+            <input id="f-name" type="text" placeholder="山田 太郎">
+          </div>
+          <div class="form-row">
+            <label for="f-model">お使いの機種</label>
+            <input id="f-model" type="text" placeholder="例:iPhone 16">
+          </div>
+          <div class="form-row">
+            <label for="f-mail">メールアドレス</label>
+            <input id="f-mail" type="email" placeholder="example@mail.com">
+          </div>
+          <div class="form-row">
+            <label for="f-msg">お問い合わせ内容</label>
+            <textarea id="f-msg" placeholder="ご相談内容をご記入ください"></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary" style="width:100%;">送信する(サンプルにつき送信されません)</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-disclaimer">
+      ※本ページは制作サンプル(デモ)です。掲載の内容・数値は仮のもので、写真はイメージです。
+    </div>
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="brand" style="color:#fff;">
+          <span class="brand-mark"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><use href="#icon-shield"/></svg></span>
+          ガラスラボ
+        </div>
+        <p>気泡ゼロの密着設計にこだわる、スマホ保護フィルム専門ストアの制作サンプルです。</p>
+      </div>
+      <div>
+        <h4>ショップ</h4>
+        <ul>
+          <li><a href="#lineup">商品ラインナップ</a></li>
+          <li><a href="#compat">対応機種</a></li>
+          <li><a href="#guide">貼り方ガイド</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>サポート</h4>
+        <ul>
+          <li><a href="#faq">よくある質問</a></li>
+          <li><a href="#contact">お問い合わせ</a></li>
+          <li><a href="#voice">お客様の声</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 ガラスラボ(制作サンプル)</span>
+      <span>本ページは実在の店舗・法人とは関係ありません</span>
+    </div>
+  </div>
+</footer>
+
+<div class="sticky-cta">
+  <a href="#contact" class="btn btn-ghost">相談する</a>
+  <a href="#lineup" class="btn btn-primary">今すぐ購入へ</a>
+</div>
+
+<script>
+(function(){
+  var hamburger = document.getElementById('hamburgerBtn');
+  var mobileNav = document.getElementById('mobileNav');
+  hamburger.addEventListener('click', function(){
+    var open = mobileNav.classList.toggle('is-open');
+    hamburger.classList.toggle('is-active', open);
+    hamburger.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+  mobileNav.querySelectorAll('a').forEach(function(a){
+    a.addEventListener('click', function(){
+      mobileNav.classList.remove('is-open');
+      hamburger.classList.remove('is-active');
+      hamburger.setAttribute('aria-expanded', 'false');
+    });
+  });
+
+  document.querySelectorAll('.faq-q').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var item = btn.closest('.faq-item');
+      var isOpen = item.classList.contains('is-open');
+      document.querySelectorAll('.faq-item.is-open').forEach(function(el){
+        if (el !== item) el.classList.remove('is-open');
+      });
+      item.classList.toggle('is-open', !isOpen);
+    });
+  });
+
+  if ('IntersectionObserver' in window) {
+    var observer = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+    document.querySelectorAll('.reveal').forEach(function(el){ observer.observe(el); });
+  } else {
+    document.querySelectorAll('.reveal').forEach(function(el){ el.classList.add('is-visible'); });
+  }
+})();
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "OnlineStore",
+  "name": "ガラスラボ",
+  "description": "気泡ゼロの密着設計にこだわるスマホ保護フィルム専門ストア(制作サンプル)",
+  "url": "https://example-glasslab.jp",
+  "areaServed": "JP"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "どの機種に対応していますか?",
+      "acceptedAnswer": { "@type": "Answer", "text": "iPhone・Xperia・AQUOS・Galaxyの主要シリーズに対応しています。新機種は発売後、順次型紙データを追加します。" }
+    },
+    {
+      "@type": "Question",
+      "name": "気泡が入らないか心配です",
+      "acceptedAnswer": { "@type": "Answer", "text": "位置合わせガイドと専用ヘラを同梱しており、中央から外側へ圧着することで気泡は自然に抜けていきます。" }
+    },
+    {
+      "@type": "Question",
+      "name": "商品画像はAIで制作されたものですか?",
+      "acceptedAnswer": { "@type": "Answer", "text": "実物撮影を基本とし、背景整理・質感補正・バリエーション生成にAIを活用しています。" }
+    }
+  ]
+}
+</script>
+</body>
+</html>
