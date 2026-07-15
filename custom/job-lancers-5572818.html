@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BEGINNING | 不動産投資家のための情報サポート・公式LINE&マイページ登録</title>
+<meta name="description" content="不動産投資に関心のある方へ。株式会社BEGINNINGの公式LINEとマイページ「Facilo」で、物件情報・市況・個別相談をムダなく受け取る。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;700&family=Noto+Sans+JP:wght@400;500;700&family=Manrope:wght@600;800&display=swap" rel="stylesheet">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "RealEstateAgent",
+  "name": "株式会社BEGINNING",
+  "description": "不動産投資家向けの資産運用支援を行う不動産会社。公式LINEとマイページ「Facilo」で投資情報を提供。",
+  "areaServed": "JP",
+  "sameAs": ["https://www.instagram.com/beginning.co_fudosan/"]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {"@type":"Question","name":"投資初心者でも登録して大丈夫ですか。","acceptedAnswer":{"@type":"Answer","text":"はい。これから始めたい方向けの基礎情報も配信しています。知識がない状態からのご登録でも問題ありません。"}},
+    {"@type":"Question","name":"公式LINEとマイページ「Facilo」は何が違いますか。","acceptedAnswer":{"@type":"Answer","text":"公式LINEは市況や新着物件のお知らせを受け取る窓口、マイページ「Facilo」はご自身の希望条件を登録し、条件に合う情報を管理・閲覧できる窓口です。両方のご登録を推奨しています。"}},
+    {"@type":"Question","name":"営業の電話やしつこい勧誘はありますか。","acceptedAnswer":{"@type":"Answer","text":"ご登録時点では一方的な営業電話は行いません。ご希望のタイミングでご相談いただく形式です。"}}
+  ]
+}
+</script>
+<style>
+:root{
+  --navy:#152238;
+  --navy-deep:#0d1729;
+  --line-green:#06c755;
+  --paper:#fbfaf7;
+  --ink:#1c2430;
+  --sub:#5b6472;
+  --hair:#e4e2db;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{
+  font-family:"Noto Sans JP",sans-serif;
+  color:var(--ink);
+  background:var(--paper);
+  line-height:1.8;
+  font-feature-settings:"palt";
+  letter-spacing:.02em;
+  overflow-x:hidden;
+}
+img{max-width:100%;display:block;}
+h1,h2,h3{font-family:"Shippori Mincho",serif;font-weight:700;letter-spacing:.04em;}
+.num{font-family:"Manrope",sans-serif;font-weight:800;}
+a{color:inherit;text-decoration:none;}
+.wrap{width:100%;max-width:1080px;margin:0 auto;padding:0 24px;}
+section{padding:96px 0;}
+@media (max-width:600px){section{padding:64px 0;}.wrap{padding:0 20px;}}
+
+/* header */
+header{
+  position:fixed;top:0;left:0;width:100%;max-width:100%;z-index:100;
+  background:rgba(251,250,247,.92);backdrop-filter:blur(6px);
+  border-bottom:1px solid var(--hair);
+}
+.headbar{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:14px 24px;max-width:1080px;margin:0 auto;
+}
+.logo{font-family:"Shippori Mincho",serif;font-weight:700;font-size:20px;color:var(--navy);}
+.logo span{color:var(--line-green);}
+.burger{
+  width:40px;height:40px;border:1px solid var(--hair);border-radius:8px;
+  background:none;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:5px;cursor:pointer;
+}
+.burger span{width:20px;height:2px;background:var(--navy);display:block;transition:.25s;}
+.burger.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+.burger.open span:nth-child(2){opacity:0;}
+.burger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+
+/* nav drawer placed outside header to avoid fixed-in-fixed clipping */
+#navdrawer{
+  position:fixed;top:0;right:-320px;width:min(320px,84vw);height:100%;max-height:100%;
+  background:var(--navy);z-index:120;transition:right .3s ease;
+  padding:100px 32px 32px;
+}
+#navdrawer.open{right:0;}
+#navdrawer a{
+  display:block;color:#fff;font-size:15px;padding:14px 0;border-bottom:1px solid rgba(255,255,255,.12);
+}
+#navdrawer .close{
+  position:absolute;top:20px;right:20px;width:36px;height:36px;border:1px solid rgba(255,255,255,.3);
+  border-radius:8px;background:none;color:#fff;font-size:18px;cursor:pointer;
+}
+#scrim{position:fixed;inset:0;background:rgba(13,23,41,.5);z-index:110;opacity:0;pointer-events:none;transition:opacity .3s;}
+#scrim.open{opacity:1;pointer-events:auto;}
+
+/* buttons */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  padding:16px 30px;border-radius:100px;font-weight:700;font-size:15px;
+  box-shadow:0 8px 20px rgba(13,23,41,.15);white-space:nowrap;border:none;cursor:pointer;
+}
+.btn-line{background:var(--line-green);color:#fff;}
+.btn-navy{background:var(--navy);color:#fff;}
+.btn-outline{background:#fff;color:var(--navy);border:1.5px solid var(--navy);box-shadow:none;}
+.btn svg{width:18px;height:18px;flex-shrink:0;}
+
+/* hero */
+.hero{
+  position:relative;margin-top:64px;min-height:640px;display:flex;align-items:center;
+  background:linear-gradient(180deg,rgba(13,23,41,.72),rgba(13,23,41,.55)),
+    url('https://images.unsplash.com/photo-1629875499750-a31b83446598?auto=format&fit=crop&w=1200&q=70') center/cover;
+  color:#fff;
+}
+.hero .wrap{padding-top:72px;padding-bottom:72px;}
+.eyebrow{
+  display:inline-block;font-family:"Manrope",sans-serif;font-size:12px;letter-spacing:.18em;
+  border:1px solid rgba(255,255,255,.5);padding:6px 14px;border-radius:100px;margin-bottom:22px;
+}
+.hero h1{
+  font-size:clamp(30px,5vw,50px);line-height:1.45;margin-bottom:20px;
+}
+.hero h1 em{font-style:normal;color:#8fd9b3;}
+.hero p.lead{
+  font-size:16px;color:rgba(255,255,255,.88);max-width:520px;margin-bottom:36px;
+}
+.hero-cta{display:flex;flex-wrap:wrap;gap:14px;margin-bottom:44px;}
+.trust-strip{
+  display:flex;flex-wrap:wrap;gap:28px;padding-top:28px;border-top:1px solid rgba(255,255,255,.22);
+  max-width:640px;
+}
+.trust-item .num{font-size:26px;color:#8fd9b3;}
+.trust-item .cap{font-size:12px;color:rgba(255,255,255,.75);margin-top:2px;}
+
+/* section heading */
+.sechead{max-width:640px;margin:0 auto 48px;text-align:center;}
+.sechead .tag{
+  display:inline-block;font-family:"Manrope",sans-serif;font-size:12px;letter-spacing:.16em;
+  color:var(--navy);border-bottom:2px solid var(--line-green);padding-bottom:6px;margin-bottom:16px;
+}
+.sechead h2{font-size:clamp(22px,3.4vw,32px);line-height:1.5;}
+.sechead p{color:var(--sub);font-size:14px;margin-top:14px;max-width:52ch;margin-left:auto;margin-right:auto;}
+
+/* worry checklist */
+.worry-box{
+  background:#fff;border:1px solid var(--hair);border-radius:20px;padding:40px;
+  max-width:680px;margin:0 auto;box-shadow:0 12px 32px rgba(13,23,41,.06);
+}
+.worry-item{display:flex;gap:14px;padding:16px 0;border-bottom:1px solid var(--hair);align-items:flex-start;}
+.worry-item:last-child{border-bottom:none;}
+.worry-item svg{width:22px;height:22px;flex-shrink:0;margin-top:2px;color:#c0392b;}
+.worry-item p{font-size:15px;}
+
+/* cards grid */
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;}
+@media (max-width:820px){.grid3{grid-template-columns:1fr;}}
+.card{
+  background:#fff;border:1px solid var(--hair);border-radius:18px;padding:32px 26px;
+  transition:transform .25s,box-shadow .25s;
+}
+.card:hover{transform:translateY(-4px);box-shadow:0 16px 32px rgba(13,23,41,.08);}
+.card .ico{
+  width:52px;height:52px;border-radius:14px;display:flex;align-items:center;justify-content:center;margin-bottom:20px;
+}
+.card .ico svg{width:26px;height:26px;}
+.ico-navy{background:rgba(21,34,56,.08);color:var(--navy);}
+.ico-green{background:rgba(6,199,85,.1);color:var(--line-green);}
+.card h3{font-size:17px;margin-bottom:10px;font-weight:700;font-family:"Noto Sans JP",sans-serif;}
+.card p{font-size:14px;color:var(--sub);}
+
+/* two-column register meritz */
+.reg-block{
+  display:grid;grid-template-columns:1fr 1fr;gap:36px;
+}
+@media (max-width:820px){.reg-block{grid-template-columns:1fr;}}
+.reg-panel{
+  border-radius:22px;padding:38px 32px;position:relative;overflow:hidden;
+}
+.reg-panel.line{background:linear-gradient(160deg,#06c755 0%,#04a648 100%);color:#fff;}
+.reg-panel.navy{background:linear-gradient(160deg,var(--navy) 0%,var(--navy-deep) 100%);color:#fff;}
+.reg-panel .badge{
+  display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:700;
+  background:rgba(255,255,255,.16);padding:8px 16px;border-radius:100px;margin-bottom:20px;
+}
+.reg-panel h3{font-family:"Shippori Mincho",serif;font-size:22px;margin-bottom:14px;}
+.reg-panel ul{margin:20px 0 26px;padding:0;list-style:none;}
+.reg-panel li{display:flex;gap:10px;font-size:14px;padding:8px 0;opacity:.94;}
+.reg-panel li svg{width:18px;height:18px;flex-shrink:0;margin-top:2px;}
+.reg-panel .btn{width:100%;}
+
+/* flow steps */
+.flow{display:flex;gap:0;counter-reset:step;}
+@media (max-width:760px){.flow{flex-direction:column;}}
+.flow-step{flex:1;position:relative;padding:0 20px;text-align:center;}
+.flow-step::before{
+  counter-increment:step;content:counter(step);
+  width:44px;height:44px;border-radius:50%;background:var(--navy);color:#fff;
+  display:flex;align-items:center;justify-content:center;margin:0 auto 18px;
+  font-family:"Manrope",sans-serif;font-weight:800;font-size:16px;
+}
+.flow-step h3{font-size:15px;margin-bottom:8px;font-family:"Noto Sans JP",sans-serif;}
+.flow-step p{font-size:13px;color:var(--sub);}
+.flow-line{
+  position:absolute;top:22px;left:calc(50% + 40px);width:calc(100% - 80px);height:1px;
+  background:var(--hair);
+}
+@media (max-width:760px){.flow-line{display:none;}}
+
+/* voices */
+.voice-wrap{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
+@media (max-width:820px){.voice-wrap{grid-template-columns:1fr;}}
+.voice{background:#fff;border:1px solid var(--hair);border-radius:16px;padding:28px;}
+.voice .stars{color:#e0a13a;font-size:13px;margin-bottom:14px;letter-spacing:2px;}
+.voice p.body{font-size:14px;color:var(--ink);margin-bottom:16px;}
+.voice .who{font-size:12px;color:var(--sub);display:flex;justify-content:space-between;}
+
+/* faq */
+.faq-item{border-bottom:1px solid var(--hair);}
+.faq-q{
+  width:100%;text-align:left;background:none;border:none;padding:22px 4px;
+  display:flex;justify-content:space-between;align-items:center;cursor:pointer;font-size:15px;font-weight:700;color:var(--ink);
+  font-family:"Noto Sans JP",sans-serif;
+}
+.faq-q .mark{font-family:"Manrope",sans-serif;font-size:20px;color:var(--navy);transition:transform .25s;}
+.faq-item.open .mark{transform:rotate(45deg);}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .3s ease;font-size:14px;color:var(--sub);}
+.faq-a p{padding:0 4px 22px;}
+
+/* about */
+.about{display:grid;grid-template-columns:1fr 1fr;gap:44px;align-items:center;}
+@media (max-width:820px){.about{grid-template-columns:1fr;}}
+.about img{border-radius:20px;aspect-ratio:4/3;object-fit:cover;}
+.about-quote{
+  font-family:"Shippori Mincho",serif;font-size:20px;line-height:1.9;color:var(--navy);margin:20px 0 18px;
+}
+
+/* final cta */
+.final-cta{
+  background:linear-gradient(180deg,rgba(13,23,41,.85),rgba(13,23,41,.85)),
+    url('https://images.unsplash.com/photo-1606336782667-775252a0e5b0?auto=format&fit=crop&w=1200&q=70') center/cover;
+  color:#fff;text-align:center;
+}
+.final-cta h2{font-size:clamp(22px,3.6vw,32px);margin-bottom:16px;}
+.final-cta p{color:rgba(255,255,255,.8);max-width:46ch;margin:0 auto 36px;font-size:14px;}
+.final-cta .hero-cta{justify-content:center;}
+
+/* dummy form */
+.form-box{
+  max-width:520px;margin:56px auto 0;background:#fff;color:var(--ink);border-radius:20px;padding:32px;text-align:left;
+}
+.form-box h3{font-size:16px;margin-bottom:18px;font-family:"Noto Sans JP",sans-serif;}
+.form-box label{display:block;font-size:12px;color:var(--sub);margin:14px 0 6px;}
+.form-box input,.form-box select{
+  width:100%;max-width:100%;padding:13px 14px;border:1px solid var(--hair);border-radius:10px;font-size:16px;
+  font-family:"Noto Sans JP",sans-serif;
+}
+.form-box .btn{width:100%;margin-top:22px;}
+.form-note{font-size:11px;color:var(--sub);margin-top:12px;}
+
+/* footer */
+footer{background:var(--navy-deep);color:rgba(255,255,255,.7);padding:56px 0 120px;font-size:13px;}
+.foot-grid{display:flex;flex-wrap:wrap;gap:40px;justify-content:space-between;margin-bottom:36px;}
+.foot-col h4{color:#fff;font-size:13px;margin-bottom:14px;font-family:"Noto Sans JP",sans-serif;}
+.foot-col a{display:block;padding:5px 0;color:rgba(255,255,255,.65);font-size:13px;}
+.foot-demo{
+  border-top:1px solid rgba(255,255,255,.14);padding-top:24px;font-size:12px;color:rgba(255,255,255,.5);line-height:1.9;
+}
+
+/* sticky mobile cta */
+.sticky-cta{
+  position:fixed;bottom:0;left:0;width:100%;max-width:100%;z-index:90;
+  background:#fff;border-top:1px solid var(--hair);padding:12px 16px;
+  display:flex;gap:10px;box-shadow:0 -8px 24px rgba(13,23,41,.1);
+}
+.sticky-cta .btn{flex:1;padding:14px 10px;font-size:13px;}
+
+/* reveal */
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .6s ease,transform .6s ease;}
+.reveal.in{opacity:1;transform:none;}
+@media (prefers-reduced-motion:reduce){
+  .reveal{opacity:1;transform:none;transition:none;}
+  *{scroll-behavior:auto !important;}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="headbar">
+    <div class="logo">BEGINNING <span>|</span> 不動産投資サポート</div>
+    <button class="burger" id="burgerBtn" aria-label="メニュー"><span></span><span></span><span></span></button>
+  </div>
+</header>
+<div id="scrim"></div>
+<nav id="navdrawer">
+  <button class="close" id="navClose" aria-label="閉じる">×</button>
+  <a href="#worry">こんなお悩みありませんか</a>
+  <a href="#merit">LINE・マイページの違い</a>
+  <a href="#reason">選ばれる理由</a>
+  <a href="#flow">ご利用の流れ</a>
+  <a href="#voice">投資家の声</a>
+  <a href="#faq">よくある質問</a>
+  <a href="#cta">今すぐ登録</a>
+</nav>
+
+<section class="hero">
+  <div class="wrap">
+    <span class="eyebrow">REAL ESTATE INVESTMENT SUPPORT</span>
+    <h1>知ってから、動く。<br><em>不動産投資</em>は、情報を得た人から前に進める。</h1>
+    <p class="lead">株式会社BEGINNINGが、これから始めたい方・すでに投資中の方の両方に向けて、市況と物件情報を無理なく届けます。公式LINEとマイページ「Facilo」、まずは両方登録がおすすめです。</p>
+    <div class="hero-cta">
+      <a href="#cta" class="btn btn-line">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M12 3C6.5 3 2 6.6 2 11c0 2.7 1.7 5.1 4.4 6.6-.2.7-.7 2.4-.8 2.8-.1.4.2.4.3.3.2-.1 2.6-1.7 3.6-2.4.8.1 1.6.2 2.5.2 5.5 0 10-3.6 10-8s-4.5-8.5-10-8.5z" fill="currentColor"/></svg>
+        公式LINEを友だち追加
+      </a>
+      <a href="#cta" class="btn btn-outline" style="background:transparent;color:#fff;border-color:rgba(255,255,255,.6);">
+        マイページ「Facilo」に登録
+      </a>
+    </div>
+    <div class="trust-strip">
+      <div class="trust-item"><div class="num">2,000<span style="font-size:15px;">+</span></div><div class="cap">登録者数(累計・目安)</div></div>
+      <div class="trust-item"><div class="num">30〜60<span style="font-size:15px;">代</span></div><div class="cap">利用者層の中心</div></div>
+      <div class="trust-item"><div class="num">無料</div><div class="cap">登録・情報受け取り</div></div>
+    </div>
+  </div>
+</section>
+
+<section id="worry">
+  <div class="wrap">
+    <div class="sechead reveal">
+      <span class="tag">WORRY</span>
+      <h2>不動産投資、こんな迷いはありませんか</h2>
+    </div>
+    <div class="worry-box reveal">
+      <div class="worry-item">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M12 8v5m0 3h.01M12 3l9 16H3l9-16z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
+        <p>何から手を付ければいいのか、そもそも情報がどこにあるのか分からない。</p>
+      </div>
+      <div class="worry-item">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M12 8v5m0 3h.01M12 3l9 16H3l9-16z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
+        <p>物件情報サイトは多いが、玉石混交で自分に合う情報を選びきれない。</p>
+      </div>
+      <div class="worry-item">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M12 8v5m0 3h.01M12 3l9 16H3l9-16z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
+        <p>営業担当にいきなり電話や訪問で相談するのは気が重い。</p>
+      </div>
+      <div class="worry-item">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M12 8v5m0 3h.01M12 3l9 16H3l9-16z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
+        <p>すでに投資中だが、市況の変化や新着物件を追いきれていない。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="merit" style="background:#fff;">
+  <div class="wrap">
+    <div class="sechead reveal">
+      <span class="tag">TWO CHANNELS</span>
+      <h2>公式LINEとマイページ「Facilo」、それぞれの役割</h2>
+      <p>目的の違う2つの窓口です。両方登録しておくと、受け取る情報と自分で管理する情報の両方が揃います。</p>
+    </div>
+    <div class="reg-block reveal">
+      <div class="reg-panel line">
+        <span class="badge">
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="none"><path d="M12 3C6.5 3 2 6.6 2 11c0 2.7 1.7 5.1 4.4 6.6-.2.7-.7 2.4-.8 2.8-.1.4.2.4.3.3.2-.1 2.6-1.7 3.6-2.4.8.1 1.6.2 2.5.2 5.5 0 10-3.6 10-8s-4.5-8.5-10-8.5z" fill="currentColor"/></svg>
+          公式LINE
+        </span>
+        <h3>受け取る窓口</h3>
+        <ul>
+          <li><svg viewBox="0 0 24 24" fill="none"><path d="M5 12l4 4L19 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>新着物件・市況アップデートをタイムラインで受け取れる</li>
+          <li><svg viewBox="0 0 24 24" fill="none"><path d="M5 12l4 4L19 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>気になった時だけトーク画面から気軽に質問できる</li>
+          <li><svg viewBox="0 0 24 24" fill="none"><path d="M5 12l4 4L19 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>登録・ブロックはいつでも自分のタイミングで</li>
+        </ul>
+        <a href="#cta" class="btn" style="background:#fff;color:#04a648;">友だち追加はこちら</a>
+      </div>
+      <div class="reg-panel navy">
+        <span class="badge">
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="none"><rect x="4" y="4" width="16" height="16" rx="3" stroke="currentColor" stroke-width="1.8"/><path d="M8 9h8M8 13h5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+          マイページ Facilo
+        </span>
+        <h3>管理する窓口</h3>
+        <ul>
+          <li><svg viewBox="0 0 24 24" fill="none"><path d="M5 12l4 4L19 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>希望条件(エリア・予算・利回りなど)を登録し保存できる</li>
+          <li><svg viewBox="0 0 24 24" fill="none"><path d="M5 12l4 4L19 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>条件に近い情報だけを自分のページで見返せる</li>
+          <li><svg viewBox="0 0 24 24" fill="none"><path d="M5 12l4 4L19 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>相談したい時だけ、ページから個別に申し込める</li>
+        </ul>
+        <a href="#cta" class="btn" style="background:#fff;color:var(--navy);">マイページ登録はこちら</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="reason">
+  <div class="wrap">
+    <div class="sechead reveal">
+      <span class="tag">WHY BEGINNING</span>
+      <h2>BEGINNINGが選ばれる理由</h2>
+    </div>
+    <div class="grid3 reveal">
+      <div class="card">
+        <div class="ico ico-navy">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M3 12l2-2 4 4L19 4l2 2-12 12z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
+        </div>
+        <h3>初心者にも分かる説明</h3>
+        <p>専門用語をそのまま使わず、投資が初めての方でも判断材料を持てるところまで噛み砕いてお伝えします。</p>
+      </div>
+      <div class="card">
+        <div class="ico ico-green">
+          <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.8"/><path d="M12 7v5l3 3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+        </div>
+        <h3>必要な時だけ届く距離感</h3>
+        <p>登録後にしつこい営業電話をかけることはありません。ご自身のペースで情報を確認いただけます。</p>
+      </div>
+      <div class="card">
+        <div class="ico ico-navy">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M4 19V5a1 1 0 011-1h9l6 6v9a1 1 0 01-1 1H5a1 1 0 01-1-1z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M14 4v6h6" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
+        </div>
+        <h3>継続投資家の相談実績</h3>
+        <p>すでに複数物件を保有する投資家の資産運用相談にも対応。買い増し・入れ替えのご相談も承ります。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="flow" style="background:#fff;">
+  <div class="wrap">
+    <div class="sechead reveal">
+      <span class="tag">FLOW</span>
+      <h2>ご登録から情報を受け取るまで</h2>
+    </div>
+    <div class="flow reveal">
+      <div class="flow-step">
+        <div class="flow-line"></div>
+        <h3>友だち追加・登録</h3>
+        <p>公式LINEを友だち追加、またはマイページ「Facilo」に希望条件を登録します。</p>
+      </div>
+      <div class="flow-step">
+        <div class="flow-line"></div>
+        <h3>情報を受け取る</h3>
+        <p>市況の変化や条件に合う新着情報が届きます。読むだけでも構いません。</p>
+      </div>
+      <div class="flow-step">
+        <h3>必要な時に相談</h3>
+        <p>気になった物件やタイミングがあれば、トークやページから個別にご相談ください。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="voice">
+  <div class="wrap">
+    <div class="sechead reveal">
+      <span class="tag">VOICE</span>
+      <h2>ご登録者の声</h2>
+      <p>※本デモページに掲載の声は仮の内容です。実制作では取材に基づく内容に差し替えます。</p>
+    </div>
+    <div class="voice-wrap reveal">
+      <div class="voice">
+        <div class="stars">★★★★★</div>
+        <p class="body">「知識ゼロから始めたが、LINEで届く内容が難しすぎず、自分のペースで理解を深められた。」</p>
+        <div class="who"><span>30代・会社員</span><span>投資検討中</span></div>
+      </div>
+      <div class="voice">
+        <div class="stars">★★★★★</div>
+        <p class="body">「マイページに条件を登録しておくだけで、見るべき情報が絞られて時間が浮いた。」</p>
+        <div class="who"><span>40代・会社員</span><span>1棟保有</span></div>
+      </div>
+      <div class="voice">
+        <div class="stars">★★★★☆</div>
+        <p class="body">「登録後にしつこい電話が来なかったのが良かった。必要な時だけ相談できる距離感が合っている。」</p>
+        <div class="who"><span>50代・自営業</span><span>複数物件保有</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="about" style="background:#fff;">
+  <div class="wrap">
+    <div class="about reveal">
+      <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=1200&q=70" alt="担当スタッフ(※イメージです)">
+      <div>
+        <span class="tag" style="display:inline-block;margin-bottom:14px;">FROM BEGINNING</span>
+        <p class="about-quote">「情報が多い時代だからこそ、ご自身に必要な分だけをお届けしたい。」</p>
+        <p style="font-size:14px;color:var(--sub);">不動産投資は、判断材料が揃っているかどうかで結果が大きく変わります。BEGINNINGは、これから始める方にも継続中の方にも、負担のない距離感で情報をお届けすることを大切にしています。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="faq">
+  <div class="wrap" style="max-width:760px;">
+    <div class="sechead reveal">
+      <span class="tag">FAQ</span>
+      <h2>よくある質問</h2>
+    </div>
+    <div class="reveal">
+      <div class="faq-item open">
+        <button class="faq-q"><span>投資初心者でも登録して大丈夫ですか。</span><span class="mark">+</span></button>
+        <div class="faq-a" style="max-height:120px;"><p>はい。これから始めたい方向けの基礎的な情報も配信しています。知識がない状態からのご登録でも問題ありません。</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q"><span>公式LINEとマイページ「Facilo」は何が違いますか。</span><span class="mark">+</span></button>
+        <div class="faq-a"><p>公式LINEは市況や新着物件のお知らせを受け取る窓口、マイページ「Facilo」はご自身の希望条件を登録し、条件に合う情報を管理・閲覧できる窓口です。両方のご登録を推奨しています。</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q"><span>営業の電話やしつこい勧誘はありますか。</span><span class="mark">+</span></button>
+        <div class="faq-a"><p>ご登録時点で一方的な営業電話を行うことはありません。ご希望のタイミングでご相談いただく形式です。</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q"><span>登録に料金はかかりますか。</span><span class="mark">+</span></button>
+        <div class="faq-a"><p>公式LINE・マイページともに登録・情報の受け取りは無料です。(※本デモページの料金表記は仮の内容です)</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q"><span>すでに他社で投資物件を保有していても相談できますか。</span><span class="mark">+</span></button>
+        <div class="faq-a"><p>問題ございません。買い増しや入れ替えなど、保有中の方からのご相談も承っております。</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="cta" class="final-cta">
+  <div class="wrap">
+    <span class="eyebrow">GET STARTED</span>
+    <h2>まずは、知ることから始める。</h2>
+    <p>公式LINEとマイページ「Facilo」、どちらもご登録は1分ほどで完了します。</p>
+    <div class="hero-cta">
+      <a href="#" class="btn btn-line">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M12 3C6.5 3 2 6.6 2 11c0 2.7 1.7 5.1 4.4 6.6-.2.7-.7 2.4-.8 2.8-.1.4.2.4.3.3.2-.1 2.6-1.7 3.6-2.4.8.1 1.6.2 2.5.2 5.5 0 10-3.6 10-8s-4.5-8.5-10-8.5z" fill="currentColor"/></svg>
+        公式LINEを友だち追加(仮リンク)
+      </a>
+      <a href="#" class="btn" style="background:#fff;color:var(--navy);">マイページ「Facilo」に登録(仮リンク)</a>
+    </div>
+
+    <form class="form-box" onsubmit="return false;">
+      <h3 style="color:var(--ink);">お問い合わせ(サンプルフォーム)</h3>
+      <label for="f-name">お名前</label>
+      <input id="f-name" type="text" placeholder="山田 太郎">
+      <label for="f-mail">メールアドレス</label>
+      <input id="f-mail" type="email" placeholder="you@example.com">
+      <label for="f-stage">投資状況</label>
+      <select id="f-stage">
+        <option>これから始めたい</option>
+        <option>すでに投資している</option>
+      </select>
+      <button type="submit" class="btn btn-navy">送信する(ダミー・送信されません)</button>
+      <p class="form-note">※このフォームはデモ用のダミーです。実制作では実際の送信・確認メール機能を実装します。</p>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-col">
+        <h4>株式会社BEGINNING</h4>
+        <p style="font-size:12px;color:rgba(255,255,255,.55);max-width:26ch;">不動産投資家向けの資産運用支援</p>
+        <p style="font-size:12px;color:rgba(255,255,255,.55);margin-top:10px;">TEL 048-000-0000(ダミー)</p>
+      </div>
+      <div class="foot-col">
+        <h4>メニュー</h4>
+        <a href="#worry">お悩み</a>
+        <a href="#merit">LINE・マイページ</a>
+        <a href="#faq">FAQ</a>
+      </div>
+      <div class="foot-col">
+        <h4>SNS</h4>
+        <a href="https://www.instagram.com/beginning.co_fudosan/" target="_blank" rel="noopener">Instagram(公式)</a>
+      </div>
+    </div>
+    <div class="foot-demo">
+      ※本ページは制作サンプル(デモ)です。掲載の内容・数値は仮のもので、写真はイメージです。実制作ではご提供写真や日本人モデルの素材、正式なLINE・マイページ登録リンクに差し替えます。<br>
+      &copy; 2026 BEGINNING Inc. (制作デモ)
+    </div>
+  </div>
+</footer>
+
+<div class="sticky-cta">
+  <a href="#cta" class="btn btn-line" style="flex:1.2;">
+    <svg viewBox="0 0 24 24" width="16" height="16" fill="none"><path d="M12 3C6.5 3 2 6.6 2 11c0 2.7 1.7 5.1 4.4 6.6-.2.7-.7 2.4-.8 2.8-.1.4.2.4.3.3.2-.1 2.6-1.7 3.6-2.4.8.1 1.6.2 2.5.2 5.5 0 10-3.6 10-8s-4.5-8.5-10-8.5z" fill="currentColor"/></svg>
+    LINE追加
+  </a>
+  <a href="#cta" class="btn btn-navy">マイページ登録</a>
+</div>
+
+<script>
+(function(){
+  var burger = document.getElementById('burgerBtn');
+  var drawer = document.getElementById('navdrawer');
+  var scrim = document.getElementById('scrim');
+  var closeBtn = document.getElementById('navClose');
+  function openNav(){drawer.classList.add('open');scrim.classList.add('open');burger.classList.add('open');}
+  function closeNav(){drawer.classList.remove('open');scrim.classList.remove('open');burger.classList.remove('open');}
+  burger.addEventListener('click', function(){
+    drawer.classList.contains('open') ? closeNav() : openNav();
+  });
+  closeBtn.addEventListener('click', closeNav);
+  scrim.addEventListener('click', closeNav);
+  drawer.querySelectorAll('a').forEach(function(a){a.addEventListener('click', closeNav);});
+
+  document.querySelectorAll('.faq-item').forEach(function(item){
+    var q = item.querySelector('.faq-q');
+    var a = item.querySelector('.faq-a');
+    q.addEventListener('click', function(){
+      var isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(function(other){
+        other.classList.remove('open');
+        other.querySelector('.faq-a').style.maxHeight = 0;
+      });
+      if(!isOpen){
+        item.classList.add('open');
+        a.style.maxHeight = a.scrollHeight + 'px';
+      }
+    });
+  });
+
+  if('IntersectionObserver' in window){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}
+      });
+    },{threshold:0.15});
+    document.querySelectorAll('.reveal').forEach(function(el){io.observe(el);});
+  } else {
+    document.querySelectorAll('.reveal').forEach(function(el){el.classList.add('in');});
+  }
+})();
+</script>
+</body>
+</html>
