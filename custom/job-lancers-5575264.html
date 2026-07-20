@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ステージノート株式会社 | 公式サイト(制作サンプル)</title>
+<meta name="description" content="タレントマネジメント・コンテンツ制作・イベント企画を手がける芸能プロダクションのコーポレートサイト制作サンプルです。NEWSページの追加・自己更新イメージを含みます。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;600;800&family=Noto+Sans+JP:wght@400;500;700;900&family=Manrope:wght@500;700;800&display=swap" rel="stylesheet">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "ステージノート株式会社",
+  "description": "タレントマネジメント、コンテンツ制作、イベント企画・運営を行う芸能プロダクション(制作サンプル)。",
+  "telephone": "03-0000-0000",
+  "address": {
+    "@type": "PostalAddress",
+    "addressRegion": "東京都",
+    "addressCountry": "JP"
+  },
+  "url": "https://example.com/"
+}
+</script>
+<style>
+  :root{
+    --ink:#221d1d;
+    --sub:#5c5450;
+    --paper:#faf7f3;
+    --paper2:#ffffff;
+    --line:#e7ded6;
+    --wine:#7f1f36;
+    --wine-deep:#5e1527;
+    --wine-tint:rgba(127,31,54,0.08);
+    --wine-tint2:rgba(127,31,54,0.14);
+    --shadow:0 18px 40px rgba(34,29,29,0.10);
+    --radius:20px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:"Noto Sans JP",sans-serif;
+    line-height:1.85;
+    letter-spacing:0.02em;
+    font-feature-settings:"palt";
+    -webkit-font-smoothing:antialiased;
+  }
+  img{max-width:100%;display:block;}
+  a{color:inherit;text-decoration:none;}
+  h1,h2,h3{font-family:"Shippori Mincho",serif;margin:0 0 0.6em;color:var(--ink);}
+  .num{font-family:"Manrope",sans-serif;}
+  .wrap{max-width:1120px;width:100%;margin:0 auto;padding:0 24px;}
+  section{padding:96px 0;}
+  section.tight{padding:80px 0;}
+  .eyebrow{
+    display:inline-block;
+    font-size:0.78rem;
+    letter-spacing:0.24em;
+    color:var(--wine);
+    font-weight:700;
+    margin-bottom:14px;
+  }
+  .lead{color:var(--sub);font-size:1rem;max-width:640px;}
+  .center{text-align:center;margin-left:auto;margin-right:auto;}
+
+  /* ---- header ---- */
+  .site-header{
+    position:fixed;
+    top:0;left:0;right:0;
+    z-index:60;
+    background:rgba(250,247,243,0.86);
+    backdrop-filter:blur(10px);
+    -webkit-backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .site-header .inner{
+    max-width:1120px;margin:0 auto;padding:14px 24px;
+    display:flex;align-items:center;justify-content:space-between;
+  }
+  .brand{display:flex;align-items:baseline;gap:10px;font-family:"Shippori Mincho",serif;}
+  .brand .mark{
+    width:34px;height:34px;border-radius:50%;
+    background:var(--wine);
+    position:relative;flex:none;
+  }
+  .brand .mark::after{
+    content:"";position:absolute;inset:9px;
+    border:2px solid #fff;border-radius:50%;
+  }
+  .brand .name{font-size:1.05rem;font-weight:600;}
+  .brand .name small{display:block;font-family:"Noto Sans JP",sans-serif;font-size:0.62rem;letter-spacing:0.14em;color:var(--sub);font-weight:500;}
+  nav.desktop-nav{display:none;}
+  nav.desktop-nav ul{display:flex;gap:32px;list-style:none;margin:0;padding:0;font-size:0.92rem;}
+  nav.desktop-nav a{position:relative;padding:4px 0;}
+  nav.desktop-nav a::after{
+    content:"";position:absolute;left:0;bottom:-2px;width:0;height:2px;background:var(--wine);
+    transition:width .25s ease;
+  }
+  nav.desktop-nav a:hover::after{width:100%;}
+  .nav-cta{
+    display:none;
+    background:var(--wine);color:#fff;padding:10px 22px;border-radius:100px;
+    font-size:0.86rem;font-weight:700;box-shadow:var(--shadow);
+  }
+  .hamburger{
+    width:44px;height:44px;border-radius:50%;border:1px solid var(--line);
+    background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;
+    cursor:pointer;
+  }
+  .hamburger span{width:18px;height:2px;background:var(--ink);display:block;transition:transform .25s ease,opacity .25s ease;}
+  body.nav-open .hamburger span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+  body.nav-open .hamburger span:nth-child(2){opacity:0;}
+  body.nav-open .hamburger span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+
+  .mobile-nav{
+    position:fixed;top:0;right:0;bottom:0;
+    width:min(78vw,320px);
+    background:#fff;
+    z-index:80;
+    transform:translateX(100%);
+    transition:transform .3s ease;
+    box-shadow:-14px 0 30px rgba(0,0,0,0.12);
+    padding:100px 32px 32px;
+  }
+  body.nav-open .mobile-nav{transform:translateX(0);}
+  .mobile-nav ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:26px;font-size:1.02rem;}
+  .mobile-nav .nav-cta{display:inline-block;margin-top:8px;text-align:center;}
+  .nav-overlay{
+    position:fixed;inset:0;background:rgba(34,29,29,0.35);
+    z-index:70;opacity:0;pointer-events:none;transition:opacity .3s ease;
+  }
+  body.nav-open .nav-overlay{opacity:1;pointer-events:auto;}
+
+  /* ---- hero ---- */
+  .hero{
+    position:relative;
+    min-height:640px;
+    display:flex;align-items:center;
+    padding-top:180px;
+    padding-bottom:90px;
+    color:#fff;
+    overflow:hidden;
+  }
+  .hero .bg{
+    position:absolute;inset:0;
+    background-image:linear-gradient(180deg,rgba(20,14,17,0.72),rgba(20,14,17,0.55) 45%,rgba(34,29,29,0.92)),
+      url("https://images.unsplash.com/photo-1629875499750-a31b83446598?auto=format&fit=crop&w=1600&q=70");
+    background-size:cover;background-position:center;
+    z-index:0;
+  }
+  .hero .wrap{position:relative;z-index:1;}
+  .hero .eyebrow{color:#f0c7cf;}
+  .hero h1{
+    color:#fff;
+    font-size:clamp(1.9rem,5vw,3.1rem);
+    line-height:1.5;
+    max-width:12ch;
+  }
+  .hero p.lead{color:#efe6e2;max-width:520px;}
+  .cta-row{display:flex;flex-wrap:wrap;gap:14px;margin-top:32px;}
+  .btn{
+    display:inline-flex;align-items:center;gap:8px;
+    padding:16px 30px;border-radius:100px;
+    font-weight:700;font-size:0.95rem;
+    box-shadow:var(--shadow);
+    transition:transform .2s ease;
+  }
+  .btn:hover{transform:translateY(-2px);}
+  .btn-primary{background:var(--wine);color:#fff;}
+  .btn-ghost{background:rgba(255,255,255,0.12);color:#fff;border:1px solid rgba(255,255,255,0.5);}
+
+  .trust-band{
+    position:relative;z-index:1;
+    margin-top:56px;
+    display:grid;grid-template-columns:repeat(3,1fr);
+    gap:1px;background:rgba(255,255,255,0.18);
+    border-radius:18px;overflow:hidden;
+    backdrop-filter:blur(4px);
+  }
+  .trust-band div{
+    background:rgba(20,14,17,0.42);
+    padding:22px 16px;text-align:center;
+  }
+  .trust-band .num{font-size:clamp(1.4rem,3vw,2rem);font-weight:800;color:#fff;}
+  .trust-band .label{font-size:0.74rem;color:#e8d9dc;margin-top:4px;}
+  .tentative-note{font-size:0.72rem;color:#d9c3c8;margin-top:10px;text-align:right;}
+
+  /* ---- strengths ---- */
+  .strengths-grid{
+    display:grid;grid-template-columns:1fr;gap:24px;margin-top:48px;
+  }
+  .strength-card{
+    background:var(--paper2);border:1px solid var(--line);border-radius:var(--radius);
+    padding:32px 28px;
+  }
+  .strength-card .icon{
+    width:52px;height:52px;border-radius:50%;
+    background:var(--wine-tint);
+    display:flex;align-items:center;justify-content:center;
+    margin-bottom:18px;
+  }
+  .strength-card .icon svg{width:24px;height:24px;stroke:var(--wine);}
+  .strength-card h3{font-size:1.1rem;}
+  .strength-card p{color:var(--sub);font-size:0.92rem;margin:0;}
+
+  /* ---- business ---- */
+  .business{background:var(--paper2);}
+  .business-list{
+    display:grid;grid-template-columns:1fr;gap:1px;
+    background:var(--line);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;
+    margin-top:44px;
+  }
+  .business-row{
+    background:var(--paper2);padding:26px 28px;
+    display:flex;gap:18px;align-items:flex-start;
+  }
+  .business-row .idx{font-family:"Manrope",sans-serif;font-weight:800;color:var(--wine);font-size:0.85rem;flex:none;padding-top:4px;}
+  .business-row h3{font-size:1.02rem;margin-bottom:6px;}
+  .business-row p{color:var(--sub);font-size:0.9rem;margin:0;}
+
+  /* ---- news ---- */
+  .news-intro{
+    background:#fff;border:1px solid var(--line);border-radius:var(--radius);
+    padding:20px 24px;margin-top:20px;font-size:0.88rem;color:var(--sub);
+  }
+  .news-intro strong{color:var(--ink);}
+  .chip-row{display:flex;flex-wrap:wrap;gap:10px;margin:32px 0 28px;}
+  .chip{
+    padding:8px 18px;border-radius:100px;font-size:0.82rem;font-weight:700;
+    background:var(--wine-tint);color:var(--wine-deep);border:1px solid transparent;
+  }
+  .chip.is-active{background:var(--wine);color:#fff;}
+  .news-grid{display:grid;grid-template-columns:1fr;gap:20px;}
+  .news-card{
+    background:var(--paper2);border:1px solid var(--line);border-radius:16px;
+    overflow:hidden;display:flex;flex-direction:column;
+    box-shadow:0 8px 20px rgba(34,29,29,0.05);
+  }
+  .news-card .thumb{
+    height:120px;
+    background:linear-gradient(135deg,var(--wine) 0%,var(--wine-deep) 100%);
+    position:relative;
+  }
+  .news-card .thumb::after{
+    content:"";position:absolute;inset:0;
+    background-image:repeating-linear-gradient(115deg,rgba(255,255,255,0.06) 0 2px,transparent 2px 26px);
+  }
+  .news-card .thumb .tag{
+    position:absolute;left:14px;bottom:12px;
+    background:rgba(255,255,255,0.92);color:var(--wine-deep);
+    font-size:0.68rem;font-weight:700;padding:5px 12px;border-radius:100px;
+  }
+  .news-card .body{padding:20px 22px 24px;flex:1;display:flex;flex-direction:column;}
+  .news-card time{font-family:"Manrope",sans-serif;font-size:0.76rem;color:var(--sub);letter-spacing:0.04em;}
+  .news-card h3{font-size:0.98rem;margin:8px 0 10px;line-height:1.6;}
+  .news-card p{font-size:0.84rem;color:var(--sub);margin:0 0 14px;flex:1;}
+  .news-card .more{font-size:0.82rem;font-weight:700;color:var(--wine);}
+  .news-footnote{margin-top:28px;font-size:0.82rem;color:var(--sub);}
+
+  /* ---- message (代表挨拶) ---- */
+  .message{background:var(--paper2);}
+  .message-grid{
+    display:grid;grid-template-columns:1fr;gap:36px;align-items:center;margin-top:40px;
+  }
+  .message-photo{
+    border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);
+  }
+  .message-photo img{width:100%;height:340px;object-fit:cover;}
+  .message-text .role{font-size:0.82rem;color:var(--wine);font-weight:700;letter-spacing:0.08em;}
+  .message-text h3{font-size:1.3rem;margin:6px 0 18px;}
+  .message-text p{color:var(--sub);font-size:0.92rem;}
+  .signature{margin-top:18px;font-family:"Shippori Mincho",serif;font-size:1.05rem;}
+
+  /* ---- company overview ---- */
+  .overview-table{
+    margin-top:40px;border-top:1px solid var(--line);
+  }
+  .overview-row{
+    display:grid;grid-template-columns:120px 1fr;gap:16px;
+    padding:18px 0;border-bottom:1px solid var(--line);font-size:0.92rem;
+  }
+  .overview-row dt{color:var(--sub);font-weight:700;font-size:0.84rem;}
+  .overview-row dd{margin:0;}
+
+  /* ---- access ---- */
+  .access-grid{display:grid;grid-template-columns:1fr;gap:24px;margin-top:36px;}
+  .map-placeholder{
+    background:var(--paper2);border:1px dashed var(--line);border-radius:var(--radius);
+    min-height:220px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;
+    color:var(--sub);font-size:0.84rem;
+  }
+  .map-placeholder svg{width:34px;height:34px;stroke:var(--wine);}
+  .access-info p{margin:4px 0;font-size:0.92rem;color:var(--sub);}
+  .access-info strong{color:var(--ink);}
+
+  /* ---- faq ---- */
+  .faq-list{margin-top:40px;border-top:1px solid var(--line);}
+  .faq-item{border-bottom:1px solid var(--line);}
+  .faq-q{
+    width:100%;text-align:left;background:none;border:none;
+    padding:22px 4px;display:flex;justify-content:space-between;align-items:center;
+    font-size:0.98rem;font-weight:700;cursor:pointer;color:var(--ink);font-family:inherit;
+  }
+  .faq-q .sign{
+    width:22px;height:22px;border-radius:50%;border:1px solid var(--wine);
+    position:relative;flex:none;
+  }
+  .faq-q .sign::before,.faq-q .sign::after{
+    content:"";position:absolute;background:var(--wine);
+    top:50%;left:50%;transform:translate(-50%,-50%);
+  }
+  .faq-q .sign::before{width:9px;height:1.6px;}
+  .faq-q .sign::after{width:1.6px;height:9px;transition:opacity .2s ease;}
+  .faq-item.is-open .faq-q .sign::after{opacity:0;}
+  .faq-a{max-height:0;overflow:hidden;transition:max-height .3s ease;}
+  .faq-item.is-open .faq-a{max-height:300px;}
+  .faq-a p{padding:0 4px 22px;color:var(--sub);font-size:0.9rem;margin:0;}
+
+  /* ---- contact ---- */
+  .contact{background:var(--paper2);}
+  form.contact-form{margin-top:40px;display:grid;gap:20px;}
+  .field label{display:block;font-size:0.84rem;font-weight:700;margin-bottom:8px;}
+  .field .req{color:var(--wine);font-size:0.72rem;margin-left:6px;}
+  .field input,.field select,.field textarea{
+    width:100%;padding:14px 16px;border-radius:12px;border:1px solid var(--line);
+    font-size:16px;font-family:inherit;background:var(--paper);color:var(--ink);
+  }
+  .field textarea{min-height:140px;resize:vertical;}
+  .field input:focus,.field textarea:focus,.field select:focus{outline:2px solid var(--wine-tint2);border-color:var(--wine);}
+  .form-note{font-size:0.78rem;color:var(--sub);}
+  .submit-btn{
+    justify-self:start;background:var(--wine);color:#fff;border:none;
+    padding:16px 40px;border-radius:100px;font-weight:700;font-size:0.98rem;cursor:pointer;
+    box-shadow:var(--shadow);
+  }
+  .form-thanks{
+    display:none;background:var(--wine-tint);border:1px solid var(--wine-tint2);
+    border-radius:14px;padding:18px 20px;font-size:0.9rem;color:var(--wine-deep);
+  }
+  .form-thanks.is-visible{display:block;}
+
+  /* ---- footer ---- */
+  footer{background:#1c1315;color:#efe5e3;padding:64px 0 120px;}
+  .footer-grid{display:grid;grid-template-columns:1fr;gap:32px;}
+  footer .brand-f{font-family:"Shippori Mincho",serif;font-size:1.1rem;color:#fff;}
+  footer p{color:#c9b9ba;font-size:0.84rem;}
+  footer ul{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:12px;font-size:0.88rem;}
+  footer a:hover{color:#fff;}
+  .footer-disclaimer{
+    margin-top:40px;padding-top:28px;border-top:1px solid rgba(255,255,255,0.12);
+    font-size:0.76rem;color:#a9989a;line-height:1.9;
+  }
+
+  /* ---- mobile cta ---- */
+  .mobile-cta{
+    position:fixed;left:0;right:0;bottom:0;z-index:50;
+    display:grid;grid-template-columns:1fr 1fr;
+    box-shadow:0 -8px 24px rgba(0,0,0,0.14);
+  }
+  .mobile-cta a{
+    text-align:center;padding:16px 8px;font-weight:700;font-size:0.92rem;
+  }
+  .mobile-cta .tel{background:#2c2224;color:#fff;}
+  .mobile-cta .inq{background:var(--wine);color:#fff;}
+
+  [data-reveal]{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s ease;}
+  [data-reveal].is-visible{opacity:1;transform:translateY(0);}
+
+  @media (min-width:47.5em){
+    section{padding:110px 0;}
+    .strengths-grid{grid-template-columns:repeat(3,1fr);}
+    .news-grid{grid-template-columns:repeat(2,1fr);}
+    .message-grid{grid-template-columns:0.85fr 1.15fr;}
+    .access-grid{grid-template-columns:1.1fr 0.9fr;}
+    .footer-grid{grid-template-columns:1.3fr 1fr 1fr;}
+  }
+  @media (min-width:56.25em){
+    nav.desktop-nav{display:block;}
+    .nav-cta{display:inline-flex;}
+    .hamburger{display:none;}
+    .news-grid{grid-template-columns:repeat(3,1fr);}
+    .mobile-cta{display:none;}
+  }
+  @media (prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto;}
+    [data-reveal]{transition:none;opacity:1;transform:none;}
+    .btn:hover{transform:none;}
+  }
+</style>
+</head>
+<body>
+
+<header class="site-header" id="siteHeader">
+  <div class="inner">
+    <a class="brand" href="#top">
+      <span class="mark"></span>
+      <span class="name">ステージノート<small>STAGE NOTE ENTERTAINMENT</small></span>
+    </a>
+    <nav class="desktop-nav">
+      <ul>
+        <li><a href="#business">事業内容</a></li>
+        <li><a href="#news">NEWS</a></li>
+        <li><a href="#message">代表挨拶</a></li>
+        <li><a href="#company">会社概要</a></li>
+        <li><a href="#faq">よくある質問</a></li>
+      </ul>
+    </nav>
+    <a class="nav-cta" href="#contact">お問い合わせ</a>
+    <button class="hamburger" id="hamburgerBtn" aria-label="メニューを開く" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<nav class="mobile-nav" id="mobileNav">
+  <ul>
+    <li><a href="#business">事業内容</a></li>
+    <li><a href="#news">NEWS</a></li>
+    <li><a href="#message">代表挨拶</a></li>
+    <li><a href="#company">会社概要</a></li>
+    <li><a href="#access">アクセス</a></li>
+    <li><a href="#faq">よくある質問</a></li>
+    <li><a class="btn btn-primary nav-cta" href="#contact">お問い合わせ</a></li>
+  </ul>
+</nav>
+<div class="nav-overlay" id="navOverlay"></div>
+
+<main id="top">
+
+  <section class="hero">
+    <div class="bg"></div>
+    <div class="wrap">
+      <span class="eyebrow">芸能プロダクション コーポレートサイト制作サンプル</span>
+      <h1>伝える速さも、魅せる力に。</h1>
+      <p class="lead">タレントマネジメントからイベント制作まで。想いを形にする芸能事務所のための、更新のしやすいコーポレートサイトのサンプルです。掲載文章の整理・デザインの整え直し・NEWSページの新設をまとめてイメージしています。</p>
+      <div class="cta-row">
+        <a class="btn btn-primary" href="tel:0300000000">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.68 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.32 1.85.55 2.81.68A2 2 0 0 1 22 16.92z"/></svg>
+          電話で相談する
+        </a>
+        <a class="btn btn-ghost" href="#contact">お問い合わせフォーム</a>
+      </div>
+      <div class="trust-band">
+        <div><div class="num">32<span style="font-size:0.9rem;">組</span></div><div class="label">所属タレント数</div></div>
+        <div><div class="num">120<span style="font-size:0.9rem;">件</span></div><div class="label">年間イベント実施数</div></div>
+        <div><div class="num">80<span style="font-size:0.9rem;">件</span></div><div class="label">メディア掲載実績</div></div>
+      </div>
+      <p class="tentative-note">※上記の数値はサンプル用の仮の内容です</p>
+    </div>
+  </section>
+
+  <section class="strengths tight" id="strengths">
+    <div class="wrap">
+      <span class="eyebrow">STRENGTH</span>
+      <h2>選ばれる、3つの理由</h2>
+      <p class="lead">企画から現場運営まで、一貫して伴走できる体制を強みにしています。</p>
+      <div class="strengths-grid">
+        <div class="strength-card" data-reveal>
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l2.4 6.6L21 11l-6.6 2.4L12 20l-2.4-6.6L3 11l6.6-2.4z"/></svg></div>
+          <h3>企画力</h3>
+          <p>企画立案から構成・演出・進行台本まで、一気通貫でご提案します。単発のご依頼にも柔軟に対応します。</p>
+        </div>
+        <div class="strength-card" data-reveal>
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a15 15 0 0 1 0 18M12 3a15 15 0 0 0 0 18"/></svg></div>
+          <h3>業界ネットワーク</h3>
+          <p>メディア・会場・制作会社など、長年培ったつながりを活かし、必要な体制を素早く整えます。</p>
+        </div>
+        <div class="strength-card" data-reveal>
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 3 14h8l-1 8 10-12h-8z"/></svg></div>
+          <h3>機動力</h3>
+          <p>小規模なローンチイベントから大型キャンペーンまで、規模に応じたチーム編成でスピード対応します。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="business" id="business">
+    <div class="wrap">
+      <span class="eyebrow">BUSINESS</span>
+      <h2>事業内容</h2>
+      <p class="lead">タレントの魅力を届けるための、3つの事業を展開しています。</p>
+      <div class="business-list">
+        <div class="business-row" data-reveal>
+          <div class="idx">01</div>
+          <div>
+            <h3>タレントマネジメント</h3>
+            <p>所属タレントのブッキング・スケジュール管理・出演交渉まで、日々の活動を一貫してサポートします。</p>
+          </div>
+        </div>
+        <div class="business-row" data-reveal>
+          <div class="idx">02</div>
+          <div>
+            <h3>コンテンツ制作</h3>
+            <p>動画・SNS運用・広報素材の企画制作を行い、タレントの活動を継続的に発信します。</p>
+          </div>
+        </div>
+        <div class="business-row" data-reveal>
+          <div class="idx">03</div>
+          <div>
+            <h3>イベント企画・運営</h3>
+            <p>ファンイベントや企業案件の企画から当日運営まで、現場対応を含めて一括で承ります。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="news" id="news">
+    <div class="wrap">
+      <span class="eyebrow">NEWS</span>
+      <h2>お知らせ・メディア情報</h2>
+      <p class="lead">今回のご依頼の中心となる「NEWSページ」の仕様イメージです。カテゴリ分け・一覧表示・詳細ページまでを想定しています。</p>
+      <div class="news-intro">
+        <strong>投稿・更新について、</strong> ページ公開後は貴社ご担当者様がWordPressの管理画面から新規投稿・編集・カテゴリ分けまで行えるようにする想定です。専門知識がなくても、通常の記事作成と同じ感覚で更新いただけます。
+      </div>
+      <div class="chip-row" role="tablist" aria-label="NEWSカテゴリ">
+        <span class="chip is-active">すべて</span>
+        <span class="chip">お知らせ</span>
+        <span class="chip">メディア掲載</span>
+        <span class="chip">イベント</span>
+      </div>
+      <div class="news-grid">
+        <article class="news-card" data-reveal>
+          <div class="thumb"><span class="tag">お知らせ</span></div>
+          <div class="body">
+            <time>2026.07.01</time>
+            <h3>公式サイトリニューアルのお知らせ</h3>
+            <p>コーポレートサイトの一部デザインを見直し、NEWSページを新設しました。</p>
+            <a class="more" href="#">続きを読む &rarr;</a>
+          </div>
+        </article>
+        <article class="news-card" data-reveal>
+          <div class="thumb"><span class="tag">メディア掲載</span></div>
+          <div class="body">
+            <time>2026.06.24</time>
+            <h3>所属タレントが情報番組に出演予定</h3>
+            <p>放送日時・番組名は決定次第、こちらのページで随時更新します。</p>
+            <a class="more" href="#">続きを読む &rarr;</a>
+          </div>
+        </article>
+        <article class="news-card" data-reveal>
+          <div class="thumb"><span class="tag">イベント</span></div>
+          <div class="body">
+            <time>2026.06.10</time>
+            <h3>秋季ファンイベント開催決定</h3>
+            <p>詳細・チケット情報は決まり次第、本ページと各種SNSでご案内します。</p>
+            <a class="more" href="#">続きを読む &rarr;</a>
+          </div>
+        </article>
+        <article class="news-card" data-reveal>
+          <div class="thumb"><span class="tag">お知らせ</span></div>
+          <div class="body">
+            <time>2026.05.28</time>
+            <h3>夏季休業のお知らせ</h3>
+            <p>休業期間中のお問い合わせ対応について案内しています。</p>
+            <a class="more" href="#">続きを読む &rarr;</a>
+          </div>
+        </article>
+        <article class="news-card" data-reveal>
+          <div class="thumb"><span class="tag">メディア掲載</span></div>
+          <div class="body">
+            <time>2026.05.15</time>
+            <h3>Web媒体にインタビュー記事が掲載</h3>
+            <p>所属タレントへのインタビューが特集ページに掲載されました。</p>
+            <a class="more" href="#">続きを読む &rarr;</a>
+          </div>
+        </article>
+        <article class="news-card" data-reveal>
+          <div class="thumb"><span class="tag">イベント</span></div>
+          <div class="body">
+            <time>2026.04.30</time>
+            <h3>新人タレント合同オーディション実施</h3>
+            <p>次年度の合同オーディションの開催概要を掲載しました。</p>
+            <a class="more" href="#">続きを読む &rarr;</a>
+          </div>
+        </article>
+      </div>
+      <p class="news-footnote">※掲載内容・日付はサンプルのため仮のものです。実制作では貴社の最新情報に差し替えます。</p>
+    </div>
+  </section>
+
+  <section class="message" id="message">
+    <div class="wrap">
+      <span class="eyebrow">MESSAGE</span>
+      <h2>代表挨拶</h2>
+      <div class="message-grid">
+        <div class="message-photo" data-reveal>
+          <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=900&q=70" alt="代表者のポートレート写真(イメージ)" loading="lazy">
+        </div>
+        <div class="message-text" data-reveal>
+          <div class="role">代表取締役</div>
+          <h3>「届く」までを、私たちの仕事にする。</h3>
+          <p>どれほど良いコンテンツも、届かなければ意味がありません。私たちは企画・制作の現場に立ちながら、タレント一人ひとりの魅力が正しく伝わる形を日々模索してきました。</p>
+          <p>ホームページも同じだと考えています。情報が整理され、更新しやすい状態であることが、結果として「伝わる速さ」につながります。今回のリニューアルも、その考えのもとで設計しています。</p>
+          <div class="signature">代表取締役 星野 一輝(仮)</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="company" id="company">
+    <div class="wrap">
+      <span class="eyebrow">COMPANY</span>
+      <h2>会社概要</h2>
+      <dl class="overview-table">
+        <div class="overview-row"><dt>名称</dt><dd>ステージノート株式会社(制作サンプル)</dd></div>
+        <div class="overview-row"><dt>設立</dt><dd>20XX年(※仮の内容です)</dd></div>
+        <div class="overview-row"><dt>所在地</dt><dd>東京都内(※仮の表示です)</dd></div>
+        <div class="overview-row"><dt>電話番号</dt><dd>03-0000-0000(ダミー)</dd></div>
+        <div class="overview-row"><dt>事業内容</dt><dd>タレントマネジメント / コンテンツ制作 / イベント企画・運営</dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <section class="access tight" id="access">
+    <div class="wrap">
+      <span class="eyebrow">ACCESS</span>
+      <h2>アクセス</h2>
+      <div class="access-grid">
+        <div class="map-placeholder" data-reveal>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.1-7-11a7 7 0 0 1 14 0c0 4.9-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>
+          <span>地図はサンプルのため非表示です</span>
+        </div>
+        <div class="access-info" data-reveal>
+          <p><strong>所在地</strong><br>東京都内(詳細は下記フォームよりお問い合わせください)</p>
+          <p><strong>最寄り</strong><br>主要駅より徒歩圏内を想定(実制作時に確定)</p>
+          <p><strong>受付時間</strong><br>平日 10:00〜18:00(土日祝を除く/仮)</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="faq" id="faq">
+    <div class="wrap">
+      <span class="eyebrow">FAQ</span>
+      <h2>よくある質問</h2>
+      <div class="faq-list">
+        <div class="faq-item">
+          <button class="faq-q" type="button"><span>WordPressの操作に不慣れでも、NEWSページを更新できますか?</span><span class="sign"></span></button>
+          <div class="faq-a"><p>はい。通常の記事作成と同じ操作感で投稿・編集ができるよう設定します。初回は簡単な手順書もご用意可能です。</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" type="button"><span>既存ページの文章修正とデザイン調整だけを依頼することも可能ですか?</span><span class="sign"></span></button>
+          <div class="faq-a"><p>可能です。現状のサイトを拝見した上で、修正が必要な箇所と対応範囲・お見積もりをご案内します。</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" type="button"><span>NEWSはカテゴリごとに分けて表示できますか?</span><span class="sign"></span></button>
+          <div class="faq-a"><p>はい。「お知らせ」「メディア掲載」「イベント」のようにカテゴリを設定し、絞り込み表示できる形にします。</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" type="button"><span>公開後の継続的な更新サポートも依頼できますか?</span><span class="sign"></span></button>
+          <div class="faq-a"><p>ご相談内容に応じて対応可能です。継続が必要かまだ未定という段階でも、まずはお気軽にご相談ください。</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" type="button"><span>見積もり前に、現状のサイトを確認してもらえますか?</span><span class="sign"></span></button>
+          <div class="faq-a"><p>はい。現状のサイトURLをお知らせいただければ拝見した上で、対応可能な範囲とお見積もりをご案内します。</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="contact" id="contact">
+    <div class="wrap">
+      <span class="eyebrow">CONTACT</span>
+      <h2>お問い合わせ</h2>
+      <p class="lead">修正内容や現状のサイトURLをお送りいただければ、対応範囲とお見積もりをご案内します。</p>
+      <form class="contact-form" id="contactForm">
+        <div class="field">
+          <label for="f-name">お名前<span class="req">必須</span></label>
+          <input type="text" id="f-name" name="name" required placeholder="山田 太郎">
+        </div>
+        <div class="field">
+          <label for="f-company">会社名・屋号</label>
+          <input type="text" id="f-company" name="company" placeholder="株式会社サンプル">
+        </div>
+        <div class="field">
+          <label for="f-email">メールアドレス<span class="req">必須</span></label>
+          <input type="email" id="f-email" name="email" required placeholder="mail@example.com">
+        </div>
+        <div class="field">
+          <label for="f-tel">電話番号</label>
+          <input type="tel" id="f-tel" name="tel" placeholder="03-0000-0000">
+        </div>
+        <div class="field">
+          <label for="f-message">お問い合わせ内容<span class="req">必須</span></label>
+          <textarea id="f-message" name="message" required placeholder="現状サイトのURLと、修正・追加したい内容をご記入ください"></textarea>
+        </div>
+        <p class="form-note">※本サンプルのフォームは送信されません(デモ用ダミーです)。</p>
+        <button class="submit-btn" type="submit">送信する</button>
+        <div class="form-thanks" id="formThanks">送信内容を確認しました、という想定のメッセージです(実際には送信されていません)。</div>
+      </form>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap footer-grid">
+    <div>
+      <div class="brand-f">ステージノート株式会社</div>
+      <p>タレントマネジメント・コンテンツ制作・イベント企画運営(制作サンプル)</p>
+    </div>
+    <div>
+      <ul>
+        <li><a href="#business">事業内容</a></li>
+        <li><a href="#news">NEWS</a></li>
+        <li><a href="#company">会社概要</a></li>
+      </ul>
+    </div>
+    <div>
+      <ul>
+        <li><a href="#access">アクセス</a></li>
+        <li><a href="#faq">よくある質問</a></li>
+        <li><a href="#contact">お問い合わせ</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="wrap footer-disclaimer">
+    ※本ページは制作サンプル(デモ)です。掲載の内容・数値は仮のもので、写真はイメージです。会社名・人物名は架空のものであり、実在の団体・個人とは関係ありません。
+  </div>
+</footer>
+
+<div class="mobile-cta">
+  <a class="tel" href="tel:0300000000">電話で相談</a>
+  <a class="inq" href="#contact">お問い合わせ</a>
+</div>
+
+<script>
+  (function(){
+    var body = document.body;
+    var hamburgerBtn = document.getElementById('hamburgerBtn');
+    var navOverlay = document.getElementById('navOverlay');
+    var mobileNav = document.getElementById('mobileNav');
+
+    function closeNav(){
+      body.classList.remove('nav-open');
+      hamburgerBtn.setAttribute('aria-expanded','false');
+    }
+    hamburgerBtn.addEventListener('click', function(){
+      var open = body.classList.toggle('nav-open');
+      hamburgerBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+    navOverlay.addEventListener('click', closeNav);
+    mobileNav.querySelectorAll('a').forEach(function(a){
+      a.addEventListener('click', closeNav);
+    });
+
+    var chips = document.querySelectorAll('.chip');
+    chips.forEach(function(chip){
+      chip.addEventListener('click', function(){
+        chips.forEach(function(c){ c.classList.remove('is-active'); });
+        chip.classList.add('is-active');
+      });
+    });
+
+    var faqItems = document.querySelectorAll('.faq-item');
+    faqItems.forEach(function(item){
+      var q = item.querySelector('.faq-q');
+      q.addEventListener('click', function(){
+        var wasOpen = item.classList.contains('is-open');
+        faqItems.forEach(function(i){ i.classList.remove('is-open'); });
+        if(!wasOpen){ item.classList.add('is-open'); }
+      });
+    });
+
+    var form = document.getElementById('contactForm');
+    var thanks = document.getElementById('formThanks');
+    form.addEventListener('submit', function(e){
+      e.preventDefault();
+      thanks.classList.add('is-visible');
+    });
+
+    var revealEls = document.querySelectorAll('[data-reveal]');
+    if('IntersectionObserver' in window){
+      var io = new IntersectionObserver(function(entries){
+        entries.forEach(function(entry){
+          if(entry.isIntersecting){
+            entry.target.classList.add('is-visible');
+            io.unobserve(entry.target);
+          }
+        });
+      }, {threshold:0.15});
+      revealEls.forEach(function(el){ io.observe(el); });
+    } else {
+      revealEls.forEach(function(el){ el.classList.add('is-visible'); });
+    }
+  })();
+</script>
+</body>
+</html>
