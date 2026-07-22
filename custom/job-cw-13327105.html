@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LINE友だち追加 コンバージョン計測 実装デモ|正確な計測でGoogle広告の入札精度を上げる</title>
+<meta name="description" content="LINEログインの友だち追加完了をサーバー側で確認し、Google広告のコンバージョンとして正確に計測する仕組みの実装デモです。PHP+セッションのみ・DB不要・低コスト運用。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@500;700;900&family=Noto+Sans+JP:wght@400;500;700&family=Manrope:wght@600;800&display=swap" rel="stylesheet">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "serviceType": "LINEログイン連携によるGoogle広告コンバージョン計測実装",
+  "provider": {
+    "@type": "Person",
+    "name": "自動化のミナト"
+  },
+  "areaServed": "JP",
+  "description": "LINE公式アカウントの友だち追加完了をサーバー側で判定し、Google広告のコンバージョンタグを正確に発火させるPHP実装。DB不要・低コスト運用を前提に設計。"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "データベースを使わずに重複計測は防げますか？",
+      "acceptedAnswer": { "@type": "Answer", "text": "PHPセッション内のtransaction_idと処理済みフラグで判定します。完了ページの再読み込みや直接アクセスでは新しいtransaction_idが発行されないため、重複発火しません。ご要望通りMySQL等のDBは使用しません。" }
+    },
+    {
+      "@type": "Question",
+      "name": "既存のGTMコンテナがある場合も使えますか？",
+      "acceptedAnswer": { "@type": "Answer", "text": "既存のGTM環境にカスタムイベント（例: line_friend_activated）とトリガーを追加する形で組み込みます。既存タグの構成を壊さない範囲で設定します。" }
+    },
+    {
+      "@type": "Question",
+      "name": "外部の有料計測ツールは必要ですか？",
+      "acceptedAnswer": { "@type": "Answer", "text": "不要です。LINE Login APIとお名前.comのレンタルサーバー上のPHPのみで完結する構成にするため、月額の追加コストは発生しません。" }
+    },
+    {
+      "@type": "Question",
+      "name": "iPhone・Androidの実機確認はできますか？",
+      "acceptedAnswer": { "@type": "Answer", "text": "検収条件に合わせて、実機でのLINE Login完了からコンバージョン発火までの一連の動作を確認したうえで納品します。" }
+    }
+  ]
+}
+</script>
+<style>
+  :root{
+    --line-green:#06C755;
+    --line-green-dark:#049c43;
+    --ink:#1c2321;
+    --ink-soft:#4b5563;
+    --bg:#fafaf8;
+    --card:#ffffff;
+    --border:#e6e8e5;
+    --danger:#c0392b;
+    --danger-bg:#fdf1ef;
+    --ok-bg:#eefaf1;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    font-family:"Noto Sans JP",sans-serif;
+    color:var(--ink);
+    background:var(--bg);
+    line-height:1.8;
+    font-feature-settings:"palt";
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,h4{font-family:"Zen Kaku Gothic New","Noto Sans JP",sans-serif;margin:0;line-height:1.5;}
+  .num{font-family:"Manrope",sans-serif;font-weight:800;}
+  img{max-width:100%;display:block;}
+  a{color:inherit;}
+  .wrap{width:100%;max-width:1080px;margin:0 auto;padding:0 24px;}
+  section{padding:96px 0;}
+  @media (max-width:640px){ section{padding:64px 0;} .wrap{padding:0 20px;} }
+
+  /* header */
+  header{
+    position:fixed;top:0;left:0;right:0;z-index:100;
+    background:rgba(250,250,248,.92);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--border);
+  }
+  .header-inner{
+    max-width:1080px;margin:0 auto;padding:14px 24px;
+    display:flex;align-items:center;justify-content:space-between;
+  }
+  .brand{font-weight:700;font-size:15px;letter-spacing:.02em;}
+  .brand span{color:var(--line-green-dark);}
+  nav.main-nav{display:flex;gap:28px;}
+  nav.main-nav a{font-size:14px;font-weight:500;text-decoration:none;color:var(--ink-soft);white-space:nowrap;}
+  nav.main-nav a:hover{color:var(--line-green-dark);}
+  .hamburger{
+    display:none;width:40px;height:40px;border-radius:8px;border:1px solid var(--border);
+    background:#fff;position:relative;cursor:pointer;
+  }
+  .hamburger span, .hamburger::before, .hamburger::after{
+    content:"";position:absolute;left:9px;right:9px;height:2px;background:var(--ink);
+  }
+  .hamburger::before{top:14px;}
+  .hamburger span{top:19px;position:absolute;left:9px;right:9px;height:2px;background:var(--ink);}
+  .hamburger::after{top:24px;}
+
+  #mobile-nav{
+    display:none;
+    position:fixed;top:69px;left:0;right:0;bottom:0;z-index:99;
+    background:#fff;padding:28px 24px;overflow-y:auto;
+  }
+  #mobile-nav.open{display:block;}
+  #mobile-nav a{
+    display:block;padding:14px 0;border-bottom:1px solid var(--border);
+    text-decoration:none;color:var(--ink);font-size:16px;font-weight:500;
+  }
+
+  @media (max-width:820px){
+    nav.main-nav{display:none;}
+    .hamburger{display:block;}
+  }
+
+  /* hero */
+  .hero{
+    padding:150px 0 90px;
+    background:
+      radial-gradient(700px 380px at 85% -10%, rgba(6,199,85,.10), transparent 60%),
+      linear-gradient(180deg,#fdfdfc, #f6f8f5 70%);
+  }
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:8px;
+    font-size:12.5px;font-weight:700;color:var(--line-green-dark);
+    background:var(--ok-bg);border:1px solid #cdeeda;padding:6px 14px;border-radius:100px;
+    margin-bottom:22px;
+  }
+  .hero h1{
+    font-size:clamp(28px,4.6vw,46px);
+    font-weight:900;letter-spacing:.01em;
+    max-width:16ch;
+  }
+  .hero h1 em{font-style:normal;color:var(--line-green-dark);}
+  .hero p.lead{
+    margin-top:22px;font-size:16px;color:var(--ink-soft);max-width:56ch;
+  }
+  .cta-row{display:flex;gap:14px;margin-top:36px;flex-wrap:wrap;}
+  .btn{
+    display:inline-flex;align-items:center;gap:8px;
+    padding:15px 28px;border-radius:100px;font-weight:700;font-size:15px;
+    text-decoration:none;border:1px solid transparent;
+    box-shadow:0 8px 20px -8px rgba(6,199,85,.5);
+    transition:transform .15s ease, box-shadow .15s ease;
+  }
+  .btn:active{transform:translateY(1px);}
+  .btn-primary{background:var(--line-green);color:#fff;}
+  .btn-primary:hover{background:var(--line-green-dark);}
+  .btn-ghost{background:#fff;color:var(--ink);border-color:var(--border);box-shadow:none;}
+  .btn-ghost:hover{border-color:var(--line-green);}
+
+  .trust-bar{
+    margin-top:56px;display:grid;grid-template-columns:repeat(3,1fr);gap:16px;
+    max-width:640px;
+  }
+  .trust-bar .item{
+    background:var(--card);border:1px solid var(--border);border-radius:14px;
+    padding:16px 14px;text-align:center;
+  }
+  .trust-bar .num{display:block;font-size:24px;color:var(--line-green-dark);}
+  .trust-bar .label{font-size:12px;color:var(--ink-soft);margin-top:4px;}
+  @media (max-width:560px){ .trust-bar{grid-template-columns:1fr 1fr 1fr;gap:10px;} .trust-bar .item{padding:12px 6px;} .trust-bar .num{font-size:19px;} .trust-bar .label{font-size:10.5px;} }
+
+  /* section heading */
+  .sec-head{max-width:640px;margin-bottom:52px;}
+  .sec-head .tag{font-size:12.5px;font-weight:700;color:var(--line-green-dark);letter-spacing:.08em;}
+  .sec-head h2{font-size:clamp(22px,3.2vw,32px);margin-top:10px;font-weight:900;}
+  .sec-head p{margin-top:14px;color:var(--ink-soft);font-size:15px;}
+
+  .reveal{opacity:0;transform:translateY(18px);transition:opacity .6s ease, transform .6s ease;}
+  .reveal.in{opacity:1;transform:none;}
+  @media (prefers-reduced-motion:reduce){ .reveal{opacity:1;transform:none;transition:none;} }
+
+  /* 課題 checklist */
+  .issue-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;}
+  @media (max-width:700px){ .issue-grid{grid-template-columns:1fr;} }
+  .issue{
+    display:flex;gap:14px;background:var(--card);border:1px solid var(--border);
+    border-radius:14px;padding:20px;
+  }
+  .issue .mark{
+    flex:none;width:26px;height:26px;border-radius:50%;
+    border:2px solid var(--danger);position:relative;margin-top:2px;
+  }
+  .issue .mark::before,.issue .mark::after{
+    content:"";position:absolute;left:6px;right:6px;top:12px;height:2px;background:var(--danger);
+  }
+  .issue .mark::before{transform:rotate(45deg);}
+  .issue .mark::after{transform:rotate(-45deg);}
+  .issue p{margin:0;font-size:14.5px;color:var(--ink-soft);}
+  .issue strong{display:block;font-size:15px;color:var(--ink);margin-bottom:4px;}
+
+  /* flow diagram */
+  .flow{
+    display:grid;grid-template-columns:repeat(3,1fr);gap:18px;
+  }
+  @media (max-width:760px){ .flow{grid-template-columns:1fr;} }
+  .flow-step{
+    background:var(--card);border:1px solid var(--border);border-radius:16px;padding:22px 20px;position:relative;
+  }
+  .flow-step .idx{
+    font-family:"Manrope",sans-serif;font-weight:800;font-size:13px;color:#fff;
+    background:var(--line-green);width:28px;height:28px;border-radius:50%;
+    display:flex;align-items:center;justify-content:center;margin-bottom:14px;
+  }
+  .flow-step h4{font-size:15px;margin-bottom:6px;}
+  .flow-step p{font-size:13.5px;color:var(--ink-soft);margin:0;}
+
+  /* judge table */
+  .judge-cols{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
+  @media (max-width:700px){ .judge-cols{grid-template-columns:1fr;} }
+  .judge-col{border-radius:16px;padding:24px 24px 8px;border:1px solid var(--border);}
+  .judge-col.ok{background:var(--ok-bg);border-color:#cdeeda;}
+  .judge-col.ng{background:var(--danger-bg);border-color:#f3d4cf;}
+  .judge-col h3{font-size:16px;margin-bottom:16px;display:flex;align-items:center;gap:8px;}
+  .judge-col ul{list-style:none;margin:0;padding:0;}
+  .judge-col li{
+    font-size:14px;color:var(--ink-soft);padding:10px 0 14px 26px;position:relative;
+    border-bottom:1px dashed rgba(0,0,0,.08);
+  }
+  .judge-col li:last-child{border-bottom:none;}
+  .judge-col.ok li::before{content:"";position:absolute;left:0;top:11px;width:14px;height:8px;border-left:3px solid var(--line-green-dark);border-bottom:3px solid var(--line-green-dark);transform:rotate(-45deg);}
+  .judge-col.ng li::before{content:"×";position:absolute;left:0;top:8px;color:var(--danger);font-weight:700;font-size:16px;}
+
+  /* dashboard mock */
+  .kpi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;}
+  @media (max-width:900px){ .kpi-grid{grid-template-columns:repeat(2,1fr);} }
+  .kpi-card{
+    background:var(--card);border:1px solid var(--border);border-radius:16px;padding:22px;
+  }
+  .kpi-card .label{font-size:12.5px;color:var(--ink-soft);}
+  .kpi-card .val{font-size:26px;margin-top:8px;}
+  .kpi-card .delta{font-size:12px;margin-top:6px;font-weight:700;}
+  .delta.down{color:var(--danger);}
+  .delta.up{color:var(--line-green-dark);}
+  .compare-note{
+    margin-top:14px;font-size:12.5px;color:var(--ink-soft);
+    background:#fff;border:1px dashed var(--border);border-radius:10px;padding:10px 14px;
+  }
+
+  .compare-bars{margin-top:28px;background:var(--card);border:1px solid var(--border);border-radius:16px;padding:26px 24px;}
+  .bar-row{display:grid;grid-template-columns:120px 1fr 60px;align-items:center;gap:14px;margin-bottom:18px;font-size:13px;}
+  .bar-row:last-child{margin-bottom:0;}
+  .bar-track{background:#eef0ed;border-radius:8px;height:14px;overflow:hidden;}
+  .bar-fill{height:100%;border-radius:8px;}
+  .bar-fill.before{background:#cbd0cb;}
+  .bar-fill.after{background:var(--line-green);}
+
+  /* architecture */
+  .arch{display:flex;align-items:center;gap:10px;flex-wrap:wrap;justify-content:center;margin-top:12px;}
+  .arch-box{
+    background:var(--card);border:1px solid var(--border);border-radius:12px;
+    padding:16px 18px;font-size:13px;text-align:center;min-width:130px;
+  }
+  .arch-box b{display:block;font-size:14px;margin-bottom:4px;}
+  .arch-arrow{color:var(--line-green-dark);font-size:20px;font-weight:700;}
+  @media (max-width:700px){ .arch{flex-direction:column;} .arch-arrow{transform:rotate(90deg);} }
+
+  .tech-list{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:32px;}
+  @media (max-width:700px){ .tech-list{grid-template-columns:1fr;} }
+  .tech-item{
+    display:flex;gap:12px;background:var(--card);border:1px solid var(--border);
+    border-radius:12px;padding:16px 18px;font-size:13.5px;color:var(--ink-soft);
+  }
+  .tech-item svg{flex:none;width:20px;height:20px;color:var(--line-green-dark);margin-top:2px;}
+  .tech-item strong{display:block;color:var(--ink);font-size:14px;margin-bottom:3px;}
+
+  /* acceptance */
+  .accept-list{list-style:none;margin:0;padding:0;display:grid;gap:12px;}
+  .accept-list li{
+    display:flex;gap:12px;align-items:flex-start;background:var(--card);
+    border:1px solid var(--border);border-radius:12px;padding:16px 18px;font-size:14px;color:var(--ink-soft);
+  }
+  .accept-list svg{flex:none;width:18px;height:18px;color:var(--line-green-dark);margin-top:2px;}
+
+  /* faq */
+  .faq-item{border-bottom:1px solid var(--border);padding:22px 0;}
+  .faq-q{
+    display:flex;justify-content:space-between;align-items:center;cursor:pointer;
+    font-weight:700;font-size:15.5px;gap:16px;
+  }
+  .faq-q .plus{flex:none;width:22px;height:22px;position:relative;}
+  .faq-q .plus::before,.faq-q .plus::after{content:"";position:absolute;background:var(--line-green-dark);top:50%;left:50%;transform:translate(-50%,-50%);}
+  .faq-q .plus::before{width:14px;height:2px;}
+  .faq-q .plus::after{width:2px;height:14px;transition:transform .2s ease;}
+  .faq-item.open .plus::after{transform:translate(-50%,-50%) rotate(90deg) scaleY(0);}
+  .faq-a{max-height:0;overflow:hidden;transition:max-height .25s ease;font-size:14px;color:var(--ink-soft);}
+  .faq-item.open .faq-a{max-height:260px;margin-top:14px;}
+
+  /* contact */
+  .contact-wrap{
+    background:var(--card);border:1px solid var(--border);border-radius:20px;
+    padding:40px;display:grid;grid-template-columns:1fr 1fr;gap:36px;
+  }
+  @media (max-width:760px){ .contact-wrap{grid-template-columns:1fr;padding:28px 22px;} }
+  .field{margin-bottom:16px;}
+  .field label{display:block;font-size:13px;font-weight:700;margin-bottom:6px;}
+  .field input,.field textarea,.field select{
+    width:100%;max-width:100%;padding:13px 14px;border:1px solid var(--border);
+    border-radius:10px;font-size:16px;font-family:inherit;background:#fbfbfa;
+  }
+  .field textarea{resize:vertical;min-height:100px;}
+  .contact-side h3{font-size:18px;margin-bottom:14px;}
+  .contact-side p{font-size:14px;color:var(--ink-soft);}
+  .contact-side .phone{
+    display:flex;align-items:center;gap:10px;font-size:20px;font-weight:800;margin-top:18px;
+    color:var(--line-green-dark);text-decoration:none;
+  }
+
+  /* sticky mobile cta */
+  .sticky-cta{
+    position:fixed;left:0;right:0;bottom:0;z-index:90;
+    background:#fff;border-top:1px solid var(--border);
+    padding:12px 16px;display:none;gap:10px;
+    box-shadow:0 -6px 18px rgba(0,0,0,.06);
+  }
+  .sticky-cta a{flex:1;text-align:center;padding:13px 10px;border-radius:100px;font-weight:700;font-size:14px;text-decoration:none;}
+  .sticky-cta .btn-primary{background:var(--line-green);color:#fff;}
+  .sticky-cta .btn-ghost{border:1px solid var(--border);color:var(--ink);}
+  @media (max-width:760px){ .sticky-cta{display:flex;} body{padding-bottom:78px;} }
+
+  footer{background:#101613;color:#c9d2cb;padding:56px 0 32px;}
+  footer .wrap{display:flex;flex-direction:column;gap:18px;}
+  footer .foot-top{display:flex;justify-content:space-between;flex-wrap:wrap;gap:20px;}
+  footer .brand{color:#fff;}
+  footer nav{display:flex;gap:20px;flex-wrap:wrap;}
+  footer nav a{font-size:13px;color:#c9d2cb;text-decoration:none;}
+  footer .disclaimer{font-size:12px;color:#7d867f;border-top:1px solid #232a25;padding-top:20px;line-height:1.9;}
+
+  section#compare, section#issues{background:#fff;}
+  section#flow, section#architecture, section#faq{background:var(--bg);}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="brand">LINE<span>友だち追加</span>計測実装</div>
+    <nav class="main-nav">
+      <a href="#issues">課題</a>
+      <a href="#flow">仕組み</a>
+      <a href="#compare">精度比較</a>
+      <a href="#architecture">技術構成</a>
+      <a href="#accept">検収条件</a>
+      <a href="#faq">FAQ</a>
+      <a href="#contact">相談する</a>
+    </nav>
+    <button class="hamburger" onclick="document.getElementById('mobile-nav').classList.toggle('open')" aria-label="メニュー"><span></span></button>
+  </div>
+</header>
+<div id="mobile-nav">
+  <a href="#issues" onclick="document.getElementById('mobile-nav').classList.remove('open')">課題</a>
+  <a href="#flow" onclick="document.getElementById('mobile-nav').classList.remove('open')">仕組み</a>
+  <a href="#compare" onclick="document.getElementById('mobile-nav').classList.remove('open')">精度比較</a>
+  <a href="#architecture" onclick="document.getElementById('mobile-nav').classList.remove('open')">技術構成</a>
+  <a href="#accept" onclick="document.getElementById('mobile-nav').classList.remove('open')">検収条件</a>
+  <a href="#faq" onclick="document.getElementById('mobile-nav').classList.remove('open')">FAQ</a>
+  <a href="#contact" onclick="document.getElementById('mobile-nav').classList.remove('open')">相談する</a>
+</div>
+
+<section class="hero">
+  <div class="wrap">
+    <div class="eyebrow">LINE Login × Google広告 コンバージョン計測 実装デモ</div>
+    <h1>「押した」を数えない。<br><em>「届いた」</em>を数える。</h1>
+    <p class="lead">
+      LPの「友だち追加」ボタンのクリックではなく、LINEログインの友だち追加オプションを使い、
+      サーバー側で友だち関係の成立を確認してからGoogle広告のコンバージョンを発火させる仕組みです。
+      有料の外部計測ツールは使わず、既存のお名前.comサーバー上のPHPだけで完結させます。
+    </p>
+    <div class="cta-row">
+      <a class="btn btn-primary" href="#contact">この仕組みについて相談する</a>
+      <a class="btn btn-ghost" href="tel:0480000000">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6.6 10.8a15.7 15.7 0 006.6 6.6l2.2-2.2a1.5 1.5 0 011.5-.4 11 11 0 003.5.6 1.5 1.5 0 011.5 1.5V21a1.5 1.5 0 01-1.5 1.5C10.5 22.5 1.5 13.5 1.5 3.5A1.5 1.5 0 013 2h4.1A1.5 1.5 0 018.6 3.5a11 11 0 00.6 3.5 1.5 1.5 0 01-.4 1.5z"/></svg>
+        048-000-0000
+      </a>
+    </div>
+    <div class="trust-bar reveal">
+      <div class="item"><span class="num">0<span style="font-size:14px;">円</span></span><span class="label">追加の月額ツール費</span></div>
+      <div class="item"><span class="num">0</span><span class="label">追加DBテーブル</span></div>
+      <div class="item"><span class="num">1<span style="font-size:14px;">回</span></span><span class="label">条件成立時のみ発火</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="issues">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="tag">CURRENT ISSUE</div>
+      <h2>「クリック計測」のままだと、広告の入札が狂う</h2>
+      <p>現状の「ボタンクリック=コンバージョン」計測には、募集内容にある通り次のズレが起きています。自動入札は入ってくるコンバージョンデータの質でしか賢くなりません。</p>
+    </div>
+    <div class="issue-grid">
+      <div class="issue reveal">
+        <div class="mark"></div>
+        <div><strong>友だち追加していない人も計上</strong><p>ボタンを押しただけでLINEアプリを閉じた場合も、クリックの時点でCVが立ってしまいます。</p></div>
+      </div>
+      <div class="issue reveal">
+        <div class="mark"></div>
+        <div><strong>既存の友だちも計上</strong><p>すでに友だちのユーザーが再訪してログインしても、新規獲得のように計測されてしまいます。</p></div>
+      </div>
+      <div class="issue reveal">
+        <div class="mark"></div>
+        <div><strong>再読み込みでの重複計測</strong><p>完了ページの更新や直接アクセスで、同じユーザーの成果が二重に計上される恐れがあります。</p></div>
+      </div>
+      <div class="issue reveal">
+        <div class="mark"></div>
+        <div><strong>有料ツール費をかけたくない</strong><p>外部の計測SaaSを追加すると月額費用がかさみます。既存サーバーの範囲で完結させたい、という前提です。</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="flow">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="tag">HOW IT WORKS</div>
+      <h2>友だち追加の「完了」をサーバー側で確認してから発火</h2>
+      <p>ボットリンク機能（bot_prompt=aggressive）付きのLINEログインを使い、コールバック時にfriendship_status_changedと友だち関係確認APIの2段でチェックします。</p>
+    </div>
+    <div class="flow">
+      <div class="flow-step reveal"><div class="idx">1</div><h4>LPで友だち追加ボタンをクリック</h4><p>Google広告経由のLP。クリック時点ではまだCVを発火しません。</p></div>
+      <div class="flow-step reveal"><div class="idx">2</div><h4>サーバーでstateを発行</h4><p>PHPセッションにstateと有効期限を保存し、認可URLへ付与します。</p></div>
+      <div class="flow-step reveal"><div class="idx">3</div><h4>LINE Login（友だち追加画面）へ遷移</h4><p>bot_prompt=aggressiveで、ログインと同時に友だち追加を促す画面を表示します。</p></div>
+      <div class="flow-step reveal"><div class="idx">4</div><h4>コールバックURLへ復帰</h4><p>認可コードを受け取り、stateの一致を検証します。</p></div>
+      <div class="flow-step reveal"><div class="idx">5</div><h4>アクセストークンを取得</h4><p>Channel Secretはサーバーの環境変数で保持し、ブラウザ側には一切渡しません。</p></div>
+      <div class="flow-step reveal"><div class="idx">6</div><h4>友だち関係を2段で確認</h4><p>friendship_status_changed=trueと、友だち関係確認APIのfriendFlag=trueの両方を確認します。</p></div>
+      <div class="flow-step reveal"><div class="idx">7</div><h4>重複チェック</h4><p>同一ユーザーの過去計上有無をセッション内の処理済みフラグで確認します。</p></div>
+      <div class="flow-step reveal"><div class="idx">8</div><h4>transaction_idを1件発行</h4><p>条件をすべて満たした場合のみ、一意なIDを発行して完了ページへ渡します。</p></div>
+      <div class="flow-step reveal"><div class="idx">9</div><h4>GTMでCVタグを1回発火</h4><p>dataLayerへline_friend_activatedを送信し、transaction_idで重複発火を防ぎます。</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="judge" style="background:#fff;">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="tag">JUDGMENT LOGIC</div>
+      <h2>発火する条件・しない条件</h2>
+      <p>検収条件にある「新規友だち追加のみ1回だけ発火」を、サーバー側の判定ロジックとして明文化しています。</p>
+    </div>
+    <div class="judge-cols">
+      <div class="judge-col ok reveal">
+        <h3>発火する</h3>
+        <ul>
+          <li>LINE Loginが正常完了し、今回のログイン中に友だち追加が行われた</li>
+          <li>確認時点で友だち状態（friendFlag）が有効である</li>
+          <li>同一ユーザーで過去に計上されていない</li>
+        </ul>
+      </div>
+      <div class="judge-col ng reveal">
+        <h3>発火しない</h3>
+        <ul>
+          <li>LINE Loginのみ完了し、友だち追加しなかった</li>
+          <li>以前から友だちだった</li>
+          <li>途中でキャンセルされた／stateが不一致</li>
+          <li>APIエラーが発生した</li>
+          <li>完了ページへの直接アクセス・再読み込み</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="compare">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="tag">MEASUREMENT ACCURACY（仮の数値例）</div>
+      <h2>クリック計測 → 友だち追加完了計測</h2>
+      <p>実案件のデータではなく、仕組みの違いによる計測結果の変化イメージです。実際の改善幅は現状のクリック数・友だち追加率によって変わります。</p>
+    </div>
+    <div class="kpi-grid reveal">
+      <div class="kpi-card">
+        <div class="label">従来（クリック計測）のCV数</div>
+        <div class="val num">312</div>
+        <div class="delta">※仮の数値例</div>
+      </div>
+      <div class="kpi-card">
+        <div class="label">友だち追加完了ベースのCV数</div>
+        <div class="val num">198</div>
+        <div class="delta down">-36.5%（水増し分を除外）</div>
+      </div>
+      <div class="kpi-card">
+        <div class="label">既存友だちの誤計上</div>
+        <div class="val num">0<span style="font-size:15px;">件</span></div>
+        <div class="delta up">判定ロジックで除外</div>
+      </div>
+      <div class="kpi-card">
+        <div class="label">再読み込みによる重複</div>
+        <div class="val num">0<span style="font-size:15px;">件</span></div>
+        <div class="delta up">transaction_idで防止</div>
+      </div>
+    </div>
+    <div class="compare-bars reveal">
+      <div class="bar-row">
+        <span>従来計測</span>
+        <div class="bar-track"><div class="bar-fill before" style="width:100%;"></div></div>
+        <span class="num">312</span>
+      </div>
+      <div class="bar-row">
+        <span>本方式</span>
+        <div class="bar-track"><div class="bar-fill after" style="width:63%;"></div></div>
+        <span class="num">198</span>
+      </div>
+      <div class="compare-note">※ ここでの数値はイメージ用の仮データです。実際は既存のクリック数・広告アカウントの実測値をもとにご相談しながら設計します。</div>
+    </div>
+  </div>
+</section>
+
+<section id="architecture">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="tag">ARCHITECTURE</div>
+      <h2>既存サーバーの範囲で完結する最小構成</h2>
+      <p>MySQL等のデータベースは使わず、state・transaction_id・処理済みフラグはPHPセッションに一時保存し、処理完了後に削除します。</p>
+    </div>
+    <div class="arch reveal">
+      <div class="arch-box"><b>LP</b>Google広告からの流入</div>
+      <div class="arch-arrow">→</div>
+      <div class="arch-box"><b>PHP（開始）</b>state発行・セッション保存</div>
+      <div class="arch-arrow">→</div>
+      <div class="arch-box"><b>LINE Login</b>bot_prompt=aggressive</div>
+      <div class="arch-arrow">→</div>
+      <div class="arch-box"><b>PHP（コールバック）</b>state照合・friendFlag確認</div>
+      <div class="arch-arrow">→</div>
+      <div class="arch-box"><b>GTM</b>dataLayer→CVタグ発火</div>
+    </div>
+    <div class="tech-list">
+      <div class="tech-item reveal">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M7 8h10M7 12h6"/></svg>
+        <div><strong>PHP + セッションのみ</strong>DBテーブルを新設せず、state・有効期限・処理済みフラグ・transaction_idをセッションで管理し、完了後に削除します。</div>
+      </div>
+      <div class="tech-item reveal">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3l7 4v5c0 5-3.5 7.5-7 9-3.5-1.5-7-4-7-9V7z"/></svg>
+        <div><strong>Channel Secretはサーバー環境変数</strong>ブラウザ側のJSやHTMLソースには一切出力せず、コールバック処理のPHP内でのみ参照します。</div>
+      </div>
+      <div class="tech-item reveal">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M8 12l3 3 5-6"/></svg>
+        <div><strong>友だち関係の二重確認</strong>friendship_status_changedと友だち関係確認APIのfriendFlagを両方満たした場合のみ成立とみなします。</div>
+      </div>
+      <div class="tech-item reveal">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12h16M4 6h16M4 18h10"/></svg>
+        <div><strong>GTM側は最小限の追加のみ</strong>既存コンテナにカスタムイベントとトリガーを1組追加する形で、既存タグ構成には手を入れません。</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="accept" style="background:#fff;">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="tag">ACCEPTANCE CRITERIA</div>
+      <h2>検収条件への対応</h2>
+      <p>ご提示いただいた検収条件をそのまま実装のチェックリストとして扱います。</p>
+    </div>
+    <ul class="accept-list reveal">
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M8 12l3 3 5-6"/></svg>新規ユーザーが友だち追加した場合、CVが1回だけ発火する</li>
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M8 12l3 3 5-6"/></svg>LINE Loginのみで友だち追加しなかった場合は発火しない</li>
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M8 12l3 3 5-6"/></svg>すでに友だちのユーザーがログインしても発火しない</li>
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M8 12l3 3 5-6"/></svg>完了ページの再読み込みや直接アクセスでは発火しない</li>
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M8 12l3 3 5-6"/></svg>Google広告側でコンバージョンの受信を確認できる状態にする</li>
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M8 12l3 3 5-6"/></svg>iPhone・Androidの実機で一連の動作を確認してから納品する</li>
+    </ul>
+  </div>
+</section>
+
+<section id="faq">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="tag">FAQ</div>
+      <h2>よくある質問</h2>
+    </div>
+    <div class="reveal">
+      <div class="faq-item">
+        <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">データベースを使わずに重複計測を防げますか<span class="plus"></span></div>
+        <div class="faq-a">セッション内のtransaction_idと処理済みフラグで判定します。完了ページの再読み込みや直接アクセスでは新しいIDが発行されないため、重複発火しません。ご要望通りMySQL等のDBは使いません。</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">既存のGTMコンテナがあっても組み込めますか<span class="plus"></span></div>
+        <div class="faq-a">はい。既存GTMにカスタムイベントとトリガーを1組追加する形にします。既存タグの構成は変更しません。</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">外部の有料計測ツールは必要ですか<span class="plus"></span></div>
+        <div class="faq-a">不要です。LINE Login APIと既存のお名前.comサーバー上のPHPのみで完結する構成にするため、追加の月額費用は発生しません。</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">Channel Secretの安全性が気になります<span class="plus"></span></div>
+        <div class="faq-a">Channel Secretやアクセストークンはブラウザ側に一切渡さず、サーバーの環境変数としてのみ保持します。コールバック処理のPHP内部でしか参照しません。</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">実機での動作確認はしてもらえますか<span class="plus"></span></div>
+        <div class="faq-a">検収条件に合わせて、iPhone・Androidの実機でLINE Login完了からコンバージョン発火までの一連の流れを確認したうえで納品します。</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact" style="background:#fff;">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="tag">CONTACT</div>
+      <h2>仕組みの詳細・構成について相談する</h2>
+      <p>現在お使いのLPやGTMの状況を伺いながら、最小構成での実装範囲をご提案します。</p>
+    </div>
+    <div class="contact-wrap reveal">
+      <form onsubmit="event.preventDefault(); alert('※本デモは送信機能のないサンプルフォームです。');">
+        <div class="field"><label for="f-name">お名前</label><input id="f-name" type="text" placeholder="山田 太郎" required></div>
+        <div class="field"><label for="f-mail">メールアドレス</label><input id="f-mail" type="email" placeholder="example@mail.com" required></div>
+        <div class="field"><label for="f-url">現在のLPのURL（任意）</label><input id="f-url" type="text" placeholder="https://example.com/lp"></div>
+        <div class="field"><label for="f-msg">ご相談内容</label><textarea id="f-msg" placeholder="現在のGTM構成、友だち追加率の目安、希望納期などをご記入ください"></textarea></div>
+        <button class="btn btn-primary" type="submit" style="width:100%;justify-content:center;border:none;cursor:pointer;">送信する（サンプル）</button>
+      </form>
+      <div class="contact-side">
+        <h3>ご相談の前に</h3>
+        <p>本ページは実装内容の理解を揃えるための制作サンプルです。実際の着手前に、現状のLPのHTML構成・既存GTMの中身・LINE公式アカウントとログインチャネルの連携状況を確認させてください。</p>
+        <p>お電話でも承ります。</p>
+        <a class="phone" href="tel:0480000000">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6.6 10.8a15.7 15.7 0 006.6 6.6l2.2-2.2a1.5 1.5 0 011.5-.4 11 11 0 003.5.6 1.5 1.5 0 011.5 1.5V21a1.5 1.5 0 01-1.5 1.5C10.5 22.5 1.5 13.5 1.5 3.5A1.5 1.5 0 013 2h4.1A1.5 1.5 0 018.6 3.5a11 11 0 00.6 3.5 1.5 1.5 0 01-.4 1.5z"/></svg>
+          048-000-0000
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="sticky-cta">
+  <a class="btn-ghost" href="tel:0480000000">電話で相談</a>
+  <a class="btn-primary" href="#contact">フォームで相談</a>
+</div>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-top">
+      <div class="brand">LINE友だち追加コンバージョン計測 実装デモ</div>
+      <nav>
+        <a href="#flow">仕組み</a>
+        <a href="#architecture">技術構成</a>
+        <a href="#accept">検収条件</a>
+        <a href="#faq">FAQ</a>
+        <a href="#contact">相談する</a>
+      </nav>
+    </div>
+    <div class="disclaimer">
+      ※本ページは制作サンプル（デモ）です。掲載の内容・数値は仮のもので、比較グラフの数値例も架空のものです。実際のご依頼内容・広告アカウントの状況に合わせて構成・お見積りをご提案します。
+    </div>
+  </div>
+</footer>
+
+<script>
+  (function(){
+    var els = document.querySelectorAll('.reveal');
+    if('IntersectionObserver' in window){
+      var io = new IntersectionObserver(function(entries){
+        entries.forEach(function(e){
+          if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
+        });
+      }, {threshold:0.15});
+      els.forEach(function(el){ io.observe(el); });
+    } else {
+      els.forEach(function(el){ el.classList.add('in'); });
+    }
+  })();
+</script>
+</body>
+</html>
