@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>はるにれ皮膚科クリニック | 大人にきび・肌荒れ専門治療【制作サンプル】</title>
+<meta name="description" content="繰り返す大人にきびに、皮膚科専門医によるオーダーメイド治療。保険診療と自費メニューを組み合わせ、無理のない通院で根本改善を目指します。※本ページは制作サンプルです。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Shippori+Mincho:wght@500;700;800&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "MedicalClinic",
+  "name": "はるにれ皮膚科クリニック",
+  "description": "大人にきび・肌荒れ治療を専門とする皮膚科クリニック(制作サンプル)",
+  "telephone": "03-0000-0000",
+  "address": {
+    "@type": "PostalAddress",
+    "addressRegion": "東京都",
+    "addressCountry": "JP"
+  },
+  "medicalSpecialty": "Dermatologic",
+  "openingHoursSpecification": [
+    { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday","Tuesday","Thursday","Friday"], "opens": "10:00", "closes": "19:00" },
+    { "@type": "OpeningHoursSpecification", "dayOfWeek": "Saturday", "opens": "10:00", "closes": "17:00" }
+  ]
+}
+</script>
+<style>
+  :root{
+    --bg:#fffdf9;
+    --bg-soft:#f5f2ec;
+    --ink:#20302a;
+    --ink-sub:#5b6b63;
+    --line:#e4ded2;
+    --accent:#12523d;
+    --accent-dark:#0b3a2b;
+    --accent-tint:#e9f1ec;
+    --radius-lg:24px;
+    --radius-sm:12px;
+    --shadow:0 18px 40px -20px rgba(18,82,61,.35);
+    --maxw:1120px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--ink);
+    font-family:'Noto Sans JP',sans-serif;
+    line-height:1.85;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  img{max-width:100%;height:auto;display:block;}
+  a{color:inherit;text-decoration:none;}
+  .num{font-family:'Manrope',sans-serif;}
+  h1,h2,h3,.serif{font-family:'Shippori Mincho',serif;}
+  .wrap{width:100%;max-width:var(--maxw);margin:0 auto;padding:0 24px;}
+  section{padding:96px 0;}
+  @media(max-width:600px){section{padding:64px 0;}}
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:8px;
+    font-size:.78rem;letter-spacing:.14em;color:var(--accent);
+    font-weight:700;margin-bottom:14px;
+  }
+  .eyebrow::before{content:"";width:22px;height:1px;background:var(--accent);}
+  h2.section-title{
+    font-size:clamp(1.5rem,3.6vw,2.15rem);
+    font-weight:700;letter-spacing:.03em;
+    margin:0 0 16px;
+  }
+  .lead{color:var(--ink-sub);font-size:.98rem;max-width:640px;margin:0 0 48px;}
+  .btn{
+    display:inline-flex;align-items:center;justify-content:center;gap:8px;
+    padding:16px 30px;border-radius:100px;font-weight:700;font-size:.95rem;
+    cursor:pointer;border:none;transition:transform .18s ease,box-shadow .18s ease;
+    white-space:nowrap;
+  }
+  .btn-primary{background:var(--accent);color:#fff;box-shadow:var(--shadow);}
+  .btn-primary:hover{transform:translateY(-2px);box-shadow:0 22px 44px -18px rgba(18,82,61,.5);}
+  .btn-ghost{background:#fff;color:var(--accent);border:1px solid var(--line);}
+  .btn-ghost:hover{border-color:var(--accent);}
+
+  /* header */
+  header.site-header{
+    position:fixed;top:0;left:0;right:0;z-index:50;
+    background:rgba(255,253,249,.9);backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);
+  }
+  .header-inner{
+    max-width:var(--maxw);margin:0 auto;padding:14px 24px;
+    display:flex;align-items:center;justify-content:space-between;
+  }
+  .logo{font-family:'Shippori Mincho',serif;font-weight:700;font-size:1.15rem;letter-spacing:.04em;}
+  .logo span{color:var(--accent);}
+  .desktop-nav{display:flex;gap:28px;font-size:.9rem;font-weight:500;}
+  .desktop-nav a:hover{color:var(--accent);}
+  .header-actions{display:flex;align-items:center;gap:14px;}
+  .tel-link{display:flex;align-items:center;gap:8px;font-weight:700;font-size:.92rem;}
+  .tel-link svg{flex-shrink:0;}
+  .hamburger{
+    display:none;width:42px;height:42px;border-radius:10px;border:1px solid var(--line);
+    background:#fff;align-items:center;justify-content:center;flex-direction:column;gap:5px;cursor:pointer;
+  }
+  .hamburger span{width:18px;height:2px;background:var(--ink);transition:transform .2s,opacity .2s;}
+  @media(max-width:860px){
+    .desktop-nav{display:none;}
+    .header-actions .btn-primary{display:none;}
+    .hamburger{display:flex;}
+  }
+  /* nav placed OUTSIDE header to avoid fixed+backdrop-filter clipping on mobile */
+  nav#mobileNav{
+    position:fixed;inset:0;z-index:60;background:var(--accent-dark);
+    display:flex;flex-direction:column;align-items:center;justify-content:center;gap:26px;
+    transform:translateY(-100%);transition:transform .32s ease;
+  }
+  nav#mobileNav.open{transform:translateY(0);}
+  nav#mobileNav a{color:#fff;font-size:1.3rem;font-family:'Shippori Mincho',serif;}
+  nav#mobileNav .close-nav{
+    position:absolute;top:18px;right:24px;width:42px;height:42px;border-radius:10px;
+    border:1px solid rgba(255,255,255,.3);display:flex;align-items:center;justify-content:center;
+    color:#fff;background:transparent;cursor:pointer;
+  }
+
+  /* hero */
+  .hero{
+    position:relative;margin-top:0;padding:168px 0 96px;overflow:hidden;
+    background:var(--accent-dark);color:#fff;
+  }
+  .hero::before{
+    content:"";position:absolute;inset:0;
+    background:linear-gradient(120deg,rgba(11,58,43,.92),rgba(11,58,43,.55)),
+      url('https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&w=1400&q=70') center/cover;
+  }
+  .hero-inner{position:relative;z-index:1;display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:48px;align-items:center;}
+  @media(max-width:900px){.hero-inner{grid-template-columns:minmax(0,1fr);}}
+  .hero h1{font-size:clamp(1.85rem,4.6vw,3rem);line-height:1.5;margin:0 0 20px;letter-spacing:.02em;}
+  .hero p.sub{font-size:1rem;color:#e6ede9;max-width:520px;margin:0 0 32px;}
+  .hero-ctas{display:flex;flex-wrap:wrap;gap:14px;margin-bottom:40px;}
+  .trust-row{display:flex;flex-wrap:wrap;gap:28px;}
+  .trust-item{min-width:140px;}
+  .trust-item .num{font-size:1.7rem;font-weight:800;display:block;}
+  .trust-item .cap{font-size:.76rem;color:#cfe0d7;}
+  .hero-card{
+    background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.22);
+    border-radius:var(--radius-lg);padding:28px;backdrop-filter:blur(4px);
+  }
+  .hero-card h3{margin:0 0 14px;font-size:1.05rem;}
+  .hero-card ul{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:12px;}
+  .hero-card li{display:flex;gap:10px;font-size:.88rem;color:#eef4f0;align-items:flex-start;}
+  .hero-card svg{flex-shrink:0;margin-top:3px;}
+
+  /* checklist */
+  .checklist-grid{
+    display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;
+  }
+  @media(max-width:640px){.checklist-grid{grid-template-columns:minmax(0,1fr);}}
+  .check-item{
+    display:flex;gap:14px;align-items:flex-start;background:var(--bg-soft);
+    border-radius:var(--radius-sm);padding:20px 22px;
+  }
+  .check-item svg{flex-shrink:0;margin-top:2px;}
+  .check-item p{margin:0;font-size:.94rem;}
+
+  /* reasons */
+  .reason-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;}
+  @media(max-width:860px){.reason-grid{grid-template-columns:minmax(0,1fr);}}
+  .reason-card{
+    background:#fff;border:1px solid var(--line);border-radius:var(--radius-lg);
+    padding:32px 26px;position:relative;
+  }
+  .reason-num{
+    width:44px;height:44px;border-radius:50%;background:var(--accent-tint);color:var(--accent);
+    display:flex;align-items:center;justify-content:center;font-family:'Manrope',sans-serif;
+    font-weight:800;margin-bottom:18px;
+  }
+  .reason-card h3{font-size:1.05rem;margin:0 0 10px;}
+  .reason-card p{font-size:.9rem;color:var(--ink-sub);margin:0;}
+
+  /* flow */
+  .flow-track{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0;position:relative;}
+  @media(max-width:860px){.flow-track{grid-template-columns:minmax(0,1fr);gap:18px;}}
+  .flow-step{position:relative;padding:0 18px;}
+  .flow-track:not(.stacked) .flow-step:not(:last-child)::after{
+    content:"";position:absolute;top:22px;right:-2px;width:60%;height:1px;background:var(--line);
+  }
+  .flow-step .idx{
+    width:44px;height:44px;border-radius:50%;background:var(--accent);color:#fff;
+    display:flex;align-items:center;justify-content:center;font-family:'Manrope',sans-serif;
+    font-weight:800;margin-bottom:16px;position:relative;z-index:1;
+  }
+  .flow-step h4{margin:0 0 8px;font-size:.98rem;}
+  .flow-step p{margin:0;font-size:.84rem;color:var(--ink-sub);}
+
+  /* doctor */
+  .doctor-block{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:40px;align-items:center;}
+  @media(max-width:860px){.doctor-block{grid-template-columns:minmax(0,1fr);}}
+  .doctor-photo{border-radius:var(--radius-lg);overflow:hidden;box-shadow:var(--shadow);}
+  .doctor-name{font-size:1.3rem;margin:0 0 6px;}
+  .doctor-role{color:var(--accent);font-weight:700;font-size:.86rem;margin-bottom:18px;}
+  .doctor-block p.bio{color:var(--ink-sub);font-size:.92rem;}
+  .note{font-size:.78rem;color:#8a938c;margin-top:14px;}
+
+  /* pricing */
+  .price-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px;align-items:stretch;}
+  @media(max-width:860px){.price-grid{grid-template-columns:minmax(0,1fr);}}
+  .price-card{
+    border:1px solid var(--line);border-radius:var(--radius-lg);padding:32px 26px;
+    background:#fff;display:flex;flex-direction:column;
+  }
+  .price-card.featured{
+    background:var(--accent-dark);color:#fff;border-color:var(--accent-dark);
+    transform:translateY(-10px);box-shadow:var(--shadow);
+  }
+  .price-card .badge{
+    align-self:flex-start;background:var(--accent);color:#fff;font-size:.72rem;font-weight:700;
+    padding:4px 12px;border-radius:100px;margin-bottom:14px;
+  }
+  .price-card.featured .badge{background:#fff;color:var(--accent-dark);}
+  .price-card h3{margin:0 0 6px;font-size:1.05rem;}
+  .price-card .amount{font-family:'Manrope',sans-serif;font-size:2rem;font-weight:800;margin:12px 0;}
+  .price-card .amount small{font-size:.85rem;font-weight:600;}
+  .price-card ul{list-style:none;padding:0;margin:0 0 24px;flex-grow:1;}
+  .price-card li{display:flex;gap:8px;font-size:.86rem;padding:7px 0;border-top:1px solid rgba(0,0,0,.06);}
+  .price-card.featured li{border-top:1px solid rgba(255,255,255,.14);}
+  .price-card li:first-child{border-top:none;}
+
+  /* compare table */
+  .compare-wrap{overflow-x:auto;border-radius:var(--radius-lg);border:1px solid var(--line);}
+  table.compare{width:100%;min-width:520px;border-collapse:collapse;font-size:.88rem;}
+  table.compare th,table.compare td{padding:16px 18px;text-align:left;border-bottom:1px solid var(--line);}
+  table.compare thead th{background:var(--bg-soft);font-weight:700;}
+  table.compare td.us{color:var(--accent);font-weight:700;background:var(--accent-tint);}
+  table.compare tr:last-child td{border-bottom:none;}
+
+  /* voice */
+  .voice-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px;}
+  @media(max-width:860px){.voice-grid{grid-template-columns:minmax(0,1fr);}}
+  .voice-card{background:#fff;border:1px solid var(--line);border-radius:var(--radius-lg);padding:26px;}
+  .voice-top{display:flex;align-items:center;gap:12px;margin-bottom:14px;}
+  .voice-avatar{
+    width:44px;height:44px;border-radius:50%;background:var(--accent-tint);color:var(--accent);
+    display:flex;align-items:center;justify-content:center;font-weight:700;font-family:'Shippori Mincho',serif;
+  }
+  .voice-meta strong{display:block;font-size:.88rem;}
+  .voice-meta span{font-size:.74rem;color:var(--ink-sub);}
+  .stars{display:flex;gap:2px;margin-bottom:10px;}
+  .voice-card p{font-size:.88rem;color:var(--ink-sub);margin:0;}
+
+  /* faq */
+  .faq-item{border-bottom:1px solid var(--line);}
+  .faq-item summary{
+    list-style:none;cursor:pointer;padding:22px 4px;display:flex;justify-content:space-between;
+    align-items:center;font-weight:700;font-size:.96rem;gap:16px;
+  }
+  .faq-item summary::-webkit-details-marker{display:none;}
+  .faq-item summary .plus{flex-shrink:0;position:relative;width:20px;height:20px;}
+  .faq-item summary .plus::before,.faq-item summary .plus::after{
+    content:"";position:absolute;background:var(--accent);transition:transform .2s;
+  }
+  .faq-item summary .plus::before{width:100%;height:2px;top:9px;left:0;}
+  .faq-item summary .plus::after{width:2px;height:100%;top:0;left:9px;}
+  .faq-item[open] summary .plus::after{transform:rotate(90deg);}
+  .faq-item p{margin:0 0 22px;color:var(--ink-sub);font-size:.9rem;padding:0 4px;}
+
+  /* schedule */
+  .schedule-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:32px;}
+  @media(max-width:860px){.schedule-grid{grid-template-columns:minmax(0,1fr);}}
+  table.hours{width:100%;border-collapse:collapse;font-size:.88rem;}
+  table.hours th,table.hours td{padding:12px 14px;border-bottom:1px solid var(--line);text-align:left;}
+  table.hours th{width:40%;color:var(--ink-sub);font-weight:500;}
+  .access-card{background:var(--bg-soft);border-radius:var(--radius-lg);padding:26px;font-size:.9rem;color:var(--ink-sub);}
+  .access-card h4{margin:0 0 10px;color:var(--ink);font-size:.98rem;}
+
+  /* form */
+  .form-shell{
+    background:var(--accent-dark);border-radius:var(--radius-lg);padding:44px;color:#fff;
+  }
+  @media(max-width:640px){.form-shell{padding:28px 20px;}}
+  .form-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;margin-top:28px;}
+  @media(max-width:640px){.form-grid{grid-template-columns:minmax(0,1fr);}}
+  .field{display:flex;flex-direction:column;gap:8px;}
+  .field.full{grid-column:1/-1;}
+  .field label{font-size:.82rem;color:#d7e5dd;}
+  .field input,.field select,.field textarea{
+    width:100%;max-width:100%;font-size:16px;padding:13px 14px;border-radius:10px;
+    border:1px solid rgba(255,255,255,.25);background:rgba(255,255,255,.08);color:#fff;
+    font-family:inherit;
+  }
+  .field input::placeholder,.field textarea::placeholder{color:#b9c9c0;}
+  .field textarea{resize:vertical;min-height:110px;}
+  .form-note{margin-top:20px;font-size:.78rem;color:#c9d9d0;}
+
+  /* sticky cta */
+  .sticky-cta{
+    position:fixed;left:0;right:0;bottom:0;z-index:40;
+    background:#fff;border-top:1px solid var(--line);
+    display:flex;gap:10px;padding:12px 16px;box-shadow:0 -10px 30px -18px rgba(0,0,0,.25);
+  }
+  .sticky-cta a{flex:1;}
+  .sticky-cta .btn{width:100%;padding:14px 10px;font-size:.86rem;}
+  @media(min-width:900px){.sticky-cta{display:none;}}
+
+  footer{background:var(--accent-dark);color:#cfe0d7;padding:64px 0 100px;}
+  @media(min-width:900px){footer{padding-bottom:64px;}}
+  .footer-grid{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr) minmax(0,1fr);gap:36px;}
+  @media(max-width:760px){.footer-grid{grid-template-columns:minmax(0,1fr);}}
+  footer h5{color:#fff;font-size:.9rem;margin:0 0 14px;}
+  footer p,footer li{font-size:.82rem;line-height:1.9;}
+  footer ul{list-style:none;padding:0;margin:0;}
+  .footer-disclaimer{
+    margin-top:44px;padding-top:24px;border-top:1px solid rgba(255,255,255,.14);
+    font-size:.74rem;color:#9fb3a8;
+  }
+
+  [data-reveal]{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s ease;}
+  [data-reveal].is-visible{opacity:1;transform:translateY(0);}
+  @media(prefers-reduced-motion:reduce){
+    [data-reveal]{opacity:1;transform:none;transition:none;}
+    html{scroll-behavior:auto;}
+  }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <a href="#top" class="logo">はるにれ<span>皮膚科クリニック</span></a>
+    <nav class="desktop-nav">
+      <a href="#worries">お悩み</a>
+      <a href="#reasons">選ばれる理由</a>
+      <a href="#doctor">院長紹介</a>
+      <a href="#price">料金</a>
+      <a href="#voice">利用者の声</a>
+      <a href="#faq">よくある質問</a>
+      <a href="#access">アクセス</a>
+    </nav>
+    <div class="header-actions">
+      <a class="tel-link" href="tel:0300000000">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M6.6 10.8c1.4 2.8 3.8 5.2 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.6 21 3 13.4 3 4c0-.6.4-1 1-1h3.4c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.4 0 .8-.2 1L6.6 10.8z" stroke="#12523d" stroke-width="1.6"/></svg>
+        03-0000-0000
+      </a>
+      <a href="#form" class="btn btn-primary">WEB予約</a>
+      <button class="hamburger" id="hamburgerBtn" aria-label="メニューを開く" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<nav id="mobileNav">
+  <button class="close-nav" id="closeNavBtn" aria-label="メニューを閉じる">✕</button>
+  <a href="#worries">お悩み</a>
+  <a href="#reasons">選ばれる理由</a>
+  <a href="#doctor">院長紹介</a>
+  <a href="#price">料金</a>
+  <a href="#voice">利用者の声</a>
+  <a href="#faq">よくある質問</a>
+  <a href="#access">アクセス</a>
+  <a href="#form" class="btn btn-primary" style="margin-top:10px;">WEB予約はこちら</a>
+</nav>
+
+<main id="top">
+
+  <section class="hero">
+    <div class="wrap hero-inner">
+      <div>
+        <p class="eyebrow" style="color:#bfe0cf;">大人にきび・肌荒れ専門</p>
+        <h1>繰り返す大人にきび、<br>根本から。</h1>
+        <p class="sub">自己流のケアで悩み続ける前に。皮膚科専門医によるオーダーメイド治療で、繰り返さない肌へ向き合います。</p>
+        <div class="hero-ctas">
+          <a href="#form" class="btn btn-primary">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M4 4h16v16H4V4z" stroke="#fff" stroke-width="1.6"/><path d="M8 2v4M16 2v4M4 10h16" stroke="#fff" stroke-width="1.6"/></svg>
+            WEB予約する
+          </a>
+          <a href="tel:0300000000" class="btn btn-ghost" style="background:transparent;color:#fff;border-color:rgba(255,255,255,.4);">
+            電話で相談 03-0000-0000
+          </a>
+        </div>
+        <div class="trust-row">
+          <div class="trust-item"><span class="num">8,400<small>+</small></span><span class="cap">累計ご相談件数(※仮の数値です)</span></div>
+          <div class="trust-item"><span class="num">15<small>分以内</small></span><span class="cap">予約時の平均待ち時間(※仮)</span></div>
+          <div class="trust-item"><span class="num">週6<small>日</small></span><span class="cap">診療対応(水曜定休)</span></div>
+        </div>
+      </div>
+      <div class="hero-card" data-reveal>
+        <h3>初診の方へ</h3>
+        <ul>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg>WEB予約は24時間受付</li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg>保険診療にも対応</li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg>症状に応じてオンライン診療も選択可</li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg>未成年は保護者の同意が必要です</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="worries">
+    <div class="wrap">
+      <p class="eyebrow">SYMPTOM CHECK</p>
+      <h2 class="section-title">こんなお悩みありませんか</h2>
+      <p class="lead">一つでも当てはまる方は、自己流のケアを続ける前にご相談ください。原因によって適した治療は異なります。</p>
+      <div class="checklist-grid" data-reveal>
+        <div class="check-item"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="#12523d" stroke-width="1.6"/><path d="M8 12.5l2.5 2.5L16 9" stroke="#12523d" stroke-width="1.6" stroke-linecap="round"/></svg><p>同じ場所に繰り返しできる</p></div>
+        <div class="check-item"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="#12523d" stroke-width="1.6"/><path d="M8 12.5l2.5 2.5L16 9" stroke="#12523d" stroke-width="1.6" stroke-linecap="round"/></svg><p>市販薬を試したが改善しない</p></div>
+        <div class="check-item"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="#12523d" stroke-width="1.6"/><path d="M8 12.5l2.5 2.5L16 9" stroke="#12523d" stroke-width="1.6" stroke-linecap="round"/></svg><p>あご・フェイスラインに集中している</p></div>
+        <div class="check-item"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="#12523d" stroke-width="1.6"/><path d="M8 12.5l2.5 2.5L16 9" stroke="#12523d" stroke-width="1.6" stroke-linecap="round"/></svg><p>触ると痛みや赤みがある</p></div>
+        <div class="check-item"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="#12523d" stroke-width="1.6"/><path d="M8 12.5l2.5 2.5L16 9" stroke="#12523d" stroke-width="1.6" stroke-linecap="round"/></svg><p>化粧で隠すことに疲れてきた</p></div>
+        <div class="check-item"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="#12523d" stroke-width="1.6"/><path d="M8 12.5l2.5 2.5L16 9" stroke="#12523d" stroke-width="1.6" stroke-linecap="round"/></svg><p>何から試せばよいか分からない</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="reasons" style="background:var(--bg-soft);">
+    <div class="wrap">
+      <p class="eyebrow">WHY CHOOSE US</p>
+      <h2 class="section-title">はるにれ皮膚科クリニックが選ばれる理由</h2>
+      <p class="lead">「原因を見極める」「無理のない範囲で続けられる」を軸に、治療方針を組み立てます。</p>
+      <div class="reason-grid" data-reveal>
+        <div class="reason-card">
+          <div class="reason-num">01</div>
+          <h3>皮膚科専門医による見立て</h3>
+          <p>自己判断のケアでは届かない毛穴の状態まで診察し、症状の段階ごとに原因を切り分けます。</p>
+        </div>
+        <div class="reason-card">
+          <div class="reason-num">02</div>
+          <h3>保険診療+自費のオーダーメイド</h3>
+          <p>内服・外用・自費治療を症状に合わせて組み合わせ、続けやすい範囲での提案を心がけています。</p>
+        </div>
+        <div class="reason-card">
+          <div class="reason-num">03</div>
+          <h3>通いやすい導線</h3>
+          <p>予約制で待ち時間を抑え、経過観察はオンライン診療も選べるため通院の負担を減らせます。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="flow">
+    <div class="wrap">
+      <p class="eyebrow">FLOW</p>
+      <h2 class="section-title">ご来院から治療開始までの流れ</h2>
+      <p class="lead">初診から治療方針が決まるまで、最短1回のご来院で進められます。</p>
+      <div class="flow-track" data-reveal>
+        <div class="flow-step"><div class="idx num">1</div><h4>WEB予約</h4><p>24時間受付のフォームから初診枠を予約します。</p></div>
+        <div class="flow-step"><div class="idx num">2</div><h4>カウンセリング・診察</h4><p>専門医が肌の状態と生活習慣を確認します。</p></div>
+        <div class="flow-step"><div class="idx num">3</div><h4>治療方針のご提案</h4><p>保険診療と自費メニューを組み合わせて提案します。</p></div>
+        <div class="flow-step"><div class="idx num">4</div><h4>通院・経過観察</h4><p>変化を記録しながら治療内容を調整していきます。</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="doctor" style="background:var(--bg-soft);">
+    <div class="wrap">
+      <p class="eyebrow">DOCTOR</p>
+      <h2 class="section-title">院長紹介</h2>
+      <div class="doctor-block" data-reveal>
+        <div class="doctor-photo">
+          <img src="https://images.unsplash.com/photo-1622902046580-2b47f47f5471?auto=format&fit=crop&w=900&q=70" alt="院長イメージ写真">
+        </div>
+        <div>
+          <h3 class="doctor-name">皮膚科専門医　佐伯 悠</h3>
+          <p class="doctor-role">はるにれ皮膚科クリニック 院長</p>
+          <p class="bio">大学病院の皮膚科での勤務を経て開院。特に成人のにきび・肌荒れ治療を専門とし、患者一人ひとりの生活背景に合わせた治療計画を大切にしています。「治す」だけでなく「続けられる」治療を心がけています。</p>
+          <p class="note">※院長プロフィールは制作サンプルのための仮の内容です。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="price">
+    <div class="wrap">
+      <p class="eyebrow">PRICE</p>
+      <h2 class="section-title">料金プラン</h2>
+      <p class="lead">症状の段階に応じて3つのプランからご案内します。まずはライトプランでのご相談も可能です。</p>
+      <div class="price-grid" data-reveal>
+        <div class="price-card">
+          <span class="badge">まず相談したい方に</span>
+          <h3>ライトプラン</h3>
+          <p class="amount">3,000<small>円〜/回(保険適用)</small></p>
+          <ul>
+            <li>初診カウンセリング</li>
+            <li>保険診療の範囲での外用・内服処方</li>
+            <li>次回通院ペースのご案内</li>
+          </ul>
+        </div>
+        <div class="price-card featured">
+          <span class="badge">本格的に治したい方に</span>
+          <h3>スタンダードプラン</h3>
+          <p class="amount">12,000<small>円〜/月</small></p>
+          <ul>
+            <li>自費リセット処方(段階調整あり)</li>
+            <li>月1回の経過フォロー診察</li>
+            <li>オンライン診療の併用可</li>
+          </ul>
+        </div>
+        <div class="price-card">
+          <span class="badge">経過を密に管理したい方に</span>
+          <h3>プレミアムプラン</h3>
+          <p class="amount">28,000<small>円〜/月</small></p>
+          <ul>
+            <li>専門医による伴走プラン</li>
+            <li>隔週の経過チェック</li>
+            <li>生活習慣のアドバイスを含む</li>
+          </ul>
+        </div>
+      </div>
+      <p class="note">※上記は一般的な目安料金です。実際の金額は診察内容により異なります(制作サンプルのための仮の内容です)。</p>
+    </div>
+  </section>
+
+  <section id="compare" style="background:var(--bg-soft);">
+    <div class="wrap">
+      <p class="eyebrow">COMPARE</p>
+      <h2 class="section-title">一般的な皮膚科クリニックとの違い</h2>
+      <div class="compare-wrap" data-reveal>
+        <table class="compare">
+          <thead>
+            <tr><th>比較項目</th><th class="us">はるにれ皮膚科クリニック</th><th>一般的な皮膚科クリニック</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>診察までの待ち時間</td><td class="us">平均15分以内(予約制)</td><td>混雑時60分以上のことも</td></tr>
+            <tr><td>オンライン診療</td><td class="us">経過観察は対応</td><td>未対応が多い</td></tr>
+            <tr><td>治療方針の説明</td><td class="us">図解つきで丁寧に説明</td><td>口頭のみで簡潔なことが多い</td></tr>
+            <tr><td>通院ペースの相談</td><td class="us">生活スタイルに合わせ都度相談</td><td>画一的な指示が多い</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="note">※比較内容は一般的な傾向をもとにした制作サンプルのための仮の内容です。</p>
+    </div>
+  </section>
+
+  <section id="voice">
+    <div class="wrap">
+      <p class="eyebrow">VOICE(※イメージです)</p>
+      <h2 class="section-title">ご利用いただいた方の声</h2>
+      <div class="voice-grid" data-reveal>
+        <div class="voice-card">
+          <div class="stars">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="#12523d"><path d="M12 2l2.9 6.6 7.1.6-5.4 4.7 1.7 7-6.3-3.9L5.7 21l1.7-7-5.4-4.7 7.1-.6z"/></svg>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="#12523d"><path d="M12 2l2.9 6.6 7.1.6-5.4 4.7 1.7 7-6.3-3.9L5.7 21l1.7-7-5.4-4.7 7.1-.6z"/></svg>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="#12523d"><path d="M12 2l2.9 6.6 7.1.6-5.4 4.7 1.7 7-6.3-3.9L5.7 21l1.7-7-5.4-4.7 7.1-.6z"/></svg>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="#12523d"><path d="M12 2l2.9 6.6 7.1.6-5.4 4.7 1.7 7-6.3-3.9L5.7 21l1.7-7-5.4-4.7 7.1-.6z"/></svg>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="#12523d"><path d="M12 2l2.9 6.6 7.1.6-5.4 4.7 1.7 7-6.3-3.9L5.7 21l1.7-7-5.4-4.7 7.1-.6z"/></svg>
+          </div>
+          <div class="voice-top">
+            <div class="voice-avatar">M</div>
+            <div class="voice-meta"><strong>30代・女性</strong><span>スタンダードプラン利用</span></div>
+          </div>
+          <p>繰り返すあごにきびに悩んでいましたが、原因を丁寧に説明してもらえて安心して治療を続けられています。</p>
+        </div>
+        <div class="voice-card">
+          <div class="stars">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="#12523d"><path d="M12 2l2.9 6.6 7.1.6-5.4 4.7 1.7 7-6.3-3.9L5.7 21l1.7-7-5.4-4.7 7.1-.6z"/></svg>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="#12523d"><path d="M12 2l2.9 6.6 7.1.6-5.4 4.7 1.7 7-6.3-3.9L5.7 21l1.7-7-5.4-4.7 7.1-.6z"/></svg>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="#12523d"><path d="M12 2l2.9 6.6 7.1.6-5.4 4.7 1.7 7-6.3-3.9L5.7 21l1.7-7-5.4-4.7 7.1-.6z"/></svg>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="#12523d"><path d="M12 2l2.9 6.6 7.1.6-5.4 4.7 1.7 7-6.3-3.9L5.7 21l1.7-7-5.4-4.7 7.1-.6z"/></svg>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="#e4ded2"><path d="M12 2l2.9 6.6 7.1.6-5.4 4.7 1.7 7-6.3-3.9L5.7 21l1.7-7-5.4-4.7 7.1-.6z"/></svg>
+          </div>
+          <div class="voice-top">
+            <div class="voice-avatar">K</div>
+            <div class="voice-meta"><strong>20代・女性</strong><span>ライトプラン利用</span></div>
+          </div>
+          <p>オンライン診療があるので、忙しい時期でも通院を止めずに済みました。</p>
+        </div>
+        <div class="voice-card">
+          <div class="stars">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="#12523d"><path d="M12 2l2.9 6.6 7.1.6-5.4 4.7 1.7 7-6.3-3.9L5.7 21l1.7-7-5.4-4.7 7.1-.6z"/></svg>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="#12523d"><path d="M12 2l2.9 6.6 7.1.6-5.4 4.7 1.7 7-6.3-3.9L5.7 21l1.7-7-5.4-4.7 7.1-.6z"/></svg>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="#12523d"><path d="M12 2l2.9 6.6 7.1.6-5.4 4.7 1.7 7-6.3-3.9L5.7 21l1.7-7-5.4-4.7 7.1-.6z"/></svg>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="#12523d"><path d="M12 2l2.9 6.6 7.1.6-5.4 4.7 1.7 7-6.3-3.9L5.7 21l1.7-7-5.4-4.7 7.1-.6z"/></svg>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="#12523d"><path d="M12 2l2.9 6.6 7.1.6-5.4 4.7 1.7 7-6.3-3.9L5.7 21l1.7-7-5.4-4.7 7.1-.6z"/></svg>
+          </div>
+          <div class="voice-top">
+            <div class="voice-avatar">S</div>
+            <div class="voice-meta"><strong>40代・女性</strong><span>プレミアムプラン利用</span></div>
+          </div>
+          <p>自己流のケアで悪化させていたことに気づけました。今は落ち着いて過ごせています。</p>
+        </div>
+      </div>
+      <p class="note">※お客様の声は制作サンプルのための仮のイメージです。実在の患者様のものではありません。</p>
+    </div>
+  </section>
+
+  <section id="faq" style="background:var(--bg-soft);">
+    <div class="wrap" style="max-width:820px;">
+      <p class="eyebrow">FAQ</p>
+      <h2 class="section-title">よくある質問</h2>
+      <div data-reveal>
+        <details class="faq-item" open>
+          <summary>保険診療と自費診療の違いは何ですか。<span class="plus"></span></summary>
+          <p>症状の程度によって使い分けます。初診時に医師が保険適用の範囲かどうかをご説明します。</p>
+        </details>
+        <details class="faq-item">
+          <summary>オンライン診療だけで治療は完結しますか。<span class="plus"></span></summary>
+          <p>初診は対面での診察をお願いしています。症状が安定した後の経過観察はオンラインも選べます。</p>
+        </details>
+        <details class="faq-item">
+          <summary>通院の頻度はどれくらいですか。<span class="plus"></span></summary>
+          <p>治療開始から1〜2か月は2〜4週間ごと、状態が落ち着いてからは月1回程度が目安です。</p>
+        </details>
+        <details class="faq-item">
+          <summary>未成年でも受診できますか。<span class="plus"></span></summary>
+          <p>保護者の同意があれば受診いただけます。詳しくは予約時にご相談ください。</p>
+        </details>
+        <details class="faq-item">
+          <summary>予約なしでも受診できますか。<span class="plus"></span></summary>
+          <p>当日の空き状況によりご案内できる場合がありますが、待ち時間短縮のため予約をおすすめしています。</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <section id="access">
+    <div class="wrap">
+      <p class="eyebrow">SCHEDULE / ACCESS</p>
+      <h2 class="section-title">診療時間・アクセス</h2>
+      <div class="schedule-grid" data-reveal>
+        <table class="hours">
+          <tr><th>平日</th><td>10:00-13:00 / 15:00-19:00</td></tr>
+          <tr><th>土曜</th><td>10:00-13:00 / 14:00-17:00</td></tr>
+          <tr><th>日曜・祝日</th><td>休診</td></tr>
+          <tr><th>定休日</th><td>水曜日</td></tr>
+        </table>
+        <div class="access-card">
+          <h4>アクセス</h4>
+          <p>最寄り駅から徒歩圏内を想定した立地です。詳細な所在地・地図は制作サンプルのための仮表示です。実制作時に正式な住所・地図へ差し替えます。</p>
+          <p style="margin-top:12px;">電話番号: 03-0000-0000(ダミー番号)</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="form" style="background:var(--bg-soft);">
+    <div class="wrap" style="max-width:760px;">
+      <p class="eyebrow">RESERVATION</p>
+      <h2 class="section-title">WEB予約フォーム</h2>
+      <p class="lead">下記フォームは制作サンプルの動作見本です。実際の送信・予約は行われません。</p>
+      <div class="form-shell" data-reveal>
+        <h3 style="margin:0;font-size:1.1rem;">初診予約 お申し込み</h3>
+        <form class="form-grid" onsubmit="return false;">
+          <div class="field">
+            <label for="f-name">お名前</label>
+            <input id="f-name" type="text" placeholder="山田 花子">
+          </div>
+          <div class="field">
+            <label for="f-tel">電話番号</label>
+            <input id="f-tel" type="tel" placeholder="03-0000-0000">
+          </div>
+          <div class="field">
+            <label for="f-mail">メールアドレス</label>
+            <input id="f-mail" type="email" placeholder="sample@example.com">
+          </div>
+          <div class="field">
+            <label for="f-date">希望日時</label>
+            <input id="f-date" type="text" placeholder="例:平日夕方希望">
+          </div>
+          <div class="field full">
+            <label for="f-msg">ご相談内容</label>
+            <textarea id="f-msg" placeholder="現在の肌の状態や気になる点をご記入ください"></textarea>
+          </div>
+          <div class="field full">
+            <button type="submit" class="btn btn-primary" style="width:100%;">この内容で予約する(サンプル)</button>
+          </div>
+        </form>
+        <p class="form-note">※本フォームはデザイン確認用のサンプルです。入力内容は送信・保存されません。</p>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<div class="sticky-cta">
+  <a href="tel:0300000000" class="btn btn-ghost">電話で相談</a>
+  <a href="#form" class="btn btn-primary">WEB予約する</a>
+</div>
+
+<footer>
+  <div class="wrap footer-grid">
+    <div>
+      <h5 class="serif" style="font-size:1.1rem;">はるにれ皮膚科クリニック</h5>
+      <p>大人にきび・肌荒れ治療を専門とする皮膚科クリニックの制作サンプルページです。</p>
+      <p>電話: 03-0000-0000(ダミー番号)</p>
+    </div>
+    <div>
+      <h5>メニュー</h5>
+      <ul>
+        <li><a href="#worries">お悩み</a></li>
+        <li><a href="#reasons">選ばれる理由</a></li>
+        <li><a href="#price">料金プラン</a></li>
+        <li><a href="#faq">よくある質問</a></li>
+      </ul>
+    </div>
+    <div>
+      <h5>診療時間</h5>
+      <ul>
+        <li>平日 10:00-19:00(休憩あり)</li>
+        <li>土曜 10:00-17:00(休憩あり)</li>
+        <li>日曜・祝日・水曜 休診</li>
+      </ul>
+    </div>
+  </div>
+  <div class="wrap footer-disclaimer">
+    <p>※本ページは制作サンプル(デモ)です。掲載の内容・数値は仮のもので、写真はイメージです。院名・人物名・料金・お客様の声はすべて架空の内容であり、実在する医療機関・人物とは関係ありません。</p>
+    <p style="margin-top:8px;">&copy; 2026 はるにれ皮膚科クリニック(制作サンプル)</p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var hbtn = document.getElementById('hamburgerBtn');
+  var closeBtn = document.getElementById('closeNavBtn');
+  var nav = document.getElementById('mobileNav');
+  function openNav(){ nav.classList.add('open'); hbtn.setAttribute('aria-expanded','true'); document.body.style.overflow='hidden'; }
+  function closeNav(){ nav.classList.remove('open'); hbtn.setAttribute('aria-expanded','false'); document.body.style.overflow=''; }
+  hbtn.addEventListener('click', openNav);
+  closeBtn.addEventListener('click', closeNav);
+  nav.querySelectorAll('a').forEach(function(a){ a.addEventListener('click', closeNav); });
+
+  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(!reduceMotion && 'IntersectionObserver' in window){
+    var targets = document.querySelectorAll('[data-reveal]');
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if(entry.isIntersecting){
+          entry.target.classList.add('is-visible');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+    targets.forEach(function(t){ io.observe(t); });
+  } else {
+    document.querySelectorAll('[data-reveal]').forEach(function(t){ t.classList.add('is-visible'); });
+  }
+
+  var faqItems = document.querySelectorAll('.faq-item');
+  faqItems.forEach(function(item){
+    item.addEventListener('toggle', function(){
+      if(item.open){
+        faqItems.forEach(function(other){
+          if(other !== item) other.open = false;
+        });
+      }
+    });
+  });
+})();
+</script>
+</body>
+</html>
