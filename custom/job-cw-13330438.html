@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AXIS CREATIVE(広告制作会社サンプル)| コーポレートサイト リニューアル提案</title>
+<meta name="description" content="広告制作会社様のコーポレートサイトリニューアル提案サンプル。デザイン・コーディング・レスポンシブ対応・SEO対策までワンストップで制作します。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Zen+Kaku+Gothic+New:wght@500;700;900&family=Manrope:wght@500;700;800&display=swap" rel="stylesheet">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  "name": "AXIS CREATIVE(広告制作会社サンプル)",
+  "description": "広告・グラフィック・Web制作を手がける広告制作会社のコーポレートサイト提案サンプルです。",
+  "areaServed": "JP",
+  "priceRange": "要相談"
+}
+</script>
+<style>
+  :root{
+    --navy:#16233f;
+    --navy-deep:#0d1730;
+    --paper:#faf8f4;
+    --paper-2:#f2efe8;
+    --ink:#1c1c1c;
+    --ink-soft:#54586a;
+    --line:#e2ded4;
+    --radius:14px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    font-family:"Noto Sans JP",sans-serif;
+    color:var(--ink);
+    background:var(--paper);
+    line-height:1.8;
+    font-feature-settings:"palt";
+    overflow-x:hidden;
+  }
+  img{max-width:100%;display:block;}
+  h1,h2,h3,h4{font-family:"Zen Kaku Gothic New",sans-serif;margin:0;letter-spacing:.02em;}
+  p{margin:0;}
+  a{color:inherit;text-decoration:none;}
+  .num{font-family:"Manrope",sans-serif;}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 24px;width:100%;}
+  section{padding:96px 0;}
+  @media (max-width:640px){section{padding:64px 0;}}
+
+  /* ---------- header ---------- */
+  header{
+    position:fixed;top:0;left:0;right:0;z-index:100;
+    background:rgba(250,248,244,.86);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid rgba(28,28,28,.06);
+    transition:background .3s;
+  }
+  .header-inner{
+    max-width:1120px;margin:0 auto;padding:16px 24px;
+    display:flex;align-items:center;justify-content:space-between;
+  }
+  .logo{font-family:"Zen Kaku Gothic New",sans-serif;font-weight:900;font-size:1.3rem;letter-spacing:.06em;color:var(--navy);}
+  .logo span{display:block;font-family:"Noto Sans JP",sans-serif;font-weight:500;font-size:.6rem;letter-spacing:.1em;color:var(--ink-soft);margin-top:2px;}
+  .nav-desktop{display:flex;gap:32px;font-size:.9rem;font-weight:500;}
+  .nav-desktop a{position:relative;padding:4px 0;}
+  .nav-desktop a::after{content:"";position:absolute;left:0;bottom:0;width:0;height:2px;background:var(--navy);transition:width .25s;}
+  .nav-desktop a:hover::after{width:100%;}
+  .burger{
+    display:none;width:44px;height:44px;border:1px solid var(--line);border-radius:10px;
+    background:none;cursor:pointer;position:relative;
+  }
+  .burger span,.burger span::before,.burger span::after{
+    content:"";position:absolute;left:11px;right:11px;height:2px;background:var(--navy);transition:transform .25s,opacity .25s;
+  }
+  .burger span{top:21px;}
+  .burger span::before{top:-7px;}
+  .burger span::after{top:7px;}
+  .burger.open span{background:transparent;}
+  .burger.open span::before{transform:translateY(7px) rotate(45deg);}
+  .burger.open span::after{transform:translateY(-7px) rotate(-45deg);}
+
+  /* mobile nav drawer sits OUTSIDE header to avoid backdrop-filter trapping fixed children */
+  #mobileNav{
+    position:fixed;top:0;right:-100%;width:78%;max-width:340px;height:100%;z-index:99;
+    background:var(--navy-deep);color:#fff;padding:100px 32px 40px;
+    transition:right .35s ease;overflow-y:auto;
+  }
+  #mobileNav.open{right:0;}
+  #mobileNav a{display:block;font-size:1.05rem;font-weight:700;padding:14px 0;border-bottom:1px solid rgba(255,255,255,.12);}
+  #navScrim{position:fixed;inset:0;background:rgba(13,23,48,.45);z-index:98;opacity:0;pointer-events:none;transition:opacity .3s;}
+  #navScrim.open{opacity:1;pointer-events:auto;}
+
+  @media (max-width:860px){
+    .nav-desktop{display:none;}
+    .burger{display:block;}
+  }
+
+  /* ---------- hero ---------- */
+  .hero{
+    position:relative;min-height:100svh;display:flex;align-items:flex-end;
+    padding-top:120px;
+  }
+  .hero-bg{
+    position:absolute;inset:0;
+    background:linear-gradient(180deg,rgba(13,23,48,.55) 0%,rgba(13,23,48,.72) 55%,rgba(13,23,48,.92) 100%),
+      url("https://images.unsplash.com/photo-1629875499750-a31b83446598?auto=format&fit=crop&w=1600&q=70") center/cover no-repeat;
+  }
+  .hero-content{position:relative;z-index:2;color:#fff;padding-bottom:72px;width:100%;}
+  .hero-badge{
+    display:inline-flex;align-items:center;gap:8px;font-size:.78rem;font-weight:700;letter-spacing:.08em;
+    background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.35);
+    padding:7px 16px;border-radius:100px;margin-bottom:24px;
+  }
+  .hero-badge .dot{width:6px;height:6px;border-radius:50%;background:#fff;}
+  .hero h1{
+    font-size:clamp(2.1rem,5.2vw,3.6rem);font-weight:900;line-height:1.4;margin-bottom:20px;
+  }
+  .hero h1 em{font-style:normal;color:#e7c15a;}
+  .hero p.lead{font-size:1.05rem;max-width:560px;color:rgba(255,255,255,.88);margin-bottom:36px;}
+  .cta-row{display:flex;gap:16px;flex-wrap:wrap;}
+  .btn{
+    display:inline-flex;align-items:center;gap:10px;padding:16px 30px;border-radius:100px;
+    font-weight:700;font-size:.95rem;cursor:pointer;border:none;transition:transform .2s,box-shadow .2s;
+  }
+  .btn:hover{transform:translateY(-2px);}
+  .btn-primary{background:#e7c15a;color:var(--navy-deep);box-shadow:0 10px 26px rgba(231,193,90,.35);}
+  .btn-outline{background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,.6);}
+  .btn svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:2;}
+
+  .trust-band{
+    position:relative;z-index:2;background:var(--navy-deep);color:#fff;
+  }
+  .trust-band .wrap{
+    display:grid;grid-template-columns:repeat(4,1fr);gap:24px;padding:28px 24px;
+  }
+  .trust-item{text-align:center;border-left:1px solid rgba(255,255,255,.15);}
+  .trust-item:first-child{border-left:none;}
+  .trust-item .num{font-size:1.9rem;font-weight:800;color:#e7c15a;}
+  .trust-item .cap{font-size:.72rem;color:rgba(255,255,255,.7);margin-top:4px;}
+  @media (max-width:640px){
+    .trust-band .wrap{grid-template-columns:repeat(2,1fr);row-gap:20px;}
+    .trust-item:nth-child(3){border-left:none;}
+  }
+
+  /* ---------- section heading ---------- */
+  .sec-head{max-width:640px;margin:0 auto 56px;text-align:center;}
+  .sec-kicker{font-family:"Manrope",sans-serif;font-size:.8rem;font-weight:800;letter-spacing:.18em;color:var(--navy);text-transform:uppercase;}
+  .sec-head h2{font-size:clamp(1.5rem,3.4vw,2.1rem);margin-top:10px;line-height:1.5;}
+  .sec-head p{color:var(--ink-soft);margin-top:16px;font-size:.95rem;}
+
+  /* reveal */
+  .reveal{opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s ease;}
+  .reveal.in{opacity:1;transform:none;}
+
+  /* ---------- strengths ---------- */
+  .strength-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;}
+  @media (max-width:860px){.strength-grid{grid-template-columns:1fr;}}
+  .strength-card{
+    background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:32px 28px;
+  }
+  .strength-icon{width:52px;height:52px;border-radius:12px;background:var(--paper-2);display:flex;align-items:center;justify-content:center;margin-bottom:20px;}
+  .strength-icon svg{width:26px;height:26px;stroke:var(--navy);fill:none;stroke-width:1.8;}
+  .strength-card h3{font-size:1.1rem;margin-bottom:10px;}
+  .strength-card p{font-size:.88rem;color:var(--ink-soft);}
+  .strength-num{font-family:"Manrope",sans-serif;font-weight:800;font-size:.75rem;color:var(--navy);letter-spacing:.1em;margin-bottom:8px;display:block;}
+
+  /* ---------- sitemap / service scope ---------- */
+  .scope{background:var(--paper-2);}
+  .sitemap{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;}
+  @media (max-width:860px){.sitemap{grid-template-columns:repeat(2,1fr);}}
+  .sitemap-item{
+    background:#fff;border:1px solid var(--line);border-radius:10px;padding:20px 16px;text-align:center;
+  }
+  .sitemap-item .no{font-family:"Manrope",sans-serif;font-weight:800;color:var(--navy);font-size:.75rem;}
+  .sitemap-item h4{font-size:.92rem;margin:6px 0 4px;}
+  .sitemap-item p{font-size:.72rem;color:var(--ink-soft);}
+  .scope-note{margin-top:28px;font-size:.82rem;color:var(--ink-soft);text-align:center;}
+
+  /* ---------- works ---------- */
+  .works-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
+  @media (max-width:860px){.works-grid{grid-template-columns:1fr 1fr;}}
+  @media (max-width:560px){.works-grid{grid-template-columns:1fr;}}
+  .work-card{border-radius:var(--radius);overflow:hidden;border:1px solid var(--line);background:#fff;}
+  .work-visual{
+    aspect-ratio:4/3;position:relative;display:flex;align-items:flex-end;padding:18px;overflow:hidden;
+  }
+  .work-visual::before{content:"";position:absolute;inset:0;opacity:.9;}
+  .work-visual .tag{position:relative;z-index:1;color:#fff;font-weight:700;font-size:.82rem;letter-spacing:.04em;}
+  .wv-1::before{background:linear-gradient(145deg,#16233f,#3a4c78);}
+  .wv-2::before{background:linear-gradient(145deg,#7a5a1e,#e7c15a);}
+  .wv-3::before{background:linear-gradient(145deg,#233a2a,#4d7a5a);}
+  .wv-4::before{background:linear-gradient(145deg,#3f1f2b,#7a3a4d);}
+  .wv-5::before{background:linear-gradient(145deg,#1e2a3f,#5a7a9e);}
+  .wv-6::before{background:linear-gradient(145deg,#2b2b2b,#5c5c5c);}
+  .work-shape{position:absolute;border-radius:50%;}
+  .work-card .body{padding:18px 20px 22px;}
+  .work-card h4{font-size:.95rem;margin-bottom:6px;}
+  .work-card p{font-size:.78rem;color:var(--ink-soft);}
+  .works-note{margin-top:24px;font-size:.8rem;color:var(--ink-soft);text-align:center;}
+
+  /* ---------- flow ---------- */
+  .flow{background:var(--navy-deep);color:#fff;}
+  .flow .sec-kicker{color:#e7c15a;}
+  .flow .sec-head p{color:rgba(255,255,255,.68);}
+  .flow-list{display:grid;grid-template-columns:repeat(5,1fr);gap:16px;counter-reset:flow;}
+  @media (max-width:960px){.flow-list{grid-template-columns:repeat(2,1fr);}}
+  .flow-item{
+    background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);border-radius:12px;padding:24px 18px;position:relative;
+  }
+  .flow-item .fnum{font-family:"Manrope",sans-serif;font-weight:800;font-size:1.6rem;color:#e7c15a;}
+  .flow-item h4{font-size:.92rem;margin:10px 0 8px;}
+  .flow-item p{font-size:.76rem;color:rgba(255,255,255,.66);}
+
+  /* ---------- company ---------- */
+  .company-wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:56px;align-items:center;}
+  @media (max-width:860px){.company-wrap{grid-template-columns:1fr;}}
+  .company-photo{border-radius:var(--radius);overflow:hidden;position:relative;aspect-ratio:4/5;}
+  .company-photo img{width:100%;height:100%;object-fit:cover;}
+  .company-caption{
+    position:absolute;bottom:0;left:0;right:0;padding:20px;
+    background:linear-gradient(0deg,rgba(13,23,48,.85),transparent);color:#fff;font-size:.78rem;
+  }
+  table.company-table{width:100%;border-collapse:collapse;font-size:.9rem;}
+  table.company-table th,table.company-table td{
+    text-align:left;padding:14px 0;border-bottom:1px solid var(--line);vertical-align:top;
+  }
+  table.company-table th{width:120px;color:var(--ink-soft);font-weight:500;}
+
+  /* ---------- faq ---------- */
+  .faq-list{max-width:760px;margin:0 auto;}
+  .faq-item{border-bottom:1px solid var(--line);}
+  .faq-q{
+    display:flex;justify-content:space-between;align-items:center;gap:16px;padding:22px 4px;
+    cursor:pointer;font-weight:700;font-size:.96rem;
+  }
+  .faq-q .plus{width:22px;height:22px;flex:none;position:relative;}
+  .faq-q .plus::before,.faq-q .plus::after{content:"";position:absolute;background:var(--navy);top:50%;left:50%;transform:translate(-50%,-50%);}
+  .faq-q .plus::before{width:14px;height:2px;}
+  .faq-q .plus::after{width:2px;height:14px;transition:transform .25s;}
+  .faq-item.open .plus::after{transform:translate(-50%,-50%) rotate(90deg) scaleY(0);}
+  .faq-a{max-height:0;overflow:hidden;transition:max-height .3s ease;}
+  .faq-a p{padding:0 4px 22px;font-size:.86rem;color:var(--ink-soft);}
+  .faq-item.open .faq-a{max-height:240px;}
+
+  /* ---------- contact ---------- */
+  .contact{background:var(--paper-2);}
+  .contact-box{
+    max-width:640px;margin:0 auto;background:#fff;border:1px solid var(--line);border-radius:var(--radius);
+    padding:40px 32px;
+  }
+  @media (max-width:560px){.contact-box{padding:28px 20px;}}
+  .form-row{margin-bottom:20px;}
+  .form-row label{display:block;font-size:.82rem;font-weight:700;margin-bottom:8px;}
+  .form-row label .req{color:#b3413a;font-size:.72rem;margin-left:4px;}
+  .form-row input,.form-row select,.form-row textarea{
+    width:100%;max-width:100%;padding:14px 16px;border:1px solid var(--line);border-radius:8px;
+    font-size:16px;font-family:inherit;background:#fff;
+  }
+  .form-row textarea{resize:vertical;min-height:120px;}
+  .form-two{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
+  @media (max-width:560px){.form-two{grid-template-columns:1fr;}}
+  .form-submit{width:100%;background:var(--navy);color:#fff;padding:17px;border-radius:100px;font-weight:700;font-size:1rem;border:none;cursor:pointer;}
+  .form-note{font-size:.76rem;color:var(--ink-soft);margin-top:14px;text-align:center;}
+
+  /* ---------- footer ---------- */
+  footer{background:var(--navy-deep);color:rgba(255,255,255,.7);padding:56px 0 110px;}
+  .footer-top{display:flex;justify-content:space-between;flex-wrap:wrap;gap:32px;margin-bottom:32px;}
+  .footer-logo{font-family:"Zen Kaku Gothic New",sans-serif;font-weight:900;color:#fff;font-size:1.15rem;}
+  .footer-links{display:flex;gap:28px;flex-wrap:wrap;font-size:.85rem;}
+  .footer-disclaimer{
+    border-top:1px solid rgba(255,255,255,.14);padding-top:24px;font-size:.74rem;line-height:1.9;color:rgba(255,255,255,.55);
+  }
+
+  /* ---------- sticky mobile cta ---------- */
+  .sticky-cta{
+    position:fixed;left:0;right:0;bottom:0;z-index:90;display:none;
+    background:#fff;border-top:1px solid var(--line);padding:12px 16px;
+    gap:10px;box-shadow:0 -6px 20px rgba(0,0,0,.08);
+  }
+  @media (max-width:760px){.sticky-cta{display:flex;}}
+  .sticky-cta a{
+    flex:1;text-align:center;padding:14px 0;border-radius:100px;font-weight:700;font-size:.88rem;
+    display:flex;align-items:center;justify-content:center;gap:6px;
+  }
+  .sticky-cta .call{background:var(--paper-2);color:var(--navy);}
+  .sticky-cta .go{background:var(--navy);color:#fff;}
+  .sticky-cta svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2;}
+
+  @media (prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto;}
+    .reveal{transition:none;opacity:1;transform:none;}
+  }
+</style>
+</head>
+<body>
+
+<header id="siteHeader">
+  <div class="header-inner">
+    <a href="#top" class="logo">AXIS CREATIVE<span>広告制作会社サンプル・HPリニューアル提案</span></a>
+    <nav class="nav-desktop">
+      <a href="#strength">選ばれる理由</a>
+      <a href="#service">制作範囲</a>
+      <a href="#works">実績</a>
+      <a href="#flow">制作の流れ</a>
+      <a href="#company">会社概要</a>
+      <a href="#faq">よくある質問</a>
+      <a href="#contact">お問い合わせ</a>
+    </nav>
+    <button class="burger" id="burgerBtn" aria-label="メニューを開く"><span></span></button>
+  </div>
+</header>
+
+<div id="navScrim"></div>
+<nav id="mobileNav">
+  <a href="#strength">選ばれる理由</a>
+  <a href="#service">制作範囲</a>
+  <a href="#works">実績</a>
+  <a href="#flow">制作の流れ</a>
+  <a href="#company">会社概要</a>
+  <a href="#faq">よくある質問</a>
+  <a href="#contact">お問い合わせ</a>
+</nav>
+
+<div id="top"></div>
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="wrap hero-content">
+    <span class="hero-badge"><span class="dot"></span>広告制作会社様 コーポレートサイト リニューアル案</span>
+    <h1>伝えるだけでは、終わらない。<br><em>成果に変わる</em>サイトへ。</h1>
+    <p class="lead">デザイン・コーディング・レスポンシブ対応・SEO対策までを一気通貫で担当。全7ページ構成を1ヶ月をめどに構築し、貴社の制作実績が正しく伝わるコーポレートサイトに刷新します。</p>
+    <div class="cta-row">
+      <a href="#contact" class="btn btn-primary">
+        <svg viewBox="0 0 24 24"><path d="M4 4h16v16H4z" opacity="0"/><path d="M22 6 12 13 2 6"/><path d="M2 6h20v12H2z"/></svg>
+        無料相談・お見積もり
+      </a>
+      <a href="#works" class="btn btn-outline">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
+        制作実績を見る
+      </a>
+    </div>
+  </div>
+</section>
+
+<div class="trust-band">
+  <div class="wrap">
+    <div class="trust-item"><div class="num">7<span style="font-size:1rem;">ページ</span></div><div class="cap">リニューアル構成想定</div></div>
+    <div class="trust-item"><div class="num">4<span style="font-size:1rem;">週間</span></div><div class="cap">納品までの標準目安</div></div>
+    <div class="trust-item"><div class="num">1<span style="font-size:1rem;">窓口</span></div><div class="cap">デザイン〜SEOまで一括</div></div>
+    <div class="trust-item"><div class="num">2<span style="font-size:1rem;">回</span></div><div class="cap">構成案フィードバック(仮)</div></div>
+  </div>
+</div>
+
+<section id="strength">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="sec-kicker">Why Us</span>
+      <h2>ご依頼内容にそのまま応える、<br class="hide-sm">3つの体制</h2>
+      <p>デザイン・コーディング・レスポンシブ対応・SEO対策というご依頼を、外注をまたがず一つのチームで完結します。</p>
+    </div>
+    <div class="strength-grid">
+      <div class="strength-card reveal">
+        <span class="strength-num">01</span>
+        <div class="strength-icon"><svg viewBox="0 0 24 24"><path d="M4 20 20 4M15 4h5v5"/><rect x="3" y="14" width="7" height="7" rx="1"/></svg></div>
+        <h3>デザイン</h3>
+        <p>広告制作会社様の「見せ方」がそのまま説得材料になるよう、事例写真やキャッチコピーの見せ場を設計。競合他社と並んでも埋もれないトーン&マナーで組み立てます。</p>
+      </div>
+      <div class="strength-card reveal">
+        <span class="strength-num">02</span>
+        <div class="strength-icon"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M8 4v5"/></svg></div>
+        <h3>コーディング・レスポンシブ</h3>
+        <p>スマホ・タブレット・PCで崩れない実装を1ページずつ実機確認。フォームや資料請求導線もタップしやすい大きさで組みます。</p>
+      </div>
+      <div class="strength-card reveal">
+        <span class="strength-num">03</span>
+        <div class="strength-icon"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg></div>
+        <h3>SEO対策</h3>
+        <p>タイトル・見出し構造・構造化データ・表示速度を初期設計に組み込み。公開後に検索に見つけてもらえる土台をあらかじめ作ります。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="scope" id="service">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="sec-kicker">Site Structure</span>
+      <h2>ご相談の全7ページ、構成イメージ</h2>
+      <p>ワイヤー・ラフ案からのご相談も可能です。以下は一般的な広告制作会社様の構成例(仮)です。</p>
+    </div>
+    <div class="sitemap">
+      <div class="sitemap-item reveal"><span class="no">01</span><h4>トップページ</h4><p>強み・実績・導線を凝縮</p></div>
+      <div class="sitemap-item reveal"><span class="no">02</span><h4>サービス紹介</h4><p>グラフィック/Web/映像 等</p></div>
+      <div class="sitemap-item reveal"><span class="no">03</span><h4>制作実績</h4><p>事例一覧・詳細ページ</p></div>
+      <div class="sitemap-item reveal"><span class="no">04</span><h4>会社情報</h4><p>沿革・体制・アクセス</p></div>
+      <div class="sitemap-item reveal"><span class="no">05</span><h4>制作の流れ</h4><p>ヒアリングから納品まで</p></div>
+      <div class="sitemap-item reveal"><span class="no">06</span><h4>採用・パートナー</h4><p>体制拡大の窓口(任意)</p></div>
+      <div class="sitemap-item reveal"><span class="no">07</span><h4>お問い合わせ</h4><p>フォーム・SEO最適化</p></div>
+      <div class="sitemap-item reveal" style="background:var(--navy);border-color:var(--navy);"><span class="no" style="color:#e7c15a;">+</span><h4 style="color:#fff;">ページ数は調整可</h4><p style="color:rgba(255,255,255,.7);">増減はご相談ください</p></div>
+    </div>
+    <p class="scope-note">※ページ構成・名称は一般的な例です。実際のご依頼内容にあわせて調整します。</p>
+  </div>
+</section>
+
+<section id="works">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="sec-kicker">Works</span>
+      <h2>制作実績ページのイメージ</h2>
+      <p>実績ページは案件のビジュアルが並ぶだけで説得力が変わります。仕上がりの一例(サンプル)です。</p>
+    </div>
+    <div class="works-grid">
+      <div class="work-card reveal">
+        <div class="work-visual wv-1"><span class="tag">CI / ブランディング</span></div>
+        <div class="body"><h4>飲食チェーン様 CI刷新</h4><p>ロゴ・名刺・店舗サイン一式(仮)</p></div>
+      </div>
+      <div class="work-card reveal">
+        <div class="work-visual wv-2"><span class="tag">パッケージデザイン</span></div>
+        <div class="body"><h4>食品メーカー様 新商品</h4><p>パッケージ+販促POP(仮)</p></div>
+      </div>
+      <div class="work-card reveal">
+        <div class="work-visual wv-3"><span class="tag">Webサイト制作</span></div>
+        <div class="body"><h4>アパレルブランド様 EC</h4><p>ブランドサイト+ECカート連携(仮)</p></div>
+      </div>
+      <div class="work-card reveal">
+        <div class="work-visual wv-4"><span class="tag">広告グラフィック</span></div>
+        <div class="body"><h4>不動産会社様 折込広告</h4><p>チラシ・交通広告展開(仮)</p></div>
+      </div>
+      <div class="work-card reveal">
+        <div class="work-visual wv-5"><span class="tag">採用LP</span></div>
+        <div class="body"><h4>製造業様 採用サイト</h4><p>応募導線+社員インタビュー(仮)</p></div>
+      </div>
+      <div class="work-card reveal">
+        <div class="work-visual wv-6"><span class="tag">動画・SNS運用</span></div>
+        <div class="body"><h4>サービス業様 SNS展開</h4><p>ショート動画+投稿設計(仮)</p></div>
+      </div>
+    </div>
+    <p class="works-note">※実績カードは制作イメージのサンプルです。実際の掲載時は貴社の実制作物・許諾済み事例に差し替えます。</p>
+  </div>
+</section>
+
+<section class="flow" id="flow">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="sec-kicker">Flow</span>
+      <h2>ご依頼〜納品までの流れ</h2>
+      <p>「納期1ヶ月前後」のご希望に合わせた標準スケジュールです。</p>
+    </div>
+    <div class="flow-list">
+      <div class="flow-item reveal"><div class="fnum">01</div><h4>ヒアリング</h4><p>目的・素材の有無・希望ページ数を確認</p></div>
+      <div class="flow-item reveal"><div class="fnum">02</div><h4>構成・ワイヤー</h4><p>7ページの構成案を作成しすり合わせ</p></div>
+      <div class="flow-item reveal"><div class="fnum">03</div><h4>デザイン</h4><p>トップ+下層のデザインカンプを提示</p></div>
+      <div class="flow-item reveal"><div class="fnum">04</div><h4>コーディング</h4><p>レスポンシブ実装+実機確認</p></div>
+      <div class="flow-item reveal"><div class="fnum">05</div><h4>SEO設定・公開</h4><p>タイトル/構造化データ設定→既存サーバーへ公開</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="company">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="sec-kicker">Team</span>
+      <h2>制作を担当するチーム</h2>
+    </div>
+    <div class="company-wrap">
+      <div class="company-photo reveal">
+        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=900&q=70" alt="ディレクター(イメージ)">
+        <div class="company-caption">ディレクター 担当(イメージ) / デザイン・コーディング・SEOまで一貫対応</div>
+      </div>
+      <div class="reveal">
+        <table class="company-table">
+          <tr><th>屋号</th><td>AXIS CREATIVE(サンプル名称)</td></tr>
+          <tr><th>対応範囲</th><td>デザイン / コーディング / レスポンシブ対応 / SEO対策</td></tr>
+          <tr><th>想定規模</th><td>7ページ程度のコーポレートサイト</td></tr>
+          <tr><th>納期目安</th><td>1ヶ月前後(素材ご提供状況により調整)</td></tr>
+          <tr><th>連絡方法</th><td>クラウドワークス メッセージ / オンライン打合せ可</td></tr>
+          <tr><th>電話(仮)</th><td>03-0000-0000<span style="color:var(--ink-soft);font-size:.78rem;"> ※ダミー番号</span></td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="contact" id="faq" style="padding-bottom:0;">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="sec-kicker">FAQ</span>
+      <h2>よくあるご質問</h2>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item reveal">
+        <div class="faq-q">ワイヤーやラフ案がまだ無くても相談できますか<div class="plus"></div></div>
+        <div class="faq-a"><p>可能です。ヒアリング段階で構成案からご提案しますので、素材・ラフ案は「相談」の状態からで問題ございません。</p></div>
+      </div>
+      <div class="faq-item reveal">
+        <div class="faq-q">画像や文章の準備は必要ですか<div class="plus"></div></div>
+        <div class="faq-a"><p>ご提供いただける範囲で構いません。不足分はヒアリング内容をもとにこちらでたたき台を作成し、ご確認いただきながら進めます。</p></div>
+      </div>
+      <div class="faq-item reveal">
+        <div class="faq-q">既存のサーバー・ドメインにそのまま公開できますか<div class="plus"></div></div>
+        <div class="faq-a"><p>はい。既存サーバー・ドメインをお持ちとのことですので、そちらへ直接公開する前提で進行します。</p></div>
+      </div>
+      <div class="faq-item reveal">
+        <div class="faq-q">SEO対策は具体的に何をしますか<div class="plus"></div></div>
+        <div class="faq-a"><p>ページごとのタイトル・見出し構造の最適化、構造化データの設置、表示速度の調整を制作段階から組み込みます。</p></div>
+      </div>
+      <div class="faq-item reveal">
+        <div class="faq-q">修正対応の回数に制限はありますか<div class="plus"></div></div>
+        <div class="faq-a"><p>デザイン確認時に一定回数のフィードバックを想定しております。具体的な回数はお見積もり時にご相談のうえ確定します。</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="contact" id="contact">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="sec-kicker">Contact</span>
+      <h2>お問い合わせ・お見積もり</h2>
+      <p>ご依頼内容・素材の状況を簡単にお知らせください。折り返しご連絡いたします。</p>
+    </div>
+    <form class="contact-box reveal" onsubmit="return false;">
+      <div class="form-two">
+        <div class="form-row"><label>お名前<span class="req">必須</span></label><input type="text" placeholder="山田 太郎"></div>
+        <div class="form-row"><label>会社名</label><input type="text" placeholder="株式会社〇〇"></div>
+      </div>
+      <div class="form-two">
+        <div class="form-row"><label>メールアドレス<span class="req">必須</span></label><input type="email" placeholder="example@company.co.jp"></div>
+        <div class="form-row"><label>電話番号</label><input type="tel" placeholder="03-0000-0000"></div>
+      </div>
+      <div class="form-row">
+        <label>ご希望のページ数</label>
+        <select>
+          <option>7ページ程度(想定)</option>
+          <option>5ページ以下</option>
+          <option>8ページ以上</option>
+          <option>相談しながら決めたい</option>
+        </select>
+      </div>
+      <div class="form-row">
+        <label>ご相談内容<span class="req">必須</span></label>
+        <textarea placeholder="現状のお悩みや、ご希望の納期・ご予算感などをご記入ください"></textarea>
+      </div>
+      <button class="form-submit" type="submit">この内容で送信する(サンプルのため送信されません)</button>
+      <p class="form-note">※本フォームはデモ用のため送信機能はありません。実際の制作時は貴社ご希望の送信先へ設定します。</p>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-top">
+      <div class="footer-logo">AXIS CREATIVE</div>
+      <div class="footer-links">
+        <a href="#service">制作範囲</a>
+        <a href="#works">実績</a>
+        <a href="#flow">制作の流れ</a>
+        <a href="#company">会社概要</a>
+        <a href="#contact">お問い合わせ</a>
+      </div>
+    </div>
+    <div class="footer-disclaimer">
+      ※本ページは制作サンプル(デモ)です。掲載の内容・数値は仮のもので、写真はイメージです。会社名・実績・電話番号はすべて架空のものであり、実在の企業・団体とは関係ありません。実制作ではご提供写真や貴社の実績データに差し替えます。
+    </div>
+  </div>
+</footer>
+
+<div class="sticky-cta">
+  <a href="tel:0300000000" class="call"><svg viewBox="0 0 24 24"><path d="M22 16.9v2a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3-8.7A2 2 0 0 1 4.1 1h2a2 2 0 0 1 2 1.7c.1 1 .4 2 .7 3a2 2 0 0 1-.5 2.1L7.1 9a16 16 0 0 0 6 6l1.2-1.2a2 2 0 0 1 2.1-.5c1 .3 2 .5 3 .7a2 2 0 0 1 1.6 2z"/></svg>電話で相談</a>
+  <a href="#contact" class="go"><svg viewBox="0 0 24 24"><path d="M22 2 11 13"/><path d="M22 2 15 22l-4-9-9-4z"/></svg>お見積もり</a>
+</div>
+
+<script>
+  var burger = document.getElementById('burgerBtn');
+  var mobileNav = document.getElementById('mobileNav');
+  var scrim = document.getElementById('navScrim');
+  function closeNav(){
+    burger.classList.remove('open');
+    mobileNav.classList.remove('open');
+    scrim.classList.remove('open');
+  }
+  burger.addEventListener('click', function(){
+    var isOpen = mobileNav.classList.toggle('open');
+    burger.classList.toggle('open', isOpen);
+    scrim.classList.toggle('open', isOpen);
+  });
+  scrim.addEventListener('click', closeNav);
+  Array.prototype.forEach.call(mobileNav.querySelectorAll('a'), function(a){
+    a.addEventListener('click', closeNav);
+  });
+
+  Array.prototype.forEach.call(document.querySelectorAll('.faq-q'), function(q){
+    q.addEventListener('click', function(){
+      q.parentElement.classList.toggle('open');
+    });
+  });
+
+  if ('IntersectionObserver' in window){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if (e.isIntersecting){
+          e.target.classList.add('in');
+          io.unobserve(e.target);
+        }
+      });
+    }, {threshold:0.15});
+    Array.prototype.forEach.call(document.querySelectorAll('.reveal'), function(el){ io.observe(el); });
+  } else {
+    Array.prototype.forEach.call(document.querySelectorAll('.reveal'), function(el){ el.classList.add('in'); });
+  }
+</script>
+</body>
+</html>
