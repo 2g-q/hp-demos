@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>株式会社TAIGA｜製作金物・建築金物のご相談は図面一枚から</title>
+<meta name="description" content="鉄・ステンレス・アルミの製作金物、建築金物工事を東京都内で20年以上。手摺・階段・特注金物まで、製作から取付まで一貫対応。図面一枚からのお見積りに対応します。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@500;700;900&family=Noto+Sans+JP:wght@400;500;700&family=Manrope:wght@500;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --black:#121214;
+    --charcoal:#1d1e21;
+    --steel-900:#232428;
+    --steel-700:#4a4c52;
+    --steel-400:#8b8e96;
+    --steel-200:#d8d9dc;
+    --off-white:#f4f3f1;
+    --white:#ffffff;
+    --accent:#e2793a;
+    --accent-dark:#c15f24;
+    --radius-lg:20px;
+    --radius-pill:100px;
+    --maxw:1160px;
+  }
+  *,*::before,*::after{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    font-family:"Noto Sans JP",-apple-system,sans-serif;
+    color:var(--charcoal);
+    background:var(--off-white);
+    line-height:1.8;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  img,svg{max-width:100%;display:block;}
+  h1,h2,h3,h4{
+    font-family:"Zen Kaku Gothic New","Noto Sans JP",sans-serif;
+    letter-spacing:0.02em;
+    margin:0;
+  }
+  .num{font-family:"Manrope","Noto Sans JP",sans-serif;}
+  a{color:inherit;text-decoration:none;}
+  .wrap{width:100%;max-width:var(--maxw);margin:0 auto;padding:0 clamp(20px,5vw,40px);}
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:10px;
+    font-size:0.78rem;letter-spacing:0.22em;font-weight:700;
+    color:var(--accent);text-transform:uppercase;
+  }
+  .eyebrow::before{content:"";width:26px;height:2px;background:var(--accent);display:inline-block;}
+  section{padding:clamp(64px,9vw,108px) 0;}
+  .section-head{max-width:640px;margin-bottom:clamp(36px,5vw,56px);}
+  .section-head h2{font-size:clamp(1.6rem,4vw,2.3rem);font-weight:900;margin-top:14px;line-height:1.5;}
+  .section-head p{color:var(--steel-700);margin-top:16px;font-size:0.98rem;}
+
+  /* ===== header ===== */
+  .site-header{
+    position:fixed;top:0;left:0;right:0;z-index:60;
+    background:rgba(18,18,20,0.86);
+    backdrop-filter:blur(10px);
+    -webkit-backdrop-filter:blur(10px);
+    border-bottom:1px solid rgba(255,255,255,0.08);
+  }
+  .site-header .wrap{
+    display:flex;align-items:center;justify-content:space-between;
+    height:64px;max-width:var(--maxw);
+  }
+  .logo{display:flex;align-items:center;gap:10px;color:var(--white);font-weight:900;font-size:1.05rem;}
+  .logo .mark{
+    width:34px;height:34px;border:2px solid var(--accent);
+    display:flex;align-items:center;justify-content:center;
+    transform:rotate(45deg);flex-shrink:0;
+  }
+  .logo .mark span{transform:rotate(-45deg);color:var(--accent);font-family:"Manrope";font-weight:800;font-size:0.78rem;}
+  .logo small{display:block;font-size:0.62rem;letter-spacing:0.14em;color:var(--steel-400);font-weight:500;font-family:"Manrope";}
+
+  .desk-nav{display:none;align-items:center;gap:clamp(14px,2vw,28px);}
+  .desk-nav a{color:var(--steel-200);font-size:0.86rem;font-weight:500;white-space:nowrap;}
+  .desk-nav a:hover{color:var(--accent);}
+  .header-actions{display:flex;align-items:center;gap:10px;}
+  .btn{
+    display:inline-flex;align-items:center;justify-content:center;gap:8px;
+    padding:12px 26px;border-radius:var(--radius-pill);
+    font-weight:700;font-size:0.88rem;border:1px solid transparent;
+    cursor:pointer;white-space:nowrap;transition:transform .15s ease, opacity .15s ease;
+  }
+  .btn:active{transform:scale(0.97);}
+  .btn-accent{background:var(--accent);color:var(--white);box-shadow:0 10px 24px -10px rgba(226,121,58,0.7);}
+  .btn-accent:hover{background:var(--accent-dark);}
+  .btn-outline{background:transparent;border-color:rgba(255,255,255,0.35);color:var(--white);}
+  .btn-outline:hover{border-color:var(--accent);color:var(--accent);}
+  .btn-dark{background:var(--charcoal);color:var(--white);}
+  .btn-dark:hover{background:var(--black);}
+  .btn-sm{padding:9px 18px;font-size:0.8rem;}
+
+  .hamburger{
+    display:flex;flex-direction:column;justify-content:center;gap:5px;
+    width:40px;height:40px;border:1px solid rgba(255,255,255,0.25);
+    border-radius:8px;background:transparent;cursor:pointer;align-items:center;
+  }
+  .hamburger span{width:18px;height:2px;background:var(--white);display:block;transition:.2s;}
+  .hamburger.is-open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+  .hamburger.is-open span:nth-child(2){opacity:0;}
+  .hamburger.is-open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+
+  /* mobile nav lives OUTSIDE header so fixed overlay isn't trapped by backdrop-filter */
+  #mobile-nav{
+    position:fixed;inset:0;z-index:55;background:var(--black);
+    display:flex;flex-direction:column;align-items:flex-start;justify-content:center;gap:6px;
+    padding:0 clamp(28px,8vw,60px);
+    transform:translateY(-100%);opacity:0;
+    transition:transform .32s ease, opacity .32s ease;
+    pointer-events:none;
+  }
+  #mobile-nav.is-open{transform:translateY(0);opacity:1;pointer-events:auto;}
+  #mobile-nav a{
+    color:var(--white);font-family:"Zen Kaku Gothic New";font-weight:700;
+    font-size:1.5rem;padding:14px 0;border-bottom:1px solid rgba(255,255,255,0.1);width:100%;
+  }
+  #mobile-nav .mnav-cta{display:flex;gap:12px;margin-top:26px;flex-wrap:wrap;}
+
+  @media(min-width:900px){
+    .desk-nav{display:flex;}
+    .hamburger{display:none;}
+    #mobile-nav{display:none;}
+  }
+
+  /* ===== hero ===== */
+  .hero{
+    position:relative;color:var(--white);background:var(--black);
+    padding:calc(64px + 72px) 0 90px;overflow:hidden;
+  }
+  .hero::before{
+    content:"";position:absolute;inset:0;
+    background-image:
+      repeating-linear-gradient(115deg, rgba(255,255,255,0.035) 0 2px, transparent 2px 64px),
+      repeating-linear-gradient(25deg, rgba(255,255,255,0.03) 0 1px, transparent 1px 48px);
+    opacity:0.8;
+  }
+  .hero::after{
+    content:"";position:absolute;right:-10%;top:-20%;width:70%;height:140%;
+    background:radial-gradient(closest-side, rgba(226,121,58,0.16), transparent 70%);
+  }
+  .hero .wrap{position:relative;z-index:2;}
+  .hero-grid{display:grid;gap:40px;}
+  @media(min-width:960px){.hero-grid{grid-template-columns:1.15fr 0.85fr;align-items:center;}}
+  .hero h1{
+    font-size:clamp(2.1rem,5.6vw,3.4rem);font-weight:900;line-height:1.32;
+    margin-top:18px;
+  }
+  .hero h1 em{font-style:normal;color:var(--accent);}
+  .hero .lead{color:var(--steel-200);margin-top:22px;font-size:1.02rem;max-width:46ch;}
+  .hero .cta-row{display:flex;flex-wrap:wrap;gap:12px;margin-top:32px;}
+  .hero-panel{
+    background:var(--charcoal);border:1px solid rgba(255,255,255,0.08);
+    border-radius:var(--radius-lg);padding:clamp(22px,4vw,32px);
+  }
+  .hero-panel .row{display:flex;justify-content:space-between;align-items:baseline;padding:16px 0;border-bottom:1px dashed rgba(255,255,255,0.14);}
+  .hero-panel .row:last-child{border-bottom:none;}
+  .hero-panel .row .label{color:var(--steel-400);font-size:0.86rem;}
+  .hero-panel .row .val{font-family:"Manrope";font-weight:800;font-size:1.5rem;color:var(--white);}
+  .hero-panel .row .val span{font-size:0.85rem;font-weight:500;color:var(--steel-400);margin-left:4px;}
+
+  /* ===== reasons ===== */
+  .reason-grid{display:grid;gap:20px;grid-template-columns:1fr;}
+  @media(min-width:720px){.reason-grid{grid-template-columns:repeat(3,1fr);}}
+  .reason-card{
+    background:var(--white);border:1px solid var(--steel-200);border-radius:var(--radius-lg);
+    padding:28px 24px;position:relative;
+  }
+  .reason-card .icon{
+    width:52px;height:52px;border-radius:14px;background:var(--steel-900);
+    display:flex;align-items:center;justify-content:center;margin-bottom:18px;
+  }
+  .reason-card .icon svg{width:26px;height:26px;stroke:var(--accent);}
+  .reason-card h3{font-size:1.06rem;font-weight:700;}
+  .reason-card p{color:var(--steel-700);font-size:0.9rem;margin-top:10px;}
+  .reason-card .idx{position:absolute;top:22px;right:24px;font-family:"Manrope";font-weight:800;font-size:0.78rem;color:var(--steel-400);}
+
+  /* ===== dark band ===== */
+  .band-dark{background:var(--black);color:var(--white);}
+  .band-dark .section-head p{color:var(--steel-300,#c9cbcf);}
+  .band-dark .eyebrow{color:var(--accent);}
+
+  /* ===== results ===== */
+  .result-grid{display:grid;gap:18px;grid-template-columns:1fr;}
+  @media(min-width:720px){.result-grid{grid-template-columns:repeat(2,1fr);}}
+  .result-card{
+    background:var(--charcoal);border:1px solid rgba(255,255,255,0.08);
+    border-radius:var(--radius-lg);overflow:hidden;
+  }
+  .result-thumb{
+    height:150px;position:relative;
+    background:
+      repeating-linear-gradient(135deg, #2a2b2f 0 10px, #232428 10px 20px);
+    display:flex;align-items:center;justify-content:center;
+  }
+  .result-thumb svg{width:56px;height:56px;stroke:var(--accent);opacity:0.9;}
+  .result-body{padding:22px 24px 26px;}
+  .result-tag{display:inline-block;font-size:0.72rem;font-weight:700;letter-spacing:0.08em;color:var(--accent);border:1px solid var(--accent);padding:4px 10px;border-radius:var(--radius-pill);}
+  .result-body h3{font-size:1.05rem;margin-top:14px;font-weight:700;}
+  .result-body p{color:var(--steel-300,#c9cbcf);font-size:0.86rem;margin-top:8px;}
+  .result-note{
+    margin-top:28px;font-size:0.82rem;color:var(--steel-400);
+    border-left:3px solid var(--accent);padding-left:14px;
+  }
+
+  /* ===== works list ===== */
+  .work-grid{display:grid;gap:14px;grid-template-columns:repeat(2,1fr);}
+  @media(min-width:640px){.work-grid{grid-template-columns:repeat(3,1fr);}}
+  @media(min-width:960px){.work-grid{grid-template-columns:repeat(5,1fr);}}
+  .work-item{
+    background:var(--white);border:1px solid var(--steel-200);border-radius:16px;
+    padding:20px 16px;text-align:center;
+  }
+  .work-item .icon{width:40px;height:40px;margin:0 auto 12px;}
+  .work-item .icon svg{width:100%;height:100%;stroke:var(--steel-900);}
+  .work-item span{font-size:0.86rem;font-weight:500;}
+
+  /* ===== flow ===== */
+  .flow-list{display:grid;gap:0;counter-reset:flow;}
+  .flow-item{
+    display:grid;grid-template-columns:56px 1fr;gap:20px;
+    padding:24px 0;border-bottom:1px solid var(--steel-200);position:relative;
+  }
+  .flow-item:last-child{border-bottom:none;}
+  .flow-item .step-num{
+    counter-increment:flow;font-family:"Manrope";font-weight:800;font-size:1rem;
+    width:56px;height:56px;border-radius:50%;background:var(--steel-900);color:var(--white);
+    display:flex;align-items:center;justify-content:center;flex-shrink:0;
+  }
+  .flow-item .step-num::before{content:counter(flow, decimal-leading-zero);}
+  .flow-item h3{font-size:1.02rem;font-weight:700;}
+  .flow-item p{color:var(--steel-700);font-size:0.9rem;margin-top:8px;}
+
+  /* ===== faq ===== */
+  .faq-item{border-bottom:1px solid var(--steel-200);}
+  .faq-q{
+    width:100%;text-align:left;background:none;border:none;cursor:pointer;
+    padding:20px 4px;display:flex;justify-content:space-between;align-items:center;gap:16px;
+    font-family:inherit;font-size:0.98rem;font-weight:700;color:var(--charcoal);
+  }
+  .faq-q .plusminus{
+    width:22px;height:22px;flex-shrink:0;position:relative;
+  }
+  .faq-q .plusminus::before,.faq-q .plusminus::after{
+    content:"";position:absolute;background:var(--accent);top:50%;left:50%;
+    transform:translate(-50%,-50%);
+  }
+  .faq-q .plusminus::before{width:14px;height:2px;}
+  .faq-q .plusminus::after{width:2px;height:14px;transition:transform .2s;}
+  .faq-item.is-open .plusminus::after{transform:translate(-50%,-50%) scaleY(0);}
+  .faq-a{max-height:0;overflow:hidden;transition:max-height .25s ease;}
+  .faq-a p{padding:0 4px 22px;color:var(--steel-700);font-size:0.9rem;}
+
+  /* ===== company ===== */
+  .company-table{width:100%;border-collapse:collapse;}
+  .company-table tr{border-bottom:1px solid var(--steel-200);}
+  .company-table th,.company-table td{text-align:left;padding:16px 12px;font-size:0.9rem;vertical-align:top;}
+  .company-table th{color:var(--steel-700);font-weight:500;width:140px;white-space:nowrap;}
+  .company-note{font-size:0.78rem;color:var(--steel-400);margin-top:14px;}
+
+  /* ===== contact ===== */
+  .contact-grid{display:grid;gap:32px;}
+  @media(min-width:900px){.contact-grid{grid-template-columns:0.9fr 1.1fr;}}
+  .contact-side{background:var(--steel-900);color:var(--white);border-radius:var(--radius-lg);padding:clamp(26px,4vw,34px);}
+  .contact-side h3{font-size:1.15rem;font-weight:700;}
+  .contact-side p{color:var(--steel-300,#c9cbcf);font-size:0.88rem;margin-top:10px;}
+  .contact-side .cline{display:flex;align-items:center;gap:12px;margin-top:22px;padding-top:22px;border-top:1px dashed rgba(255,255,255,0.15);}
+  .contact-side .cline .num{font-size:1.3rem;font-weight:800;}
+  .contact-side .cline small{display:block;color:var(--steel-400);font-size:0.72rem;}
+
+  form.contact-form{background:var(--white);border:1px solid var(--steel-200);border-radius:var(--radius-lg);padding:clamp(22px,4vw,30px);}
+  .field{margin-bottom:18px;}
+  .field label{display:block;font-size:0.85rem;font-weight:700;margin-bottom:8px;}
+  .field label .req{color:var(--accent);font-size:0.72rem;margin-left:6px;font-weight:700;}
+  .field input,.field select,.field textarea{
+    width:100%;max-width:100%;padding:13px 14px;border:1px solid var(--steel-200);
+    border-radius:10px;font-size:16px;font-family:inherit;background:var(--off-white);
+  }
+  .field textarea{min-height:110px;resize:vertical;}
+  .field input:focus,.field select:focus,.field textarea:focus{outline:2px solid var(--accent);outline-offset:1px;}
+  .form-note{font-size:0.76rem;color:var(--steel-400);margin-top:6px;}
+  .submit-row{display:flex;flex-wrap:wrap;align-items:center;gap:14px;margin-top:6px;}
+
+  /* ===== mobile sticky cta ===== */
+  .mobile-cta{
+    position:fixed;left:0;right:0;bottom:0;z-index:50;
+    display:flex;background:var(--black);border-top:1px solid rgba(255,255,255,0.1);
+    padding:10px clamp(12px,4vw,20px);gap:10px;
+    padding-bottom:calc(10px + env(safe-area-inset-bottom));
+  }
+  .mobile-cta a{
+    flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;
+    gap:2px;color:var(--white);font-size:0.7rem;font-weight:700;padding:8px 4px;border-radius:12px;
+  }
+  .mobile-cta a svg{width:18px;height:18px;stroke:currentColor;}
+  .mobile-cta a.primary{background:var(--accent);}
+  @media(min-width:900px){.mobile-cta{display:none;}}
+  body{padding-bottom:74px;}
+  @media(min-width:900px){body{padding-bottom:0;}}
+
+  /* ===== footer ===== */
+  footer{background:var(--black);color:var(--steel-400);padding:48px 0 30px;font-size:0.82rem;}
+  footer .foot-top{display:flex;flex-wrap:wrap;justify-content:space-between;gap:24px;padding-bottom:28px;border-bottom:1px solid rgba(255,255,255,0.08);}
+  footer .foot-logo{color:var(--white);font-weight:800;font-family:"Zen Kaku Gothic New";font-size:1rem;}
+  footer .foot-links{display:flex;gap:20px;flex-wrap:wrap;}
+  footer .foot-links a:hover{color:var(--accent);}
+  footer .disclaimer{margin-top:22px;line-height:1.9;color:var(--steel-700);}
+  footer .copy{margin-top:18px;color:var(--steel-700);}
+
+  /* ===== reveal ===== */
+  .reveal{opacity:0;transform:translateY(18px);transition:opacity .6s ease, transform .6s ease;}
+  .reveal.is-visible{opacity:1;transform:translateY(0);}
+  @media(prefers-reduced-motion:reduce){
+    .reveal{opacity:1;transform:none;transition:none;}
+    html{scroll-behavior:auto;}
+  }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap">
+    <a href="#hero" class="logo">
+      <span class="mark"><span>TG</span></span>
+      <span>株式会社TAIGA<small>KANAMONO WORKS TOKYO</small></span>
+    </a>
+    <nav class="desk-nav">
+      <a href="#reasons">選ばれる理由</a>
+      <a href="#results">施工実績</a>
+      <a href="#works">対応工事</a>
+      <a href="#flow">流れ</a>
+      <a href="#faq">よくある質問</a>
+      <a href="#company">会社概要</a>
+    </nav>
+    <div class="header-actions">
+      <a href="#contact" class="btn btn-accent btn-sm">図面でお見積り</a>
+      <button class="hamburger" id="hamburgerBtn" aria-label="メニューを開く" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<nav id="mobile-nav">
+  <a href="#reasons">選ばれる理由</a>
+  <a href="#results">施工実績</a>
+  <a href="#works">対応工事</a>
+  <a href="#flow">施工までの流れ</a>
+  <a href="#faq">よくある質問</a>
+  <a href="#company">会社概要</a>
+  <a href="#contact">お問い合わせ</a>
+  <div class="mnav-cta">
+    <a href="tel:0300000000" class="btn btn-accent">電話で相談</a>
+    <a href="#contact" class="btn btn-outline">図面を送る</a>
+  </div>
+</nav>
+
+<main>
+
+  <section class="hero" id="hero">
+    <div class="wrap">
+      <div class="hero-grid">
+        <div>
+          <span class="eyebrow">製作金物・建築金物 / 東京</span>
+          <h1>図面一枚、<br><em>鉄</em>に変わる。</h1>
+          <p class="lead">鉄・ステンレス・アルミの製作金物、建築金物工事を製作から取付まで一貫対応。手摺・階段・特注金物まで、図面一枚からのお見積りに対応します。株式会社TAIGA、東京都内で20年以上の現場経験。</p>
+          <div class="cta-row">
+            <a href="#contact" class="btn btn-accent">図面を送ってお見積り</a>
+            <a href="tel:0300000000" class="btn btn-outline">電話で相談する</a>
+          </div>
+        </div>
+        <div class="hero-panel reveal">
+          <div class="row"><span class="label">現場経験</span><span class="val num">20<span>年以上</span></span></div>
+          <div class="row"><span class="label">対応素材</span><span class="val num">3<span>種(鉄・SUS・AL)</span></span></div>
+          <div class="row"><span class="label">対応範囲</span><span class="val num">1<span>点物〜量産まで</span></span></div>
+          <div class="row"><span class="label">相談方法</span><span class="val num">3<span>経路(電話・LINE・図面)</span></span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="reasons">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow">Why TAIGA</span>
+        <h2>製作金物・建築金物、<br>製作から取付までを一社で。</h2>
+        <p>設計図から現場取付まで社内で完結させることで、伝言による齟齬と手戻りを減らします。利益率の高い案件ほど、仕様の細かな詰めが仕上がりを左右します。</p>
+      </div>
+      <div class="reason-grid">
+        <div class="reason-card reveal">
+          <span class="idx">01</span>
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V8l8-4 8 4v12"/><path d="M9 20v-6h6v6"/></svg></div>
+          <h3>20年以上の現場経験</h3>
+          <p>設計図の読み込みから納まりの調整まで、現場で培った勘所を製作に反映します。</p>
+        </div>
+        <div class="reason-card reveal">
+          <span class="idx">02</span>
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7l9-4 9 4-9 4-9-4z"/><path d="M3 12l9 4 9-4"/><path d="M3 17l9 4 9-4"/></svg></div>
+          <h3>製作から施工まで一貫対応</h3>
+          <p>製作・塗装・現地取付までを社内体制で進行。窓口を分けず、仕様確認のロスを抑えます。</p>
+        </div>
+        <div class="reason-card reveal">
+          <span class="idx">03</span>
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 2v4M12 18v4M4.9 4.9l2.8 2.8M16.3 16.3l2.8 2.8M2 12h4M18 12h4M4.9 19.1l2.8-2.8M16.3 7.7l2.8-2.8"/></svg></div>
+          <h3>鉄・ステンレス・アルミに対応</h3>
+          <p>素材ごとの加工特性を踏まえ、用途や予算に応じた材質選定をご提案します。</p>
+        </div>
+        <div class="reason-card reveal">
+          <span class="idx">04</span>
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l2.4 5.5L20 9l-4.4 3.8L16.9 19 12 15.8 7.1 19l1.3-6.2L4 9l5.6-.5L12 3z"/></svg></div>
+          <h3>一点物・特注サイズも対応</h3>
+          <p>規格品では収まらない寸法・意匠にも、現物合わせを含めて柔軟に対応します。</p>
+        </div>
+        <div class="reason-card reveal">
+          <span class="idx">05</span>
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v4H4zM4 10h10v4H4zM4 16h16v4H4z"/></svg></div>
+          <h3>図面一枚からの見積り対応</h3>
+          <p>詳細図がなくても、手描き図やイメージ写真からの概算見積りに対応します。</p>
+        </div>
+        <div class="reason-card reveal">
+          <span class="idx">06</span>
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
+          <h3>電話・LINE・図面送付に対応</h3>
+          <p>ご都合の良い経路でご相談いただけます。現場都合の急ぎのご連絡にも対応します。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band-dark" id="results">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow">Works</span>
+        <h2>施工実績</h2>
+        <p>手摺・階段・ステンレス製品を中心に、店舗・住宅・商業施設向けの金物製作/取付に対応してきました。掲載内容は制作サンプルのため一般的な事例区分でのご紹介です。</p>
+      </div>
+      <div class="result-grid">
+        <div class="result-card reveal">
+          <div class="result-thumb"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 21V9l8-5 8 5v12"/><path d="M9 21v-7h6v7"/></svg></div>
+          <div class="result-body">
+            <span class="result-tag">手摺・階段</span>
+            <h3>店舗階段まわりの鉄骨手摺 新設</h3>
+            <p>既存躯体の採寸から意匠検討、現地取付までを一括で担当。※内容はイメージです。</p>
+          </div>
+        </div>
+        <div class="result-card reveal">
+          <div class="result-thumb"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M4 10h16M10 4v16"/></svg></div>
+          <div class="result-body">
+            <span class="result-tag">ステンレス製品</span>
+            <h3>ステンレス製カウンター・什器 製作</h3>
+            <p>店舗内装向けにステンレス製の什器を製作。防錆・清掃性を考慮した仕様。※内容はイメージです。</p>
+          </div>
+        </div>
+        <div class="result-card reveal">
+          <div class="result-thumb"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h18M6 6l-3 6 3 6M18 6l3 6-3 6"/></svg></div>
+          <div class="result-body">
+            <span class="result-tag">アルミ加工</span>
+            <h3>軽量アルミフレームの架台 製作</h3>
+            <p>屋外設置機器向けの架台をアルミで軽量化。現場搬入・据付までを含め対応。※内容はイメージです。</p>
+          </div>
+        </div>
+        <div class="result-card reveal">
+          <div class="result-thumb"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l3 6 6 1-4.5 4.5L18 20l-6-3-6 3 1.5-6.5L3 9l6-1z"/></svg></div>
+          <div class="result-body">
+            <span class="result-tag">特注金物</span>
+            <h3>意匠性を重視した特注ブラケット</h3>
+            <p>規格品では対応できない寸法・形状の金物を、図面協議のうえ製作。※内容はイメージです。</p>
+          </div>
+        </div>
+      </div>
+      <p class="result-note reveal">※本ページは制作サンプル(デモ)のため、施工実績の内容は一般的な事例区分によるイメージです。実際の実績・施工写真は制作時にご提供いただく資料に差し替えます。</p>
+    </div>
+  </section>
+
+  <section id="works">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow">Scope of Work</span>
+        <h2>対応工事一覧</h2>
+        <p>建築金物全般に対応。記載以外の内容も、まずは図面や現状写真をお送りください。</p>
+      </div>
+      <div class="work-grid">
+        <div class="work-item reveal"><div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 21V9l8-5 8 5v12M9 21v-7h6v7"/></svg></div><span>手摺</span></div>
+        <div class="work-item reveal"><div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 20h4v-4h4v-4h4v-4h4v-4"/></svg></div><span>階段</span></div>
+        <div class="work-item reveal"><div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M4 10h16M10 4v16"/></svg></div><span>ステンレス製品</span></div>
+        <div class="work-item reveal"><div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h18M6 6l-3 6 3 6M18 6l3 6-3 6"/></svg></div><span>アルミ加工</span></div>
+        <div class="work-item reveal"><div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V10h16v10M4 10l8-6 8 6"/></svg></div><span>架台</span></div>
+        <div class="work-item reveal"><div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V6h6v14M10 12h10v8"/></svg></div><span>ブラケット</span></div>
+        <div class="work-item reveal"><div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8"/><path d="M12 8v4l3 2"/></svg></div><span>金物製作</span></div>
+        <div class="work-item reveal"><div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l3 6 6 1-4.5 4.5L18 20l-6-3-6 3 1.5-6.5L3 9l6-1z"/></svg></div><span>特注金物</span></div>
+        <div class="work-item reveal"><div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21V9l9-6 9 6v12H3z"/><path d="M9 21v-6h6v6"/></svg></div><span>店舗金物</span></div>
+        <div class="work-item reveal"><div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v16H4zM4 10h16M10 4v16"/></svg></div><span>建築金物全般</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band-dark" id="flow">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow">Flow</span>
+        <h2>施工までの流れ</h2>
+        <p>図面のご相談から引き渡しまで、6つの工程で進めます。</p>
+      </div>
+      <div class="flow-list" style="max-width:720px;">
+        <div class="flow-item reveal">
+          <div class="step-num"></div>
+          <div><h3>図面・ご相談</h3><p>電話・LINE・お問い合わせフォームのいずれかで、図面や現状写真をお送りください。図面がない場合もご相談可能です。</p></div>
+        </div>
+        <div class="flow-item reveal">
+          <div class="step-num"></div>
+          <div><h3>現地・仕様ヒアリング</h3><p>必要に応じて現地の採寸や既存部材の確認を行い、材質・仕上げ・納期の希望を伺います。</p></div>
+        </div>
+        <div class="flow-item reveal">
+          <div class="step-num"></div>
+          <div><h3>お見積り提出</h3><p>仕様に基づき概算・詳細のお見積りを提出します。内容にご不明点があれば都度調整します。</p></div>
+        </div>
+        <div class="flow-item reveal">
+          <div class="step-num"></div>
+          <div><h3>ご発注・製作開始</h3><p>仕様確定後、社内工場にて製作を開始します。進行中の仕様変更もご相談に応じます。</p></div>
+        </div>
+        <div class="flow-item reveal">
+          <div class="step-num"></div>
+          <div><h3>検品・現地取付</h3><p>出荷前の検品を行ったうえで、現地への搬入・取付まで担当します。</p></div>
+        </div>
+        <div class="flow-item reveal">
+          <div class="step-num"></div>
+          <div><h3>引き渡し・アフターフォロー</h3><p>取付完了後、最終確認のうえ引き渡し。継続案件のご相談も承ります。</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="faq">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow">FAQ</span>
+        <h2>よくある質問</h2>
+      </div>
+      <div style="max-width:760px;">
+        <div class="faq-item reveal">
+          <button class="faq-q"><span>図面がない場合でも相談できますか？</span><span class="plusminus"></span></button>
+          <div class="faq-a"><p>はい、対応可能です。現状写真や現物の採寸をもとに、仕様のすり合わせから進めることができます。</p></div>
+        </div>
+        <div class="faq-item reveal">
+          <button class="faq-q"><span>一点物や特注サイズの製作は可能ですか？</span><span class="plusminus"></span></button>
+          <div class="faq-a"><p>可能です。規格品では対応できない寸法・意匠にも、現物合わせを含めて柔軟に対応します。</p></div>
+        </div>
+        <div class="faq-item reveal">
+          <button class="faq-q"><span>鉄・ステンレス・アルミ、どれを選べばよいか相談できますか？</span><span class="plusminus"></span></button>
+          <div class="faq-a"><p>はい。設置場所・用途・予算に応じた材質選定のご提案から承ります。</p></div>
+        </div>
+        <div class="faq-item reveal">
+          <button class="faq-q"><span>対応エリアはどこまでですか？</span><span class="plusminus"></span></button>
+          <div class="faq-a"><p>東京都内を中心に対応しています。対応可否は案件の内容・現場条件によって異なりますので、まずはご相談ください。</p></div>
+        </div>
+        <div class="faq-item reveal">
+          <button class="faq-q"><span>LINEでの相談は可能ですか？</span><span class="plusminus"></span></button>
+          <div class="faq-a"><p>可能です。図面や写真をそのまま送っていただく形でご相談いただけます。</p></div>
+        </div>
+        <div class="faq-item reveal">
+          <button class="faq-q"><span>見積りだけでも依頼できますか？</span><span class="plusminus"></span></button>
+          <div class="faq-a"><p>可能です。図面一枚からでも概算のお見積りに対応しますので、まずはお気軽にお送りください。</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band-dark" id="company">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow">Company</span>
+        <h2>会社概要</h2>
+      </div>
+      <table class="company-table reveal" style="max-width:720px;color:var(--white);">
+        <tr><th>会社名</th><td>株式会社TAIGA</td></tr>
+        <tr><th>所在地</th><td>東京都内(詳細所在地はお問い合わせ時にご案内します・仮の内容です)</td></tr>
+        <tr><th>事業内容</th><td>製作金物・建築金物工事(鉄・ステンレス・アルミ)、製作〜施工の一貫対応</td></tr>
+        <tr><th>現場経験</th><td>20年以上</td></tr>
+        <tr><th>対応エリア</th><td>東京都内を中心に対応(案件により要相談)</td></tr>
+        <tr><th>電話番号</th><td class="num">03-0000-0000(デモ用の仮番号です)</td></tr>
+        <tr><th>定休日</th><td>日曜・祝日(仮の内容です・実際の営業日はご案内時にお伝えします)</td></tr>
+      </table>
+      <p class="company-note reveal">※本セクションの所在地・電話番号・定休日は制作サンプルのため仮の内容です。</p>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow">Contact</span>
+        <h2>お問い合わせ</h2>
+        <p>図面・現状写真の添付、電話、LINEのいずれからでもご相談いただけます。折り返しのご連絡先を必ずご記入ください。</p>
+      </div>
+      <div class="contact-grid">
+        <div class="contact-side reveal">
+          <h3>お急ぎの方はお電話・LINEへ</h3>
+          <p>現場の急ぎのご相談は、フォームより電話・LINEが早くつながります。</p>
+          <div class="cline">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.362 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.338 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            <div><span class="num">03-0000-0000</span><small>受付時間 平日9:00-18:00(仮)</small></div>
+          </div>
+          <div class="cline">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            <div><span class="num" style="font-size:1.05rem;">LINEで相談する</span><small>友だち追加後、図面を送るだけでOK(デモ用リンク)</small></div>
+          </div>
+        </div>
+        <form class="contact-form reveal" onsubmit="event.preventDefault();">
+          <div class="field">
+            <label>お名前<span class="req">必須</span></label>
+            <input type="text" name="name" placeholder="山田 太郎" required>
+          </div>
+          <div class="field">
+            <label>会社名</label>
+            <input type="text" name="company" placeholder="株式会社◯◯工務店">
+          </div>
+          <div class="field">
+            <label>電話番号<span class="req">必須</span></label>
+            <input type="tel" name="tel" placeholder="090-0000-0000" required>
+          </div>
+          <div class="field">
+            <label>メールアドレス<span class="req">必須</span></label>
+            <input type="email" name="email" placeholder="mail@example.com" required>
+          </div>
+          <div class="field">
+            <label>ご相談内容<span class="req">必須</span></label>
+            <select name="topic" required>
+              <option value="">選択してください</option>
+              <option>図面から見積もり依頼</option>
+              <option>LINEで相談したい</option>
+              <option>電話で相談したい</option>
+              <option>その他のご相談</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>詳細・ご要望</label>
+            <textarea name="detail" placeholder="工事内容、設置場所、希望納期などをご記入ください。図面や写真はメール・LINEでの送付もご案内します。"></textarea>
+            <p class="form-note">図面・写真ファイルはフォーム送信後、担当より送付方法をご案内します。</p>
+          </div>
+          <div class="submit-row">
+            <button type="submit" class="btn btn-accent">この内容で送信する</button>
+            <span class="form-note">※本フォームは制作サンプルのため送信されません。</span>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<div class="mobile-cta">
+  <a href="tel:0300000000" class="primary">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.362 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.338 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+    電話で相談
+  </a>
+  <a href="#contact">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+    LINE相談
+  </a>
+  <a href="#contact">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v16H4zM4 10h16M10 4v16"/></svg>
+    図面でお見積り
+  </a>
+</div>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-top">
+      <span class="foot-logo">株式会社TAIGA</span>
+      <div class="foot-links">
+        <a href="#reasons">選ばれる理由</a>
+        <a href="#results">施工実績</a>
+        <a href="#works">対応工事</a>
+        <a href="#flow">流れ</a>
+        <a href="#faq">よくある質問</a>
+        <a href="#company">会社概要</a>
+        <a href="#contact">お問い合わせ</a>
+      </div>
+    </div>
+    <p class="disclaimer">※本ページは制作サンプル(デモ)です。掲載の内容・数値は仮のもので、写真はイメージです。実際の制作では、ご提供いただく施工写真・会社情報・ロゴをもとに正式なコンテンツへ差し替えます。</p>
+    <p class="copy">&copy; 2026 TAIGA Co., Ltd. (デモ表示)</p>
+  </div>
+</footer>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "HomeAndConstructionBusiness",
+  "name": "株式会社TAIGA",
+  "description": "鉄・ステンレス・アルミの製作金物、建築金物工事。手摺・階段・特注金物の製作から現地取付まで一貫対応。",
+  "areaServed": "東京都",
+  "telephone": "03-0000-0000",
+  "address": {
+    "@type": "PostalAddress",
+    "addressRegion": "東京都",
+    "addressCountry": "JP"
+  }
+}
+</script>
+
+<script>
+(function(){
+  var hbtn = document.getElementById('hamburgerBtn');
+  var mnav = document.getElementById('mobile-nav');
+  hbtn.addEventListener('click', function(){
+    var open = mnav.classList.toggle('is-open');
+    hbtn.classList.toggle('is-open', open);
+    hbtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    document.body.style.overflow = open ? 'hidden' : '';
+  });
+  mnav.querySelectorAll('a').forEach(function(a){
+    a.addEventListener('click', function(){
+      mnav.classList.remove('is-open');
+      hbtn.classList.remove('is-open');
+      hbtn.setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
+    });
+  });
+
+  document.querySelectorAll('.faq-item').forEach(function(item){
+    var q = item.querySelector('.faq-q');
+    var a = item.querySelector('.faq-a');
+    q.addEventListener('click', function(){
+      var isOpen = item.classList.contains('is-open');
+      document.querySelectorAll('.faq-item.is-open').forEach(function(other){
+        if(other !== item){
+          other.classList.remove('is-open');
+          other.querySelector('.faq-a').style.maxHeight = null;
+        }
+      });
+      if(isOpen){
+        item.classList.remove('is-open');
+        a.style.maxHeight = null;
+      } else {
+        item.classList.add('is-open');
+        a.style.maxHeight = a.scrollHeight + 'px';
+      }
+    });
+  });
+
+  if('IntersectionObserver' in window){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if(e.isIntersecting){
+          e.target.classList.add('is-visible');
+          io.unobserve(e.target);
+        }
+      });
+    }, {threshold:0.15});
+    document.querySelectorAll('.reveal').forEach(function(el){ io.observe(el); });
+  } else {
+    document.querySelectorAll('.reveal').forEach(function(el){ el.classList.add('is-visible'); });
+  }
+})();
+</script>
+
+</body>
+</html>
