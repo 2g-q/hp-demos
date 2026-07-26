@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>はればれ債務整理ナビ ブログ運営ディレクション提案サンプル</title>
+<meta name="description" content="債務整理サイトのブログ運営ディレクション業務の提案サンプルです。TOPページ設計・運営フロー・品質管理・AI活用の考え方をまとめています。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Zen+Kaku+Gothic+New:wght@500;700;900&family=Manrope:wght@600;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#faf9f5;
+    --bg-alt:#f1efe8;
+    --ink:#20242b;
+    --ink-soft:#565c66;
+    --accent:#1c3d5a;
+    --accent-soft:#e7edf2;
+    --line:#e3e0d8;
+    --white:#ffffff;
+    --radius-card:18px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    font-family:"Noto Sans JP",sans-serif;
+    background:var(--bg);
+    color:var(--ink);
+    line-height:1.85;
+    -webkit-font-smoothing:antialiased;
+    word-break:normal;
+    overflow-wrapper:break-word;
+  }
+  img{max-width:100%;display:block;}
+  a{color:inherit;text-decoration:none;}
+  h1,h2,h3,h4{font-family:"Zen Kaku Gothic New",sans-serif;letter-spacing:.02em;margin:0;}
+  .num{font-family:"Manrope",sans-serif;}
+  .wrap{width:100%;max-width:1080px;margin:0 auto;padding:0 24px;}
+  section{padding:96px 0;}
+  @media (max-width:640px){section{padding:64px 0;}}
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:8px;
+    font-size:.78rem;font-weight:700;color:var(--accent);
+    letter-spacing:.12em;margin-bottom:16px;
+  }
+  .eyebrow::before{content:"";width:22px;height:2px;background:var(--accent);display:inline-block;}
+  h2.section-title{
+    font-size:clamp(1.5rem,4vw,2.15rem);
+    font-weight:900;line-height:1.5;margin-bottom:14px;
+  }
+  .section-lead{color:var(--ink-soft);font-size:.98rem;max-width:640px;margin-bottom:48px;}
+
+  /* ---------- header ---------- */
+  header{
+    position:fixed;top:0;left:0;right:0;z-index:100;
+    background:rgba(250,249,245,.92);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);
+  }
+  .header-inner{
+    width:100%;max-width:1080px;margin:0 auto;padding:0 24px;
+    height:68px;display:flex;align-items:center;justify-content:space-between;
+  }
+  .logo{font-family:"Zen Kaku Gothic New",sans-serif;font-weight:900;font-size:1.05rem;color:var(--accent);white-space:nowrap;}
+  .logo span{font-weight:500;font-size:.68rem;display:block;color:var(--ink-soft);letter-spacing:.08em;}
+  .desktop-nav{display:flex;gap:28px;font-size:.86rem;font-weight:500;}
+  .desktop-nav a:hover{color:var(--accent);}
+  .burger{
+    display:none;width:42px;height:42px;border-radius:50%;border:1px solid var(--line);
+    background:var(--white);position:relative;cursor:pointer;
+  }
+  .burger span{
+    position:absolute;left:11px;right:11px;height:2px;background:var(--ink);
+    transition:transform .25s ease,opacity .25s ease;
+  }
+  .burger span:nth-child(1){top:15px;}
+  .burger span:nth-child(2){top:21px;}
+  .burger span:nth-child(3){top:27px;}
+  .burger.open span:nth-child(1){transform:translateY(6px) rotate(45deg);}
+  .burger.open span:nth-child(2){opacity:0;}
+  .burger.open span:nth-child(3){transform:translateY(-6px) rotate(-45deg);}
+
+  /* mobile nav is a SIBLING of header, not nested, so fixed positioning is never clipped by header's backdrop-filter */
+  #mobileNav{
+    position:fixed;top:68px;left:0;right:0;bottom:0;z-index:99;
+    background:var(--bg);
+    transform:translateX(100%);
+    transition:transform .3s ease;
+    display:none;
+    overflow-y:auto;
+  }
+  #mobileNav.open{transform:translateX(0);}
+  #mobileNav ul{list-style:none;margin:0;padding:32px 24px;display:flex;flex-direction:column;gap:6px;}
+  #mobileNav a{display:block;padding:16px 4px;font-size:1.05rem;font-weight:700;border-bottom:1px solid var(--line);}
+
+  @media (max-width:860px){
+    .desktop-nav{display:none;}
+    .burger{display:block;}
+    #mobileNav{display:block;}
+  }
+
+  /* ---------- hero ---------- */
+  .hero{
+    padding:150px 0 90px;
+    background:
+      linear-gradient(180deg,rgba(28,61,90,.86),rgba(28,61,90,.72)),
+      url("https://images.unsplash.com/photo-1629875499750-a31b83446598?auto=format&fit=crop&w=1200&q=70") center/cover no-repeat;
+    color:var(--white);
+  }
+  .hero-badge{
+    display:inline-block;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.35);
+    border-radius:100px;padding:6px 16px;font-size:.74rem;letter-spacing:.08em;font-weight:700;margin-bottom:22px;
+  }
+  .hero h1{
+    font-size:clamp(1.85rem,5.4vw,3rem);
+    font-weight:900;line-height:1.55;margin-bottom:22px;
+    max-width:15ch;
+  }
+  .hero p{font-size:.98rem;color:rgba(255,255,255,.86);max-width:46ch;margin-bottom:34px;}
+  .hero-cta{display:flex;gap:14px;flex-wrap:wrap;}
+  .btn{
+    display:inline-flex;align-items:center;gap:8px;
+    padding:15px 30px;border-radius:100px;font-weight:700;font-size:.9rem;
+    box-shadow:0 10px 26px rgba(28,61,90,.28);border:none;cursor:pointer;
+  }
+  .btn-primary{background:var(--white);color:var(--accent);}
+  .btn-ghost{background:transparent;color:var(--white);border:1px solid rgba(255,255,255,.55);box-shadow:none;}
+  .btn-solid{background:var(--accent);color:var(--white);}
+
+  /* trust bar */
+  .trust{
+    background:var(--accent);color:var(--white);
+  }
+  .trust .wrap{
+    display:grid;grid-template-columns:repeat(4,1fr);gap:24px;padding:36px 24px;text-align:center;
+  }
+  @media (max-width:760px){.trust .wrap{grid-template-columns:repeat(2,1fr);}}
+  .trust-item .num{display:block;font-size:1.7rem;font-weight:800;}
+  .trust-item p{margin:6px 0 0;font-size:.76rem;color:rgba(255,255,255,.78);}
+
+  /* ---------- mockup browser frame ---------- */
+  .browser{
+    border-radius:16px;overflow:hidden;border:1px solid var(--line);
+    box-shadow:0 24px 60px rgba(32,36,43,.12);background:var(--white);
+  }
+  .browser-bar{
+    background:#eeece5;padding:12px 16px;display:flex;align-items:center;gap:8px;border-bottom:1px solid var(--line);
+  }
+  .browser-bar i{width:10px;height:10px;border-radius:50%;background:#d7d3c8;display:inline-block;}
+  .browser-bar .url{
+    margin-left:10px;background:var(--white);border:1px solid var(--line);border-radius:100px;
+    padding:5px 14px;font-size:.72rem;color:var(--ink-soft);flex:1;max-width:280px;
+  }
+  .mock-hero{
+    padding:52px 28px;text-align:center;
+    background:linear-gradient(180deg,var(--accent-soft),var(--white));
+  }
+  .mock-hero .eyebrow{justify-content:center;}
+  .mock-hero h3{font-size:clamp(1.3rem,4vw,1.9rem);font-weight:900;line-height:1.6;color:var(--accent);margin-bottom:14px;}
+  .mock-hero p{color:var(--ink-soft);font-size:.88rem;max-width:38ch;margin:0 auto 22px;}
+  .chip-row{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;padding:24px 20px 4px;}
+  .chip{
+    font-size:.76rem;font-weight:700;border:1px solid var(--line);border-radius:100px;
+    padding:7px 16px;color:var(--ink-soft);background:var(--bg-alt);
+  }
+  .chip.active{background:var(--accent);color:var(--white);border-color:var(--accent);}
+  .mock-grid{
+    display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1px;
+    background:var(--line);padding:1px;
+  }
+  .mock-card{background:var(--white);padding:22px;}
+  .mock-card .cat{
+    display:inline-block;font-size:.68rem;font-weight:700;color:var(--accent);
+    background:var(--accent-soft);border-radius:6px;padding:3px 9px;margin-bottom:12px;
+  }
+  .mock-card h4{font-size:.98rem;font-weight:700;line-height:1.6;margin-bottom:8px;}
+  .mock-card .meta{font-size:.72rem;color:var(--ink-soft);}
+  .mock-card .kw{
+    margin-top:12px;font-size:.68rem;color:var(--ink-soft);
+    border-top:1px dashed var(--line);padding-top:10px;
+  }
+  .mock-card .kw b{color:var(--accent);font-weight:700;}
+
+  /* ---------- flow timeline ---------- */
+  .flow{
+    display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:0;
+    counter-reset:step;
+  }
+  .flow-step{
+    position:relative;padding:26px 18px 18px;border-top:3px solid var(--accent);background:var(--white);
+    margin-right:1px;
+  }
+  .flow-step::before{
+    counter-increment:step;content:counter(step);
+    font-family:"Manrope",sans-serif;font-weight:800;font-size:.82rem;
+    width:30px;height:30px;border-radius:50%;background:var(--accent);color:var(--white);
+    display:flex;align-items:center;justify-content:center;margin-bottom:14px;
+  }
+  .flow-step h4{font-size:.92rem;font-weight:700;margin-bottom:8px;}
+  .flow-step p{font-size:.8rem;color:var(--ink-soft);margin:0;}
+  .flow-note{
+    margin-top:28px;background:var(--accent-soft);border-radius:14px;padding:18px 22px;
+    font-size:.84rem;color:var(--accent);font-weight:500;
+  }
+
+  /* bar chart (illustrative) */
+  .chart-box{
+    background:var(--white);border:1px solid var(--line);border-radius:var(--radius-card);
+    padding:28px 24px;margin-top:32px;
+  }
+  .chart-box h4{font-size:.9rem;font-weight:700;margin-bottom:4px;}
+  .chart-box .cap{font-size:.72rem;color:var(--ink-soft);margin-bottom:22px;}
+  .bars{display:flex;align-items:flex-end;gap:10px;height:120px;}
+  .bar{flex:1;background:linear-gradient(180deg,var(--accent),#2c5c82);border-radius:6px 6px 0 0;position:relative;min-width:0;}
+  .bar span{
+    position:absolute;bottom:-22px;left:0;right:0;text-align:center;font-size:.65rem;color:var(--ink-soft);
+  }
+
+  /* grid cards generic */
+  .card-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:20px;}
+  .card{
+    background:var(--white);border:1px solid var(--line);border-radius:var(--radius-card);
+    padding:28px 24px;
+  }
+  .card .ico{width:38px;height:38px;margin-bottom:16px;}
+  .card h4{font-size:1rem;font-weight:700;margin-bottom:10px;}
+  .card p{font-size:.85rem;color:var(--ink-soft);margin:0;}
+
+  /* director */
+  .director{
+    display:grid;grid-template-columns:220px 1fr;gap:36px;align-items:center;
+    background:var(--white);border:1px solid var(--line);border-radius:20px;padding:32px;
+  }
+  @media (max-width:640px){.director{grid-template-columns:1fr;}}
+  .director img{border-radius:14px;width:100%;max-width:220px;aspect-ratio:1/1;object-fit:cover;margin:0 auto;}
+  .director h3{font-size:1.15rem;font-weight:900;margin-bottom:10px;}
+  .director .role{font-size:.78rem;color:var(--accent);font-weight:700;margin-bottom:14px;display:block;}
+  .director p{font-size:.87rem;color:var(--ink-soft);margin:0 0 10px;}
+
+  /* faq */
+  .faq-item{border-bottom:1px solid var(--line);padding:22px 0;}
+  .faq-q{
+    display:flex;justify-content:space-between;align-items:center;gap:16px;cursor:pointer;
+    font-weight:700;font-size:.95rem;
+  }
+  .faq-q .toggle{font-family:"Manrope",sans-serif;font-size:1.2rem;color:var(--accent);flex-shrink:0;}
+  .faq-a{max-height:0;overflow:hidden;transition:max-height .3s ease;font-size:.85rem;color:var(--ink-soft);}
+  .faq-a p{margin:14px 0 0;}
+  .faq-item.open .faq-a{max-height:260px;}
+  .faq-item.open .toggle{transform:rotate(45deg);}
+
+  /* contact */
+  .contact{background:var(--accent);color:var(--white);border-radius:24px;padding:52px 32px;text-align:center;}
+  .contact h2{color:var(--white);}
+  .contact p{color:rgba(255,255,255,.82);max-width:46ch;margin:14px auto 30px;font-size:.9rem;}
+
+  /* reveal */
+  .reveal{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s ease;}
+  .reveal.in{opacity:1;transform:translateY(0);}
+  @media (prefers-reduced-motion:reduce){
+    .reveal{opacity:1;transform:none;transition:none;}
+    html{scroll-behavior:auto;}
+  }
+
+  /* footer */
+  footer{background:#181d24;color:#b8bcc4;padding:56px 0 32px;font-size:.8rem;}
+  footer .foot-top{display:flex;justify-content:space-between;flex-wrap:wrap;gap:24px;margin-bottom:32px;}
+  footer .foot-logo{font-family:"Zen Kaku Gothic New",sans-serif;color:var(--white);font-weight:900;font-size:1rem;}
+  footer .disclaimer{
+    border-top:1px solid #2c323c;padding-top:24px;font-size:.74rem;color:#8b909a;line-height:1.9;
+  }
+
+  /* sticky mobile cta */
+  .sticky-cta{
+    position:fixed;left:0;right:0;bottom:0;z-index:90;
+    background:rgba(255,255,255,.96);backdrop-filter:blur(6px);
+    border-top:1px solid var(--line);
+    padding:12px 16px;display:none;gap:10px;
+  }
+  .sticky-cta a{flex:1;text-align:center;padding:13px 10px;border-radius:100px;font-weight:700;font-size:.82rem;}
+  .sticky-cta .call{background:var(--accent-soft);color:var(--accent);}
+  .sticky-cta .go{background:var(--accent);color:var(--white);}
+  @media (max-width:760px){
+    .sticky-cta{display:flex;}
+    body{padding-bottom:76px;}
+  }
+
+  input,textarea{font-size:16px;}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="logo">はればれ債務整理ナビ<span>ブログ運営ディレクション提案サンプル</span></div>
+    <nav class="desktop-nav">
+      <a href="#design">サイト設計</a>
+      <a href="#flow">運営フロー</a>
+      <a href="#quality">品質管理</a>
+      <a href="#ai">AI活用</a>
+      <a href="#director">体制紹介</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+    <button class="burger" id="burgerBtn" aria-label="メニュー"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<nav id="mobileNav">
+  <ul>
+    <li><a href="#design">サイト設計</a></li>
+    <li><a href="#flow">運営フロー</a></li>
+    <li><a href="#quality">品質管理</a></li>
+    <li><a href="#ai">AI活用</a></li>
+    <li><a href="#director">体制紹介</a></li>
+    <li><a href="#faq">FAQ</a></li>
+    <li><a href="#contact">ご提案</a></li>
+  </ul>
+</nav>
+
+<section class="hero">
+  <div class="wrap">
+    <span class="hero-badge">ブログ運営ディレクター募集案件 提案サンプル</span>
+    <h1>書くのはライターへ。<br>整えるのは、私が。</h1>
+    <p>債務整理サイトのブログ運営ディレクション業務のご提案として、TOPページの設計イメージと運営フローをまとめたサンプルです。掲載の内容・数値は仮のものです。</p>
+    <div class="hero-cta">
+      <a href="#design" class="btn btn-primary">サイト設計案を見る</a>
+      <a href="#contact" class="btn btn-ghost">ご提案について</a>
+    </div>
+  </div>
+</section>
+
+<div class="trust">
+  <div class="wrap">
+    <div class="trust-item"><span class="num">5〜8</span><p>月間公開記事数の目安</p></div>
+    <div class="trust-item"><span class="num">2段</span><p>添削・ファクトチェック体制</p></div>
+    <div class="trust-item"><span class="num">AI</span><p>情報収集・タイトル案の補助に活用</p></div>
+    <div class="trust-item"><span class="num">柔軟</span><p>稼働時間は自由・進行のみ管理</p></div>
+  </div>
+</div>
+
+<section id="design">
+  <div class="wrap">
+    <div class="reveal">
+      <span class="eyebrow">サイト設計案</span>
+      <h2 class="section-title">TOPページは、こう組み立てます</h2>
+      <p class="section-lead">キーワードは貴社よりご提示いただく前提で、検索意図ごとにカテゴリを分け、記事の入口をわかりやすく整理します。以下は構成イメージのモックアップです。</p>
+    </div>
+
+    <div class="browser reveal">
+      <div class="browser-bar">
+        <i></i><i></i><i></i>
+        <span class="url">harebare-saimu-navi.example.jp</span>
+      </div>
+      <div class="mock-hero">
+        <span class="eyebrow">はればれ債務整理ナビ</span>
+        <h3>動かなければ、増えていく。<br>動けば、選べる。</h3>
+        <p>任意整理・自己破産・個人再生・過払い金請求。状況別に、次の一歩をわかりやすく解説します。</p>
+      </div>
+      <div class="chip-row">
+        <span class="chip active">すべて</span>
+        <span class="chip">任意整理</span>
+        <span class="chip">自己破産</span>
+        <span class="chip">個人再生</span>
+        <span class="chip">過払い金</span>
+        <span class="chip">よくある質問</span>
+      </div>
+      <div class="mock-grid">
+        <div class="mock-card">
+          <span class="cat">任意整理</span>
+          <h4>任意整理をするとどうなる?メリットと後悔しないための注意点</h4>
+          <span class="meta">公開日 2026.07.20 ／ 監修記事</span>
+          <div class="kw">検索意図: <b>任意整理 デメリット</b> への直接回答から書き出し</div>
+        </div>
+        <div class="mock-card">
+          <span class="cat">自己破産</span>
+          <h4>自己破産で家族に影響は出る?同居家族への影響を状況別に整理</h4>
+          <span class="meta">公開日 2026.07.18</span>
+          <div class="kw">検索意図: <b>自己破産 家族 影響</b> の不安に先回りする見出し構成</div>
+        </div>
+        <div class="mock-card">
+          <span class="cat">個人再生</span>
+          <h4>個人再生の返済期間はどれくらい?住宅を残す条件つき解説</h4>
+          <span class="meta">公開日 2026.07.15</span>
+          <div class="kw">検索意図: <b>個人再生 期間</b> ＋ 住宅ローン特則を併記</div>
+        </div>
+        <div class="mock-card">
+          <span class="cat">過払い金</span>
+          <h4>過払い金請求に時効はある?最終取引日からの数え方を解説</h4>
+          <span class="meta">公開日 2026.07.11</span>
+          <div class="kw">検索意図: <b>過払い金 時効</b> を冒頭で明確化</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="flow" style="background:var(--bg-alt);">
+  <div class="wrap">
+    <div class="reveal">
+      <span class="eyebrow">運営フロー</span>
+      <h2 class="section-title">月5〜8記事を、無理なく回す仕組み</h2>
+      <p class="section-lead">キーワード設計から公開まで、ディレクターが要所を押さえる体制です。マニュアルは契約後にお預かりし、そちらに沿って運用します。</p>
+    </div>
+
+    <div class="flow reveal">
+      <div class="flow-step"><h4>キーワード・見出し設計</h4><p>ご提示いただくキーワードをもとに、検索意図に沿った見出し構成をディレクターが作成</p></div>
+      <div class="flow-step"><h4>ライターアサイン</h4><p>記事の難易度・専門性に応じて担当ライターを割り当て</p></div>
+      <div class="flow-step"><h4>執筆</h4><p>構成に沿って本文を執筆。Claudeで情報収集を補助しつつ人が確認</p></div>
+      <div class="flow-step"><h4>添削・ファクトチェック</h4><p>表現・言い回し・事実関係をディレクターが確認し修正指示</p></div>
+      <div class="flow-step"><h4>公開</h4><p>最終体裁を整えて公開。掲載後の見え方まで確認</p></div>
+      <div class="flow-step"><h4>次月へ反映</h4><p>公開ペースと反応を踏まえ、翌月のキーワード配分を調整</p></div>
+    </div>
+
+    <div class="flow-note reveal">公開ペースさえ守れれば稼働時間は問いません。ディレクターが進行と品質を管理する前提で、日々の作業時間は柔軟に調整します。</div>
+
+    <div class="chart-box reveal">
+      <h4>月間公開記事数イメージ</h4>
+      <p class="cap">※目標として想定するペースのイメージ図です(仮の数値)</p>
+      <div class="bars">
+        <div class="bar" style="height:62%;"><span>1月</span></div>
+        <div class="bar" style="height:75%;"><span>2月</span></div>
+        <div class="bar" style="height:68%;"><span>3月</span></div>
+        <div class="bar" style="height:88%;"><span>4月</span></div>
+        <div class="bar" style="height:70%;"><span>5月</span></div>
+        <div class="bar" style="height:82%;"><span>6月</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="quality">
+  <div class="wrap">
+    <div class="reveal">
+      <span class="eyebrow">品質管理</span>
+      <h2 class="section-title">添削で見る、3つの軸</h2>
+      <p class="section-lead">債務整理という性質上、言い回しには特に注意を払います。公開前にディレクターが必ず目を通します。</p>
+    </div>
+    <div class="card-grid reveal">
+      <div class="card">
+        <svg class="ico" viewBox="0 0 38 38" fill="none"><circle cx="19" cy="19" r="17" stroke="#1c3d5a" stroke-width="2"/><path d="M12 19l5 5 9-11" stroke="#1c3d5a" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <h4>事実確認・表現の妥当性</h4>
+        <p>断定的すぎる表現や誤解を招く言い回しがないか、公開前に確認します。</p>
+      </div>
+      <div class="card">
+        <svg class="ico" viewBox="0 0 38 38" fill="none"><rect x="8" y="6" width="22" height="26" rx="2" stroke="#1c3d5a" stroke-width="2"/><path d="M13 14h12M13 20h12M13 26h7" stroke="#1c3d5a" stroke-width="2" stroke-linecap="round"/></svg>
+        <h4>読みやすさ</h4>
+        <p>専門用語は噛み砕き、はじめて調べる読者でも迷わない文章に整えます。</p>
+      </div>
+      <div class="card">
+        <svg class="ico" viewBox="0 0 38 38" fill="none"><path d="M19 6v26M8 14l11-8 11 8" stroke="#1c3d5a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <h4>検索意図との整合</h4>
+        <p>見出しと本文がずれていないか、検索してきた読者の疑問に答えられているかを確認します。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="ai" style="background:var(--bg-alt);">
+  <div class="wrap">
+    <div class="reveal">
+      <span class="eyebrow">AI活用</span>
+      <h2 class="section-title">AIは補助、判断は人が行います</h2>
+      <p class="section-lead">ご提示いただいたAI活用の方針に沿い、次の場面でClaudeを使います。最終判断・公開可否はディレクターが行います。</p>
+    </div>
+    <div class="card-grid reveal">
+      <div class="card">
+        <svg class="ico" viewBox="0 0 38 38" fill="none"><circle cx="16" cy="16" r="9" stroke="#1c3d5a" stroke-width="2"/><path d="M23 23l8 8" stroke="#1c3d5a" stroke-width="2.4" stroke-linecap="round"/></svg>
+        <h4>情報収集の補助</h4>
+        <p>制度の概要や論点整理など、執筆前のリサーチ時間を短縮します。</p>
+      </div>
+      <div class="card">
+        <svg class="ico" viewBox="0 0 38 38" fill="none"><path d="M9 27l4-1 15-15-3-3L10 23l-1 4z" stroke="#1c3d5a" stroke-width="2" stroke-linejoin="round"/></svg>
+        <h4>タイトル・見出し案</h4>
+        <p>キーワードから複数案を出し、ディレクターが検索意図に合うものを選定します。</p>
+      </div>
+      <div class="card">
+        <svg class="ico" viewBox="0 0 38 38" fill="none"><path d="M8 19h22M8 12h22M8 26h14" stroke="#1c3d5a" stroke-width="2" stroke-linecap="round"/></svg>
+        <h4>添削時の表記チェック</h4>
+        <p>表記ゆれや冗長な言い回しの洗い出しに使い、最終確認は人の目で行います。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="director">
+  <div class="wrap">
+    <div class="reveal">
+      <span class="eyebrow">体制紹介</span>
+      <h2 class="section-title">進行管理は、ひとりで責任を持って</h2>
+    </div>
+    <div class="director reveal">
+      <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=600&q=70" alt="ディレクター紹介イメージ(※写真はイメージです)">
+      <div>
+        <span class="role">ディレクター担当</span>
+        <h3>自動化のミナト</h3>
+        <p>本業でAI・自動化開発に携わり、Claude Codeなどを活用した業務設計を行っています。ライターの募集・アサインから添削・進行管理まで、公開ペースを守る運用体制を構築します。</p>
+        <p>マニュアルをお預かりした後は、それに沿って再現性のある運営に落とし込みます。ご不明点はその都度ご相談ください。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="faq" style="background:var(--bg-alt);">
+  <div class="wrap">
+    <div class="reveal">
+      <span class="eyebrow">FAQ</span>
+      <h2 class="section-title">よくあるご質問</h2>
+    </div>
+    <div class="reveal">
+      <div class="faq-item open">
+        <div class="faq-q"><span>稼働時間は決まっていますか?</span><span class="toggle">+</span></div>
+        <div class="faq-a"><p>公開記事数(月5〜8本)を守れれば、日々の稼働時間や曜日は柔軟に調整して問題ないと理解しています。進行が遅れそうな場合は早めにご連絡します。</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q"><span>ライターはどのように確保しますか?</span><span class="toggle">+</span></div>
+        <div class="faq-a"><p>募集・選定・アサインまでディレクターが担当します。債務整理分野の理解度を確認したうえで担当を割り振ります。</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q"><span>マニュアルはどう反映されますか?</span><span class="toggle">+</span></div>
+        <div class="faq-a"><p>契約後にお預かりするマニュアルの内容を運営フローに落とし込み、添削基準として統一します。</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q"><span>AIの活用範囲を教えてください</span><span class="toggle">+</span></div>
+        <div class="faq-a"><p>情報収集の補助・タイトルや見出し案の作成・表記チェックに使います。事実確認と公開判断は人が行います。</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="wrap">
+    <div class="contact reveal">
+      <h2 class="section-title">この体制でご提案いたします</h2>
+      <p>本ページはご提案内容をお伝えするためのサンプルです。詳細やご不明点はお気軽にお問い合わせください。</p>
+      <a href="#" class="btn btn-primary" onclick="return false;">お問い合わせフォームへ</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-top">
+      <div class="foot-logo">はればれ債務整理ナビ(提案サンプル)</div>
+      <div>お問い合わせ(サンプル): 03-0000-0000</div>
+    </div>
+    <div class="disclaimer">
+      ※本ページは制作サンプル(デモ)です。掲載の内容・数値は仮のもので、写真はイメージです。実制作ではご提供の資料や日本人モデルの素材に差し替えます。サイト名・記事タイトル・キーワード・電話番号はすべて架空のものであり、実在の団体・サービスとは関係ありません。
+    </div>
+  </div>
+</footer>
+
+<div class="sticky-cta">
+  <a href="tel:0300000000" class="call">電話で相談(仮)</a>
+  <a href="#contact" class="go">ご提案を見る</a>
+</div>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "はればれ債務整理ナビ",
+  "description": "債務整理に関する情報を発信するブログメディア(制作サンプル・架空)",
+  "url": "https://harebare-saimu-navi.example.jp"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "任意整理をするとどうなる?メリットと後悔しないための注意点",
+  "author": {"@type": "Organization", "name": "はればれ債務整理ナビ 編集部"},
+  "publisher": {"@type": "Organization", "name": "はればれ債務整理ナビ"},
+  "datePublished": "2026-07-20"
+}
+</script>
+
+<script>
+  var burger = document.getElementById('burgerBtn');
+  var nav = document.getElementById('mobileNav');
+  burger.addEventListener('click', function(){
+    burger.classList.toggle('open');
+    nav.classList.toggle('open');
+  });
+  nav.querySelectorAll('a').forEach(function(a){
+    a.addEventListener('click', function(){
+      burger.classList.remove('open');
+      nav.classList.remove('open');
+    });
+  });
+
+  document.querySelectorAll('.faq-q').forEach(function(q){
+    q.addEventListener('click', function(){
+      q.parentElement.classList.toggle('open');
+    });
+  });
+
+  if ('IntersectionObserver' in window){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if (e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
+      });
+    }, {threshold:.12});
+    document.querySelectorAll('.reveal').forEach(function(el){ io.observe(el); });
+  } else {
+    document.querySelectorAll('.reveal').forEach(function(el){ el.classList.add('in'); });
+  }
+</script>
+</body>
+</html>
