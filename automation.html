@@ -158,6 +158,52 @@
   .foot-link:hover{background:var(--navy2)}
   .foot-link .ar{font-family:var(--num);font-weight:800}
 
+  /* ===== ヘッダー内タブ(他ジャンルの作品集への導線) ===== */
+  .htabs{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px}
+  .htab{
+    display:inline-flex;align-items:center;gap:7px;
+    border-radius:100px;padding:7px 15px;
+    font-size:13px;font-weight:700;text-decoration:none;
+    border:1px solid rgba(255,255,255,.22);
+    color:#c7d1e8;transition:.15s;white-space:nowrap;
+  }
+  .htab.on{background:#fff;color:var(--navy);border-color:#fff}
+  .htab:not(.on):hover{background:rgba(255,255,255,.12);color:#fff;border-color:rgba(255,255,255,.45)}
+  .htab .ar{font-family:var(--num);font-weight:800}
+
+  /* ===== 他ジャンルの作品集(サムネイル) ===== */
+  .xsell{
+    background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+    box-shadow:var(--shadow);padding:26px 24px 24px;margin-top:34px;
+  }
+  .xsell h3{font-size:18px;font-weight:800;letter-spacing:.01em}
+  .xsell .xlead{font-size:13.5px;color:var(--muted);line-height:1.75;margin:6px 0 18px;max-width:760px}
+  .xgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+  a.xcard{
+    display:block;text-decoration:none;color:inherit;
+    border:1px solid var(--line);border-radius:11px;overflow:hidden;
+    background:var(--card);transition:.18s;
+  }
+  a.xcard:hover{transform:translateY(-3px);box-shadow:0 14px 32px -18px rgba(27,35,51,.45);border-color:#c9d4f5}
+  a.xcard img{display:block;width:100%;height:auto;aspect-ratio:1000/672;object-fit:cover;background:var(--bg)}
+  a.xcard .xmeta{padding:11px 13px 13px}
+  a.xcard .xtag{
+    display:inline-block;font-size:10.5px;font-weight:800;letter-spacing:.06em;
+    color:var(--accent);background:var(--accent-soft);border-radius:100px;padding:2px 9px;margin-bottom:5px;
+  }
+  a.xcard b{display:block;font-size:13.5px;font-weight:700;line-height:1.5}
+  a.xcard span.xsub{display:block;font-size:12px;color:var(--muted);line-height:1.6;margin-top:3px}
+  .xall{
+    display:inline-flex;align-items:center;gap:8px;margin-top:18px;
+    background:var(--navy);color:#fff;text-decoration:none;
+    border-radius:10px;padding:12px 22px;font-size:14px;font-weight:700;transition:.15s;
+  }
+  .xall:hover{background:var(--navy2)}
+  .xall .ar{font-family:var(--num);font-weight:800}
+  .xnote{font-size:11.5px;color:var(--muted);margin-top:12px;line-height:1.7}
+  @media(max-width:900px){.xgrid{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:420px){.xgrid{grid-template-columns:1fr}}
+
   @media(max-width:600px){
     header h1{font-size:24px}
     header .head-in{padding:32px 20px 36px}
@@ -178,6 +224,10 @@
         <div class="role">AI・自動化開発 / データ処理受託</div>
       </div>
     </div>
+    <div class="htabs">
+      <span class="htab on">自動化・データ処理</span>
+      <a class="htab" href="index.html">ホームページ・LP・デザイン <span class="ar">→</span></a>
+    </div>
     <h1>
       自動化・データ処理 作品集
       <span class="thin">AIで速く正確に、品質は全件人の目で検品。</span>
@@ -187,8 +237,8 @@
       下は実際に動くツールの出力です。数字はすべて手元で計測した実測値です。
     </p>
     <div class="badges">
-      <span class="badge">クラウドワークス総合評価 <b>4.9</b>(15件)</span>
-      <span class="badge">受注実績 <b>20件</b></span>
+      <span class="badge">クラウドワークス総合評価 <b>4.9</b>(17件)</span>
+      <span class="badge">受注実績 <b>22件</b></span>
       <span class="badge">納品物は<b>全件</b>人の目で検品</span>
     </div>
   </div>
@@ -358,6 +408,51 @@
       <div class="dot">3</div>
       <div><b>数字はすべて実測</b><span>掲載の処理時間・件数は誇張なく、手元で計測した実測値のみです。</span></div>
     </div>
+  </div>
+
+  <!-- 他ジャンルの作品集 -->
+  <div class="xsell">
+    <h3>ホームページ・LP・デザインもお作りしています</h3>
+    <p class="xlead">
+      同じ「AIで速く、人の目で検品」の進め方で、ホームページ・ランディングページ・バナー・LINE構築まで対応しています。
+      いずれも実際にブラウザで動くサンプルです。スマホでもそのままご覧いただけます。
+    </p>
+    <div class="xgrid">
+      <a class="xcard" href="lp-gym.html">
+        <img src="pf/lp-gym.jpg" alt="パーソナルジムの体験予約LPサンプル" loading="lazy">
+        <div class="xmeta">
+          <span class="xtag">集客LP</span>
+          <b>パーソナルジム 体験予約LP</b>
+          <span class="xsub">料金比較・お客様の声・FAQ・予約フォームまでの導線設計。</span>
+        </div>
+      </a>
+      <a class="xcard" href="dental-sakura.html">
+        <img src="pf/dental-sakura.jpg" alt="歯科医院のホームページサンプル" loading="lazy">
+        <div class="xmeta">
+          <span class="xtag">ホームページ</span>
+          <b>歯科医院(訪問歯科)</b>
+          <span class="xsub">対象・エリア・費用・流れまで丁寧に設計した医院サイト。</span>
+        </div>
+      </a>
+      <a class="xcard" href="corp.html">
+        <img src="pf/corp.jpg" alt="人材会社のコーポレートサイトサンプル" loading="lazy">
+        <div class="xmeta">
+          <span class="xtag">ホームページ</span>
+          <b>コーポレート(人材会社)</b>
+          <span class="xsub">信頼感のあるビジネス向けデザイン。事業紹介・問い合わせ。</span>
+        </div>
+      </a>
+      <a class="xcard" href="design.html">
+        <img src="pf/design.jpg" alt="バナー・チラシのデザイン制作サンプル" loading="lazy">
+        <div class="xmeta">
+          <span class="xtag">デザイン</span>
+          <b>バナー・チラシ量産</b>
+          <span class="xsub">メルマガヘッダー・Instagram広告・A4チラシ・サムネイル。</span>
+        </div>
+      </a>
+    </div>
+    <a class="xall" href="index.html">制作サンプル集をすべて見る <span class="ar">→</span></a>
+    <p class="xnote">※各サンプルの店舗名・人物・数値はすべて架空です。写真はイメージです。</p>
   </div>
 
 </div>
