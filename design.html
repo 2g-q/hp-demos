@@ -909,6 +909,31 @@ footer p + p{ margin-top:6px; }
     </div>
   </section>
 
+  <!-- ============ 05 character banners ============ -->
+  <section class="group">
+    <div class="group-head">
+      <span class="num">05</span>
+      <h2>キャラクター起用バナー — 6業種展開</h2>
+      <span class="spec">1200×628px</span>
+    </div>
+    <p class="group-cap">同じキャラクターを業種・訴求ごとに配置し直した例です。<strong>写実タッチ・アニメタッチ・ゆるキャラの3体を、それぞれ2案ずつ</strong>展開しています。キャラクターをお持ちの場合はご支給のものを、無い場合はご相談のうえ制作します。</p>
+    <div class="cb-grid">
+      <figure class="cb"><img src="char-assets/banner-realestate.jpg" alt="不動産リノベーションのバナー" loading="lazy">
+        <figcaption><b>不動産・リノベーション</b><span>写実タッチ／信頼感を軸に、金額の具体性で引く</span></figcaption></figure>
+      <figure class="cb"><img src="char-assets/banner-tax.jpg" alt="税理士事務所のバナー" loading="lazy">
+        <figcaption><b>士業・相続相談</b><span>写実タッチ／同じ人物を落ち着いた配色に載せ替え</span></figcaption></figure>
+      <figure class="cb"><img src="char-assets/banner-cafe.jpg" alt="カフェのモーニング告知バナー" loading="lazy">
+        <figcaption><b>カフェ・モーニング</b><span>アニメタッチ／時間と価格を主役に</span></figcaption></figure>
+      <figure class="cb"><img src="char-assets/banner-ec.jpg" alt="ECセールのバナー" loading="lazy">
+        <figcaption><b>EC・セール告知</b><span>アニメタッチ／同じ人物で割引訴求に切り替え</span></figcaption></figure>
+      <figure class="cb"><img src="char-assets/banner-local.jpg" alt="産地直送の予約受付バナー" loading="lazy">
+        <figcaption><b>地域・産直</b><span>ゆるキャラ／親しみやすさと価格の明示</span></figcaption></figure>
+      <figure class="cb"><img src="char-assets/banner-line.jpg" alt="LINE公式アカウントの友だち追加バナー" loading="lazy">
+        <figcaption><b>LINE公式アカウント</b><span>ゆるキャラ／同じマスコットを友だち追加訴求に</span></figcaption></figure>
+    </div>
+  </section>
+
+
 </div>
 
 <footer>
@@ -943,6 +968,14 @@ a.mnt-all:hover{background:#e8edf8}
 .mnt-bar.mnt-cta{padding-bottom:110px}
 @media(max-width:860px){.mnt-grid{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:420px){.mnt-grid{grid-template-columns:1fr}.mnt-bar{padding:28px 0 26px}.mnt-bar.mnt-cta{padding-bottom:120px}}
+
+  .cb-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
+  figure.cb{margin:0;border:1px solid var(--line,#e6e9ef);border-radius:12px;overflow:hidden;background:#fff}
+  figure.cb img{display:block;width:100%;height:auto}
+  figure.cb figcaption{padding:12px 14px 14px}
+  figure.cb figcaption b{display:block;font-size:14px;font-weight:700;margin-bottom:3px}
+  figure.cb figcaption span{display:block;font-size:12.5px;color:#69748c;line-height:1.65}
+  @media(max-width:760px){.cb-grid{grid-template-columns:1fr}}
 </style>
 <div class="mnt-bar">
   <div class="mnt-in">
