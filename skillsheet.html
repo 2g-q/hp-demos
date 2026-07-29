@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>スキルシート｜自動化のミナト（AI・自動化開発／Web制作）</title>
+<style>
+  @page { size: A4; margin: 12mm 12mm; }
+  * { box-sizing: border-box; }
+  :root { --ink:#1b1b1b; --sub:#555; --line:#d8d8d8; --accent:#1f4e79; --bg:#f6f8fa; }
+  body { font-family: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+         font-size: 9.8pt; color: var(--ink); line-height: 1.62; margin: 0; }
+
+  .head { display: flex; align-items: flex-end; justify-content: space-between;
+          border-bottom: 2.5px solid var(--accent); padding-bottom: 7px; margin-bottom: 4px; }
+  .name { font-size: 17pt; font-weight: 700; letter-spacing: .06em; }
+  .name .kana { font-size: 9pt; font-weight: 400; color: var(--sub); margin-left: 8px; letter-spacing: 0; }
+  .role { font-size: 10pt; color: var(--accent); font-weight: 600; margin-top: 2px; }
+  .sheet { font-size: 12pt; font-weight: 700; color: var(--accent); letter-spacing: .18em; white-space: nowrap; }
+  .asof { text-align: right; font-size: 8.5pt; color: var(--sub); margin-bottom: 12px; }
+
+  h2 { font-size: 10.2pt; font-weight: 700; color: var(--accent); margin: 14px 0 6px;
+       padding-left: 8px; border-left: 4px solid var(--accent); letter-spacing: .04em; }
+
+  table { width: 100%; border-collapse: collapse; margin-bottom: 4px; }
+  th, td { border-bottom: 1px solid var(--line); padding: 5px 8px; vertical-align: top; text-align: left; }
+  th { background: var(--bg); font-weight: 600; width: 8.6em; white-space: nowrap; color: #333; }
+  td .ex { display: block; font-size: 8.7pt; color: var(--sub); margin-top: 1px; }
+
+  ul { margin: 3px 0 4px; padding-left: 1.25em; }
+  li { margin-bottom: 1px; }
+  .cols { column-count: 2; column-gap: 16px; }
+  .cols li { break-inside: avoid; }
+
+  .tags { margin: 2px 0 6px; }
+  .tag { display: inline-block; border: 1px solid var(--line); background: #fff;
+         border-radius: 3px; padding: 1px 7px; margin: 0 4px 4px 0; font-size: 8.8pt; color: #333; }
+
+  .note { font-size: 8.6pt; color: var(--sub); }
+  .lead { font-weight: 600; }
+  .url { color: var(--accent); font-weight: 600; word-break: break-all; }
+  .block { page-break-inside: avoid; }
+  .pr p { margin: 0 0 5px; }
+  .foot { margin-top: 12px; text-align: right; font-size: 8.5pt; color: var(--sub); }
+  @media screen { body { max-width: 900px; margin: 24px auto; padding: 0 18px; } }
+</style>
+</head>
+<body>
+
+<div class="head">
+  <div>
+    <div class="name">自動化のミナト</div>
+    <div class="role">AI・自動化開発／Web制作　｜　クラウドワークス・ランサーズで受託しています</div>
+  </div>
+  <div class="sheet">SKILL SHEET</div>
+</div>
+<div class="asof">2026年7月30日現在</div>
+
+<table>
+  <tr><th>拠点・稼働形態</th><td>名古屋（フルリモートで対応します）。都内へ出る機会が多く、日程を合わせていただければ現地での打ち合わせやサイト・現場の確認にも伺えます。</td></tr>
+  <tr><th>稼働時間</th><td>普段は在宅で作業しているため、平日の日中を含めて終日、チャットでのご連絡とオンラインの打ち合わせに対応できます。稼働の見込みは週単位で先にお伝えします。</td></tr>
+  <tr><th>打ち合わせ</th><td>オンライン面談に対応します（Google Meet・Zoom等）。</td></tr>
+</table>
+
+<h2>ご依頼いただける領域</h2>
+<table>
+  <tr><th>Web制作</th><td>会社サイト・LP・採用サイトの制作。設計から実装・公開・その後の更新まで対応します。スマートフォン表示の最適化、問い合わせフォームの設置、アクセス解析の導入。
+    <span class="ex">実際に動くサンプル：<span class="url">https://2g-q.github.io/hp-demos/</span></span></td></tr>
+  <tr><th>業務自動化</th><td>手作業で回している業務を仕組みにします。Webサイトからの情報収集、他サービスとの連携、スプレッドシートの自動処理、帳票・文書の自動生成、メールの自動返信・リマインド。
+    <span class="ex">例：2つのスプレッドシート間で項目を照合して転記するツールの作成</span></td></tr>
+  <tr><th>データ処理</th><td>大量データの変換・重複の整理・一括登録。ECモールや業務システムへの取り込みと、取り込んだ後に正しく入っているかの検証まで。
+    <span class="ex">例：ECサイトの商品データを複数プラットフォームへ同期して一括登録</span></td></tr>
+  <tr><th>AI導入支援</th><td>ChatGPTやClaudeなどの生成AIを業務に組み込む設計と実装。どこをAIに任せ、どこは人が見るべきかの切り分けから入ります。</td></tr>
+  <tr><th>要件整理・<br>進行管理</th><td>やりたいことのヒアリングから、必要な機能の整理、画面構成案の作成、やることと期限の一覧化、進捗の定期報告まで。</td></tr>
+  <tr><th>既存システムの<br>改修</th><td>不具合の調査と修正、複数人での利用への対応、アクセス権の設定、外部サービスとの連携部分の修正。</td></tr>
+</table>
+
+<h2>進め方・お約束</h2>
+<table>
+  <tr><th>連絡</th><td>ご連絡には可能な限り早くお返しします。進捗はこちらから先に報告し、確認待ちで止めません。</td></tr>
+  <tr><th>着手の仕方</th><td>最初に完成物のイメージと範囲をすり合わせ、小さく作ってお見せしてから広げます。認識のずれを後半に持ち越しません。</td></tr>
+  <tr><th>品質の担保</th><td><span class="lead">作業はAIエージェントで速く回し、お渡しするものは全件自分の目で検品します。</span>送信・納品の前には自作の機械チェックを通し、事実と異なる記載や抜けを止めています。</td></tr>
+  <tr><th>できないこと</th><td>分からないこと・対応できないことは、最初にそう申し上げます。抱え込んで期日直前に相談する形にはしません。</td></tr>
+  <tr><th>守秘・情報の扱い</th><td>本業で社外秘の情報を日常的に扱っています。お預かりした資料・顧客データ・個人情報は本件以外に使用せず、作業環境も案件ごとに分けています。アカウントの共有が必要な場合は、権限を限定した形でのお預かりをお願いしています。</td></tr>
+</table>
+
+<h2>これまでにお引き受けした内容</h2>
+<div class="block">
+<ul class="cols">
+  <li>ECサイトの商品データの変換・一括登録を、複数プラットフォームで同期する仕組みとして構築・納品</li>
+  <li>アンケートの設計・募集・集計（複数回のリピート受注）</li>
+  <li>会社サイト・LPの制作と、公開後の運用・修正</li>
+  <li>Notionによる業務管理システムの構築</li>
+  <li>スプレッドシート／GASによる転記・照合ツールの作成</li>
+  <li>SNS投稿の制作と、運用の自動化</li>
+  <li>外部API連携・情報収集の自動化</li>
+  <li>既存システムの不具合調査・修正、複数人利用への対応</li>
+</ul>
+<div class="note">クラウドワークスでは高い評価をいただき、継続してご依頼いただいているお客様もいます。評価と実績はプロフィールでご確認いただけます。</div>
+</div>
+
+<h2>技術スタック</h2>
+<div class="tags">
+  <span class="tag">Python</span><span class="tag">JavaScript</span><span class="tag">TypeScript</span><span class="tag">HTML・CSS</span><span class="tag">SQL</span><span class="tag">Google Apps Script</span><span class="tag">シェルスクリプト</span>
+  <span class="tag">Node.js</span><span class="tag">AWS</span><span class="tag">Vercel</span><span class="tag">Supabase</span><span class="tag">Git・GitHub</span><span class="tag">GitHub Pages</span>
+  <span class="tag">Claude・Claude Code</span><span class="tag">ChatGPT</span><span class="tag">Codex</span><span class="tag">Cursor</span>
+  <span class="tag">Googleスプレッドシート</span><span class="tag">Googleフォーム</span><span class="tag">Notion</span><span class="tag">Slack・Chatwork</span><span class="tag">各種ECプラットフォーム</span>
+</div>
+<table>
+  <tr><th>AIを使った開発</th><td>Claude Code等のAIエージェントによる開発で、データ変換の仕組み、文書・帳票の自動生成、Webサイト制作、SNS運用の自動化、進行管理の仕組み化を構築・納品しています。</td></tr>
+  <tr><th>データ分析</th><td>データの変換・整理・一括登録の設計と検証。特許・文献・市場データの定量分析とレポート作成（月次の技術調査・市場調査の実務経験）。</td></tr>
+</table>
+
+<h2>経歴</h2>
+<table>
+  <tr><th>2025年10月〜<br>現在</th><td><span class="lead">自動車メーカー（東証プライム上場）／情報システム・AIデータ基盤開発</span>
+    <span class="ex">※社名および業務詳細は本業の規定・守秘義務により非公開とさせていただいています。</span>
+    社内の情報システムと、AIが扱えるようにデータを整えて共有する基盤の開発、および業務自動化を担当。研究開発部門向けの基盤の設計・構築、製造ラインおよび従業員の日常業務の最適化・自動化、複数案件での自動化の企画から実装・展開まで。</td></tr>
+  <tr><th>2026年6月〜<br>現在</th><td><span class="lead">個人受託（AI・業務自動化の開発）／クラウドワークス・ランサーズ「自動化のミナト」</span>
+    生成AI（Claude Code等）を活用した業務自動化・Web制作の受託開発。要件の整理から設計・実装・納品・公開後の運用までを自分ひとりで対応。</td></tr>
+  <tr><th>2018年4月〜<br>2025年9月</th><td><span class="lead">国立大学・公的研究機関／助教・博士研究員・博士課程（日本学術振興会 特別研究員）</span>
+    <span class="ex">※機関名は省略しています。肩書きは在籍期間により異なります。</span>
+    次世代デバイスの研究開発。企業との共同開発と国際共同プロジェクトを、企画から実行・予算管理まで担当。文献・特許・市場データをPythonで分析し判断材料として提示。海外機関と英語で直接やり取りしながら共同開発を推進。</td></tr>
+  <tr><th>学位・語学</th><td>博士（工学）／英語：海外の研究機関に滞在し、国際共同プロジェクトを推進。国際学会での発表、英語論文の執筆。</td></tr>
+</table>
+
+<h2>自己PR</h2>
+<div class="pr">
+<p>技術と業務の両方が分かる立場から、<span class="lead">「何を自動化すれば効くか」を業務側の言葉で設計し、そのまま実装まで持っていける</span>ことを強みとしています。本業では情報システムとAIデータ基盤の開発を、受託では要件整理から納品までを、いずれも自分の手で進めています。</p>
+<p>仕様が固まっていない状態からご相談いただいても、目的を伺って要件に落とし、実装して公開まで持っていきます。作業はAIエージェントで速く回しますが、お渡しするものは全件自分の目で通します。<span class="lead">処理はAIで速く、最終品質は人が担保する。</span>この形で、短納期でも品質を落とさずにお返ししています。</p>
+<p>分からないことは分からないとお伝えし、できることとできないことを最初に線引きします。そのうえで、任せていただいた範囲は最後まで持ちます。</p>
+</div>
+
+<div class="foot">以上</div>
+
+</body>
+</html>
