@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>STRYDE GOLF 日本公式サイト | 制作サンプル</title>
+<meta name="description" content="海外ゴルフブランド STRYDE GOLF の日本版公式サイト制作サンプル。本社の世界観を踏襲しつつ日本語で自然に伝えるWordPressサイトのデザイン提案です。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Zen+Kaku+Gothic+New:wght@400;500;700;900&family=Manrope:wght@500;700;800&display=swap" rel="stylesheet">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "STRYDE GOLF Japan",
+  "url": "https://example.com/",
+  "logo": "https://example.com/logo.png",
+  "description": "海外発ゴルフトレーニングギアブランドの日本公式サイト(制作サンプル)",
+  "sameAs": []
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Product",
+  "name": "STRYDE GOLF トレーニングシリーズ",
+  "brand": {"@type": "Brand", "name": "STRYDE GOLF"},
+  "description": "海外本社設計のスイング矯正・上達支援ギア。日本仕様に調整して展開(仮の内容です)。",
+  "offers": {
+    "@type": "AggregateOffer",
+    "priceCurrency": "JPY",
+    "lowPrice": "6800",
+    "highPrice": "28000",
+    "url": "https://example.stores.jp/"
+  }
+}
+</script>
+<style>
+  :root{
+    --green:#2f5233;
+    --green-deep:#203a26;
+    --ink:#1c1f1c;
+    --sub:#5b6259;
+    --line:#e4e2da;
+    --bg:#fbfaf6;
+    --card:#ffffff;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:"Noto Sans JP","Zen Kaku Gothic New",sans-serif;
+    color:var(--ink);
+    background:var(--bg);
+    line-height:1.8;
+    letter-spacing:.02em;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  img,svg{max-width:100%;}
+  .heading, h1, h2, h3, .logo{
+    font-family:"Zen Kaku Gothic New","Noto Sans JP",sans-serif;
+    font-weight:900;
+    letter-spacing:.04em;
+  }
+  .num{font-family:"Manrope","Noto Sans JP",sans-serif; font-weight:800;}
+  .wrap{max-width:1120px; margin:0 auto; padding:0 24px; width:100%;}
+  a{color:inherit; text-decoration:none;}
+  ul{list-style:none;}
+  section{padding:96px 0;}
+  @media (max-width:600px){ section{padding:64px 0;} }
+
+  /* ---------- header ---------- */
+  header{
+    position:fixed; top:0; left:0; right:0; z-index:50;
+    background:rgba(251,250,246,.92);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);
+  }
+  .header-inner{
+    max-width:1120px; margin:0 auto; padding:14px 24px;
+    display:flex; align-items:center; justify-content:space-between;
+    width:100%;
+  }
+  .logo{font-size:20px; color:var(--green-deep); display:flex; align-items:center; gap:8px;}
+  .logo .mark{width:26px; height:26px; flex:none;}
+  .logo .en{font-size:20px;}
+  .logo .ja{font-size:10px; font-weight:500; color:var(--sub); letter-spacing:.12em; display:block; margin-top:1px;}
+  nav.gnav{display:flex; align-items:center; gap:32px;}
+  nav.gnav a{font-size:14px; font-weight:500; color:var(--ink); position:relative;}
+  nav.gnav a::after{
+    content:""; position:absolute; left:0; bottom:-4px; width:0; height:1px; background:var(--green);
+    transition:width .25s;
+  }
+  nav.gnav a:hover::after{width:100%;}
+  .cta-mini{
+    padding:10px 22px; background:var(--green); color:#fff !important; border-radius:100px;
+    font-size:13px; font-weight:700; white-space:nowrap;
+  }
+  .hamburger{display:none; flex-direction:column; gap:5px; background:none; border:none; cursor:pointer; padding:8px;}
+  .hamburger span{width:22px; height:2px; background:var(--ink); display:block;}
+  .mobile-nav{
+    display:none; position:fixed; top:60px; left:0; right:0; bottom:0; z-index:49;
+    background:var(--bg); padding:32px 24px; overflow-y:auto;
+  }
+  .mobile-nav.open{display:block;}
+  .mobile-nav a{
+    display:block; padding:16px 0; font-size:16px; font-weight:700; border-bottom:1px solid var(--line);
+  }
+  @media (max-width:860px){
+    nav.gnav{display:none;}
+    .hamburger{display:flex;}
+  }
+
+  /* ---------- hero ---------- */
+  .hero{
+    position:relative; padding:150px 0 100px; overflow:hidden;
+    background:
+      radial-gradient(circle at 82% 12%, rgba(47,82,51,.10), transparent 55%),
+      radial-gradient(circle at 8% 90%, rgba(47,82,51,.08), transparent 45%),
+      var(--bg);
+  }
+  .hero-dots{
+    position:absolute; right:-60px; top:60px; width:340px; height:340px; opacity:.5;
+    pointer-events:none;
+  }
+  .hero-grid{display:grid; grid-template-columns:1.15fr .85fr; gap:56px; align-items:center;}
+  @media (max-width:900px){ .hero-grid{grid-template-columns:1fr;} }
+  .eyebrow{
+    display:inline-flex; align-items:center; gap:8px; font-size:12px; font-weight:700;
+    color:var(--green-deep); background:#eef1ea; padding:7px 16px; border-radius:100px; margin-bottom:22px;
+    letter-spacing:.1em;
+  }
+  .eyebrow svg{width:14px; height:14px;}
+  h1{
+    font-size:clamp(32px, 5.4vw, 54px); line-height:1.35; color:var(--ink); margin-bottom:22px;
+  }
+  h1 em{font-style:normal; color:var(--green);}
+  .hero-lead{font-size:15.5px; color:var(--sub); max-width:44ch; margin-bottom:34px;}
+  .hero-cta{display:flex; flex-wrap:wrap; gap:14px; margin-bottom:44px;}
+  .btn{
+    display:inline-flex; align-items:center; gap:8px; padding:16px 30px; border-radius:100px;
+    font-size:14.5px; font-weight:700; box-shadow:0 10px 24px -10px rgba(47,82,51,.5);
+    transition:transform .2s;
+  }
+  .btn:hover{transform:translateY(-2px);}
+  .btn-primary{background:var(--green); color:#fff;}
+  .btn-outline{background:#fff; color:var(--green-deep); border:1px solid var(--line); box-shadow:none;}
+  .btn svg{width:16px; height:16px;}
+  .trust-row{display:flex; gap:34px; flex-wrap:wrap;}
+  .trust-item .num{font-size:26px; color:var(--green-deep); display:block;}
+  .trust-item .lbl{font-size:11.5px; color:var(--sub);}
+  .hero-visual{position:relative;}
+  .swing-card{
+    background:linear-gradient(160deg, var(--green-deep), var(--green));
+    border-radius:28px; padding:42px 32px; color:#fff; position:relative; overflow:hidden;
+    min-height:420px; display:flex; flex-direction:column; justify-content:space-between;
+  }
+  .swing-card .arc{position:absolute; right:-40px; bottom:-40px; width:260px; height:260px; opacity:.35;}
+  .swing-card .tag{font-size:11px; letter-spacing:.16em; opacity:.75; margin-bottom:10px;}
+  .swing-card h3{font-size:24px; line-height:1.5; margin-bottom:16px;}
+  .swing-card p{font-size:13px; opacity:.85; max-width:30ch;}
+  .swing-card .foot{display:flex; align-items:center; justify-content:space-between; font-size:12px; opacity:.9;}
+  .caption-note{font-size:11px; color:var(--sub); margin-top:12px;}
+
+  /* ---------- strengths ---------- */
+  .section-head{max-width:640px; margin-bottom:56px;}
+  .section-tag{font-size:12px; color:var(--green); font-weight:700; letter-spacing:.12em; margin-bottom:10px;}
+  h2{font-size:clamp(24px,3.4vw,34px); line-height:1.5;}
+  .section-desc{color:var(--sub); font-size:14.5px; margin-top:14px;}
+  .grid3{display:grid; grid-template-columns:repeat(3,1fr); gap:24px;}
+  @media (max-width:860px){ .grid3{grid-template-columns:1fr;} }
+  .card{
+    background:var(--card); border:1px solid var(--line); border-radius:20px; padding:32px 26px;
+  }
+  .icon-badge{
+    width:48px; height:48px; border-radius:14px; background:#eef1ea; display:flex; align-items:center;
+    justify-content:center; margin-bottom:20px;
+  }
+  .icon-badge svg{width:24px; height:24px; stroke:var(--green-deep);}
+  .card h3{font-size:17px; margin-bottom:10px;}
+  .card p{font-size:13.5px; color:var(--sub);}
+
+  /* ---------- products ---------- */
+  .products{background:#f3f2ec;}
+  .grid4{display:grid; grid-template-columns:repeat(4,1fr); gap:20px;}
+  @media (max-width:920px){ .grid4{grid-template-columns:repeat(2,1fr);} }
+  @media (max-width:520px){ .grid4{grid-template-columns:1fr;} }
+  .product-card{
+    background:var(--card); border-radius:18px; overflow:hidden; border:1px solid var(--line);
+    display:flex; flex-direction:column;
+  }
+  .product-thumb{
+    aspect-ratio:1/1; display:flex; align-items:center; justify-content:center;
+    background:linear-gradient(150deg,#e9ede4,#f7f6f1);
+    position:relative;
+  }
+  .product-thumb svg{width:56%; height:56%; stroke:var(--green-deep); opacity:.85;}
+  .product-body{padding:18px 18px 22px;}
+  .product-cat{font-size:10.5px; color:var(--green); font-weight:700; letter-spacing:.08em;}
+  .product-name{font-size:14.5px; font-weight:700; margin:6px 0 8px;}
+  .product-price{font-size:15px; font-weight:800; color:var(--ink);}
+  .product-price .num{font-size:15px;}
+  .buy-link{
+    margin-top:12px; display:flex; align-items:center; justify-content:space-between;
+    font-size:12px; font-weight:700; color:var(--green-deep); padding-top:12px; border-top:1px dashed var(--line);
+  }
+  .buy-link svg{width:14px; height:14px;}
+
+  /* ---------- stores flow ---------- */
+  .flow{display:grid; grid-template-columns:repeat(3,1fr); gap:0; position:relative;}
+  @media (max-width:820px){ .flow{grid-template-columns:1fr; gap:28px;} }
+  .flow-step{padding:0 22px; position:relative;}
+  .flow-step .step-num{
+    font-size:12px; font-weight:800; color:var(--green); border:1px solid var(--green); border-radius:100px;
+    width:28px; height:28px; display:flex; align-items:center; justify-content:center; margin-bottom:16px;
+  }
+  .flow-step h3{font-size:15.5px; margin-bottom:8px;}
+  .flow-step p{font-size:13px; color:var(--sub);}
+  .flow-step:not(:last-child)::after{
+    content:""; position:absolute; right:0; top:14px; width:40px; height:1px; background:var(--line);
+  }
+  @media (max-width:820px){ .flow-step:not(:last-child)::after{display:none;} }
+
+  /* ---------- video area ---------- */
+  .video-block{
+    background:var(--green-deep); border-radius:26px; padding:56px 40px; color:#fff;
+    display:grid; grid-template-columns:1fr 1fr; gap:40px; align-items:center;
+  }
+  @media (max-width:860px){ .video-block{grid-template-columns:1fr; padding:36px 24px;} }
+  .video-frame{
+    aspect-ratio:16/9; border-radius:16px; background:rgba(255,255,255,.06);
+    border:1px solid rgba(255,255,255,.18); display:flex; align-items:center; justify-content:center;
+    position:relative;
+  }
+  .play-btn{
+    width:64px; height:64px; border-radius:50%; background:#fff; display:flex; align-items:center; justify-content:center;
+  }
+  .play-btn svg{width:22px; height:22px; fill:var(--green-deep); margin-left:3px;}
+  .video-block h3{font-size:22px; margin-bottom:14px;}
+  .video-block p{font-size:13.5px; opacity:.85; margin-bottom:20px;}
+
+  /* ---------- brand story ---------- */
+  .story{display:grid; grid-template-columns:.9fr 1.1fr; gap:56px; align-items:center;}
+  @media (max-width:900px){ .story{grid-template-columns:1fr;} }
+  .story-visual{
+    background:linear-gradient(155deg,#eef1ea,#fbfaf6); border-radius:24px; padding:40px;
+    border:1px solid var(--line); position:relative; min-height:320px;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .story-visual svg{width:70%; height:70%; opacity:.9;}
+  .story blockquote{
+    font-size:19px; line-height:1.9; font-weight:700; margin-bottom:22px; color:var(--ink);
+  }
+  .story p.body{font-size:14px; color:var(--sub); margin-bottom:14px;}
+
+  /* ---------- voice ---------- */
+  .voices{background:#f3f2ec;}
+  .grid3.voice-grid .card{position:relative;}
+  .stars{display:flex; gap:3px; margin-bottom:14px;}
+  .stars svg{width:14px; height:14px; fill:var(--green);}
+  .voice-name{font-size:12.5px; color:var(--sub); margin-top:16px;}
+
+  /* ---------- faq ---------- */
+  .faq-item{border-bottom:1px solid var(--line);}
+  .faq-q{
+    width:100%; text-align:left; background:none; border:none; padding:22px 4px; cursor:pointer;
+    display:flex; align-items:center; justify-content:space-between; font-size:15px; font-weight:700; color:var(--ink);
+    font-family:inherit;
+  }
+  .faq-q .toggle{font-size:20px; color:var(--green); flex:none; margin-left:16px; font-weight:400;}
+  .faq-a{max-height:0; overflow:hidden; transition:max-height .3s ease;}
+  .faq-a p{font-size:13.5px; color:var(--sub); padding:0 4px 22px;}
+  .faq-item.open .faq-a{max-height:200px;}
+
+  /* ---------- contact ---------- */
+  .contact-wrap{display:grid; grid-template-columns:.9fr 1.1fr; gap:48px;}
+  @media (max-width:900px){ .contact-wrap{grid-template-columns:1fr;} }
+  .contact-info .info-row{display:flex; gap:14px; margin-bottom:22px; align-items:flex-start;}
+  .contact-info .info-row svg{width:20px; height:20px; stroke:var(--green-deep); flex:none; margin-top:2px;}
+  .contact-info .info-row .lbl{font-size:11.5px; color:var(--sub); margin-bottom:2px;}
+  .contact-info .info-row .val{font-size:14.5px; font-weight:700;}
+  form{background:var(--card); border:1px solid var(--line); border-radius:20px; padding:32px;}
+  .form-row{margin-bottom:18px;}
+  .form-row label{display:block; font-size:12.5px; font-weight:700; margin-bottom:8px;}
+  .form-row input, .form-row textarea, .form-row select{
+    width:100%; padding:13px 14px; border:1px solid var(--line); border-radius:10px;
+    font-size:16px; font-family:inherit; background:#fff;
+  }
+  .form-row textarea{resize:vertical; min-height:110px;}
+  .form-two{display:grid; grid-template-columns:1fr 1fr; gap:16px;}
+  @media (max-width:520px){ .form-two{grid-template-columns:1fr;} }
+  .submit-btn{
+    width:100%; padding:16px; background:var(--green); color:#fff; border:none; border-radius:100px;
+    font-size:15px; font-weight:700; cursor:pointer; font-family:inherit;
+  }
+
+  /* ---------- footer ---------- */
+  footer{background:var(--green-deep); color:#fff; padding:64px 0 28px;}
+  .footer-grid{display:grid; grid-template-columns:1.4fr 1fr 1fr; gap:40px; margin-bottom:44px;}
+  @media (max-width:760px){ .footer-grid{grid-template-columns:1fr; gap:32px;} }
+  footer .logo{color:#fff;}
+  footer .logo .ja{color:rgba(255,255,255,.6);}
+  footer p.desc{font-size:13px; color:rgba(255,255,255,.7); margin-top:16px; max-width:34ch;}
+  footer h4{font-size:12.5px; letter-spacing:.08em; color:rgba(255,255,255,.6); margin-bottom:16px;}
+  footer li{margin-bottom:11px; font-size:13.5px;}
+  .footer-bottom{
+    border-top:1px solid rgba(255,255,255,.15); padding-top:24px; font-size:11.5px; color:rgba(255,255,255,.55);
+    line-height:1.9;
+  }
+
+  /* ---------- sticky mobile cta ---------- */
+  .sticky-cta{
+    display:none; position:fixed; bottom:0; left:0; right:0; z-index:60;
+    background:#fff; border-top:1px solid var(--line); padding:12px 16px;
+    box-shadow:0 -8px 20px rgba(0,0,0,.06);
+  }
+  .sticky-cta .row{display:flex; gap:10px;}
+  .sticky-cta a{flex:1; text-align:center; padding:14px 0; border-radius:100px; font-size:13.5px; font-weight:700;}
+  .sticky-cta .call{background:#eef1ea; color:var(--green-deep);}
+  .sticky-cta .buy{background:var(--green); color:#fff;}
+  @media (max-width:760px){ .sticky-cta{display:block;} body{padding-bottom:76px;} }
+
+  /* ---------- reveal ---------- */
+  .reveal{opacity:0; transform:translateY(18px); transition:opacity .6s ease, transform .6s ease;}
+  .reveal.in{opacity:1; transform:translateY(0);}
+  @media (prefers-reduced-motion:reduce){
+    .reveal{opacity:1; transform:none; transition:none;}
+    html{scroll-behavior:auto;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <a class="logo" href="#top">
+      <svg class="mark" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="#2f5233" stroke-width="1.6"/><circle cx="9" cy="9" r="1" fill="#2f5233"/><circle cx="13" cy="8" r="1" fill="#2f5233"/><circle cx="15" cy="12" r="1" fill="#2f5233"/><circle cx="10" cy="13" r="1" fill="#2f5233"/><circle cx="13.5" cy="15.5" r="1" fill="#2f5233"/></svg>
+      <span><span class="en">STRYDE GOLF</span><span class="ja">JAPAN OFFICIAL SITE(制作サンプル)</span></span>
+    </a>
+    <nav class="gnav">
+      <a href="#products">プロダクト</a>
+      <a href="#story">ブランドストーリー</a>
+      <a href="#voice">導入事例</a>
+      <a href="#faq">よくある質問</a>
+      <a href="#contact">お問い合わせ</a>
+      <a class="cta-mini" href="#products">STORESで購入</a>
+    </nav>
+    <button class="hamburger" id="hbtn" aria-label="メニュー">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<div class="mobile-nav" id="mnav">
+  <a href="#products">プロダクト</a>
+  <a href="#story">ブランドストーリー</a>
+  <a href="#voice">導入事例</a>
+  <a href="#faq">よくある質問</a>
+  <a href="#contact">お問い合わせ</a>
+  <a href="#products" style="color:#2f5233;">STORESで購入する</a>
+</div>
+
+<main id="top">
+
+  <section class="hero">
+    <svg class="hero-dots" viewBox="0 0 200 200"><g fill="#2f5233">
+      <circle cx="10" cy="10" r="2"/><circle cx="30" cy="10" r="2"/><circle cx="50" cy="10" r="2"/><circle cx="70" cy="10" r="2"/>
+      <circle cx="10" cy="30" r="2"/><circle cx="30" cy="30" r="2"/><circle cx="50" cy="30" r="2"/><circle cx="70" cy="30" r="2"/>
+      <circle cx="10" cy="50" r="2"/><circle cx="30" cy="50" r="2"/><circle cx="50" cy="50" r="2"/><circle cx="70" cy="50" r="2"/>
+      <circle cx="10" cy="70" r="2"/><circle cx="30" cy="70" r="2"/><circle cx="50" cy="70" r="2"/><circle cx="70" cy="70" r="2"/>
+    </g></svg>
+    <div class="wrap hero-grid">
+      <div>
+        <span class="eyebrow">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#2f5233" stroke-width="2"><path d="M12 2v20M2 12h20"/></svg>
+          海外本社デザインを、日本仕様へ
+        </span>
+        <h1>振り抜く自由を、<br><em>まっすぐ日本へ。</em></h1>
+        <p class="hero-lead">STRYDE GOLFは、海外本社の世界観をそのままに、日本のゴルファーが迷わず使えるかたちへ整えた公式サイトです。商品はSTORESの購入ページへスムーズに橋渡しします。</p>
+        <div class="hero-cta">
+          <a class="btn btn-primary" href="#products">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.7 13.4a2 2 0 002 1.6h9.7a2 2 0 002-1.6L23 6H6"/></svg>
+            プロダクトを見る
+          </a>
+          <a class="btn btn-outline" href="#contact">導入について相談する</a>
+        </div>
+        <div class="trust-row">
+          <div class="trust-item"><span class="num">12<span style="font-size:15px;">カ国</span></span><span class="lbl">本社ブランド展開実績(※仮の内容です)</span></div>
+          <div class="trust-item"><span class="num">98<span style="font-size:15px;">%</span></span><span class="lbl">日本語ローカライズ満足度(※仮の内容です)</span></div>
+          <div class="trust-item"><span class="num">6-10</span><span class="lbl">構成予定ページ数</span></div>
+        </div>
+      </div>
+      <div class="hero-visual reveal">
+        <div class="swing-card">
+          <svg class="arc" viewBox="0 0 200 200" fill="none"><path d="M20 180 A150 150 0 0 1 180 40" stroke="#fff" stroke-width="1.4" stroke-dasharray="2 8"/><circle cx="180" cy="40" r="6" fill="#fff"/></svg>
+          <div>
+            <div class="tag">SIGNATURE TRAINING SERIES</div>
+            <h3>本社の設計思想を、そのまま体感できるように。</h3>
+            <p>スイング軌道の矯正から素振りの反復まで、海外本社のプロダクトラインを日本語の使い方ガイド付きで紹介します。</p>
+          </div>
+          <div class="foot">
+            <span>WordPress + STORES連携</span>
+            <span>デモ制作案</span>
+          </div>
+        </div>
+        <p class="caption-note">※画像・数値は制作イメージです。実制作では本社共有の参考サイト・素材に差し替えます。</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="strengths">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <div class="section-tag">STRENGTHS</div>
+        <h2>本社の世界観を壊さず、<br class="brk">日本のゴルファーに届く形へ。</h2>
+        <p class="section-desc">単なる翻訳ではなく、構成・導線・写真の見せ方まで日本市場向けに再設計します。</p>
+      </div>
+      <div class="grid3">
+        <div class="card reveal">
+          <div class="icon-badge"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><path d="M3 12l18-9-9 18-2-7-7-2z"/></svg></div>
+          <h3>本社デザインを踏襲</h3>
+          <p>参考サイトのレイアウト・余白・世界観を踏まえつつ、日本語の文字量に合わせて読みやすく再構成します。</p>
+        </div>
+        <div class="card reveal">
+          <div class="icon-badge"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 3 2.5 15 0 18M12 3c-2.5 3-2.5 15 0 18"/></svg></div>
+          <h3>自然な日本語ローカライズ</h3>
+          <p>直訳調を避け、商品の魅力が伝わる日本語コピーへ書き起こし。スマートフォン表示の折り返しまで調整します。</p>
+        </div>
+        <div class="card reveal">
+          <div class="icon-badge"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.7 13.4a2 2 0 002 1.6h9.7a2 2 0 002-1.6L23 6H6"/></svg></div>
+          <h3>STORES連携で決済はシンプルに</h3>
+          <p>サイト内では商品世界観の訴求に集中し、購入はSTORESの商品ページへ。今後の商品追加もページを複製するだけです。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="products" class="products">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <div class="section-tag">PRODUCTS</div>
+        <h2>商品紹介ページのイメージ</h2>
+        <p class="section-desc">「購入する」ボタンから各商品のSTORESページへ遷移する構成です(価格・商品名は制作イメージです)。</p>
+      </div>
+      <div class="grid4">
+        <div class="product-card reveal">
+          <div class="product-thumb"><svg viewBox="0 0 64 64" fill="none" stroke-width="2"><circle cx="32" cy="14" r="7"/><path d="M32 21v34M20 55h24"/></svg></div>
+          <div class="product-body">
+            <div class="product-cat">SWING TRAINER</div>
+            <div class="product-name">STRYDE PRO 素振りシャフト</div>
+            <div class="product-price">¥<span class="num">12,800</span></div>
+            <div class="buy-link">STORESで購入<svg viewBox="0 0 24 24" fill="none" stroke="#203a26" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+          </div>
+        </div>
+        <div class="product-card reveal">
+          <div class="product-thumb"><svg viewBox="0 0 64 64" fill="none" stroke-width="2"><rect x="14" y="26" width="36" height="12" rx="6"/><circle cx="20" cy="32" r="3" fill="currentColor"/></svg></div>
+          <div class="product-body">
+            <div class="product-cat">GRIP GUIDE</div>
+            <div class="product-name">STRYDE アライメントグリップ</div>
+            <div class="product-price">¥<span class="num">6,800</span></div>
+            <div class="buy-link">STORESで購入<svg viewBox="0 0 24 24" fill="none" stroke="#203a26" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+          </div>
+        </div>
+        <div class="product-card reveal">
+          <div class="product-thumb"><svg viewBox="0 0 64 64" fill="none" stroke-width="2"><path d="M12 50 L32 14 L52 50Z"/><path d="M22 40h20"/></svg></div>
+          <div class="product-body">
+            <div class="product-cat">ALIGNMENT SET</div>
+            <div class="product-name">STRYDE アライメントスティック 2本組</div>
+            <div class="product-price">¥<span class="num">8,400</span></div>
+            <div class="buy-link">STORESで購入<svg viewBox="0 0 24 24" fill="none" stroke="#203a26" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+          </div>
+        </div>
+        <div class="product-card reveal">
+          <div class="product-thumb"><svg viewBox="0 0 64 64" fill="none" stroke-width="2"><circle cx="32" cy="32" r="18"/><path d="M32 14v36M14 32h36" stroke-dasharray="2 4"/></svg></div>
+          <div class="product-body">
+            <div class="product-cat">STARTER KIT</div>
+            <div class="product-name">STRYDE ビギナーズキット</div>
+            <div class="product-price">¥<span class="num">28,000</span></div>
+            <div class="buy-link">STORESで購入<svg viewBox="0 0 24 24" fill="none" stroke="#203a26" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="flow">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <div class="section-tag">HOW TO BUY</div>
+        <h2>購入導線はシンプルな3ステップ</h2>
+        <p class="section-desc">サイト内で決済は行わず、商品ページから外部のSTORES商品ページへ遷移する設計です。</p>
+      </div>
+      <div class="flow">
+        <div class="flow-step reveal">
+          <div class="step-num">1</div>
+          <h3>商品ページで詳細を確認</h3>
+          <p>使い方・素材・サイズなど、本社サイトの情報を日本語で分かりやすく掲載します。</p>
+        </div>
+        <div class="flow-step reveal">
+          <div class="step-num">2</div>
+          <h3>「購入する」ボタンをタップ</h3>
+          <p>各商品に紐づいたSTORES商品ページへ、新しいタブでスムーズに遷移します。</p>
+        </div>
+        <div class="flow-step reveal">
+          <div class="step-num">3</div>
+          <h3>STORES上でお会計</h3>
+          <p>決済・配送・在庫管理はSTORESに任せ、サイト側は商品追加のたびにページを複製するだけで運用できます。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="video">
+    <div class="wrap">
+      <div class="video-block reveal">
+        <div>
+          <div class="video-frame">
+            <div class="play-btn"><svg viewBox="0 0 24 24"><polygon points="6,4 20,12 6,20"/></svg></div>
+          </div>
+        </div>
+        <div>
+          <h3>スイング解説動画の掲載エリア</h3>
+          <p>本社が制作したプロモーション動画や、商品の使い方を紹介する短尺動画をここに埋め込みます。字幕は日本語対応にします。</p>
+          <a class="btn btn-primary" href="#contact">動画掲載について相談する</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="story">
+    <div class="wrap">
+      <div class="story">
+        <div class="story-visual reveal">
+          <svg viewBox="0 0 120 120" fill="none" stroke="#2f5233" stroke-width="1.4">
+            <circle cx="60" cy="60" r="46"/>
+            <circle cx="60" cy="60" r="30"/>
+            <circle cx="60" cy="60" r="14"/>
+            <path d="M60 4v20M60 96v20M4 60h20M96 60h20"/>
+          </svg>
+        </div>
+        <div class="reveal">
+          <div class="section-tag">BRAND STORY</div>
+          <blockquote>「上達は、道具から変わる。」<br>本社が10年以上磨いてきた思想を、そのまま日本へ。</blockquote>
+          <p class="body">STRYDE GOLFは、海外本社のプロダクト哲学とデザインコードを大切にしながら、日本のゴルファーが直感的に理解できる言葉と構成に置き換えます。派手な演出ではなく、余白と写真の見せ方で「本物らしさ」を伝えます。</p>
+          <p class="body">管理画面はWordPressで統一し、公開後は文章・画像・商品の追加をご自身で更新いただける状態でお渡しします。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="voice" class="voices">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <div class="section-tag">VOICE</div>
+        <h2>お客様の声(※仮の内容です)</h2>
+        <p class="section-desc">実制作後、お客様の声をいただき次第、実際の内容に差し替えます。</p>
+      </div>
+      <div class="grid3 voice-grid">
+        <div class="card reveal">
+          <div class="stars">
+            <svg viewBox="0 0 20 20"><polygon points="10,1 12.6,7 19,7.5 14,11.8 15.6,18 10,14.5 4.4,18 6,11.8 1,7.5 7.4,7"/></svg>
+            <svg viewBox="0 0 20 20"><polygon points="10,1 12.6,7 19,7.5 14,11.8 15.6,18 10,14.5 4.4,18 6,11.8 1,7.5 7.4,7"/></svg>
+            <svg viewBox="0 0 20 20"><polygon points="10,1 12.6,7 19,7.5 14,11.8 15.6,18 10,14.5 4.4,18 6,11.8 1,7.5 7.4,7"/></svg>
+            <svg viewBox="0 0 20 20"><polygon points="10,1 12.6,7 19,7.5 14,11.8 15.6,18 10,14.5 4.4,18 6,11.8 1,7.5 7.4,7"/></svg>
+            <svg viewBox="0 0 20 20"><polygon points="10,1 12.6,7 19,7.5 14,11.8 15.6,18 10,14.5 4.4,18 6,11.8 1,7.5 7.4,7"/></svg>
+          </div>
+          <p>「本社サイトの雰囲気を保ちながら、日本語として自然に読める点が良かったです。」</p>
+          <div class="voice-name">ゴルフ用品店 バイヤー様(仮)</div>
+        </div>
+        <div class="card reveal">
+          <div class="stars">
+            <svg viewBox="0 0 20 20"><polygon points="10,1 12.6,7 19,7.5 14,11.8 15.6,18 10,14.5 4.4,18 6,11.8 1,7.5 7.4,7"/></svg>
+            <svg viewBox="0 0 20 20"><polygon points="10,1 12.6,7 19,7.5 14,11.8 15.6,18 10,14.5 4.4,18 6,11.8 1,7.5 7.4,7"/></svg>
+            <svg viewBox="0 0 20 20"><polygon points="10,1 12.6,7 19,7.5 14,11.8 15.6,18 10,14.5 4.4,18 6,11.8 1,7.5 7.4,7"/></svg>
+            <svg viewBox="0 0 20 20"><polygon points="10,1 12.6,7 19,7.5 14,11.8 15.6,18 10,14.5 4.4,18 6,11.8 1,7.5 7.4,7"/></svg>
+            <svg viewBox="0 0 20 20"><polygon points="10,1 12.6,7 19,7.5 14,11.8 15.6,18 10,14.5 4.4,18 6,11.8 1,7.5 7.4,7"/></svg>
+          </div>
+          <p>「STORESへの遷移がスムーズで、注文までの離脱が減った印象があります。」</p>
+          <div class="voice-name">EC担当者様(仮)</div>
+        </div>
+        <div class="card reveal">
+          <div class="stars">
+            <svg viewBox="0 0 20 20"><polygon points="10,1 12.6,7 19,7.5 14,11.8 15.6,18 10,14.5 4.4,18 6,11.8 1,7.5 7.4,7"/></svg>
+            <svg viewBox="0 0 20 20"><polygon points="10,1 12.6,7 19,7.5 14,11.8 15.6,18 10,14.5 4.4,18 6,11.8 1,7.5 7.4,7"/></svg>
+            <svg viewBox="0 0 20 20"><polygon points="10,1 12.6,7 19,7.5 14,11.8 15.6,18 10,14.5 4.4,18 6,11.8 1,7.5 7.4,7"/></svg>
+            <svg viewBox="0 0 20 20"><polygon points="10,1 12.6,7 19,7.5 14,11.8 15.6,18 10,14.5 4.4,18 6,11.8 1,7.5 7.4,7"/></svg>
+            <svg viewBox="0 0 20 20"><polygon points="10,1 12.6,7 19,7.5 14,11.8 15.6,18 10,14.5 4.4,18 6,11.8 1,7.5 7.4,7"/></svg>
+          </div>
+          <p>「管理画面から自分たちで商品を追加できるので、更新のたびに依頼せず済みます。」</p>
+          <div class="voice-name">ブランド運営担当様(仮)</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="faq">
+    <div class="wrap" style="max-width:820px;">
+      <div class="section-head reveal">
+        <div class="section-tag">FAQ</div>
+        <h2>よくあるご質問</h2>
+      </div>
+      <div class="faq-list reveal">
+        <div class="faq-item">
+          <button class="faq-q">STORESでの決済はサイト内で完結しますか<span class="toggle">+</span></button>
+          <div class="faq-a"><p>いいえ。サイト内は商品紹介までとし、「購入する」ボタンから各商品のSTORES商品ページへ遷移してお会計いただく構成です。</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">既存のサーバー・ドメインにそのまま公開できますか<span class="toggle">+</span></button>
+          <div class="faq-a"><p>可能です。ご準備済みのサーバー・ドメインへアップロード、または移行のサポートまで対応します。</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">公開後、自分たちで商品や文章を更新できますか<span class="toggle">+</span></button>
+          <div class="faq-a"><p>WordPressの管理画面から、文章・画像・商品ページをご自身で更新いただける状態でお渡しします。</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">本社サイトのデザインをどこまで参考にできますか<span class="toggle">+</span></button>
+          <div class="faq-a"><p>採用後に共有いただく参考サイトをもとに、レイアウトや世界観を踏襲しつつ、日本語表示に合わせて調整します。</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">スマートフォン表示にも対応していますか<span class="toggle">+</span></button>
+          <div class="faq-a"><p>PC・タブレット・スマートフォンのレスポンシブ対応で制作します。本デモも390px幅で崩れないよう調整しています。</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="wrap">
+      <div class="contact-wrap">
+        <div class="contact-info reveal">
+          <div class="section-tag">CONTACT</div>
+          <h2 style="margin-bottom:24px;">ご相談・お見積もり</h2>
+          <div class="info-row">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><path d="M22 16.9v3a2 2 0 01-2.2 2 19.8 19.8 0 01-8.6-3 19.5 19.5 0 01-6-6 19.8 19.8 0 01-3-8.7A2 2 0 014.1 2h3a2 2 0 012 1.7c.1.9.3 1.8.6 2.7a2 2 0 01-.5 2.1L8 9.7a16 16 0 006 6l1.2-1.2a2 2 0 012.1-.4c.9.3 1.8.5 2.7.6a2 2 0 011.7 2z"/></svg>
+            <div><div class="lbl">お電話でのお問い合わせ(ダミー)</div><div class="val">048-000-0000</div></div>
+          </div>
+          <div class="info-row">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><path d="M4 4h16v16H4z"/><path d="M22 6l-10 7L2 6"/></svg>
+            <div><div class="lbl">メールでのお問い合わせ(ダミー)</div><div class="val">info@example.com</div></div>
+          </div>
+          <div class="info-row">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><path d="M12 21s-7-6.1-7-11a7 7 0 0114 0c0 4.9-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>
+            <div><div class="lbl">対応</div><div class="val">サーバー・ドメイン準備済みのお客様も歓迎</div></div>
+          </div>
+        </div>
+        <form class="reveal" onsubmit="return false;">
+          <div class="form-row">
+            <label for="f-name">お名前</label>
+            <input id="f-name" type="text" placeholder="山田 太郎">
+          </div>
+          <div class="form-two">
+            <div class="form-row">
+              <label for="f-mail">メールアドレス</label>
+              <input id="f-mail" type="email" placeholder="you@example.com">
+            </div>
+            <div class="form-row">
+              <label for="f-tel">電話番号(任意)</label>
+              <input id="f-tel" type="tel" placeholder="048-000-0000">
+            </div>
+          </div>
+          <div class="form-row">
+            <label for="f-type">ご相談内容</label>
+            <select id="f-type">
+              <option>サイト制作について相談したい</option>
+              <option>STORES連携について相談したい</option>
+              <option>公開後の運用・サポートについて</option>
+              <option>その他</option>
+            </select>
+          </div>
+          <div class="form-row">
+            <label for="f-msg">メッセージ</label>
+            <textarea id="f-msg" placeholder="参考サイトのURLやご希望の公開時期など、ご記入ください"></textarea>
+          </div>
+          <button type="submit" class="submit-btn">送信する(デモのため送信されません)</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <a class="logo" href="#top">
+          <svg class="mark" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="#fff" stroke-width="1.6"/><circle cx="9" cy="9" r="1" fill="#fff"/><circle cx="13" cy="8" r="1" fill="#fff"/><circle cx="15" cy="12" r="1" fill="#fff"/><circle cx="10" cy="13" r="1" fill="#fff"/><circle cx="13.5" cy="15.5" r="1" fill="#fff"/></svg>
+          <span><span class="en">STRYDE GOLF</span><span class="ja">JAPAN OFFICIAL SITE</span></span>
+        </a>
+        <p class="desc">海外本社の世界観を、日本のゴルファーへ自然な言葉で届ける公式サイト制作サンプルです。</p>
+      </div>
+      <div>
+        <h4>ページ</h4>
+        <ul>
+          <li><a href="#products">プロダクト</a></li>
+          <li><a href="#story">ブランドストーリー</a></li>
+          <li><a href="#voice">導入事例</a></li>
+          <li><a href="#faq">よくある質問</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>お問い合わせ</h4>
+        <ul>
+          <li>048-000-0000(ダミー)</li>
+          <li>info@example.com(ダミー)</li>
+          <li><a href="#contact">お問い合わせフォーム</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      ※本ページは制作サンプル(デモ)です。掲載の内容・数値は仮のもので、写真はイメージです。ブランド名・商品名・価格・お客様の声はすべて架空のものであり、実在の企業・製品とは関係ありません。実制作では採用後に共有いただく参考サイトと、貴社ご提供のテキスト・写真・動画素材に差し替えます。<br>
+      &copy; 2026 STRYDE GOLF Japan(制作サンプル)
+    </div>
+  </div>
+</footer>
+
+<div class="sticky-cta">
+  <div class="row">
+    <a class="call" href="tel:048-000-0000">
+      電話で相談
+    </a>
+    <a class="buy" href="#products">STORESで購入</a>
+  </div>
+</div>
+
+<script>
+  (function(){
+    var hbtn = document.getElementById('hbtn');
+    var mnav = document.getElementById('mnav');
+    hbtn.addEventListener('click', function(){
+      mnav.classList.toggle('open');
+    });
+    mnav.querySelectorAll('a').forEach(function(a){
+      a.addEventListener('click', function(){ mnav.classList.remove('open'); });
+    });
+
+    document.querySelectorAll('.faq-q').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        var item = btn.closest('.faq-item');
+        var wasOpen = item.classList.contains('open');
+        document.querySelectorAll('.faq-item').forEach(function(i){ i.classList.remove('open'); i.querySelector('.toggle').textContent = '+'; });
+        if(!wasOpen){
+          item.classList.add('open');
+          btn.querySelector('.toggle').textContent = '−';
+        }
+      });
+    });
+
+    if('IntersectionObserver' in window){
+      var io = new IntersectionObserver(function(entries){
+        entries.forEach(function(e){
+          if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
+        });
+      }, {threshold:.15});
+      document.querySelectorAll('.reveal').forEach(function(el){ io.observe(el); });
+    } else {
+      document.querySelectorAll('.reveal').forEach(function(el){ el.classList.add('in'); });
+    }
+  })();
+</script>
+
+</body>
+</html>
