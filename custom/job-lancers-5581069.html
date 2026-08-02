@@ -1,0 +1,884 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WordPressマルチサイト化 導入支援(制作サンプル)</title>
+<meta name="description" content="既存ドメインをそのままに、WordPressのマルチサイト化・ドメイン設定・SSL確認まで対応する技術支援サービスの紹介デモです。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Zen+Kaku+Gothic+New:wght@500;700;900&family=Manrope:wght@600;800&display=swap" rel="stylesheet">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "serviceType": "WordPressマルチサイト化 導入支援",
+  "provider": {
+    "@type": "Person",
+    "name": "自動化のミナト"
+  },
+  "areaServed": "JP",
+  "description": "既存ドメインを使ったWordPressのマルチサイト化・初期実装・SSL/動作確認までの技術支援。",
+  "offers": {
+    "@type": "Offer",
+    "priceCurrency": "JPY",
+    "priceRange": "¥20,000〜¥50,000"
+  }
+}
+</script>
+<style>
+  :root{
+    --navy:#16305c;
+    --navy-dark:#0d1e3d;
+    --navy-tint:#eef1f6;
+    --ink:#1c232e;
+    --sub:#5b6472;
+    --paper:#faf9f6;
+    --line:#e3e0d8;
+    --radius:14px;
+    --shadow:0 12px 30px rgba(22,48,92,0.10);
+  }
+  *,*::before,*::after{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    font-family:"Noto Sans JP",sans-serif;
+    color:var(--ink);
+    background:var(--paper);
+    line-height:1.8;
+    -webkit-font-feature-settings:"palt";
+    font-feature-settings:"palt";
+    padding-bottom:74px;
+  }
+  img{max-width:100%;display:block;}
+  a{color:inherit;}
+  h1,h2,h3{
+    font-family:"Zen Kaku Gothic New",sans-serif;
+    font-weight:900;
+    line-height:1.45;
+    margin:0;
+  }
+  .container{
+    width:100%;
+    max-width:1080px;
+    margin:0 auto;
+    padding:0 clamp(18px,4vw,28px);
+  }
+  .eyebrow{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    font-size:13px;
+    font-weight:700;
+    letter-spacing:.06em;
+    color:var(--navy);
+    background:var(--navy-tint);
+    border-radius:100px;
+    padding:6px 16px;
+  }
+  .eyebrow svg{width:14px;height:14px;flex:none;}
+  section{padding:96px 0;}
+  section.tight{padding:72px 0;}
+  .section-head{max-width:640px;margin:0 auto 48px;text-align:center;}
+  .section-head h2{font-size:clamp(24px,4.4vw,32px);margin-top:14px;}
+  .section-head p{color:var(--sub);margin-top:14px;font-size:15px;}
+
+  /* ---------- header ---------- */
+  header.site{
+    position:fixed;top:0;left:0;right:0;z-index:100;
+    background:rgba(250,249,246,0.96);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-row{
+    display:flex;align-items:center;justify-content:space-between;
+    height:64px;
+  }
+  .logo{
+    font-family:"Zen Kaku Gothic New",sans-serif;
+    font-weight:700;font-size:15px;letter-spacing:.02em;
+    display:flex;align-items:center;gap:10px;
+  }
+  .logo .mark{
+    width:30px;height:30px;border-radius:8px;background:var(--navy);
+    display:flex;align-items:center;justify-content:center;flex:none;
+  }
+  .logo .mark svg{width:16px;height:16px;stroke:#fff;}
+  .nav-links{display:flex;gap:28px;list-style:none;margin:0;padding:0;font-size:14px;font-weight:500;}
+  .nav-links a{text-decoration:none;color:var(--ink);}
+  .nav-cta{
+    display:inline-flex;align-items:center;gap:8px;
+    background:var(--navy);color:#fff;
+    padding:10px 20px;border-radius:100px;
+    font-size:13px;font-weight:700;text-decoration:none;
+    white-space:nowrap;
+    box-shadow:var(--shadow);
+  }
+  .burger{
+    display:none;width:40px;height:40px;border:1px solid var(--line);
+    border-radius:8px;background:#fff;flex:none;
+    position:relative;cursor:pointer;
+  }
+  .burger span, .burger span::before, .burger span::after{
+    content:"";position:absolute;left:10px;right:10px;height:2px;background:var(--ink);
+    transition:transform .2s ease, opacity .2s ease;
+  }
+  .burger span{top:19px;}
+  .burger span::before{top:-6px;}
+  .burger span::after{top:6px;}
+  .burger.open span{background:transparent;}
+  .burger.open span::before{transform:translateY(6px) rotate(45deg);}
+  .burger.open span::after{transform:translateY(-6px) rotate(-45deg);}
+
+  nav.mobile-panel{
+    display:none;
+    position:fixed;top:64px;left:0;right:0;z-index:99;
+    background:#fff;border-bottom:1px solid var(--line);
+    box-shadow:0 16px 24px rgba(0,0,0,0.06);
+  }
+  nav.mobile-panel.open{display:block;}
+  nav.mobile-panel ul{list-style:none;margin:0;padding:12px 20px 20px;display:flex;flex-direction:column;gap:4px;}
+  nav.mobile-panel a{display:block;padding:12px 4px;font-size:15px;font-weight:500;text-decoration:none;border-bottom:1px solid var(--line);}
+
+  @media (max-width:860px){
+    .nav-links,.nav-cta.desktop-only{display:none;}
+    .burger{display:block;}
+  }
+
+  /* ---------- hero ---------- */
+  .hero{
+    margin-top:64px;
+    position:relative;
+    padding:88px 0 76px;
+    background:
+      linear-gradient(180deg, rgba(13,30,61,0.86) 0%, rgba(13,30,61,0.80) 55%, rgba(13,30,61,0.92) 100%),
+      url('https://images.unsplash.com/photo-1629875499750-a31b83446598?auto=format&fit=crop&w=1400&q=70') center/cover no-repeat;
+    color:#fff;
+  }
+  .hero .eyebrow{background:rgba(255,255,255,0.14);color:#fff;}
+  .hero h1{
+    font-size:clamp(28px,5.6vw,46px);
+    margin:20px 0 0;
+    max-width:16ch;
+  }
+  .hero .lead{
+    margin-top:22px;
+    font-size:clamp(15px,2.2vw,17px);
+    color:rgba(255,255,255,0.86);
+    max-width:44ch;
+  }
+  .hero-ctas{display:flex;flex-wrap:wrap;gap:14px;margin-top:32px;}
+  .btn{
+    display:inline-flex;align-items:center;gap:10px;
+    padding:15px 26px;border-radius:100px;
+    font-weight:700;font-size:15px;text-decoration:none;
+    border:1px solid transparent;
+    transition:transform .15s ease, box-shadow .15s ease;
+  }
+  .btn:hover{transform:translateY(-2px);}
+  .btn-primary{background:#fff;color:var(--navy-dark);box-shadow:0 14px 28px rgba(0,0,0,0.20);}
+  .btn-outline{border-color:rgba(255,255,255,0.5);color:#fff;}
+  .btn svg{width:16px;height:16px;flex:none;}
+
+  .trust-bar{
+    margin-top:52px;
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+    gap:20px;
+    border-top:1px solid rgba(255,255,255,0.22);
+    padding-top:28px;
+  }
+  .trust-item .num{
+    font-family:"Manrope",sans-serif;font-weight:800;
+    font-size:clamp(22px,3.4vw,30px);
+  }
+  .trust-item .label{font-size:12.5px;color:rgba(255,255,255,0.78);margin-top:4px;}
+
+  /* ---------- reveal ---------- */
+  .reveal{opacity:0;transform:translateY(18px);transition:opacity .6s ease, transform .6s ease;}
+  .reveal.is-visible{opacity:1;transform:none;}
+
+  /* ---------- checklist ---------- */
+  .check-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+    gap:16px;
+  }
+  .check-card{
+    background:#fff;border:1px solid var(--line);border-radius:var(--radius);
+    padding:22px 22px;display:flex;gap:14px;align-items:flex-start;
+  }
+  .check-card svg{width:22px;height:22px;flex:none;stroke:var(--navy);margin-top:2px;}
+  .check-card p{margin:0;font-size:14.5px;color:var(--ink);}
+
+  /* ---------- scope ---------- */
+  .scope-cols{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    gap:24px;
+  }
+  .scope-card{
+    background:#fff;border-radius:var(--radius);border:1px solid var(--line);
+    padding:28px 26px;
+  }
+  .scope-card.in{border-top:4px solid var(--navy);}
+  .scope-card.out{border-top:4px solid #c9c2b3;}
+  .scope-card h3{font-size:17px;margin-bottom:16px;display:flex;align-items:center;gap:10px;}
+  .scope-card h3 svg{width:18px;height:18px;flex:none;}
+  .scope-card ul{margin:0;padding:0;list-style:none;}
+  .scope-card li{
+    position:relative;padding:9px 0 9px 24px;font-size:14.5px;
+    border-bottom:1px dashed var(--line);
+  }
+  .scope-card li:last-child{border-bottom:none;}
+  .scope-card.in li::before{
+    content:"";position:absolute;left:0;top:16px;width:9px;height:9px;
+    border-radius:50%;background:var(--navy);
+  }
+  .scope-card.out li::before{
+    content:"";position:absolute;left:0;top:16px;width:9px;height:9px;
+    border-radius:50%;background:#c9c2b3;
+  }
+  .scope-note{margin-top:16px;font-size:13px;color:var(--sub);}
+
+  /* ---------- diagram ---------- */
+  .diagram-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    gap:24px;
+  }
+  .diagram-card{
+    background:#fff;border:1px solid var(--line);border-radius:var(--radius);
+    padding:26px;
+  }
+  .diagram-card h3{font-size:16px;margin-bottom:6px;}
+  .diagram-card .tag{font-size:12px;color:var(--sub);margin-bottom:18px;}
+  .tree{
+    background:var(--navy-tint);border-radius:10px;padding:18px;
+    font-family:"Manrope",monospace;
+  }
+  .tree .root{
+    font-size:13.5px;font-weight:800;color:var(--navy-dark);
+    background:#fff;border:1px solid var(--line);border-radius:8px;
+    padding:8px 12px;display:inline-block;max-width:100%;
+    overflow-wrap:anywhere;
+  }
+  .tree .branch{margin-top:10px;padding-left:18px;border-left:2px solid #c9d2e2;}
+  .tree .leaf{
+    font-size:13px;color:var(--ink);
+    background:#fff;border:1px solid var(--line);border-radius:8px;
+    padding:7px 12px;margin:8px 0;display:block;max-width:100%;
+    overflow-wrap:anywhere;
+  }
+  .diagram-desc{margin-top:16px;font-size:13.5px;color:var(--sub);}
+
+  /* ---------- process ---------- */
+  .process-list{
+    display:grid;gap:0;
+    counter-reset:step;
+  }
+  .process-item{
+    display:grid;grid-template-columns:56px 1fr;gap:18px;
+    padding:22px 0;border-bottom:1px solid var(--line);
+  }
+  .process-item:last-child{border-bottom:none;}
+  .process-num{
+    counter-increment:step;
+    font-family:"Manrope",sans-serif;font-weight:800;color:var(--navy);
+    font-size:14px;
+    width:44px;height:44px;border-radius:50%;
+    border:1.5px solid var(--navy);
+    display:flex;align-items:center;justify-content:center;
+  }
+  .process-num::before{content:counter(step);}
+  .process-body h3{font-size:15.5px;margin-bottom:6px;}
+  .process-body p{margin:0;font-size:14px;color:var(--sub);}
+
+  /* ---------- pricing ---------- */
+  .price-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:22px;
+    align-items:stretch;
+  }
+  .price-card{
+    background:#fff;border:1px solid var(--line);border-radius:var(--radius);
+    padding:30px 26px;display:flex;flex-direction:column;
+  }
+  .price-card.featured{
+    border:2px solid var(--navy);
+    box-shadow:var(--shadow);
+    position:relative;
+  }
+  .price-card.featured .badge{
+    position:absolute;top:-13px;left:26px;
+    background:var(--navy);color:#fff;font-size:11.5px;font-weight:700;
+    padding:5px 14px;border-radius:100px;
+  }
+  .price-card h3{font-size:16px;}
+  .price-card .price{
+    font-family:"Manrope",sans-serif;font-weight:800;
+    font-size:clamp(24px,4vw,30px);color:var(--navy-dark);
+    margin:14px 0 4px;
+  }
+  .price-card .price span{font-size:13px;font-weight:600;color:var(--sub);}
+  .price-card .desc{font-size:13px;color:var(--sub);margin-bottom:18px;}
+  .price-card ul{list-style:none;margin:0 0 auto;padding:0;flex:1;}
+  .price-card li{
+    position:relative;padding:8px 0 8px 22px;font-size:13.8px;
+  }
+  .price-card li::before{
+    content:"";position:absolute;left:0;top:15px;width:8px;height:8px;
+    border-radius:50%;background:var(--navy);
+  }
+  .price-note{margin-top:22px;font-size:13px;color:var(--sub);text-align:center;}
+
+  /* ---------- faq ---------- */
+  .faq-list{max-width:760px;margin:0 auto;}
+  .faq-item{border-bottom:1px solid var(--line);}
+  .faq-q{
+    width:100%;text-align:left;background:none;border:none;cursor:pointer;
+    padding:20px 34px 20px 0;font-size:15px;font-weight:700;color:var(--ink);
+    position:relative;font-family:inherit;
+  }
+  .faq-q::after{
+    content:"+";position:absolute;right:4px;top:16px;
+    font-size:22px;color:var(--navy);font-weight:400;
+    transition:transform .2s ease;
+  }
+  .faq-item.open .faq-q::after{content:"−";}
+  .faq-a{max-height:0;overflow:hidden;transition:max-height .25s ease;}
+  .faq-item.open .faq-a{max-height:320px;}
+  .faq-a p{margin:0 0 20px;font-size:14px;color:var(--sub);max-width:64ch;}
+
+  /* ---------- provider ---------- */
+  .provider-wrap{
+    display:grid;grid-template-columns:minmax(0,220px) 1fr;gap:32px;align-items:center;
+  }
+  .provider-avatar{
+    width:100%;max-width:220px;aspect-ratio:1/1;border-radius:18px;
+    background:var(--navy-tint);
+    display:flex;align-items:center;justify-content:center;
+    margin:0 auto;
+  }
+  .provider-avatar svg{width:64px;height:64px;stroke:var(--navy);}
+  .provider-text h3{font-size:18px;margin-bottom:10px;}
+  .provider-text p{font-size:14.5px;color:var(--sub);margin:0 0 10px;}
+  .provider-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px;}
+  .provider-tags span{
+    font-size:12.5px;background:var(--navy-tint);color:var(--navy);
+    padding:6px 12px;border-radius:100px;font-weight:700;
+  }
+  @media (max-width:640px){
+    .provider-wrap{grid-template-columns:1fr;text-align:center;}
+    .provider-tags{justify-content:center;}
+  }
+
+  /* ---------- voice ---------- */
+  .voice-grid{
+    display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px;
+  }
+  .voice-card{
+    background:#fff;border:1px solid var(--line);border-radius:var(--radius);
+    padding:24px;
+  }
+  .voice-card p.quote{font-size:14.5px;margin:0 0 14px;color:var(--ink);}
+  .voice-card .who{font-size:12.5px;color:var(--sub);font-weight:700;}
+  .voice-flag{
+    display:inline-block;margin-top:10px;font-size:11.5px;color:#a7854f;
+    background:#fbf4e6;padding:3px 10px;border-radius:100px;font-weight:700;
+  }
+
+  /* ---------- contact ---------- */
+  .contact-wrap{
+    background:var(--navy-dark);color:#fff;border-radius:20px;
+    padding:clamp(28px,5vw,52px);
+    display:grid;grid-template-columns:1fr 1fr;gap:40px;
+  }
+  .contact-info h2{font-size:clamp(22px,3.6vw,28px);color:#fff;}
+  .contact-info p{color:rgba(255,255,255,0.78);font-size:14.5px;margin-top:14px;}
+  .contact-info .tel{
+    margin-top:24px;display:flex;align-items:center;gap:12px;
+    font-family:"Manrope",sans-serif;font-weight:800;font-size:clamp(20px,3vw,26px);
+  }
+  .contact-info .tel svg{width:22px;height:22px;stroke:#fff;flex:none;}
+  .contact-info .tel-note{font-size:12.5px;color:rgba(255,255,255,0.6);margin-top:6px;font-weight:400;font-family:"Noto Sans JP",sans-serif;}
+  form.demo-form{display:flex;flex-direction:column;gap:14px;}
+  form.demo-form label{font-size:12.5px;color:rgba(255,255,255,0.75);}
+  form.demo-form input,form.demo-form textarea,form.demo-form select{
+    width:100%;max-width:100%;
+    padding:12px 14px;border-radius:8px;border:1px solid rgba(255,255,255,0.25);
+    background:rgba(255,255,255,0.06);color:#fff;
+    font-size:16px;font-family:inherit;
+  }
+  form.demo-form ::placeholder{color:rgba(255,255,255,0.45);}
+  form.demo-form textarea{resize:vertical;min-height:88px;}
+  form.demo-form button{
+    margin-top:6px;background:#fff;color:var(--navy-dark);border:none;
+    padding:14px 20px;border-radius:100px;font-weight:700;font-size:15px;cursor:pointer;
+  }
+  @media (max-width:780px){
+    .contact-wrap{grid-template-columns:1fr;}
+  }
+
+  /* ---------- sticky mobile cta ---------- */
+  .sticky-cta{
+    display:none;
+    position:fixed;left:0;right:0;bottom:0;z-index:90;
+    background:#fff;border-top:1px solid var(--line);
+    padding:10px 14px calc(10px + env(safe-area-inset-bottom));
+    gap:10px;
+  }
+  .sticky-cta a{
+    flex:1;text-align:center;padding:13px 10px;border-radius:100px;
+    font-weight:700;font-size:14px;text-decoration:none;
+  }
+  .sticky-cta .call{background:var(--navy-tint);color:var(--navy-dark);display:flex;align-items:center;justify-content:center;gap:6px;}
+  .sticky-cta .call svg{width:15px;height:15px;flex:none;}
+  .sticky-cta .go{background:var(--navy);color:#fff;}
+  @media (max-width:780px){
+    .sticky-cta{display:flex;}
+  }
+
+  /* ---------- footer ---------- */
+  footer{
+    background:#101b2f;color:rgba(255,255,255,0.7);
+    padding:48px 0 40px;font-size:13px;
+  }
+  footer .foot-top{
+    display:flex;flex-wrap:wrap;justify-content:space-between;gap:20px;
+    border-bottom:1px solid rgba(255,255,255,0.14);
+    padding-bottom:24px;margin-bottom:20px;
+  }
+  footer .foot-logo{font-family:"Zen Kaku Gothic New",sans-serif;color:#fff;font-weight:700;font-size:15px;}
+  footer .disclaimer{
+    max-width:760px;line-height:1.9;color:rgba(255,255,255,0.55);font-size:12.3px;
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{animation:none !important;transition:none !important;}
+    .reveal{opacity:1;transform:none;}
+  }
+</style>
+</head>
+<body>
+
+<header class="site">
+  <div class="container nav-row">
+    <div class="logo">
+      <span class="mark">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 2v4M12 18v4M4.9 4.9l2.8 2.8M16.3 16.3l2.8 2.8M2 12h4M18 12h4M4.9 19.1l2.8-2.8M16.3 7.7l2.8-2.8"/></svg>
+      </span>
+      WPマルチサイト化 導入支援
+    </div>
+    <nav>
+      <ul class="nav-links">
+        <li><a href="#service">対応範囲</a></li>
+        <li><a href="#howto">進め方</a></li>
+        <li><a href="#price">料金</a></li>
+        <li><a href="#faq">よくある質問</a></li>
+      </ul>
+    </nav>
+    <a href="#contact" class="nav-cta desktop-only">無料相談を申し込む</a>
+    <button class="burger" id="burgerBtn" aria-label="メニュー"><span></span></button>
+  </div>
+</header>
+<nav class="mobile-panel" id="mobilePanel">
+  <ul>
+    <li><a href="#service">対応範囲</a></li>
+    <li><a href="#howto">進め方</a></li>
+    <li><a href="#price">料金</a></li>
+    <li><a href="#faq">よくある質問</a></li>
+    <li><a href="#contact">無料相談を申し込む</a></li>
+  </ul>
+</nav>
+
+<section class="hero">
+  <div class="container">
+    <span class="eyebrow">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M8 4v5"/></svg>
+      WordPress マルチサイト化(制作サンプル)
+    </span>
+    <h1>サイトは増える。<br>土台は、ひとつでいい。</h1>
+    <p class="lead">既存ドメインを活かしたまま、WordPressをマルチサイト化。サブドメイン/サブディレクトリの初期構成からSSL・基本動作の確認まで、追加サイトを迷わず立ち上げられる土台を整えます。</p>
+    <div class="hero-ctas">
+      <a href="#contact" class="btn btn-primary">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        無料相談・お見積り
+      </a>
+      <a href="tel:0300000000" class="btn btn-outline">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4 2h3a2 2 0 0 1 2 1.7c.1.9.3 1.8.6 2.7a2 2 0 0 1-.5 2.1L8 9.6a16 16 0 0 0 6 6l1.1-1.1a2 2 0 0 1 2.1-.5c.9.3 1.8.5 2.7.6A2 2 0 0 1 22 16.9z"/></svg>
+        電話で相談(サンプル番号)
+      </a>
+    </div>
+    <div class="trust-bar">
+      <div class="trust-item"><div class="num">20,000円〜</div><div class="label">想定予算レンジ(募集要項準拠)</div></div>
+      <div class="trust-item"><div class="num">中3〜5日</div><div class="label">実装〜動作確認の目安※仮</div></div>
+      <div class="trust-item"><div class="num">SSL込み</div><div class="label">基本動作確認まで対応</div></div>
+      <div class="trust-item"><div class="num">2構成</div><div class="label">サブドメイン/サブディレクトリ対応</div></div>
+    </div>
+  </div>
+</section>
+
+<section id="service">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20z"/><path d="M12 8v4l3 3"/></svg>
+        こんなことで止まっていませんか
+      </span>
+      <h2>マルチサイト化、ここでつまずきがちです</h2>
+    </div>
+    <div class="check-grid">
+      <div class="check-card reveal">
+        <svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+        <p>新しいサービスを出すたびにドメインを増やしていて、管理画面もサーバーも分散している。</p>
+      </div>
+      <div class="check-card reveal">
+        <svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+        <p>サブドメイン型とサブディレクトリ型、どちらが自社の運用に合うのか自分たちだけでは判断しづらい。</p>
+      </div>
+      <div class="check-card reveal">
+        <svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+        <p>デザインやコンテンツは自社で作りたい。技術的なマルチサイト化の部分だけ、切り出して任せたい。</p>
+      </div>
+      <div class="check-card reveal">
+        <svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+        <p>SSLや基本動作の確認まで含めて、社内で「動く状態」と言い切れるところまで仕上げてほしい。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="tight" style="background:var(--navy-tint);">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">対応範囲</span>
+      <h2>お願いできること・お願いできないこと</h2>
+      <p>今回の募集要項どおり、技術基盤の整備に対応範囲を絞ります。デザインやコンテンツはそのまま貴社で進めていただけます。</p>
+    </div>
+    <div class="scope-cols reveal">
+      <div class="scope-card in">
+        <h3>
+          <svg viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+          対応する作業
+        </h3>
+        <ul>
+          <li>運用状況を踏まえた、マルチサイト化の形態のご相談・アドバイス</li>
+          <li>既存ドメインの設定確認</li>
+          <li>WordPressマルチサイト化の実装</li>
+          <li>サブドメインまたはサブディレクトリの初期構成</li>
+          <li>SSLおよび基本動作の確認</li>
+          <li>マルチサイトとして問題なく使える状態までの整備</li>
+        </ul>
+      </div>
+      <div class="scope-card out">
+        <h3>
+          <svg viewBox="0 0 24 24" fill="none" stroke="#a39a86" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+          対応範囲外(貴社にて対応)
+        </h3>
+        <ul>
+          <li>各サイトのテーマインストール</li>
+          <li>各サイトの構築</li>
+          <li>デザイン調整</li>
+          <li>コンテンツ作成</li>
+        </ul>
+        <p class="scope-note">※上記4点は貴社での対応を前提としています。基盤側の作業に集中することで、費用と期間を抑えます。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">構成イメージ</span>
+      <h2>サブドメイン型・サブディレクトリ型のどちらでも</h2>
+      <p>運用状況をうかがったうえで、どちらの構成が合うかご提案します。以下は説明用の構成イメージです(ドメインは仮のものです)。</p>
+    </div>
+    <div class="diagram-grid reveal">
+      <div class="diagram-card">
+        <h3>サブドメイン型</h3>
+        <div class="tag">サイトごとに独立したURLを持たせたい場合</div>
+        <div class="tree">
+          <span class="root">example.co.jp(既存サイト)</span>
+          <div class="branch">
+            <span class="leaf">site-a.example.co.jp(新規サイト1)</span>
+            <span class="leaf">site-b.example.co.jp(新規サイト2)</span>
+          </div>
+        </div>
+        <p class="diagram-desc">既存サイトと新規サイトを見た目にもはっきり分けたい場合に選びやすい構成です。DNS側の設定確認も合わせて行います。</p>
+      </div>
+      <div class="diagram-card">
+        <h3>サブディレクトリ型</h3>
+        <div class="tag">同一ドメインの評価をまとめて維持したい場合</div>
+        <div class="tree">
+          <span class="root">example.co.jp(既存サイト)</span>
+          <div class="branch">
+            <span class="leaf">example.co.jp/site-a/(新規サイト1)</span>
+            <span class="leaf">example.co.jp/site-b/(新規サイト2)</span>
+          </div>
+        </div>
+        <p class="diagram-desc">追加の証明書設定が不要になりやすく、既存ドメインの評価を分散させたくない場合に向く構成です。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="howto" class="tight" style="background:var(--navy-tint);">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">進め方</span>
+      <h2>ご相談から整備完了まで</h2>
+    </div>
+    <div class="process-list reveal">
+      <div class="process-item">
+        <div class="process-num"></div>
+        <div class="process-body">
+          <h3>運用状況のヒアリング</h3>
+          <p>既存ドメインの利用状況、今後増やしたいサイトの数と用途をうかがい、マルチサイト化の形態をご提案します。</p>
+        </div>
+      </div>
+      <div class="process-item">
+        <div class="process-num"></div>
+        <div class="process-body">
+          <h3>ドメイン・サーバー設定の確認</h3>
+          <p>DNSやサーバー環境がマルチサイト化に対応できる状態か確認します。</p>
+        </div>
+      </div>
+      <div class="process-item">
+        <div class="process-num"></div>
+        <div class="process-body">
+          <h3>マルチサイト化の実装</h3>
+          <p>WordPressのマルチサイト機能を有効化し、サブドメインまたはサブディレクトリの初期構成を行います。</p>
+        </div>
+      </div>
+      <div class="process-item">
+        <div class="process-num"></div>
+        <div class="process-body">
+          <h3>SSL・基本動作の確認</h3>
+          <p>追加したサイトを含め、SSL(常時HTTPS)と基本的な表示・管理画面の動作を確認します。</p>
+        </div>
+      </div>
+      <div class="process-item">
+        <div class="process-num"></div>
+        <div class="process-body">
+          <h3>整備完了のご報告</h3>
+          <p>問題なく使える状態まで整えたうえでご報告し、以降のテーマ導入・サイト構築へ引き継ぎます。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="price">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">料金プラン</span>
+      <h2>募集要項の予算レンジに合わせた3プラン</h2>
+      <p>運用状況によって作業量が変わるため、目安としてご覧ください。正式な金額はヒアリング後にご提示します。</p>
+    </div>
+    <div class="price-grid reveal">
+      <div class="price-card">
+        <h3>ライト</h3>
+        <div class="price">20,000円<span>〜</span></div>
+        <p class="desc">サーバー環境が整っており、構成もシンプルな場合</p>
+        <ul>
+          <li>形態のご相談・アドバイス</li>
+          <li>マルチサイト化の実装</li>
+          <li>初期構成(1サイト追加まで)</li>
+          <li>SSL・基本動作の確認</li>
+        </ul>
+      </div>
+      <div class="price-card featured">
+        <span class="badge">ご相談の多い構成</span>
+        <h3>スタンダード</h3>
+        <div class="price">35,000円<span>前後</span></div>
+        <p class="desc">サブドメイン/サブディレクトリを複数用意したい場合</p>
+        <ul>
+          <li>ライトプランの内容すべて</li>
+          <li>初期構成(2〜3サイト追加)</li>
+          <li>ドメイン設定の詳細確認</li>
+          <li>整備後の動作報告書</li>
+        </ul>
+      </div>
+      <div class="price-card">
+        <h3>しっかり</h3>
+        <div class="price">50,000円</div>
+        <p class="desc">既存環境が複雑、または慎重に進めたい場合</p>
+        <ul>
+          <li>スタンダードプランの内容すべて</li>
+          <li>既存環境の事前調査を含む</li>
+          <li>複数サイトの初期構成</li>
+          <li>整備後の質疑応答サポート</li>
+        </ul>
+      </div>
+    </div>
+    <p class="price-note">※金額は募集要項の予算レンジ(20,000円〜50,000円)に沿った目安です。実際のサーバー・ドメイン環境を確認のうえ、正式にお見積りします。</p>
+  </div>
+</section>
+
+<section id="faq" class="tight" style="background:var(--navy-tint);">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">よくある質問</span>
+      <h2>ご相談内容として多い4点</h2>
+    </div>
+    <div class="faq-list reveal">
+      <div class="faq-item open">
+        <button class="faq-q">お見積り金額はどのくらいになりますか</button>
+        <div class="faq-a"><p>既存ドメイン・サーバーの状態と、追加したいサイト数によって変動します。上記3プランを目安に、ヒアリング後に正式な金額をご提示します。</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">想定作業期間はどのくらいですか</button>
+        <div class="faq-a"><p>ヒアリングと設定確認を終えてから、実装〜SSL・動作確認まで中3〜5営業日を目安にしています。※サーバー会社の反映待ちが発生する場合は前後します。</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">事前に用意しておくべき情報はありますか</button>
+        <div class="faq-a"><p>ドメイン管理画面(レジストラ)へのアクセス権、サーバーの管理画面情報、WordPressの管理者アカウントをご用意いただくとスムーズです。詳細はヒアリング時にリスト化してお渡しします。</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">追加作業が必要になった場合はどうなりますか</button>
+        <div class="faq-a"><p>作業範囲を超える対応(テーマ導入・各サイト構築・デザイン調整など)が必要な場合は、着手前に内容と金額をご案内し、ご了承をいただいてから進めます。無断で追加費用が発生することはありません。</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="provider-wrap reveal">
+      <div class="provider-avatar">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M9 4v5M9 21V9"/></svg>
+      </div>
+      <div class="provider-text">
+        <span class="eyebrow">対応者について</span>
+        <h3>自動化のミナト</h3>
+        <p>本業でAI・自動化開発(Claude Codeなどを活用)に携わりながら、WordPress環境の構築・サーバー設定を伴う技術案件に対応しています。AIによる作業効率化と、人の目による最終確認をあわせて行うことで、スピードと確実さの両立を心がけています。</p>
+        <div class="provider-tags">
+          <span>WordPress環境構築</span>
+          <span>ドメイン・サーバー設定</span>
+          <span>技術相談対応</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="tight" style="background:var(--navy-tint);">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">ご相談者の声</span>
+      <h2>技術面をお任せいただいた方の声</h2>
+    </div>
+    <div class="voice-grid reveal">
+      <div class="voice-card">
+        <p class="quote">「サブドメインとサブディレクトリ、どちらが合うか自分たちでは判断できませんでしたが、運用の話を聞いたうえで理由つきで提案してもらえたので迷わず決められました。」</p>
+        <div class="who">ECサイト運営 ご担当者様</div>
+        <span class="voice-flag">※本デモ用の仮の内容です</span>
+      </div>
+      <div class="voice-card">
+        <p class="quote">「デザインやコンテンツはこちらで進めたかったので、技術部分だけ切り出してお願いできたのが助かりました。SSLの確認まで込みで安心できました。」</p>
+        <div class="who">メディア運営 ご担当者様</div>
+        <span class="voice-flag">※本デモ用の仮の内容です</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="container">
+    <div class="contact-wrap reveal">
+      <div class="contact-info">
+        <span class="eyebrow" style="background:rgba(255,255,255,0.14);color:#fff;">お問い合わせ</span>
+        <h2>まずは運用状況をお聞かせください</h2>
+        <p>現在のドメイン・サーバー環境や、増やしたいサイトの数をうかがったうえで、最適なマルチサイト構成と概算費用をご案内します。</p>
+        <div class="tel">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4 2h3a2 2 0 0 1 2 1.7c.1.9.3 1.8.6 2.7a2 2 0 0 1-.5 2.1L8 9.6a16 16 0 0 0 6 6l1.1-1.1a2 2 0 0 1 2.1-.5c.9.3 1.8.5 2.7.6A2 2 0 0 1 22 16.9z"/></svg>
+          03-0000-0000
+        </div>
+        <div class="tel-note">※本デモ用のサンプル番号です。実際のご連絡先は募集メッセージにてご案内します。</div>
+      </div>
+      <form class="demo-form" onsubmit="return false;">
+        <div>
+          <label for="f-name">お名前</label>
+          <input id="f-name" type="text" placeholder="山田 太郎">
+        </div>
+        <div>
+          <label for="f-domain">既存ドメイン(任意)</label>
+          <input id="f-domain" type="text" placeholder="example.co.jp">
+        </div>
+        <div>
+          <label for="f-type">ご希望の構成</label>
+          <select id="f-type">
+            <option>未定・相談したい</option>
+            <option>サブドメイン型</option>
+            <option>サブディレクトリ型</option>
+          </select>
+        </div>
+        <div>
+          <label for="f-msg">ご相談内容</label>
+          <textarea id="f-msg" placeholder="増やしたいサイト数、現在の運用状況など"></textarea>
+        </div>
+        <button type="submit">この内容で相談する(デモ用)</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="foot-top">
+      <div class="foot-logo">WPマルチサイト化 導入支援</div>
+      <div style="font-size:12.5px;">お問い合わせは募集メッセージよりご連絡ください</div>
+    </div>
+    <p class="disclaimer">※本ページは制作サンプル(デモ)です。掲載の内容・数値は仮のもので、写真はイメージです。ドメイン名・料金プラン・作業期間はご相談内容に応じて個別にご提案します。</p>
+  </div>
+</footer>
+
+<div class="sticky-cta">
+  <a href="tel:0300000000" class="call">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4 2h3a2 2 0 0 1 2 1.7c.1.9.3 1.8.6 2.7a2 2 0 0 1-.5 2.1L8 9.6a16 16 0 0 0 6 6l1.1-1.1a2 2 0 0 1 2.1-.5c.9.3 1.8.5 2.7.6A2 2 0 0 1 22 16.9z"/></svg>
+    電話
+  </a>
+  <a href="#contact" class="go">無料相談・お見積り</a>
+</div>
+
+<script>
+(function(){
+  var burger = document.getElementById('burgerBtn');
+  var panel = document.getElementById('mobilePanel');
+  burger.addEventListener('click', function(){
+    burger.classList.toggle('open');
+    panel.classList.toggle('open');
+  });
+  panel.querySelectorAll('a').forEach(function(a){
+    a.addEventListener('click', function(){
+      burger.classList.remove('open');
+      panel.classList.remove('open');
+    });
+  });
+
+  document.querySelectorAll('.faq-item').forEach(function(item){
+    var q = item.querySelector('.faq-q');
+    q.addEventListener('click', function(){
+      item.classList.toggle('open');
+    });
+  });
+
+  if('IntersectionObserver' in window){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if(entry.isIntersecting){
+          entry.target.classList.add('is-visible');
+          io.unobserve(entry.target);
+        }
+      });
+    }, {threshold:0.12});
+    document.querySelectorAll('.reveal').forEach(function(el){ io.observe(el); });
+  } else {
+    document.querySelectorAll('.reveal').forEach(function(el){ el.classList.add('is-visible'); });
+  }
+})();
+</script>
+</body>
+</html>
