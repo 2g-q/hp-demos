@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>スタジオリンク制作サンプル｜ワイヤーフレーム実装・レスポンシブ対応</title>
+<meta name="description" content="HTMLワイヤーフレームをもとにしたWebページ実装のデモサンプルです。Claude Codeによる高速実装と、人の目による全件検品を掛け合わせています。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Zen+Kaku+Gothic+New:wght@500;700;900&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#16233c;
+    --navy-2:#233a63;
+    --navy-tint:#f2f5fa;
+    --ink:#1c1c1c;
+    --sub:#5b6270;
+    --paper:#fbfaf7;
+    --line:#e4e2db;
+    --radius:14px;
+    --maxw:1120px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:"Noto Sans JP",sans-serif;
+    color:var(--ink);
+    background:var(--paper);
+    line-height:1.85;
+    letter-spacing:.02em;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  img{max-width:100%;display:block;}
+  h1,h2,h3,h4{font-family:"Zen Kaku Gothic New",sans-serif;font-weight:900;letter-spacing:.04em;color:var(--navy);}
+  .num{font-family:"Manrope",sans-serif;font-weight:800;}
+  a{color:inherit;text-decoration:none;}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px;}
+  section{padding:96px 0;}
+  .eyebrow{
+    display:inline-block;
+    font-family:"Manrope",sans-serif;
+    font-weight:700;
+    font-size:.78rem;
+    letter-spacing:.18em;
+    color:var(--navy-2);
+    border:1px solid var(--navy-2);
+    border-radius:100px;
+    padding:5px 16px;
+    margin-bottom:18px;
+  }
+  .lead{color:var(--sub);font-size:1rem;max-width:56ch;}
+  .btn{
+    display:inline-flex;align-items:center;justify-content:center;gap:8px;
+    background:var(--navy);color:#fff;
+    padding:16px 32px;border-radius:100px;
+    font-weight:700;font-size:.95rem;
+    box-shadow:0 10px 24px rgba(22,35,60,.28);
+    border:none;cursor:pointer;
+    transition:transform .2s ease, box-shadow .2s ease;
+  }
+  .btn:hover{transform:translateY(-2px);box-shadow:0 14px 30px rgba(22,35,60,.34);}
+  .btn.outline{
+    background:transparent;color:var(--navy);border:1.5px solid var(--navy);
+    box-shadow:none;
+  }
+  .btn.outline:hover{background:var(--navy);color:#fff;}
+
+  /* ---- header ---- */
+  .site-header{
+    position:fixed;top:0;left:0;right:0;z-index:60;
+    background:rgba(251,250,247,.86);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .header-inner{
+    max-width:var(--maxw);margin:0 auto;padding:14px 24px;
+    display:flex;align-items:center;justify-content:space-between;
+  }
+  .logo{font-family:"Zen Kaku Gothic New",sans-serif;font-weight:900;font-size:1.15rem;color:var(--navy);display:flex;align-items:center;gap:8px;}
+  .logo svg{flex-shrink:0;}
+  .desktop-nav{display:flex;gap:32px;align-items:center;}
+  .desktop-nav a{font-size:.88rem;font-weight:500;color:var(--ink);position:relative;padding:4px 0;}
+  .desktop-nav a::after{
+    content:"";position:absolute;left:0;bottom:0;width:0;height:2px;background:var(--navy);
+    transition:width .25s ease;
+  }
+  .desktop-nav a:hover::after{width:100%;}
+  .header-cta{display:flex;align-items:center;gap:18px;}
+  .header-tel{display:flex;align-items:center;gap:6px;font-family:"Manrope",sans-serif;font-weight:700;font-size:.95rem;}
+  .hamburger{
+    display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:6px;
+  }
+  .hamburger span{width:24px;height:2px;background:var(--navy);display:block;transition:transform .25s ease, opacity .25s ease;}
+  .hamburger.active span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+  .hamburger.active span:nth-child(2){opacity:0;}
+  .hamburger.active span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+
+  .mobile-nav{
+    position:fixed;inset:0;z-index:55;
+    background:var(--navy);
+    display:flex;flex-direction:column;align-items:center;justify-content:center;gap:28px;
+    transform:translateY(-100%);opacity:0;
+    transition:transform .35s ease, opacity .35s ease;
+    pointer-events:none;
+  }
+  .mobile-nav.open{transform:translateY(0);opacity:1;pointer-events:auto;}
+  .mobile-nav a{color:#fff;font-size:1.3rem;font-weight:700;font-family:"Zen Kaku Gothic New",sans-serif;}
+  .mobile-nav .btn{margin-top:10px;}
+
+  /* ---- hero ---- */
+  .hero{
+    position:relative;padding:168px 0 100px;
+    background:linear-gradient(180deg,var(--navy-tint) 0%, var(--paper) 78%);
+    overflow:hidden;
+  }
+  .hero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:56px;align-items:center;}
+  .hero h1{font-size:clamp(2.1rem,4.6vw,3.4rem);line-height:1.35;margin-bottom:26px;}
+  .hero h1 .accent{color:var(--navy-2);position:relative;}
+  .hero-actions{display:flex;flex-wrap:wrap;gap:14px;margin:32px 0 40px;}
+  .hero-photo{
+    border-radius:var(--radius);overflow:hidden;
+    box-shadow:0 30px 60px rgba(22,35,60,.22);
+    aspect-ratio:4/5;
+  }
+  .hero-photo img{width:100%;height:100%;object-fit:cover;}
+  .stat-band{
+    display:grid;grid-template-columns:repeat(3,1fr);
+    border:1px solid var(--line);border-radius:var(--radius);
+    background:#fff;margin-top:56px;overflow:hidden;
+  }
+  .stat-cell{padding:26px 20px;text-align:center;border-right:1px solid var(--line);}
+  .stat-cell:last-child{border-right:none;}
+  .stat-cell .num{font-size:2rem;color:var(--navy);display:block;}
+  .stat-cell .stat-label{font-size:.78rem;color:var(--sub);margin-top:6px;}
+  .stat-note{text-align:center;font-size:.74rem;color:var(--sub);margin-top:10px;}
+
+  /* ---- reveal ---- */
+  .reveal{opacity:0;transform:translateY(28px);transition:opacity .7s ease, transform .7s ease;}
+  .reveal.in{opacity:1;transform:translateY(0);}
+
+  /* ---- section heading ---- */
+  .sec-head{max-width:640px;margin-bottom:56px;}
+  .sec-head h2{font-size:clamp(1.6rem,3vw,2.2rem);margin-bottom:16px;}
+
+  /* ---- strengths ---- */
+  .strength-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;}
+  .strength-card{
+    background:#fff;border:1px solid var(--line);border-radius:var(--radius);
+    padding:32px 26px;
+  }
+  .strength-icon{
+    width:52px;height:52px;border-radius:50%;
+    border:1.5px solid var(--navy);
+    display:flex;align-items:center;justify-content:center;margin-bottom:20px;
+  }
+  .strength-card h3{font-size:1.08rem;margin-bottom:12px;}
+  .strength-card p{color:var(--sub);font-size:.9rem;}
+
+  /* ---- service ---- */
+  .service-band{background:var(--navy-tint);}
+  .service-list{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;}
+  .service-item{
+    background:#fff;border-radius:var(--radius);padding:24px 26px;
+    display:flex;gap:16px;align-items:flex-start;border:1px solid var(--line);
+  }
+  .service-item .n{
+    font-family:"Manrope",sans-serif;font-weight:800;color:var(--navy-2);font-size:1.1rem;
+    flex-shrink:0;
+  }
+  .service-item h4{font-size:1rem;margin-bottom:6px;}
+  .service-item p{font-size:.86rem;color:var(--sub);}
+
+  /* ---- flow ---- */
+  .flow-list{display:grid;grid-template-columns:repeat(4,1fr);gap:0;position:relative;}
+  .flow-step{position:relative;padding:0 18px;}
+  .flow-step:not(:last-child)::after{
+    content:"";position:absolute;top:26px;right:-10px;width:20px;height:1px;background:var(--line);
+  }
+  .flow-num{
+    width:52px;height:52px;border-radius:50%;background:var(--navy);color:#fff;
+    display:flex;align-items:center;justify-content:center;
+    font-family:"Manrope",sans-serif;font-weight:800;font-size:1.1rem;margin-bottom:18px;
+  }
+  .flow-step h4{font-size:.98rem;margin-bottom:8px;}
+  .flow-step p{font-size:.84rem;color:var(--sub);}
+
+  /* ---- pricing ---- */
+  .price-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;align-items:stretch;}
+  .price-card{
+    background:#fff;border:1px solid var(--line);border-radius:var(--radius);
+    padding:34px 28px;display:flex;flex-direction:column;
+  }
+  .price-card.featured{
+    border:2px solid var(--navy);position:relative;
+    box-shadow:0 20px 40px rgba(22,35,60,.16);
+  }
+  .price-card.featured::before{
+    content:"ご相談実績が多いプラン";
+    position:absolute;top:-13px;left:28px;
+    background:var(--navy);color:#fff;font-size:.72rem;font-weight:700;
+    padding:4px 14px;border-radius:100px;
+  }
+  .price-card h3{font-size:1.05rem;margin-bottom:6px;}
+  .price-card .price{font-family:"Manrope",sans-serif;font-weight:800;font-size:1.7rem;color:var(--navy);margin:14px 0;}
+  .price-card .price span{font-size:.85rem;font-weight:600;color:var(--sub);}
+  .price-card ul{list-style:none;margin:18px 0 26px;flex-grow:1;}
+  .price-card li{
+    font-size:.86rem;color:var(--sub);padding-left:22px;position:relative;margin-bottom:10px;
+  }
+  .price-card li::before{
+    content:"";position:absolute;left:0;top:8px;width:10px;height:6px;
+    border-left:2px solid var(--navy-2);border-bottom:2px solid var(--navy-2);
+    transform:rotate(-45deg);
+  }
+  .price-note{font-size:.78rem;color:var(--sub);margin-top:20px;}
+
+  /* ---- faq ---- */
+  .faq-item{border-bottom:1px solid var(--line);}
+  .faq-q{
+    width:100%;text-align:left;background:none;border:none;cursor:pointer;
+    padding:24px 4px;display:flex;justify-content:space-between;align-items:center;gap:16px;
+    font-family:"Zen Kaku Gothic New",sans-serif;font-weight:700;font-size:1rem;color:var(--navy);
+  }
+  .faq-q .toggle{font-family:"Manrope",sans-serif;font-size:1.3rem;color:var(--navy-2);flex-shrink:0;transition:transform .2s ease;}
+  .faq-item.open .toggle{transform:rotate(45deg);}
+  .faq-a{
+    max-height:0;overflow:hidden;transition:max-height .3s ease;
+    font-size:.9rem;color:var(--sub);
+  }
+  .faq-a p{padding:0 4px 24px;}
+  .faq-item.open .faq-a{max-height:280px;}
+
+  /* ---- contact ---- */
+  .contact-band{background:var(--navy);color:#fff;}
+  .contact-band h2{color:#fff;}
+  .contact-band .lead{color:rgba(255,255,255,.72);}
+  .contact-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:52px;}
+  .contact-info-item{display:flex;gap:14px;margin-bottom:26px;align-items:flex-start;}
+  .contact-info-item .ic{
+    width:38px;height:38px;border-radius:50%;border:1.5px solid rgba(255,255,255,.5);
+    display:flex;align-items:center;justify-content:center;flex-shrink:0;
+  }
+  .contact-info-item h4{color:#fff;font-size:.92rem;margin-bottom:4px;}
+  .contact-info-item p{font-size:.84rem;color:rgba(255,255,255,.68);}
+  form{background:#fff;border-radius:var(--radius);padding:32px;}
+  .f-row{margin-bottom:18px;}
+  .f-row label{display:block;font-size:.82rem;font-weight:700;color:var(--navy);margin-bottom:8px;}
+  .f-row input,.f-row textarea,.f-row select{
+    width:100%;border:1px solid var(--line);border-radius:8px;
+    padding:13px 14px;font-size:16px;font-family:"Noto Sans JP",sans-serif;color:var(--ink);
+    background:var(--paper);
+  }
+  .f-row textarea{resize:vertical;min-height:110px;}
+  .f-two{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+  form .btn{width:100%;margin-top:6px;}
+
+  /* ---- footer ---- */
+  footer{padding:56px 0 130px;text-align:center;}
+  footer .logo{justify-content:center;margin-bottom:16px;}
+  .foot-links{display:flex;justify-content:center;gap:24px;font-size:.82rem;color:var(--sub);margin-bottom:24px;flex-wrap:wrap;}
+  .disclaimer{
+    max-width:640px;margin:0 auto;font-size:.76rem;color:var(--sub);
+    border-top:1px solid var(--line);padding-top:20px;
+  }
+
+  /* ---- sticky mobile cta ---- */
+  .sticky-cta{
+    display:none;position:fixed;left:0;right:0;bottom:0;z-index:50;
+    background:#fff;border-top:1px solid var(--line);
+    padding:12px 16px;gap:10px;
+    box-shadow:0 -8px 24px rgba(22,35,60,.12);
+  }
+  .sticky-cta a{flex:1;}
+  .sticky-cta .btn{width:100%;padding:14px 10px;font-size:.88rem;}
+
+  @media (max-width:860px){
+    .desktop-nav{display:none;}
+    .hamburger{display:flex;}
+    .header-tel span.tel-text{display:none;}
+    .hero-grid{grid-template-columns:1fr;}
+    .hero{padding:132px 0 72px;}
+    .hero-photo{max-width:340px;margin:0 auto;}
+    .stat-band{grid-template-columns:1fr;}
+    .stat-cell{border-right:none;border-bottom:1px solid var(--line);}
+    .stat-cell:last-child{border-bottom:none;}
+    .strength-grid{grid-template-columns:1fr;}
+    .service-list{grid-template-columns:1fr;}
+    .flow-list{grid-template-columns:1fr 1fr;gap:32px 0;}
+    .flow-step:nth-child(2)::after,.flow-step:nth-child(4)::after{display:none;}
+    .price-grid{grid-template-columns:1fr;}
+    .contact-grid{grid-template-columns:1fr;}
+    .sticky-cta{display:flex;}
+    footer{padding-bottom:150px;}
+    section{padding:64px 0;}
+  }
+
+  @media (prefers-reduced-motion:reduce){
+    *{transition:none !important;}
+    .reveal{opacity:1;transform:none;}
+  }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <a href="#top" class="logo">
+      <svg width="26" height="26" viewBox="0 0 26 26" fill="none"><rect x="1" y="1" width="24" height="24" rx="6" stroke="#16233c" stroke-width="1.6"/><path d="M7 17L11 9L15 15L19 8" stroke="#16233c" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      スタジオリンク制作サンプル
+    </a>
+    <nav class="desktop-nav">
+      <a href="#service">実装内容</a>
+      <a href="#flow">流れ</a>
+      <a href="#pricing">料金目安</a>
+      <a href="#faq">よくある質問</a>
+      <a href="#contact">お問い合わせ</a>
+    </nav>
+    <div class="header-cta">
+      <a class="header-tel" href="tel:0480000000">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M6 3h4l2 5-3 2a12 12 0 0 0 6 6l2-3 5 2v4a2 2 0 0 1-2 2C10.5 21 3 13.5 3 5a2 2 0 0 1 2-2z" stroke="#16233c" stroke-width="1.5" stroke-linejoin="round"/></svg>
+        <span class="tel-text">048-000-0000</span>
+      </a>
+      <a href="#contact" class="btn" style="padding:11px 22px;font-size:.86rem;">相談する</a>
+      <button class="hamburger" id="hamburgerBtn" aria-label="メニュー">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<nav class="mobile-nav" id="mobileNav">
+  <a href="#service">実装内容</a>
+  <a href="#flow">流れ</a>
+  <a href="#pricing">料金目安</a>
+  <a href="#faq">よくある質問</a>
+  <a href="#contact">お問い合わせ</a>
+  <a href="#contact" class="btn">相談する</a>
+</nav>
+
+<main id="top">
+
+  <section class="hero">
+    <div class="wrap">
+      <div class="hero-grid">
+        <div>
+          <span class="eyebrow">WIREFRAME → IMPLEMENTATION</span>
+          <h1>描いた線を、<br>そのまま<span class="accent">動かす。</span></h1>
+          <p class="lead">
+            ご用意いただいたHTMLワイヤーフレームを、意図を崩さずに実装するとどうなるか。
+            このページ自体が、そのサンプルです。デザイン・構成・文章はいただいた指示に忠実に、
+            実装スピードと画面の作り込みだけをお預かりします。
+          </p>
+          <div class="hero-actions">
+            <a href="#service" class="btn">実装内容を見る</a>
+            <a href="#contact" class="btn outline">この品質で相談する</a>
+          </div>
+        </div>
+        <div class="hero-photo reveal">
+          <img src="https://images.unsplash.com/photo-1629875499750-a31b83446598?auto=format&fit=crop&w=1200&q=70" alt="都心のオフィス街を見上げる風景" loading="lazy">
+        </div>
+      </div>
+
+      <div class="stat-band reveal">
+        <div class="stat-cell">
+          <span class="num">240<span style="font-size:1rem;">ページ+</span></span>
+          <div class="stat-label">実装対応ページ数</div>
+        </div>
+        <div class="stat-cell">
+          <span class="num">3<span style="font-size:1rem;">営業日</span></span>
+          <div class="stat-label">初稿反映の目安</div>
+        </div>
+        <div class="stat-cell">
+          <span class="num">全件<span style="font-size:1rem;">目視検品</span></span>
+          <div class="stat-label">公開前チェック体制</div>
+        </div>
+      </div>
+      <p class="stat-note">※上記の数値・体制はサンプル表示用の仮の内容です。</p>
+    </div>
+  </section>
+
+  <section id="strengths">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span class="eyebrow">STRENGTHS</span>
+        <h2>選ばれる理由は、<br>「崩さない」姿勢にあります。</h2>
+        <p class="lead">デザインの主導権はいただいた指示にお渡しします。当方が担うのは、その意図を画面で正確に再現し、どの端末でも破綻させないことです。</p>
+      </div>
+      <div class="strength-grid">
+        <div class="strength-card reveal">
+          <div class="strength-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M4 6h16M4 12h10M4 18h16" stroke="#16233c" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+          <h3>ワイヤー準拠の精密実装</h3>
+          <p>要素の並び・余白・優先順位を、いただいたワイヤーの意図から逸らしません。判断が割れる箇所は、変更せずに確認します。</p>
+        </div>
+        <div class="strength-card reveal">
+          <div class="strength-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><rect x="4" y="3" width="9" height="15" rx="1.5" stroke="#16233c" stroke-width="1.8"/><rect x="15" y="7" width="5" height="11" rx="1.5" stroke="#16233c" stroke-width="1.8"/></svg></div>
+          <h3>PC・スマホ完全対応</h3>
+          <p>390px幅の実機検証まで含め、崩れのない状態で納品します。ナビゲーションや入力欄の使いやすさも端末ごとに調整します。</p>
+        </div>
+        <div class="strength-card reveal">
+          <div class="strength-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M12 3v6l4 2" stroke="#16233c" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><circle cx="12" cy="12" r="9" stroke="#16233c" stroke-width="1.8"/></svg></div>
+          <h3>速さと正確さの両立</h3>
+          <p>実装そのものはClaude Codeを使い高速に進め、公開前の最終確認は必ず人の目で行います。速さと粗さは別物と考えています。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="service" class="service-band">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span class="eyebrow">SCOPE</span>
+        <h2>お願いいただける実装範囲</h2>
+        <p class="lead">デザイン・構成・文章のご用意は不要です。以下の実装部分を中心にお預かりします。</p>
+      </div>
+      <div class="service-list">
+        <div class="service-item reveal">
+          <span class="n">01</span>
+          <div><h4>HTMLワイヤーからのページ実装</h4><p>いただいたワイヤーフレームをもとに、公開可能な品質のHTML / CSS / JavaScriptへ実装します。</p></div>
+        </div>
+        <div class="service-item reveal">
+          <span class="n">02</span>
+          <div><h4>PC / スマホのレスポンシブ対応</h4><p>幅の異なる端末でも意図した見え方を保つよう、ブレイクポイントごとに調整します。</p></div>
+        </div>
+        <div class="service-item reveal">
+          <span class="n">03</span>
+          <div><h4>表示崩れ・軽微な不具合の修正</h4><p>公開後に見つかった崩れや細かな不具合にも、状況を確認のうえ対応します。</p></div>
+        </div>
+        <div class="service-item reveal">
+          <span class="n">04</span>
+          <div><h4>画像・リンク等の差し替え</h4><p>素材の更新や差し替えのご依頼にも対応し、反映後の見え方まで確認します。</p></div>
+        </div>
+        <div class="service-item reveal">
+          <span class="n">05</span>
+          <div><h4>HTML / CSS / JavaScriptの調整</h4><p>実装後の細かな挙動・見た目の調整もご相談内容に沿って対応します。</p></div>
+        </div>
+        <div class="service-item reveal">
+          <span class="n">06</span>
+          <div><h4>公開作業(必要な場合)</h4><p>案件に応じて、Vercel等へのデプロイ・公開作業まで承ります。</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="flow">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span class="eyebrow">FLOW</span>
+        <h2>ご依頼から納品までの流れ</h2>
+      </div>
+      <div class="flow-list">
+        <div class="flow-step reveal">
+          <div class="flow-num">01</div>
+          <h4>ワイヤー・要件の共有</h4>
+          <p>HTML形式のワイヤーと、実装上の要望・優先順位をお伺いします。</p>
+        </div>
+        <div class="flow-step reveal">
+          <div class="flow-num">02</div>
+          <h4>実装・レスポンシブ調整</h4>
+          <p>PC・スマホ双方の見え方を確認しながら実装を進めます。</p>
+        </div>
+        <div class="flow-step reveal">
+          <div class="flow-num">03</div>
+          <h4>公開前チェック</h4>
+          <p>崩れ・リンク切れ・表記の揺れがないか、人の目で最終確認します。</p>
+        </div>
+        <div class="flow-step reveal">
+          <div class="flow-num">04</div>
+          <h4>納品・公開</h4>
+          <p>ファイル一式をお渡し、または必要に応じて公開作業まで対応します。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="pricing" class="service-band">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span class="eyebrow">PRICING</span>
+        <h2>費用感の目安</h2>
+        <p class="lead">実際の費用は、ページ数・実装の複雑さ・納期に応じてご相談のうえ決定します。以下は目安としての一例です。</p>
+      </div>
+      <div class="price-grid">
+        <div class="price-card reveal">
+          <h3>ライトプラン</h3>
+          <div class="price">¥15,000<span>〜 / LP1枚</span></div>
+          <ul>
+            <li>1枚構成のワイヤーからの実装</li>
+            <li>PC / スマホ レスポンシブ対応</li>
+            <li>軽微な修正1回込み</li>
+          </ul>
+        </div>
+        <div class="price-card featured reveal">
+          <h3>スタンダードプラン</h3>
+          <div class="price">¥40,000<span>〜 / 複数ページ</span></div>
+          <ul>
+            <li>複数ページ構成のワイヤーからの実装</li>
+            <li>画像・リンク差し替え対応</li>
+            <li>公開前チェック・修正2回込み</li>
+          </ul>
+        </div>
+        <div class="price-card reveal">
+          <h3>継続対応プラン</h3>
+          <div class="price">¥25,000<span>〜 / 月</span></div>
+          <ul>
+            <li>複数案件を月内で継続対応</li>
+            <li>優先的なスケジュール確保</li>
+            <li>Vercel等への公開作業込み</li>
+          </ul>
+        </div>
+      </div>
+      <p class="price-note">※上記金額はサンプル表示用の仮の目安です。実際の費用感はご依頼内容を確認のうえ改めてご提示します。</p>
+    </div>
+  </section>
+
+  <section id="faq">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span class="eyebrow">FAQ</span>
+        <h2>よくあるご質問</h2>
+      </div>
+      <div class="faq-list">
+        <div class="faq-item reveal">
+          <button class="faq-q">Claude Codeを使った実装経験はどの程度ありますか？<span class="toggle">＋</span></button>
+          <div class="faq-a"><p>複数のHTML / LP案件でワイヤーフレームからの実装に使用しています。生成後は必ず人の目で表示崩れや挙動を確認したうえで納品しています。</p></div>
+        </div>
+        <div class="faq-item reveal">
+          <button class="faq-q">デザインはこちらで用意しますが、微調整の相談はできますか？<span class="toggle">＋</span></button>
+          <div class="faq-a"><p>可能です。ワイヤーの意図を変えない範囲での実装上の見え方調整や、判断が必要な箇所のご相談はお気軽にお申し付けください。</p></div>
+        </div>
+        <div class="faq-item reveal">
+          <button class="faq-q">継続的な依頼は可能ですか？<span class="toggle">＋</span></button>
+          <div class="faq-a"><p>はい、継続対応を前提としたスケジュール確保や、月単位でのご相談も承っています。まずは1案件からご相談いただけます。</p></div>
+        </div>
+        <div class="faq-item reveal">
+          <button class="faq-q">Vercel等への公開作業まで依頼できますか？<span class="toggle">＋</span></button>
+          <div class="faq-a"><p>案件内容に応じて公開作業まで対応可能です。ご依頼時に必要な範囲をお伝えください。</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="contact-band">
+    <div class="wrap">
+      <div class="contact-grid">
+        <div class="reveal">
+          <span class="eyebrow" style="border-color:rgba(255,255,255,.5);color:#fff;">CONTACT</span>
+          <h2>まずはワイヤーを見せてください</h2>
+          <p class="lead">お手元のワイヤーフレームと要望をお送りいただければ、実装イメージと概算をご返信します。</p>
+
+          <div style="margin-top:36px;">
+            <div class="contact-info-item">
+              <div class="ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M6 3h4l2 5-3 2a12 12 0 0 0 6 6l2-3 5 2v4a2 2 0 0 1-2 2C10.5 21 3 13.5 3 5a2 2 0 0 1 2-2z" stroke="#fff" stroke-width="1.5" stroke-linejoin="round"/></svg></div>
+              <div><h4>電話でのお問い合わせ</h4><p>048-000-0000(平日 10:00-18:00)</p></div>
+            </div>
+            <div class="contact-info-item">
+              <div class="ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><rect x="3" y="5" width="18" height="14" rx="2" stroke="#fff" stroke-width="1.5"/><path d="M3 7l9 6 9-6" stroke="#fff" stroke-width="1.5"/></svg></div>
+              <div><h4>フォームでのお問い合わせ</h4><p>24時間受付、原則1営業日以内に返信します。</p></div>
+            </div>
+            <div class="contact-info-item">
+              <div class="ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="10" r="3" stroke="#fff" stroke-width="1.5"/><path d="M12 21s7-6.5 7-11a7 7 0 1 0-14 0c0 4.5 7 11 7 11z" stroke="#fff" stroke-width="1.5"/></svg></div>
+              <div><h4>対応エリア</h4><p>全国対応(オンライン完結)</p></div>
+            </div>
+          </div>
+        </div>
+
+        <form onsubmit="return false;">
+          <div class="f-two">
+            <div class="f-row"><label for="f-name">お名前</label><input id="f-name" type="text" placeholder="山田 太郎"></div>
+            <div class="f-row"><label for="f-company">会社名</label><input id="f-company" type="text" placeholder="任意"></div>
+          </div>
+          <div class="f-row"><label for="f-mail">メールアドレス</label><input id="f-mail" type="email" placeholder="example@mail.com"></div>
+          <div class="f-row">
+            <label for="f-type">ご依頼の種類</label>
+            <select id="f-type">
+              <option>LP1枚の実装</option>
+              <option>複数ページの実装</option>
+              <option>継続的な実装対応</option>
+              <option>その他・まずは相談</option>
+            </select>
+          </div>
+          <div class="f-row"><label for="f-msg">ワイヤー・ご要望</label><textarea id="f-msg" placeholder="ワイヤーフレームのURL、実装してほしい範囲、納期の目安などをご記入ください"></textarea></div>
+          <button class="btn" type="submit">この内容で送信する</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <a href="#top" class="logo">
+      <svg width="24" height="24" viewBox="0 0 26 26" fill="none"><rect x="1" y="1" width="24" height="24" rx="6" stroke="#16233c" stroke-width="1.6"/><path d="M7 17L11 9L15 15L19 8" stroke="#16233c" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      スタジオリンク制作サンプル
+    </a>
+    <div class="foot-links">
+      <a href="#service">実装内容</a>
+      <a href="#flow">流れ</a>
+      <a href="#pricing">料金目安</a>
+      <a href="#faq">よくある質問</a>
+      <a href="#contact">お問い合わせ</a>
+    </div>
+    <p class="disclaimer">※本ページは制作サンプル(デモ)です。掲載の内容・数値は仮のもので、写真はイメージです。ワイヤーフレームからの実装イメージを確認いただくためのサンプルとして作成しています。</p>
+  </div>
+</footer>
+
+<div class="sticky-cta">
+  <a href="tel:0480000000" class="btn outline">電話で相談</a>
+  <a href="#contact" class="btn">この品質で相談する</a>
+</div>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  "name": "スタジオリンク制作サンプル",
+  "description": "HTMLワイヤーフレームをもとにしたWebページ実装サービスのサンプルページ",
+  "telephone": "048-000-0000",
+  "areaServed": "JP",
+  "priceRange": "¥15,000〜"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Claude Codeを使った実装経験はどの程度ありますか？",
+      "acceptedAnswer": {"@type": "Answer", "text": "複数のHTML / LP案件でワイヤーフレームからの実装に使用しています。生成後は必ず人の目で表示崩れや挙動を確認したうえで納品しています。"}
+    },
+    {
+      "@type": "Question",
+      "name": "継続的な依頼は可能ですか？",
+      "acceptedAnswer": {"@type": "Answer", "text": "はい、継続対応を前提としたスケジュール確保や、月単位でのご相談も承っています。"}
+    }
+  ]
+}
+</script>
+
+<script>
+(function(){
+  var hamburger = document.getElementById('hamburgerBtn');
+  var mobileNav = document.getElementById('mobileNav');
+  hamburger.addEventListener('click', function(){
+    hamburger.classList.toggle('active');
+    mobileNav.classList.toggle('open');
+  });
+  mobileNav.querySelectorAll('a').forEach(function(a){
+    a.addEventListener('click', function(){
+      hamburger.classList.remove('active');
+      mobileNav.classList.remove('open');
+    });
+  });
+
+  document.querySelectorAll('.faq-q').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var item = btn.closest('.faq-item');
+      var wasOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item.open').forEach(function(el){ el.classList.remove('open'); });
+      if(!wasOpen){ item.classList.add('open'); }
+    });
+  });
+
+  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(reduceMotion){
+    document.querySelectorAll('.reveal').forEach(function(el){ el.classList.add('in'); });
+  } else if('IntersectionObserver' in window){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if(entry.isIntersecting){
+          entry.target.classList.add('in');
+          io.unobserve(entry.target);
+        }
+      });
+    }, {threshold:.15});
+    document.querySelectorAll('.reveal').forEach(function(el){ io.observe(el); });
+  } else {
+    document.querySelectorAll('.reveal').forEach(function(el){ el.classList.add('in'); });
+  }
+})();
+</script>
+</body>
+</html>
