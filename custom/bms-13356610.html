@@ -298,7 +298,8 @@ footer{
 .p-from{width:200pt; font-size:9.5pt; line-height:1.7}
 .p-from .co{font-size:11pt; font-weight:700}
 .p-meta{font-size:9.5pt; text-align:right; margin-bottom:6pt}
-.p-doc table{width:100%; border-collapse:collapse; margin-top:6pt}
+.p-doc table{width:100%; border-collapse:collapse; margin-top:6pt; border:1px solid #000}
+.p-doc tbody tr:last-child td{border-bottom:1px solid #000}
 .p-doc th,.p-doc td{border:1px solid #000; padding:3.5pt 5pt; font-size:9.5pt}
 .p-doc th{background:#eee; text-align:center}
 .p-doc td.r{text-align:right}
@@ -968,6 +969,8 @@ function doPrint(){
   setTimeout(function(){ window.print() }, 380);
 }
 $("#btnPrint").addEventListener("click", doPrint);
+/* ブラウザの印刷(Ctrl+P)から直接呼ばれても中身が空にならないようにする */
+window.addEventListener("beforeprint", buildPrint);
 
 /* ── 受注に変換（画面が連動することの実演） ── */
 var converted = false;
@@ -987,6 +990,7 @@ $("#btnOrder").addEventListener("click", function(){
 /* ── 初期化 ───────────────────────────────── */
 renderDeals();
 renderQuote();
+buildPrint();
 show(location.hash.slice(1) || "dash", true);
 window.addEventListener("hashchange", function(){ show(location.hash.slice(1) || "dash", true) });
 
