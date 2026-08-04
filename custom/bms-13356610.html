@@ -77,7 +77,8 @@ svg{display:block; flex:none}
 
 /* ═══ アプリシェル ═══ */
 .app{display:grid; grid-template-columns:216px minmax(0,1fr); min-height:100vh}
-.side{background:var(--nav); color:var(--nav-txt); display:flex; flex-direction:column}
+.app > *{min-width:0}
+.side{background:var(--nav); color:var(--nav-txt); display:flex; flex-direction:column; min-width:0}
 .brand{padding:var(--sp-4) var(--sp-4) var(--sp-3); display:flex; gap:var(--sp-2); align-items:center}
 .brand .mk{
   width:28px;height:28px;border-radius:var(--r-sm);background:var(--brand);
@@ -124,7 +125,7 @@ svg{display:block; flex:none}
 }
 .notetoggle[aria-pressed="true"]{background:var(--note); color:#fff; border-color:var(--note)}
 
-main{padding:var(--sp-4); max-width:1320px}
+main{padding:var(--sp-4); max-width:1320px; min-width:0}
 .view{display:none}
 .view.on{display:block}
 
@@ -184,7 +185,7 @@ tbody tr:last-child td{border-bottom:0}
 tbody tr.clickable{cursor:pointer}
 tbody tr.clickable:hover{background:var(--brand-w)}
 tbody tr.sel{background:var(--brand-w); box-shadow:inset 3px 0 0 var(--brand)}
-.tablewrap{overflow-x:auto; -webkit-overflow-scrolling:touch}
+.tablewrap{overflow-x:auto; -webkit-overflow-scrolling:touch; min-width:0; max-width:100%}
 .empty{padding:var(--sp-6) var(--sp-4); text-align:center; color:var(--faint); font-size:var(--fs-sm)}
 
 .toolbar{display:flex; gap:var(--sp-2); align-items:center; flex-wrap:wrap; padding:var(--sp-2) var(--sp-4); border-bottom:1px solid var(--line-2); background:var(--panel-2)}
@@ -350,7 +351,7 @@ footer{padding:var(--sp-5) var(--sp-4) var(--sp-6); color:var(--faint); font-siz
   .slip{grid-template-columns:repeat(2,minmax(0,1fr))}
 }
 @media (max-width:860px){
-  .app{grid-template-columns:1fr}
+  .app{grid-template-columns:1fr; grid-template-rows:auto minmax(0,1fr)}
   .side{flex-direction:row; overflow-x:auto; align-items:center; padding:0 var(--sp-2)}
   .brand{padding:var(--sp-2) var(--sp-2); flex:none}
   .brand .b2{display:none}
