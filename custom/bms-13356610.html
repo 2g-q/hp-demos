@@ -1,0 +1,996 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>業務管理システム 画面デモ｜大栄化学株式会社様 ご提案</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#16212e; --muted:#5d6b7a; --faint:#8996a5;
+  --line:#dde4ec; --line2:#eef2f6; --bg:#f3f6f9; --panel:#fff;
+  --brand:#12507d; --brand-d:#0d3d61; --brand-w:#e9f1f8;
+  --ok:#0f6f52; --ok-w:#e7f4ef;
+  --warn:#96590a; --warn-w:#fdf3e2;
+  --danger:#ad2a20; --danger-w:#fceceb;
+  --note:#6b3fa0; --note-w:#f2edfa;
+  --r:6px;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{
+  font-family:"Noto Sans JP",-apple-system,BlinkMacSystemFont,"Segoe UI","Hiragino Kaku Gothic ProN","Yu Gothic",Meiryo,sans-serif;
+  background:var(--bg); color:var(--ink); font-size:14px; line-height:1.6;
+  -webkit-font-smoothing:antialiased; font-feature-settings:"palt" 1;
+  overflow-x:hidden;
+}
+.num{font-variant-numeric:tabular-nums; font-feature-settings:"tnum" 1}
+button{font-family:inherit; font-size:inherit; cursor:pointer}
+input,select{font-family:inherit; font-size:inherit; color:inherit}
+a{color:var(--brand)}
+
+/* ── デモ帯 ───────────────────── */
+.democall{
+  background:#16212e; color:#fff; padding:9px 16px; font-size:12.5px; line-height:1.5;
+  display:flex; gap:10px; align-items:baseline; flex-wrap:wrap;
+}
+.democall b{color:#ffd79a; font-weight:700}
+.democall span{color:#b9c4d1}
+
+/* ── アプリバー ───────────────── */
+.appbar{
+  background:var(--panel); border-bottom:1px solid var(--line);
+  position:sticky; top:0; z-index:50;
+}
+.appbar-top{
+  display:flex; align-items:center; gap:14px; padding:10px 16px 8px; flex-wrap:wrap;
+}
+.logo{display:flex; align-items:center; gap:9px; min-width:0}
+.logo .mark{
+  width:26px;height:26px;border-radius:5px;background:var(--brand);flex:none;
+  display:grid;place-items:center;color:#fff;font-weight:700;font-size:12px;letter-spacing:.02em;
+}
+.logo .t1{font-weight:700; font-size:14.5px; letter-spacing:.01em; white-space:nowrap}
+.logo .t2{font-size:11.5px; color:var(--faint); white-space:nowrap}
+.appbar-right{margin-left:auto; display:flex; align-items:center; gap:8px; flex-wrap:wrap}
+.who{font-size:12px; color:var(--muted); white-space:nowrap}
+.notetoggle{
+  border:1px solid var(--note); color:var(--note); background:var(--note-w);
+  padding:5px 11px; border-radius:100px; font-size:12px; font-weight:500; white-space:nowrap;
+}
+.notetoggle[aria-pressed="true"]{background:var(--note); color:#fff}
+
+.tabs{display:flex; gap:2px; padding:0 10px; overflow-x:auto; scrollbar-width:thin}
+.tab{
+  border:0; background:none; padding:9px 14px 10px; font-size:13.5px; color:var(--muted);
+  border-bottom:2.5px solid transparent; white-space:nowrap; font-weight:500;
+}
+.tab[aria-selected="true"]{color:var(--brand); border-bottom-color:var(--brand); font-weight:700}
+
+main{padding:16px; max-width:1240px; margin:0 auto}
+.view{display:none}
+.view.on{display:block}
+
+/* ── 共通パーツ ───────────────── */
+.panel{background:var(--panel); border:1px solid var(--line); border-radius:var(--r)}
+.ph{
+  display:flex; align-items:baseline; gap:10px; padding:10px 14px; border-bottom:1px solid var(--line2);
+  flex-wrap:wrap;
+}
+.ph h2{margin:0; font-size:13.5px; font-weight:700; letter-spacing:.01em}
+.ph .sub{font-size:11.5px; color:var(--faint)}
+.ph .spacer{margin-left:auto}
+.pb{padding:14px}
+
+.btn{
+  border:1px solid var(--line); background:#fff; color:var(--ink);
+  padding:6px 12px; border-radius:var(--r); font-size:12.5px; font-weight:500;
+}
+.btn:hover{background:#f7f9fb}
+.btn-p{background:var(--brand); border-color:var(--brand); color:#fff}
+.btn-p:hover{background:var(--brand-d)}
+.btn-s{font-size:11.5px; padding:4px 9px}
+
+.tag{
+  display:inline-block; padding:1px 6px; border-radius:3px; font-size:10.5px; font-weight:700;
+  line-height:1.5; white-space:nowrap; letter-spacing:.02em;
+}
+.tag-dan{background:var(--danger-w); color:var(--danger)}
+.tag-warn{background:var(--warn-w); color:var(--warn)}
+.tag-ok{background:var(--ok-w); color:var(--ok)}
+.tag-b{background:var(--brand-w); color:var(--brand)}
+.tag-g{background:#eef1f4; color:var(--muted)}
+
+/* ── 設計メモ ─────────────────── */
+.note{display:none}
+.note-only{display:none}
+body.notes-on .note-only{display:block}
+body.notes-on .note{
+  display:block; margin:8px 0 0; padding:9px 11px 9px 12px;
+  background:var(--note-w); border-left:3px solid var(--note); border-radius:0 4px 4px 0;
+  font-size:12px; line-height:1.65; color:#3d2a5c;
+}
+body.notes-on .note b{color:var(--note); font-weight:700}
+body.notes-on .note .q{
+  display:block; margin-top:5px; padding-top:5px; border-top:1px dashed #cbb8e6; color:#5a4478;
+}
+
+/* ── ダッシュボード ───────────── */
+.dash-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:12px}
+.todo{
+  background:var(--panel); border:1px solid var(--line); border-radius:var(--r);
+  padding:12px 13px; text-align:left; width:100%; display:block; transition:border-color .12s;
+}
+.todo:hover{border-color:var(--brand)}
+.todo .lbl{font-size:12px; color:var(--muted); display:flex; align-items:center; gap:6px}
+.todo .dot{width:7px;height:7px;border-radius:50%;flex:none}
+.todo .val{font-size:27px; font-weight:700; line-height:1.15; margin-top:5px; letter-spacing:-.01em}
+.todo .val em{font-size:13px; font-style:normal; font-weight:500; color:var(--muted); margin-left:3px}
+.todo .hint{font-size:11.5px; color:var(--faint); margin-top:2px}
+
+.row2{display:grid; grid-template-columns:1.15fr .85fr; gap:12px; margin-top:12px}
+
+table{width:100%; border-collapse:collapse}
+th,td{text-align:left; padding:7px 9px; border-bottom:1px solid var(--line2); font-size:12.5px}
+th{font-size:11.5px; color:var(--muted); font-weight:500; background:#fafbfd; white-space:nowrap}
+td.r,th.r{text-align:right}
+tbody tr:last-child td{border-bottom:0}
+.tablewrap{overflow-x:auto; -webkit-overflow-scrolling:touch}
+
+/* 売掛エイジング */
+.aging{display:flex; flex-direction:column; gap:7px}
+.ag{display:grid; grid-template-columns:78px 1fr 96px; gap:9px; align-items:center}
+.ag .agl{font-size:11.5px; color:var(--muted); white-space:nowrap}
+.ag .bar{height:17px; background:var(--line2); border-radius:3px; overflow:hidden}
+.ag .bar i{display:block; height:100%; background:var(--brand); border-radius:3px}
+.ag.d .bar i{background:var(--danger)}
+.ag.w .bar i{background:#c98a1e}
+.ag .agv{text-align:right; font-size:12.5px; font-weight:500}
+.ag.d .agv{color:var(--danger); font-weight:700}
+
+/* でんさい */
+.den{display:flex; flex-direction:column}
+.den .d{display:flex; gap:10px; align-items:center; padding:8px 0; border-bottom:1px solid var(--line2)}
+.den .d:last-child{border-bottom:0}
+.den .dd{
+  flex:none; width:52px; text-align:center; border-radius:4px; padding:3px 0; line-height:1.25;
+  background:var(--line2);
+}
+.den .dd b{display:block; font-size:15px; font-weight:700}
+.den .dd span{display:block; font-size:10px; color:var(--muted)}
+.den .d.near .dd{background:var(--warn-w)}
+.den .d.near .dd b{color:var(--warn)}
+.den .dn{flex:1; min-width:0; font-size:12.5px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap}
+.den .dn small{display:block; color:var(--faint); font-size:11px}
+.den .da{font-weight:500; white-space:nowrap}
+
+/* ステータス */
+.flow{display:inline-flex; align-items:center; gap:0; white-space:nowrap}
+.flow i{
+  font-style:normal; font-size:10.5px; padding:2px 6px; background:#eef1f4; color:var(--faint);
+  border-right:1px solid #fff;
+}
+.flow i:first-child{border-radius:3px 0 0 3px}
+.flow i:last-child{border-radius:0 3px 3px 0; border-right:0}
+.flow i.done{background:#dbe6ef; color:var(--brand-d)}
+.flow i.cur{background:var(--brand); color:#fff; font-weight:700}
+
+/* ── 見積画面 ─────────────────── */
+.slip-head{display:grid; grid-template-columns:repeat(4,1fr); gap:10px 14px}
+.f{display:flex; flex-direction:column; gap:3px; min-width:0}
+.f label{font-size:11px; color:var(--muted)}
+.f input,.f select{
+  border:1px solid var(--line); border-radius:4px; padding:6px 8px; background:#fff; width:100%;
+  font-size:13px; min-height:32px;
+}
+.f input:focus,.f select:focus{outline:2px solid var(--brand); outline-offset:-1px; border-color:var(--brand)}
+.f .ro{background:#f7f9fb; color:var(--muted)}
+
+#lineTable th{position:sticky; top:0}
+#lineTable td{padding:4px 6px; vertical-align:middle}
+#lineTable input{
+  border:1px solid var(--line); background:#fff; border-radius:3px; padding:4px 5px; width:100%;
+  font-size:12.5px;
+}
+#lineTable input:hover{border-color:var(--brand)}
+#lineTable input:focus{outline:2px solid var(--brand); outline-offset:-1px; background:#fff; border-color:var(--brand)}
+#lineTable input.r{text-align:right}
+.cell-nm{min-width:190px}
+.cell-sp{min-width:120px; color:var(--muted); font-size:12px}
+.del{border:0; background:none; color:var(--faint); font-size:15px; line-height:1; padding:3px 6px; border-radius:3px}
+.del:hover{background:var(--danger-w); color:var(--danger)}
+
+.totals{display:grid; grid-template-columns:1fr auto; gap:16px; align-items:start; padding:12px 14px; border-top:1px solid var(--line)}
+.tot-box{min-width:262px; margin-left:auto}
+.tot-box .tr{display:flex; justify-content:space-between; padding:4px 0; font-size:13px}
+.tot-box .tr.sum{
+  border-top:1.5px solid var(--ink); margin-top:5px; padding-top:7px; font-size:17px; font-weight:700;
+}
+.profit{
+  display:flex; gap:14px; align-items:center; padding:8px 11px; background:var(--ok-w);
+  border-radius:5px; font-size:12.5px; flex-wrap:wrap;
+}
+.profit b{color:var(--ok); font-size:15px}
+
+.keybar{
+  display:flex; gap:6px 14px; flex-wrap:wrap; padding:8px 14px; background:#f7f9fb;
+  border-top:1px solid var(--line); font-size:11.5px; color:var(--muted);
+}
+.keybar kbd{
+  font-family:inherit; background:#fff; border:1px solid var(--line); border-bottom-width:2px;
+  border-radius:3px; padding:1px 5px; font-size:11px; color:var(--ink); font-weight:500;
+}
+
+/* 品名検索 */
+.ov{
+  position:fixed; inset:0; background:rgba(22,33,46,.45); display:none; z-index:100;
+  align-items:flex-start; justify-content:center; padding:min(9vh,80px) 14px 14px;
+}
+.ov.on{display:flex}
+.finder{background:#fff; border-radius:8px; width:min(660px,100%); max-height:78vh; display:flex; flex-direction:column; overflow:hidden}
+.finder .fh{padding:11px 13px; border-bottom:1px solid var(--line); display:flex; gap:10px; align-items:center}
+.finder .fh input{flex:1; border:1px solid var(--line); border-radius:5px; padding:8px 10px; font-size:15px}
+.finder .fl{overflow-y:auto}
+.finder .fi{display:grid; grid-template-columns:74px 1fr 96px; gap:10px; padding:8px 13px; cursor:pointer; align-items:center; border-bottom:1px solid var(--line2)}
+.finder .fi:hover,.finder .fi.sel{background:var(--brand-w)}
+.finder .fi .c{font-size:11.5px; color:var(--muted)}
+.finder .fi .n{font-size:13px; min-width:0}
+.finder .fi .n small{display:block; color:var(--faint); font-size:11px}
+.finder .fi .p{text-align:right; font-size:12.5px}
+.finder .ff{padding:7px 13px; background:#f7f9fb; border-top:1px solid var(--line); font-size:11.5px; color:var(--muted)}
+
+.toast{
+  position:fixed; left:50%; bottom:26px; transform:translate(-50%,14px); background:var(--ink); color:#fff;
+  padding:10px 18px; border-radius:100px; font-size:13px; opacity:0; pointer-events:none; transition:.22s; z-index:200;
+  box-shadow:0 6px 22px rgba(22,33,46,.28); max-width:calc(100vw - 28px); text-align:center;
+}
+.toast.on{opacity:1; transform:translate(-50%,0)}
+
+/* ── 設計の考え方 ─────────────── */
+.doc{max-width:800px}
+.doc h3{font-size:16px; margin:26px 0 8px; padding-bottom:6px; border-bottom:1px solid var(--line)}
+.doc h3:first-child{margin-top:0}
+.doc h4{font-size:13.5px; margin:16px 0 4px; color:var(--brand-d)}
+.doc p{margin:0 0 10px; line-height:1.85}
+.doc ul{margin:0 0 12px; padding-left:1.15em}
+.doc li{margin-bottom:6px; line-height:1.8}
+.doc .lead{font-size:14.5px; line-height:1.9}
+.qbox{background:var(--warn-w); border:1px solid #f0dcb6; border-radius:6px; padding:13px 15px; margin:12px 0}
+.qbox ol{margin:6px 0 0; padding-left:1.25em}
+.qbox li{margin-bottom:8px}
+.nobox{background:#f7f9fb; border:1px solid var(--line); border-radius:6px; padding:13px 15px; margin:12px 0}
+
+footer{
+  max-width:1240px; margin:0 auto; padding:22px 16px 40px; color:var(--faint); font-size:11.5px; line-height:1.8;
+}
+
+@media (max-width:1000px){
+  .dash-grid{grid-template-columns:repeat(2,1fr)}
+  .row2{grid-template-columns:1fr}
+  .slip-head{grid-template-columns:repeat(2,1fr)}
+}
+@media (max-width:560px){
+  main{padding:12px}
+  .dash-grid{grid-template-columns:1fr 1fr; gap:9px}
+  .todo .val{font-size:23px}
+  .slip-head{grid-template-columns:1fr 1fr}
+  .tot-box{min-width:0; width:100%}
+  .totals{grid-template-columns:1fr}
+}
+
+/* ── 印刷 ─────────────────────── */
+#printRoot{display:none}
+@media print{
+  body{background:#fff}
+  .democall,.appbar,main,footer,.toast,.ov{display:none !important}
+  #printRoot{display:block; padding:0}
+  @page{size:A4; margin:14mm}
+}
+.p-doc{width:100%; color:#000; font-size:11pt}
+.p-doc h1{font-size:20pt; text-align:center; letter-spacing:.5em; margin:0 0 14pt; font-weight:700}
+.p-top{display:flex; justify-content:space-between; gap:20pt; margin-bottom:12pt}
+.p-to{flex:1}
+.p-to .nm{font-size:14pt; border-bottom:1px solid #000; padding-bottom:3pt; margin-bottom:8pt}
+.p-to .amt{font-size:13pt; font-weight:700; border-bottom:2px solid #000; padding:4pt 0; display:inline-block; min-width:200pt}
+.p-from{width:200pt; font-size:9.5pt; line-height:1.7}
+.p-from .co{font-size:11pt; font-weight:700}
+.p-meta{font-size:9.5pt; text-align:right; margin-bottom:6pt}
+.p-doc table{width:100%; border-collapse:collapse; margin-top:6pt}
+.p-doc th,.p-doc td{border:1px solid #000; padding:3.5pt 5pt; font-size:9.5pt}
+.p-doc th{background:#eee; text-align:center}
+.p-doc td.r{text-align:right}
+.p-doc td.c{text-align:center}
+.p-sum{margin-top:8pt; margin-left:auto; width:210pt}
+.p-sum div{display:flex; justify-content:space-between; padding:2.5pt 0; font-size:10pt}
+.p-sum div.t{border-top:1px solid #000; font-weight:700; font-size:12pt; padding-top:4pt}
+.p-note{margin-top:10pt; font-size:9pt; line-height:1.7}
+</style>
+</head>
+<body>
+
+<div class="democall">
+  <b>画面デモ</b>
+  <span>大栄化学株式会社様 業務管理システム ご提案｜取引先名・商品・金額はすべて<b>架空のサンプル</b>です。実際に入力・計算・印刷ができます。</span>
+</div>
+
+<header class="appbar">
+  <div class="appbar-top">
+    <div class="logo">
+      <div class="mark">業</div>
+      <div>
+        <div class="t1">大栄化学 業務管理システム</div>
+        <div class="t2">見積・受注・納品・請求・入金・売掛・でんさい</div>
+      </div>
+    </div>
+    <div class="appbar-right">
+      <span class="who">狭山本社／営業部　担当：山田</span>
+      <button class="notetoggle" id="noteBtn" aria-pressed="false">設計メモを表示</button>
+    </div>
+  </div>
+  <nav class="tabs" role="tablist">
+    <button class="tab" role="tab" aria-selected="true" data-v="dash">トップ（本日の業務）</button>
+    <button class="tab" role="tab" aria-selected="false" data-v="quote">御見積書</button>
+    <button class="tab" role="tab" aria-selected="false" data-v="design">レイアウトの考え方</button>
+  </nav>
+</header>
+
+<main>
+
+<!-- ══════════ ダッシュボード ══════════ -->
+<section class="view on" id="v-dash">
+
+  <div class="note" style="margin:0 0 12px">
+    <b>設計メモ｜この画面の役割</b><br>
+    朝いちばんに開いて「今日どれから手を付けるか」だけが分かる画面にしました。数字はすべて押せて、該当の一覧へ直接飛びます。<span class="q">※「設計メモを表示」を押している間、各ブロックの意図が出ます。</span>
+  </div>
+
+  <div class="dash-grid">
+    <button class="todo" data-go="quote">
+      <span class="lbl"><i class="dot" style="background:var(--brand)"></i>見積 提出待ち</span>
+      <span class="val num" id="kpiQuote">3<em>件</em></span>
+      <span class="hint">最も古い依頼から2日経過</span>
+    </button>
+    <button class="todo">
+      <span class="lbl"><i class="dot" style="background:var(--ok)"></i>本日 納品予定</span>
+      <span class="val num">2<em>件</em></span>
+      <span class="hint">うち直送1件（メーカー手配済）</span>
+    </button>
+    <button class="todo">
+      <span class="lbl"><i class="dot" style="background:var(--warn)"></i>入金 未消込</span>
+      <span class="val num">4<em>件</em></span>
+      <span class="hint">うち1件は請求額と不一致</span>
+    </button>
+    <button class="todo">
+      <span class="lbl"><i class="dot" style="background:var(--danger)"></i>でんさい 期日7日以内</span>
+      <span class="val num">1<em>件</em></span>
+      <span class="hint">8/20 期日 ¥1,240,000</span>
+    </button>
+  </div>
+
+  <div class="note">
+    <b>設計メモ｜なぜこの4つか</b><br>
+    「放っておくと金が入ってこない／信用を落とす」ものだけを並べました。売上や粗利の累計は毎朝の判断に使わないため、ここには出していません。
+    <span class="q">入金の「請求額と不一致」は、振込手数料が引かれていたり複数の請求がまとめて入金されたケースを想定しています。この差額処理が毎月いちばん手間のかかる作業だと考えているのですが、御社でも同様でしょうか。</span>
+  </div>
+
+  <div class="row2">
+
+    <div class="panel">
+      <div class="ph">
+        <h2>進行中の案件</h2>
+        <span class="sub">見積から入金までを1本の流れで表示</span>
+        <span class="spacer"></span>
+        <button class="btn btn-s">すべて表示</button>
+      </div>
+      <div class="tablewrap">
+        <table>
+          <thead>
+            <tr>
+              <th>案件番号</th><th>得意先</th><th>件名</th><th class="r">金額(税込)</th><th>進捗</th>
+            </tr>
+          </thead>
+          <tbody id="dealBody"></tbody>
+        </table>
+      </div>
+      <div class="pb note-only" style="padding-top:10px;border-top:1px solid var(--line2)">
+        <div class="note" style="margin:0">
+          <b>設計メモ｜1本の帯で全工程を出した理由</b><br>
+          見積・受注・納品・請求・入金を別々の一覧で管理すると、「どこで止まっているか」を人が突き合わせることになります。1件＝1行で全工程を持たせ、色が進んでいない所が滞留だと一目で分かる形にしました。売掛・でんさいもこの行の続きとして繋がります。
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div class="panel">
+        <div class="ph">
+          <h2>売掛残高</h2>
+          <span class="sub">経過日数別</span>
+          <span class="spacer"></span>
+          <span class="num" style="font-weight:700">¥5,576,000</span>
+        </div>
+        <div class="pb">
+          <div class="aging">
+            <div class="ag"><span class="agl">30日以内</span><span class="bar"><i style="width:68%"></i></span><span class="agv num">¥3,820,000</span></div>
+            <div class="ag"><span class="agl">31〜60日</span><span class="bar"><i style="width:21%"></i></span><span class="agv num">¥1,150,000</span></div>
+            <div class="ag w"><span class="agl">61〜90日</span><span class="bar"><i style="width:8%"></i></span><span class="agv num">¥420,000</span></div>
+            <div class="ag d"><span class="agl">90日超</span><span class="bar"><i style="width:4%"></i></span><span class="agv num">¥186,000</span></div>
+          </div>
+          <div class="note">
+            <b>設計メモ｜唯一グラフにした数字</b><br>
+            グラフはこの1つだけに絞りました。売上推移は月次で振り返るもので、毎朝の行動を変えません。一方この図は「90日超が出た＝今日電話する先がある」という行動に直結するため、数字ではなく長さで見せています。
+          </div>
+        </div>
+      </div>
+
+      <div class="panel" style="margin-top:12px">
+        <div class="ph">
+          <h2>でんさい 期日管理</h2>
+          <span class="sub">受領済・入金待ち</span>
+        </div>
+        <div class="pb">
+          <div class="den">
+            <div class="d near">
+              <span class="dd"><b>8/20</b><span>あと16日</span></span>
+              <span class="dn">彩北化成工業株式会社<small>7月度 合計請求分</small></span>
+              <span class="da num">¥1,240,000</span>
+            </div>
+            <div class="d">
+              <span class="dd"><b>9/30</b><span>あと57日</span></span>
+              <span class="dn">武州環境分析センター株式会社<small>6月度 合計請求分</small></span>
+              <span class="da num">¥486,000</span>
+            </div>
+            <div class="d">
+              <span class="dd"><b>10/31</b><span>あと88日</span></span>
+              <span class="dn">彩北化成工業株式会社<small>8月度 合計請求分</small></span>
+              <span class="da num">¥905,000</span>
+            </div>
+          </div>
+          <div class="note">
+            <b>設計メモ｜売掛は2状態では足りない</b><br>
+            でんさいでお支払いいただく得意先は「請求済＝未入金」のまま何十日も残ります。<b>請求済 → でんさい受領 → 期日待ち → 入金済</b>の4段階で持たせ、受領した時点で売掛の性質が変わることを画面上でも分けています。
+            <span class="q">でんさいネットからのデータ取り込みまでご希望でしょうか。それとも受領した記録と期日の管理までで足りますか。金融機関ごとに形式が異なるため、まず記録・期日管理から作るのが安全だと考えています。</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══════════ 見積書 ══════════ -->
+<section class="view" id="v-quote">
+
+  <div class="note" style="margin:0 0 12px">
+    <b>設計メモ｜この画面で試していただきたいこと</b><br>
+    実際に入力できます。<b>得意先を変えると単価が変わり</b>、数量を打つと合計と粗利が即座に再計算されます。マウスを使わず <kbd>Enter</kbd> だけで明細を打ち切れること、<kbd>F2</kbd> で品名を呼び出せること、<kbd>Alt</kbd>+<kbd>P</kbd> でそのまま印刷できることをご確認ください。
+  </div>
+
+  <div class="panel">
+    <div class="ph">
+      <h2>御見積書</h2>
+      <span class="sub" id="slipNo">見積番号 Q-2026-0812</span>
+      <span class="spacer"></span>
+      <button class="btn" id="btnPrint">印刷プレビュー</button>
+      <button class="btn btn-p" id="btnOrder">受注に変換</button>
+    </div>
+
+    <div class="pb" style="border-bottom:1px solid var(--line2)">
+      <div class="slip-head">
+        <div class="f" style="grid-column:span 2">
+          <label for="fCust">得意先</label>
+          <select id="fCust"></select>
+        </div>
+        <div class="f"><label for="fDate">見積日</label><input id="fDate" value="2026/08/05"></div>
+        <div class="f"><label for="fLimit">有効期限</label><input id="fLimit" value="2026/09/04"></div>
+        <div class="f" style="grid-column:span 2"><label for="fSubj">件名</label><input id="fSubj" value="第2分析室 消耗品および機器 御見積"></div>
+        <div class="f"><label for="fDeli">納期</label><input id="fDeli" value="ご注文後 10日以内"></div>
+        <div class="f"><label>支払条件</label><input class="ro" id="fPay" readonly></div>
+      </div>
+      <div class="note">
+        <b>設計メモ｜支払条件を手入力にしなかった理由</b><br>
+        締日・支払サイト・決済方法は<b>得意先マスタ側で持ち</b>、伝票では変更できないようにしています。伝票ごとに手で書けるようにすると、月末の締め処理で条件がばらつき、請求の突き合わせができなくなるためです。得意先を切り替えると、掛率とあわせてここも自動で入れ替わります。
+      </div>
+    </div>
+
+    <div class="tablewrap">
+      <table id="lineTable">
+        <thead>
+          <tr>
+            <th style="width:34px" class="r">No</th>
+            <th>品名</th>
+            <th>規格・荷姿</th>
+            <th style="width:96px">区分</th>
+            <th class="r" style="width:66px">数量</th>
+            <th style="width:44px">単位</th>
+            <th class="r" style="width:82px">定価</th>
+            <th class="r" style="width:52px">掛率</th>
+            <th class="r" style="width:86px">単価</th>
+            <th class="r" style="width:96px">金額</th>
+            <th style="width:34px"></th>
+          </tr>
+        </thead>
+        <tbody id="lineBody"></tbody>
+      </table>
+    </div>
+
+    <div class="pb" style="padding:8px 14px">
+      <button class="btn btn-s" id="btnAdd">＋ 明細行を追加（Ctrl+Enter）</button>
+      <button class="btn btn-s" id="btnFind">品名を検索（F2）</button>
+    </div>
+
+    <div class="totals">
+      <div style="min-width:0">
+        <div class="profit">
+          <span>この見積の粗利</span>
+          <b class="num" id="pAmt">¥0</b>
+          <span>粗利率 <b class="num" id="pRate">0.0%</b></span>
+          <span style="color:var(--muted);font-size:11.5px">仕入原価 <span class="num" id="pCost">¥0</span></span>
+        </div>
+        <div class="note">
+          <b>設計メモ｜見積の画面に粗利を出した理由</b><br>
+          商社の値決めは「いくらで売るか」ではなく「いくらで仕入れて、いくら残すか」で決まります。掛率を動かした瞬間に粗利率が動くのが見えないと、値引き交渉の場で担当者が判断できません。<b>この欄は印刷する見積書には出しません</b>（社内でのみ見える扱い）。
+          <span class="q">粗利は担当者全員に見せてよいものでしょうか。役職で表示を分ける必要があれば、その形にします。</span>
+        </div>
+      </div>
+      <div class="tot-box">
+        <div class="tr"><span>小計</span><span class="num" id="tSub">¥0</span></div>
+        <div class="tr"><span>消費税（10%）</span><span class="num" id="tTax">¥0</span></div>
+        <div class="tr sum"><span>合計</span><span class="num" id="tAll">¥0</span></div>
+      </div>
+    </div>
+
+    <div class="keybar">
+      <span><kbd>Enter</kbd> 次の項目へ</span>
+      <span><kbd>Ctrl</kbd>+<kbd>Enter</kbd> 行を追加</span>
+      <span><kbd>F2</kbd> 品名検索</span>
+      <span><kbd>Alt</kbd>+<kbd>P</kbd> 印刷</span>
+      <span><kbd>Esc</kbd> 閉じる</span>
+    </div>
+  </div>
+
+  <div class="note">
+    <b>設計メモ｜キーボードだけで終わる入力にした理由</b><br>
+    見積は1日に何件も打つ画面です。入力のたびにマウスへ手を移すと、それだけで時間が倍近くかかります。数量はテンキー、確定は <kbd>Enter</kbd>、行の追加も <kbd>Ctrl</kbd>+<kbd>Enter</kbd> で、手をホームポジションから離さずに1件を打ち切れるようにしました。既存の販売管理ソフトと同じ操作感なので、移行時に指が迷いません。Windowsのブラウザでそのまま動き、インストールは不要です。
+  </div>
+</section>
+
+<!-- ══════════ 設計の考え方 ══════════ -->
+<section class="view" id="v-design">
+  <div class="panel"><div class="pb doc">
+
+    <p class="lead">
+      ご依頼いただいたトップページと御見積書を、2枚の絵ではなく<b>つながって動く1つのシステム</b>としてお作りしました。見積を「受注に変換」するとトップの件数と売掛が実際に動きます。以下、レイアウトの考え方と、あえて作らなかったものをご説明します。
+    </p>
+
+    <h3>1. 何を見て設計したか</h3>
+    <p>
+      御社のウェブサイトを拝見し、試薬・化学工業薬品・理化学機器の販売に加えて、産業廃棄物処理や委託取次まで扱われていることを前提に画面を組みました。つまり<b>「物を仕入れて納める仕事」と「役務を提供する仕事」が同じ得意先に対して同時に走る</b>という理解です。品名マスタに試薬・機器と並べて「設置調整」「収集運搬」「廃液処理」を入れているのはそのためで、1枚の見積書に物販と役務が混在しても破綻しない形にしています。
+    </p>
+
+    <h4>試薬・薬品を扱う会社ならではの点</h4>
+    <ul>
+      <li>明細に<b>「劇物」「危険物 第4類」</b>などの区分を表示しています。出荷の可否や輸送手配に直結するため、受注してからではなく<b>見積の時点で見えている</b>必要があると考えました。</li>
+      <li>産業廃棄物の役務には<b>「マニフェスト」</b>の印を付けています。伝票と交付・回収の管理が別々になると、後から突き合わせる作業が発生するためです。</li>
+      <li>数量の単位を「本・缶・箱・台・式・t」から選べるようにしています。荷姿がそのまま単位になる商材のため、固定の単位では実務に合わないと判断しました。</li>
+    </ul>
+    <div class="qbox" style="background:var(--brand-w);border-color:#c9dcec">
+      この区分の考え方は、御社の実際の運用と合っているでしょうか。毒劇物の譲受書の管理まで含める必要があれば、明細の区分と紐づけて残す形にできます。
+    </div>
+
+    <h3>2. トップページ ―「今日やること」しか置かない</h3>
+    <p>
+      毎朝この画面を開いて、放っておくと入金が遅れる・信用を落とすものだけが4つ並ぶようにしました。数字はすべて押せて、その場で該当の一覧に飛べます。<b>売上の累計や達成率は置いていません</b>。見ても今日の行動が変わらないためです。
+    </p>
+    <p>
+      グラフは<b>売掛の経過日数の1つだけ</b>にしました。「90日を超えた売掛が出た＝今日電話をかける先がある」という行動に直結する図だからです。推移のグラフは月次の振り返りで使うもので、日々の業務画面に置くと本当に見るべきものが埋もれます。
+    </p>
+
+    <h3>3. 見積・請求・売掛の作り ― ここが一番の分かれ目です</h3>
+    <h4>請求書は見積書と1対1にしていません</h4>
+    <p>
+      見積1枚につき請求1枚という作りにすると、月末締めでまとめて請求する運用に合いません。納品ごとに売上を立て、<b>締日で1か月分をまとめて1通の合計請求書にする</b>構造にしています。得意先ごとに締日（月末／20日）と支払サイトが違う前提です。ここを後から直すのは作り直しに近くなるため、最初からこの形にしてあります。
+    </p>
+    <h4>売掛は「未入金／入金済」の2状態にしていません</h4>
+    <p>
+      でんさいでお支払いいただく場合、請求した後に電子債権を受領し、そこから期日まで待ってようやく入金になります。<b>請求済 → でんさい受領 → 期日待ち → 入金済</b>の4段階で持たせているのはこのためで、「まだ入金されていない」ものの中身が、督促すべきものと期日を待つだけのもので混ざらないようにしています。
+    </p>
+    <h4>入金の消込は、金額が合わない前提で作ります</h4>
+    <p>
+      振込手数料が引かれている、複数の請求がまとめて振り込まれている、一部だけ入金されている ― 実務ではこれが普通に起こります。差額をその場で手数料・値引き・繰越に振り分けられるようにしないと、結局Excelで突き合わせることになります。トップの「入金 未消込」に不一致の件数を出しているのは、この作業を後回しにしないためです。
+    </p>
+
+    <h3>4. Windowsで速く使えること</h3>
+    <p>
+      ご要望にあった「Windows環境で快適に」を、<b>キーボードだけで入力が完結すること</b>と解釈しました。見積は1日に何件も打つ画面です。項目移動は <kbd>Enter</kbd>、行追加は <kbd>Ctrl</kbd>+<kbd>Enter</kbd>、品名呼び出しは <kbd>F2</kbd>。数量はテンキーのまま打てます。既存の販売管理ソフトと同じ操作感にしてあるので、移行の際に覚え直しが要りません。
+    </p>
+    <p>
+      Windowsのブラウザでそのまま動き、<b>インストールと更新作業は不要</b>です。デスクトップにアイコンを置いて、二重クリックで専用ウィンドウとして開く形にもできます。社内のパソコンが増えても台数分の作業は発生しません。
+    </p>
+    <h4>印刷を後回しにしていません</h4>
+    <p>
+      業務システムの出口は結局のところ紙とPDFです。画面がきれいでも、印刷したときにA4からはみ出す・罫線が消えるといったことが起きると使われなくなります。この見積書は<b>いま画面から印刷すればA4の体裁で出ます</b>（見積画面で <kbd>Alt</kbd>+<kbd>P</kbd>、またはブラウザの印刷）。社内用の粗利欄は印刷には出ません。お試しください。
+    </p>
+
+    <h3>5. あえて作らなかったもの</h3>
+    <div class="nobox">
+      <p style="margin-bottom:8px">最初の段階では次を入れていません。限られた費用を、毎日使う画面を確実に動かすことに使うべきだと考えているためです。</p>
+      <ul style="margin-bottom:0">
+        <li><b>細かい権限管理</b> ― まずは全員が使える形で始め、運用が固まってから必要な範囲だけ絞るほうが手戻りがありません。</li>
+        <li><b>スマートフォン専用の画面</b> ― 事務所のパソコンで使う画面を優先しました（この画面はスマートフォンでも開けますが、入力はパソコン向けに作っています）。</li>
+        <li><b>社内チャットや掲示板</b> ― 既にお使いの手段があるはずで、システムに抱え込む必要はないと考えました。</li>
+        <li><b>売上分析のグラフ一式</b> ― 数字を貯めてからでないと、見るべき指標が決まりません。</li>
+      </ul>
+    </div>
+
+    <h3>6. 進め方とご確認したいこと</h3>
+    <p>
+      8つの機能を一度に作ろうとすると、要件のすり合わせだけで9月20日を使い切ってしまいます。<b>まず見積・受注・請求の基幹部分を動く形にし</b>、実際に使っていただきながら入金・売掛・でんさい・作業管理を順に足していく進め方をご提案します。ご提示している 350,000円（税込）は前者の範囲で、追加分は月々の継続開発としてお引き受けする形です。
+    </p>
+    <p>
+      開発中は<b>この画面と同じURLが毎日更新され</b>、いつでも最新の状態を触っていただけます。文章の報告書だけでなく、動いている現物で進捗を確認いただける形です。あわせて<b>ソースコード一式をお渡しします</b>。特定の業者でないと直せない状態にはしません。
+    </p>
+
+    <div class="qbox">
+      <b>ご回答いただけると、次のご提案がより正確になります。</b>
+      <ol>
+        <li><b>「作業管理」</b>は、産業廃棄物処理や機器設置といった<b>現場作業の進捗管理</b>でしょうか。それとも社内の担当者ごとの<b>やることの管理</b>でしょうか。前者であれば、案件と原価に紐づける形になります。</li>
+        <li>現在お使いの仕組み（Excel・Access・市販の販売管理ソフトなど）と、<b>そこからのデータ移行の要否</b>をお教えください。得意先マスタと商品マスタだけでも引き継げると、初日から実務で使えます。</li>
+        <li><b>同時にお使いになる人数</b>と、事務所の外（出張先・現場）から使う必要があるかどうか。</li>
+        <li><b>でんさい</b>は、でんさいネットからのデータ取り込みまでご希望でしょうか。受領記録と期日管理までで足りますでしょうか。</li>
+        <li>募集文にありました<b>仕様書</b>をお送りいただけましたら、この画面をそれに合わせて作り直したうえで、改善のご提案を添えてお戻しします。</li>
+      </ol>
+    </div>
+
+  </div></div>
+</section>
+
+</main>
+
+<footer>
+  ※本ページは大栄化学株式会社様へのご提案用に作成した<b>画面デモ（サンプル）</b>です。表示している取引先名・商品名・単価・金額・残高はすべて<b>架空の仮データ</b>で、実在の企業・取引を示すものではありません。画面の配色・項目・帳票の体裁は、ご要望に合わせて変更いたします。<br>
+  作成：自動化のミナト（クラウドワークス）／2026年8月
+</footer>
+
+<!-- 品名検索 -->
+<div class="ov" id="finderOv">
+  <div class="finder" role="dialog" aria-label="品名検索">
+    <div class="fh">
+      <input id="finderQ" placeholder="品名・コードで絞り込み（例：トル、K-33、廃棄）" autocomplete="off">
+      <button class="btn" id="finderClose">閉じる</button>
+    </div>
+    <div class="fl" id="finderList"></div>
+    <div class="ff">↑↓ で選択　Enter で明細に追加　Esc で閉じる</div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<!-- 印刷用 -->
+<div id="printRoot"><div class="p-doc" id="printDoc"></div></div>
+
+<script>
+(function(){
+"use strict";
+
+/* ── マスタ（すべて架空のサンプルデータ） ───────────── */
+var CUST = [
+  {id:"C-101", name:"彩北化成工業株式会社", rate:0.92, close:"月末締", pay:"翌月末払い", method:"でんさい"},
+  {id:"C-102", name:"関東理工科大学 応用化学科", rate:0.95, close:"月末締", pay:"翌々月10日払い", method:"銀行振込"},
+  {id:"C-103", name:"武州環境分析センター株式会社", rate:0.88, close:"20日締", pay:"翌月20日払い", method:"でんさい"}
+];
+
+var PROD = [
+  {code:"R-1041", name:"アセトン 特級",           spec:"500mL ガラス瓶", unit:"本", list:1280,   cost:780,    tags:["劇物"]},
+  {code:"R-1102", name:"トルエン 一級",           spec:"18L 金属缶",     unit:"缶", list:10600,  cost:6900,   tags:["劇物","危険物第4類"]},
+  {code:"R-1250", name:"メタノール 特級",         spec:"500mL ガラス瓶", unit:"本", list:1450,   cost:900,    tags:["劇物","危険物第4類"]},
+  {code:"R-2003", name:"精製水",                  spec:"20L コック付",   unit:"箱", list:2600,   cost:1500,   tags:[]},
+  {code:"R-2210", name:"水酸化ナトリウム 試薬特級", spec:"500g ポリ瓶",   unit:"本", list:1980,   cost:1200,   tags:["劇物"]},
+  {code:"K-3301", name:"卓上型pH計 PH-2200",      spec:"電極・スタンド付", unit:"台", list:138000, cost:96000,  tags:[]},
+  {code:"K-3410", name:"電子天秤 0.1mg",          spec:"風防付",         unit:"台", list:268000, cost:191000, tags:[]},
+  {code:"K-3520", name:"ドラフトチャンバー",       spec:"1200幅 排気ファン別", unit:"台", list:480000, cost:352000, tags:[]},
+  {code:"S-5001", name:"ドラフトチャンバー 設置調整", spec:"現地作業 1日",  unit:"式", list:85000,  cost:42000,  tags:["役務"]},
+  {code:"W-6001", name:"産業廃棄物 収集運搬（汚泥）", spec:"1t あたり",    unit:"t",  list:38000,  cost:24000,  tags:["役務","マニフェスト"]},
+  {code:"W-6002", name:"廃液処理（有機溶剤系）",    spec:"20L 缶",        unit:"缶", list:12000,  cost:7200,   tags:["役務","マニフェスト"]}
+];
+
+var DEALS = [
+  {no:"2026-0784", cust:"彩北化成工業株式会社",       subj:"分析室 定期消耗品（7月分）",   amt:412500,  step:4},
+  {no:"2026-0791", cust:"武州環境分析センター株式会社", subj:"廃液処理 8月定期",             amt:158400,  step:3},
+  {no:"2026-0803", cust:"関東理工科大学 応用化学科",   subj:"電子天秤 更新",                amt:294800,  step:2},
+  {no:"2026-0808", cust:"彩北化成工業株式会社",       subj:"ドラフトチャンバー 入替一式",   amt:621500,  step:1},
+  {no:"2026-0811", cust:"武州環境分析センター株式会社", subj:"試薬 補充（9月分 予定）",      amt:96800,   step:0}
+];
+var STEPS = ["見積","受注","納品","請求","入金"];
+
+/* ── 見積の状態 ───────────────────────────── */
+var quote = {
+  custId:"C-101",
+  lines:[
+    {code:"R-1041", qty:24},
+    {code:"R-1102", qty:2},
+    {code:"R-2003", qty:5},
+    {code:"K-3301", qty:1},
+    {code:"S-5001", qty:1}
+  ]
+};
+
+var $  = function(s,r){return (r||document).querySelector(s)};
+var $$ = function(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s))};
+function yen(n){return "¥" + Math.round(n).toLocaleString("ja-JP")}
+function prod(code){for(var i=0;i<PROD.length;i++){if(PROD[i].code===code)return PROD[i]} return null}
+function cust(){for(var i=0;i<CUST.length;i++){if(CUST[i].id===quote.custId)return CUST[i]} return CUST[0]}
+function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
+
+var toastT;
+function toast(msg){
+  var t=$("#toast"); t.textContent=msg; t.classList.add("on");
+  clearTimeout(toastT); toastT=setTimeout(function(){t.classList.remove("on")},2400);
+}
+function tagHtml(tags){
+  return tags.map(function(t){
+    var c = t==="劇物" ? "tag-dan" : (t==="危険物第4類" ? "tag-warn" : (t==="マニフェスト" ? "tag-b" : "tag-g"));
+    return '<span class="tag '+c+'">'+esc(t)+'</span>';
+  }).join(" ");
+}
+
+/* ── タブ ─────────────────────────────────── */
+var VIEWS = ["dash","quote","design"];
+function show(v, keepHash){
+  if(VIEWS.indexOf(v)<0) v = "dash";
+  $$(".tab").forEach(function(b){b.setAttribute("aria-selected", String(b.dataset.v===v))});
+  $$(".view").forEach(function(s){s.classList.toggle("on", s.id==="v-"+v)});
+  if(!keepHash && location.hash.slice(1)!==v){
+    try{ history.replaceState(null,"","#"+v) }catch(err){}
+  }
+  window.scrollTo({top:0,behavior:"instant"});
+}
+$$(".tab").forEach(function(b){b.addEventListener("click",function(){show(b.dataset.v)})});
+$$("[data-go]").forEach(function(b){b.addEventListener("click",function(){show(b.dataset.go)})});
+
+/* ── 設計メモ ─────────────────────────────── */
+$("#noteBtn").addEventListener("click", function(){
+  var on = document.body.classList.toggle("notes-on");
+  this.setAttribute("aria-pressed", String(on));
+  this.textContent = on ? "設計メモを隠す" : "設計メモを表示";
+  if(on) toast("各ブロックに、そのレイアウトにした理由を表示しました");
+});
+
+/* ── ダッシュボード描画 ───────────────────── */
+function renderDeals(){
+  $("#dealBody").innerHTML = DEALS.map(function(d){
+    var f = STEPS.map(function(s,i){
+      var c = i<d.step ? "done" : (i===d.step ? "cur" : "");
+      return '<i class="'+c+'">'+s+'</i>';
+    }).join("");
+    return '<tr><td class="num">'+d.no+'</td><td>'+esc(d.cust)+'</td><td>'+esc(d.subj)+
+           '</td><td class="r num">'+yen(d.amt)+'</td><td><span class="flow">'+f+'</span></td></tr>';
+  }).join("");
+}
+
+/* ── 見積 描画 ───────────────────────────── */
+function renderCustOptions(){
+  $("#fCust").innerHTML = CUST.map(function(c){
+    return '<option value="'+c.id+'">'+esc(c.name)+'（掛率 '+Math.round(c.rate*100)+'%）</option>';
+  }).join("");
+  $("#fCust").value = quote.custId;
+}
+
+function unitPrice(p,c){
+  if(p.tags.indexOf("役務")>=0) return p.list;   // 役務は掛率の対象外
+  return Math.round(p.list * c.rate / 10) * 10;
+}
+
+function renderLines(){
+  var c = cust();
+  $("#lineBody").innerHTML = quote.lines.map(function(l,i){
+    var p = prod(l.code); if(!p) return "";
+    var isSvc = p.tags.indexOf("役務")>=0;
+    var up = unitPrice(p,c);
+    return '<tr data-i="'+i+'">'+
+      '<td class="r num" style="color:var(--faint)">'+(i+1)+'</td>'+
+      '<td class="cell-nm">'+esc(p.name)+'<div style="font-size:11px;color:var(--faint)" class="num">'+p.code+'</div></td>'+
+      '<td class="cell-sp">'+esc(p.spec)+'</td>'+
+      '<td>'+tagHtml(p.tags)+'</td>'+
+      '<td class="r"><input class="r num qty" data-i="'+i+'" value="'+l.qty+'" inputmode="numeric"></td>'+
+      '<td style="color:var(--muted)">'+esc(p.unit)+'</td>'+
+      '<td class="r num" style="color:var(--muted)">'+p.list.toLocaleString("ja-JP")+'</td>'+
+      '<td class="r num" style="color:var(--muted)">'+(isSvc?"—":Math.round(c.rate*100)+"%")+'</td>'+
+      '<td class="r num">'+up.toLocaleString("ja-JP")+'</td>'+
+      '<td class="r num" style="font-weight:500">'+(up*l.qty).toLocaleString("ja-JP")+'</td>'+
+      '<td><button class="del" data-del="'+i+'" title="この行を削除" aria-label="この行を削除">×</button></td>'+
+    '</tr>';
+  }).join("");
+}
+
+function renderTotals(){
+  var c = cust(), sub=0, cost=0;
+  quote.lines.forEach(function(l){
+    var p = prod(l.code); if(!p) return;
+    sub  += unitPrice(p,c) * l.qty;
+    cost += p.cost * l.qty;
+  });
+  var tax = Math.floor(sub*0.1);
+  $("#tSub").textContent = yen(sub);
+  $("#tTax").textContent = yen(tax);
+  $("#tAll").textContent = yen(sub+tax);
+  var gp = sub - cost;
+  $("#pAmt").textContent  = yen(gp);
+  $("#pRate").textContent = (sub>0 ? (gp/sub*100).toFixed(1) : "0.0") + "%";
+  $("#pCost").textContent = yen(cost);
+  return {sub:sub, tax:tax, total:sub+tax};
+}
+
+function renderPay(){
+  var c = cust();
+  $("#fPay").value = c.close + "／" + c.pay + "（" + c.method + "）";
+}
+
+function renderQuote(){ renderCustOptions(); renderPay(); renderLines(); renderTotals(); }
+
+/* ── 操作 ─────────────────────────────────── */
+$("#fCust").addEventListener("change", function(){
+  quote.custId = this.value;
+  renderPay(); renderLines(); renderTotals();
+  toast("得意先を変更しました。掛率と支払条件を単価に反映しています");
+});
+
+$("#lineBody").addEventListener("input", function(e){
+  var t = e.target;
+  if(!t.classList.contains("qty")) return;
+  var i = +t.dataset.i;
+  var v = parseInt(String(t.value).replace(/[^0-9]/g,""),10);
+  quote.lines[i].qty = isNaN(v) ? 0 : v;
+  var row = t.closest("tr"), c = cust(), p = prod(quote.lines[i].code);
+  if(row && p){ row.cells[9].textContent = (unitPrice(p,c)*quote.lines[i].qty).toLocaleString("ja-JP") }
+  renderTotals();
+});
+
+$("#lineBody").addEventListener("click", function(e){
+  var b = e.target.closest("[data-del]");
+  if(!b) return;
+  quote.lines.splice(+b.dataset.del,1);
+  renderLines(); renderTotals(); toast("明細行を削除しました");
+});
+
+/* Enter で次の数量へ／最終行なら品名検索 */
+$("#lineBody").addEventListener("keydown", function(e){
+  if(e.key!=="Enter") return;
+  e.preventDefault();
+  if(e.ctrlKey || e.metaKey){ openFinder(); return; }
+  var inputs = $$(".qty", $("#lineBody"));
+  var idx = inputs.indexOf(e.target);
+  if(idx>=0 && idx<inputs.length-1){ inputs[idx+1].focus(); inputs[idx+1].select(); }
+  else { openFinder(); }
+});
+
+$("#btnAdd").addEventListener("click", openFinder);
+$("#btnFind").addEventListener("click", openFinder);
+
+/* ── 品名検索 ─────────────────────────────── */
+var fSel = 0, fHits = [];
+function openFinder(){
+  $("#finderOv").classList.add("on");
+  $("#finderQ").value = ""; fSel = 0;
+  drawFinder();
+  setTimeout(function(){$("#finderQ").focus()},30);
+}
+function closeFinder(){ $("#finderOv").classList.remove("on") }
+function drawFinder(){
+  var q = $("#finderQ").value.trim().toLowerCase();
+  fHits = PROD.filter(function(p){
+    if(!q) return true;
+    return (p.name+p.spec+p.code+p.tags.join("")).toLowerCase().indexOf(q)>=0;
+  });
+  if(fSel>=fHits.length) fSel = Math.max(0,fHits.length-1);
+  var c = cust();
+  $("#finderList").innerHTML = fHits.length ? fHits.map(function(p,i){
+    return '<div class="fi'+(i===fSel?" sel":"")+'" data-i="'+i+'">'+
+      '<span class="c num">'+p.code+'</span>'+
+      '<span class="n">'+esc(p.name)+' '+tagHtml(p.tags)+'<small>'+esc(p.spec)+'／'+esc(p.unit)+'</small></span>'+
+      '<span class="p num">'+unitPrice(p,c).toLocaleString("ja-JP")+'</span></div>';
+  }).join("") : '<div style="padding:20px;text-align:center;color:var(--faint)">該当する品名がありません</div>';
+}
+function pick(i){
+  var p = fHits[i]; if(!p) return;
+  quote.lines.push({code:p.code, qty:1});
+  renderLines(); renderTotals(); closeFinder();
+  var inputs = $$(".qty", $("#lineBody"));
+  var last = inputs[inputs.length-1];
+  if(last){ last.focus(); last.select() }
+  toast(p.name + " を追加しました。数量をお試しください");
+}
+$("#finderQ").addEventListener("input", function(){ fSel=0; drawFinder() });
+$("#finderClose").addEventListener("click", closeFinder);
+$("#finderOv").addEventListener("click", function(e){ if(e.target===this) closeFinder() });
+$("#finderList").addEventListener("click", function(e){
+  var d = e.target.closest("[data-i]"); if(d) pick(+d.dataset.i);
+});
+$("#finderQ").addEventListener("keydown", function(e){
+  if(e.key==="ArrowDown"){ e.preventDefault(); fSel=Math.min(fSel+1,fHits.length-1); drawFinder() }
+  else if(e.key==="ArrowUp"){ e.preventDefault(); fSel=Math.max(fSel-1,0); drawFinder() }
+  else if(e.key==="Enter"){ e.preventDefault(); pick(fSel) }
+  else if(e.key==="Escape"){ e.preventDefault(); closeFinder() }
+});
+
+/* ── 全体キーボード ───────────────────────── */
+document.addEventListener("keydown", function(e){
+  var quoteOn = $("#v-quote").classList.contains("on");
+  if(e.key==="F2" && quoteOn){ e.preventDefault(); openFinder(); return }
+  if(e.altKey && (e.key==="p"||e.key==="P") && quoteOn){ e.preventDefault(); doPrint(); return }
+  if(e.key==="Escape"){ closeFinder() }
+});
+
+/* ── 印刷 ─────────────────────────────────── */
+function buildPrint(){
+  var c = cust(), t = renderTotals();
+  var rows = quote.lines.map(function(l,i){
+    var p = prod(l.code); if(!p) return "";
+    var up = unitPrice(p,c);
+    var nm = p.name + (p.tags.filter(function(x){return x!=="役務"}).length ? "（"+p.tags.filter(function(x){return x!=="役務"}).join("・")+"）" : "");
+    return '<tr><td class="c">'+(i+1)+'</td><td>'+esc(nm)+'</td><td>'+esc(p.spec)+
+      '</td><td class="r">'+l.qty.toLocaleString("ja-JP")+'</td><td class="c">'+esc(p.unit)+
+      '</td><td class="r">'+up.toLocaleString("ja-JP")+'</td><td class="r">'+(up*l.qty).toLocaleString("ja-JP")+'</td></tr>';
+  }).join("");
+  $("#printDoc").innerHTML =
+    '<h1>御見積書</h1>'+
+    '<div class="p-meta num">見積番号 Q-2026-0812　／　発行日 '+esc($("#fDate").value)+'</div>'+
+    '<div class="p-top">'+
+      '<div class="p-to">'+
+        '<div class="nm">'+esc(c.name)+'　御中</div>'+
+        '<div style="font-size:9.5pt;margin-bottom:6pt">件名：'+esc($("#fSubj").value)+'</div>'+
+        '<div style="font-size:9.5pt;margin-bottom:8pt">下記のとおりお見積り申し上げます。</div>'+
+        '<div class="amt num">御見積金額　'+yen(t.total)+'（税込）</div>'+
+      '</div>'+
+      '<div class="p-from">'+
+        '<div class="co">大栄化学株式会社</div>'+
+        '〒350-1304　埼玉県狭山市狭山台1-5-29<br>TEL 04-0000-0000／FAX 04-0000-0000<br>営業部　担当：山田<br>'+
+        '<div style="margin-top:6pt">納期：'+esc($("#fDeli").value)+'<br>有効期限：'+esc($("#fLimit").value)+'<br>お支払：'+esc(c.close+"／"+c.pay)+'</div>'+
+      '</div>'+
+    '</div>'+
+    '<table><thead><tr><th style="width:26pt">No</th><th>品名</th><th style="width:96pt">規格・荷姿</th>'+
+    '<th style="width:40pt">数量</th><th style="width:30pt">単位</th><th style="width:56pt">単価</th><th style="width:66pt">金額</th></tr></thead>'+
+    '<tbody>'+rows+'</tbody></table>'+
+    '<div class="p-sum num">'+
+      '<div><span>小計</span><span>'+yen(t.sub)+'</span></div>'+
+      '<div><span>消費税（10%）</span><span>'+yen(t.tax)+'</span></div>'+
+      '<div class="t"><span>合計</span><span>'+yen(t.total)+'</span></div>'+
+    '</div>'+
+    '<div class="p-note">※毒物及び劇物に該当する品目が含まれます。ご購入に際して譲受書のご提出をお願いする場合がございます。<br>'+
+    '※産業廃棄物に係る役務については、別途マニフェストを交付いたします。<br>'+
+    '※本書はご提案用のサンプルです。宛先・商品・金額はすべて架空の仮データです。</div>';
+}
+function doPrint(){
+  buildPrint();
+  toast("印刷プレビューを開きます（A4・1枚に収まります）");
+  setTimeout(function(){ window.print() }, 380);
+}
+$("#btnPrint").addEventListener("click", doPrint);
+
+/* ── 受注に変換（画面が連動することの実演） ── */
+var converted = false;
+$("#btnOrder").addEventListener("click", function(){
+  if(converted){ toast("この見積は受注済みです。トップでご確認ください"); show("dash"); return }
+  var t = renderTotals(), c = cust();
+  DEALS.unshift({no:"2026-0812", cust:c.name, subj:$("#fSubj").value || "（件名未入力）", amt:t.total, step:1});
+  renderDeals();
+  var k = $("#kpiQuote");
+  k.innerHTML = "2<em>件</em>";
+  converted = true;
+  this.textContent = "受注済み";
+  toast("受注に変換しました。トップの件数と案件一覧に反映しています");
+  setTimeout(function(){ show("dash") }, 700);
+});
+
+/* ── 初期化 ───────────────────────────────── */
+renderDeals();
+renderQuote();
+show(location.hash.slice(1) || "dash", true);
+window.addEventListener("hashchange", function(){ show(location.hash.slice(1) || "dash", true) });
+
+})();
+</script>
+</body>
+</html>
