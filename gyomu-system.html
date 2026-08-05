@@ -1,0 +1,1868 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="index, follow">
+<title>業務管理システム 画面デモ｜見積・発注・納品・請求・入金消込まで動くリファレンス</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --nav:#0f2438;
+  --nav-txt:#a8bccf;
+  --nav-hover:#1b3a56;
+  --nav-sec:#6c8199;
+  --ink:#14212f;
+  --muted:#556577;
+  --faint:#6b7788;
+  --line:#d8e1ea;
+  --line-2:#eaeff4;
+  --line-strong:#b6c3d0;
+  --bg:#f2f5f8;
+  --panel:#ffffff;
+  --panel-2:#f8fafc;
+  --brand:#0f5f9e;
+  --brand-d:#0a4674;
+  --brand-w:#e6f0f9;
+  --ok:#0d6b4d;
+  --ok-w:#e3f2ec;
+  --warn:#8a5100;
+  --warn-w:#fcf1de;
+  --danger:#a5271d;
+  --danger-w:#fae9e7;
+  --note:#5a3691;
+  --note-w:#f0eafa;
+  --neutral:#8494a5;
+  --neutral-w:#eef2f6;
+  --fs-xs:11px;
+  --fs-sm:12px;
+  --fs-base:13px;
+  --fs-lg:15px;
+  --fs-xl:18px;
+  --fs-2xl:26px;
+  --sp-1:4px;
+  --sp-2:8px;
+  --sp-3:12px;
+  --sp-4:16px;
+  --sp-5:24px;
+  --sp-6:32px;
+  --r-sm:4px;
+  --r-md:8px;
+  --r-pill:999px;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{
+  font-family:"Noto Sans JP",-apple-system,BlinkMacSystemFont,"Segoe UI","Hiragino Kaku Gothic ProN","Yu Gothic",Meiryo,sans-serif;
+  background:var(--bg); color:var(--ink); font-size:var(--fs-base); line-height:1.6;
+  -webkit-font-smoothing:antialiased; font-feature-settings:"palt" 1;
+  overflow-x:hidden;
+}
+.num{font-variant-numeric:tabular-nums; font-feature-settings:"tnum" 1}
+button{font-family:inherit; font-size:inherit; cursor:pointer}
+input,select,textarea{font-family:inherit; font-size:inherit; color:inherit}
+a{color:var(--brand)}
+svg{display:block; flex:none}
+:focus-visible{outline:2px solid var(--brand); outline-offset:2px; border-radius:2px}
+
+/* ═══ デモ帯 ═══ */
+.democall{
+  background:#0b1a29; color:#fff; padding:var(--sp-2) var(--sp-4); font-size:var(--fs-sm);
+  line-height:1.55; display:flex; gap:var(--sp-2); align-items:baseline; flex-wrap:wrap;
+}
+.democall b{color:#ffcf8a; font-weight:700}
+.democall span{color:#a9bccd}
+
+/* ═══ アプリシェル ═══ */
+.app{display:grid; grid-template-columns:216px minmax(0,1fr); min-height:100vh}
+.app > *{min-width:0}
+.side{background:var(--nav); color:var(--nav-txt); display:flex; flex-direction:column; min-width:0}
+.brand{padding:var(--sp-4) var(--sp-4) var(--sp-3); display:flex; gap:var(--sp-2); align-items:center}
+.brand .mk{
+  width:28px;height:28px;border-radius:var(--r-sm);background:var(--brand);
+  display:grid;place-items:center;color:#fff;font-weight:700;font-size:var(--fs-sm);
+}
+.brand .b1{color:#fff; font-weight:700; font-size:var(--fs-base); line-height:1.35}
+.brand .b2{color:var(--nav-sec); font-size:10.5px; line-height:1.35}
+
+.navgrp{padding:var(--sp-3) 0 var(--sp-1)}
+.navgrp h3{
+  margin:0; padding:0 var(--sp-4) var(--sp-1); font-size:10.5px; font-weight:700;
+  color:var(--nav-sec); letter-spacing:.06em;
+}
+.nav{display:flex; flex-direction:column}
+.nav button{
+  display:flex; align-items:center; gap:var(--sp-2); width:100%; text-align:left;
+  background:none; border:0; color:var(--nav-txt); padding:var(--sp-2) var(--sp-4);
+  font-size:var(--fs-base); border-left:3px solid transparent; position:relative;
+}
+.nav button:hover{background:var(--nav-hover); color:#fff}
+.nav button[aria-current="page"]{background:var(--nav-hover); color:#fff; border-left-color:var(--brand); font-weight:700}
+.nav button .lb{flex:1; min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap}
+.nav button.soon{color:var(--nav-sec)}
+.badge{
+  font-size:9.5px; font-weight:700; padding:1px var(--sp-1); border-radius:var(--r-sm);
+  background:#20405d; color:#93aec7; letter-spacing:.02em; white-space:nowrap;
+}
+.badge.ask{background:#4a3a12; color:#e0bd72}
+.sidefoot{margin-top:auto; padding:var(--sp-3) var(--sp-4) var(--sp-4); font-size:10.5px; color:var(--nav-sec); line-height:1.6}
+
+/* ═══ トップバー ═══ */
+.topbar{
+  background:var(--panel); border-bottom:1px solid var(--line); padding:var(--sp-2) var(--sp-4);
+  display:flex; align-items:center; gap:var(--sp-3); flex-wrap:wrap; position:sticky; top:0; z-index:30;
+}
+.crumb{font-size:var(--fs-sm); color:var(--faint)}
+.crumb b{color:var(--ink); font-size:var(--fs-lg); font-weight:700; margin-right:var(--sp-2)}
+.topbar .sp{margin-left:auto}
+.who{font-size:var(--fs-sm); color:var(--muted); white-space:nowrap}
+.notetoggle{
+  border:1px solid var(--note); color:var(--note); background:var(--note-w);
+  padding:5px var(--sp-3); border-radius:var(--r-pill); font-size:var(--fs-sm); font-weight:500;
+  display:flex; align-items:center; gap:6px; white-space:nowrap;
+}
+.notetoggle[aria-pressed="true"]{background:var(--note); color:#fff; border-color:var(--note)}
+
+main{padding:var(--sp-4); max-width:1320px; min-width:0}
+.view{display:none}
+.view.on{display:block}
+
+/* ═══ 汎用 ═══ */
+.panel{background:var(--panel); border:1px solid var(--line); border-radius:var(--r-md); overflow:hidden}
+.panel + .panel{margin-top:var(--sp-3)}
+.ph{
+  display:flex; align-items:center; gap:var(--sp-2); padding:var(--sp-3) var(--sp-4);
+  border-bottom:1px solid var(--line-2); flex-wrap:wrap;
+}
+.ph h2{margin:0; font-size:var(--fs-lg); font-weight:700; letter-spacing:.01em}
+.ph .sub{font-size:var(--fs-xs); color:var(--faint)}
+.ph .sp{margin-left:auto}
+.pb{padding:var(--sp-4)}
+.pb-tight{padding:var(--sp-3) var(--sp-4)}
+
+.btn{
+  border:1px solid var(--line-strong); background:#fff; color:var(--ink);
+  padding:6px var(--sp-3); border-radius:var(--r-sm); font-size:var(--fs-sm); font-weight:500;
+  display:inline-flex; align-items:center; gap:6px; line-height:1.5;
+}
+.btn:hover{background:var(--panel-2); border-color:var(--brand)}
+.btn:disabled{opacity:.45; cursor:not-allowed; background:var(--panel-2); border-color:var(--line)}
+.btn:disabled:hover{border-color:var(--line)}
+.btn-p{background:var(--brand); border-color:var(--brand); color:#fff}
+.btn-p:hover{background:var(--brand-d); border-color:var(--brand-d)}
+.btn-p:disabled{background:var(--neutral); border-color:var(--neutral); color:#fff; opacity:.5}
+.btn-s{font-size:var(--fs-xs); padding:3px var(--sp-2)}
+
+.pill{
+  display:inline-flex; align-items:center; gap:4px; padding:2px var(--sp-2); border-radius:var(--r-pill);
+  font-size:var(--fs-xs); font-weight:700; line-height:1.6; white-space:nowrap;
+}
+.pill::before{content:""; width:6px; height:6px; border-radius:50%; background:currentColor; flex:none}
+.p-draft{background:var(--neutral-w); color:#4f6072}
+.p-sent{background:var(--brand-w); color:var(--brand)}
+.p-order{background:var(--ok-w); color:var(--ok)}
+.p-bill{background:var(--warn-w); color:var(--warn)}
+.p-paid{background:var(--ok-w); color:var(--ok)}
+.p-late{background:var(--danger-w); color:var(--danger)}
+
+.tag{
+  display:inline-flex; align-items:center; gap:3px; padding:1px 6px; border-radius:var(--r-sm);
+  font-size:10.5px; font-weight:700; line-height:1.6; white-space:nowrap;
+}
+.t-dan{background:var(--danger-w); color:var(--danger)}
+.t-warn{background:var(--warn-w); color:var(--warn)}
+.t-brand{background:var(--brand-w); color:var(--brand)}
+.t-neu{background:var(--neutral-w); color:#4f6072}
+
+table{width:100%; border-collapse:collapse}
+th,td{text-align:left; padding:7px var(--sp-2); border-bottom:1px solid var(--line-2); font-size:var(--fs-sm)}
+th{font-size:var(--fs-xs); color:var(--muted); font-weight:700; background:var(--panel-2); white-space:nowrap; border-bottom:1px solid var(--line)}
+td.r,th.r{text-align:right}
+td.c,th.c{text-align:center}
+tbody tr:last-child td{border-bottom:0}
+tbody tr.clickable{cursor:pointer}
+tbody tr.clickable:hover{background:var(--brand-w)}
+tbody tr.sel{background:var(--brand-w); box-shadow:inset 3px 0 0 var(--brand)}
+.tablewrap{overflow-x:auto; -webkit-overflow-scrolling:touch; min-width:0; max-width:100%}
+.empty{padding:var(--sp-6) var(--sp-4); text-align:center; color:var(--faint); font-size:var(--fs-sm)}
+
+.toolbar{display:flex; gap:var(--sp-2); align-items:center; flex-wrap:wrap; padding:var(--sp-2) var(--sp-4); border-bottom:1px solid var(--line-2); background:var(--panel-2)}
+.search{position:relative; display:flex; align-items:center}
+.search svg{position:absolute; left:8px; color:var(--faint)}
+.search input{border:1px solid var(--line-strong); border-radius:var(--r-sm); padding:5px var(--sp-2) 5px 28px; font-size:var(--fs-sm); min-width:190px}
+.search input:focus{outline:2px solid var(--brand); outline-offset:-1px; border-color:var(--brand)}
+.chips{display:flex; gap:var(--sp-1); flex-wrap:wrap}
+.chip{border:1px solid var(--line-strong); background:#fff; border-radius:var(--r-pill); padding:3px var(--sp-3); font-size:var(--fs-xs); color:var(--muted)}
+.chip[aria-pressed="true"]{background:var(--brand); border-color:var(--brand); color:#fff; font-weight:700}
+
+/* ═══ 設計メモ ═══ */
+.note{display:none}
+.note-only{display:none}
+body.notes-on .note-only{display:block}
+body.notes-on .note{
+  display:block; margin:var(--sp-2) 0 0; padding:var(--sp-2) var(--sp-3);
+  background:var(--note-w); border-left:3px solid var(--note); border-radius:0 var(--r-sm) var(--r-sm) 0;
+  font-size:var(--fs-sm); line-height:1.7; color:#3b2a5c;
+}
+body.notes-on .note b{color:var(--note)}
+body.notes-on .note .q{display:block; margin-top:5px; padding-top:5px; border-top:1px dashed #c6b3e2; color:#54407a}
+
+/* ═══ ダッシュボード ═══ */
+.kpis{display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:var(--sp-3)}
+.kpi{
+  background:var(--panel); border:1px solid var(--line); border-radius:var(--r-md);
+  padding:var(--sp-3); text-align:left; width:100%; display:block;
+}
+.kpi:hover{border-color:var(--brand); background:var(--brand-w)}
+.kpi .kl{font-size:var(--fs-sm); color:var(--muted); display:flex; align-items:center; gap:6px}
+.kpi .kv{font-size:var(--fs-2xl); font-weight:700; line-height:1.1; margin-top:6px; letter-spacing:-.02em}
+.kpi .kv em{font-size:var(--fs-base); font-style:normal; font-weight:500; color:var(--muted); margin-left:3px}
+.kpi .kh{font-size:var(--fs-xs); color:var(--faint); margin-top:2px}
+.kpi.dan .kv{color:var(--danger)}
+
+.grid2{display:grid; grid-template-columns:1.25fr .75fr; gap:var(--sp-3); margin-top:var(--sp-3); align-items:start}
+
+.flow{display:inline-flex; align-items:center; white-space:nowrap}
+.flow i{font-style:normal; font-size:10.5px; padding:2px 6px; background:var(--neutral-w); color:var(--faint); border-right:1px solid #fff}
+.flow i:first-child{border-radius:var(--r-sm) 0 0 var(--r-sm)}
+.flow i:last-child{border-radius:0 var(--r-sm) var(--r-sm) 0; border-right:0}
+.flow i.done{background:#d6e4f0; color:var(--brand-d)}
+.flow i.cur{background:var(--brand); color:#fff; font-weight:700}
+
+.aging{display:flex; flex-direction:column; gap:var(--sp-2)}
+.ag{display:grid; grid-template-columns:74px minmax(0,1fr) 92px; gap:var(--sp-2); align-items:center}
+.ag .agl{font-size:var(--fs-xs); color:var(--muted); white-space:nowrap}
+.ag .bar{height:16px; background:var(--line-2); border-radius:var(--r-sm); overflow:hidden}
+.ag .bar i{display:block; height:100%; background:var(--neutral); border-radius:var(--r-sm); min-width:5px}
+.ag.w .bar i{background:var(--warn)}
+.ag.d .bar i{background:var(--danger); min-width:16px}
+.ag .agv{text-align:right; font-size:var(--fs-sm); font-weight:500}
+.ag.d .agv{color:var(--danger); font-weight:700}
+
+.den .d{display:flex; gap:var(--sp-2); align-items:center; padding:var(--sp-2) 0; border-bottom:1px solid var(--line-2)}
+.den .d:last-child{border-bottom:0}
+.den .dd{flex:none; width:54px; text-align:center; border-radius:var(--r-sm); padding:3px 0; line-height:1.25; background:var(--neutral-w)}
+.den .dd b{display:block; font-size:var(--fs-lg); font-weight:700}
+.den .dd span{display:block; font-size:10px; color:var(--muted)}
+.den .d.near .dd{background:var(--warn-w)}
+.den .d.near .dd b{color:var(--warn)}
+.den .dn{flex:1; min-width:0; font-size:var(--fs-sm); overflow:hidden; text-overflow:ellipsis; white-space:nowrap}
+.den .dn small{display:block; color:var(--faint); font-size:var(--fs-xs)}
+.den .da{font-weight:500; white-space:nowrap; font-size:var(--fs-sm)}
+
+/* ═══ 伝票 ═══ */
+.slip{display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:var(--sp-3) var(--sp-4)}
+.f{display:flex; flex-direction:column; gap:3px; min-width:0}
+.f label{font-size:var(--fs-xs); color:var(--muted); display:flex; align-items:center; gap:4px}
+.f label .req{color:var(--danger); font-weight:700}
+.f input,.f select{
+  border:1px solid var(--line-strong); border-radius:var(--r-sm); padding:6px var(--sp-2);
+  background:#fff; width:100%; font-size:var(--fs-base); min-height:32px;
+}
+.f input:focus,.f select:focus{outline:2px solid var(--brand); outline-offset:-1px; border-color:var(--brand)}
+.f input.ro{background:var(--panel-2); color:var(--muted); border-style:dashed}
+.f .hint{font-size:10.5px; color:var(--faint)}
+.f.err input{border-color:var(--danger); background:var(--danger-w)}
+.f .msg{font-size:10.5px; color:var(--danger); display:none}
+.f.err .msg{display:block}
+
+#lineTable td{padding:4px 6px; vertical-align:middle}
+#lineTable input{
+  border:1px solid var(--line-strong); background:#fff; border-radius:var(--r-sm);
+  padding:4px 5px; width:100%; font-size:var(--fs-sm);
+}
+#lineTable input:hover{border-color:var(--brand)}
+#lineTable input:focus{outline:2px solid var(--brand); outline-offset:-1px; border-color:var(--brand)}
+#lineTable input.r{text-align:right}
+#lineTable input.bad{border-color:var(--danger); background:var(--danger-w)}
+.cell-nm{min-width:180px}
+.cell-sp{min-width:112px; color:var(--muted); font-size:var(--fs-sm)}
+.iconbtn{border:0; background:none; color:var(--faint); padding:3px 6px; border-radius:var(--r-sm); display:inline-flex}
+.iconbtn:hover{background:var(--danger-w); color:var(--danger)}
+
+.totals{display:grid; grid-template-columns:minmax(0,1fr) auto; gap:var(--sp-4); align-items:start; padding:var(--sp-3) var(--sp-4); border-top:1px solid var(--line)}
+.totbox{min-width:256px; margin-left:auto}
+.totbox .tr{display:flex; justify-content:space-between; padding:3px 0; font-size:var(--fs-base)}
+.totbox .tr.sum{border-top:2px solid var(--ink); margin-top:var(--sp-1); padding-top:6px; font-size:var(--fs-xl); font-weight:700}
+.profit{display:flex; gap:var(--sp-3); align-items:center; padding:var(--sp-2) var(--sp-3); background:var(--ok-w); border-radius:var(--r-sm); font-size:var(--fs-sm); flex-wrap:wrap}
+.profit b{color:var(--ok); font-size:var(--fs-lg)}
+
+.keybar{display:flex; gap:6px var(--sp-4); flex-wrap:wrap; padding:var(--sp-2) var(--sp-4); background:var(--panel-2); border-top:1px solid var(--line); font-size:var(--fs-xs); color:var(--muted)}
+kbd{font-family:inherit; background:#fff; border:1px solid var(--line-strong); border-bottom-width:2px; border-radius:var(--r-sm); padding:1px 5px; font-size:10.5px; color:var(--ink); font-weight:700}
+
+/* ═══ 消込 ═══ */
+.recon{display:grid; grid-template-columns:minmax(0,1fr) 336px; gap:var(--sp-3); align-items:start}
+.diffbox{padding:var(--sp-3) var(--sp-4); background:var(--panel-2); border-top:1px solid var(--line)}
+.diffrow{display:flex; justify-content:space-between; padding:3px 0; font-size:var(--fs-base)}
+.diffrow.big{font-size:var(--fs-lg); font-weight:700; border-top:1px solid var(--line-strong); margin-top:var(--sp-1); padding-top:6px}
+.diffrow.ok{color:var(--ok)}
+.diffrow.ng{color:var(--danger)}
+.assign{display:flex; gap:var(--sp-2); align-items:center; margin-top:var(--sp-2); flex-wrap:wrap}
+.assign select{border:1px solid var(--line-strong); border-radius:var(--r-sm); padding:5px var(--sp-2); font-size:var(--fs-sm); flex:1; min-width:150px}
+
+/* ═══ 確認モーダル / 検索モーダル ═══ */
+.ov{position:fixed; inset:0; background:rgba(15,36,56,.5); display:none; z-index:100; align-items:flex-start; justify-content:center; padding:min(9vh,72px) var(--sp-3) var(--sp-3)}
+.ov.on{display:flex}
+.modal{background:#fff; border-radius:var(--r-md); width:min(660px,100%); max-height:78vh; display:flex; flex-direction:column; overflow:hidden; box-shadow:0 16px 48px rgba(15,36,56,.28)}
+.modal .mh{padding:var(--sp-3) var(--sp-4); border-bottom:1px solid var(--line); display:flex; gap:var(--sp-2); align-items:center}
+.modal .mh h3{margin:0; font-size:var(--fs-lg)}
+.modal .mh input{flex:1; border:1px solid var(--line-strong); border-radius:var(--r-sm); padding:7px var(--sp-2); font-size:var(--fs-lg)}
+.modal .ml{overflow-y:auto}
+.modal .mb{padding:var(--sp-4); font-size:var(--fs-base); line-height:1.8}
+.modal .mf{padding:var(--sp-2) var(--sp-4); background:var(--panel-2); border-top:1px solid var(--line); font-size:var(--fs-xs); color:var(--muted); display:flex; gap:var(--sp-2); align-items:center}
+.modal .mf .sp{margin-left:auto}
+.fi{display:grid; grid-template-columns:72px minmax(0,1fr) 92px; gap:var(--sp-2); padding:var(--sp-2) var(--sp-4); cursor:pointer; align-items:center; border-bottom:1px solid var(--line-2)}
+.fi:hover,.fi.sel{background:var(--brand-w)}
+.fi .c{font-size:var(--fs-xs); color:var(--muted)}
+.fi .n{font-size:var(--fs-base); min-width:0}
+.fi .n small{display:block; color:var(--faint); font-size:var(--fs-xs)}
+.fi .p{text-align:right; font-size:var(--fs-sm)}
+
+.toast{position:fixed; left:50%; bottom:26px; transform:translate(-50%,14px); background:var(--ink); color:#fff; padding:10px var(--sp-5); border-radius:var(--r-pill); font-size:var(--fs-base); opacity:0; pointer-events:none; transition:.22s; z-index:200; box-shadow:0 8px 26px rgba(20,33,47,.3); max-width:calc(100vw - 28px); text-align:center}
+.toast.on{opacity:1; transform:translate(-50%,0)}
+
+/* ═══ 読み物 ═══ */
+.doc{max-width:820px}
+.doc h3{font-size:var(--fs-xl); margin:var(--sp-6) 0 var(--sp-2); padding-bottom:6px; border-bottom:2px solid var(--line)}
+.doc h3:first-child{margin-top:0}
+.doc h4{font-size:var(--fs-lg); margin:var(--sp-4) 0 var(--sp-1); color:var(--brand-d)}
+.doc p{margin:0 0 var(--sp-3); line-height:1.9}
+.doc ul,.doc ol{margin:0 0 var(--sp-3); padding-left:1.2em}
+.doc li{margin-bottom:6px; line-height:1.85}
+.doc .lead{font-size:var(--fs-lg); line-height:1.95}
+.qbox{background:var(--warn-w); border:1px solid #eedcb6; border-radius:var(--r-md); padding:var(--sp-3) var(--sp-4); margin:var(--sp-3) 0}
+.ibox{background:var(--brand-w); border:1px solid #c4dbef; border-radius:var(--r-md); padding:var(--sp-3) var(--sp-4); margin:var(--sp-3) 0}
+.nobox{background:var(--panel-2); border:1px solid var(--line); border-radius:var(--r-md); padding:var(--sp-3) var(--sp-4); margin:var(--sp-3) 0}
+
+.opt2{display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:var(--sp-3)}
+.opt{border:1px solid var(--line); border-radius:var(--r-md); overflow:hidden}
+.opt h4{margin:0; padding:var(--sp-2) var(--sp-3); background:var(--panel-2); border-bottom:1px solid var(--line); font-size:var(--fs-base); color:var(--ink)}
+.opt .ob{padding:var(--sp-3); font-size:var(--fs-sm); line-height:1.8}
+
+footer{padding:var(--sp-5) var(--sp-4) var(--sp-6); color:var(--faint); font-size:var(--fs-xs); line-height:1.8; max-width:1320px}
+
+/* ═══ レスポンシブ ═══ */
+@media (max-width:1100px){
+  .kpis{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .grid2{grid-template-columns:1fr}
+  .recon{grid-template-columns:1fr}
+  .slip{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media (max-width:860px){
+  .app{grid-template-columns:1fr; grid-template-rows:auto minmax(0,1fr)}
+  .side{flex-direction:row; overflow-x:auto; align-items:center; padding:0 var(--sp-2)}
+  .brand{padding:var(--sp-2) var(--sp-2); flex:none}
+  .brand .b2{display:none}
+  .navgrp{padding:0; display:flex; align-items:center; flex:none}
+  .navgrp h3{display:none}
+  .nav{flex-direction:row}
+  .nav button{border-left:0; border-bottom:3px solid transparent; padding:var(--sp-3) var(--sp-2); white-space:nowrap}
+  .nav button[aria-current="page"]{border-left-color:transparent; border-bottom-color:var(--brand)}
+  .sidefoot{display:none}
+  .badge{display:none}
+}
+@media (max-width:560px){
+  main{padding:var(--sp-3)}
+  .kpis{gap:var(--sp-2)}
+  .kpi .kv{font-size:22px}
+  .slip{grid-template-columns:1fr 1fr}
+  .totals{grid-template-columns:1fr}
+  .totbox{min-width:0; width:100%}
+  .opt2{grid-template-columns:1fr}
+}
+
+/* ═══ 印刷 ═══ */
+#printRoot{display:none}
+@media print{
+  body{background:#fff}
+  .democall,.app,footer,.toast,.ov{display:none !important}
+  #printRoot{display:block}
+  @page{size:A4; margin:14mm}
+}
+.pdoc{width:100%; color:#000; font-size:11pt}
+.pdoc h1{font-size:19pt; text-align:center; letter-spacing:.45em; margin:0 0 12pt; font-weight:700}
+.ptop{display:flex; justify-content:space-between; gap:18pt; margin-bottom:10pt}
+.pto{flex:1}
+.pto .nm{font-size:14pt; border-bottom:1px solid #000; padding-bottom:3pt; margin-bottom:7pt}
+.pto .amt{font-size:13pt; font-weight:700; border-bottom:2px solid #000; padding:4pt 0; display:inline-block; min-width:196pt}
+.pfrom{width:198pt; font-size:9.5pt; line-height:1.7}
+.pfrom .co{font-size:11pt; font-weight:700}
+.pmeta{font-size:9.5pt; text-align:right; margin-bottom:6pt}
+.pdoc table{width:100%; border-collapse:collapse; margin-top:6pt; border:1px solid #000}
+.pdoc th,.pdoc td{border:1px solid #000; padding:3.5pt 5pt; font-size:9.5pt}
+.pdoc th{background:#eee; text-align:center}
+.pdoc tbody tr:last-child td{border-bottom:1px solid #000}
+.pdoc td.r{text-align:right}
+.pdoc td.c{text-align:center}
+.psum{margin-top:8pt; margin-left:auto; width:206pt}
+.psum div{display:flex; justify-content:space-between; padding:2.5pt 0; font-size:10pt}
+.psum div.t{border-top:1px solid #000; font-weight:700; font-size:12pt; padding-top:4pt}
+.pnote{margin-top:10pt; font-size:9pt; line-height:1.7}
+</style>
+</head>
+<body>
+
+<div class="democall">
+  <b>業務管理システム リファレンス</b>
+  <span>見積・受注・発注・納品・請求・入金消込・売掛まで、<b>実際に入力・計算・印刷ができます</b>。会社名・取引先・商品・金額はすべて架空のサンプルです。<b>業種は専門商社を一例にしています</b>（御社の業務に置き換えて設計します）。</span>
+</div>
+
+<div class="app">
+
+  <!-- ══════ サイドバー ══════ -->
+  <aside class="side">
+    <div class="brand">
+      <div class="mk">業</div>
+      <div>
+        <div class="b1">業務管理システム</div>
+        <div class="b2">販売・購買・債権管理</div>
+      </div>
+    </div>
+
+    <div class="navgrp">
+      <h3>第1フェーズ（今回のご提案の範囲）</h3>
+      <div class="nav" id="nav1"></div>
+    </div>
+    <div class="navgrp">
+      <h3>第2フェーズ（継続開発）</h3>
+      <div class="nav" id="nav2"></div>
+    </div>
+    <div class="navgrp">
+      <h3>ご提案</h3>
+      <div class="nav" id="nav3"></div>
+    </div>
+
+    <div class="sidefoot">
+      左のメニューは、ご依頼の8機能を<br>どの順で作るかをそのまま表しています。
+    </div>
+  </aside>
+
+  <!-- ══════ メイン ══════ -->
+  <div>
+    <div class="topbar">
+      <div class="crumb"><b id="crumbTitle">本日の業務</b><span id="crumbSub"></span></div>
+      <div class="sp"></div>
+      <span class="who">本社／営業部　担当：山田</span>
+      <button class="notetoggle" id="noteBtn" aria-pressed="false">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 17v.01M12 13a2.5 2.5 0 1 0-2.5-2.5"/><circle cx="12" cy="12" r="9"/></svg>
+        <span id="noteBtnLabel">設計メモを表示</span>
+      </button>
+    </div>
+
+    <main>
+
+<!-- ══════════ ダッシュボード ══════════ -->
+<section class="view on" id="v-dash">
+  <div class="note" style="margin:0 0 12px">
+    <b>設計メモ｜この画面の役割</b><br>
+    朝いちばんに開いて「今日どれから手を付けるか」だけが分かる画面にしました。<b>4枚のカードと案件の行はすべて押せて</b>、該当する一覧へ移動します。
+    <span class="q">「設計メモを表示」を押している間、各ブロックをそこに置いた理由が出ます。</span>
+  </div>
+
+  <div class="kpis" id="kpis"></div>
+
+  <div class="note">
+    <b>設計メモ｜なぜこの4つか</b><br>
+    「放っておくと入金が遅れる／信用を落とす」ものだけを並べました。売上や粗利の累計は毎朝の判断を変えないため、ここには出していません。
+    <span class="q">入金の「請求額と不一致」は、振込手数料が引かれていたり複数の請求がまとめて入金されたケースです。この差額処理が毎月いちばん手間のかかる作業だと考えていますが、御社でも同様でしょうか。</span>
+  </div>
+
+  <div class="grid2">
+    <div class="panel">
+      <div class="ph">
+        <h2>進行中の案件</h2>
+        <span class="sub">見積から入金までを1本の流れで表示</span>
+        <span class="sp"></span>
+        <button class="btn btn-s" data-go="quote">見積一覧へ</button>
+      </div>
+      <div class="tablewrap">
+        <table>
+          <thead><tr><th>案件番号</th><th>得意先</th><th>件名</th><th class="r">金額(税込)</th><th>進捗</th></tr></thead>
+          <tbody id="dealBody"></tbody>
+        </table>
+      </div>
+      <div class="pb-tight note-only" style="border-top:1px solid var(--line-2)">
+        <div class="note" style="margin:0">
+          <b>設計メモ｜1本の帯で全工程を出した理由</b><br>
+          見積・受注・納品・請求・入金を別々の一覧で管理すると、「どこで止まっているか」を人が突き合わせることになります。1件＝1行で全工程を持たせ、色が進んでいない所が滞留だと一目で分かる形にしました。行を押すとその伝票へ移動します。
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div class="panel">
+        <div class="ph">
+          <h2>売掛残高</h2><span class="sub">経過日数別</span>
+          <span class="sp"></span><span class="num" style="font-weight:700">¥5,576,000</span>
+        </div>
+        <div class="pb">
+          <div class="aging">
+            <div class="ag"><span class="agl">30日以内</span><span class="bar"><i style="width:68%"></i></span><span class="agv num">¥3,820,000</span></div>
+            <div class="ag"><span class="agl">31〜60日</span><span class="bar"><i style="width:21%"></i></span><span class="agv num">¥1,150,000</span></div>
+            <div class="ag w"><span class="agl">61〜90日</span><span class="bar"><i style="width:8%"></i></span><span class="agv num">¥420,000</span></div>
+            <div class="ag d"><span class="agl">90日超</span><span class="bar"><i style="width:4%"></i></span><span class="agv num">¥186,000</span></div>
+          </div>
+          <div style="margin-top:12px"><button class="btn btn-s" data-go="ar">売掛・でんさい一覧へ</button></div>
+          <div class="note">
+            <b>設計メモ｜唯一グラフにした数字</b><br>
+            グラフはこの1つだけに絞りました。売上推移は月次で振り返るもので、毎朝の行動を変えません。この図は「90日超が出た＝今日電話する先がある」という行動に直結するため、数字ではなく長さで見せています。<b>90日超は金額が小さくても必ず見える太さで描いています</b>（比率どおりに細くすると、いちばん見るべき数字がいちばん見えなくなるため）。
+          </div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <div class="ph"><h2>でんさい 期日管理</h2><span class="sub">受領済・入金待ち</span></div>
+        <div class="pb">
+          <div class="den">
+            <div class="d near"><span class="dd"><b>8/20</b><span>あと16日</span></span><span class="dn">彩北化成工業株式会社<small>7月度 合計請求分</small></span><span class="da num">¥1,240,000</span></div>
+            <div class="d"><span class="dd"><b>9/30</b><span>あと57日</span></span><span class="dn">武州環境分析センター株式会社<small>5月度 合計請求分</small></span><span class="da num">¥486,000</span></div>
+            <div class="d"><span class="dd"><b>10/31</b><span>あと88日</span></span><span class="dn">彩北化成工業株式会社<small>8月度 合計請求分</small></span><span class="da num">¥905,000</span></div>
+          </div>
+          <div class="note">
+            <b>設計メモ｜売掛は2状態では足りない</b><br>
+            でんさいでお支払いいただく得意先は「請求済＝未入金」のまま何十日も残ります。<b>請求済 → でんさい受領 → 期日待ち → 入金済</b>の4段階で持たせ、督促すべきものと期日を待つだけのものが同じ箱に入らないようにしています。
+            <span class="q">でんさいネットからのデータ取り込みまでご希望でしょうか。受領した記録と期日の管理までで足りますか。金融機関ごとに形式が異なるため、まず記録・期日管理から作るのが安全だと考えています。</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ 見積一覧 ══════════ -->
+<section class="view" id="v-quote">
+  <div class="note" style="margin:0 0 12px">
+    <b>設計メモ｜一覧を先に置く理由</b><br>
+    業務システムで人がいちばん長くいるのは入力画面ではなく<b>一覧</b>です。「あの見積どうなった」を探す時間が1日で最も積み上がるため、検索と状態の絞り込みを最初に置いています。行を押すと伝票が開きます。
+  </div>
+  <div class="panel">
+    <div class="ph">
+      <h2>見積</h2><span class="sub">一覧</span>
+      <span class="sp"></span>
+      <button class="btn btn-p" id="btnNewQuote">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>新規作成
+      </button>
+    </div>
+    <div class="toolbar">
+      <div class="search">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+        <input id="qSearch" placeholder="得意先・件名・見積番号で検索" autocomplete="off">
+      </div>
+      <div class="chips" id="qChips"></div>
+      <span class="sp" style="margin-left:auto"></span>
+      <span style="font-size:var(--fs-xs);color:var(--faint)" id="qCount"></span>
+    </div>
+    <div class="tablewrap">
+      <table>
+        <thead><tr>
+          <th class="sortable" data-sort="no">見積番号</th><th data-sort="date">見積日</th><th>得意先</th><th>件名</th>
+          <th class="r" data-sort="amt">金額(税込)</th><th>状態</th>
+        </tr></thead>
+        <tbody id="quoteListBody"></tbody>
+      </table>
+    </div>
+    <div class="empty" id="quoteEmpty" style="display:none">該当する見積がありません。検索条件を変えてください。</div>
+  </div>
+</section>
+
+<!-- ══════════ 見積 入力 ══════════ -->
+<section class="view" id="v-quoteedit">
+  <div class="note" style="margin:0 0 12px">
+    <b>設計メモ｜ここで試していただきたいこと</b><br>
+    <b>得意先を変えると単価が変わり</b>、数量を打つと合計と粗利が即座に再計算されます。マウスを使わず <kbd>Enter</kbd> だけで明細を打ち切れること、<kbd>F2</kbd> で品名を呼び出せること、<kbd>Alt</kbd>+<kbd>P</kbd> でそのままA4の見積書が印刷できることをご確認ください。
+  </div>
+
+  <div class="panel">
+    <div class="ph">
+      <h2>御見積書</h2>
+      <span class="sub num" id="slipNo">Q-2026-0812</span>
+      <span class="pill p-draft" id="slipState">下書き</span>
+      <span class="pill p-late" id="gekiBadge" style="display:none" title="劇物を含むため出荷前に譲受書が必要です">譲受書 未受領</span>
+      <span class="sp"></span>
+      <button class="btn" data-go="quote">一覧へ戻る</button>
+      <button class="btn" id="btnPrintQuote">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9V3h12v6M6 18H4v-6h16v6h-2M8 14h8v7H8z"/></svg>印刷
+      </button>
+      <button class="btn btn-p" id="btnOrder">受注に変換</button>
+    </div>
+
+    <div class="pb" style="border-bottom:1px solid var(--line-2)">
+      <div class="slip">
+        <div class="f" style="grid-column:span 2">
+          <label for="fCust">得意先 <span class="req">必須</span></label>
+          <select id="fCust"></select>
+          <span class="hint" id="custHint"></span>
+        </div>
+        <div class="f" id="fDateWrap">
+          <label for="fDate">見積日 <span class="req">必須</span></label>
+          <input id="fDate" type="date" value="2026-08-05">
+          <span class="msg">日付を入力してください</span>
+        </div>
+        <div class="f"><label for="fLimit">有効期限</label><input id="fLimit" type="date" value="2026-09-04"></div>
+        <div class="f" style="grid-column:span 2" id="fSubjWrap">
+          <label for="fSubj">件名 <span class="req">必須</span></label>
+          <input id="fSubj" value="第2分析室 消耗品および機器 御見積" maxlength="60">
+          <span class="msg">件名を入力してください</span>
+        </div>
+        <div class="f"><label for="fDeli">納期</label><input id="fDeli" value="ご注文後 10日以内"></div>
+        <div class="f"><label>支払条件<span style="color:var(--faint);font-weight:400">（得意先マスタ）</span></label><input class="ro" id="fPay" readonly tabindex="-1"></div>
+      </div>
+      <div class="note">
+        <b>設計メモ｜支払条件を手入力にしなかった理由</b><br>
+        締日・支払サイト・決済方法は<b>得意先マスタ側で持ち</b>、伝票では変更できないようにしています（点線の枠が「マスタから来る項目」の印です）。伝票ごとに手で書けるようにすると、月末の締め処理で条件がばらつき、請求の突き合わせができなくなるためです。
+      </div>
+    </div>
+
+    <div class="tablewrap">
+      <table id="lineTable">
+        <thead><tr>
+          <th class="r" style="width:32px">No</th><th>品名</th><th>規格・荷姿</th><th style="width:150px">法規区分</th>
+          <th class="r" style="width:62px">数量</th><th style="width:40px">単位</th>
+          <th class="r" style="width:78px">定価</th><th class="r" style="width:48px">掛率</th>
+          <th class="r" style="width:82px">単価</th><th class="r" style="width:92px">金額</th><th style="width:32px"></th>
+        </tr></thead>
+        <tbody id="lineBody"></tbody>
+      </table>
+    </div>
+
+    <div class="pb-tight">
+      <button class="btn btn-s" id="btnAdd">＋ 明細行を追加（Ctrl+Enter）</button>
+      <button class="btn btn-s" id="btnFind">品名を検索（F2）</button>
+    </div>
+
+    <div class="totals">
+      <div style="min-width:0">
+        <div class="profit">
+          <span>この見積の粗利</span><b class="num" id="pAmt">¥0</b>
+          <span>粗利率 <b class="num" id="pRate">0.0%</b></span>
+          <span style="color:var(--muted);font-size:var(--fs-xs)">仕入原価 <span class="num" id="pCost">¥0</span></span>
+        </div>
+        <div class="note">
+          <b>設計メモ｜見積の画面に粗利を出した理由</b><br>
+          商社の値決めは「いくらで売るか」ではなく「いくらで仕入れて、いくら残すか」で決まります。掛率を動かした瞬間に粗利率が動くのが見えないと、値引き交渉の場で担当者が判断できません。<b>この欄は印刷する見積書には出しません</b>（社内でのみ見える扱い）。
+          <span class="q">粗利は担当者全員に見せてよいものでしょうか。役職で表示を分ける必要があれば、その形にします。</span>
+        </div>
+      </div>
+      <div class="totbox">
+        <div class="tr"><span>小計</span><span class="num" id="tSub">¥0</span></div>
+        <div class="tr"><span>消費税（10%）</span><span class="num" id="tTax">¥0</span></div>
+        <div class="tr sum"><span>合計</span><span class="num" id="tAll">¥0</span></div>
+      </div>
+    </div>
+
+    <div class="keybar">
+      <span><kbd>Enter</kbd> 次の項目へ</span><span><kbd>Ctrl</kbd>+<kbd>Enter</kbd> 行を追加</span>
+      <span><kbd>F2</kbd> 品名検索</span><span><kbd>Alt</kbd>+<kbd>P</kbd> 印刷</span><span><kbd>Esc</kbd> 閉じる</span>
+    </div>
+  </div>
+
+  <div class="note">
+    <b>設計メモ｜キーボードだけで終わる入力にした理由</b><br>
+    見積は1日に何件も打つ画面です。入力のたびにマウスへ手を移すと、それだけで時間が倍近くかかります。数量はテンキー、確定は <kbd>Enter</kbd>、行の追加も <kbd>Ctrl</kbd>+<kbd>Enter</kbd> で、手をホームポジションから離さずに1件を打ち切れるようにしました。既存の販売管理ソフトと同じ操作感なので、移行時に指が迷いません。Windowsのブラウザでそのまま動き、インストールは不要です。
+  </div>
+</section>
+
+<!-- ══════════ 発注 ══════════ -->
+<section class="view" id="v-purchase">
+  <div class="note" style="margin:0 0 12px">
+    <b>設計メモ｜発注は「受注に紐づけて」持ちます</b><br>
+    商社の発注は、社内在庫の補充ではなく<b>受注に対して仕入れる</b>のが基本です。そのため発注書は案件番号と紐づけ、案件ごとの粗利がそのまま確定するようにしています。得意先へ直接送ってもらう<b>直送</b>もこの画面で扱います。
+  </div>
+
+  <div class="panel">
+    <div class="ph">
+      <h2>発注</h2><span class="sub">仕入先への発注書</span>
+      <span class="sp"></span>
+      <span class="pill p-sent" id="poState">作成中</span>
+      <button class="btn" id="btnPrintPO">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9V3h12v6M6 18H4v-6h16v6h-2M8 14h8v7H8z"/></svg>発注書を印刷
+      </button>
+    </div>
+    <div class="pb" style="border-bottom:1px solid var(--line-2)">
+      <div class="slip">
+        <div class="f" style="grid-column:span 2">
+          <label for="poSup">仕入先 <span class="req">必須</span></label>
+          <select id="poSup"></select>
+          <span class="hint" id="supHint"></span>
+        </div>
+        <div class="f"><label for="poDeal">紐づく案件</label><input class="ro" id="poDeal" readonly tabindex="-1" value="2026-0812／彩北化成工業株式会社"></div>
+        <div class="f">
+          <label for="poShip">出荷方法</label>
+          <select id="poShip">
+            <option value="own">当社倉庫へ入荷（検品後に納品）</option>
+            <option value="direct">得意先へ直送（メーカー出荷）</option>
+          </select>
+        </div>
+      </div>
+      <div class="note" id="poDirectNote">
+        <b>設計メモ｜直送を「出荷方法」の選択で持つ理由</b><br>
+        直送にすると、当社を物が通らないため<b>入荷検品の工程が発生せず、納品日はメーカーの出荷日になります</b>。運用が変わる以上、伝票の備考ではなく項目として持たせ、納品・請求の締めがそれに追従するようにしています。
+        <span class="q">直送の比率はどの程度でしょうか。多い場合は、メーカーの出荷連絡をそのまま納品実績に取り込む形にすると入力が一度で済みます。</span>
+      </div>
+    </div>
+
+    <div class="tablewrap">
+      <table>
+        <thead><tr>
+          <th class="r" style="width:32px">No</th><th>品名</th><th>規格・荷姿</th><th style="width:150px">法規区分</th>
+          <th class="r" style="width:62px">数量</th><th style="width:40px">単位</th>
+          <th class="r" style="width:88px">仕入単価</th><th class="r" style="width:96px">仕入金額</th>
+          <th class="r" style="width:82px">売単価</th><th class="r" style="width:66px">粗利率</th>
+        </tr></thead>
+        <tbody id="poBody"></tbody>
+      </table>
+    </div>
+
+    <div class="totals">
+      <div style="min-width:0">
+        <div class="note" style="margin:0">
+          <b>設計メモ｜発注画面に売単価と粗利率を並べた理由</b><br>
+          仕入先から「今回は単価が上がる」と言われたとき、その場で<b>どの明細の粗利が消えるか</b>が見えないと、得意先に価格改定を申し入れるか自社で飲むかを判断できません。仕入と売りを同じ行に並べているのはそのためです。
+        </div>
+      </div>
+      <div class="totbox">
+        <div class="tr"><span>仕入 小計</span><span class="num" id="poSub">¥0</span></div>
+        <div class="tr"><span>消費税（10%）</span><span class="num" id="poTax">¥0</span></div>
+        <div class="tr sum"><span>発注合計</span><span class="num" id="poAll">¥0</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ 納品 ══════════ -->
+<section class="view" id="v-delivery">
+  <div class="note" style="margin:0 0 12px">
+    <b>設計メモ｜納品は「請求のもと」になります</b><br>
+    納品を1件ずつ登録しておくことで、月末の締めで<b>その月の納品をまとめて1通の請求書</b>にできます。ここが積み上がっていないと締め処理ができないため、納品の登録が業務の要になります。
+    <span class="q"><b>ロットと使用期限は、見積ではなくこの納品の段階で記録します。</b>見積の時点ではどのロットを出すかまだ決まっていないためです。試薬は回収や品質の問い合わせが入ったとき「どの得意先にどのロットを納めたか」を遡れることが要になるので、納品と紐づけて残す形にしました。この持ち方で御社の運用に合っていますでしょうか。</span>
+  </div>
+  <div class="panel">
+    <div class="ph">
+      <h2>納品</h2><span class="sub">一覧（当月＋前月）</span>
+      <span class="sp"></span>
+      <button class="btn btn-s" data-go="invoice">締めて請求する</button>
+    </div>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th>納品番号</th><th>納品日</th><th>得意先</th><th>件名</th><th class="r">税抜金額</th><th>ロット</th><th>使用期限</th><th>出荷</th><th>請求</th></tr></thead>
+        <tbody id="deliveryBody"></tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ 請求（合計請求書） ══════════ -->
+<section class="view" id="v-invoice">
+  <div class="note" style="margin:0 0 12px">
+    <b>設計メモ｜請求書は見積書と1対1にしていません</b><br>
+    見積1枚につき請求1枚という作りは、月末締めでまとめて請求する運用に合いません。左の納品一覧の<b>チェックを外すと請求額が減ります</b>。1通の請求書が複数の納品からできていることを、操作で確かめられます。
+  </div>
+
+  <div class="recon">
+    <div class="panel">
+      <div class="ph">
+        <h2>締め対象の納品</h2><span class="sub">7月度</span>
+        <span class="sp"></span>
+        <span style="font-size:var(--fs-xs);color:var(--faint)" id="closeCount"></span>
+      </div>
+      <div class="toolbar">
+        <div class="f" style="flex:1;min-width:200px">
+          <label for="invCust">得意先</label>
+          <select id="invCust"></select>
+        </div>
+        <div class="f" style="width:130px">
+          <label for="invClose">締日</label>
+          <input class="ro" id="invClose" readonly tabindex="-1">
+        </div>
+        <div class="f" style="width:140px">
+          <label for="invDue">支払期日</label>
+          <input class="ro" id="invDue" readonly tabindex="-1">
+        </div>
+      </div>
+      <div class="tablewrap">
+        <table>
+          <thead><tr><th style="width:34px" class="c">含</th><th>納品番号</th><th>納品日</th><th>件名</th><th class="r">税抜金額</th></tr></thead>
+          <tbody id="invSrcBody"></tbody>
+        </table>
+      </div>
+      <div class="empty" id="invEmpty" style="display:none">この得意先には、当月の締め対象となる納品がありません。</div>
+    </div>
+
+    <div class="panel">
+      <div class="ph"><h2>合計請求書</h2><span class="sub num" id="invNo">INV-2026-07-0012</span></div>
+      <div class="pb">
+        <div class="totbox" style="min-width:0;width:100%">
+          <div class="tr"><span>納品 <span class="num" id="invLines">0</span> 件</span><span class="num" id="invSub">¥0</span></div>
+          <div class="tr"><span>消費税（10%）</span><span class="num" id="invTax">¥0</span></div>
+          <div class="tr sum"><span>請求額</span><span class="num" id="invAll">¥0</span></div>
+        </div>
+        <div style="margin-top:16px;display:flex;gap:8px;flex-wrap:wrap">
+          <button class="btn btn-p" id="btnPrintInv">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9V3h12v6M6 18H4v-6h16v6h-2M8 14h8v7H8z"/></svg>請求書を印刷
+          </button>
+        </div>
+        <div class="note">
+          <b>設計メモ｜締日と支払期日を手で書かせない</b><br>
+          得意先マスタの締日（月末／20日）と支払サイトから自動で決まります。ここを人が打つと、同じ得意先なのに月によって期日が違うという事故が起き、売掛の消込ができなくなります。
+          <span class="q">締日は月末と20日以外にもございますか。請求書の送付方法（郵送・メール・Web）についてもお教えください。</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ 入金・消込 ══════════ -->
+<section class="view" id="v-payment">
+  <div class="note" style="margin:0 0 12px">
+    <b>設計メモ｜入金は「金額が合わない前提」で作ります</b><br>
+    振込手数料が引かれている、複数の請求がまとめて振り込まれている、一部だけ入金されている ― 実務ではこれが普通に起こります。<b>3件の入金それぞれが、その3パターンです。</b>入金を選び、請求にチェックを入れて差額を振り分けてください。
+  </div>
+
+  <div class="panel">
+    <div class="ph"><h2>入金</h2><span class="sub">未消込のものから表示</span></div>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th>入金日</th><th>入金元</th><th>方法</th><th class="r">入金額</th><th>状態</th><th></th></tr></thead>
+        <tbody id="payBody"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="panel" id="reconPanel">
+    <div class="ph">
+      <h2>消込</h2><span class="sub" id="reconSub">入金を選んでください</span>
+    </div>
+    <div id="reconInner">
+      <div class="empty">上の一覧から入金を1件選ぶと、その得意先の未消込の請求が出ます。</div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ 売掛・でんさい ══════════ -->
+<section class="view" id="v-ar">
+  <div class="note" style="margin:0 0 12px">
+    <b>設計メモ｜「未入金」で括らない</b><br>
+    下の一覧を「未入金」だけで括ると、<b>期日を待つだけの1,240,000円</b>と<b>95日滞留している186,000円</b>が同じ箱に入ります。前者は何もしなくてよく、後者は今日電話する先です。状態を分けているのはこのためです。絞り込みを押して確かめてください。
+  </div>
+  <div class="panel">
+    <div class="ph"><h2>売掛・でんさい</h2><span class="sub">債権一覧</span></div>
+    <div class="toolbar">
+      <div class="chips" id="arChips"></div>
+      <span class="sp" style="margin-left:auto"></span>
+      <span style="font-size:var(--fs-xs);color:var(--faint)" id="arCount"></span>
+    </div>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th>請求番号</th><th>得意先</th><th class="r">残高</th><th>状態</th><th>期日</th><th class="r">経過</th></tr></thead>
+        <tbody id="arBody"></tbody>
+      </table>
+    </div>
+    <div class="empty" id="arEmpty" style="display:none">該当する債権はありません。</div>
+  </div>
+</section>
+
+<!-- ══════════ 作業管理（要件確認中） ══════════ -->
+<section class="view" id="v-work">
+  <div class="panel">
+    <div class="ph"><h2>作業管理</h2><span class="pill p-bill">要件確認中</span></div>
+    <div class="pb doc">
+      <p class="lead">
+        この画面は<b>まだ作っていません</b>。「作業管理」という言葉には、御社の業務では少なくとも2つの解釈があり、どちらかによってデータの持ち方が根本的に変わるためです。推測で作ると、後から直すのに一番費用がかかる箇所になります。
+      </p>
+
+      <div class="opt2">
+        <div class="opt">
+          <h4>案A｜現場作業の進捗管理</h4>
+          <div class="ob">
+            産業廃棄物の収集運搬、機器の設置調整、排水処理装置の工事など、<b>役務そのものが売上になる作業</b>を管理する。<br><br>
+            ・案件（受注）に紐づく<br>
+            ・予定日／担当者／実施日／完了報告<br>
+            ・作業ごとの原価（外注費・人件費）を積み、案件粗利に反映<br>
+            ・産廃はマニフェストの交付・回収と連動<br><br>
+            <span style="color:var(--muted)">→ 受注・原価・請求と同じ流れの中に置く設計になります。</span>
+          </div>
+        </div>
+        <div class="opt">
+          <h4>案B｜社内のやること管理</h4>
+          <div class="ob">
+            「見積を出す」「請求書を送る」「在庫を確認する」といった<b>社内のタスク</b>を担当者ごとに管理する。<br><br>
+            ・伝票に紐づかないものも登録できる<br>
+            ・期限／担当者／完了チェック<br>
+            ・伝票の状態から自動で発生させることも可能<br><br>
+            <span style="color:var(--muted)">→ 販売の流れとは別の、軽い仕組みとして独立させる設計になります。</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="qbox">
+        <b>役務が売上になる事業をお持ちなら、案Aを先にご提案します。</b><br>
+        設置工事・保守・処理業務など、作業そのものが売上になる場合は、作業の進み具合が請求と原価に直結します。この場合は<b>案A</b>のほうが金額に効きます。役務がなく社内のやること管理が目的であれば案Bで、作りは軽くなり、その分を他の機能に回せます。両方必要な場合は案Aを先に作り、案Bを後から足す順序をご提案します。
+        <br><br>
+        計測機器や設備をお売りになる場合は、<b>定期保守・校正の予定管理</b>という第3の形もあります。周期が来たら作業予定と請求予定を自動で作る、という別のデータの持ち方になります。
+      </div>
+
+      <div class="note" style="display:block;background:var(--note-w);border-left:3px solid var(--note);padding:12px 14px;border-radius:0 4px 4px 0;color:#3b2a5c">
+        <b>設計メモ｜あえて「作っていない画面」を1枚入れた理由</b><br>
+        ご要望の8機能すべてに、それらしい画面を並べることはできます。ただ、定義が決まっていないものを推測で作ってお見せするのは、実際の開発では最も手戻りの大きいやり方です。<b>分からないものは分からないと申し上げ、確認してから作る</b>という進め方を、文章ではなく画面でお示ししたいと考えました。
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ マスタ ══════════ -->
+<section class="view" id="v-master">
+  <div class="note" style="margin:0 0 12px">
+    <b>設計メモ｜マスタは「伝票の前」に決まっているべきもの</b><br>
+    掛率・締日・支払サイト・法規区分は、伝票を打つたびに人が思い出すものではなく、<b>マスタに一度入れておいて伝票が自動で拾う</b>ものです。ここが整うと入力そのものが減ります。
+  </div>
+  <div class="panel">
+    <div class="ph"><h2>得意先マスタ</h2><span class="sub">抜粋</span></div>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th>コード</th><th>得意先名</th><th class="r">掛率</th><th>締日</th><th>支払</th><th>決済</th></tr></thead>
+        <tbody id="custMasterBody"></tbody>
+      </table>
+    </div>
+  </div>
+  <div class="panel">
+    <div class="ph"><h2>商品マスタ</h2><span class="sub">抜粋</span>
+      <span class="sp"></span><span style="font-size:var(--fs-xs);color:var(--faint)">法規区分は出荷可否・輸送手配・譲受書に直結します</span>
+    </div>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th>コード</th><th>品名</th><th>規格・荷姿</th><th>法規区分</th><th>消防法の細区分・指定数量</th><th>ロット管理</th><th class="r">定価</th><th class="r">仕入原価</th></tr></thead>
+        <tbody id="prodMasterBody"></tbody>
+      </table>
+    </div>
+    <div class="pb-tight note-only" style="border-top:1px solid var(--line-2)">
+      <div class="note" style="margin:0">
+        <b>設計メモ｜法規区分をマスタに持たせた理由</b><br>
+        毒物及び劇物取締法の劇物と、消防法の危険物は<b>別の法律で、該当する品目も違います</b>（たとえばアセトンは危険物第4類ですが劇物ではなく、水酸化ナトリウムは劇物ですが危険物ではありません）。担当者の記憶に頼らずマスタで持ち、見積・発注・納品のすべてに自動で出るようにしています。
+        <span class="q">劇物の販売時に必要な<b>譲受書</b>の授受も、この区分と紐づけて管理できます。現在は紙で保管されていますか。システムで期限管理まで行うご希望はありますか。</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ 設計の考え方 ══════════ -->
+<section class="view" id="v-design">
+  <div class="panel"><div class="pb doc">
+
+    <p class="lead">
+      見積から入金までの8つの機能が<b>どうつながるか</b>が分かるところまで作ってあります。左のメニューは、そのまま作る順序の提案です。以下、レイアウトの考え方と、あえて作らなかったものをご説明します。<br>
+      <b>業種は専門商社（試薬・化学品・理化学機器の販売と役務）を一例にしています。</b>物販と役務が同じ得意先に対して同時に走る、という商流はどの業種の卸売・商社にも共通します。御社の商材・法規・帳票に置き換えて設計しますので、「うちならここが違う」という目で見ていただくのが早いと思います。
+    </p>
+
+    <h3>1. 何を見て設計したか</h3>
+    <p>
+      御社のウェブサイトを拝見し、試薬・化学工業薬品・理化学機器の販売に加えて、産業廃棄物処理や委託取次まで扱われていることを前提に画面を組みました。つまり<b>「物を仕入れて納める仕事」と「役務を提供する仕事」が同じ得意先に対して同時に走る</b>という理解です。商品マスタに試薬・機器と並べて「設置調整」「収集運搬」「廃液処理」を入れているのはそのためで、1枚の伝票に物販と役務が混在しても破綻しない形にしています。
+    </p>
+
+    <h4>試薬・薬品を扱う会社ならではの点</h4>
+    <ul>
+      <li>明細に<b>法規区分（劇物／危険物第4類／マニフェスト）</b>を表示しています。出荷の可否や輸送手配に直結するため、受注してからではなく<b>見積の時点で見えている</b>必要があると考えました。</li>
+      <li>劇物と危険物は<b>別の法律</b>で、該当する品目も違います。アセトンは危険物第4類（第1石油類・水溶性）ですが毒物及び劇物取締法には該当せず、トルエンは劇物であり危険物第4類（第1石油類・非水溶性）でもあり、水酸化ナトリウムは劇物ですが危険物ではありません。<b>デモの分類は各社のSDSの記載に合わせています</b>。担当者の記憶に頼らず商品マスタで持たせ、見積・発注・納品のすべてに自動で出します。</li>
+      <li>劇物を含む見積には、伝票の見出しに<b>「譲受書 未受領」</b>の印が出ます。出荷前に必ず要るものを、出荷の直前ではなく見積の段階から見えるようにしています。</li>
+      <li>産業廃棄物の役務には<b>マニフェスト</b>の印を付けています。伝票と交付・回収の管理が別々になると、後から突き合わせる作業が発生するためです。</li>
+      <li>帳票の法定注記は、<b>その伝票に該当する品目があるときだけ</b>印字されます。劇物を含まない見積に劇物の注記が出ると、かえって信用を損なうためです。</li>
+      <li>単位を「本・缶・箱・台・式・t」から選べるようにしています。荷姿がそのまま単位になる商材のため、固定の単位では実務に合わないと判断しました。</li>
+    </ul>
+    <div class="ibox">
+      <b>ここは確認させてください。</b>マニフェストの交付者は、法律上は排出事業者（お客様側）になります。御社が<b>委託の取次</b>をされる立場か、収集運搬の許可をお持ちで自社搬送もされるかによって、帳票に載せる文言と管理の範囲が変わります。デモでは「交付者は排出事業者様、当社は取次」という前提で書いていますが、実態と違っていればお教えください。<br><br>
+      あわせて、劇物販売時の<b>譲受書</b>は書面での保存が要るものですので、システムで受領状況と保存期限まで管理するご希望があるかもお聞かせください。
+    </div>
+
+    <h3>2. トップページ ―「今日やること」しか置かない</h3>
+    <p>
+      毎朝この画面を開いて、放っておくと入金が遅れる・信用を落とすものだけが4つ並ぶようにしました。<b>4枚のカードと案件の行はすべて押せて</b>、該当する一覧に移動します。売上の累計や達成率は置いていません。見ても今日の行動が変わらないためです。
+    </p>
+    <p>
+      グラフは<b>売掛の経過日数の1つだけ</b>にしました。「90日を超えた売掛が出た＝今日電話をかける先がある」という行動に直結する図だからです。金額が小さくても必ず見える太さで描いています。比率どおりに細くすると、いちばん見るべき数字がいちばん見えなくなるためです。
+    </p>
+
+    <h3>3. 8つの機能をどうつなぐか</h3>
+    <h4>見積 → 受注 → 発注 → 納品 → 請求 → 入金 → 売掛</h4>
+    <p>
+      商社の仕事は、受注してから仕入れるのが基本です。そのため<b>発注書は案件に紐づけ</b>、案件ごとの粗利がそのまま確定するようにしています。得意先へ直接送ってもらう<b>直送</b>は出荷方法の選択として持たせました。直送では当社を物が通らず入荷検品が発生しないため、納品日の決まり方が変わるからです。
+    </p>
+    <p>
+      なお<b>受注は独立した画面にせず、見積の状態遷移</b>として持たせています（見積一覧の状態が「受注」に変わります）。中小の商社では見積の内容がそのまま受注になることがほとんどで、受注伝票を別に作ると同じ内容を二重に持つことになるためです。分けたほうがよい事情があればお教えください。
+    </p>
+    <h4>請求書は見積書と1対1にしていません</h4>
+    <p>
+      見積1枚につき請求1枚という作りにすると、月末締めでまとめて請求する運用に合いません。納品ごとに売上を立て、<b>締日で1か月分をまとめて1通の合計請求書にする</b>構造にしています。得意先ごとに締日（月末／20日）と支払サイトが違う前提です。ここを後から直すのは作り直しに近くなるため、最初からこの形にしてあります。請求画面で納品のチェックを外すと請求額が変わるのをお試しください。
+    </p>
+    <h4>売掛の状態は、決済方法によって分かれます</h4>
+    <p>
+      銀行振込の得意先は「請求済 → 入金済」の2段階で足ります。一方<b>でんさいの得意先は、請求した後に電子債権を受領し、そこから期日まで待ってようやく入金</b>になります。同じ「未入金」でも中身がまったく違うため、決済方法ごとに状態の道筋を分け、<b>請求済 → でんさい受領 → 期日待ち → 入金済</b>の4段階を持たせています。督促すべきものと、期日を待つだけのものが同じ箱に入らないようにするためです。
+    </p>
+    <p>
+      なお、でんさいを期日前に金融機関へ持ち込む（割引）、他社へ渡す（裏書譲渡）といった扱いは、今回の画面には入れていません。<b>まず受領と期日の管理を確実にし、実際にお使いになる操作が見えてから足す</b>のが安全だと考えています。現在これらをどの程度お使いか、お教えいただけますでしょうか。
+    </p>
+    <h4>確定した伝票の単価は、後から変わらないようにします</h4>
+    <p>
+      掛率や定価を改定したときに、過去に出した見積や請求の金額まで変わってしまうと、お客様にお出しした書類と社内の記録が食い違います。<b>伝票は確定した時点の単価をそのまま持ち</b>、マスタの改定はそれ以降の伝票にだけ効く形にします。地味ですが、後から直すのが最も難しい部分です。
+    </p>
+    <h4>入金の消込は、金額が合わない前提で作ります</h4>
+    <p>
+      振込手数料が引かれている、複数の請求がまとめて振り込まれている、一部だけ入金されている ― 実務ではこれが普通に起こります。入金・消込の画面に並べた3件は、そのまま<b>この3パターン</b>です。差額を手数料・値引・一部入金のいずれかに振り分けないと消込を確定できない作りにしており、宙に浮いた差額が残らないようにしています。
+    </p>
+
+    <h3>4. Windowsで速く使えること</h3>
+    <p>
+      ご要望にあった「Windows環境で快適に」を、<b>キーボードだけで入力が完結すること</b>と解釈しました。見積は1日に何件も打つ画面です。項目移動は <kbd>Enter</kbd>、行追加は <kbd>Ctrl</kbd>+<kbd>Enter</kbd>、品名呼び出しは <kbd>F2</kbd>。数量はテンキーのまま打てます。既存の販売管理ソフトと同じ操作感にしてあるので、移行の際に覚え直しが要りません。
+    </p>
+    <p>
+      Windowsのブラウザでそのまま動き、<b>インストールと更新作業は不要</b>です。デスクトップにアイコンを置いて、二重クリックで専用ウィンドウとして開く形にもできます。社内のパソコンが増えても台数分の作業は発生しません。
+    </p>
+    <h4>印刷を後回しにしていません</h4>
+    <p>
+      業務システムの出口は結局のところ紙とPDFです。画面がきれいでも、印刷したときにA4からはみ出す・罫線が消えるといったことが起きると使われなくなります。<b>見積書・発注書・合計請求書の3種類が、いま画面から印刷すればA4の体裁で出ます</b>。社内用の粗利欄は印刷には出ません。お試しください。
+    </p>
+
+    <h3>5. このデモで「実際に動く範囲」</h3>
+    <p>
+      デモは見た目だけ整えることもできますが、それでは判断の材料になりません。<b>いま計算やデータの連動が本当に動いているのは次の範囲です。</b>
+    </p>
+    <div class="nobox">
+      <p style="margin-bottom:8px"><b>実際に動きます</b></p>
+      <ul>
+        <li>見積の単価計算（得意先の掛率・個別契約単価・役務の扱い・粗利）</li>
+        <li>見積から受注への変換と、ダッシュボード・一覧への反映</li>
+        <li>発注の金額計算と、明細ごとの粗利率</li>
+        <li>締め処理（納品のチェックを外すと請求額が変わります）</li>
+        <li>入金の消込（充当・差額の振り分け・売掛一覧への反映）</li>
+        <li>見積書・発注書・請求書のA4印刷</li>
+        <li>一覧の検索と絞り込み</li>
+      </ul>
+      <p style="margin:12px 0 8px"><b>今回は固定の表示です（実装ではつなぎます）</b></p>
+      <ul style="margin-bottom:0">
+        <li>売掛のグラフとでんさいの期日一覧（数値は仮置きで、消込とは連動していません）</li>
+        <li>納品の登録画面（一覧の表示のみ）</li>
+        <li>見積一覧のうち、中身まで開けるのは Q-2026-0812 の1件だけです</li>
+      </ul>
+    </div>
+    <p>
+      できていないことを「できている」ようにお見せしないことが、この先お付き合いいただくうえで一番大事だと考えています。
+    </p>
+
+    <h3>6. データの置き場所とバックアップ</h3>
+    <p>
+      このデモは説明用に公開の場所へ置いていますが、<b>実際のシステムは御社専用の環境に構築します</b>。データベースは日次で自動バックアップを取り、一定期間さかのぼって復元できる形にします。社外からの接続を許可するかどうか、誰がどこまで見られるかは、運用が固まってからご相談のうえ設定します。
+    </p>
+    <p>
+      <b>ソースコードは一式お渡しします。</b>特定の業者でないと直せない状態にはしません。データもいつでも取り出せる形（CSVなど）で持ちます。長くお使いいただく前提のご依頼と伺っていますので、私以外の手でも続けられることを条件に設計します。
+    </p>
+
+    <h3>7. あえて作らなかったもの</h3>
+    <div class="nobox">
+      <p style="margin-bottom:8px">最初の段階では次を入れていません。限られた費用を、毎日使う画面を確実に動かすことに使うべきだと考えているためです。</p>
+      <ul style="margin-bottom:0">
+        <li><b>細かい権限管理</b> ― まずは全員が使える形で始め、運用が固まってから必要な範囲だけ絞るほうが手戻りがありません。</li>
+        <li><b>在庫の数量管理</b> ― 受注してから仕入れる商流が中心と拝察しました。ロットと使用期限は納品の記録として残しますが、倉庫の在庫数を持つところまでは入れていません。常備在庫をお持ちであれば第2フェーズで足します。</li>
+        <li><b>スマートフォン専用の画面</b> ― 事務所のパソコンで使う画面を優先しました（この画面はスマートフォンでも開けますが、入力はパソコン向けに作っています）。</li>
+        <li><b>売上分析のグラフ一式</b> ― 数字を貯めてからでないと、見るべき指標が決まりません。</li>
+      </ul>
+    </div>
+
+    <h3>8. 進め方の考え方</h3>
+    <p>
+      機能を一度に全部作ろうとすると、要件のすり合わせだけで期間を使い切ります。<b>まず毎日使う基幹部分（見積・受注・発注・納品・請求）を動く形にし</b>、実際にお使いいただきながら残りを順に足していく進め方をご提案しています。最初の数週間で「実務で使える状態」に到達させることを優先します。
+    </p>
+    <p>
+      その後は<b>月額での継続開発</b>としてお引き受けする形にも対応します。一度に大きな金額をお支払いいただくのではなく、動くものを見ながら順に広げられます。保守と機能追加もこの中に含みます。費用は機能の範囲と件数で変わりますので、業務を伺ったうえでお見積りします。
+    </p>
+    <p>
+      開発中は<b>この画面と同じ形で更新され</b>、いつでも最新の状態を触っていただけます。文章の報告書だけでなく、動いている現物で進捗を確認いただける形です。
+    </p>
+
+    <div class="qbox">
+      <b>ご相談をいただく際、最初に伺うことです。</b>この5つが分かれば、御社の業務に合わせた画面をお見せできます。
+      <ol>
+        <li><b>締めと支払いの条件</b>。得意先ごとに締日（月末／20日など）と支払サイトが違うか。決済は振込か、手形・でんさいが混ざるか。ここで請求と売掛の作りが決まります。</li>
+        <li><b>単価の決まり方</b>。得意先ごとの掛率か、品目ごとの個別契約単価か、その両方か。値決めの実態が単価マスタの設計を左右します。</li>
+        <li><b>商材に固有の区分</b>。法規（危険物・医薬品・食品表示など）、ロット・使用期限、資格や書面の授受が要るものがあるか。<b>この画面では試薬・化学品を例に、劇物と消防法の危険物をマスタで持たせています。</b></li>
+        <li>現在お使いの仕組み（Excel・Access・市販の販売管理ソフトなど）と、<b>データ移行の要否</b>。得意先マスタと商品マスタだけでも引き継げると、初日から実務で使えます。</li>
+        <li><b>同時にお使いになる人数</b>と、事務所の外から使う必要があるかどうか。</li>
+      </ol>
+      仕様書をお持ちでしたらお送りください。<b>それに合わせてこの画面を作り直し、改善のご提案を添えてお戻しします。</b>
+    </div>
+
+  </div></div>
+</section>
+
+    </main>
+
+    <footer>
+      ※本ページは業務管理システムの<b>画面デモ（サンプル）</b>です。会社名・取引先名・仕入先名・商品名・単価・金額・残高はすべて<b>架空の仮データ</b>で、実在の企業・取引を示すものではありません。業種は専門商社を一例にしています。画面の配色・項目・帳票の体裁は、ご要望に合わせて変更いたします。<br>
+      作成：自動化のミナト（クラウドワークス）／2026年8月
+    </footer>
+  </div>
+</div>
+
+<!-- 品名検索 -->
+<div class="ov" id="finderOv">
+  <div class="modal" role="dialog" aria-label="品名検索">
+    <div class="mh">
+      <input id="finderQ" placeholder="品名・コード・区分で絞り込み（例：トル、K-33、劇物）" autocomplete="off">
+      <button class="btn" id="finderClose">閉じる</button>
+    </div>
+    <div class="ml" id="finderList"></div>
+    <div class="mf">↑↓ で選択　Enter で明細に追加　Esc で閉じる</div>
+  </div>
+</div>
+
+<!-- 確認 -->
+<div class="ov" id="confirmOv">
+  <div class="modal" style="width:min(460px,100%)" role="dialog" aria-label="確認">
+    <div class="mh"><h3 id="cfTitle">確認</h3></div>
+    <div class="mb" id="cfBody"></div>
+    <div class="mf">
+      <span class="sp"></span>
+      <button class="btn" id="cfNo">キャンセル</button>
+      <button class="btn btn-p" id="cfYes">実行する</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+<div id="printRoot"><div class="pdoc" id="printDoc"></div></div>
+
+<script>
+(function(){
+"use strict";
+
+/* ══ マスタ（すべて架空のサンプル。法規区分のみ実際の分類に合わせています） ══ */
+var CUST=[
+ {id:"C-101",name:"彩北化成工業株式会社",rate:0.92,close:"月末締",pay:"翌月末払い",method:"でんさい",closeDay:31,limit:5000000},
+ {id:"C-102",name:"関東理工科大学 応用化学科",rate:0.95,close:"月末締",pay:"翌々月10日払い",method:"銀行振込",closeDay:31,limit:3000000},
+ {id:"C-103",name:"武州環境分析センター株式会社",rate:0.88,close:"20日締",pay:"翌月20日払い",method:"でんさい",closeDay:20,limit:1000000}
+];
+var SUP=[
+ {id:"S-01",name:"東京試薬工業株式会社",note:"試薬・化学工業薬品／掛仕入 月末締翌月末払"},
+ {id:"S-02",name:"関越理化機器販売株式会社",note:"理化学機器／受注生産品は納期4〜6週"},
+ {id:"S-03",name:"埼玉環境サービス株式会社",note:"産業廃棄物 収集運搬・処分／マニフェスト交付"}
+];
+/* 法規区分。毒物及び劇物取締法の「劇物」と消防法の「危険物」は別の法律で、該当する品目も異なります。
+   下記の分類は各社のSDS(安全データシート)の記載に合わせています。
+   例) アセトン=毒劇法に該当しない/危険物第4類第1石油類(水溶性・指定数量400L)
+       トルエン=劇物に該当する/危険物第4類第1石油類(非水溶性・指定数量200L) */
+var PROD=[
+ {code:"R-1041",name:"アセトン 特級",spec:"500mL ガラス瓶",unit:"本",list:1280,cost:780,tags:["危険物第4類"],reg:"第1石油類(水溶性)／指定数量400L",lot:true},
+ {code:"R-1102",name:"トルエン 一級",spec:"18L 金属缶",unit:"缶",list:10600,cost:6900,tags:["劇物","危険物第4類"],reg:"第1石油類(非水溶性)／指定数量200L",lot:true},
+ {code:"R-1250",name:"メタノール 特級",spec:"500mL ガラス瓶",unit:"本",list:1450,cost:900,tags:["劇物","危険物第4類"],reg:"アルコール類／指定数量400L",lot:true},
+ {code:"R-2003",name:"精製水",spec:"20L コック付",unit:"箱",list:2600,cost:1500,tags:[],reg:"",lot:true},
+ {code:"R-2210",name:"水酸化ナトリウム 試薬特級",spec:"500g ポリ瓶",unit:"本",list:1980,cost:1200,tags:["劇物"],reg:"危険物には該当しません",lot:true},
+ {code:"K-3301",name:"卓上型pH計 PH-2200",spec:"電極・スタンド付",unit:"台",list:138000,cost:96000,tags:[],reg:"",lot:false},
+ {code:"K-3410",name:"電子天秤 0.1mg",spec:"風防付",unit:"台",list:268000,cost:191000,tags:[],reg:"",lot:false},
+ {code:"K-3520",name:"ドラフトチャンバー",spec:"1200幅 排気ファン別",unit:"台",list:480000,cost:352000,tags:[],reg:"",lot:false},
+ {code:"S-5001",name:"ドラフトチャンバー 設置調整",spec:"現地作業 1日",unit:"式",list:85000,cost:42000,tags:["役務"],reg:"",lot:false},
+ {code:"W-6001",name:"産業廃棄物 収集運搬（汚泥）",spec:"1t あたり",unit:"t",list:38000,cost:24000,tags:["役務","マニフェスト"],reg:"",lot:false},
+ {code:"W-6002",name:"廃液処理（有機溶剤系）",spec:"20L 缶",unit:"缶",list:12000,cost:7200,tags:["役務","マニフェスト"],reg:"",lot:false}
+];
+/* 得意先×品目の個別単価(掛率の例外)。実務では必ず出るため上書きの仕組みを持たせる */
+var SPECIAL_PRICE={"C-101|R-1102":9800};
+
+var QUOTES=[
+ {no:"Q-2026-0812",date:"2026-08-05",cust:"C-101",subj:"第2分析室 消耗品および機器 御見積",amt:298903,state:"draft",cur:true},
+ {no:"Q-2026-0806",date:"2026-08-03",cust:"C-103",subj:"廃液処理 9月定期分",amt:158400,state:"sent"},
+ {no:"Q-2026-0799",date:"2026-08-01",cust:"C-102",subj:"電子天秤 更新",amt:294800,state:"sent"},
+ {no:"Q-2026-0788",date:"2026-07-29",cust:"C-101",subj:"ドラフトチャンバー 入替一式",amt:621500,state:"order"},
+ {no:"Q-2026-0771",date:"2026-07-24",cust:"C-103",subj:"試薬 補充（8月分）",amt:96800,state:"order"},
+ {no:"Q-2026-0760",date:"2026-07-18",cust:"C-102",subj:"pH計 校正用標準液",amt:41800,state:"draft"}
+];
+
+var DEALS=[
+ {no:"2026-0784",cust:"彩北化成工業株式会社",subj:"分析室 定期消耗品（7月分）",amt:412500,step:4,go:"ar"},
+ {no:"2026-0791",cust:"武州環境分析センター株式会社",subj:"廃液処理 8月定期",amt:158400,step:3,go:"invoice"},
+ {no:"2026-0803",cust:"関東理工科大学 応用化学科",subj:"電子天秤 更新",amt:294800,step:2,go:"delivery"},
+ {no:"2026-0808",cust:"彩北化成工業株式会社",subj:"ドラフトチャンバー 入替一式",amt:621500,step:1,go:"purchase"},
+ {no:"2026-0812",cust:"彩北化成工業株式会社",subj:"第2分析室 消耗品および機器",amt:298903,step:0,go:"quoteedit"}
+];
+var STEPS=["見積","受注","納品","請求","入金"];
+
+var DELIV=[
+ {no:"D-2026-0731",date:"2026-07-03",cust:"C-101",subj:"分析室 定期消耗品",amt:164000,ship:"own",billed:false,lot:"TL24G019",exp:"2029-07"},
+ {no:"D-2026-0748",date:"2026-07-12",cust:"C-101",subj:"廃液処理（有機溶剤系）20L×6",amt:72000,ship:"own",billed:false,lot:"",exp:""},
+ {no:"D-2026-0766",date:"2026-07-25",cust:"C-101",subj:"卓上型pH計 PH-2200",amt:126960,ship:"direct",billed:false,lot:"",exp:""},
+ {no:"D-2026-0771",date:"2026-07-31",cust:"C-101",subj:"アセトン 特級ほか",amt:12040,ship:"own",billed:false,lot:"AC26B104",exp:"2028-12"},
+ {no:"D-2026-0769",date:"2026-07-28",cust:"C-103",subj:"廃液処理 7月定期",amt:144000,ship:"own",billed:true,lot:"",exp:""},
+ {no:"D-2026-0775",date:"2026-08-01",cust:"C-102",subj:"電子天秤 更新",amt:268000,ship:"direct",billed:false,lot:"",exp:""}
+];
+
+var INVOICES=[
+ {no:"INV-2026-07-0012",cust:"C-101",amt:412500,state:"paid",due:"2026-08-31",age:0},
+ {no:"INV-2026-06-0005",cust:"C-101",amt:1240000,state:"note",due:"2026-08-20",age:0},
+ {no:"INV-2026-05-0003",cust:"C-103",amt:486000,state:"note",due:"2026-09-30",age:0},
+ {no:"INV-2026-07-0021",cust:"C-103",amt:854000,state:"billed",due:"2026-08-20",age:15},
+ {no:"INV-2026-07-0019",cust:"C-102",amt:294800,state:"billed",due:"2026-09-10",age:4},
+ {no:"INV-2026-04-0002",cust:"C-101",amt:186000,state:"billed",due:"2026-05-31",age:95}
+];
+
+var PAYMENTS=[
+ {id:"P1",date:"2026-08-01",cust:"C-101",method:"銀行振込",amt:411940,done:false,targets:["INV-2026-07-0012"],hint:"振込手数料が引かれている例"},
+ {id:"P2",date:"2026-08-01",cust:"C-103",method:"銀行振込",amt:1340000,done:false,targets:["INV-2026-05-0003","INV-2026-07-0021"],hint:"2件の請求がまとめて入金された例"},
+ {id:"P3",date:"2026-08-03",cust:"C-102",method:"銀行振込",amt:200000,done:false,targets:["INV-2026-07-0019"],hint:"一部だけ入金された例"}
+];
+
+var AR_STATE={billed:{cls:"p-bill",label:"請求済"},note:{cls:"p-sent",label:"期日待ち（でんさい）"},paid:{cls:"p-paid",label:"入金済"}};
+var Q_STATE={draft:{cls:"p-draft",label:"下書き"},sent:{cls:"p-sent",label:"提出済"},order:{cls:"p-order",label:"受注"}};
+
+/* ══ 汎用 ══ */
+var $=function(s,r){return (r||document).querySelector(s)};
+var $$=function(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s))};
+function yen(n){return "¥"+Math.round(n).toLocaleString("ja-JP")}
+function n2(n){return Math.round(n).toLocaleString("ja-JP")}
+function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
+function prod(c){for(var i=0;i<PROD.length;i++){if(PROD[i].code===c)return PROD[i]}return null}
+function custById(id){for(var i=0;i<CUST.length;i++){if(CUST[i].id===id)return CUST[i]}return CUST[0]}
+function invById(no){for(var i=0;i<INVOICES.length;i++){if(INVOICES[i].no===no)return INVOICES[i]}return null}
+function jdate(s){var p=String(s).split("-");return p[0]+"/"+p[1]+"/"+p[2]}
+var toastT;
+function toast(m){var t=$("#toast");t.textContent=m;t.classList.add("on");clearTimeout(toastT);toastT=setTimeout(function(){t.classList.remove("on")},2600)}
+function tagHtml(tags){
+  return tags.map(function(t){
+    var c=t==="劇物"?"t-dan":(t==="危険物第4類"?"t-warn":(t==="マニフェスト"?"t-brand":"t-neu"));
+    return '<span class="tag '+c+'">'+esc(t)+'</span>';
+  }).join(" ");
+}
+function pillHtml(map,key){var s=map[key];return s?'<span class="pill '+s.cls+'">'+esc(s.label)+'</span>':""}
+
+/* ══ ナビゲーション ══ */
+var ICONS={
+ dash:'<path d="M4 4h6v6H4zM14 4h6v6h-6zM4 14h6v6H4zM14 14h6v6h-6z"/>',
+ quote:'<path d="M7 3h7l4 4v14H7z"/><path d="M14 3v4h4"/><path d="M10 13h6M10 16h4"/>',
+ purchase:'<path d="M3 6h3l2 10h10"/><circle cx="10" cy="19" r="1.4"/><circle cx="17" cy="19" r="1.4"/><path d="M8 9h12l-1.5 5H9"/>',
+ delivery:'<path d="M3 8l9-4 9 4v8l-9 4-9-4z"/><path d="M3 8l9 4 9-4M12 12v8"/>',
+ invoice:'<path d="M7 3h10v18l-2.5-1.6L12 21l-2.5-1.6L7 21z"/><path d="M10 8h4M10 12h4"/>',
+ payment:'<ellipse cx="12" cy="7" rx="7" ry="3"/><path d="M5 7v5c0 1.7 3.1 3 7 3s7-1.3 7-3V7"/><path d="M5 12v5c0 1.7 3.1 3 7 3s7-1.3 7-3v-5"/>',
+ ar:'<circle cx="12" cy="12" r="8"/><path d="M12 7v5l3.5 2"/>',
+ work:'<path d="M14.5 5.5a4 4 0 0 0 5 5L21 12l-9 9-3-3 9-9z"/><path d="M6 6l3 3"/>',
+ master:'<ellipse cx="12" cy="6" rx="7" ry="3"/><path d="M5 6v12c0 1.7 3.1 3 7 3s7-1.3 7-3V6"/><path d="M5 12c0 1.7 3.1 3 7 3s7-1.3 7-3"/>',
+ design:'<path d="M4 4h7v16H4zM13 4h7v16h-7z"/><path d="M7 8h1M16 8h1"/>'
+};
+function icon(k){
+  return '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">'+(ICONS[k]||"")+'</svg>';
+}
+var NAV1=[
+ {v:"dash",k:"dash",label:"ダッシュボード"},
+ {v:"quote",k:"quote",label:"見積・受注"},
+ {v:"purchase",k:"purchase",label:"発注"},
+ {v:"delivery",k:"delivery",label:"納品"},
+ {v:"invoice",k:"invoice",label:"請求（締め）"},
+ {v:"master",k:"master",label:"マスタ"}
+];
+var NAV2=[
+ {v:"payment",k:"payment",label:"入金・消込"},
+ {v:"ar",k:"ar",label:"売掛・でんさい"},
+ {v:"work",k:"work",label:"作業管理",badge:"要件確認中",badgeCls:"ask"}
+];
+var NAV3=[{v:"design",k:"design",label:"レイアウトの考え方"}];
+var TITLES={
+ dash:["本日の業務",""],quote:["見積・受注","一覧"],quoteedit:["見積","伝票入力"],
+ purchase:["発注","仕入先への発注書"],delivery:["納品","一覧"],invoice:["請求","月次の締め処理"],
+ payment:["入金・消込",""],ar:["売掛・でんさい","債権一覧"],work:["作業管理","要件確認中"],
+ master:["マスタ","得意先・商品"],design:["レイアウトの考え方","ご提案"]
+};
+function navBtn(it){
+  return '<button data-v="'+it.v+'" class="'+(it.badge?"soon":"")+'">'+icon(it.k)+
+    '<span class="lb">'+esc(it.label)+'</span>'+
+    (it.badge?'<span class="badge '+(it.badgeCls||"")+'">'+esc(it.badge)+'</span>':"")+'</button>';
+}
+$("#nav1").innerHTML=NAV1.map(navBtn).join("");
+$("#nav2").innerHTML=NAV2.map(navBtn).join("");
+$("#nav3").innerHTML=NAV3.map(navBtn).join("");
+
+var VIEWS=["dash","quote","quoteedit","purchase","delivery","invoice","payment","ar","work","master","design"];
+function show(v,keepHash){
+  if(VIEWS.indexOf(v)<0)v="dash";
+  $$(".view").forEach(function(s){s.classList.toggle("on",s.id==="v-"+v)});
+  var navKey=(v==="quoteedit")?"quote":v;
+  $$(".nav button").forEach(function(b){
+    if(b.dataset.v===navKey)b.setAttribute("aria-current","page"); else b.removeAttribute("aria-current");
+  });
+  var t=TITLES[v]||["",""];
+  $("#crumbTitle").textContent=t[0]; $("#crumbSub").textContent=t[1];
+  if(!keepHash && location.hash.slice(1)!==v){try{history.replaceState(null,"","#"+v)}catch(e){}}
+  window.scrollTo({top:0,behavior:"instant"});
+}
+document.addEventListener("click",function(e){
+  var b=e.target.closest("[data-v]"); if(b){show(b.dataset.v); return}
+  var g=e.target.closest("[data-go]"); if(g){show(g.dataset.go)}
+});
+
+/* ══ 設計メモ ══ */
+$("#noteBtn").addEventListener("click",function(){
+  var on=document.body.classList.toggle("notes-on");
+  this.setAttribute("aria-pressed",String(on));
+  $("#noteBtnLabel").textContent=on?"設計メモを隠す":"設計メモを表示";
+  if(on)toast("各ブロックに、そのレイアウトにした理由を表示しました");
+});
+
+/* ══ 確認モーダル ══ */
+var cfCb=null;
+function confirmBox(title,body,label,cb){
+  $("#cfTitle").textContent=title; $("#cfBody").innerHTML=body;
+  $("#cfYes").textContent=label||"実行する"; cfCb=cb;
+  $("#confirmOv").classList.add("on"); setTimeout(function(){$("#cfYes").focus()},30);
+}
+function closeConfirm(){$("#confirmOv").classList.remove("on"); cfCb=null}
+$("#cfNo").addEventListener("click",closeConfirm);
+$("#confirmOv").addEventListener("click",function(e){if(e.target===this)closeConfirm()});
+$("#cfYes").addEventListener("click",function(){var c=cfCb; closeConfirm(); if(c)c()});
+
+/* ══ ダッシュボード ══ */
+var KPI=[
+ {k:"見積 提出待ち",v:3,u:"件",h:"最も古い依頼から2日経過",go:"quote",c:"var(--brand)"},
+ {k:"本日 納品予定",v:2,u:"件",h:"うち直送1件（メーカー手配済）",go:"delivery",c:"var(--ok)"},
+ {k:"入金 未消込",v:3,u:"件",h:"いずれも請求額と一致しません",go:"payment",c:"var(--warn)"},
+ {k:"でんさい 期日7日以内",v:1,u:"件",h:"8/20 期日 ¥1,240,000",go:"ar",c:"var(--danger)",dan:true}
+];
+function renderKpis(){
+  $("#kpis").innerHTML=KPI.map(function(x){
+    return '<button class="kpi'+(x.dan?" dan":"")+'" data-go="'+x.go+'">'+
+      '<span class="kl"><span style="width:7px;height:7px;border-radius:50%;background:'+x.c+';display:inline-block"></span>'+esc(x.k)+'</span>'+
+      '<span class="kv num">'+x.v+'<em>'+x.u+'</em></span>'+
+      '<span class="kh">'+esc(x.h)+'</span></button>';
+  }).join("");
+}
+function renderDeals(){
+  $("#dealBody").innerHTML=DEALS.map(function(d){
+    var f=STEPS.map(function(s,i){return '<i class="'+(i<d.step?"done":(i===d.step?"cur":""))+'">'+s+'</i>'}).join("");
+    return '<tr class="clickable" data-go="'+d.go+'"><td class="num">'+d.no+'</td><td>'+esc(d.cust)+'</td><td>'+esc(d.subj)+
+      '</td><td class="r num">'+yen(d.amt)+'</td><td><span class="flow">'+f+'</span></td></tr>';
+  }).join("");
+}
+
+/* ══ 見積一覧 ══ */
+var qFilter="all", qQuery="";
+var Q_CHIPS=[{k:"all",l:"すべて"},{k:"draft",l:"下書き"},{k:"sent",l:"提出済"},{k:"order",l:"受注"}];
+function renderQChips(){
+  $("#qChips").innerHTML=Q_CHIPS.map(function(c){
+    return '<button class="chip" data-q="'+c.k+'" aria-pressed="'+(qFilter===c.k)+'">'+esc(c.l)+'</button>';
+  }).join("");
+}
+function renderQuoteList(){
+  var rows=QUOTES.filter(function(q){
+    if(qFilter!=="all"&&q.state!==qFilter)return false;
+    if(!qQuery)return true;
+    var s=(q.no+custById(q.cust).name+q.subj).toLowerCase();
+    return s.indexOf(qQuery.toLowerCase())>=0;
+  });
+  $("#quoteListBody").innerHTML=rows.map(function(q){
+    return '<tr class="clickable" data-quote="'+q.no+'"><td class="num">'+q.no+'</td><td class="num">'+jdate(q.date)+
+      '</td><td>'+esc(custById(q.cust).name)+'</td><td>'+esc(q.subj)+'</td><td class="r num">'+yen(q.amt)+
+      '</td><td>'+pillHtml(Q_STATE,q.state)+'</td></tr>';
+  }).join("");
+  $("#quoteEmpty").style.display=rows.length?"none":"block";
+  $("#qCount").textContent=rows.length+" 件 / 全 "+QUOTES.length+" 件";
+}
+$("#qChips").addEventListener("click",function(e){
+  var b=e.target.closest("[data-q]"); if(!b)return;
+  qFilter=b.dataset.q; renderQChips(); renderQuoteList();
+});
+$("#qSearch").addEventListener("input",function(){qQuery=this.value.trim(); renderQuoteList()});
+$("#quoteListBody").addEventListener("click",function(e){
+  var tr=e.target.closest("[data-quote]"); if(!tr)return;
+  var no=tr.dataset.quote;
+  if(no==="Q-2026-0812"){show("quoteedit")}
+  else{toast("このデモで中身まで開けるのは Q-2026-0812 の1件です（他は一覧の表示のみ）")}
+});
+$("#btnNewQuote").addEventListener("click",function(){
+  toast("このデモでは Q-2026-0812 を開きます");
+  show("quoteedit");
+});
+
+/* ══ 見積 伝票 ══ */
+var quote={custId:"C-101",lines:[{code:"R-1041",qty:24},{code:"R-1102",qty:2},{code:"R-2003",qty:5},{code:"K-3301",qty:1},{code:"S-5001",qty:1}]};
+var converted=false;
+function cust(){return custById(quote.custId)}
+function isSpecial(p,c){return SPECIAL_PRICE[c.id+"|"+p.code]!==undefined}
+function unitPrice(p,c){
+  var sp=SPECIAL_PRICE[c.id+"|"+p.code];
+  if(sp!==undefined)return sp;                       /* 個別契約単価は掛率より優先 */
+  if(p.tags.indexOf("役務")>=0)return p.list;         /* 役務は掛率の対象外 */
+  return Math.round(p.list*c.rate/10)*10;
+}
+function hasGekibutsu(){return quote.lines.some(function(l){var p=prod(l.code); return p&&p.tags.indexOf("劇物")>=0})}
+function hasKikenbutsu(){return quote.lines.some(function(l){var p=prod(l.code); return p&&p.tags.indexOf("危険物第4類")>=0})}
+function hasManifest(){return quote.lines.some(function(l){var p=prod(l.code); return p&&p.tags.indexOf("マニフェスト")>=0})}
+
+function renderCustOptions(){
+  var h=CUST.map(function(c){return '<option value="'+c.id+'">'+esc(c.name)+'（掛率 '+Math.round(c.rate*100)+'%）</option>'}).join("");
+  $("#fCust").innerHTML=h; $("#fCust").value=quote.custId;
+  $("#invCust").innerHTML=h;
+  $("#poSup").innerHTML=SUP.map(function(s){return '<option value="'+s.id+'">'+esc(s.name)+'</option>'}).join("");
+}
+function renderPay(){
+  var c=cust();
+  $("#fPay").value=c.close+"／"+c.pay+"（"+c.method+"）";
+  var ar=0; INVOICES.forEach(function(iv){if(iv.cust===c.id&&iv.state!=="paid")ar+=iv.amt});
+  var over=ar>c.limit;
+  $("#custHint").innerHTML=
+    "掛率 "+Math.round(c.rate*100)+"% を単価に適用（個別契約単価がある品目はそちらが優先）"+
+    '<br><span style="color:'+(over?"var(--danger)":"var(--muted)")+';font-weight:'+(over?"700":"400")+'">'+
+    "与信枠 "+yen(c.limit)+"／未回収 "+yen(ar)+(over?"　枠を超えています":"")+"</span>";
+  var g=hasGekibutsu();
+  $("#gekiBadge").style.display=g?"inline-flex":"none";
+}
+function renderLines(){
+  var c=cust();
+  $("#lineBody").innerHTML=quote.lines.map(function(l,i){
+    var p=prod(l.code); if(!p)return "";
+    var svc=p.tags.indexOf("役務")>=0, up=unitPrice(p,c);
+    return '<tr data-i="'+i+'">'+
+      '<td class="r num" style="color:var(--faint)">'+(i+1)+'</td>'+
+      '<td class="cell-nm">'+esc(p.name)+'<div class="num" style="font-size:var(--fs-xs);color:var(--faint)">'+p.code+'</div></td>'+
+      '<td class="cell-sp">'+esc(p.spec)+'</td>'+
+      '<td>'+tagHtml(p.tags)+'</td>'+
+      '<td class="r"><input class="r num qty" data-i="'+i+'" value="'+l.qty+'" inputmode="numeric" aria-label="数量"></td>'+
+      '<td style="color:var(--muted)">'+esc(p.unit)+'</td>'+
+      '<td class="r num" style="color:var(--muted)">'+n2(p.list)+'</td>'+
+      '<td class="r num" style="color:var(--muted)">'+(isSpecial(p,c)?'<span class="tag t-brand">個別</span>':(svc?"—":Math.round(c.rate*100)+"%"))+'</td>'+
+      '<td class="r num">'+n2(up)+'</td>'+
+      '<td class="r num" style="font-weight:500">'+n2(up*l.qty)+'</td>'+
+      '<td><button class="iconbtn" data-del="'+i+'" aria-label="この行を削除"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button></td></tr>';
+  }).join("");
+}
+function renderTotals(){
+  var c=cust(),sub=0,cost=0;
+  quote.lines.forEach(function(l){var p=prod(l.code); if(!p)return; sub+=unitPrice(p,c)*l.qty; cost+=p.cost*l.qty});
+  var tax=Math.floor(sub*0.1);
+  $("#tSub").textContent=yen(sub); $("#tTax").textContent=yen(tax); $("#tAll").textContent=yen(sub+tax);
+  var gp=sub-cost;
+  $("#pAmt").textContent=yen(gp);
+  $("#pRate").textContent=(sub>0?(gp/sub*100).toFixed(1):"0.0")+"%";
+  $("#pCost").textContent=yen(cost);
+  return {sub:sub,tax:tax,total:sub+tax,cost:cost};
+}
+function renderQuoteSlip(){renderPay(); renderLines(); renderTotals(); renderPO()}
+
+$("#fCust").addEventListener("change",function(){
+  quote.custId=this.value; renderQuoteSlip();
+  toast("得意先を変更しました。掛率と支払条件を単価に反映しています");
+});
+$("#lineBody").addEventListener("input",function(e){
+  var t=e.target; if(!t.classList.contains("qty"))return;
+  var i=+t.dataset.i, raw=String(t.value);
+  var v=parseInt(raw.replace(/[^0-9]/g,""),10);
+  var bad=raw.trim()!=="" && /[^0-9]/.test(raw.trim());
+  t.classList.toggle("bad",bad);
+  quote.lines[i].qty=isNaN(v)?0:v;
+  var row=t.closest("tr"),c=cust(),p=prod(quote.lines[i].code);
+  if(row&&p)row.cells[9].textContent=n2(unitPrice(p,c)*quote.lines[i].qty);
+  renderTotals();
+});
+$("#lineBody").addEventListener("click",function(e){
+  var b=e.target.closest("[data-del]"); if(!b)return;
+  var i=+b.dataset.del, p=prod(quote.lines[i].code);
+  confirmBox("明細行の削除","「"+esc(p?p.name:"")+"」を明細から削除します。よろしいですか。","削除する",function(){
+    quote.lines.splice(i,1); renderLines(); renderTotals(); renderPO(); toast("明細行を削除しました");
+  });
+});
+$("#lineBody").addEventListener("keydown",function(e){
+  if(e.key!=="Enter")return;
+  e.preventDefault();
+  if(e.ctrlKey||e.metaKey){openFinder();return}
+  var ins=$$(".qty",$("#lineBody")), idx=ins.indexOf(e.target);
+  if(idx>=0&&idx<ins.length-1){ins[idx+1].focus(); ins[idx+1].select()} else {openFinder()}
+});
+$("#btnAdd").addEventListener("click",openFinder);
+$("#btnFind").addEventListener("click",openFinder);
+
+/* 必須チェック */
+function validateSlip(){
+  var ok=true;
+  [["fSubjWrap","fSubj"],["fDateWrap","fDate"]].forEach(function(p){
+    var w=$("#"+p[0]), v=$("#"+p[1]).value.trim();
+    if(!v){w.classList.add("err"); ok=false} else {w.classList.remove("err")}
+  });
+  return ok;
+}
+$("#btnOrder").addEventListener("click",function(){
+  if(converted){toast("この見積は受注済みです"); show("dash"); return}
+  if(!validateSlip()){toast("必須項目が空欄です。赤い枠の項目をご確認ください"); return}
+  var t=renderTotals(), c=cust();
+  confirmBox("受注に変換",
+    "見積 <b>Q-2026-0812</b>（"+esc(c.name)+"／"+yen(t.total)+"）を受注に変換します。<br>変換後は見積の内容を直接編集できなくなり、変更は訂正伝票で行います。",
+    "受注にする",
+    function(){
+      DEALS[DEALS.length-1].step=1;
+      QUOTES[0].state="order";
+      converted=true;
+      $("#slipState").className="pill p-order"; $("#slipState").textContent="受注";
+      $("#btnOrder").disabled=true; $("#btnOrder").textContent="受注済み";
+      KPI[0].v=2; renderKpis(); renderDeals(); renderQuoteList();
+      toast("受注に変換しました。ダッシュボードと見積一覧に反映しています");
+      setTimeout(function(){show("dash")},700);
+    });
+});
+
+/* ══ 品名検索 ══ */
+var fSel=0,fHits=[];
+function openFinder(){$("#finderOv").classList.add("on"); $("#finderQ").value=""; fSel=0; drawFinder(); setTimeout(function(){$("#finderQ").focus()},30)}
+function closeFinder(){$("#finderOv").classList.remove("on")}
+function drawFinder(){
+  var q=$("#finderQ").value.trim().toLowerCase();
+  fHits=PROD.filter(function(p){return !q||(p.name+p.spec+p.code+p.tags.join("")).toLowerCase().indexOf(q)>=0});
+  if(fSel>=fHits.length)fSel=Math.max(0,fHits.length-1);
+  var c=cust();
+  $("#finderList").innerHTML=fHits.length?fHits.map(function(p,i){
+    return '<div class="fi'+(i===fSel?" sel":"")+'" data-i="'+i+'"><span class="c num">'+p.code+'</span>'+
+      '<span class="n">'+esc(p.name)+' '+tagHtml(p.tags)+'<small>'+esc(p.spec)+'／'+esc(p.unit)+'</small></span>'+
+      '<span class="p num">'+n2(unitPrice(p,c))+'</span></div>';
+  }).join(""):'<div class="empty">該当する品名がありません</div>';
+}
+function pick(i){
+  var p=fHits[i]; if(!p)return;
+  quote.lines.push({code:p.code,qty:1});
+  renderLines(); renderTotals(); renderPO(); closeFinder();
+  var ins=$$(".qty",$("#lineBody")), last=ins[ins.length-1];
+  if(last){last.focus(); last.select()}
+  toast(p.name+" を追加しました。数量をお試しください");
+}
+$("#finderQ").addEventListener("input",function(){fSel=0; drawFinder()});
+$("#finderClose").addEventListener("click",closeFinder);
+$("#finderOv").addEventListener("click",function(e){if(e.target===this)closeFinder()});
+$("#finderList").addEventListener("click",function(e){var d=e.target.closest("[data-i]"); if(d)pick(+d.dataset.i)});
+$("#finderQ").addEventListener("keydown",function(e){
+  if(e.key==="ArrowDown"){e.preventDefault(); fSel=Math.min(fSel+1,fHits.length-1); drawFinder()}
+  else if(e.key==="ArrowUp"){e.preventDefault(); fSel=Math.max(fSel-1,0); drawFinder()}
+  else if(e.key==="Enter"){e.preventDefault(); pick(fSel)}
+  else if(e.key==="Escape"){e.preventDefault(); closeFinder()}
+});
+
+/* ══ 発注 ══ */
+function renderPO(){
+  var c=cust(),sub=0;
+  var rows=quote.lines.filter(function(l){var p=prod(l.code); return p&&p.tags.indexOf("役務")<0});
+  $("#poBody").innerHTML=rows.length?rows.map(function(l,i){
+    var p=prod(l.code), up=unitPrice(p,c), amt=p.cost*l.qty, gpr=up>0?((up-p.cost)/up*100):0;
+    sub+=amt;
+    return '<tr><td class="r num" style="color:var(--faint)">'+(i+1)+'</td>'+
+      '<td class="cell-nm">'+esc(p.name)+'<div class="num" style="font-size:var(--fs-xs);color:var(--faint)">'+p.code+'</div></td>'+
+      '<td class="cell-sp">'+esc(p.spec)+'</td><td>'+tagHtml(p.tags)+'</td>'+
+      '<td class="r num">'+n2(l.qty)+'</td><td style="color:var(--muted)">'+esc(p.unit)+'</td>'+
+      '<td class="r num">'+n2(p.cost)+'</td><td class="r num" style="font-weight:500">'+n2(amt)+'</td>'+
+      '<td class="r num" style="color:var(--muted)">'+n2(up)+'</td>'+
+      '<td class="r num" style="color:'+(gpr<20?"var(--danger)":"var(--ok)")+';font-weight:700">'+gpr.toFixed(1)+'%</td></tr>';
+  }).join(""):'<tr><td colspan="10" class="empty">仕入の発生する明細がありません（役務のみの案件です）</td></tr>';
+  var tax=Math.floor(sub*0.1);
+  $("#poSub").textContent=yen(sub); $("#poTax").textContent=yen(tax); $("#poAll").textContent=yen(sub+tax);
+  var c2=cust();
+  $("#poDeal").value="2026-0812／"+c2.name;
+}
+$("#poSup").addEventListener("change",function(){
+  var s=null; for(var i=0;i<SUP.length;i++){if(SUP[i].id===this.value)s=SUP[i]}
+  $("#supHint").textContent=s?s.note:"";
+});
+$("#poShip").addEventListener("change",function(){
+  toast(this.value==="direct"
+    ?"直送に変更しました。入荷検品が発生せず、納品日はメーカー出荷日になります"
+    :"当社倉庫へ入荷に変更しました。検品後に納品となります");
+});
+
+/* ══ 納品 ══ */
+function renderDelivery(){
+  $("#deliveryBody").innerHTML=DELIV.map(function(d){
+    return '<tr><td class="num">'+d.no+'</td><td class="num">'+jdate(d.date)+'</td><td>'+esc(custById(d.cust).name)+
+      '</td><td>'+esc(d.subj)+'</td><td class="r num">'+yen(d.amt)+
+      '</td><td class="num">'+(d.lot?esc(d.lot):'<span style="color:var(--faint)">—</span>')+'</td>'+
+      '<td class="num">'+(d.exp?esc(d.exp.replace("-","/")):'<span style="color:var(--faint)">—</span>')+'</td>'+
+      '<td>'+(d.ship==="direct"?'<span class="tag t-brand">直送</span>':'<span class="tag t-neu">倉庫</span>')+
+      '</td><td>'+(d.billed?'<span class="pill p-paid">請求済</span>':'<span class="pill p-draft">未請求</span>')+'</td></tr>';
+  }).join("");
+}
+
+/* ══ 請求（締め） ══ */
+var invCust="C-101", invExclude={};
+function invTargets(){return DELIV.filter(function(d){return d.cust===invCust && !d.billed})}
+function renderInvoice(){
+  var c=custById(invCust), rows=invTargets();
+  $("#invClose").value=c.close;
+  $("#invDue").value=(c.closeDay===20?"2026/08/20":"2026/08/31");
+  $("#invSrcBody").innerHTML=rows.map(function(d){
+    var on=!invExclude[d.no];
+    return '<tr class="'+(on?"":"")+'"><td class="c"><input type="checkbox" data-inv="'+d.no+'"'+(on?" checked":"")+' aria-label="請求に含める"></td>'+
+      '<td class="num">'+d.no+'</td><td class="num">'+jdate(d.date)+'</td><td>'+esc(d.subj)+
+      '</td><td class="r num">'+yen(d.amt)+'</td></tr>';
+  }).join("");
+  $("#invEmpty").style.display=rows.length?"none":"block";
+  $("#closeCount").textContent=rows.length+" 件";
+  var sub=0,n=0;
+  rows.forEach(function(d){if(!invExclude[d.no]){sub+=d.amt;n++}});
+  var tax=Math.floor(sub*0.1);
+  $("#invLines").textContent=n; $("#invSub").textContent=yen(sub);
+  $("#invTax").textContent=yen(tax); $("#invAll").textContent=yen(sub+tax);
+  $("#invNo").textContent=(invCust==="C-101"?"INV-2026-07-0012":(invCust==="C-103"?"INV-2026-07-0022":"INV-2026-07-0019"));
+  $("#btnPrintInv").disabled=(n===0);
+}
+$("#invCust").addEventListener("change",function(){invCust=this.value; invExclude={}; renderInvoice()});
+$("#invSrcBody").addEventListener("change",function(e){
+  var cb=e.target.closest("[data-inv]"); if(!cb)return;
+  invExclude[cb.dataset.inv]=!cb.checked; renderInvoice();
+});
+
+/* ══ 入金・消込 ══ */
+var selPay=null, selInv={}, diffKind="fee";
+function renderPayments(){
+  $("#payBody").innerHTML=PAYMENTS.map(function(p){
+    return '<tr class="clickable'+(selPay===p.id?" sel":"")+'" data-pay="'+p.id+'">'+
+      '<td class="num">'+jdate(p.date)+'</td><td>'+esc(custById(p.cust).name)+'</td><td>'+esc(p.method)+
+      '</td><td class="r num" style="font-weight:500">'+yen(p.amt)+'</td>'+
+      '<td>'+(p.done?'<span class="pill p-paid">消込済</span>':'<span class="pill p-bill">未消込</span>')+'</td>'+
+      '<td style="font-size:var(--fs-xs);color:var(--faint)">'+esc(p.hint)+'</td></tr>';
+  }).join("");
+}
+function payById(id){for(var i=0;i<PAYMENTS.length;i++){if(PAYMENTS[i].id===id)return PAYMENTS[i]}return null}
+function renderRecon(){
+  var p=selPay?payById(selPay):null;
+  if(!p){
+    $("#reconSub").textContent="入金を選んでください";
+    $("#reconInner").innerHTML='<div class="empty">上の一覧から入金を1件選ぶと、その得意先の未消込の請求が出ます。</div>';
+    return;
+  }
+  var c=custById(p.cust);
+  $("#reconSub").textContent=jdate(p.date)+"／"+c.name+"／"+yen(p.amt);
+  var cands=INVOICES.filter(function(iv){return iv.cust===p.cust && iv.state!=="paid"});
+  var checked=0;
+  cands.forEach(function(iv){if(selInv[iv.no])checked+=iv.amt});
+  var diff=p.amt-checked;
+  var rows=cands.map(function(iv){
+    return '<tr><td class="c"><input type="checkbox" data-rec="'+iv.no+'"'+(selInv[iv.no]?" checked":"")+' aria-label="この請求に充当"></td>'+
+      '<td class="num">'+iv.no+'</td><td class="num">'+jdate(iv.due)+'</td><td>'+pillHtml(AR_STATE,iv.state)+
+      '</td><td class="r num">'+yen(iv.amt)+'</td></tr>';
+  }).join("");
+  var diffCls=(checked===0)?"":(diff===0?"ok":"ng");
+  var opts=[["fee","振込手数料"],["disc","値引"],["partial","一部入金（残高を繰り越す）"],["offset","相殺"],["hold","保留（担当者へ確認）"]];
+  $("#reconInner").innerHTML=
+    '<div class="tablewrap"><table><thead><tr><th style="width:34px" class="c">充当</th><th>請求番号</th><th>支払期日</th><th>状態</th><th class="r">請求額</th></tr></thead>'+
+    '<tbody>'+(rows||'<tr><td colspan="5" class="empty">未消込の請求がありません</td></tr>')+'</tbody></table></div>'+
+    '<div class="diffbox">'+
+      '<div class="diffrow"><span>入金額</span><span class="num">'+yen(p.amt)+'</span></div>'+
+      '<div class="diffrow"><span>充当した請求の合計</span><span class="num">'+yen(checked)+'</span></div>'+
+      '<div class="diffrow big '+diffCls+'"><span>差額</span><span class="num">'+(diff===0?"¥0（一致）":yen(diff))+'</span></div>'+
+      (diff!==0&&checked>0?
+        '<div class="assign"><span style="font-size:var(--fs-sm);color:var(--muted)">差額の扱い</span>'+
+        '<select id="diffKind">'+opts.map(function(o){return '<option value="'+o[0]+'"'+(diffKind===o[0]?" selected":"")+'>'+o[1]+'</option>'}).join("")+'</select></div>'
+        :"")+
+      '<div style="margin-top:12px;display:flex;gap:8px;flex-wrap:wrap;align-items:center">'+
+        '<button class="btn btn-p" id="btnRecon"'+(checked===0?" disabled":"")+'>消込を確定する</button>'+
+        '<span style="font-size:var(--fs-xs);color:var(--faint)">'+(checked===0?"充当する請求にチェックを入れてください":(diff===0?"差額なし。そのまま確定できます":"差額の扱いを選ぶと確定できます"))+'</span>'+
+      '</div>'+
+      '<div class="note" style="margin-top:12px"><b>設計メモ｜差額を宙に浮かせない</b><br>'+
+      '差額をどれかに振り分けないと確定できない作りにしています。「とりあえず消した」を許すと、月末に売掛残高と帳簿が合わなくなり、原因を探す作業が発生するためです。</div>'+
+    '</div>';
+}
+$("#payBody").addEventListener("click",function(e){
+  var tr=e.target.closest("[data-pay]"); if(!tr)return;
+  selPay=tr.dataset.pay; selInv={}; diffKind="fee";
+  var p=payById(selPay);
+  if(p){p.targets.forEach(function(no){selInv[no]=true})}
+  renderPayments(); renderRecon();
+  toast("この入金に対応しそうな請求をあらかじめ選んでいます。外して確かめられます");
+});
+$("#reconInner").addEventListener("change",function(e){
+  var cb=e.target.closest("[data-rec]");
+  if(cb){selInv[cb.dataset.rec]=cb.checked; renderRecon(); return}
+  if(e.target.id==="diffKind"){diffKind=e.target.value}
+});
+$("#reconInner").addEventListener("click",function(e){
+  if(!e.target.closest("#btnRecon"))return;
+  var p=payById(selPay); if(!p)return;
+  var checked=0,list=[];
+  INVOICES.forEach(function(iv){if(selInv[iv.no]){checked+=iv.amt; list.push(iv.no)}});
+  var diff=p.amt-checked;
+  var kindLabel={fee:"振込手数料",disc:"値引",partial:"一部入金（残高を繰り越す）",offset:"相殺",hold:"保留"}[diffKind];
+  confirmBox("消込の確定",
+    "入金 "+yen(p.amt)+" を "+list.length+" 件の請求に充当します。"+
+    (diff!==0?"<br>差額 "+yen(diff)+" は<b>"+kindLabel+"</b>として処理します。":"<br>差額はありません。"),
+    "消込を確定",
+    function(){
+      p.done=true;
+      list.forEach(function(no){
+        var iv=invById(no); if(!iv)return;
+        if(diff!==0 && diffKind==="partial" && list.length===1){iv.amt=Math.abs(diff); iv.state="billed"}
+        else{iv.state="paid"}
+      });
+      selPay=null; selInv={};
+      KPI[2].v=Math.max(0,KPI[2].v-1); renderKpis();
+      renderPayments(); renderRecon(); renderAR();
+      toast("消込を確定しました。売掛・でんさい一覧に反映しています");
+    });
+});
+
+/* ══ 売掛・でんさい ══ */
+var arFilter="all";
+var AR_CHIPS=[{k:"all",l:"すべて"},{k:"late",l:"要督促（滞留）"},{k:"note",l:"期日待ち（でんさい）"},{k:"open",l:"未入金"}];
+function renderArChips(){
+  $("#arChips").innerHTML=AR_CHIPS.map(function(c){
+    return '<button class="chip" data-ar="'+c.k+'" aria-pressed="'+(arFilter===c.k)+'">'+esc(c.l)+'</button>';
+  }).join("");
+}
+function renderAR(){
+  var rows=INVOICES.filter(function(iv){
+    if(arFilter==="all")return true;
+    if(arFilter==="late")return iv.state!=="paid" && iv.age>=60;
+    if(arFilter==="note")return iv.state==="note";
+    if(arFilter==="open")return iv.state!=="paid";
+    return true;
+  });
+  $("#arBody").innerHTML=rows.map(function(iv){
+    var late=iv.state!=="paid"&&iv.age>=60;
+    return '<tr'+(late?' style="background:var(--danger-w)"':'')+'><td class="num">'+iv.no+'</td><td>'+esc(custById(iv.cust).name)+
+      '</td><td class="r num" style="font-weight:500">'+yen(iv.amt)+'</td>'+
+      '<td>'+(late?'<span class="pill p-late">滞留</span> ':'')+pillHtml(AR_STATE,iv.state)+'</td>'+
+      '<td class="num">'+jdate(iv.due)+'</td>'+
+      '<td class="r num"'+(late?' style="color:var(--danger);font-weight:700"':'')+'>'+(iv.state==="paid"?"—":iv.age+" 日")+'</td></tr>';
+  }).join("");
+  $("#arEmpty").style.display=rows.length?"none":"block";
+  $("#arCount").textContent=rows.length+" 件 / 全 "+INVOICES.length+" 件";
+}
+$("#arChips").addEventListener("click",function(e){
+  var b=e.target.closest("[data-ar]"); if(!b)return;
+  arFilter=b.dataset.ar; renderArChips(); renderAR();
+});
+
+/* ══ マスタ ══ */
+function renderMaster(){
+  $("#custMasterBody").innerHTML=CUST.map(function(c){
+    return '<tr><td class="num">'+c.id+'</td><td>'+esc(c.name)+'</td><td class="r num">'+Math.round(c.rate*100)+'%</td>'+
+      '<td>'+esc(c.close)+'</td><td>'+esc(c.pay)+'</td><td>'+esc(c.method)+'</td></tr>';
+  }).join("");
+  $("#prodMasterBody").innerHTML=PROD.map(function(p){
+    return '<tr><td class="num">'+p.code+'</td><td>'+esc(p.name)+'</td><td style="color:var(--muted)">'+esc(p.spec)+
+      '</td><td>'+(p.tags.length?tagHtml(p.tags):'<span style="color:var(--faint)">—</span>')+'</td>'+
+      '<td style="color:var(--muted);font-size:var(--fs-xs)">'+(p.reg?esc(p.reg):'<span style="color:var(--faint)">—</span>')+'</td>'+
+      '<td>'+(p.lot?'<span class="tag t-brand">要</span>':'<span style="color:var(--faint)">—</span>')+'</td>'+
+      '<td class="r num">'+n2(p.list)+'</td><td class="r num" style="color:var(--muted)">'+n2(p.cost)+'</td></tr>';
+  }).join("");
+}
+
+/* ══ 印刷 ══ */
+var FROM='<div class="pfrom"><div class="co">サンプル化学株式会社</div>'+
+  '〒000-0000　○○県○○市○○町1-2-3<br>TEL 04-0000-0000／FAX 04-0000-0000<br>営業部　担当：山田<br>'+
+  '<span style="font-size:8.5pt">適格請求書発行事業者 登録番号 T0000000000000</span>';
+function printQuote(){
+  var c=cust(),t=renderTotals();
+  var rows=quote.lines.map(function(l,i){
+    var p=prod(l.code); if(!p)return "";
+    var up=unitPrice(p,c);
+    var reg=p.tags.filter(function(x){return x!=="役務"});
+    var nm=p.name+(reg.length?"（"+reg.join("・")+"）":"");
+    return '<tr><td class="c">'+(i+1)+'</td><td>'+esc(nm)+'</td><td>'+esc(p.spec)+'</td><td class="r">'+n2(l.qty)+
+      '</td><td class="c">'+esc(p.unit)+'</td><td class="r">'+n2(up)+'</td><td class="r">'+n2(up*l.qty)+'</td></tr>';
+  }).join("");
+  $("#printDoc").innerHTML='<h1>御見積書</h1>'+
+    '<div class="pmeta num">見積番号 Q-2026-0812　／　発行日 '+esc(jdate($("#fDate").value))+'</div>'+
+    '<div class="ptop"><div class="pto"><div class="nm">'+esc(c.name)+'　御中</div>'+
+    '<div style="font-size:9.5pt;margin-bottom:6pt">件名：'+esc($("#fSubj").value)+'</div>'+
+    '<div style="font-size:9.5pt;margin-bottom:8pt">下記のとおりお見積り申し上げます。</div>'+
+    '<div class="amt num">御見積金額　'+yen(t.total)+'（税込）</div></div>'+
+    FROM+'<div style="margin-top:6pt">納期：'+esc($("#fDeli").value)+'<br>有効期限：'+esc(jdate($("#fLimit").value))+
+    '<br>お支払：'+esc(c.close+"／"+c.pay)+'</div></div></div>'+
+    '<table><thead><tr><th style="width:26pt">No</th><th>品名</th><th style="width:92pt">規格・荷姿</th>'+
+    '<th style="width:38pt">数量</th><th style="width:28pt">単位</th><th style="width:54pt">単価</th><th style="width:64pt">金額</th></tr></thead><tbody>'+rows+'</tbody></table>'+
+    '<div class="psum num"><div><span>小計</span><span>'+yen(t.sub)+'</span></div>'+
+    '<div><span>消費税（10%）</span><span>'+yen(t.tax)+'</span></div>'+
+    '<div class="t"><span>合計</span><span>'+yen(t.total)+'</span></div></div>'+
+    '<div class="pnote">'+
+    (hasGekibutsu()?'※毒物及び劇物取締法の劇物に該当する品目が含まれます。お引渡しに際して譲受書のご提出をお願いいたします。<br>':'')+
+    (hasKikenbutsu()?'※消防法の危険物（第4類）に該当する品目が含まれます。数量により輸送・保管の条件が変わることがあります。<br>':'')+
+    (hasManifest()?'※産業廃棄物に係る役務が含まれます。マニフェストの交付者は排出事業者様となります（当社は委託の取次を行います）。<br>':'')+
+    '※本書はご提案用のサンプルです。宛先・商品・金額はすべて架空の仮データです。</div>';
+}
+function printInvoice(){
+  var c=custById(invCust), rows=invTargets().filter(function(d){return !invExclude[d.no]});
+  var sub=0; rows.forEach(function(d){sub+=d.amt});
+  var tax=Math.floor(sub*0.1);
+  var body=rows.map(function(d,i){
+    return '<tr><td class="c">'+(i+1)+'</td><td class="c">'+esc(jdate(d.date))+'</td><td class="c">'+d.no+
+      '</td><td>'+esc(d.subj)+'</td><td class="r">'+n2(d.amt)+'</td></tr>';
+  }).join("");
+  $("#printDoc").innerHTML='<h1>請 求 書</h1>'+
+    '<div class="pmeta num">請求番号 '+esc($("#invNo").textContent)+'　／　締切日 2026/07/31</div>'+
+    '<div class="ptop"><div class="pto"><div class="nm">'+esc(c.name)+'　御中</div>'+
+    '<div style="font-size:9.5pt;margin-bottom:8pt">下記のとおりご請求申し上げます。</div>'+
+    '<div class="amt num">ご請求金額　'+yen(sub+tax)+'（税込）</div></div>'+
+    FROM+'<div style="margin-top:6pt">お支払期日：'+esc($("#invDue").value)+'<br>お支払条件：'+esc(c.close+"／"+c.pay)+
+    '<br>決済方法：'+esc(c.method)+'</div></div></div>'+
+    '<table><thead><tr><th style="width:26pt">No</th><th style="width:64pt">納品日</th><th style="width:84pt">納品番号</th><th>件名</th><th style="width:70pt">金額</th></tr></thead><tbody>'+
+    (body||'<tr><td colspan="5" class="c">対象の納品がありません</td></tr>')+'</tbody></table>'+
+    '<div class="psum num"><div><span>小計</span><span>'+yen(sub)+'</span></div>'+
+    '<div><span>消費税（10%）</span><span>'+yen(tax)+'</span></div>'+
+    '<div class="t"><span>合計</span><span>'+yen(sub+tax)+'</span></div></div>'+
+    '<div class="pnote">※本請求書は当月締め分の納品をまとめたものです。内訳は上記の納品番号をご参照ください。<br>'+
+    '※本書はご提案用のサンプルです。宛先・商品・金額はすべて架空の仮データです。</div>';
+}
+function printPO(){
+  var c=cust(), s=null;
+  for(var i=0;i<SUP.length;i++){if(SUP[i].id===$("#poSup").value)s=SUP[i]}
+  var rows=quote.lines.filter(function(l){var p=prod(l.code); return p&&p.tags.indexOf("役務")<0});
+  var sub=0;
+  var body=rows.map(function(l,i){
+    var p=prod(l.code); sub+=p.cost*l.qty;
+    var reg=p.tags.filter(function(x){return x!=="役務"});
+    return '<tr><td class="c">'+(i+1)+'</td><td>'+esc(p.name)+(reg.length?"（"+esc(reg.join("・"))+"）":"")+
+      '</td><td>'+esc(p.spec)+'</td><td class="r">'+n2(l.qty)+'</td><td class="c">'+esc(p.unit)+
+      '</td><td class="r">'+n2(p.cost)+'</td><td class="r">'+n2(p.cost*l.qty)+'</td></tr>';
+  }).join("");
+  var tax=Math.floor(sub*0.1);
+  var direct=$("#poShip").value==="direct";
+  $("#printDoc").innerHTML='<h1>発 注 書</h1>'+
+    '<div class="pmeta num">発注番号 PO-2026-0812　／　発行日 2026/08/05</div>'+
+    '<div class="ptop"><div class="pto"><div class="nm">'+esc(s?s.name:"")+'　御中</div>'+
+    '<div style="font-size:9.5pt;margin-bottom:8pt">下記のとおり発注いたします。</div>'+
+    '<div class="amt num">発注金額　'+yen(sub+tax)+'（税込）</div></div>'+
+    FROM+'</div></div>'+
+    '<div style="font-size:9.5pt;margin:6pt 0">出荷方法：'+(direct?'<b>得意先へ直送</b>（送り先：'+esc(c.name)+'）':'当社倉庫へ入荷')+'</div>'+
+    '<table><thead><tr><th style="width:26pt">No</th><th>品名</th><th style="width:92pt">規格・荷姿</th>'+
+    '<th style="width:38pt">数量</th><th style="width:28pt">単位</th><th style="width:54pt">単価</th><th style="width:64pt">金額</th></tr></thead><tbody>'+
+    (body||'<tr><td colspan="7" class="c">仕入の発生する明細がありません</td></tr>')+'</tbody></table>'+
+    '<div class="psum num"><div><span>小計</span><span>'+yen(sub)+'</span></div>'+
+    '<div><span>消費税（10%）</span><span>'+yen(tax)+'</span></div>'+
+    '<div class="t"><span>合計</span><span>'+yen(sub+tax)+'</span></div></div>'+
+    '<div class="pnote">'+(direct?'※本発注は得意先への直送です。納品書は当社宛、現品は送り先へお願いいたします。<br>':'')+
+    ((hasGekibutsu()||hasKikenbutsu())?'※劇物または消防法の危険物に該当する品目が含まれます。輸送区分に沿った荷姿・表示をお願いいたします。<br>':'')+
+    '※本書はご提案用のサンプルです。宛先・商品・金額はすべて架空の仮データです。</div>';
+}
+function doPrint(kind){
+  if(kind==="invoice")printInvoice(); else if(kind==="po")printPO(); else printQuote();
+  toast("印刷プレビューを開きます（A4・1枚に収まります）");
+  setTimeout(function(){window.print()},380);
+}
+$("#btnPrintQuote").addEventListener("click",function(){doPrint("quote")});
+$("#btnPrintInv").addEventListener("click",function(){doPrint("invoice")});
+$("#btnPrintPO").addEventListener("click",function(){doPrint("po")});
+window.addEventListener("beforeprint",function(){
+  var v=VIEWS.filter(function(x){return $("#v-"+x).classList.contains("on")})[0];
+  if(v==="invoice")printInvoice(); else if(v==="purchase")printPO(); else printQuote();
+});
+
+/* ══ キーボード ══ */
+document.addEventListener("keydown",function(e){
+  var qOn=$("#v-quoteedit").classList.contains("on");
+  if(e.key==="F2"&&qOn){e.preventDefault(); openFinder(); return}
+  if(e.altKey&&(e.key==="p"||e.key==="P")){
+    var v=VIEWS.filter(function(x){return $("#v-"+x).classList.contains("on")})[0];
+    if(v==="quoteedit"||v==="invoice"||v==="purchase"){e.preventDefault(); doPrint(v==="invoice"?"invoice":(v==="purchase"?"po":"quote"))}
+    return;
+  }
+  if(e.key==="Escape"){closeFinder(); closeConfirm()}
+});
+
+/* ══ 初期化 ══ */
+renderKpis(); renderDeals(); renderCustOptions(); renderQChips(); renderQuoteList();
+renderQuoteSlip(); renderDelivery(); renderInvoice(); renderPayments(); renderRecon();
+renderArChips(); renderAR(); renderMaster();
+$("#supHint").textContent=SUP[0].note;
+printQuote();
+show(location.hash.slice(1)||"dash",true);
+window.addEventListener("hashchange",function(){show(location.hash.slice(1)||"dash",true)});
+
+})();
+</script>
+</body>
+</html>
