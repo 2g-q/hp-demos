@@ -214,6 +214,35 @@
 </style>
 </head>
 <body>
+<!-- pfnav:start 全ページ共通ナビ(自動挿入・手で編集しない) -->
+<style>
+#pfnav{position:sticky;top:0;z-index:99999;background:#0f2438;color:#cfe0f0;font-family:"Noto Sans JP",-apple-system,BlinkMacSystemFont,"Segoe UI","Hiragino Kaku Gothic ProN","Yu Gothic",Meiryo,sans-serif;font-size:13px;line-height:1;border-bottom:1px solid rgba(255,255,255,.12)}
+#pfnav .in{max-width:1180px;margin:0 auto;padding:0 16px;display:flex;align-items:center;gap:4px;overflow-x:auto;scrollbar-width:none}
+#pfnav .in::-webkit-scrollbar{display:none}
+#pfnav a{color:#cfe0f0;text-decoration:none;padding:11px 10px;white-space:nowrap;border-bottom:2px solid transparent;transition:.15s}
+#pfnav a:hover{color:#fff;background:rgba(255,255,255,.07)}
+#pfnav a.home{font-weight:700;color:#fff;padding-left:0;padding-right:14px;margin-right:4px;border-right:1px solid rgba(255,255,255,.15)}
+#pfnav a.on{color:#fff;border-bottom-color:#6fd3ff;font-weight:700}
+#pfnav .sp{margin-left:auto}
+#pfnav .me{color:#8fa8bf;padding:11px 0 11px 10px;white-space:nowrap}
+@media(max-width:640px){#pfnav .me{display:none}#pfnav a{padding:10px 8px}}
+@media print{#pfnav{display:none}}
+</style>
+<nav id="pfnav"><div class="in">
+<a class="home" href="./index.html">&#8592; 制作サンプル集</a>
+<a href="./gyomu-system.html" data-k="gyomu-system">業務システム</a>
+<a href="./automation.html" data-k="automation">自動化</a>
+<a href="./dashboard.html" data-k="dashboard">ダッシュボード</a>
+<a href="./cases.html" data-k="cases">導入事例</a>
+<a href="./advisor.html" data-k="advisor">継続でご一緒する形</a>
+<a href="./skillsheet.html" data-k="skillsheet">スキルシート</a>
+<span class="sp"></span><span class="me">自動化のミナト</span>
+</div>
+<script>(function(){var f=(location.pathname.split("/").pop()||"index.html").replace(".html","");
+document.querySelectorAll("#pfnav a[data-k]").forEach(function(a){if(a.getAttribute("data-k")===f)a.className="on";});})();</script>
+</nav>
+<!-- pfnav:end -->
+
 
 <header>
   <div class="head-in">
@@ -266,7 +295,7 @@
         <p class="benefit">公開サイトから書籍100件を約10秒で収集し、色付き見出し・フィルタ付きの整形済みExcelで納品します。転記のミスも起きません。</p>
       </div>
       <div class="shot">
-        <img src="auto-assets/scraping_output_preview.png" alt="スクレイピング結果を整形したExcelの出力プレビュー">
+        <img src="pf/sample1-scraping.jpg?v=f67509b6" alt="スクレイピング自動化のカバー">
       </div>
       <div class="shot-cap">出力例:収集データを整形したExcel</div>
     </div>
@@ -285,10 +314,9 @@
         <p class="benefit">フォーム回答が届いた瞬間に、整形転記・集計表の更新・担当者への内容入りメールまで全自動。毎朝の目視確認が不要になります。</p>
       </div>
       <div class="shot pair">
-        <img src="auto-assets/gas_before_after.png" alt="GAS導入前後の比較">
-        <img src="auto-assets/gas_flow_diagram.png" alt="フォームから通知までの自動化フロー図">
+        <img src="pf/sample2-gas.jpg?v=945e1479" alt="GAS業務自動化のカバー">
       </div>
-      <div class="shot-cap">左:導入前後の比較 / 右:自動化フロー</div>
+      <div class="shot-cap">導入前後の比較</div>
     </div>
 
     <!-- 3. PDF -->
@@ -305,7 +333,7 @@
         <p class="benefit">溜まったPDFを一括で読み取り、番号・日付・金額をExcelに展開。読取不能は赤マーク、金額は自動で検算し、転記事故を防ぎます。</p>
       </div>
       <div class="shot">
-        <img src="auto-assets/pdf_before_after.png" alt="PDFからExcelへ変換した前後の比較">
+        <img src="pf/sample3-pdf.jpg?v=af606a34" alt="PDF→Excel変換のカバー">
       </div>
       <div class="shot-cap">PDF(左)を1枚1行のExcel(右)へ</div>
     </div>
@@ -324,7 +352,7 @@
         <p class="benefit">複数ソースのCSVを表記ゆれ統一・重複除去・統合。3ソース59行を0.1秒で名寄せし、実体29社に整理します。</p>
       </div>
       <div class="shot">
-        <img src="auto-assets/cleansing_before_after.png" alt="名寄せ・クレンジングの前後比較">
+        <img src="pf/sample4-cleansing.jpg?v=ae66476c" alt="名寄せ・クレンジングのカバー">
       </div>
       <div class="shot-cap">表記ゆれ・重複を統一(前後比較)</div>
     </div>
@@ -343,7 +371,7 @@
         <p class="benefit">外部システムから商品データをAPIで取得し、前回値と突合。変更行だけを色分け表示します(緑=新規 / 黄=価格 / 青=在庫 / 赤=廃番)。</p>
       </div>
       <div class="shot">
-        <img src="auto-assets/api_before_after.png" alt="API差分検知の前後比較と変更行の色分け">
+        <img src="pf/sample5-api.jpg?v=d7558044" alt="API差分検知のカバー">
       </div>
       <div class="shot-cap">変更行のみ色分けで抽出</div>
     </div>
@@ -362,11 +390,8 @@
         <p class="benefit">売上CSVを読み込むだけで、カテゴリ・月次・店舗別のグラフを自動生成。期間を切り替えると全グラフが連動します。</p>
       </div>
       <div class="shot">
-        <img src="auto-assets/dashboard_before_after.png" alt="売上CSVからダッシュボードを生成した前後比較">
+        <img src="pf/sample6-dashboard.jpg?v=3544574e" alt="売上ダッシュボードのカバー">
         <div class="charts">
-          <img src="auto-assets/dashboard_chart_category.png" alt="カテゴリ別グラフ">
-          <img src="auto-assets/dashboard_chart_monthly.png" alt="月次推移グラフ">
-          <img src="auto-assets/dashboard_chart_store.png" alt="店舗別グラフ">
         </div>
       </div>
       <div class="shot-cap">CSVから自動生成 / カテゴリ・月次・店舗別</div>
@@ -386,7 +411,7 @@
         <p class="benefit">自由記述をカテゴリ自動分類し、ネガポジも判定。確信度の低いものはAIで補完し、最終は全件人の目で検品します。</p>
       </div>
       <div class="shot">
-        <img src="auto-assets/classify_category_chart.png" alt="テキスト分類のカテゴリ別集計グラフ">
+        <img src="pf/sample7-classify.jpg?v=98872e6d" alt="テキスト分類のカバー">
       </div>
       <div class="shot-cap">カテゴリ別の自動分類結果</div>
     </div>
