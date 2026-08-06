@@ -1,0 +1,858 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+<title>銘酒めぐり | 日本酒の銘柄・イベント・豆知識で選ぶ、新しい酒選び</title>
+<meta name="description" content="全国の蔵元がつくる日本酒の銘柄紹介・試飲イベント情報・日本酒の豆知識をまとめたポータル。気になる一本が見つかったら、そのままECサイトでご購入いただけます。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;600;800&family=Noto+Sans+JP:wght@300;400;500;700&family=Manrope:wght@500;700;800&display=swap" rel="stylesheet">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "純米酒と吟醸酒はどう違いますか。",
+      "acceptedAnswer": { "@type": "Answer", "text": "純米酒は米・米麹・水のみでつくられる日本酒です。吟醸酒は米を精米歩合60%以下まで磨き、低温でゆっくり発酵させることで、華やかな香りを引き出した日本酒を指します。原料と磨き方の基準の違いによる分類です。" }
+    },
+    {
+      "@type": "Question",
+      "name": "海外への発送は可能ですか。",
+      "acceptedAnswer": { "@type": "Answer", "text": "本ページで紹介する銘柄は、提携するECサイトを通じて海外発送に対応しています（対応国・送料は購入手続き画面でご確認いただけます）。" }
+    },
+    {
+      "@type": "Question",
+      "name": "冷酒と燗酒はどちらで飲むのが正解ですか。",
+      "acceptedAnswer": { "@type": "Answer", "text": "正解は一つではありません。同じ日本酒でも温度帯によって香りと味わいの印象が変わります。銘柄ごとのおすすめ温度は各商品ページに記載していますので、飲み比べてお好みを探すのもおすすめです。" }
+    }
+  ]
+}
+</script>
+<style>
+  :root{
+    --ink:#2b2926;
+    --ink-soft:#5c574f;
+    --paper:#faf7f1;
+    --paper-deep:#f1ece1;
+    --line:#e2dbca;
+    --ai:#1f3a5c;
+    --ai-deep:#152943;
+    --ai-tint:#eaf0f4;
+    --radius:14px;
+    --shadow:0 18px 40px -22px rgba(31,58,92,0.35);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:"Noto Sans JP",sans-serif;
+    font-weight:400;
+    line-height:1.85;
+    -webkit-font-smoothing:antialiased;
+    letter-spacing:.02em;
+    overflow-x:hidden;
+    width:100%;
+  }
+  img{max-width:100%;height:auto;display:block;}
+  a{color:inherit;text-decoration:none;}
+  h1,h2,h3,h4{
+    font-family:"Shippori Mincho",serif;
+    font-weight:600;
+    line-height:1.5;
+    margin:0;
+    letter-spacing:.04em;
+  }
+  .num{font-family:"Manrope",sans-serif;}
+  .wrap{
+    max-width:1120px;
+    width:100%;
+    margin:0 auto;
+    padding:0 24px;
+  }
+  section{padding:96px 0;}
+  @media (max-width:640px){
+    section{padding:64px 0;}
+    .wrap{padding:0 20px;}
+  }
+  .eyebrow{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    font-size:12.5px;
+    letter-spacing:.24em;
+    color:var(--ai);
+    font-weight:700;
+    margin-bottom:14px;
+  }
+  .eyebrow::before{
+    content:"";
+    width:22px;height:1px;background:var(--ai);
+  }
+  .lead{
+    color:var(--ink-soft);
+    font-size:15.5px;
+    max-width:640px;
+  }
+  .btn{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+    padding:16px 34px;
+    border-radius:100px;
+    font-weight:700;
+    font-size:15px;
+    letter-spacing:.05em;
+    cursor:pointer;
+    border:1px solid transparent;
+    transition:transform .18s ease, box-shadow .18s ease, background .18s ease;
+    max-width:100%;
+  }
+  .btn-primary{
+    background:var(--ai);
+    color:#fff;
+    box-shadow:var(--shadow);
+  }
+  .btn-primary:hover{transform:translateY(-2px);box-shadow:0 22px 46px -20px rgba(31,58,92,.5);}
+  .btn-outline{
+    background:transparent;
+    color:var(--ai);
+    border-color:var(--ai);
+  }
+  .btn-outline:hover{background:var(--ai-tint);}
+
+  /* header / nav */
+  header{
+    position:fixed;top:0;left:0;right:0;
+    z-index:80;
+    background:rgba(250,247,241,.9);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .headbar{
+    max-width:1120px;margin:0 auto;padding:14px 24px;
+    display:flex;align-items:center;justify-content:space-between;
+  }
+  .brand{display:flex;align-items:center;gap:10px;}
+  .brand-mark{
+    width:34px;height:34px;border-radius:50%;
+    background:var(--ai);
+    display:flex;align-items:center;justify-content:center;
+    flex-shrink:0;
+  }
+  .brand-mark svg{width:17px;height:17px;stroke:#fff;fill:none;}
+  .brand-name{font-family:"Shippori Mincho",serif;font-size:18px;font-weight:600;letter-spacing:.08em;}
+  .brand-name small{display:block;font-family:"Noto Sans JP",sans-serif;font-size:10px;color:var(--ink-soft);letter-spacing:.14em;font-weight:400;}
+  .desk-nav{display:flex;align-items:center;gap:30px;}
+  .desk-nav a{font-size:13.5px;font-weight:500;color:var(--ink-soft);}
+  .desk-nav a:hover{color:var(--ai);}
+  .head-cta{display:flex;align-items:center;gap:12px;}
+  .head-cta .btn{padding:11px 22px;font-size:13px;}
+  .burger{
+    display:none;
+    width:40px;height:40px;border-radius:50%;
+    border:1px solid var(--line);
+    background:#fff;
+    align-items:center;justify-content:center;
+    cursor:pointer;
+  }
+  .burger span, .burger span::before, .burger span::after{
+    content:"";display:block;width:16px;height:1.5px;background:var(--ink);position:relative;transition:.2s;
+  }
+  .burger span::before{position:absolute;top:-6px;}
+  .burger span::after{position:absolute;top:6px;}
+
+  nav.mobile-nav{
+    position:fixed;top:0;right:-100%;
+    width:78%;max-width:320px;height:100%;
+    background:var(--paper);
+    z-index:95;
+    box-shadow:-14px 0 34px rgba(0,0,0,.14);
+    transition:right .3s ease;
+    padding:90px 30px 30px;
+  }
+  nav.mobile-nav.open{right:0;}
+  nav.mobile-nav a{
+    display:block;padding:14px 0;border-bottom:1px solid var(--line);
+    font-size:15px;font-weight:500;
+  }
+  .nav-scrim{
+    position:fixed;inset:0;background:rgba(20,20,18,.35);
+    z-index:90;opacity:0;pointer-events:none;transition:opacity .3s ease;
+  }
+  .nav-scrim.open{opacity:1;pointer-events:auto;}
+
+  @media (max-width:900px){
+    .desk-nav{display:none;}
+    .head-cta .btn.btn-outline{display:none;}
+    .burger{display:flex;}
+  }
+
+  /* hero */
+  .hero{
+    position:relative;
+    margin-top:70px;
+    min-height:640px;
+    display:flex;align-items:flex-end;
+    color:#fff;
+    overflow:hidden;
+  }
+  .hero-bg{
+    position:absolute;inset:0;
+    background:url('https://images.unsplash.com/photo-1470337458703-46ad1756a187?auto=format&fit=crop&w=1600&q=70') center/cover;
+  }
+  .hero-bg::after{
+    content:"";position:absolute;inset:0;
+    background:linear-gradient(180deg, rgba(21,41,67,.35) 0%, rgba(21,41,67,.55) 55%, rgba(21,41,67,.92) 100%);
+  }
+  .hero-inner{position:relative;padding:120px 0 56px;width:100%;}
+  .hero-copy{max-width:620px;}
+  .hero-copy .eyebrow{color:#dfe9f1;}
+  .hero-copy .eyebrow::before{background:#dfe9f1;}
+  .hero h1{
+    font-size:clamp(30px,5.4vw,50px);
+    color:#fff;
+    margin-bottom:20px;
+  }
+  .hero p.lead{color:#e4e9ee;font-size:15.5px;margin-bottom:34px;}
+  .hero-actions{display:flex;flex-wrap:wrap;gap:14px;margin-bottom:44px;}
+  .hero .btn-outline{color:#fff;border-color:rgba(255,255,255,.55);}
+  .hero .btn-outline:hover{background:rgba(255,255,255,.12);}
+  .stat-strip{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:18px;
+    border-top:1px solid rgba(255,255,255,.22);
+    padding-top:26px;
+  }
+  .stat-strip div{min-width:0;}
+  .stat-strip .num{font-size:clamp(20px,3.4vw,30px);font-weight:800;display:block;}
+  .stat-strip span{font-size:11.5px;color:#cbd6df;letter-spacing:.04em;}
+  @media (max-width:640px){
+    .stat-strip{grid-template-columns:repeat(2,1fr);}
+    .hero{min-height:auto;}
+    .hero-inner{padding:96px 0 40px;}
+  }
+  .note-tag{
+    font-size:11px;color:#cbd6df;margin-top:16px;
+  }
+
+  /* reveal */
+  .reveal{opacity:0;transform:translateY(22px);transition:opacity .7s ease, transform .7s ease;}
+  .reveal.visible{opacity:1;transform:translateY(0);}
+  @media (prefers-reduced-motion:reduce){
+    .reveal{opacity:1;transform:none;transition:none;}
+    html{scroll-behavior:auto;}
+  }
+
+  /* section headers */
+  .sec-head{max-width:640px;margin-bottom:52px;}
+  .sec-head.center{margin-left:auto;margin-right:auto;text-align:center;}
+  .sec-head h2{font-size:clamp(24px,3.6vw,34px);}
+
+  /* reasons */
+  .reasons{
+    display:grid;grid-template-columns:repeat(3,1fr);gap:28px;
+  }
+  .reason-card{
+    background:#fff;border:1px solid var(--line);border-radius:var(--radius);
+    padding:32px 26px;min-width:0;
+  }
+  .reason-icon{
+    width:48px;height:48px;border-radius:50%;
+    background:var(--ai-tint);
+    display:flex;align-items:center;justify-content:center;
+    margin-bottom:20px;
+  }
+  .reason-icon svg{width:22px;height:22px;stroke:var(--ai);fill:none;stroke-width:1.6;}
+  .reason-card h3{font-size:18px;margin-bottom:10px;}
+  .reason-card p{font-size:13.8px;color:var(--ink-soft);margin:0;}
+  @media (max-width:900px){.reasons{grid-template-columns:1fr;}}
+
+  /* brands */
+  .brand-grid{
+    display:grid;grid-template-columns:repeat(3,1fr);gap:26px;
+  }
+  .brand-card{
+    background:#fff;border-radius:var(--radius);overflow:hidden;
+    border:1px solid var(--line);
+    display:flex;flex-direction:column;min-width:0;
+  }
+  .brand-photo{height:190px;position:relative;overflow:hidden;}
+  .brand-photo img{width:100%;height:100%;object-fit:cover;}
+  .brand-photo .tag{
+    position:absolute;top:14px;left:14px;
+    background:rgba(255,255,255,.92);
+    color:var(--ai-deep);
+    font-size:11px;font-weight:700;letter-spacing:.06em;
+    padding:5px 12px;border-radius:100px;
+  }
+  .brand-body{padding:22px 24px 26px;flex:1;display:flex;flex-direction:column;}
+  .brand-body .region{font-size:11.5px;color:var(--ink-soft);letter-spacing:.06em;margin-bottom:6px;}
+  .brand-body h3{font-size:19px;margin-bottom:10px;}
+  .brand-body p{font-size:13.4px;color:var(--ink-soft);margin:0 0 18px;flex:1;}
+  .brand-foot{
+    display:flex;align-items:center;justify-content:space-between;
+    border-top:1px solid var(--line);padding-top:14px;
+  }
+  .price{font-family:"Manrope",sans-serif;font-weight:700;font-size:15px;color:var(--ai-deep);}
+  .brand-foot a{font-size:12.5px;font-weight:700;color:var(--ai);display:flex;align-items:center;gap:4px;}
+  @media (max-width:900px){.brand-grid{grid-template-columns:1fr 1fr;}}
+  @media (max-width:640px){.brand-grid{grid-template-columns:1fr;}}
+
+  /* section alt bg */
+  .alt{background:var(--paper-deep);}
+
+  /* events */
+  .event-list{display:flex;flex-direction:column;gap:0;}
+  .event-row{
+    display:grid;
+    grid-template-columns:96px 1fr auto;
+    gap:24px;align-items:center;
+    padding:26px 0;
+    border-bottom:1px solid var(--line);
+  }
+  .event-row:first-child{border-top:1px solid var(--line);}
+  .event-date{
+    text-align:center;
+    background:var(--ai);color:#fff;border-radius:10px;
+    padding:12px 0;
+  }
+  .event-date .d{font-family:"Manrope",sans-serif;font-size:24px;font-weight:800;line-height:1;}
+  .event-date .m{font-size:11px;letter-spacing:.06em;}
+  .event-info h3{font-size:16.5px;margin-bottom:6px;}
+  .event-info p{font-size:13px;color:var(--ink-soft);margin:0;}
+  .event-place{font-size:12px;color:var(--ink-soft);white-space:nowrap;}
+  @media (max-width:640px){
+    .event-row{grid-template-columns:64px 1fr;}
+    .event-place{grid-column:2;font-size:11.5px;}
+    .event-date{padding:8px 0;}
+    .event-date .d{font-size:19px;}
+  }
+
+  /* trivia */
+  .trivia-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;}
+  .trivia-card{
+    background:#fff;border:1px solid var(--line);border-radius:var(--radius);
+    padding:26px 22px;min-width:0;
+  }
+  .trivia-card .qm{
+    font-family:"Shippori Mincho",serif;font-size:26px;color:var(--ai);
+    display:block;margin-bottom:12px;
+  }
+  .trivia-card h4{font-size:14.5px;margin-bottom:8px;line-height:1.6;}
+  .trivia-card p{font-size:12.6px;color:var(--ink-soft);margin:0;}
+  @media (max-width:900px){.trivia-grid{grid-template-columns:1fr 1fr;}}
+  @media (max-width:520px){.trivia-grid{grid-template-columns:1fr;}}
+
+  /* curator */
+  .curator{
+    display:grid;grid-template-columns:0.85fr 1.15fr;gap:56px;align-items:center;
+  }
+  .curator-photo{border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);}
+  .curator-photo img{width:100%;height:380px;object-fit:cover;}
+  .curator-text .kai{
+    font-family:"Shippori Mincho",serif;font-size:15px;color:var(--ai);
+    display:block;margin-bottom:14px;
+  }
+  .curator-text h2{font-size:clamp(22px,3.2vw,30px);margin-bottom:20px;}
+  .curator-text p{color:var(--ink-soft);font-size:14.5px;margin-bottom:16px;}
+  .curator-badges{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px;}
+  .curator-badges span{
+    font-size:11.5px;background:var(--ai-tint);color:var(--ai-deep);
+    padding:7px 14px;border-radius:100px;font-weight:700;
+  }
+  @media (max-width:900px){
+    .curator{grid-template-columns:1fr;}
+    .curator-photo img{height:260px;}
+  }
+
+  /* voices */
+  .voice-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
+  .voice-card{
+    background:#fff;border:1px solid var(--line);border-radius:var(--radius);
+    padding:28px 26px;min-width:0;
+  }
+  .voice-stars{color:var(--ai);font-size:13px;margin-bottom:14px;letter-spacing:2px;}
+  .voice-card p{font-size:13.6px;color:var(--ink-soft);margin-bottom:18px;}
+  .voice-who{display:flex;align-items:center;gap:10px;}
+  .voice-avatar{
+    width:34px;height:34px;border-radius:50%;background:var(--ai-tint);
+    display:flex;align-items:center;justify-content:center;
+    font-family:"Shippori Mincho",serif;color:var(--ai-deep);font-size:13px;font-weight:700;
+    flex-shrink:0;
+  }
+  .voice-who .name{font-size:12.5px;font-weight:700;}
+  .voice-who .meta{font-size:11px;color:var(--ink-soft);}
+  @media (max-width:900px){.voice-grid{grid-template-columns:1fr;}}
+
+  /* faq */
+  .faq-list{max-width:760px;margin:0 auto;}
+  .faq-item{border-bottom:1px solid var(--line);}
+  .faq-q{
+    width:100%;background:none;border:none;text-align:left;
+    padding:22px 4px;font-size:15px;font-weight:500;
+    display:flex;align-items:center;justify-content:space-between;
+    cursor:pointer;color:var(--ink);font-family:"Noto Sans JP",sans-serif;
+    gap:16px;
+  }
+  .faq-q .mark{font-family:"Manrope",sans-serif;font-size:18px;color:var(--ai);flex-shrink:0;}
+  .faq-a{max-height:0;overflow:hidden;transition:max-height .3s ease;}
+  .faq-a p{padding:0 4px 22px;font-size:13.6px;color:var(--ink-soft);margin:0;max-width:640px;}
+  .faq-item.open .faq-a{max-height:220px;}
+
+  /* signup / final cta */
+  .final-cta{
+    background:var(--ai-deep);
+    color:#fff;border-radius:24px;
+    padding:64px 48px;
+    display:grid;grid-template-columns:1.2fr 1fr;gap:40px;align-items:center;
+  }
+  .final-cta h2{color:#fff;font-size:clamp(22px,3.2vw,30px);margin-bottom:14px;}
+  .final-cta p{color:#c9d3dc;font-size:14px;margin:0;}
+  .final-form{display:flex;flex-direction:column;gap:12px;}
+  .final-form input[type=email]{
+    width:100%;
+    padding:15px 18px;border-radius:10px;border:1px solid rgba(255,255,255,.25);
+    background:rgba(255,255,255,.08);color:#fff;font-size:16px;font-family:"Noto Sans JP",sans-serif;
+  }
+  .final-form input::placeholder{color:#9fb0bf;}
+  .final-form .btn-primary{background:#fff;color:var(--ai-deep);}
+  .final-form small{color:#9fb0bf;font-size:11px;}
+  @media (max-width:900px){
+    .final-cta{grid-template-columns:1fr;padding:44px 26px;border-radius:18px;}
+  }
+
+  /* footer */
+  footer{background:var(--ink);color:#cfc9bd;padding:56px 0 110px;}
+  .foot-grid{
+    display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:40px;margin-bottom:36px;
+  }
+  .foot-brand .brand-name{color:#fff;}
+  .foot-brand p{font-size:12.6px;color:#a39d90;margin-top:14px;max-width:280px;}
+  footer h5{font-family:"Noto Sans JP",sans-serif;font-size:12px;letter-spacing:.1em;color:#8f887a;margin-bottom:16px;}
+  footer ul{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:10px;}
+  footer a{font-size:13px;color:#d7d2c6;}
+  footer a:hover{color:#fff;}
+  .foot-bottom{border-top:1px solid #3a372f;padding-top:24px;font-size:11.5px;color:#8f887a;line-height:1.9;}
+  @media (max-width:760px){.foot-grid{grid-template-columns:1fr;gap:26px;}}
+
+  /* sticky mobile cta */
+  .sticky-cta{
+    position:fixed;left:0;right:0;bottom:0;z-index:70;
+    background:#fff;border-top:1px solid var(--line);
+    padding:12px 16px;
+    display:none;
+    align-items:center;gap:10px;
+    box-shadow:0 -10px 30px rgba(0,0,0,.08);
+  }
+  .sticky-cta a.btn{flex:1;padding:14px 10px;font-size:13.5px;}
+  .sticky-cta a.tel{
+    width:48px;height:48px;border-radius:50%;flex-shrink:0;
+    background:var(--ai-tint);display:flex;align-items:center;justify-content:center;
+  }
+  .sticky-cta a.tel svg{width:19px;height:19px;stroke:var(--ai);fill:none;stroke-width:1.6;}
+  @media (max-width:760px){
+    .sticky-cta{display:flex;}
+    footer{padding-bottom:112px;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="headbar">
+    <div class="brand">
+      <div class="brand-mark"><svg viewBox="0 0 24 24"><path d="M7 3h10M9 3v4l-4 9a3 3 0 0 0 3 4h8a3 3 0 0 0 3-4l-4-9V3" stroke-width="1.6" stroke-linejoin="round"/></svg></div>
+      <div class="brand-name">銘酒めぐり<small>SAKE BRAND &amp; EVENT GUIDE</small></div>
+    </div>
+    <nav class="desk-nav">
+      <a href="#brands">銘柄紹介</a>
+      <a href="#events">イベント</a>
+      <a href="#trivia">豆知識</a>
+      <a href="#voice">お客様の声</a>
+      <a href="#faq">よくある質問</a>
+    </nav>
+    <div class="head-cta">
+      <a href="#ec" class="btn btn-outline">ECサイトへ</a>
+      <button class="burger" id="burgerBtn" aria-label="メニューを開く"><span></span></button>
+    </div>
+  </div>
+</header>
+
+<div class="nav-scrim" id="navScrim"></div>
+<nav class="mobile-nav" id="mobileNav">
+  <a href="#brands">銘柄紹介</a>
+  <a href="#events">イベント情報</a>
+  <a href="#trivia">日本酒の豆知識</a>
+  <a href="#voice">お客様の声</a>
+  <a href="#faq">よくある質問</a>
+  <a href="#ec">ECサイトへ進む</a>
+</nav>
+
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-inner wrap">
+    <div class="hero-copy">
+      <span class="eyebrow">SAKE BRAND &amp; EVENT GUIDE</span>
+      <h1>一献に、<br>物語を。</h1>
+      <p class="lead">全国の蔵元がつくる日本酒の銘柄・味わい・試飲イベント・豆知識をひとつにまとめました。気になる一本に出会ったら、そのままECサイトでお求めいただけます。</p>
+      <div class="hero-actions">
+        <a href="#ec" class="btn btn-primary">ECサイトで購入する</a>
+        <a href="#brands" class="btn btn-outline">銘柄を見てみる</a>
+      </div>
+      <div class="stat-strip">
+        <div><span class="num">120<small style="font-size:14px;">+</small></span><span>取扱銘柄数</span></div>
+        <div><span class="num">18</span><span>提携蔵元数</span></div>
+        <div><span class="num">32</span><span>年間イベント開催数</span></div>
+        <div><span class="num">24</span><span>海外発送対応国</span></div>
+      </div>
+      <p class="note-tag">※掲載の数値は仮の内容です。実際の取扱数・開催数はECサイトの最新情報をご確認ください。</p>
+    </div>
+  </div>
+</section>
+
+<section id="reasons">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">WHY US</span>
+      <h2>選ぶ楽しさから、<br class="mobile-only">購入までを一本道に。</h2>
+      <p class="lead">「なんとなく選ぶ」から「understanding して選ぶ」へ。銘柄・イベント・知識の3つの入口を用意し、迷わずお気に入りに出会える構成にしています。</p>
+    </div>
+    <div class="reasons">
+      <div class="reason-card reveal">
+        <div class="reason-icon"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2" stroke-width="1.6"/><path d="M4 10h16M10 4v16" stroke-width="1.6"/></svg></div>
+        <h3>味わいから探せる銘柄紹介</h3>
+        <p>甘辛・香り・精米歩合など、蔵元から届いた情報をもとに一銘柄ずつ丁寧に紹介。好みに近い一本を見つけやすくしています。</p>
+      </div>
+      <div class="reason-card reveal">
+        <div class="reason-icon"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2" stroke-width="1.6"/><path d="M3 10h18M8 3v4M16 3v4" stroke-width="1.6"/></svg></div>
+        <h3>試飲会・蔵開きの最新情報</h3>
+        <p>全国各地の試飲イベント・蔵開き・オンライン利き酒会の開催情報を随時更新。気になるイベントはそのまま詳細ページへ。</p>
+      </div>
+      <div class="reason-card reveal">
+        <div class="reason-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" stroke-width="1.6"/><path d="M12 8v4l3 2" stroke-width="1.6" stroke-linecap="round"/></svg></div>
+        <h3>知って楽しむ日本酒の豆知識</h3>
+        <p>純米・吟醸の違いや温度帯による味わいの変化など、知っておくとお酒の時間がもっと楽しくなる知識を短くまとめています。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="brands" class="alt">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">FEATURED BRANDS</span>
+      <h2>今月ご紹介する銘柄</h2>
+      <p class="lead">蔵元からいただいた最新情報をもとに、毎月入れ替えでご紹介しています。詳しい味わいと在庫状況はECサイトの商品ページでご確認ください。</p>
+    </div>
+    <div class="brand-grid">
+      <div class="brand-card reveal">
+        <div class="brand-photo">
+          <img src="https://images.unsplash.com/photo-1573455494060-c5595004fb6c?auto=format&fit=crop&w=900&q=70" alt="夜の路地に灯る酒場の提灯（イメージ）">
+          <span class="tag">季節限定</span>
+        </div>
+        <div class="brand-body">
+          <span class="region">東北エリア・純米吟醸</span>
+          <h3>雪垂（ゆきしだれ）</h3>
+          <p>雪解け水を仕込み水に使う、透明感のある口当たりが持ち味。冷やして飲むと香りが際立つタイプです。</p>
+          <div class="brand-foot">
+            <span class="price num">¥3,200<small style="font-size:11px;">/720ml・仮</small></span>
+            <a href="#ec">ECで見る →</a>
+          </div>
+        </div>
+      </div>
+      <div class="brand-card reveal">
+        <div class="brand-photo">
+          <img src="https://images.unsplash.com/photo-1753164725860-ffcd260b7b32?auto=format&fit=crop&w=900&q=70" alt="陶芸のろくろを回す職人の手元（イメージ）">
+          <span class="tag">定番</span>
+        </div>
+        <div class="brand-body">
+          <span class="region">北陸エリア・特別純米</span>
+          <h3>白磁蔵（はくじぐら）</h3>
+          <p>米の旨みをしっかり感じるコクのある味わい。燗にすることで甘みがふくらむ、食中酒向きの一本です。</p>
+          <div class="brand-foot">
+            <span class="price num">¥2,800<small style="font-size:11px;">/720ml・仮</small></span>
+            <a href="#ec">ECで見る →</a>
+          </div>
+        </div>
+      </div>
+      <div class="brand-card reveal">
+        <div class="brand-photo">
+          <img src="https://images.unsplash.com/photo-1496113329550-ce8886d06d54?auto=format&fit=crop&w=900&q=70" alt="畳と障子の和室（イメージ）">
+          <span class="tag">数量限定</span>
+        </div>
+        <div class="brand-body">
+          <span class="region">山陰エリア・大吟醸</span>
+          <h3>灯り月（あかりづき）</h3>
+          <p>吟醸香が華やかに広がる、贈答にも選ばれる一本。冷酒でグラスに注ぎ、香りごと楽しんでいただきたい味わいです。</p>
+          <div class="brand-foot">
+            <span class="price num">¥5,400<small style="font-size:11px;">/720ml・仮</small></span>
+            <a href="#ec">ECで見る →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="events">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">EVENT INFORMATION</span>
+      <h2>試飲会・蔵開き情報</h2>
+      <p class="lead">会場開催・オンライン開催ともにご紹介しています。参加方法・お申し込みは各イベント詳細ページをご確認ください。</p>
+    </div>
+    <div class="event-list">
+      <div class="event-row reveal">
+        <div class="event-date"><span class="d num">14</span><span class="m">SEP</span></div>
+        <div class="event-info">
+          <h3>秋の蔵元利き酒会（東京会場）</h3>
+          <p>18蔵元が出展する試飲イベント。新酒・限定酒を飲み比べいただけます。</p>
+        </div>
+        <div class="event-place">東京都内・会場開催</div>
+      </div>
+      <div class="event-row reveal">
+        <div class="event-date"><span class="d num">28</span><span class="m">SEP</span></div>
+        <div class="event-info">
+          <h3>オンライン蔵開き・雪垂の蔵元</h3>
+          <p>蔵元がライブ配信で仕込みの様子をご紹介。参加者には特典セットのご案内あり。</p>
+        </div>
+        <div class="event-place">オンライン開催</div>
+      </div>
+      <div class="event-row reveal">
+        <div class="event-date"><span class="d num">05</span><span class="m">OCT</span></div>
+        <div class="event-info">
+          <h3>燗酒の温度帯を楽しむ会</h3>
+          <p>同じ銘柄を5段階の温度で飲み比べる、季節先取りの体験型イベントです。</p>
+        </div>
+        <div class="event-place">大阪会場・定員制</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="trivia" class="alt">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">SAKE TRIVIA</span>
+      <h2>知ると、もっとおいしい豆知識</h2>
+      <p class="lead">選ぶときも、飲むときも役立つ小さな知識を集めました。</p>
+    </div>
+    <div class="trivia-grid">
+      <div class="trivia-card reveal">
+        <span class="qm">01</span>
+        <h4>純米酒と吟醸酒の違い</h4>
+        <p>純米酒は米・米麹・水のみ。吟醸酒は精米歩合60%以下まで磨き、低温発酵で香りを引き出したものです。</p>
+      </div>
+      <div class="trivia-card reveal">
+        <span class="qm">02</span>
+        <h4>冷酒と燗酒、選び方の目安</h4>
+        <p>香りを楽しみたい銘柄は冷やして、旨みやコクを楽しみたい銘柄は燗にすると印象が変わります。</p>
+      </div>
+      <div class="trivia-card reveal">
+        <span class="qm">03</span>
+        <h4>「精米歩合」って何のこと</h4>
+        <p>玄米をどれだけ磨いたかを示す数値です。数値が低いほど雑味が少なく、すっきりとした味わいになります。</p>
+      </div>
+      <div class="trivia-card reveal">
+        <span class="qm">04</span>
+        <h4>開栓後はいつまでにおいしい？</h4>
+        <p>冷蔵保存で概ね2週間程度が目安。日を追うごとに香りが変化していく様子も楽しめます。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="curator">
+  <div class="wrap curator">
+    <div class="curator-photo reveal">
+      <img src="https://images.unsplash.com/photo-1480796927426-f609979314bd?auto=format&fit=crop&w=900&q=70" alt="日本の商店街の店先（イメージ）">
+    </div>
+    <div class="curator-text reveal">
+      <span class="kai">CURATION POLICY</span>
+      <h2>蔵元の声を、そのままお届けする。</h2>
+      <p>掲載する銘柄情報・イベント情報は、すべて蔵元・提携先からいただいた一次情報をもとに構成しています。人気ランキングだけでなく、地域や造り手のこだわりが伝わる紹介を心がけています。</p>
+      <p>気になる一本が見つかったら、詳細ページからそのままECサイトのご購入画面へ進んでいただけます。迷ったときは、豆知識ページや試飲イベントもあわせてご活用ください。</p>
+      <div class="curator-badges">
+        <span>蔵元直接取材</span>
+        <span>毎月銘柄更新</span>
+        <span>海外発送対応</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="voice" class="alt">
+  <div class="wrap">
+    <div class="sec-head center reveal">
+      <span class="eyebrow">VOICE</span>
+      <h2>ご利用いただいた方の声</h2>
+      <p class="lead" style="margin:0 auto;">※ページ構成イメージのための仮のコメントです。</p>
+    </div>
+    <div class="voice-grid">
+      <div class="voice-card reveal">
+        <div class="voice-stars">★★★★★</div>
+        <p>「豆知識のページを読んでから選んだら、いつもと違う燗酒の楽しみ方に出会えました。」</p>
+        <div class="voice-who">
+          <div class="voice-avatar">A</div>
+          <div><div class="name">40代・個人のお客様</div><div class="meta">大阪府</div></div>
+        </div>
+      </div>
+      <div class="voice-card reveal">
+        <div class="voice-stars">★★★★★</div>
+        <p>「イベント情報を見てオンライン蔵開きに参加し、そのまま気に入った銘柄を購入しました。」</p>
+        <div class="voice-who">
+          <div class="voice-avatar">K</div>
+          <div><div class="name">30代・個人のお客様</div><div class="meta">神奈川県</div></div>
+        </div>
+      </div>
+      <div class="voice-card reveal">
+        <div class="voice-stars">★★★★★</div>
+        <p>「海外在住ですが、発送対応の銘柄が分かりやすくまとまっていて選びやすかったです。」</p>
+        <div class="voice-who">
+          <div class="voice-avatar">M</div>
+          <div><div class="name">海外在住のお客様</div><div class="meta">シンガポール</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="faq">
+  <div class="wrap">
+    <div class="sec-head center reveal">
+      <span class="eyebrow">FAQ</span>
+      <h2>よくあるご質問</h2>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item reveal">
+        <button class="faq-q" type="button">純米酒と吟醸酒はどう違いますか。<span class="mark">＋</span></button>
+        <div class="faq-a"><p>純米酒は米・米麹・水のみでつくられます。吟醸酒は精米歩合60%以下まで磨き、低温でじっくり発酵させ、香りを引き出したお酒です。原料と磨き方の基準による分類です。</p></div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-q" type="button">海外への発送は可能ですか。<span class="mark">＋</span></button>
+        <div class="faq-a"><p>本ページでご紹介する銘柄は、提携するECサイトを通じて海外発送に対応しています。対応国・送料は購入手続き画面でご確認いただけます。</p></div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-q" type="button">冷酒と燗酒、どちらで飲むのが正解ですか。<span class="mark">＋</span></button>
+        <div class="faq-a"><p>正解は一つではありません。温度帯によって香りと味わいの印象が変わります。銘柄ごとのおすすめ温度は商品ページに記載していますので、飲み比べてお好みを探すのもおすすめです。</p></div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-q" type="button">イベントの参加方法を教えてください。<span class="mark">＋</span></button>
+        <div class="faq-a"><p>各イベント詳細ページに参加方法・お申し込み手順を記載しています。会場開催・オンライン開催で手順が異なりますのでご確認ください。</p></div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-q" type="button">在庫状況はどこで確認できますか。<span class="mark">＋</span></button>
+        <div class="faq-a"><p>最新の在庫状況は、各銘柄の紹介ページから遷移するECサイトの商品ページでご確認いただけます。</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="ec">
+  <div class="wrap">
+    <div class="final-cta reveal">
+      <div>
+        <h2>気になる一本は、<br>ECサイトでゆっくり選べます。</h2>
+        <p>銘柄・イベント・豆知識のページから、そのままご購入手続きへ進めます。新着銘柄やイベントの通知をメールでお届けすることも可能です。</p>
+      </div>
+      <div>
+        <form class="final-form" onsubmit="return false;">
+          <input type="email" placeholder="メールアドレスを入力">
+          <button type="submit" class="btn btn-primary">新着情報を受け取る</button>
+          <a href="#ec" class="btn btn-outline" style="color:#fff;border-color:rgba(255,255,255,.5);">今すぐECサイトを見る</a>
+          <small>※本フォームはデモのため送信されません。</small>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <div class="brand-name">銘酒めぐり</div>
+        <p>日本酒の銘柄紹介・イベント情報・豆知識をまとめ、ECサイトでの購入までをひとつの流れでご案内するガイドページです。</p>
+      </div>
+      <div>
+        <h5>コンテンツ</h5>
+        <ul>
+          <li><a href="#brands">銘柄紹介</a></li>
+          <li><a href="#events">イベント情報</a></li>
+          <li><a href="#trivia">日本酒の豆知識</a></li>
+          <li><a href="#voice">お客様の声</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>お問い合わせ</h5>
+        <ul>
+          <li><a href="tel:0480000000">048-000-0000（仮）</a></li>
+          <li>受付時間 10:00-18:00（土日祝を除く）</li>
+          <li>全国配送・海外発送対応（提携ECサイト）</li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <p>※本ページは制作サンプル（デモ）です。掲載の内容・数値は仮のもので、写真はイメージです。銘柄名・イベント名・お客様の声はすべて架空のものであり、実在の商品・団体・個人とは関係ありません。</p>
+      <p>© 銘酒めぐり（制作サンプル）</p>
+    </div>
+  </div>
+</footer>
+
+<div class="sticky-cta">
+  <a href="tel:0480000000" class="tel" aria-label="電話で問い合わせる"><svg viewBox="0 0 24 24"><path d="M4 5c0 8 7 15 15 15l3-4-6-3-2 2c-3-2-5-4-7-7l2-2-3-6-4 3Z" stroke-width="1.4" stroke-linejoin="round"/></svg></a>
+  <a href="#ec" class="btn btn-primary">ECサイトで購入する</a>
+</div>
+
+<script>
+(function(){
+  var burger = document.getElementById('burgerBtn');
+  var nav = document.getElementById('mobileNav');
+  var scrim = document.getElementById('navScrim');
+  function closeNav(){ nav.classList.remove('open'); scrim.classList.remove('open'); }
+  burger.addEventListener('click', function(){
+    nav.classList.toggle('open');
+    scrim.classList.toggle('open');
+  });
+  scrim.addEventListener('click', closeNav);
+  Array.prototype.forEach.call(nav.querySelectorAll('a'), function(a){
+    a.addEventListener('click', closeNav);
+  });
+
+  var faqs = document.querySelectorAll('.faq-item');
+  faqs.forEach(function(item){
+    var q = item.querySelector('.faq-q');
+    q.addEventListener('click', function(){
+      var isOpen = item.classList.contains('open');
+      faqs.forEach(function(i){ i.classList.remove('open'); i.querySelector('.faq-q .mark').textContent = '＋'; });
+      if(!isOpen){
+        item.classList.add('open');
+        q.querySelector('.mark').textContent = '－';
+      }
+    });
+  });
+
+  if('IntersectionObserver' in window){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if(entry.isIntersecting){
+          entry.target.classList.add('visible');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.14 });
+    document.querySelectorAll('.reveal').forEach(function(el){ io.observe(el); });
+  } else {
+    document.querySelectorAll('.reveal').forEach(function(el){ el.classList.add('visible'); });
+  }
+})();
+</script>
+</body>
+</html>
