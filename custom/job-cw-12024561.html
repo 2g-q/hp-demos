@@ -1,0 +1,1077 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WordPress運用・改善 伴走パートナー｜自動化のミナト（制作サンプル）</title>
+<meta name="description" content="WordPress運用・保守・テクニカルサポートを、AI活用のスピードと人の目のダブルチェックで伴走するパートナーサービスのご提案サンプルです。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Zen+Kaku+Gothic+New:wght@500;700;900&family=Manrope:wght@600;800&display=swap" rel="stylesheet">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "serviceType": "WordPress運用・保守・テクニカルサポート",
+  "provider": {
+    "@type": "Organization",
+    "name": "自動化のミナト"
+  },
+  "areaServed": "JP",
+  "description": "WordPressサイトの運用・修正・改善、HTML/CSS/PHPによるテクニカル対応、生成AIを活用した業務効率化を継続的に伴走するパートナーサービス。"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "小さな修正1件からでもお願いできますか。",
+      "acceptedAnswer": { "@type": "Answer", "text": "はい。初回はタスク単位の小さな依頼からお試しいただき、継続の可否をご判断いただく進め方を推奨しています。" }
+    },
+    {
+      "@type": "Question",
+      "name": "サーバーやドメインの知識がなくても相談できますか。",
+      "acceptedAnswer": { "@type": "Answer", "text": "現状の管理画面やサーバー環境を拝見したうえで、必要な設定・移行手順をこちらで整理してご提案します。" }
+    }
+  ]
+}
+</script>
+<style>
+:root{
+  --navy:#1b2f4d;
+  --navy-dark:#12213a;
+  --navy-soft:#eef1f6;
+  --ink:#20242c;
+  --sub:#5b6270;
+  --bg:#fbfbf9;
+  --line:#e4e2da;
+  --card:#ffffff;
+  --radius:16px;
+}
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--ink);
+  font-family:"Noto Sans JP","Hiragino Kaku Gothic ProN",sans-serif;
+  line-height:1.8;
+  letter-spacing:.02em;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+img,svg{max-width:100%;display:block;}
+.font-head{font-family:"Zen Kaku Gothic New","Noto Sans JP",sans-serif;}
+.font-num{font-family:"Manrope","Noto Sans JP",sans-serif;}
+.wrap{
+  width:100%;
+  max-width:1120px;
+  margin:0 auto;
+  padding:0 24px;
+}
+a{color:inherit;}
+section{padding:96px 0;}
+@media (max-width:640px){
+  section{padding:64px 0;}
+  .wrap{padding:0 20px;}
+}
+.eyebrow{
+  display:inline-block;
+  font-size:.78rem;
+  font-weight:700;
+  letter-spacing:.14em;
+  color:var(--navy);
+  background:var(--navy-soft);
+  border-radius:100px;
+  padding:6px 16px;
+  margin-bottom:18px;
+}
+h1,h2,h3{
+  font-weight:900;
+  margin:0 0 .5em;
+  color:var(--navy-dark);
+}
+h2{
+  font-size:clamp(1.6rem,3.4vw,2.3rem);
+  line-height:1.5;
+}
+p{color:var(--sub);}
+.section-lead{
+  max-width:640px;
+  margin:0 0 48px;
+}
+.btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  padding:16px 32px;
+  border-radius:100px;
+  font-weight:700;
+  font-size:.98rem;
+  text-decoration:none;
+  border:2px solid transparent;
+  cursor:pointer;
+  transition:transform .18s ease, box-shadow .18s ease, opacity .18s ease;
+  white-space:nowrap;
+}
+.btn-primary{
+  background:var(--navy);
+  color:#fff;
+  box-shadow:0 12px 24px -10px rgba(27,47,77,.55);
+}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 16px 30px -10px rgba(27,47,77,.6);}
+.btn-outline{
+  background:#fff;
+  border-color:var(--line);
+  color:var(--navy-dark);
+}
+.btn-outline:hover{border-color:var(--navy);transform:translateY(-2px);}
+
+/* ---------- header ---------- */
+header{
+  position:fixed;
+  top:0;left:0;right:0;
+  z-index:1000;
+  background:rgba(251,251,249,.9);
+  backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line);
+}
+.header-inner{
+  width:100%;
+  max-width:1120px;
+  margin:0 auto;
+  padding:14px 24px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+.logo{
+  font-family:"Zen Kaku Gothic New",sans-serif;
+  font-weight:900;
+  font-size:1.05rem;
+  color:var(--navy-dark);
+  letter-spacing:.03em;
+}
+.logo span{color:var(--navy);}
+.nav-desktop{
+  display:flex;
+  gap:28px;
+  list-style:none;
+  margin:0;padding:0;
+  font-size:.92rem;
+  font-weight:500;
+}
+.nav-desktop a{text-decoration:none;color:var(--ink);}
+.nav-desktop a:hover{color:var(--navy);}
+.header-cta{display:flex;align-items:center;gap:14px;}
+.hamburger{
+  display:none;
+  width:44px;height:44px;
+  border-radius:10px;
+  border:1px solid var(--line);
+  background:#fff;
+  position:relative;
+  cursor:pointer;
+}
+.hamburger span{
+  position:absolute;left:11px;right:11px;
+  height:2px;background:var(--navy-dark);
+  transition:transform .25s ease, opacity .25s ease;
+}
+.hamburger span:nth-child(1){top:15px;}
+.hamburger span:nth-child(2){top:21px;}
+.hamburger span:nth-child(3){top:27px;}
+.hamburger.open span:nth-child(1){transform:translateY(6px) rotate(45deg);}
+.hamburger.open span:nth-child(2){opacity:0;}
+.hamburger.open span:nth-child(3){transform:translateY(-6px) rotate(-45deg);}
+
+/* mobile nav lives OUTSIDE header to avoid backdrop-filter clipping fixed children */
+#mobileNav{
+  position:fixed;
+  inset:0;
+  z-index:999;
+  background:#fff;
+  padding:96px 28px 40px;
+  transform:translateX(100%);
+  transition:transform .3s ease;
+  display:none;
+}
+#mobileNav.open{transform:translateX(0);}
+#mobileNav ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px;}
+#mobileNav a{
+  display:block;
+  padding:16px 4px;
+  border-bottom:1px solid var(--line);
+  text-decoration:none;
+  font-weight:700;
+  font-size:1.05rem;
+  color:var(--navy-dark);
+}
+#mobileNav .btn{margin-top:28px;width:100%;}
+
+@media (max-width:900px){
+  .nav-desktop{display:none;}
+  .hamburger{display:block;}
+  #mobileNav{display:block;}
+  .header-cta .btn-primary{display:none;}
+}
+
+/* ---------- hero ---------- */
+.hero{
+  padding:172px 0 96px;
+  background:
+    radial-gradient(720px 420px at 82% -10%, rgba(27,47,77,.10), transparent 60%),
+    linear-gradient(180deg,#fbfbf9 0%,#f5f6f3 100%);
+}
+.hero-grid{
+  display:grid;
+  grid-template-columns:1.05fr .95fr;
+  gap:56px;
+  align-items:center;
+}
+@media (max-width:900px){
+  .hero{padding:132px 0 64px;}
+  .hero-grid{grid-template-columns:1fr;gap:40px;}
+}
+.hero h1{
+  font-size:clamp(2rem,4.6vw,3.15rem);
+  line-height:1.42;
+  letter-spacing:.01em;
+}
+.hero-sub{
+  font-size:1.02rem;
+  max-width:560px;
+  margin-bottom:32px;
+}
+.hero-actions{display:flex;flex-wrap:wrap;gap:14px;margin-bottom:36px;}
+.trust-strip{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+}
+.trust-chip{
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:100px;
+  padding:9px 18px;
+  font-size:.82rem;
+  font-weight:700;
+  color:var(--navy-dark);
+  display:flex;align-items:center;gap:8px;
+}
+.trust-chip .dot{width:7px;height:7px;border-radius:50%;background:var(--navy);flex:none;}
+
+/* mock browser visual, no external images at all */
+.mock{
+  width:100%;
+  max-width:100%;
+  background:#fff;
+  border-radius:18px;
+  border:1px solid var(--line);
+  box-shadow:0 30px 60px -30px rgba(19,32,56,.35);
+  overflow:hidden;
+}
+.mock-bar{
+  display:flex;align-items:center;gap:6px;
+  padding:12px 16px;
+  background:var(--navy-soft);
+  border-bottom:1px solid var(--line);
+}
+.mock-bar i{width:9px;height:9px;border-radius:50%;background:#d7dae1;display:block;}
+.mock-bar .url{
+  margin-left:10px;
+  font-size:.72rem;
+  color:var(--sub);
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:6px;
+  padding:4px 10px;
+  flex:1;
+  min-width:0;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+.mock-body{padding:22px;}
+.mock-line{height:12px;border-radius:6px;background:var(--navy-soft);margin-bottom:12px;}
+.mock-row{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:16px;}
+.mock-card{
+  border:1px solid var(--line);
+  border-radius:12px;
+  padding:14px;
+  background:var(--bg);
+}
+.mock-card .num{font-family:"Manrope",sans-serif;font-weight:800;font-size:1.3rem;color:var(--navy);}
+.mock-card .lab{font-size:.72rem;color:var(--sub);margin-top:4px;}
+
+/* ---------- concerns ---------- */
+.concern-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:18px;
+}
+.concern-card{
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  padding:26px 24px;
+  display:flex;
+  gap:16px;
+  align-items:flex-start;
+}
+.check-ico{
+  flex:none;
+  width:34px;height:34px;
+  border-radius:50%;
+  border:2px solid var(--navy);
+  display:flex;align-items:center;justify-content:center;
+}
+.check-ico svg{width:16px;height:16px;}
+.concern-card p{margin:0;color:var(--ink);font-weight:500;}
+
+/* ---------- reasons ---------- */
+.reason-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:24px;
+}
+@media (max-width:900px){.reason-grid{grid-template-columns:1fr;}}
+.reason-card{
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  padding:32px 26px;
+  position:relative;
+}
+.reason-num{
+  font-family:"Manrope",sans-serif;
+  font-weight:800;
+  font-size:.85rem;
+  color:var(--navy);
+  background:var(--navy-soft);
+  display:inline-block;
+  padding:5px 12px;
+  border-radius:100px;
+  margin-bottom:16px;
+}
+.reason-card h3{font-size:1.12rem;margin-bottom:10px;}
+.reason-card p{margin:0;font-size:.92rem;}
+
+/* ---------- services ---------- */
+.svc-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  gap:18px;
+}
+.svc-card{
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  background:var(--card);
+  padding:26px;
+}
+.svc-ico{
+  width:44px;height:44px;
+  border-radius:12px;
+  background:var(--navy-soft);
+  display:flex;align-items:center;justify-content:center;
+  margin-bottom:16px;
+}
+.svc-ico svg{width:22px;height:22px;color:var(--navy);}
+.svc-card h3{font-size:1.02rem;margin-bottom:8px;}
+.svc-card p{font-size:.9rem;margin:0;}
+
+/* ---------- report / dashboard demo ---------- */
+.report-note{
+  font-size:.82rem;
+  color:var(--navy);
+  background:var(--navy-soft);
+  border-radius:10px;
+  padding:12px 16px;
+  margin-bottom:28px;
+  display:inline-block;
+}
+.report-shell{
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:20px;
+  padding:clamp(18px,3vw,34px);
+  box-shadow:0 24px 50px -30px rgba(19,32,56,.3);
+}
+.report-head{
+  display:flex;
+  flex-wrap:wrap;
+  gap:12px;
+  align-items:center;
+  justify-content:space-between;
+  margin-bottom:22px;
+  padding-bottom:18px;
+  border-bottom:1px dashed var(--line);
+}
+.report-head h3{margin:0;font-size:1.05rem;}
+.report-head span{font-size:.78rem;color:var(--sub);}
+.kpi-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+  gap:14px;
+  margin-bottom:24px;
+}
+.kpi{
+  border:1px solid var(--line);
+  border-radius:14px;
+  padding:18px;
+  background:var(--bg);
+}
+.kpi .num{font-family:"Manrope",sans-serif;font-weight:800;font-size:1.7rem;color:var(--navy-dark);}
+.kpi .num small{font-size:.9rem;font-weight:700;color:var(--sub);margin-left:2px;}
+.kpi .lab{font-size:.78rem;color:var(--sub);margin-top:6px;}
+.bar-row{display:flex;align-items:center;gap:12px;margin-bottom:12px;}
+.bar-row .name{width:132px;flex:none;font-size:.82rem;color:var(--ink);}
+.bar-track{flex:1;height:10px;background:var(--navy-soft);border-radius:100px;overflow:hidden;}
+.bar-fill{height:100%;background:var(--navy);border-radius:100px;width:0;transition:width 1s ease;}
+.bar-row .pct{width:44px;flex:none;text-align:right;font-family:"Manrope",sans-serif;font-weight:700;font-size:.82rem;color:var(--navy-dark);}
+
+/* ---------- flow ---------- */
+.flow-list{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:20px;
+  counter-reset:flow;
+}
+.flow-item{
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  background:var(--card);
+  padding:26px 22px;
+  position:relative;
+}
+.flow-item::before{
+  counter-increment:flow;
+  content:counter(flow);
+  font-family:"Manrope",sans-serif;
+  font-weight:800;
+  font-size:.95rem;
+  color:#fff;
+  background:var(--navy);
+  width:32px;height:32px;
+  border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  margin-bottom:16px;
+}
+.flow-item h3{font-size:.98rem;margin-bottom:8px;}
+.flow-item p{font-size:.88rem;margin:0;}
+
+/* ---------- pricing ---------- */
+.price-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:22px;
+  align-items:stretch;
+}
+@media (max-width:900px){.price-grid{grid-template-columns:1fr;}}
+.price-card{
+  border:1px solid var(--line);
+  border-radius:20px;
+  background:var(--card);
+  padding:32px 26px;
+  display:flex;
+  flex-direction:column;
+}
+.price-card.featured{
+  border-color:var(--navy);
+  box-shadow:0 26px 50px -28px rgba(27,47,77,.45);
+  transform:translateY(-6px);
+}
+.price-tag{
+  font-size:.76rem;
+  font-weight:700;
+  color:var(--navy);
+  background:var(--navy-soft);
+  border-radius:100px;
+  padding:5px 12px;
+  display:inline-block;
+  margin-bottom:14px;
+  align-self:flex-start;
+}
+.price-card h3{font-size:1.08rem;margin-bottom:6px;}
+.price-amount{
+  font-family:"Manrope",sans-serif;
+  font-weight:800;
+  font-size:1.9rem;
+  color:var(--navy-dark);
+  margin-bottom:4px;
+}
+.price-amount small{font-size:.85rem;font-weight:600;color:var(--sub);}
+.price-note{font-size:.78rem;color:var(--sub);margin-bottom:20px;}
+.price-list{list-style:none;margin:0 0 24px;padding:0;flex:1;}
+.price-list li{
+  font-size:.88rem;
+  color:var(--ink);
+  padding:10px 0;
+  border-top:1px solid var(--line);
+  display:flex;gap:10px;
+}
+.price-list li:first-child{border-top:none;}
+.price-list svg{flex:none;width:16px;height:16px;color:var(--navy);margin-top:3px;}
+
+/* ---------- faq ---------- */
+.faq-item{
+  border-bottom:1px solid var(--line);
+  padding:20px 0;
+}
+.faq-q{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:16px;
+  cursor:pointer;
+  font-weight:700;
+  color:var(--navy-dark);
+  font-size:.98rem;
+}
+.faq-q .toggle{
+  flex:none;
+  width:26px;height:26px;
+  border-radius:50%;
+  border:1px solid var(--line);
+  position:relative;
+}
+.faq-q .toggle::before,.faq-q .toggle::after{
+  content:"";
+  position:absolute;
+  background:var(--navy-dark);
+  left:50%;top:50%;
+  transform:translate(-50%,-50%);
+}
+.faq-q .toggle::before{width:10px;height:2px;}
+.faq-q .toggle::after{width:2px;height:10px;transition:transform .2s ease;}
+.faq-item.open .toggle::after{transform:translate(-50%,-50%) scaleY(0);}
+.faq-a{
+  max-height:0;
+  overflow:hidden;
+  transition:max-height .3s ease;
+  font-size:.9rem;
+  color:var(--sub);
+}
+.faq-item.open .faq-a{max-height:220px;margin-top:14px;}
+
+/* ---------- contact ---------- */
+.contact-shell{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:40px;
+  align-items:flex-start;
+}
+@media (max-width:900px){.contact-shell{grid-template-columns:1fr;}}
+.contact-info{
+  background:var(--navy-dark);
+  color:#fff;
+  border-radius:20px;
+  padding:34px;
+}
+.contact-info h3{color:#fff;font-size:1.1rem;}
+.contact-info p{color:#c9d1e0;font-size:.9rem;}
+.contact-info .tel{
+  font-family:"Manrope",sans-serif;
+  font-weight:800;
+  font-size:1.5rem;
+  color:#fff;
+  text-decoration:none;
+  display:block;
+  margin:14px 0 6px;
+}
+.contact-info .small{font-size:.78rem;color:#9aa6bd;}
+.form-shell{
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:20px;
+  padding:30px;
+}
+.field{margin-bottom:16px;}
+.field label{
+  display:block;
+  font-size:.82rem;
+  font-weight:700;
+  color:var(--navy-dark);
+  margin-bottom:6px;
+}
+.field input,.field textarea,.field select{
+  width:100%;
+  max-width:100%;
+  padding:13px 14px;
+  border-radius:10px;
+  border:1px solid var(--line);
+  background:#fff;
+  font-size:16px;
+  font-family:inherit;
+  color:var(--ink);
+}
+.field textarea{resize:vertical;min-height:100px;}
+.form-shell .btn{width:100%;margin-top:6px;}
+
+/* ---------- footer ---------- */
+footer{
+  background:var(--navy-dark);
+  color:#c9d1e0;
+  padding:56px 0 100px;
+}
+footer .wrap{
+  display:flex;
+  flex-direction:column;
+  gap:18px;
+}
+footer .foot-top{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:space-between;
+  gap:20px;
+  padding-bottom:24px;
+  border-bottom:1px solid rgba(255,255,255,.12);
+}
+footer .foot-logo{font-family:"Zen Kaku Gothic New",sans-serif;font-weight:900;color:#fff;font-size:1.05rem;}
+footer .disclaimer{font-size:.78rem;line-height:1.9;color:#93a0b8;}
+
+/* ---------- mobile sticky cta ---------- */
+.sticky-cta{
+  position:fixed;
+  left:0;right:0;bottom:0;
+  z-index:900;
+  background:#fff;
+  border-top:1px solid var(--line);
+  padding:10px 16px calc(10px + env(safe-area-inset-bottom));
+  display:none;
+  gap:10px;
+  box-shadow:0 -12px 24px -20px rgba(19,32,56,.4);
+}
+.sticky-cta .btn{flex:1;padding:14px 10px;font-size:.9rem;}
+@media (max-width:640px){.sticky-cta{display:flex;}body{padding-bottom:76px;}}
+
+/* ---------- reveal ---------- */
+.reveal{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s ease;}
+.reveal.in{opacity:1;transform:none;}
+@media (prefers-reduced-motion:reduce){
+  .reveal{opacity:1;transform:none;transition:none;}
+  html{scroll-behavior:auto;}
+  .bar-fill{transition:none;}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="logo">自動化の<span>ミナト</span></div>
+    <ul class="nav-desktop">
+      <li><a href="#concerns">お悩み</a></li>
+      <li><a href="#reasons">選ばれる理由</a></li>
+      <li><a href="#services">対応内容</a></li>
+      <li><a href="#report">月次レポート例</a></li>
+      <li><a href="#pricing">料金</a></li>
+      <li><a href="#faq">よくある質問</a></li>
+    </ul>
+    <div class="header-cta">
+      <a href="#contact" class="btn btn-primary">ご相談する</a>
+      <button class="hamburger" id="hamburgerBtn" aria-label="メニュー" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<nav id="mobileNav" aria-hidden="true">
+  <ul>
+    <li><a href="#concerns">お悩み</a></li>
+    <li><a href="#reasons">選ばれる理由</a></li>
+    <li><a href="#services">対応内容</a></li>
+    <li><a href="#report">月次レポート例</a></li>
+    <li><a href="#flow">ご相談の流れ</a></li>
+    <li><a href="#pricing">料金</a></li>
+    <li><a href="#faq">よくある質問</a></li>
+  </ul>
+  <a href="#contact" class="btn btn-primary">ご相談する</a>
+</nav>
+
+<main>
+
+  <section class="hero" id="home">
+    <div class="wrap hero-grid">
+      <div>
+        <span class="eyebrow">WordPress運用・改善 伴走パートナー ご提案サンプル</span>
+        <h1 class="font-head">止めない運用、<br>崩さない改修。</h1>
+        <p class="hero-sub">
+          WordPressサイトの保守・修正・改善、HTML/CSS/PHPのテクニカル対応、
+          生成AIを使った業務効率化まで、貴社のWebメディア運営に伴走します。
+          対応はAI活用でスピーディに、仕上がりは人の目で必ず二重に確認します。
+        </p>
+        <div class="hero-actions">
+          <a href="#contact" class="btn btn-primary">まずは相談してみる</a>
+          <a href="#services" class="btn btn-outline">対応内容を見る</a>
+        </div>
+        <div class="trust-strip">
+          <span class="trust-chip"><span class="dot"></span>タスク単位〜月額まで柔軟契約</span>
+          <span class="trust-chip"><span class="dot"></span>WordPress／HTML・CSS・PHP対応</span>
+          <span class="trust-chip"><span class="dot"></span>AI活用×人の目で品質担保</span>
+        </div>
+      </div>
+      <div class="reveal">
+        <div class="mock">
+          <div class="mock-bar">
+            <i></i><i></i><i></i>
+            <span class="url">your-media-site.example.com/wp-admin</span>
+          </div>
+          <div class="mock-body">
+            <div class="mock-line" style="width:70%;"></div>
+            <div class="mock-line" style="width:92%;"></div>
+            <div class="mock-line" style="width:55%;"></div>
+            <div class="mock-row">
+              <div class="mock-card"><div class="num">12</div><div class="lab">今月の対応件数</div></div>
+              <div class="mock-card"><div class="num">0</div><div class="lab">未対応エラー</div></div>
+              <div class="mock-card"><div class="num">A+</div><div class="lab">表示速度評価</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="concerns">
+    <div class="wrap">
+      <span class="eyebrow">こんなお悩みはありませんか</span>
+      <h2 class="font-head reveal">WordPress運用、<br class="br-sp">こんな状態で止まっていませんか。</h2>
+      <div class="concern-grid reveal">
+        <div class="concern-card">
+          <span class="check-ico"><svg viewBox="0 0 24 24" fill="none" stroke="#1b2f4d" stroke-width="2.4" stroke-linecap="round"><path d="M4 12l5 5L20 6"/></svg></span>
+          <p>プラグイン更新やエラー表示を、気づいたときにしか対応できていない。</p>
+        </div>
+        <div class="concern-card">
+          <span class="check-ico"><svg viewBox="0 0 24 24" fill="none" stroke="#1b2f4d" stroke-width="2.4" stroke-linecap="round"><path d="M4 12l5 5L20 6"/></svg></span>
+          <p>デザインやテーマの微調整を依頼できる相手が社内にいない。</p>
+        </div>
+        <div class="concern-card">
+          <span class="check-ico"><svg viewBox="0 0 24 24" fill="none" stroke="#1b2f4d" stroke-width="2.4" stroke-linecap="round"><path d="M4 12l5 5L20 6"/></svg></span>
+          <p>サーバー移行・ドメイン管理まわりの相談先が見つからない。</p>
+        </div>
+        <div class="concern-card">
+          <span class="check-ico"><svg viewBox="0 0 24 24" fill="none" stroke="#1b2f4d" stroke-width="2.4" stroke-linecap="round"><path d="M4 12l5 5L20 6"/></svg></span>
+          <p>生成AIを業務に活かしたいが、何から着手すればよいか分からない。</p>
+        </div>
+        <div class="concern-card">
+          <span class="check-ico"><svg viewBox="0 0 24 24" fill="none" stroke="#1b2f4d" stroke-width="2.4" stroke-linecap="round"><path d="M4 12l5 5L20 6"/></svg></span>
+          <p>一人で全部背負っており、相談・協力しながら進める体制がない。</p>
+        </div>
+        <div class="concern-card">
+          <span class="check-ico"><svg viewBox="0 0 24 24" fill="none" stroke="#1b2f4d" stroke-width="2.4" stroke-linecap="round"><path d="M4 12l5 5L20 6"/></svg></span>
+          <p>大きな契約の前に、小さなタスクで相性を見極めたい。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="reasons" style="background:#f5f6f3;">
+    <div class="wrap">
+      <span class="eyebrow">選ばれる理由</span>
+      <h2 class="font-head reveal">速さと正確さを、<br class="br-sp">両方あきらめません。</h2>
+      <div class="reason-grid reveal">
+        <div class="reason-card">
+          <span class="reason-num">REASON 01</span>
+          <h3 class="font-head">AI活用で、対応が速い</h3>
+          <p>定型的な修正・調査・下書き作成に生成AIを活用し、着手から反映までのリードタイムを短縮します。</p>
+        </div>
+        <div class="reason-card">
+          <span class="reason-num">REASON 02</span>
+          <h3 class="font-head">仕上がりは、必ず人が検品</h3>
+          <p>AIが作った変更内容・コードは、公開前に必ず目視で確認します。速さと品質はどちらも譲りません。</p>
+        </div>
+        <div class="reason-card">
+          <span class="reason-num">REASON 03</span>
+          <h3 class="font-head">柔軟な契約で、小さく始められる</h3>
+          <p>タスク単位のスポット対応から月額の継続運用まで、貴社の進め方に合わせて体制を調整します。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="services">
+    <div class="wrap">
+      <span class="eyebrow">対応内容</span>
+      <h2 class="font-head reveal">募集内容にそのまま対応できる、<br class="br-sp">6つの領域。</h2>
+      <p class="section-lead reveal">すべてを一人で抱える必要はありません。得意な領域を中心に、相談・協力体制で進めます。</p>
+      <div class="svc-grid reveal">
+        <div class="svc-card">
+          <span class="svc-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18"/></svg></span>
+          <h3>WordPressの修正・更新・運用補助</h3>
+          <p>記事投稿の不具合、表示崩れ、管理画面の使い勝手など、日々の運用まわりを継続的に対応します。</p>
+        </div>
+        <div class="svc-card">
+          <span class="svc-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h10M4 18h7"/></svg></span>
+          <h3>デザイン・テーマ調整（HTML/CSS/PHP）</h3>
+          <p>既存テーマの微調整から部分的なカスタマイズまで、サイトの雰囲気を崩さずに実装します。</p>
+        </div>
+        <div class="svc-card">
+          <span class="svc-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 9v4m0 4h.01M10.3 3.9l-8 14A2 2 0 0 0 4.2 21h15.6a2 2 0 0 0 1.9-3.1l-8-14a2 2 0 0 0-3.4 0z"/></svg></span>
+          <h3>プラグイン設定・エラー対応</h3>
+          <p>プラグインの競合・不具合の切り分けから、必要な設定変更、軽微なコーディングまで対応します。</p>
+        </div>
+        <div class="svc-card">
+          <span class="svc-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><ellipse cx="12" cy="6" rx="8" ry="3"/><path d="M4 6v6c0 1.7 3.6 3 8 3s8-1.3 8-3V6M4 12v6c0 1.7 3.6 3 8 3s8-1.3 8-3v-6"/></svg></span>
+          <h3>サーバー・ドメインの基本サポート</h3>
+          <p>サーバー移行やドメイン管理まわりの手順整理・実作業を、事前確認のうえ丁寧に進めます。</p>
+        </div>
+        <div class="svc-card">
+          <span class="svc-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l2.4 5.5L20 9l-4.6 3.6L16.5 19 12 15.8 7.5 19l1.1-6.4L4 9l5.6-1.5z"/></svg></span>
+          <h3>生成AIを活用した業務効率化</h3>
+          <p>ChatGPT等を使った記事構成の下書き、定型作業の自動化、社内ワークフローの効率化を支援します。</p>
+        </div>
+        <div class="svc-card">
+          <span class="svc-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 12h8M12 8v8"/><circle cx="12" cy="12" r="9"/></svg></span>
+          <h3>運営全般のテクニカル相談・アイディア出し</h3>
+          <p>改善案の壁打ち相手として、思いついたことを気軽に相談できる窓口になります。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="report" style="background:#f5f6f3;">
+    <div class="wrap">
+      <span class="eyebrow">継続運用のイメージ</span>
+      <h2 class="font-head reveal">毎月、対応内容が見える<br class="br-sp">レポートをお渡しします。</h2>
+      <p class="report-note reveal">※以下はレポート画面のイメージです。実際の項目・数値はご相談のうえ、貴社の運営状況に合わせて設計します。</p>
+      <div class="report-shell reveal">
+        <div class="report-head">
+          <h3 class="font-head">月次運用レポート（サンプル）</h3>
+          <span>対象期間：2026年7月分</span>
+        </div>
+        <div class="kpi-grid">
+          <div class="kpi"><div class="num font-num">18<small>件</small></div><div class="lab">今月の対応チケット数</div></div>
+          <div class="kpi"><div class="num font-num">0<small>件</small></div><div class="lab">未解決エラー・不具合</div></div>
+          <div class="kpi"><div class="num font-num">1.4<small>秒</small></div><div class="lab">平均ページ表示速度</div></div>
+          <div class="kpi"><div class="num font-num">6<small>件</small></div><div class="lab">プラグイン更新・検証</div></div>
+        </div>
+        <div>
+          <div class="bar-row"><span class="name">記事投稿トラブル対応</span><div class="bar-track"><div class="bar-fill" data-w="90"></div></div><span class="pct font-num">90%</span></div>
+          <div class="bar-row"><span class="name">表示崩れ・CSS調整</span><div class="bar-track"><div class="bar-fill" data-w="75"></div></div><span class="pct font-num">75%</span></div>
+          <div class="bar-row"><span class="name">プラグイン検証</span><div class="bar-track"><div class="bar-fill" data-w="60"></div></div><span class="pct font-num">60%</span></div>
+          <div class="bar-row"><span class="name">AI活用による効率化提案</span><div class="bar-track"><div class="bar-fill" data-w="45"></div></div><span class="pct font-num">45%</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="flow">
+    <div class="wrap">
+      <span class="eyebrow">ご相談の流れ</span>
+      <h2 class="font-head reveal">まずは小さなタスクから、<br class="br-sp">相性を確かめてください。</h2>
+      <div class="flow-list reveal">
+        <div class="flow-item">
+          <h3 class="font-head">ご連絡・ヒアリング</h3>
+          <p>現在のサイト状況、困りごと、稼働可能な時間帯や頻度についてお伺いします。</p>
+        </div>
+        <div class="flow-item">
+          <h3 class="font-head">初回タスクのご依頼</h3>
+          <p>まずは小さな修正・改善タスクを1件お任せいただき、進め方や連絡のしやすさをご確認ください。</p>
+        </div>
+        <div class="flow-item">
+          <h3 class="font-head">継続可否のご判断</h3>
+          <p>初回対応の結果を踏まえ、継続してご依頼いただくかどうかをご判断いただきます。</p>
+        </div>
+        <div class="flow-item">
+          <h3 class="font-head">タスク単位／月額での継続運用</h3>
+          <p>ご要望に合わせて、都度依頼または月額制での継続的な運用サポートへ移行します。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="pricing" style="background:#f5f6f3;">
+    <div class="wrap">
+      <span class="eyebrow">料金の目安</span>
+      <h2 class="font-head reveal">タスク単位でも、月額でも。<br class="br-sp">※金額はご相談のうえ決定する仮の目安です。</h2>
+      <div class="price-grid reveal">
+        <div class="price-card">
+          <span class="price-tag">スポット対応</span>
+          <h3 class="font-head">タスク単位プラン</h3>
+          <div class="price-amount font-num">都度見積 <small>／件</small></div>
+          <p class="price-note">まずは1件だけ試したい方向け</p>
+          <ul class="price-list">
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="#1b2f4d" stroke-width="2.4" stroke-linecap="round"><path d="M4 12l5 5L20 6"/></svg>修正・更新1件ごとのご依頼</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="#1b2f4d" stroke-width="2.4" stroke-linecap="round"><path d="M4 12l5 5L20 6"/></svg>内容確認後にお見積り</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="#1b2f4d" stroke-width="2.4" stroke-linecap="round"><path d="M4 12l5 5L20 6"/></svg>継続の縛りなし</li>
+          </ul>
+          <a href="#contact" class="btn btn-outline">相談してみる</a>
+        </div>
+        <div class="price-card featured">
+          <span class="price-tag">おすすめ</span>
+          <h3 class="font-head">月額ライトプラン</h3>
+          <div class="price-amount font-num">月額 応相談<small>／月</small></div>
+          <p class="price-note">軽微な修正・保守を継続的に</p>
+          <ul class="price-list">
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="#1b2f4d" stroke-width="2.4" stroke-linecap="round"><path d="M4 12l5 5L20 6"/></svg>月間の対応件数上限まで随時対応</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="#1b2f4d" stroke-width="2.4" stroke-linecap="round"><path d="M4 12l5 5L20 6"/></svg>プラグイン更新・軽微なエラー対応</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="#1b2f4d" stroke-width="2.4" stroke-linecap="round"><path d="M4 12l5 5L20 6"/></svg>月次レポートで対応内容を共有</li>
+          </ul>
+          <a href="#contact" class="btn btn-primary">相談してみる</a>
+        </div>
+        <div class="price-card">
+          <span class="price-tag">フル伴走</span>
+          <h3 class="font-head">月額フルサポートプラン</h3>
+          <div class="price-amount font-num">月額 応相談<small>／月</small></div>
+          <p class="price-note">運営改善・AI活用まで伴走</p>
+          <ul class="price-list">
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="#1b2f4d" stroke-width="2.4" stroke-linecap="round"><path d="M4 12l5 5L20 6"/></svg>ライトプランの対応範囲すべて</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="#1b2f4d" stroke-width="2.4" stroke-linecap="round"><path d="M4 12l5 5L20 6"/></svg>デザイン調整・サーバー相談を含む</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="#1b2f4d" stroke-width="2.4" stroke-linecap="round"><path d="M4 12l5 5L20 6"/></svg>生成AI活用の企画・実装まで伴走</li>
+          </ul>
+          <a href="#contact" class="btn btn-outline">相談してみる</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="faq">
+    <div class="wrap">
+      <span class="eyebrow">よくあるご質問</span>
+      <h2 class="font-head reveal">ご相談前によくいただく質問</h2>
+      <div class="reveal">
+        <div class="faq-item open">
+          <div class="faq-q"><span>小さな修正1件からでもお願いできますか。</span><span class="toggle"></span></div>
+          <div class="faq-a"><p>はい。初回はタスク単位の小さな依頼からお試しいただき、継続の可否をご判断いただく進め方を推奨しています。</p></div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q"><span>サーバーやドメインの知識がなくても相談できますか。</span><span class="toggle"></span></div>
+          <div class="faq-a"><p>現状の管理画面やサーバー環境を拝見したうえで、必要な設定・移行手順をこちらで整理してご提案します。</p></div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q"><span>生成AIの活用は、どこまで対応してもらえますか。</span><span class="toggle"></span></div>
+          <div class="faq-a"><p>記事構成の下書き作成や定型作業の自動化など、業務効率化につながる範囲で企画から実装までご相談いただけます。</p></div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q"><span>稼働できる時間帯や頻度に制限はありますか。</span><span class="toggle"></span></div>
+          <div class="faq-a"><p>稼働可能な時間帯・頻度は事前にすり合わせのうえ、無理のない範囲で継続できる体制をご提案します。</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" style="background:#f5f6f3;">
+    <div class="wrap">
+      <span class="eyebrow">お問い合わせ</span>
+      <h2 class="font-head reveal">まずは、お気軽にご相談ください。</h2>
+      <div class="contact-shell reveal">
+        <div class="contact-info">
+          <h3 class="font-head">お電話でのご相談も可能です</h3>
+          <a class="tel" href="tel:0480000000">048-000-0000</a>
+          <p class="small">受付時間：平日10:00〜18:00（※本サンプルのダミー番号です）</p>
+          <p style="margin-top:20px;">簡単な自己紹介・これまでの実績や得意分野・稼働可能な時間帯や頻度を添えてご連絡いただけますと、スムーズにご案内できます。</p>
+        </div>
+        <div class="form-shell">
+          <form onsubmit="return false;">
+            <div class="field">
+              <label for="f-name">お名前・貴社名</label>
+              <input id="f-name" type="text" placeholder="例）自動化のミナト">
+            </div>
+            <div class="field">
+              <label for="f-mail">メールアドレス</label>
+              <input id="f-mail" type="email" placeholder="例）info@example.com">
+            </div>
+            <div class="field">
+              <label for="f-plan">ご希望プラン</label>
+              <select id="f-plan">
+                <option>タスク単位プラン</option>
+                <option>月額ライトプラン</option>
+                <option>月額フルサポートプラン</option>
+                <option>まだ決めていない</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="f-msg">ご相談内容</label>
+              <textarea id="f-msg" placeholder="現在のサイト状況や、お困りごとをご記入ください"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">この内容で相談する（デモ）</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<div class="sticky-cta">
+  <a href="tel:0480000000" class="btn btn-outline">電話で相談</a>
+  <a href="#contact" class="btn btn-primary">フォームで相談</a>
+</div>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-top">
+      <div class="foot-logo">自動化のミナト</div>
+      <div class="small" style="font-size:.82rem;">WordPress運用・改善 伴走パートナー</div>
+    </div>
+    <p class="disclaimer">
+      ※本ページは制作サンプル（デモ）です。掲載している会社名・数値・レポート画面・料金はすべて仮のもので、実在の団体・実績とは関係ありません。実際の対応範囲・料金・レポート項目は、ご相談のうえ貴社の運営状況に合わせて個別に設計いたします。
+    </p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var burger = document.getElementById('hamburgerBtn');
+  var nav = document.getElementById('mobileNav');
+  function closeNav(){
+    burger.classList.remove('open');
+    nav.classList.remove('open');
+    burger.setAttribute('aria-expanded','false');
+    nav.setAttribute('aria-hidden','true');
+  }
+  burger.addEventListener('click', function(){
+    var open = nav.classList.toggle('open');
+    burger.classList.toggle('open', open);
+    burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+    nav.setAttribute('aria-hidden', open ? 'false' : 'true');
+  });
+  nav.querySelectorAll('a').forEach(function(a){
+    a.addEventListener('click', closeNav);
+  });
+
+  document.querySelectorAll('.faq-q').forEach(function(q){
+    q.addEventListener('click', function(){
+      var item = q.closest('.faq-item');
+      var isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(function(el){ el.classList.remove('open'); });
+      if(!isOpen){ item.classList.add('open'); }
+    });
+  });
+
+  var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var barsAnimated = false;
+
+  function animateBars(){
+    if(barsAnimated) return;
+    barsAnimated = true;
+    document.querySelectorAll('.bar-fill').forEach(function(el){
+      el.style.width = el.getAttribute('data-w') + '%';
+    });
+  }
+
+  if(prefersReduced || !('IntersectionObserver' in window)){
+    document.querySelectorAll('.reveal').forEach(function(el){ el.classList.add('in'); });
+    animateBars();
+  } else {
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if(entry.isIntersecting){
+          entry.target.classList.add('in');
+          if(entry.target.querySelector('.bar-fill') || entry.target.classList.contains('bar-fill')){
+            animateBars();
+          }
+        }
+      });
+    }, { threshold: 0.18 });
+    document.querySelectorAll('.reveal').forEach(function(el){ io.observe(el); });
+  }
+})();
+</script>
+</body>
+</html>
