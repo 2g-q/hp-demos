@@ -1,0 +1,1089 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Antique Kimono PEACE | Vintage Kimono Store in Asakusa, Tokyo</title>
+<meta name="description" content="Antique Kimono PEACE — a one-of-a-kind vintage kimono, samurai armor and Japanese craft store inside Asakusa Sumo Club, Tokyo. No reservation needed. English spoken.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;600;800&family=Noto+Sans+JP:wght@300;400;500;700&family=Manrope:wght@500;700;800&display=swap" rel="stylesheet">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Store",
+  "name": "Antique Kimono PEACE",
+  "description": "Vintage kimono, yukata, haori, obi, samurai armor and Japanese craft store for international visitors. Walk-in welcome, no reservation required.",
+  "image": "",
+  "telephone": "03-0000-0000",
+  "priceRange": "¥¥",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Inside Asakusa Sumo Club",
+    "addressLocality": "Taito City, Asakusa",
+    "addressRegion": "Tokyo",
+    "addressCountry": "JP"
+  },
+  "areaServed": "Worldwide",
+  "knowsLanguage": ["en","fr","de","es","it","ru","zh-Hans","zh-Hant","ko","ja"]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Do I need a reservation to visit?",
+      "acceptedAnswer": {"@type":"Answer","text":"No reservation is required. Walk in any time during opening hours."}
+    },
+    {
+      "@type": "Question",
+      "name": "Is this a rental shop or a store?",
+      "acceptedAnswer": {"@type":"Answer","text":"PEACE is a purchase-only store. We do not offer kimono rental."}
+    },
+    {
+      "@type": "Question",
+      "name": "Do you speak English?",
+      "acceptedAnswer": {"@type":"Answer","text":"Yes, our staff can assist you in English."}
+    }
+  ]
+}
+</script>
+<style>
+  :root{
+    --ink:#211c16;
+    --ink-soft:#5c5347;
+    --paper:#faf6ee;
+    --paper-deep:#f2ead9;
+    --card:#ffffff;
+    --line:#e4d8c2;
+    --shu:#b3392b;
+    --shu-deep:#8f2c21;
+    --shu-tint:#f6e4de;
+    --radius:18px;
+    --gap-section: clamp(64px, 9vw, 108px);
+  }
+  *,*::before,*::after{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Noto Sans JP', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-feature-settings:"palt";
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+    width:100%;
+  }
+  img{max-width:100%;display:block;}
+  a{color:inherit;}
+  h1,h2,h3,h4{
+    font-family:'Shippori Mincho', serif;
+    margin:0;
+    line-height:1.3;
+    letter-spacing:.01em;
+  }
+  .num{font-family:'Manrope', sans-serif;}
+  .wrap{
+    width:100%;
+    max-width:1160px;
+    margin:0 auto;
+    padding:0 clamp(20px, 5vw, 40px);
+  }
+  .eyebrow{
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    font-size:12.5px;
+    letter-spacing:.16em;
+    text-transform:uppercase;
+    color:var(--shu);
+    font-weight:700;
+    margin-bottom:14px;
+  }
+  .eyebrow::before{
+    content:"";
+    width:22px;height:1px;
+    background:var(--shu);
+    display:inline-block;
+  }
+  .jp-tag{
+    font-family:'Shippori Mincho', serif;
+    font-size:13px;
+    color:var(--ink-soft);
+    letter-spacing:.08em;
+  }
+  section{position:relative;padding: var(--gap-section) 0;}
+  .center{text-align:center;}
+  .lede{
+    max-width:620px;
+    color:var(--ink-soft);
+    font-size:15.5px;
+    line-height:1.9;
+  }
+  .lede.mx{margin-left:auto;margin-right:auto;}
+  .btn{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+    padding:15px 30px;
+    border-radius:100px;
+    font-weight:700;
+    font-size:14.5px;
+    letter-spacing:.03em;
+    text-decoration:none;
+    cursor:pointer;
+    border:1.5px solid transparent;
+    transition:transform .18s ease, box-shadow .18s ease, background .18s ease;
+    white-space:nowrap;
+  }
+  .btn-primary{
+    background:var(--shu);
+    color:#fff;
+    box-shadow:0 10px 24px -8px rgba(179,57,43,.55);
+  }
+  .btn-primary:hover{transform:translateY(-2px);box-shadow:0 14px 28px -8px rgba(179,57,43,.65);}
+  .btn-ghost{
+    background:transparent;
+    border-color:var(--ink);
+    color:var(--ink);
+  }
+  .btn-ghost:hover{background:var(--ink);color:#fff;transform:translateY(-2px);}
+  .btn-line{
+    background:transparent;
+    border-color:var(--line);
+    color:var(--ink);
+    font-size:13px;
+    padding:11px 20px;
+  }
+
+  /* ---------- Header ---------- */
+  header{
+    position:fixed;
+    top:0;left:0;right:0;
+    z-index:100;
+    background:rgba(250,246,238,.86);
+    backdrop-filter:blur(10px);
+    -webkit-backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .header-inner{
+    max-width:1160px;
+    margin:0 auto;
+    padding:14px clamp(20px,5vw,40px);
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:16px;
+  }
+  .logo{
+    display:flex;
+    flex-direction:column;
+    line-height:1;
+  }
+  .logo .mark{
+    font-family:'Shippori Mincho', serif;
+    font-weight:800;
+    font-size:20px;
+    letter-spacing:.04em;
+  }
+  .logo .mark span{color:var(--shu);}
+  .logo .sub{
+    font-size:9.5px;
+    letter-spacing:.22em;
+    color:var(--ink-soft);
+    margin-top:3px;
+    text-transform:uppercase;
+  }
+  .nav-desktop{
+    display:flex;
+    align-items:center;
+    gap:30px;
+  }
+  .nav-desktop a{
+    text-decoration:none;
+    font-size:13.5px;
+    font-weight:500;
+    color:var(--ink);
+    position:relative;
+    padding:4px 0;
+  }
+  .nav-desktop a::after{
+    content:"";
+    position:absolute;left:0;right:0;bottom:0;
+    height:1.5px;background:var(--shu);
+    transform:scaleX(0);transform-origin:right;
+    transition:transform .25s ease;
+  }
+  .nav-desktop a:hover::after{transform:scaleX(1);transform-origin:left;}
+  .header-actions{display:flex;align-items:center;gap:14px;}
+  .burger{
+    display:none;
+    width:42px;height:42px;
+    border-radius:50%;
+    border:1px solid var(--line);
+    background:var(--card);
+    align-items:center;justify-content:center;
+    cursor:pointer;
+  }
+  .burger span,.burger span::before,.burger span::after{
+    content:"";display:block;
+    width:16px;height:1.5px;background:var(--ink);
+    position:relative;transition:.2s;
+  }
+  .burger span::before{position:absolute;top:-5px;}
+  .burger span::after{position:absolute;top:5px;}
+
+  /* mobile nav lives OUTSIDE header to avoid fixed-parent/backdrop-filter clipping */
+  .mobile-nav{
+    position:fixed;
+    top:0;right:0;
+    height:100%;
+    width:min(78vw,320px);
+    max-width:100%;
+    background:var(--card);
+    z-index:200;
+    box-shadow:-18px 0 40px -14px rgba(0,0,0,.25);
+    transform:translateX(100%);
+    transition:transform .32s cubic-bezier(.6,0,.3,1);
+    padding:26px 24px;
+    display:flex;
+    flex-direction:column;
+    gap:6px;
+  }
+  .mobile-nav.open{transform:translateX(0);}
+  .mobile-nav a{
+    text-decoration:none;
+    color:var(--ink);
+    font-size:16px;
+    font-weight:600;
+    padding:14px 4px;
+    border-bottom:1px solid var(--line);
+  }
+  .nav-scrim{
+    position:fixed;inset:0;background:rgba(33,28,22,.4);
+    z-index:190;opacity:0;pointer-events:none;transition:opacity .3s;
+  }
+  .nav-scrim.open{opacity:1;pointer-events:auto;}
+
+  /* ---------- Hero ---------- */
+  .hero{
+    padding-top:calc(96px + var(--gap-section));
+    background:
+      radial-gradient(circle at 12% 18%, rgba(179,57,43,.07), transparent 42%),
+      var(--paper);
+    overflow:hidden;
+  }
+  .hero-grid{
+    display:grid;
+    grid-template-columns:1.05fr .95fr;
+    gap:56px;
+    align-items:center;
+  }
+  .hero h1{
+    font-size:clamp(34px,5.4vw,58px);
+    font-weight:600;
+  }
+  .hero h1 em{
+    font-style:normal;color:var(--shu);
+    display:block;
+  }
+  .hero-copy{
+    margin-top:20px;
+    color:var(--ink-soft);
+    font-size:15.5px;
+    line-height:1.9;
+    max-width:480px;
+  }
+  .hero-ctas{
+    display:flex;
+    flex-wrap:wrap;
+    gap:14px;
+    margin-top:32px;
+  }
+  .hero-badges{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px 22px;
+    margin-top:34px;
+    padding-top:26px;
+    border-top:1px solid var(--line);
+  }
+  .badge{
+    display:flex;align-items:center;gap:8px;
+    font-size:12.5px;font-weight:600;color:var(--ink-soft);
+  }
+  .badge svg{flex:none;}
+  .hero-visual{
+    position:relative;
+    aspect-ratio:4/5;
+    border-radius:26px;
+    overflow:hidden;
+    background:
+      repeating-linear-gradient(135deg, #c8493a 0 2px, #b3392b 2px 42px),
+      var(--shu);
+    box-shadow:0 30px 60px -20px rgba(33,28,22,.35);
+  }
+  .hero-visual::before{
+    content:"";
+    position:absolute;inset:0;
+    background:
+      radial-gradient(circle at 30% 70%, rgba(255,255,255,.14), transparent 55%),
+      radial-gradient(circle at 75% 20%, rgba(255,255,255,.10), transparent 45%);
+  }
+  .hero-visual .tag{
+    position:absolute;left:22px;bottom:22px;
+    background:rgba(250,246,238,.94);
+    color:var(--ink);
+    padding:14px 18px;
+    border-radius:14px;
+    font-size:12.5px;
+    line-height:1.6;
+    max-width:78%;
+    box-shadow:0 12px 24px -10px rgba(0,0,0,.25);
+  }
+  .hero-visual .tag b{display:block;font-family:'Shippori Mincho',serif;font-size:15px;margin-bottom:2px;}
+  .kimono-icon{position:absolute;opacity:.9;}
+
+  /* ---------- Intro strip ---------- */
+  .strip{
+    background:var(--ink);
+    color:var(--paper);
+    padding:26px 0;
+  }
+  .strip .wrap{
+    display:flex;
+    flex-wrap:wrap;
+    gap:14px 40px;
+    justify-content:space-between;
+    align-items:center;
+    font-size:13px;
+    letter-spacing:.03em;
+  }
+  .strip strong{color:#fff;font-weight:700;}
+
+  /* ---------- About ---------- */
+  .about-grid{
+    display:grid;
+    grid-template-columns:.9fr 1.1fr;
+    gap:60px;
+    align-items:start;
+  }
+  .about-visual{
+    aspect-ratio:1/1;
+    border-radius:var(--radius);
+    background:
+      linear-gradient(180deg, var(--paper-deep), var(--card)) ;
+    border:1px solid var(--line);
+    position:relative;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .kanji-vertical{
+    writing-mode:vertical-rl;
+    font-family:'Shippori Mincho',serif;
+    font-size:15px;
+    letter-spacing:.5em;
+    color:var(--shu);
+    opacity:.8;
+  }
+  .about-points{margin-top:28px;display:grid;gap:18px;}
+  .point{
+    display:flex;gap:16px;
+    padding:18px;
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:14px;
+  }
+  .point .num{
+    flex:none;
+    font-size:22px;font-weight:800;color:var(--shu);
+  }
+  .point h4{font-size:15.5px;font-weight:600;margin-bottom:6px;}
+  .point p{margin:0;color:var(--ink-soft);font-size:13.5px;line-height:1.75;}
+
+  /* ---------- Collection ---------- */
+  .collection{background:var(--paper-deep);}
+  .cat-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fill, minmax(200px,1fr));
+    gap:16px;
+    margin-top:44px;
+  }
+  .cat-card{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:16px;
+    padding:26px 20px;
+    text-align:center;
+    transition:transform .22s ease, box-shadow .22s ease, border-color .22s ease;
+  }
+  .cat-card:hover{
+    transform:translateY(-4px);
+    box-shadow:0 16px 30px -14px rgba(33,28,22,.22);
+    border-color:var(--shu);
+  }
+  .cat-card svg{margin:0 auto 14px;}
+  .cat-card h4{font-size:14.5px;font-weight:600;}
+  .cat-card span{
+    display:block;
+    margin-top:4px;
+    font-size:11px;
+    color:var(--ink-soft);
+    font-family:'Shippori Mincho',serif;
+  }
+
+  /* ---------- Global-ready ---------- */
+  .global{
+    background:var(--ink);
+    color:var(--paper);
+  }
+  .global .eyebrow{color:#e8a598;}
+  .global .lede{color:#c9c1b3;}
+  .lang-chips{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+    margin-top:32px;
+  }
+  .chip{
+    padding:9px 16px;
+    border-radius:100px;
+    border:1px solid rgba(250,246,238,.25);
+    font-size:12.5px;
+    font-weight:600;
+    letter-spacing:.03em;
+    color:var(--paper);
+    background:rgba(250,246,238,.06);
+  }
+  .chip.main{background:var(--shu);border-color:var(--shu);}
+  .global-notes{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:18px;
+    margin-top:40px;
+  }
+  .gnote{
+    padding:22px;
+    border-radius:14px;
+    background:rgba(250,246,238,.05);
+    border:1px solid rgba(250,246,238,.14);
+  }
+  .gnote h4{font-size:14px;color:#fff;margin-bottom:8px;font-weight:600;}
+  .gnote p{margin:0;font-size:12.5px;line-height:1.75;color:#c9c1b3;}
+
+  /* ---------- Access ---------- */
+  .access-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:50px;
+    align-items:stretch;
+  }
+  .map-block{
+    border-radius:var(--radius);
+    border:1px solid var(--line);
+    background:
+      linear-gradient(135deg, var(--paper-deep) 25%, transparent 25%) -10px 0/20px 20px,
+      linear-gradient(225deg, var(--paper-deep) 25%, transparent 25%) -10px 0/20px 20px,
+      var(--card);
+    min-height:320px;
+    position:relative;
+    display:flex;align-items:center;justify-content:center;
+    overflow:hidden;
+  }
+  .map-pin{
+    display:flex;flex-direction:column;align-items:center;gap:10px;
+  }
+  .map-pin span{
+    background:var(--card);
+    padding:8px 14px;
+    border-radius:10px;
+    font-size:12px;
+    font-weight:600;
+    box-shadow:0 8px 18px -8px rgba(0,0,0,.25);
+  }
+  .info-card{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:32px;
+  }
+  .info-row{
+    display:flex;
+    justify-content:space-between;
+    gap:20px;
+    padding:14px 0;
+    border-bottom:1px solid var(--line);
+    font-size:13.5px;
+  }
+  .info-row:last-child{border-bottom:none;}
+  .info-row dt{color:var(--ink-soft);font-weight:500;}
+  .info-row dd{margin:0;font-weight:600;text-align:right;}
+  .tentative{
+    margin-top:14px;
+    font-size:11.5px;
+    color:var(--ink-soft);
+  }
+
+  /* ---------- FAQ ---------- */
+  .faq-list{max-width:760px;margin:44px auto 0;}
+  .faq-item{
+    border-bottom:1px solid var(--line);
+  }
+  .faq-q{
+    width:100%;
+    background:none;border:none;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:16px;
+    padding:20px 4px;
+    font-family:'Shippori Mincho',serif;
+    font-size:16px;
+    font-weight:600;
+    color:var(--ink);
+    cursor:pointer;
+    text-align:left;
+  }
+  .faq-q .plus{
+    flex:none;
+    width:26px;height:26px;
+    border-radius:50%;
+    border:1px solid var(--line);
+    position:relative;
+  }
+  .faq-q .plus::before,.faq-q .plus::after{
+    content:"";position:absolute;background:var(--shu);
+    top:50%;left:50%;transform:translate(-50%,-50%);
+  }
+  .faq-q .plus::before{width:10px;height:1.5px;}
+  .faq-q .plus::after{width:1.5px;height:10px;transition:transform .25s;}
+  .faq-item.open .plus::after{transform:translate(-50%,-50%) rotate(90deg);}
+  .faq-a{
+    max-height:0;
+    overflow:hidden;
+    transition:max-height .32s ease;
+  }
+  .faq-a p{
+    margin:0 0 20px;
+    color:var(--ink-soft);
+    font-size:13.5px;
+    line-height:1.85;
+    max-width:640px;
+  }
+
+  /* ---------- Contact ---------- */
+  .contact{background:var(--paper-deep);}
+  .contact-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:50px;
+  }
+  .form-card{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:32px;
+  }
+  .field{margin-bottom:16px;}
+  .field label{
+    display:block;
+    font-size:12px;
+    font-weight:600;
+    color:var(--ink-soft);
+    margin-bottom:7px;
+  }
+  .field input,.field textarea{
+    width:100%;
+    max-width:100%;
+    padding:13px 14px;
+    border-radius:10px;
+    border:1px solid var(--line);
+    background:var(--paper);
+    font-size:16px;
+    font-family:inherit;
+    color:var(--ink);
+  }
+  .field input:focus,.field textarea:focus{outline:2px solid var(--shu);outline-offset:1px;}
+  .form-note{font-size:11px;color:var(--ink-soft);margin-top:10px;}
+  .contact-side h3{font-size:22px;margin-bottom:16px;}
+  .contact-side .lede{margin-bottom:24px;}
+  .sns-row{display:flex;gap:12px;margin-top:8px;}
+  .sns-row a{
+    width:44px;height:44px;
+    border-radius:50%;
+    border:1px solid var(--line);
+    background:var(--card);
+    display:flex;align-items:center;justify-content:center;
+    text-decoration:none;
+    transition:.2s;
+  }
+  .sns-row a:hover{background:var(--shu);border-color:var(--shu);}
+  .sns-row a:hover svg path,.sns-row a:hover svg circle{stroke:#fff;}
+
+  /* ---------- Footer ---------- */
+  footer{
+    background:var(--ink);
+    color:#c9c1b3;
+    padding:56px 0 110px;
+  }
+  .footer-grid{
+    display:grid;
+    grid-template-columns:1.3fr 1fr 1fr;
+    gap:40px;
+    padding-bottom:32px;
+    border-bottom:1px solid rgba(250,246,238,.14);
+  }
+  .footer-logo{
+    font-family:'Shippori Mincho',serif;
+    font-size:20px;
+    color:#fff;
+    font-weight:800;
+  }
+  .footer-logo span{color:var(--shu);}
+  footer p{font-size:12.5px;line-height:1.85;margin:12px 0 0;max-width:320px;}
+  .footer-col h5{
+    color:#fff;
+    font-size:12.5px;
+    letter-spacing:.1em;
+    text-transform:uppercase;
+    margin-bottom:14px;
+  }
+  .footer-col a{
+    display:block;
+    text-decoration:none;
+    color:#c9c1b3;
+    font-size:13px;
+    margin-bottom:10px;
+  }
+  .footer-col a:hover{color:#fff;}
+  .footer-bottom{
+    padding-top:24px;
+    font-size:11px;
+    color:#8f8778;
+    line-height:1.8;
+  }
+
+  /* ---------- Mobile sticky CTA ---------- */
+  .sticky-cta{
+    position:fixed;
+    left:0;right:0;bottom:0;
+    z-index:150;
+    display:none;
+    gap:10px;
+    padding:12px 16px calc(12px + env(safe-area-inset-bottom));
+    background:rgba(250,246,238,.96);
+    backdrop-filter:blur(10px);
+    border-top:1px solid var(--line);
+  }
+  .sticky-cta .btn{flex:1;padding:14px 10px;font-size:13px;}
+
+  /* ---------- Reveal ---------- */
+  .reveal{opacity:0;transform:translateY(22px);transition:opacity .7s ease, transform .7s ease;}
+  .reveal.in{opacity:1;transform:translateY(0);}
+
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    .reveal{opacity:1;transform:none;transition:none;}
+    .btn:hover, .cat-card:hover{transform:none;}
+  }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width: 980px){
+    .hero-grid{grid-template-columns:1fr;}
+    .hero-visual{max-width:420px;margin:0 auto;}
+    .about-grid{grid-template-columns:1fr;}
+    .about-visual{max-width:340px;margin:0 auto;aspect-ratio:1/1;}
+    .access-grid{grid-template-columns:1fr;}
+    .contact-grid{grid-template-columns:1fr;}
+    .footer-grid{grid-template-columns:1fr 1fr;}
+    .global-notes{grid-template-columns:1fr;}
+  }
+  @media (max-width: 720px){
+    .nav-desktop{display:none;}
+    .burger{display:flex;}
+    .strip .wrap{justify-content:flex-start;}
+    .footer-grid{grid-template-columns:1fr;}
+    .sticky-cta{display:flex;}
+    body{padding-bottom:0;}
+    section{padding: 56px 0;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <a href="#top" class="logo">
+      <span class="mark">PEACE <span>着物</span></span>
+      <span class="sub">Antique Kimono, Asakusa</span>
+    </a>
+    <nav class="nav-desktop">
+      <a href="#about">About</a>
+      <a href="#collection">Collection</a>
+      <a href="#access">Access</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+    <div class="header-actions">
+      <a class="btn btn-ghost" href="#access" style="padding:11px 22px;font-size:13px;">Visit Us</a>
+      <button class="burger" id="burgerBtn" aria-label="Open menu"><span></span></button>
+    </div>
+  </div>
+</header>
+
+<div class="nav-scrim" id="navScrim"></div>
+<nav class="mobile-nav" id="mobileNav">
+  <a href="#about">About</a>
+  <a href="#collection">Collection</a>
+  <a href="#access">Access</a>
+  <a href="#faq">FAQ</a>
+  <a href="#contact">Contact</a>
+</nav>
+
+<main id="top">
+
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div class="reveal">
+        <div class="eyebrow">Asakusa · Walk-in Store</div>
+        <h1>Not a costume.<em>A find.</em></h1>
+        <p class="hero-copy">
+          Antique Kimono PEACE is a one-of-a-kind vintage kimono store inside Asakusa Sumo Club —
+          where century-old textiles, samurai armor and Japanese craft meet modern Tokyo style.
+          No reservation. No rental counter. Just real pieces, ready to take home.
+        </p>
+        <div class="hero-ctas">
+          <a class="btn btn-primary" href="#access">Get Directions</a>
+          <a class="btn btn-ghost" href="#collection">See the Collection</a>
+        </div>
+        <div class="hero-badges">
+          <div class="badge">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="#b3392b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Walk-in Welcome
+          </div>
+          <div class="badge">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="#b3392b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            English Spoken
+          </div>
+          <div class="badge">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="#b3392b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            One-of-a-Kind Pieces
+          </div>
+          <div class="badge">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="#b3392b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            9 Languages
+          </div>
+        </div>
+      </div>
+      <div class="hero-visual reveal">
+        <svg class="kimono-icon" style="top:8%;left:10%;width:70px;height:70px;opacity:.5" viewBox="0 0 64 64" fill="none"><path d="M20 8 L32 16 L44 8 L44 20 L52 24 L52 56 L12 56 L12 24 L20 20 Z" stroke="#faf6ee" stroke-width="1.4"/></svg>
+        <svg class="kimono-icon" style="bottom:16%;right:8%;width:54px;height:54px;opacity:.4" viewBox="0 0 64 64" fill="none"><circle cx="32" cy="32" r="20" stroke="#faf6ee" stroke-width="1.4"/><path d="M32 12v40M12 32h40" stroke="#faf6ee" stroke-width="1"/></svg>
+        <div class="tag">
+          <b>一点物</b>
+          Every garment is an original — once it's sold, it's gone for good.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="strip">
+    <div class="wrap">
+      <span><strong>Purchase, not rental</strong> — take it home the same day</span>
+      <span><strong>No booking required</strong> — open door, walk in</span>
+      <span><strong>Inside Asakusa Sumo Club</strong> — easy to find, easy to combine</span>
+    </div>
+  </div>
+
+  <section id="about">
+    <div class="wrap about-grid">
+      <div class="about-visual reveal">
+        <span class="kanji-vertical">平和 · 古着</span>
+      </div>
+      <div class="reveal">
+        <div class="eyebrow">About PEACE</div>
+        <h2 style="font-size:clamp(26px,3.6vw,36px);max-width:520px;">
+          Traditional roots, vintage soul, dressed for modern Tokyo.
+        </h2>
+        <p class="lede" style="margin-top:18px;max-width:520px;">
+          We are not a rental counter or a souvenir shop. PEACE is a specialist store for genuine
+          vintage kimono, yukata, haori and obi — alongside samurai armor, Noh &amp; Kagura masks,
+          kokeshi dolls and vintage bags. Many visitors from Europe and beyond find us while exploring
+          Asakusa, and stay far longer than they planned.
+        </p>
+        <div class="about-points">
+          <div class="point">
+            <div class="num">01</div>
+            <div><h4>Purchase, not costume rental</h4><p>Every item is for sale. What you try on is what you can wear home — or wear anywhere, anytime.</p></div>
+          </div>
+          <div class="point">
+            <div class="num">02</div>
+            <div><h4>Curated one-of-a-kind stock</h4><p>Vintage means singular. We don't restock the same piece twice, so today's find won't wait.</p></div>
+          </div>
+          <div class="point">
+            <div class="num">03</div>
+            <div><h4>English-friendly, no pressure</h4><p>Browse freely, ask freely. Our staff can guide you in English, from sizing to styling.</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="collection" class="collection">
+    <div class="wrap">
+      <div class="center reveal">
+        <div class="eyebrow" style="justify-content:center;">The Collection</div>
+        <h2 style="font-size:clamp(26px,3.6vw,36px);">Ten worlds of Japanese craft</h2>
+        <p class="lede mx" style="margin-top:14px;">From everyday yukata to full samurai armor — one visit, many discoveries.</p>
+      </div>
+      <div class="cat-grid reveal">
+        <div class="cat-card">
+          <svg width="34" height="34" viewBox="0 0 24 24" fill="none"><path d="M9 3l3 2 3-2v3l3 1v13H6V7l3-1z" stroke="#b3392b" stroke-width="1.4"/></svg>
+          <h4>Kimono</h4><span>着物</span>
+        </div>
+        <div class="cat-card">
+          <svg width="34" height="34" viewBox="0 0 24 24" fill="none"><path d="M9 3l3 2 3-2v3l3 1v13H6V7l3-1z" stroke="#b3392b" stroke-width="1.4"/><path d="M6 12h12" stroke="#b3392b" stroke-width="1"/></svg>
+          <h4>Yukata</h4><span>浴衣</span>
+        </div>
+        <div class="cat-card">
+          <svg width="34" height="34" viewBox="0 0 24 24" fill="none"><path d="M6 4h12v6l-4 3 4 3v4H6v-4l4-3-4-3V4z" stroke="#b3392b" stroke-width="1.4"/></svg>
+          <h4>Haori</h4><span>羽織</span>
+        </div>
+        <div class="cat-card">
+          <svg width="34" height="34" viewBox="0 0 24 24" fill="none"><path d="M12 2l7 4v6c0 5-3 8-7 10-4-2-7-5-7-10V6l7-4z" stroke="#b3392b" stroke-width="1.4"/></svg>
+          <h4>Furisode</h4><span>振袖</span>
+        </div>
+        <div class="cat-card">
+          <svg width="34" height="34" viewBox="0 0 24 24" fill="none"><rect x="4" y="10" width="16" height="4" rx="2" stroke="#b3392b" stroke-width="1.4"/><circle cx="12" cy="12" r="2.4" stroke="#b3392b" stroke-width="1.2"/></svg>
+          <h4>Obi</h4><span>帯</span>
+        </div>
+        <div class="cat-card">
+          <svg width="34" height="34" viewBox="0 0 24 24" fill="none"><path d="M12 3l7 3v5c0 6-3.5 9-7 10-3.5-1-7-4-7-10V6l7-3z" stroke="#b3392b" stroke-width="1.4"/><path d="M9 10h6" stroke="#b3392b" stroke-width="1"/></svg>
+          <h4>Samurai Armor</h4><span>甲冑</span>
+        </div>
+        <div class="cat-card">
+          <svg width="34" height="34" viewBox="0 0 24 24" fill="none"><rect x="5" y="6" width="14" height="12" rx="6" stroke="#b3392b" stroke-width="1.4"/><circle cx="9.5" cy="12" r="1.1" fill="#b3392b"/><circle cx="14.5" cy="12" r="1.1" fill="#b3392b"/></svg>
+          <h4>Japanese Masks</h4><span>能・神楽面</span>
+        </div>
+        <div class="cat-card">
+          <svg width="34" height="34" viewBox="0 0 24 24" fill="none"><path d="M6 18L18 6M15 3l6 6" stroke="#b3392b" stroke-width="1.4" stroke-linecap="round"/></svg>
+          <h4>Decorative Swords</h4><span>模造刀</span>
+        </div>
+        <div class="cat-card">
+          <svg width="34" height="34" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="4" stroke="#b3392b" stroke-width="1.4"/><path d="M8 20c0-4 1.8-7 4-7s4 3 4 7" stroke="#b3392b" stroke-width="1.4"/></svg>
+          <h4>Kokeshi Dolls</h4><span>こけし</span>
+        </div>
+        <div class="cat-card">
+          <svg width="34" height="34" viewBox="0 0 24 24" fill="none"><path d="M6 9h12v10a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2V9z" stroke="#b3392b" stroke-width="1.4"/><path d="M9 9V6a3 3 0 0 1 6 0v3" stroke="#b3392b" stroke-width="1.4"/></svg>
+          <h4>Vintage Bags</h4><span>古着バッグ</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="global">
+    <div class="wrap">
+      <div class="reveal">
+        <div class="eyebrow">Built for Every Traveler</div>
+        <h2 style="font-size:clamp(24px,3.4vw,34px);color:#fff;max-width:560px;">
+          One store, nine languages, one clear message.
+        </h2>
+        <p class="lede" style="margin-top:14px;max-width:560px;">
+          Content is planned in each language from day one — proposed URL structure below shows how
+          we keep every version fast, findable, and easy for PEACE to update.
+        </p>
+        <div class="lang-chips">
+          <span class="chip main">EN /en/</span>
+          <span class="chip">FR /fr/</span>
+          <span class="chip">DE /de/</span>
+          <span class="chip">ES /es/</span>
+          <span class="chip">IT /it/</span>
+          <span class="chip">RU /ru/</span>
+          <span class="chip">简体中文 /zh-hans/</span>
+          <span class="chip">繁體中文 /zh-hant/</span>
+          <span class="chip">한국어 /ko/</span>
+        </div>
+        <div class="global-notes">
+          <div class="gnote">
+            <h4>Language-specific URLs</h4>
+            <p>Each language gets its own indexable path with hreflang tags, so Google and AI search engines can serve the right version to the right visitor.</p>
+          </div>
+          <div class="gnote">
+            <h4>Staged rollout</h4>
+            <p>Launch with English + 2–3 priority languages, then add the rest as translated copy arrives — no rebuild required.</p>
+          </div>
+          <div class="gnote">
+            <h4>Editable without a developer</h4>
+            <p>Products, FAQ and store info are managed as structured content, so PEACE staff can update text and photos per language.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="access">
+    <div class="wrap">
+      <div class="reveal">
+        <div class="eyebrow">Access</div>
+        <h2 style="font-size:clamp(26px,3.6vw,36px);">Find us in Asakusa</h2>
+      </div>
+      <div class="access-grid" style="margin-top:40px;">
+        <div class="map-block reveal">
+          <div class="map-pin">
+            <svg width="34" height="34" viewBox="0 0 24 24" fill="none"><path d="M12 21s7-6.5 7-11a7 7 0 1 0-14 0c0 4.5 7 11 7 11z" stroke="#b3392b" stroke-width="1.6"/><circle cx="12" cy="10" r="2.4" stroke="#b3392b" stroke-width="1.4"/></svg>
+            <span>Map placeholder — live Google Map on delivery</span>
+          </div>
+        </div>
+        <div class="info-card reveal">
+          <dl style="margin:0;">
+            <div class="info-row"><dt>Store</dt><dd>Antique Kimono PEACE</dd></div>
+            <div class="info-row"><dt>Location</dt><dd>Inside Asakusa Sumo Club, Taito City, Tokyo</dd></div>
+            <div class="info-row"><dt>Reservation</dt><dd>Not required — walk in</dd></div>
+            <div class="info-row"><dt>Language</dt><dd>English spoken</dd></div>
+            <div class="info-row"><dt>Hours</dt><dd>10:00 – 18:00 (example)</dd></div>
+            <div class="info-row"><dt>Phone</dt><dd><a href="tel:0300000000">03-0000-0000</a></dd></div>
+          </dl>
+          <p class="tentative">※ Hours and phone number shown are tentative placeholders for this design sample.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="faq">
+    <div class="wrap">
+      <div class="center reveal">
+        <div class="eyebrow" style="justify-content:center;">FAQ</div>
+        <h2 style="font-size:clamp(26px,3.6vw,36px);">Before you visit</h2>
+      </div>
+      <div class="faq-list reveal">
+        <div class="faq-item open">
+          <button class="faq-q" aria-expanded="true">Is this a rental shop or can I buy the kimono?<span class="plus"></span></button>
+          <div class="faq-a" style="max-height:120px;">
+            <p>PEACE is a purchase-only store. Every piece you see can be bought and taken with you — we do not offer rental services.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false">Do I need to book in advance?<span class="plus"></span></button>
+          <div class="faq-a"><p>No reservation is needed. Simply walk in during opening hours — we welcome drop-in visitors every day.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false">Where exactly is the store?<span class="plus"></span></button>
+          <div class="faq-a"><p>We are located inside Asakusa Sumo Club, a short walk from Asakusa's main sightseeing area — easy to combine with a temple visit.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false">Can staff help me in English?<span class="plus"></span></button>
+          <div class="faq-a"><p>Yes. Our team can assist you in English with sizing, styling and product questions.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false">What kind of items do you sell besides kimono?<span class="plus"></span></button>
+          <div class="faq-a"><p>Alongside kimono, yukata, haori and obi, we carry samurai armor, Noh and Kagura masks, decorative swords, kokeshi dolls and vintage bags.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="contact">
+    <div class="wrap contact-grid">
+      <div class="reveal">
+        <div class="eyebrow">Plan Your Visit</div>
+        <h3>Questions before you come by?</h3>
+        <p class="lede">Send a quick message — this form is a design sample and does not submit live on this preview.</p>
+        <div class="sns-row">
+          <a href="#" aria-label="Instagram"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="5" stroke="#211c16" stroke-width="1.5"/><circle cx="12" cy="12" r="4" stroke="#211c16" stroke-width="1.5"/><circle cx="17.2" cy="6.8" r="1" fill="#211c16"/></svg></a>
+          <a href="#" aria-label="Facebook"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M14 21v-7h2.5l.5-3H14V9c0-.9.3-1.5 1.7-1.5H17V4.8c-.3 0-1.3-.1-2.4-.1-2.4 0-4 1.5-4 4.1V11H8v3h2.6v7h3.4z" stroke="#211c16" stroke-width="1.2"/></svg></a>
+          <a href="#" aria-label="Google Maps"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 21s7-6.5 7-11a7 7 0 1 0-14 0c0 4.5 7 11 7 11z" stroke="#211c16" stroke-width="1.4"/><circle cx="12" cy="10" r="2.2" stroke="#211c16" stroke-width="1.2"/></svg></a>
+        </div>
+      </div>
+      <form class="form-card reveal" onsubmit="event.preventDefault();">
+        <div class="field"><label for="name">Name</label><input id="name" type="text" placeholder="Jane Smith"></div>
+        <div class="field"><label for="email">Email</label><input id="email" type="email" placeholder="you@example.com"></div>
+        <div class="field"><label for="msg">Message</label><textarea id="msg" rows="4" placeholder="I'd like to ask about..."></textarea></div>
+        <button class="btn btn-primary" type="submit" style="width:100%;">Send Message</button>
+        <p class="form-note">Sample form only — not connected on this preview page.</p>
+      </form>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-logo">PEACE <span>着物</span></div>
+        <p>Antique Kimono PEACE — vintage kimono, samurai armor and Japanese craft, inside Asakusa Sumo Club, Tokyo. Purchase only, no reservation needed.</p>
+      </div>
+      <div class="footer-col">
+        <h5>Explore</h5>
+        <a href="#about">About</a>
+        <a href="#collection">Collection</a>
+        <a href="#faq">FAQ</a>
+      </div>
+      <div class="footer-col">
+        <h5>Visit</h5>
+        <a href="#access">Access</a>
+        <a href="#contact">Contact</a>
+        <a href="tel:0300000000">03-0000-0000</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>※本ページは制作サンプル(デモ)です。掲載の内容・数値は仮のもので、写真はイメージです。住所・電話番号等は架空のものです。実制作では店舗様ご提供の写真・原稿・正式な地図情報に差し替えます。</p>
+      <p style="margin-top:10px;">© Antique Kimono PEACE — design concept sample.</p>
+    </div>
+  </div>
+</footer>
+
+<div class="sticky-cta">
+  <a class="btn btn-primary" href="#access">Get Directions</a>
+  <a class="btn btn-ghost" href="tel:0300000000">Call Store</a>
+</div>
+
+<script>
+  // mobile nav
+  var burger = document.getElementById('burgerBtn');
+  var mnav = document.getElementById('mobileNav');
+  var scrim = document.getElementById('navScrim');
+  function closeNav(){ mnav.classList.remove('open'); scrim.classList.remove('open'); }
+  burger.addEventListener('click', function(){
+    mnav.classList.toggle('open');
+    scrim.classList.toggle('open');
+  });
+  scrim.addEventListener('click', closeNav);
+  Array.prototype.forEach.call(mnav.querySelectorAll('a'), function(a){
+    a.addEventListener('click', closeNav);
+  });
+
+  // faq accordion
+  Array.prototype.forEach.call(document.querySelectorAll('.faq-item'), function(item){
+    var q = item.querySelector('.faq-q');
+    var a = item.querySelector('.faq-a');
+    q.addEventListener('click', function(){
+      var isOpen = item.classList.contains('open');
+      Array.prototype.forEach.call(document.querySelectorAll('.faq-item'), function(other){
+        other.classList.remove('open');
+        other.querySelector('.faq-q').setAttribute('aria-expanded','false');
+        other.querySelector('.faq-a').style.maxHeight = null;
+      });
+      if(!isOpen){
+        item.classList.add('open');
+        q.setAttribute('aria-expanded','true');
+        a.style.maxHeight = a.scrollHeight + 'px';
+      }
+    });
+  });
+
+  // reveal on scroll
+  if('IntersectionObserver' in window){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
+      });
+    }, {threshold:.15});
+    Array.prototype.forEach.call(document.querySelectorAll('.reveal'), function(el){ io.observe(el); });
+  } else {
+    Array.prototype.forEach.call(document.querySelectorAll('.reveal'), function(el){ el.classList.add('in'); });
+  }
+</script>
+</body>
+</html>
