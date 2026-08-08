@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Antique Kimono peace — Cool Kimono Archive (Demo)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;800&family=IBM+Plex+Mono:wght@400;500&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f2efe7; --card:#faf8f2; --ink:#16130f; --mut:#6d675c;
+  --line:#d6cfc0; --acc:#e2472a; --acc2:#b83519; --ok:#1e7a46;
+  --sans:'Archivo','Noto Sans JP',sans-serif; --mono:'IBM Plex Mono',monospace;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.6;overflow-x:hidden}
+img{max-width:100%;display:block}
+a{color:inherit}
+h1,h2,h3{line-height:1.1;font-weight:800;letter-spacing:-.01em}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+.mono{font-family:var(--mono);font-size:.78rem;letter-spacing:.04em}
+.wrap{max-width:1160px;margin:0 auto;padding:0 20px}
+.skip{position:absolute;left:-9999px;top:0;z-index:100;background:var(--ink);color:var(--bg);padding:10px 16px;font-family:var(--mono);font-size:.75rem;text-decoration:none}
+.skip:focus{left:0}
+section{border-top:1px solid var(--line)}
+.sec{padding:72px 0}
+.sec-h{display:flex;align-items:baseline;gap:14px;margin-bottom:36px;flex-wrap:wrap}
+.sec-no{font-family:var(--mono);font-size:.78rem;color:var(--acc2)}
+.sec-h h2{font-size:clamp(1.7rem,4.5vw,2.6rem);text-transform:uppercase}
+body:not(.ja) .ja{display:none}
+body.ja .en{display:none}
+
+/* ---------- header ---------- */
+.hd{position:sticky;top:0;z-index:50;background:var(--bg);border-bottom:1px solid var(--line)}
+.hd-in{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:12px 20px;max-width:1160px;margin:0 auto}
+.mark{font-weight:800;text-decoration:none;font-size:.95rem;letter-spacing:.02em;text-transform:uppercase;white-space:nowrap}
+.mark em{font-style:normal;color:var(--acc2)}
+.hd-r{display:flex;align-items:center;gap:8px}
+.btn{display:inline-block;border:1px solid var(--ink);padding:8px 16px;text-decoration:none;font-family:var(--mono);font-size:.75rem;text-transform:uppercase;letter-spacing:.08em;background:var(--ink);color:var(--bg);transition:background .15s,color .15s}
+.btn:hover{background:var(--acc2);border-color:var(--acc2);color:#fff}
+.btn.ghost{background:transparent;color:var(--ink)}
+.btn.ghost:hover{background:var(--ink);color:var(--bg)}
+.lang-btn{border:1px solid var(--line);padding:8px 12px;font-family:var(--mono);font-size:.75rem;display:flex;align-items:center;gap:6px}
+.lang-btn svg{width:9px;height:6px}
+.lang-panel{display:none;position:absolute;right:20px;top:100%;margin-top:-1px;background:var(--card);border:1px solid var(--ink);width:min(320px,calc(100vw - 40px));max-height:70vh;overflow:auto;z-index:60}
+.lang-panel.show{display:block}
+.lp-g{padding:14px 16px;border-bottom:1px solid var(--line)}
+.lp-g:last-child{border-bottom:0}
+.lp-t{font-family:var(--mono);font-size:.68rem;text-transform:uppercase;color:var(--mut);margin-bottom:8px;letter-spacing:.08em}
+.lp-i{display:flex;justify-content:space-between;align-items:center;width:100%;padding:7px 4px;text-align:left;border-bottom:1px dashed var(--line)}
+.lp-i:last-child{border-bottom:0}
+.lp-i:hover{color:var(--acc2)}
+.lp-i .p{font-family:var(--mono);font-size:.7rem;color:var(--mut)}
+.lp-i.on .p{color:var(--ok)}
+
+/* ---------- hero + ticker ---------- */
+.hero{border-top:0;padding:76px 0 44px}
+.kicker{color:var(--mut);text-transform:uppercase;margin-bottom:18px}
+.hero h1{font-size:clamp(3.2rem,15vw,10.5rem);text-transform:uppercase;letter-spacing:-.03em}
+.hero h1 .dot{color:var(--acc)}
+.hero .sub{max-width:38em;margin-top:26px;font-size:1.05rem}
+.hero-meta{display:flex;flex-wrap:wrap;gap:10px;margin-top:30px}
+.chip{border:1px solid var(--line);padding:6px 12px;font-family:var(--mono);font-size:.72rem;text-transform:uppercase;letter-spacing:.05em;background:var(--card)}
+.chip.state{border-color:var(--ok);color:var(--ok)}
+.chip.state.closed{border-color:var(--mut);color:var(--mut)}
+.chip.hot{border-color:var(--acc2);color:var(--acc2)}
+.ticker{overflow:hidden;border-top:1px solid var(--ink);border-bottom:1px solid var(--ink);background:var(--ink);color:var(--bg)}
+.tk{display:inline-flex;white-space:nowrap;animation:tick 36s linear infinite;padding:10px 0}
+.tk span{font-family:var(--mono);font-size:.8rem;padding:0 1.4em;text-transform:uppercase;letter-spacing:.06em}
+.tk i{font-style:normal;color:var(--acc)}
+@keyframes tick{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* ---------- manifesto ---------- */
+.mani{display:grid;grid-template-columns:1.4fr 1fr;gap:44px;align-items:start}
+.mani-l p{font-size:clamp(1.25rem,2.6vw,1.9rem);font-weight:600;line-height:1.35;margin-bottom:22px;max-width:22em}
+.mani-l p i{font-style:normal;color:var(--acc)}
+.ph{position:relative;background:var(--card);border:1px solid var(--line);overflow:hidden}
+.ph img{width:100%;height:100%;object-fit:cover}
+.ph .cap{position:absolute;left:0;bottom:0;background:var(--ink);color:var(--bg);font-family:var(--mono);font-size:.65rem;padding:4px 10px;letter-spacing:.05em}
+.ph.noimg img{display:none}
+.ph.noimg::before{content:attr(data-fb);position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:.72rem;color:var(--mut);text-align:center;padding:16px}
+.ph.tall{aspect-ratio:3/4}
+.ph.wide{aspect-ratio:16/9}
+
+/* ---------- archive ---------- */
+.fict{border:1px dashed var(--acc2);color:var(--acc2);padding:10px 14px;font-family:var(--mono);font-size:.74rem;margin-bottom:30px;background:var(--card)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1px;background:var(--line);border:1px solid var(--line)}
+.card{background:var(--card);display:flex;flex-direction:column}
+.card-h{display:block;width:100%;text-align:left;padding:20px 20px 16px}
+.card-h:hover .nm{color:var(--acc)}
+.card-top{display:flex;justify-content:space-between;font-family:var(--mono);font-size:.72rem;color:var(--mut);margin-bottom:12px}
+.card-top .no{color:var(--ink)}
+.nm{font-size:1.25rem;margin-bottom:12px;transition:color .15s}
+.sws{display:flex;gap:6px;margin-bottom:14px}
+.sws i{width:26px;height:26px;background:var(--c);border:1px solid rgba(0,0,0,.15)}
+.pline{display:flex;justify-content:space-between;align-items:center;font-family:var(--mono);font-size:.78rem}
+.st{padding:3px 9px;border:1px solid;font-size:.68rem;letter-spacing:.06em}
+.st.av{color:var(--ok);border-color:var(--ok)}
+.st.sold{color:var(--mut);border-color:var(--mut);text-decoration:line-through;text-decoration-thickness:1px}
+.hint{font-family:var(--mono);font-size:.66rem;color:var(--mut);margin-top:12px;text-transform:uppercase;letter-spacing:.06em}
+.card-d{display:none;border-top:1px dashed var(--line);padding:16px 20px 20px;font-family:var(--mono);font-size:.76rem}
+.card.open .card-d{display:block}
+.card.open .hint .op, .card:not(.open) .hint .cl{display:none}
+.card-d dl{display:grid;grid-template-columns:auto 1fr;gap:4px 16px;margin-bottom:14px}
+.card-d dt{color:var(--mut);text-transform:uppercase;font-size:.66rem;padding-top:2px}
+.card-d a{color:var(--acc2);text-decoration:none;font-size:.74rem;text-transform:uppercase;letter-spacing:.05em}
+.card-d a:hover{text-decoration:underline}
+.card .ph{border:0;border-bottom:1px solid var(--line);aspect-ratio:16/10;cursor:pointer}
+.arch-foot{margin-top:26px;display:flex;gap:16px;flex-wrap:wrap;align-items:center}
+
+/* ---------- sumo ---------- */
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);counter-reset:s}
+.step{background:var(--card);padding:26px 22px 30px;position:relative}
+.step .n{font-family:var(--mono);font-size:2.2rem;color:var(--acc);display:block;margin-bottom:14px}
+.step h3{font-size:1.15rem;margin-bottom:10px;text-transform:uppercase}
+.step p{font-size:.92rem;color:var(--mut)}
+.sumo-line{margin-top:30px;font-size:clamp(1.1rem,2.4vw,1.5rem);font-weight:600;max-width:30em}
+.sumo-line i{font-style:normal;color:var(--acc2)}
+
+/* ---------- AI ---------- */
+.ai{display:grid;grid-template-columns:1.2fr 1fr;gap:44px;align-items:start}
+.sim{border:1px solid var(--ink);background:var(--card)}
+.sim-tag{background:var(--acc2);color:#fff;font-family:var(--mono);font-size:.68rem;padding:6px 12px;letter-spacing:.08em;text-transform:uppercase}
+.sim-q{padding:18px 20px;border-bottom:1px dashed var(--line);font-family:var(--mono);font-size:.82rem;color:var(--mut)}
+.sim-q b{color:var(--ink);font-weight:500}
+.sim-a{padding:20px}
+.sim-a p{font-size:.95rem;margin-bottom:10px}
+.sim-a .src{font-family:var(--mono);font-size:.68rem;color:var(--mut)}
+.facts{border:1px solid var(--line);background:var(--card)}
+.facts .f{display:grid;grid-template-columns:110px 1fr;gap:14px;padding:12px 16px;border-bottom:1px dashed var(--line);font-family:var(--mono);font-size:.76rem}
+.facts .f:last-child{border-bottom:0}
+.facts .k{color:var(--mut);text-transform:uppercase;font-size:.66rem;padding-top:2px}
+details.code{margin-top:18px;border:1px solid var(--line);background:var(--card)}
+details.code summary{padding:12px 16px;font-family:var(--mono);font-size:.74rem;cursor:pointer;text-transform:uppercase;letter-spacing:.05em}
+details.code summary:hover{color:var(--acc2)}
+.codebox{overflow-x:auto;border-top:1px dashed var(--line)}
+pre{font-family:var(--mono);font-size:.7rem;line-height:1.7;padding:16px;white-space:pre}
+
+/* ---------- FAQ / visit ---------- */
+.faq details{border:1px solid var(--line);background:var(--card);margin-bottom:-1px}
+.faq summary{padding:18px 20px;cursor:pointer;font-weight:600;font-size:1rem;list-style:none;display:flex;justify-content:space-between;gap:14px;align-items:center}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary:hover{color:var(--acc2)}
+.faq summary::after{content:"+";font-family:var(--mono);color:var(--acc2);font-size:1.1rem;flex:none}
+.faq details[open] summary::after{content:"–"}
+.faq .a{padding:0 20px 20px;color:var(--mut);max-width:44em}
+.visit-g{display:grid;grid-template-columns:1.3fr 1fr;gap:44px;align-items:start}
+.hours{font-size:clamp(2.4rem,7vw,4.4rem);font-weight:800;letter-spacing:-.02em;margin:10px 0 6px}
+.hours i{font-style:normal;color:var(--acc)}
+.v-rows{margin-top:24px;border-top:1px solid var(--line)}
+.v-r{display:grid;grid-template-columns:130px 1fr;gap:16px;padding:12px 0;border-bottom:1px solid var(--line);font-size:.95rem}
+.v-r .k{font-family:var(--mono);font-size:.68rem;text-transform:uppercase;color:var(--mut);padding-top:4px}
+.visit-cta{margin-top:26px;display:flex;gap:12px;flex-wrap:wrap}
+.sns-note{display:none;border:1px dashed var(--line);background:var(--card);padding:14px 16px;margin-top:14px;font-size:.85rem;color:var(--mut);max-width:44em}
+.sns-note.show{display:block}
+
+/* ---------- blueprint ---------- */
+.bp{background:var(--ink);color:var(--bg)}
+.bp .sec-h h2{color:var(--bg)}
+.bp .lede{max-width:44em;color:#b9b2a4;margin-bottom:40px}
+.bp-g{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:#3a352c;border:1px solid #3a352c}
+.bp-b{background:var(--ink);padding:24px 22px}
+.bp-b h3{font-family:var(--mono);font-size:.74rem;font-weight:500;text-transform:uppercase;letter-spacing:.08em;color:var(--acc);margin-bottom:16px}
+.bp-b.wide{grid-column:1/-1}
+.bp-b p{font-size:.88rem;color:#cfc8ba;margin-bottom:10px}
+.bp-b pre{padding:0;font-size:.68rem;color:#cfc8ba}
+.bp-b .codebox{border:0}
+.bp ol{list-style:none}
+.bp ol li{padding:8px 0;border-bottom:1px dashed #3a352c;font-size:.86rem;color:#cfc8ba}
+.bp ol li b{color:var(--bg);font-family:var(--mono);font-size:.7rem;text-transform:uppercase;letter-spacing:.06em;display:block}
+.flow{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.flow .fb{border:1px solid #3a352c;padding:8px 12px;font-family:var(--mono);font-size:.68rem;color:#cfc8ba}
+.flow .fb.goal{border-color:var(--acc);color:var(--acc)}
+.flow .ar{color:var(--acc);font-family:var(--mono)}
+
+/* ---------- notes / modal / footer ---------- */
+.note{display:none;border:1px dashed var(--acc);background:rgba(226,71,42,.05);padding:14px 16px;margin-top:30px;font-size:.85rem;max-width:52em}
+.note b{font-family:var(--mono);font-size:.66rem;text-transform:uppercase;letter-spacing:.08em;color:var(--acc2);display:block;margin-bottom:6px}
+body.notes .note{display:block}
+.bp .note{background:rgba(226,71,42,.12);color:#e8e2d4}
+.bp .note b{color:var(--acc)}
+.bp .sec-no{color:var(--acc)}
+.notes-btn{position:fixed;left:14px;bottom:14px;z-index:70;border:1px solid var(--ink);background:var(--card);font-family:var(--mono);font-size:.68rem;padding:9px 13px;letter-spacing:.06em;box-shadow:0 2px 10px rgba(0,0,0,.12)}
+.notes-btn.on{background:var(--acc2);border-color:var(--acc2);color:#fff}
+.pmodal{position:fixed;inset:0;z-index:80;display:none;align-items:center;justify-content:center;background:rgba(22,19,15,.55);padding:20px}
+.pmodal.show{display:flex}
+.pm-card{background:var(--card);border:1px solid var(--ink);max-width:460px;width:100%;padding:26px 24px}
+.pm-code{color:var(--acc2);margin-bottom:8px}
+.pm-card h3{font-size:1.5rem;margin-bottom:12px}
+.pm-card p{font-size:.9rem;color:var(--mut);margin-bottom:10px}
+.pm-card pre{border:1px solid var(--line);margin:14px 0;overflow-x:auto}
+footer{border-top:1px solid var(--line);padding:34px 0 90px}
+.demo-note{font-size:.8rem;color:var(--mut);max-width:44em;margin-bottom:10px}
+.credit{font-family:var(--mono);font-size:.68rem;color:var(--mut)}
+
+/* ---------- responsive / motion / a11y ---------- */
+@media(max-width:840px){
+  .mani,.ai,.visit-g{grid-template-columns:1fr}
+  .steps{grid-template-columns:1fr}
+  .bp-g{grid-template-columns:1fr}
+  .sec{padding:52px 0}
+}
+@media(max-width:430px){
+  .mark{font-size:.8rem}
+  .btn{padding:7px 10px;font-size:.68rem}
+  .lang-btn{padding:7px 9px}
+  .facts .f{grid-template-columns:1fr;gap:2px}
+  .v-r{grid-template-columns:1fr;gap:2px}
+}
+:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .tk{animation:none;flex-wrap:wrap;white-space:normal}
+  .tk span:nth-child(n+11){display:none}
+  *{transition:none!important}
+}
+</style>
+</head>
+<body>
+
+<a class="skip" href="#main"><span class="en">Skip to content</span><span class="ja">本文へ移動</span></a>
+
+<header class="hd">
+  <div class="hd-in">
+    <a class="mark" href="#top">Antique Kimono <em>peace</em></a>
+    <div class="hd-r">
+      <button class="lang-btn" id="langBtn" aria-expanded="false" aria-controls="langPanel">
+        <span id="langCur">EN</span>
+        <svg viewBox="0 0 10 6" aria-hidden="true"><path d="M1 1l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
+      </button>
+      <a class="btn" href="#visit"><span class="en">Visit us</span><span class="ja">来店案内</span></a>
+    </div>
+  </div>
+  <div class="lang-panel" id="langPanel">
+    <div class="lp-g">
+      <p class="lp-t"><span class="en">Live in this demo</span><span class="ja">このデモで切替可</span></p>
+      <button class="lp-i on" data-lang="en"><span>English</span><span class="p">/ — main</span></button>
+      <button class="lp-i on" data-lang="ja"><span>日本語</span><span class="p">/ja/</span></button>
+    </div>
+    <div class="lp-g">
+      <p class="lp-t"><span class="en">Structure ready — awaiting copy</span><span class="ja">構造は準備済(原稿待ち)</span></p>
+      <button class="lp-i" data-prep="fr" data-name="Français"><span>Français</span><span class="p">/fr/</span></button>
+      <button class="lp-i" data-prep="de" data-name="Deutsch"><span>Deutsch</span><span class="p">/de/</span></button>
+      <button class="lp-i" data-prep="es" data-name="Español"><span>Español</span><span class="p">/es/</span></button>
+      <button class="lp-i" data-prep="it" data-name="Italiano"><span>Italiano</span><span class="p">/it/</span></button>
+      <button class="lp-i" data-prep="ru" data-name="Русский"><span>Русский</span><span class="p">/ru/</span></button>
+      <button class="lp-i" data-prep="zh-Hans" data-name="简体中文"><span>简体中文</span><span class="p">/zh-hans/</span></button>
+      <button class="lp-i" data-prep="zh-Hant" data-name="繁體中文"><span>繁體中文</span><span class="p">/zh-hant/</span></button>
+      <button class="lp-i" data-prep="ko" data-name="한국어"><span>한국어</span><span class="p">/ko/</span></button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+<!-- S1 HERO -->
+<section class="hero" id="top">
+  <div class="wrap">
+    <p class="kicker mono">Asakusa · Tokyo — Vintage, one of one</p>
+    <h1>Cool<br>Kimono<span class="dot">.</span></h1>
+    <p class="sub en">One-of-a-kind vintage kimono, armor and masks — sold, not rented.
+      Inside the <strong>Asakusa Sumo Club</strong>, open every day until 22:30. Walk in.</p>
+    <p class="sub ja">一点物のヴィンテージ着物・甲冑・面。レンタルではなく<strong>販売</strong>です。
+      浅草の相撲ショー会場「Asakusa Sumo Club」の中で、毎日22:30まで。予約は要りません。</p>
+    <div class="hero-meta">
+      <span class="chip state" data-open-chip>—</span>
+      <span class="chip">12:00–22:30</span>
+      <span class="chip"><span class="en">No reservation needed</span><span class="ja">予約不要</span></span>
+      <span class="chip hot"><span class="en">Inside Asakusa Sumo Club</span><span class="ja">Asakusa Sumo Club内</span></span>
+    </div>
+    <div class="note"><b>Design note 01</b>ヒーローは写真を使わずタイポグラフィのみ。理由=(1)「和風テンプレ」との差別化を最初の1画面で宣言する (2)素材写真に依存しない=公開後に実店舗の写真へ差し替えるまでの間もブランドが立つ。店の既存コンセプト語「Cool Kimono」をそのまま見出しに使い、来店条件(場所・時間・予約不要)を最初の画面に置いています。</div>
+  </div>
+</section>
+
+<div class="ticker" aria-hidden="true">
+  <div class="tk" id="tk">
+    <span>Welcome<i> · </i></span><span>いらっしゃいませ<i> · </i></span><span>Bienvenue<i> · </i></span><span>Willkommen<i> · </i></span><span>Bienvenido<i> · </i></span><span>Benvenuti<i> · </i></span><span>Добро пожаловать<i> · </i></span><span>欢迎光临<i> · </i></span><span>歡迎光臨<i> · </i></span><span>환영합니다<i> · </i></span>
+  </div>
+</div>
+
+<!-- S2 MANIFESTO -->
+<section class="sec">
+  <div class="wrap">
+    <div class="sec-h"><span class="sec-no">01</span><h2>Manifesto</h2></div>
+    <div class="mani">
+      <div class="mani-l">
+        <p class="en">Traditional fabric. <i>Modern Tokyo</i> attitude.</p>
+        <p class="ja">伝統の布を、<i>いまの東京</i>の感覚で。</p>
+        <p class="en">Every piece is one of one. It will not come back.</p>
+        <p class="ja">すべて一点物。同じ一枚は、二度と入荷しません。</p>
+        <p class="en">We sell — we don't rent. This is fashion you keep.</p>
+        <p class="ja">貸すのではなく、売る。持ち帰って着るためのファッションです。</p>
+        <p class="en"><i>Neo Kimono</i>: wear it your way. No rules.</p>
+        <p class="ja"><i>Neo Kimono</i> — 着方に決まりはありません。</p>
+      </div>
+      <figure class="ph tall" data-fb="TEXTILE CLOSE-UP / No. 0001">
+        <img src="https://images.unsplash.com/photo-1767839507898-9a8624bdd8b0?auto=format&fit=crop&w=1200&q=70" alt="Close-up of patterned silk kimono fabric" loading="lazy" onerror="this.parentElement.classList.add('noimg')">
+        <figcaption class="cap">SILK / DETAIL</figcaption>
+      </figure>
+    </div>
+    <div class="note"><b>Design note 02</b>UIをほぼ無彩色(生成り×墨)に抑えているのは、ヴィンテージ着物の布地自体が強い色彩を持つため。商品写真だけが色を持つ状態にすると、素材が主役になり「高級感」が出ます。文章は貴店の語彙(Cool Kimono / Neo Kimono / 販売専門)だけで構成し、汎用の観光コピーを使っていません。</div>
+  </div>
+</section>
+
+<!-- S3 ARCHIVE -->
+<section class="sec" id="archive">
+  <div class="wrap">
+    <div class="sec-h"><span class="sec-no">02</span><h2>The Archive</h2></div>
+    <p class="fict"><span class="en">SAMPLE DATA — every item, number and price in this section is fictional, for layout demonstration only.</span><span class="ja">サンプルデータ — このセクションの商品・番号・価格はすべて架空です(レイアウト提案用)。</span></p>
+    <div class="grid">
+
+      <article class="card">
+        <figure class="ph" data-fb="ITEM PHOTO / No. 0001">
+          <img src="https://images.unsplash.com/photo-1759579470279-0a647e2968b9?auto=format&fit=crop&w=1200&q=70" alt="Patterned kimono hanging on a rack" loading="lazy" onerror="this.parentElement.classList.add('noimg')">
+        </figure>
+        <button class="card-h" data-card aria-expanded="false">
+          <span class="card-top"><span class="no">No. 0001</span><span>KIMONO</span></span>
+          <h3 class="nm">Indigo silk kimono</h3>
+          <div class="sws" role="img" aria-label="Colors: indigo, cream, persimmon"><i style="--c:#2b3a67"></i><i style="--c:#e8e0cd"></i><i style="--c:#c26a3f"></i></div>
+          <div class="pline"><span>¥98,000 <span class="en">(sample)</span><span class="ja">(架空)</span></span><span class="st av">AVAILABLE</span></div>
+          <span class="hint"><span class="op">+ Specifications</span><span class="cl">– Close</span></span>
+        </button>
+        <div class="card-d">
+          <dl><dt>Era (est.)</dt><dd>Shōwa</dd><dt>Length</dt><dd>158 cm</dd><dt>Sleeve</dt><dd>64 cm</dd><dt>Condition</dt><dd>Very good — minor wear at hem</dd></dl>
+          <a href="#visit">See it in store ↓</a>
+        </div>
+      </article>
+
+      <article class="card">
+        <figure class="ph noimg" data-fb="ITEM PHOTO SLOT / No. 0002" aria-hidden="true"></figure>
+        <button class="card-h" data-card aria-expanded="false">
+          <span class="card-top"><span class="no">No. 0002</span><span>FURISODE</span></span>
+          <h3 class="nm">Crane motif furisode</h3>
+          <div class="sws" role="img" aria-label="Colors: deep red, gold, black"><i style="--c:#8f1d22"></i><i style="--c:#d9b64c"></i><i style="--c:#1c1c1c"></i></div>
+          <div class="pline"><span>¥168,000 <span class="en">(sample)</span><span class="ja">(架空)</span></span><span class="st sold">SOLD</span></div>
+          <span class="hint"><span class="op">+ Specifications</span><span class="cl">– Close</span></span>
+        </button>
+        <div class="card-d">
+          <dl><dt>Era (est.)</dt><dd>Taishō</dd><dt>Length</dt><dd>165 cm</dd><dt>Sleeve</dt><dd>102 cm</dd><dt>Condition</dt><dd>Excellent</dd></dl>
+          <p class="en">Sold pieces stay in the archive — each one is a record of what passes through the shop.</p>
+          <p class="ja">売れた一枚もアーカイブに残します。店を通り過ぎた一点物の記録です。</p>
+        </div>
+      </article>
+
+      <article class="card">
+        <figure class="ph noimg" data-fb="ITEM PHOTO SLOT / No. 0003" aria-hidden="true"></figure>
+        <button class="card-h" data-card aria-expanded="false">
+          <span class="card-top"><span class="no">No. 0003</span><span>HAORI</span></span>
+          <h3 class="nm">Black haori, hidden lining</h3>
+          <div class="sws" role="img" aria-label="Colors: black, vermilion, pine green"><i style="--c:#181818"></i><i style="--c:#b03a2e"></i><i style="--c:#4a6b5a"></i></div>
+          <div class="pline"><span>¥42,000 <span class="en">(sample)</span><span class="ja">(架空)</span></span><span class="st av">AVAILABLE</span></div>
+          <span class="hint"><span class="op">+ Specifications</span><span class="cl">– Close</span></span>
+        </button>
+        <div class="card-d">
+          <dl><dt>Era (est.)</dt><dd>Shōwa</dd><dt>Length</dt><dd>98 cm</dd><dt>Note</dt><dd>Painted lining — worn open or closed</dd><dt>Condition</dt><dd>Good</dd></dl>
+          <a href="#visit">See it in store ↓</a>
+        </div>
+      </article>
+
+      <article class="card">
+        <figure class="ph" data-fb="ITEM PHOTO / No. 0004">
+          <img src="https://images.unsplash.com/photo-1718049942873-58bd663206dc?auto=format&fit=crop&w=1200&q=70" alt="Obi sash on display" loading="lazy" onerror="this.parentElement.classList.add('noimg')">
+        </figure>
+        <button class="card-h" data-card aria-expanded="false">
+          <span class="card-top"><span class="no">No. 0004</span><span>OBI</span></span>
+          <h3 class="nm">Gold brocade obi</h3>
+          <div class="sws" role="img" aria-label="Colors: gold, ivory, dark brown"><i style="--c:#b98a2f"></i><i style="--c:#efe6d0"></i><i style="--c:#3d2b1f"></i></div>
+          <div class="pline"><span>¥35,000 <span class="en">(sample)</span><span class="ja">(架空)</span></span><span class="st av">AVAILABLE</span></div>
+          <span class="hint"><span class="op">+ Specifications</span><span class="cl">– Close</span></span>
+        </button>
+        <div class="card-d">
+          <dl><dt>Era (est.)</dt><dd>Shōwa</dd><dt>Length</dt><dd>380 cm</dd><dt>Width</dt><dd>31 cm</dd><dt>Condition</dt><dd>Very good</dd></dl>
+          <a href="#visit">See it in store ↓</a>
+        </div>
+      </article>
+
+      <article class="card">
+        <figure class="ph noimg" data-fb="ITEM PHOTO SLOT / No. 0005" aria-hidden="true"></figure>
+        <button class="card-h" data-card aria-expanded="false">
+          <span class="card-top"><span class="no">No. 0005</span><span>SAMURAI ARMOR</span></span>
+          <h3 class="nm">Display armor set</h3>
+          <div class="sws" role="img" aria-label="Colors: iron black, dark red, aged gold"><i style="--c:#20242c"></i><i style="--c:#7a1f1f"></i><i style="--c:#8c7b52"></i></div>
+          <div class="pline"><span>¥520,000 <span class="en">(sample)</span><span class="ja">(架空)</span></span><span class="st av">AVAILABLE</span></div>
+          <span class="hint"><span class="op">+ Specifications</span><span class="cl">– Close</span></span>
+        </button>
+        <div class="card-d">
+          <dl><dt>Type</dt><dd>Decorative, Edo style</dd><dt>Height</dt><dd>approx. 120 cm (seated display)</dd><dt>Condition</dt><dd>Good — display use</dd></dl>
+          <a href="#visit">See it in store ↓</a>
+        </div>
+      </article>
+
+      <article class="card">
+        <figure class="ph noimg" data-fb="ITEM PHOTO SLOT / No. 0006" aria-hidden="true"></figure>
+        <button class="card-h" data-card aria-expanded="false">
+          <span class="card-top"><span class="no">No. 0006</span><span>JAPANESE MASK</span></span>
+          <h3 class="nm">Carved noh-style mask</h3>
+          <div class="sws" role="img" aria-label="Colors: pale wood, dark brown, red"><i style="--c:#d8c6a5"></i><i style="--c:#5a4632"></i><i style="--c:#9c2b2b"></i></div>
+          <div class="pline"><span>¥88,000 <span class="en">(sample)</span><span class="ja">(架空)</span></span><span class="st av">AVAILABLE</span></div>
+          <span class="hint"><span class="op">+ Specifications</span><span class="cl">– Close</span></span>
+        </button>
+        <div class="card-d">
+          <dl><dt>Material</dt><dd>Carved wood, pigment</dd><dt>Height</dt><dd>21 cm</dd><dt>Condition</dt><dd>Very good</dd></dl>
+          <a href="#visit">See it in store ↓</a>
+        </div>
+      </article>
+
+    </div>
+    <div class="arch-foot">
+      <span class="chip"><span class="en">Also in store: Yukata / Decorative Swords / Kokeshi Dolls / Vintage Bags</span><span class="ja">ほか店頭: 浴衣・模造刀・こけし・ヴィンテージバッグ</span></span>
+      <a class="btn ghost" href="#visit"><span class="en">Every piece is in Asakusa →</span><span class="ja">現物はすべて浅草の店頭に →</span></a>
+    </div>
+    <div class="note"><b>Design note 03</b>一点物は「商品一覧」でなく「標本台帳(アーカイブ)」の文法で見せます。採番・年代・採寸・状態・色標本(布の色をチップで表示=写真が無くても個体が立つ)。SOLDの一枚を意図的に残しているのは、売れた商品ページを消さず蓄積する運用の提案です=ページ数が増え続け、検索エンジン・AI検索が店を理解する材料になります(募集要項の「公式情報源に育てたい」への回答)。カートは置きません — 一点物は店頭で会って買うもの、という導線設計です。</div>
+  </div>
+</section>
+
+<!-- S4 SUMO -->
+<section class="sec">
+  <div class="wrap">
+    <div class="sec-h"><span class="sec-no">03</span><h2><span class="en">From the show to the shop</span><span class="ja">ショーから、店へ</span></h2></div>
+    <div class="steps">
+      <div class="step"><span class="n mono">01</span>
+        <h3><span class="en">Watch the show</span><span class="ja">ショーを観る</span></h3>
+        <p class="en">You came for sumo. The shop is inside the same venue — you are already at our door.</p>
+        <p class="ja">相撲ショーの会場の中に店があります。観に来た時点で、もう店の前にいます。</p>
+      </div>
+      <div class="step"><span class="n mono">02</span>
+        <h3><span class="en">Step in — no booking</span><span class="ja">そのまま入る</span></h3>
+        <p class="en">No reservation, no pressure. English-speaking staff. Browse like a vintage archive.</p>
+        <p class="ja">予約不要。英語での接客が可能です。古着のアーカイブを見る感覚でどうぞ。</p>
+      </div>
+      <div class="step"><span class="n mono">03</span>
+        <h3><span class="en">Take home one of one</span><span class="ja">一点物を連れて帰る</span></h3>
+        <p class="en">Everything is for sale. What you buy here exists nowhere else in the world.</p>
+        <p class="ja">すべて販売品。ここで買う一枚は、世界のどこにもない一枚です。</p>
+      </div>
+    </div>
+    <p class="sumo-line en">Shows end. We don't — open until <i>22:30</i>, every day.</p>
+    <p class="sumo-line ja">ショーが終わっても、店は開いています — 毎日 <i>22:30</i> まで。</p>
+    <div class="note"><b>Design note 04</b>このセクションがこのサイトの構成上の核です。「浅草で発見してもらう」一般論ではなく、貴店だけが持つ資産=<b style="display:inline">相撲ショーの観客は既に店の前にいる</b>を導線として明文化しました。夜まで営業(22:30)という事実は、ショー後・夕食後の観光客を拾える強みなので、独立した1行で強調しています。</div>
+  </div>
+</section>
+
+<!-- S5 AI -->
+<section class="sec bp">
+  <div class="wrap">
+    <div class="sec-h"><span class="sec-no">04</span><h2><span class="en">How the world finds us</span><span class="ja">世界からの見つかり方</span></h2></div>
+    <p class="lede"><span class="en">Proposal exhibit — how discovery will work once the site is live. Not a working feature of this demo.</span><span class="ja">これは「公開後にどう見つかるか」を示す提案の展示です。本デモで動作している機能ではありません。</span></p>
+    <div class="ai">
+      <div class="sim">
+        <p class="sim-tag"><span class="en">Simulated preview — not a real AI response</span><span class="ja">想定表示(モック) — 実際のAI回答ではありません</span></p>
+        <p class="sim-q">Q: <b>"Where can I buy an antique kimono in Asakusa tonight?"</b></p>
+        <div class="sim-a">
+          <p class="en"><strong>Antique Kimono peace</strong> sells one-of-a-kind vintage kimono, armor and masks. It is located inside the Asakusa Sumo Club in Asakusa, Tokyo. Open daily 12:00–22:30, walk-ins welcome, English-speaking staff.</p>
+          <p class="ja"><strong>Antique Kimono peace</strong> は一点物のヴィンテージ着物・甲冑・面を販売する店です。浅草の Asakusa Sumo Club 内にあり、毎日12:00–22:30営業・予約不要・英語対応。</p>
+          <p class="src">Source: kimono-peace.com (structured data)</p>
+        </div>
+      </div>
+      <div>
+        <div class="facts">
+          <div class="f"><span class="k">Business</span><span>Antique Kimono peace — vintage kimono, sales only</span></div>
+          <div class="f"><span class="k">Location</span><span>Inside Asakusa Sumo Club, Asakusa, Tokyo</span></div>
+          <div class="f"><span class="k">Hours</span><span>12:00–22:30, every day · walk-in</span></div>
+          <div class="f"><span class="k">Inventory</span><span>One-of-one items, each on its own page</span></div>
+          <div class="f"><span class="k">Languages</span><span>EN main + 8 more, per-language URLs</span></div>
+        </div>
+        <details class="code">
+          <summary><span class="en">The code behind this answer (product-page JSON-LD sample)</span><span class="ja">この回答を支えるコード(商品ページのJSON-LDサンプル)</span></summary>
+          <div class="codebox"><pre>{
+  "@context": "https://schema.org",
+  "@type": "Product",
+  "name": "Indigo silk kimono — No.0001 (sample)",
+  "itemCondition": "https://schema.org/UsedCondition",
+  "offers": {
+    "@type": "Offer",
+    "price": "98000",
+    "priceCurrency": "JPY",
+    "availability": "https://schema.org/InStock",
+    "seller": {
+      "@type": "Store",
+      "name": "Antique Kimono peace",
+      "containedInPlace": { "@type": "EventVenue",
+        "name": "Asakusa Sumo Club" },
+      "address": { "@type": "PostalAddress",
+        "addressLocality": "Asakusa, Taito City",
+        "addressRegion": "Tokyo" },
+      "openingHours": "Mo-Su 12:00-22:30"
+    }
+  }
+}</pre></div>
+        </details>
+      </div>
+    </div>
+    <div class="note"><b>Design note 05</b>「AI検索対応」を、コードではなく<b style="display:inline">結果の見え方</b>で提示しています(左=観光客の質問にAIが貴店を答える想定画面。モックである旨を画面上に明記)。これを実現する仕組みが右下の構造化データ(JSON-LD)で、商品1点=1ページ=1データの構造にすると、在庫・営業時間・場所を機械が誤解なく読めます。ヴィンテージ=中古であることもitemCondition(UsedCondition)で機械宣言します(一点物販売の業態では必須の宣言)。Google ビジネスプロフィールと同じ事実(営業時間・場所)を同じ値で持つこと=情報整合も設計に含めます。</div>
+  </div>
+</section>
+
+<!-- S6 FAQ -->
+<section class="sec">
+  <div class="wrap">
+    <div class="sec-h"><span class="sec-no">05</span><h2>FAQ</h2></div>
+    <div class="faq">
+      <details>
+        <summary><span class="en">Do I need a reservation?</span><span class="ja">予約は必要ですか?</span></summary>
+        <p class="a en">No. Walk in any day between 12:00 and 22:30. The shop is inside the Asakusa Sumo Club venue.</p>
+        <p class="a ja">不要です。毎日12:00–22:30、Asakusa Sumo Club の会場内へそのままお越しください。</p>
+      </details>
+      <details>
+        <summary><span class="en">Is this a rental shop?</span><span class="ja">レンタル店ですか?</span></summary>
+        <p class="a en">No — we sell. Every kimono, armor set and mask here is a one-of-a-kind piece you take home and keep.</p>
+        <p class="a ja">いいえ、販売専門です。着物も甲冑も面もすべて一点物で、購入してお持ち帰りいただくものです。</p>
+      </details>
+      <details>
+        <summary><span class="en">Can I shop in English?</span><span class="ja">英語で買い物できますか?</span></summary>
+        <p class="a en">Yes, English-speaking staff are available. Come see the pieces in person — sizing and styling are easiest to check in the shop.</p>
+        <p class="a ja">はい、英語での接客が可能です。サイズ感や合わせ方は店頭で現物を見ながらが確実です。</p>
+      </details>
+      <details>
+        <summary><span class="en">Can I shop tax-free?</span><span class="ja">免税で購入できますか?</span></summary>
+        <p class="a en">To be confirmed with the shop — at launch, this answer will state the store's actual tax-free policy and procedure, exactly as it operates. This demo does not assume an answer either way.</p>
+        <p class="a ja">本番公開時に、貴店の免税対応の実際の運用(可否・手続き)を確認のうえ事実どおりに記載します。デモの段階では可否を仮定していません。</p>
+      </details>
+      <details>
+        <summary><span class="en">How can I pay?</span><span class="ja">支払い方法は?</span></summary>
+        <p class="a en">To be confirmed with the shop — cash, cards and mobile payments will be listed here exactly as the store accepts them at launch.</p>
+        <p class="a ja">本番公開時に、貴店で実際に使える手段(現金・カード・モバイル決済)を確認のうえ、そのまま記載します。</p>
+      </details>
+    </div>
+    <div class="note"><b>Design note 06</b>FAQは観光客が来店前に実際に調べる5問(予約/レンタルとの違い/言語/免税/決済)。いずれも回答が「来店」の不安解消に着地する=FAQ自体が来店導線です。免税・決済は当方が事実を把握していないため、断定せず「貴店の運用確認後に記載」と明示しています(確認していないことを書かない方針)。本番ではFAQPageスキーマを付け、AI検索が引用できる形にします。項目の追加は貴店がCMSから行えます。</div>
+  </div>
+</section>
+
+<!-- S7 VISIT -->
+<section class="sec" id="visit">
+  <div class="wrap">
+    <div class="sec-h"><span class="sec-no">06</span><h2><span class="en">Visit us</span><span class="ja">来店案内</span></h2></div>
+    <div class="visit-g">
+      <div>
+        <span class="chip state" data-open-chip>—</span>
+        <p class="hours">12:00<i>–</i>22:30</p>
+        <p class="mono" style="color:var(--mut)"><span class="en">Every day · no reservation needed</span><span class="ja">毎日 · 予約不要</span></p>
+        <div class="v-rows">
+          <div class="v-r"><span class="k">Where</span><span><span class="en">Inside <strong>Asakusa Sumo Club</strong>, Asakusa, Taitō City, Tokyo</span><span class="ja"><strong>Asakusa Sumo Club</strong> 内(東京都台東区・浅草)</span></span></div>
+          <div class="v-r"><span class="k">How</span><span><span class="en">Walk in — before or after the sumo show, or on its own</span><span class="ja">ショーの前後でも、お買い物だけでも、そのままどうぞ</span></span></div>
+          <div class="v-r"><span class="k">Language</span><span><span class="en">English OK</span><span class="ja">英語対応可</span></span></div>
+        </div>
+        <div class="visit-cta">
+          <a class="btn" href="https://maps.google.com/?q=Asakusa+Sumo+Club" target="_blank" rel="noopener"><span class="en">Open in Google Maps</span><span class="ja">Google Mapsで開く</span></a>
+          <button class="btn ghost" id="snsBtn" aria-expanded="false" aria-controls="snsNote">Instagram</button>
+          <a class="btn ghost" href="#archive"><span class="en">Back to the archive</span><span class="ja">アーカイブへ戻る</span></a>
+        </div>
+        <div class="sns-note" id="snsNote">
+          <p class="en">Demo — not linked to a live account. In production this button connects to the shop's official Instagram, and the same account URL is declared in the site's structured data (<span class="mono">sameAs</span>) so search engines and AI systems can tie the account to the store.</p>
+          <p class="ja">デモのため実アカウントには接続していません。本番では貴店の公式Instagramに接続し、同じURLを構造化データ(<span class="mono">sameAs</span>)にも宣言します — 検索エンジン・AI検索がアカウントと店舗を同一の存在として結び付けられます。</p>
+        </div>
+      </div>
+      <figure class="ph tall" data-fb="IN-STORE RACK">
+        <img src="https://images.unsplash.com/photo-1481325545291-94394fe1cf95?auto=format&fit=crop&w=1200&q=70" alt="Rack of colorful vintage fabrics" loading="lazy" onerror="this.parentElement.classList.add('noimg')">
+        <figcaption class="cap">THE RACKS</figcaption>
+      </figure>
+    </div>
+    <div class="note"><b>Design note 07</b>全セクションの導線がここに収束します。営業中/営業時間外の表示はページを開いた瞬間の日本時間から自動計算(ウォークイン業態では「いま開いているか」が来店判断のほぼすべて)。本番ではGoogle Mapsボタンのタップ数をGA4で計測し、「サイト→来店」の転換を数字で追えるようにします。番地・電話は本番で掲載します(本デモでは省略)。</div>
+  </div>
+</section>
+
+<!-- S8 BLUEPRINT -->
+<section class="sec bp">
+  <div class="wrap">
+    <div class="sec-h"><span class="sec-no">07</span><h2><span class="en">Blueprint</span><span class="ja">設計図</span></h2></div>
+    <p class="lede"><span class="en">This demo is one page, but it is built on a real site structure. Here is the thinking.</span><span class="ja">このデモは1枚ですが、実サイトの構造を前提に設計しています。以下がその考え方です。</span></p>
+    <div class="bp-g">
+
+      <div class="bp-b">
+        <h3>Sitemap</h3>
+        <div class="codebox"><pre>/                  EN (main)
+/ja/               日本語
+/fr/ /de/ /es/ /it/ /ru/
+/zh-hans/ /zh-hant/ /ko/
+  └ each language mirrors:
+    /about/
+    /collection/
+    /collection/no-0001-indigo-silk-kimono
+    /visit/
+    /faq/</pre></div>
+        <p>1商品=1ページ=1 URL。SOLDでも削除せず、アーカイブとして蓄積します。募集要件の想定コンテンツ(TOP / About / Products / Access / FAQ / 店舗情報 / SNS)は全てこの構造に対応。本デモのManifestoは入口の「世界観」で、/about/ は店の来歴・背景を置く別ページとして役割を分けます。</p>
+      </div>
+
+      <div class="bp-b">
+        <h3>Languages &amp; hreflang</h3>
+        <div class="codebox"><pre>&lt;link rel="alternate" hreflang="en" href=".../" /&gt;
+&lt;link rel="alternate" hreflang="ja" href=".../ja/" /&gt;
+&lt;link rel="alternate" hreflang="fr" href=".../fr/" /&gt;
+... ru / zh-Hans / zh-Hant / ko
+&lt;link rel="alternate" hreflang="x-default"
+      href=".../" /&gt;</pre></div>
+        <p>募集要件の9言語=EN+仏独西伊露・中(簡/繁)・韓。これに店舗運用言語として日本語を加えた10言語をスイッチャに置いています。翻訳原稿は貴店支給の前提のため、このデモで動くのはEN/JAのみ。残り8言語は「構造だけ先に敷設」し、原稿到着ごとに流し込みます。</p>
+        <p>上のタグ列は全言語公開後の完成形イメージです。hreflangの相互参照は<b style="color:var(--bg)">その言語のページを公開した時点で追加</b>します — 未公開のURLへ張るとSearch Consoleで「参照先が存在しない」エラーになるためです。</p>
+      </div>
+
+      <div class="bp-b">
+        <h3>Visitor journey</h3>
+        <div class="flow">
+          <span class="fb">Google Maps / Search</span>
+          <span class="fb">AI answers</span>
+          <span class="fb">Sumo Club audience</span>
+          <span class="fb">SNS</span>
+          <span class="ar">→</span>
+          <span class="fb">This site</span>
+          <span class="ar">→</span>
+          <span class="fb goal">STORE VISIT</span>
+        </div>
+        <p style="margin-top:14px">KPIは「来店」。だから全セクションの終点をVisitに揃え、購入ボタンは置きません。SNSは店舗の公式アカウントに接続し、構造化データのsameAsで店舗と結び付けます。</p>
+        <p>GBP(Googleビジネスプロフィール)に登録するサイトURLは1つだけ持てる仕様のため、<b style="color:var(--bg)">EN(x-default)のルートを登録URLに推奨</b>します。言語ごとに別のGBPは作りません(重複ビジネス登録はガイドライン違反のリスク)。営業時間・場所はサイト・構造化データ・GBPの3箇所で常に同値に保ちます。</p>
+      </div>
+
+      <div class="bp-b wide">
+        <h3>Measurement &amp; Performance — GA4 × Search Console</h3>
+        <p><b style="color:var(--bg)">GA4(行動側)</b> — 地図タップ / 言語切替 / 商品カード展開 / FAQ展開をイベント計測。「サイト→来店意思」の転換を数字で追い、どのセクションが来店を作っているかを見ます。</p>
+        <p><b style="color:var(--bg)">Search Console(検索側)</b> — ①言語別サイトマップを送信し、10言語それぞれのインデックス状況を監視 ②hreflangエラーの検出(多言語サイトで最も壊れやすい箇所) ③実際の検索クエリの確認 — どの言語圏・どんな語で発見されているかを見て、Phase 2で公開する翻訳の優先順位に反映します。</p>
+        <p><b style="color:var(--bg)">表示速度</b> — このデモ自体に実装済みの方針: 画像の遅延読み込み(loading="lazy")・フォント接続の事前確立(preconnect)・画像枠のaspect-ratio指定でレイアウトのずれ(CLS)を予防。本番ではさらに画像の次世代フォーマット配信と幅別出し分けを行い、Core Web VitalsをSearch Consoleで継続監視します。回線が不安定な旅行者のスマホで速く開くことは、来店KPIの前提条件です。</p>
+      </div>
+
+      <div class="bp-b">
+        <h3>Phases &amp; CMS</h3>
+        <ol>
+          <li><b>Phase 1</b>EN + JA で公開。全ページに構造化データ、GBPと営業時間・場所を同値で整合。</li>
+          <li><b>Phase 2</b>翻訳原稿の到着順に8言語を順次公開。デザインの追加設計は不要ですが、URL・hreflang・サイトマップ・Search Consoleの更新は言語追加のたびに行います。</li>
+          <li><b>Phase 3</b>FAQ・日本文化記事・SOLDアーカイブを蓄積し、検索とAIが参照する「公式情報源」に育てる。</li>
+        </ol>
+        <p style="margin-top:12px">CMSは「商品」を1つの入力フォームに集約し、カード表示とJSON-LDを同じ入力から自動生成する構成を提案します(店主の更新は1フォームのみ)。WordPress/STUDIO等の比較は、運用体制を伺った上で提案書にて。</p>
+      </div>
+
+    </div>
+    <div class="note"><b>Design note 08</b>左下の「DESIGN NOTES」でこの注記群を表示/非表示できます。デモの見た目だけでなく「なぜこの構成か」を残すためのレイヤーで、本番サイトには含まれません。</div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <p class="demo-note">※本ページは制作サンプル(デモ)です。掲載の商品・価格・在庫番号は架空で、写真はイメージです。</p>
+    <p class="demo-note">店名・コンセプト語(Cool Kimono / Neo Kimono)・営業時間・所在は、公開されている既存サイト(kimono-peace.com)を拝見して確認したものです。既存サイトの文章・画像は転載していません。</p>
+    <p class="demo-note">This page is a design demo. All items, prices and stock numbers are fictional; photos are placeholders. Store name, concept words and opening hours were confirmed on the shop's public website; no text or images were copied from it.</p>
+    <p class="credit">DEMO — design &amp; build proposal / 自動化のミナト</p>
+  </div>
+</footer>
+
+<button class="notes-btn" id="notesBtn" aria-pressed="false">DESIGN NOTES: OFF</button>
+
+<div class="pmodal" id="pmodal" role="dialog" aria-modal="true" aria-labelledby="pmName">
+  <div class="pm-card">
+    <p class="pm-code mono" id="pmCode">/fr/ · hreflang="fr"</p>
+    <h3 id="pmName">Français</h3>
+    <p class="en">This language slot is structured and ready — URL, hreflang and templates are in place. It goes live as soon as your approved translation arrives. No machine translation is shown to your customers.</p>
+    <p class="ja">この言語は構造(URL・hreflang・テンプレート)を準備済みです。貴店支給の翻訳原稿が届き次第、流し込んで公開できます。品質の担保できない機械翻訳はお客様に見せません。</p>
+    <pre class="mono" id="pmSnip">&lt;link rel="alternate" hreflang="fr" href=".../fr/" /&gt;</pre>
+    <button class="btn" id="pmClose"><span class="en">Close</span><span class="ja">閉じる</span></button>
+  </div>
+</div>
+
+<script>
+(function(){
+  var body=document.body;
+
+  /* ---- open/closed (JST, 12:00-22:30) ---- */
+  function jstMin(){
+    var p=new Intl.DateTimeFormat('en-GB',{timeZone:'Asia/Tokyo',hour:'2-digit',minute:'2-digit',hour12:false}).formatToParts(new Date());
+    var h=0,m=0;
+    p.forEach(function(x){if(x.type==='hour')h=+x.value;if(x.type==='minute')m=+x.value;});
+    return h*60+m;
+  }
+  function paintOpen(){
+    var open=jstMin()>=720&&jstMin()<1350;
+    document.querySelectorAll('[data-open-chip]').forEach(function(el){
+      el.textContent=open?'OPEN NOW · UNTIL 22:30 JST':'CLOSED · OPENS 12:00 JST';
+      el.classList.toggle('closed',!open);
+    });
+  }
+  paintOpen(); setInterval(paintOpen,60000);
+
+  /* ---- language switcher ---- */
+  var langBtn=document.getElementById('langBtn'),
+      panel=document.getElementById('langPanel'),
+      cur=document.getElementById('langCur');
+  langBtn.addEventListener('click',function(e){
+    e.stopPropagation();
+    var on=panel.classList.toggle('show');
+    langBtn.setAttribute('aria-expanded',on);
+  });
+  document.addEventListener('click',function(e){
+    if(!panel.contains(e.target)&&e.target!==langBtn){panel.classList.remove('show');langBtn.setAttribute('aria-expanded','false');}
+  });
+  panel.querySelectorAll('[data-lang]').forEach(function(b){
+    b.addEventListener('click',function(){
+      var l=b.getAttribute('data-lang');
+      body.classList.toggle('ja',l==='ja');
+      document.documentElement.lang=l;
+      cur.textContent=l.toUpperCase();
+      panel.classList.remove('show');
+      langBtn.setAttribute('aria-expanded','false');
+    });
+  });
+
+  /* ---- prepared-language modal (with focus management) ---- */
+  var pm=document.getElementById('pmodal'),
+      pmClose=document.getElementById('pmClose'),
+      pmOpener=null;
+  panel.querySelectorAll('[data-prep]').forEach(function(b){
+    b.addEventListener('click',function(){
+      var code=b.getAttribute('data-prep'),
+          path='/'+code.toLowerCase()+'/';
+      document.getElementById('pmName').textContent=b.getAttribute('data-name');
+      document.getElementById('pmCode').textContent=path+' · hreflang="'+code+'"';
+      document.getElementById('pmSnip').textContent='<link rel="alternate" hreflang="'+code+'" href=".../'+code.toLowerCase()+'/" />';
+      panel.classList.remove('show');
+      langBtn.setAttribute('aria-expanded','false');
+      pmOpener=langBtn;
+      pm.classList.add('show');
+      pmClose.focus();
+    });
+  });
+  function closePm(){
+    if(!pm.classList.contains('show'))return;
+    pm.classList.remove('show');
+    if(pmOpener){pmOpener.focus();pmOpener=null;}
+  }
+  pmClose.addEventListener('click',closePm);
+  pm.addEventListener('click',function(e){if(e.target===pm)closePm();});
+  pm.addEventListener('keydown',function(e){
+    if(e.key==='Tab'){e.preventDefault();pmClose.focus();}
+  });
+  document.addEventListener('keydown',function(e){
+    if(e.key==='Escape'){closePm();panel.classList.remove('show');langBtn.setAttribute('aria-expanded','false');}
+  });
+
+  /* ---- specimen cards ---- */
+  document.querySelectorAll('[data-card]').forEach(function(b){
+    b.addEventListener('click',function(){
+      var card=b.closest('.card'),on=card.classList.toggle('open');
+      b.setAttribute('aria-expanded',on);
+    });
+  });
+  /* photo area forwards click to the card button (same target, larger hit area) */
+  document.querySelectorAll('.card .ph').forEach(function(f){
+    f.addEventListener('click',function(){
+      var b=f.closest('.card').querySelector('[data-card]');
+      if(b)b.click();
+    });
+  });
+
+  /* ---- SNS button (no live account — honest reveal) ---- */
+  var snsBtn=document.getElementById('snsBtn'),snsNote=document.getElementById('snsNote');
+  snsBtn.addEventListener('click',function(){
+    var on=snsNote.classList.toggle('show');
+    snsBtn.setAttribute('aria-expanded',on);
+  });
+
+  /* ---- design notes toggle ---- */
+  var nb=document.getElementById('notesBtn');
+  nb.addEventListener('click',function(){
+    var on=body.classList.toggle('notes');
+    nb.classList.toggle('on',on);
+    nb.setAttribute('aria-pressed',on);
+    nb.textContent='DESIGN NOTES: '+(on?'ON':'OFF');
+  });
+
+  /* ---- ticker: duplicate content for seamless loop ---- */
+  var tk=document.getElementById('tk');
+  tk.innerHTML+=tk.innerHTML;
+  tk.innerHTML+=tk.innerHTML;
+})();
+</script>
+</body>
+</html>
