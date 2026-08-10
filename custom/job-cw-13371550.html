@@ -379,6 +379,10 @@
     .footer-grid{grid-template-columns:1fr;gap:28px;}
     .hero-inner{padding:150px 20px 48px;}
     .contact-wrap{padding:36px 20px;}
+    /* .hero は display:flex の行。.hero-inner が width:100% なので、実績バーが
+       行の外へ押し出されて横スクロールになる。狭い幅では縦に積む。 */
+    .hero{flex-direction:column;align-items:stretch;}
+    .trust-bar{width:100%;}
   }
   @media (max-width:400px){
     .wrap{padding:0 16px;}
