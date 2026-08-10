@@ -73,6 +73,38 @@
 <script>(function(){var f=(location.pathname.split("/").pop()||"index.html").replace(".html","");
 document.querySelectorAll("#pfnav a[data-k]").forEach(function(a){if(a.getAttribute("data-k")===f)a.className="on";});})();</script>
 </nav>
+<script>/* pfnav-offset:start ナビと本体の固定ヘッダーが重なるのを防ぐ(2026-08-11)。
+   #pfnav は sticky/top:0/z-index:99999 なので、本体側の position:fixed; top:0 の
+   ヘッダーはナビの下に潜って隠れる(実測=lp-gym/lp-recruit で店名・グローバルナビ・
+   CTAボタンが全部読めなくなっていた)。ナビの実高さを測って上端固定の要素だけ下げる。
+   高さはSPで折り返すと変わるので resize でも測り直す。手で編集しない。 */
+(function(){
+  var nav = document.getElementById('pfnav');
+  if (!nav) return;
+  var basePad = null;
+  function fit(){
+    var h = nav.offsetHeight || 0;
+    if (basePad === null) {
+      basePad = parseFloat(getComputedStyle(document.documentElement).scrollPaddingTop) || 0;
+    }
+    document.documentElement.style.scrollPaddingTop = (basePad + h) + 'px';
+    var all = document.body.getElementsByTagName('*');
+    for (var i = 0; i < all.length; i++) {
+      var el = all[i];
+      if (el === nav || nav.contains(el)) continue;
+      if (el.getAttribute('data-pfnav-shift') === '1') { el.style.top = h + 'px'; continue; }
+      var cs = getComputedStyle(el);
+      if (cs.position !== 'fixed' || parseFloat(cs.top) !== 0) continue;  /* 上端固定だけ触る */
+      el.setAttribute('data-pfnav-shift', '1');
+      el.style.top = h + 'px';
+    }
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', fit);
+  else fit();
+  window.addEventListener('load', fit);
+  window.addEventListener('resize', fit);
+})();
+</script>
 <!-- pfnav:end -->
 
 
