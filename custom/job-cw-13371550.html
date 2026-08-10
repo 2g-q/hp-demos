@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>東海電機商事株式会社 | 愛知の電気機械器具卸売商社(制作サンプル)</title>
+<meta name="description" content="愛知県を拠点に、産業用モーター・制御機器・FA機器などを取り扱う電気機械器具卸売商社のコーポレートサイト(制作サンプル)。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Zen+Kaku+Gothic+New:wght@500;700;900&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "東海電機商事株式会社",
+  "url": "https://example.com/",
+  "telephone": "052-000-0000",
+  "address": {
+    "@type": "PostalAddress",
+    "addressRegion": "愛知県",
+    "addressLocality": "名古屋市内",
+    "addressCountry": "JP"
+  },
+  "areaServed": "東海地方",
+  "description": "産業用電気機械器具の卸売を行うBtoB商社(制作サンプルページ)"
+}
+</script>
+<style>
+  :root{
+    --navy:#173a63;
+    --navy-deep:#0f2748;
+    --ink:#1c232e;
+    --sub:#5b6672;
+    --bg:#faf9f6;
+    --panel:#f3f4f2;
+    --line:#e3e2dd;
+    --white:#ffffff;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    *{animation-duration:0.01ms !important;transition-duration:0.01ms !important;}
+  }
+  body{
+    font-family:"Noto Sans JP",sans-serif;
+    color:var(--ink);
+    background:var(--bg);
+    line-height:1.85;
+    letter-spacing:0.02em;
+    font-feature-settings:"palt";
+    overflow-x:hidden;
+    width:100%;
+    max-width:100%;
+  }
+  img{max-width:100%;height:auto;display:block;}
+  a{color:inherit;text-decoration:none;}
+  h1,h2,h3,h4{font-family:"Zen Kaku Gothic New",sans-serif;line-height:1.5;}
+  .num{font-family:"Manrope",sans-serif;}
+  .wrap{max-width:1120px;width:100%;margin:0 auto;padding:0 24px;}
+  section{padding:96px 0;width:100%;max-width:100%;}
+  .eyebrow{
+    display:inline-block;
+    font-size:13px;
+    font-weight:700;
+    letter-spacing:0.16em;
+    color:var(--navy);
+    border-left:3px solid var(--navy);
+    padding-left:10px;
+    margin-bottom:16px;
+  }
+  .sec-title{
+    font-size:clamp(24px,4.2vw,36px);
+    font-weight:900;
+    margin-bottom:18px;
+  }
+  .sec-lead{
+    color:var(--sub);
+    font-size:15px;
+    max-width:640px;
+    margin-bottom:48px;
+  }
+  .center{text-align:center;margin-left:auto;margin-right:auto;}
+
+  /* ===== Header ===== */
+  header{
+    position:fixed;top:0;left:0;right:0;z-index:100;
+    background:rgba(255,255,255,0.92);
+    backdrop-filter:blur(8px);
+    -webkit-backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);
+    transition:box-shadow .3s;
+  }
+  header.scrolled{box-shadow:0 4px 18px rgba(15,39,72,0.08);}
+  .header-inner{
+    max-width:1120px;margin:0 auto;padding:14px 20px;
+    display:flex;align-items:center;justify-content:space-between;
+    width:100%;max-width:100%;
+  }
+  .logo{
+    font-family:"Zen Kaku Gothic New",sans-serif;
+    font-weight:900;
+    font-size:clamp(15px,3.6vw,19px);
+    color:var(--navy-deep);
+    letter-spacing:0.04em;
+  }
+  .logo span{color:var(--sub);font-size:0.62em;font-weight:500;display:block;letter-spacing:0.12em;margin-top:2px;}
+  .header-actions{display:flex;align-items:center;gap:14px;}
+  .tel-quick{
+    display:none;
+    font-family:"Manrope",sans-serif;
+    font-weight:700;
+    font-size:16px;
+    color:var(--navy-deep);
+  }
+  .hbtn{
+    width:44px;height:44px;border-radius:50%;
+    border:1px solid var(--line);background:var(--white);
+    position:relative;cursor:pointer;flex-shrink:0;
+  }
+  .hbtn span, .hbtn span::before, .hbtn span::after{
+    content:"";position:absolute;left:12px;width:20px;height:2px;background:var(--navy-deep);
+    transition:transform .25s, opacity .25s;
+  }
+  .hbtn span{top:21px;}
+  .hbtn span::before{top:-6px;}
+  .hbtn span::after{top:6px;}
+  body.nav-open .hbtn span{background:transparent;}
+  body.nav-open .hbtn span::before{transform:translateY(6px) rotate(45deg);}
+  body.nav-open .hbtn span::after{transform:translateY(-6px) rotate(-45deg);}
+
+  /* nav is a sibling of header, NOT nested inside it, to avoid backdrop-filter clipping */
+  #sitenav{
+    position:fixed;inset:0;z-index:99;
+    background:var(--navy-deep);
+    display:flex;align-items:center;justify-content:center;
+    opacity:0;visibility:hidden;
+    transition:opacity .3s;
+  }
+  body.nav-open #sitenav{opacity:1;visibility:visible;}
+  #sitenav ul{list-style:none;text-align:center;}
+  #sitenav li{margin:18px 0;}
+  #sitenav a{
+    font-family:"Zen Kaku Gothic New",sans-serif;
+    font-size:clamp(20px,5vw,28px);
+    font-weight:700;color:#fff;
+  }
+  #sitenav .nav-tel{
+    margin-top:34px;
+    display:inline-block;
+    font-family:"Manrope",sans-serif;
+    font-size:18px;font-weight:700;
+    color:#cfe0f5;border:1px solid rgba(255,255,255,0.35);
+    border-radius:100px;padding:12px 28px;
+  }
+
+  /* ===== Hero ===== */
+  .hero{
+    position:relative;
+    margin-top:0;
+    padding:0;
+    min-height:640px;
+    display:flex;align-items:flex-end;
+    color:#fff;
+  }
+  .hero-media{position:absolute;inset:0;z-index:0;}
+  .hero-media img{width:100%;height:100%;object-fit:cover;}
+  .hero-media::after{
+    content:"";position:absolute;inset:0;
+    background:linear-gradient(180deg, rgba(15,39,72,0.55) 0%, rgba(15,39,72,0.72) 60%, rgba(15,39,72,0.92) 100%);
+  }
+  .hero-inner{
+    position:relative;z-index:1;width:100%;
+    padding:170px 24px 56px;
+    max-width:1120px;margin:0 auto;
+  }
+  .hero .eyebrow{color:#d9e6f6;border-color:#d9e6f6;}
+  .hero h1{
+    font-size:clamp(30px,6.4vw,52px);
+    font-weight:900;
+    margin-bottom:22px;
+  }
+  .hero p{
+    font-size:clamp(14px,2.4vw,16px);
+    max-width:560px;
+    color:#e7edf5;
+    margin-bottom:34px;
+  }
+  .cta-row{display:flex;flex-wrap:wrap;gap:14px;}
+  .btn{
+    display:inline-flex;align-items:center;gap:8px;
+    border-radius:100px;
+    padding:15px 30px;
+    font-weight:700;font-size:15px;
+    box-shadow:0 10px 24px rgba(15,39,72,0.28);
+    white-space:nowrap;
+  }
+  .btn-primary{background:#fff;color:var(--navy-deep);}
+  .btn-outline{border:1px solid rgba(255,255,255,0.65);color:#fff;box-shadow:none;}
+
+  .trust-bar{
+    position:relative;z-index:1;
+    background:var(--white);
+    border-top:1px solid var(--line);
+  }
+  .trust-grid{
+    max-width:1120px;margin:0 auto;padding:28px 24px;
+    display:grid;grid-template-columns:repeat(3,1fr);gap:20px;text-align:center;
+  }
+  .trust-grid .num{font-size:clamp(24px,5vw,34px);font-weight:800;color:var(--navy);}
+  .trust-grid .lbl{font-size:12.5px;color:var(--sub);margin-top:4px;}
+  .trust-note{font-size:11px;color:var(--sub);text-align:center;padding:0 24px 20px;}
+
+  /* ===== Strengths ===== */
+  .strength-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;}
+  .strength-card{
+    background:var(--white);border:1px solid var(--line);
+    border-radius:16px;padding:32px 26px;
+  }
+  .icon-circle{
+    width:52px;height:52px;border-radius:50%;
+    background:var(--navy);display:flex;align-items:center;justify-content:center;
+    margin-bottom:20px;
+  }
+  .icon-circle svg{width:24px;height:24px;stroke:#fff;fill:none;stroke-width:1.8;}
+  .strength-card h3{font-size:18px;font-weight:700;margin-bottom:10px;}
+  .strength-card p{font-size:14px;color:var(--sub);}
+
+  /* ===== Business ===== */
+  .bg-panel{background:var(--panel);}
+  .biz-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;}
+  .biz-card{
+    background:var(--white);border-radius:14px;padding:28px;border:1px solid var(--line);
+  }
+  .biz-card .tag{
+    display:inline-block;font-family:"Manrope",sans-serif;font-weight:700;
+    font-size:12px;color:var(--navy);background:#e9eff7;border-radius:100px;
+    padding:5px 14px;margin-bottom:14px;
+  }
+  .biz-card h3{font-size:17px;font-weight:700;margin-bottom:8px;}
+  .biz-card p{font-size:13.5px;color:var(--sub);}
+
+  /* ===== Makers ===== */
+  .maker-grid{
+    display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:20px;
+  }
+  .maker-badge{
+    border:1px solid var(--line);background:var(--white);
+    border-radius:10px;padding:20px 10px;text-align:center;
+    font-size:13.5px;font-weight:700;color:var(--navy-deep);
+  }
+
+  /* ===== Message ===== */
+  .msg-wrap{display:grid;grid-template-columns:280px 1fr;gap:44px;align-items:center;}
+  .msg-photo img{border-radius:18px;}
+  .msg-photo .cap{font-size:11.5px;color:var(--sub);margin-top:8px;text-align:center;}
+  .msg-text h3{font-size:20px;font-weight:800;margin-bottom:16px;}
+  .msg-text p{font-size:14.5px;color:var(--sub);margin-bottom:14px;}
+  .msg-sign{font-weight:700;color:var(--ink);margin-top:18px;}
+
+  /* ===== Company table ===== */
+  .company-table{width:100%;border-collapse:collapse;background:var(--white);border-radius:14px;overflow:hidden;border:1px solid var(--line);}
+  .company-table tr{border-bottom:1px solid var(--line);}
+  .company-table tr:last-child{border-bottom:none;}
+  .company-table th, .company-table td{
+    text-align:left;padding:16px 20px;font-size:14px;vertical-align:top;
+  }
+  .company-table th{
+    width:38%;background:var(--panel);color:var(--sub);font-weight:700;
+  }
+  .offices-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:32px;}
+  .office-card{background:var(--white);border:1px solid var(--line);border-radius:14px;padding:24px;}
+  .office-card .badge{font-size:11px;font-weight:700;color:var(--navy);letter-spacing:0.08em;}
+  .office-card h4{font-size:16px;font-weight:800;margin:8px 0 6px;}
+  .office-card p{font-size:13px;color:var(--sub);}
+
+  /* ===== News ===== */
+  .news-list{border-top:1px solid var(--line);}
+  .news-item{
+    display:grid;grid-template-columns:120px 90px 1fr;gap:18px;align-items:baseline;
+    padding:22px 0;border-bottom:1px solid var(--line);
+  }
+  .news-item .date{font-family:"Manrope",sans-serif;font-weight:700;color:var(--sub);font-size:13px;}
+  .news-item .cat{
+    font-size:11px;font-weight:700;color:var(--navy);border:1px solid var(--navy);
+    border-radius:100px;padding:3px 10px;text-align:center;justify-self:start;
+  }
+  .news-item .title{font-size:14.5px;}
+
+  /* ===== FAQ ===== */
+  .faq-item{border-bottom:1px solid var(--line);}
+  .faq-q{
+    display:flex;justify-content:space-between;align-items:center;
+    padding:22px 4px;cursor:pointer;font-weight:700;font-size:15px;gap:16px;
+  }
+  .faq-q .mark{font-family:"Manrope",sans-serif;font-size:20px;color:var(--navy);flex-shrink:0;}
+  .faq-a{
+    max-height:0;overflow:hidden;transition:max-height .3s ease;
+    font-size:13.5px;color:var(--sub);
+  }
+  .faq-a p{padding:0 4px 22px;}
+  .faq-item.open .faq-a{max-height:240px;}
+
+  /* ===== Contact ===== */
+  .contact-wrap{
+    background:var(--navy-deep);color:#fff;border-radius:22px;padding:48px 32px;
+  }
+  .contact-wrap .sec-title, .contact-wrap .eyebrow{color:#fff;}
+  .contact-wrap .eyebrow{border-color:rgba(255,255,255,0.5);}
+  .contact-wrap .sec-lead{color:#c4d1e2;}
+  form{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+  .field-full{grid-column:1 / -1;}
+  label{display:block;font-size:12.5px;margin-bottom:6px;color:#cfd9e8;}
+  input, textarea{
+    width:100%;max-width:100%;
+    border:1px solid rgba(255,255,255,0.25);
+    background:rgba(255,255,255,0.06);
+    border-radius:10px;padding:13px 14px;
+    color:#fff;font-size:16px;font-family:inherit;
+  }
+  input::placeholder, textarea::placeholder{color:#7f8ea3;}
+  textarea{resize:vertical;min-height:110px;}
+  .submit-btn{
+    grid-column:1 / -1;justify-self:start;
+    background:#fff;color:var(--navy-deep);border:none;
+    border-radius:100px;padding:15px 34px;font-weight:800;font-size:15px;cursor:pointer;
+  }
+  .form-note{grid-column:1/-1;font-size:11.5px;color:#93a3ba;}
+
+  /* ===== Footer ===== */
+  footer{background:#0c2038;color:#c9d4e2;padding:64px 0 110px;}
+  .footer-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:36px;margin-bottom:40px;}
+  .footer-logo{font-family:"Zen Kaku Gothic New",sans-serif;font-weight:900;color:#fff;font-size:18px;margin-bottom:14px;}
+  .footer-grid p{font-size:12.5px;line-height:1.9;color:#98a7bd;}
+  .footer-grid h5{font-size:13px;color:#fff;margin-bottom:14px;letter-spacing:0.06em;}
+  .footer-grid ul{list-style:none;}
+  .footer-grid li{margin-bottom:10px;font-size:13px;}
+  .disclaimer{
+    border-top:1px solid rgba(255,255,255,0.12);padding-top:24px;
+    font-size:11.5px;color:#7c8ba1;line-height:1.9;
+  }
+  .copyright{font-size:11px;color:#63728a;margin-top:16px;}
+
+  /* ===== Mobile sticky CTA ===== */
+  .mobile-cta{
+    position:fixed;left:0;right:0;bottom:0;z-index:90;
+    display:flex;
+    box-shadow:0 -6px 20px rgba(0,0,0,0.12);
+  }
+  .mobile-cta a{
+    flex:1;text-align:center;padding:16px 8px;font-weight:800;font-size:14px;
+  }
+  .mobile-cta .tel{background:var(--navy-deep);color:#fff;}
+  .mobile-cta .contact{background:var(--navy);color:#fff;border-left:1px solid rgba(255,255,255,0.2);}
+
+  /* ===== reveal ===== */
+  .reveal{opacity:0;transform:translateY(18px);transition:opacity .6s ease, transform .6s ease;}
+  .reveal.show{opacity:1;transform:none;}
+
+  /* ===== Responsive ===== */
+  @media (min-width:860px){
+    .tel-quick{display:block;}
+    .hbtn{display:none;}
+    #sitenav{display:none;}
+  }
+  @media (max-width:859px){
+    section{padding:64px 0;}
+    .strength-grid{grid-template-columns:1fr;}
+    .biz-grid{grid-template-columns:1fr;}
+    .maker-grid{grid-template-columns:repeat(2,1fr);}
+    .msg-wrap{grid-template-columns:1fr;}
+    .msg-photo{max-width:220px;margin:0 auto;}
+    .offices-grid{grid-template-columns:1fr;}
+    .trust-grid{grid-template-columns:repeat(3,1fr);gap:10px;padding:22px 16px;}
+    .trust-grid .num{font-size:20px;}
+    .trust-grid .lbl{font-size:10.5px;}
+    form{grid-template-columns:1fr;}
+    .news-item{grid-template-columns:1fr;gap:6px;}
+    .footer-grid{grid-template-columns:1fr;gap:28px;}
+    .hero-inner{padding:150px 20px 48px;}
+    .contact-wrap{padding:36px 20px;}
+  }
+  @media (max-width:400px){
+    .wrap{padding:0 16px;}
+    .maker-grid{grid-template-columns:1fr 1fr;}
+  }
+</style>
+</head>
+<body>
+
+<header id="siteHeader">
+  <div class="header-inner">
+    <a href="#top" class="logo">東海電機商事<span>TOKAI ELECTRIC TRADING CO., LTD.(制作サンプル)</span></a>
+    <div class="header-actions">
+      <a href="tel:0520000000" class="tel-quick">052-000-0000</a>
+      <button class="hbtn" id="navToggle" aria-label="メニュー"><span></span></button>
+    </div>
+  </div>
+</header>
+
+<nav id="sitenav">
+  <ul>
+    <li><a href="#top">TOP</a></li>
+    <li><a href="#business">事業内容</a></li>
+    <li><a href="#makers">取り扱いメーカー</a></li>
+    <li><a href="#company">企業情報・拠点</a></li>
+    <li><a href="#news">ニュース</a></li>
+    <li><a href="#contact">お問い合わせ</a></li>
+  </ul>
+  <a href="tel:0520000000" class="nav-tel">052-000-0000</a>
+</nav>
+
+<main id="top">
+
+  <section class="hero" style="padding-top:0;">
+    <div class="hero-media">
+      <img src="https://images.unsplash.com/photo-1629875499750-a31b83446598?auto=format&fit=crop&w=1200&q=70" alt="オフィスビル群を見上げるイメージ">
+    </div>
+    <div class="hero-inner">
+      <p class="eyebrow">愛知発・東海地方の製造現場を支える電気機械商社</p>
+      <h1>動かす部品に、動かぬ信頼を。</h1>
+      <p>産業用モーターから制御機器、FA・省力化機器まで。東海地方のものづくり現場が求める電気機械器具を、確かな目利きと途切れない供給体制でお届けします。</p>
+      <div class="cta-row">
+        <a href="tel:0520000000" class="btn btn-primary">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.362 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.338 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          電話で相談する
+        </a>
+        <a href="#contact" class="btn btn-outline">資料請求・お問い合わせ</a>
+      </div>
+    </div>
+    <div class="trust-bar">
+      <div class="trust-grid">
+        <div><div class="num">120<span style="font-size:0.5em;">社+</span></div><div class="lbl">取引メーカー数</div></div>
+        <div><div class="num">30<span style="font-size:0.5em;">業種+</span></div><div class="lbl">対応可能業種</div></div>
+        <div><div class="num">24<span style="font-size:0.5em;">h以内</span></div><div class="lbl">見積り初回回答</div></div>
+      </div>
+      <p class="trust-note">※上記の実績数値はサンプル用の仮の数値です。</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <p class="eyebrow reveal">選ばれる理由</p>
+      <h2 class="sec-title reveal">「信頼できる商社を探している」その答えに。</h2>
+      <p class="sec-lead reveal">これまで複数の業者に相談してもイメージが合わなかった、という企業様にこそ知っていただきたい、私たちの3つの強みです。</p>
+      <div class="strength-grid">
+        <div class="strength-card reveal">
+          <div class="icon-circle"><svg viewBox="0 0 24 24"><path d="M4 21V9l8-6 8 6v12"/><path d="M9 21v-8h6v8"/></svg></div>
+          <h3>確かな目利き力</h3>
+          <p>電気機械器具の専門知識を持つ担当者が、現場の用途・条件に合わせて最適な機器をご提案します。</p>
+        </div>
+        <div class="strength-card reveal">
+          <div class="icon-circle"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg></div>
+          <h3>止めない供給体制</h3>
+          <p>複数メーカー・複数ルートを確保することで、欠品や納期遅延のリスクを最小限に抑えます。</p>
+        </div>
+        <div class="strength-card reveal">
+          <div class="icon-circle"><svg viewBox="0 0 24 24"><path d="M4 4h16v16H4z"/><path d="M8 4v16M16 4v16M4 12h16"/></svg></div>
+          <h3>迅速で誠実な対応</h3>
+          <p>お見積りは原則24時間以内にご回答。専任担当が窓口を一本化し、伝達のロスをなくします。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="business" class="bg-panel">
+    <div class="wrap">
+      <p class="eyebrow reveal">事業内容</p>
+      <h2 class="sec-title reveal">電気機械器具の卸売から、保守までを一貫して。</h2>
+      <p class="sec-lead reveal">単なる仲介ではなく、現場の稼働を止めないためのパートナーであることを大切にしています。</p>
+      <div class="biz-grid">
+        <div class="biz-card reveal">
+          <span class="tag">WHOLESALE</span>
+          <h3>産業用電気機械器具卸売</h3>
+          <p>産業用モーター、ポンプ、発電機など、製造現場の基幹となる機器の仕入れ・供給を行います。</p>
+        </div>
+        <div class="biz-card reveal">
+          <span class="tag">CONTROL</span>
+          <h3>制御・配電機器</h3>
+          <p>盤内部品、リレー、センサーなど、生産設備の制御に必要な機器を幅広く取り扱っています。</p>
+        </div>
+        <div class="biz-card reveal">
+          <span class="tag">FA</span>
+          <h3>FA・省力化機器</h3>
+          <p>工場の自動化・省人化を支える機器の選定から導入まで、現場の状況に合わせてご提案します。</p>
+        </div>
+        <div class="biz-card reveal">
+          <span class="tag">SUPPORT</span>
+          <h3>保守・アフターサポート</h3>
+          <p>納品後の技術相談や修理手配まで、一貫してご対応します(※仮の内容です)。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="makers">
+    <div class="wrap">
+      <p class="eyebrow reveal">取り扱いメーカー</p>
+      <h2 class="sec-title reveal">国内外120社以上のメーカーと取引(※仮の実績です)</h2>
+      <p class="sec-lead reveal">特定メーカーに偏らず、用途・予算・納期に応じて最適な選択肢をご提案できることが、独立系商社としての強みです。</p>
+      <div class="maker-grid">
+        <div class="maker-badge reveal">モーター・回転機</div>
+        <div class="maker-badge reveal">制御機器・センサー</div>
+        <div class="maker-badge reveal">配電・盤部品</div>
+        <div class="maker-badge reveal">FA・省力化機器</div>
+        <div class="maker-badge reveal">電源・バッテリー</div>
+        <div class="maker-badge reveal">海外メーカー品</div>
+      </div>
+      <p style="font-size:12px;color:var(--sub);">※個別のメーカー名・取扱品目は、実制作時に貴社の取引先情報に差し替えます。</p>
+    </div>
+  </section>
+
+  <section class="bg-panel">
+    <div class="wrap">
+      <p class="eyebrow reveal">私たちについて</p>
+      <h2 class="sec-title reveal">代表よりご挨拶</h2>
+      <div class="msg-wrap">
+        <div class="msg-photo reveal">
+          <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=1200&q=70" alt="代表者ポートレート(イメージ)">
+          <p class="cap">代表取締役 鈴木 一郎(※仮の氏名です)</p>
+        </div>
+        <div class="msg-text reveal">
+          <h3>現場を止めない。その一点に、誠実であり続けたい。</h3>
+          <p>東海地方は、日本のものづくりを支えてきた地域です。私たちはこの地で、電気機械器具の卸売という立場から、製造現場の「止まらない稼働」を支えてまいりました。</p>
+          <p>数量の大小や取引額の規模にかかわらず、一社一社のお客様に対して誠実に向き合うこと。それが、これまで多くの企業様に選ばれ続けてきた理由だと考えています。</p>
+          <p>これから貴社のパートナーとしてお付き合いいただけることを、社員一同心より楽しみにしております。</p>
+          <p class="msg-sign">東海電機商事株式会社 代表取締役</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="company">
+    <div class="wrap">
+      <p class="eyebrow reveal">企業情報・拠点</p>
+      <h2 class="sec-title reveal">会社概要</h2>
+      <table class="company-table reveal">
+        <tr><th>商号</th><td>東海電機商事株式会社</td></tr>
+        <tr><th>設立</th><td>1988年(※仮の内容です)</td></tr>
+        <tr><th>資本金</th><td>3,000万円(※仮の内容です)</td></tr>
+        <tr><th>代表者</th><td>代表取締役 鈴木 一郎(※仮の氏名です)</td></tr>
+        <tr><th>事業内容</th><td>電気機械器具卸売業</td></tr>
+        <tr><th>本社所在地</th><td>愛知県名古屋市内(※詳細住所は仮の表記です)</td></tr>
+        <tr><th>営業時間</th><td>平日 9:00〜18:00(土日祝休み・※仮の内容です)</td></tr>
+        <tr><th>電話番号</th><td>052-000-0000(※ダミー番号です)</td></tr>
+      </table>
+
+      <div class="offices-grid">
+        <div class="office-card reveal">
+          <span class="badge">本社</span>
+          <h4>名古屋本社</h4>
+          <p>愛知県名古屋市内(※仮の表記です)</p>
+        </div>
+        <div class="office-card reveal">
+          <span class="badge">営業拠点</span>
+          <h4>東京営業所(※仮)</h4>
+          <p>広域エリアのお客様対応窓口として想定しています。</p>
+        </div>
+        <div class="office-card reveal">
+          <span class="badge">営業拠点</span>
+          <h4>大阪営業所(※仮)</h4>
+          <p>関西エリアのお客様対応窓口として想定しています。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-panel">
+    <div class="wrap">
+      <p class="eyebrow reveal">ACCESS</p>
+      <h2 class="sec-title reveal">アクセス</h2>
+      <p class="sec-lead reveal">本社は愛知県名古屋市内。主要駅からのアクセスも良く、東海地方のお客様先へ迅速に伺える立地を想定しています(※実制作時に正式な地図・住所へ差し替えます)。</p>
+      <div class="reveal" style="border-radius:16px;overflow:hidden;border:1px solid var(--line);">
+        <img src="https://images.unsplash.com/photo-1664596350962-603b0a41524a?auto=format&fit=crop&w=1200&q=70" alt="オフィス街のイメージ(※写真はイメージです)" style="width:100%;max-width:100%;">
+      </div>
+    </div>
+  </section>
+
+  <section id="news">
+    <div class="wrap">
+      <p class="eyebrow reveal">NEWS</p>
+      <h2 class="sec-title reveal">お知らせ</h2>
+      <p class="sec-lead reveal">※以下はすべてサンプル用の仮の記事です。</p>
+      <div class="news-list reveal">
+        <div class="news-item">
+          <div class="date">2026.07.15</div>
+          <div class="cat">お知らせ</div>
+          <div class="title">コーポレートサイトをリニューアルいたしました(※本デモのサンプル記事です)。</div>
+        </div>
+        <div class="news-item">
+          <div class="date">2026.06.01</div>
+          <div class="cat">休業</div>
+          <div class="title">夏季休業期間のお知らせ(※仮の内容です)。</div>
+        </div>
+        <div class="news-item">
+          <div class="date">2026.04.10</div>
+          <div class="cat">拠点</div>
+          <div class="title">名古屋本社の体制を強化いたしました(※仮の内容です)。</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-panel">
+    <div class="wrap">
+      <p class="eyebrow reveal">FAQ</p>
+      <h2 class="sec-title reveal">よくあるご質問</h2>
+      <div class="faq-list reveal">
+        <div class="faq-item">
+          <div class="faq-q"><span>少量ロットでも発注できますか?</span><span class="mark">+</span></div>
+          <div class="faq-a"><p>可能です。案件ごとの数量・納期に応じて最適な仕入れルートをご提案します(※仮の内容です)。</p></div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q"><span>見積もりの回答期間はどれくらいですか?</span><span class="mark">+</span></div>
+          <div class="faq-a"><p>原則として、お問い合わせから24時間以内にご連絡いたします(※仮の内容です)。</p></div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q"><span>対応可能なエリアを教えてください。</span><span class="mark">+</span></div>
+          <div class="faq-a"><p>東海地方を中心に、全国のお客様に対応可能です(※仮の内容です)。</p></div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q"><span>海外メーカー品の取り扱いはありますか?</span><span class="mark">+</span></div>
+          <div class="faq-a"><p>主要な海外メーカー品も取り扱っております。詳細はお問い合わせください(※仮の内容です)。</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="wrap">
+      <div class="contact-wrap reveal">
+        <p class="eyebrow">CONTACT</p>
+        <h2 class="sec-title">お問い合わせ</h2>
+        <p class="sec-lead">お見積り・お取引に関するご相談など、お気軽にお問い合わせください。</p>
+        <form onsubmit="return false;">
+          <div>
+            <label for="c-name">会社名</label>
+            <input id="c-name" type="text" placeholder="〇〇株式会社">
+          </div>
+          <div>
+            <label for="c-person">ご担当者名</label>
+            <input id="c-person" type="text" placeholder="山田 太郎">
+          </div>
+          <div>
+            <label for="c-mail">メールアドレス</label>
+            <input id="c-mail" type="email" placeholder="example@company.co.jp">
+          </div>
+          <div>
+            <label for="c-tel">電話番号</label>
+            <input id="c-tel" type="tel" placeholder="052-000-0000">
+          </div>
+          <div class="field-full">
+            <label for="c-msg">お問い合わせ内容</label>
+            <textarea id="c-msg" placeholder="取扱商品や納期についてのご相談など"></textarea>
+          </div>
+          <button type="submit" class="submit-btn">送信する(ダミー)</button>
+          <p class="form-note">※本フォームはデモ用のため、実際には送信されません。</p>
+        </form>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-logo">東海電機商事株式会社</div>
+        <p>愛知県名古屋市内(※仮の表記です)<br>TEL: 052-000-0000(※ダミー番号です)<br>電気機械器具卸売業</p>
+      </div>
+      <div>
+        <h5>サイトマップ</h5>
+        <ul>
+          <li><a href="#top">TOP</a></li>
+          <li><a href="#business">事業内容</a></li>
+          <li><a href="#makers">取り扱いメーカー一覧</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>&nbsp;</h5>
+        <ul>
+          <li><a href="#company">企業情報・拠点</a></li>
+          <li><a href="#news">ニュース</a></li>
+          <li><a href="#contact">お問い合わせ</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="disclaimer">
+      <p>※本ページは制作サンプル(デモ)です。掲載の内容・数値は仮のもので、写真はイメージです。実制作ではご提供いただく写真・文章・実際の会社情報に差し替えます。</p>
+      <p class="copyright">© 2026 東海電機商事株式会社(制作サンプル)</p>
+    </div>
+  </div>
+</footer>
+
+<div class="mobile-cta">
+  <a href="tel:0520000000" class="tel">電話で相談</a>
+  <a href="#contact" class="contact">お問い合わせ</a>
+</div>
+
+<script>
+(function(){
+  var header = document.getElementById('siteHeader');
+  var navToggle = document.getElementById('navToggle');
+  var body = document.body;
+
+  window.addEventListener('scroll', function(){
+    if(window.scrollY > 10){ header.classList.add('scrolled'); }
+    else { header.classList.remove('scrolled'); }
+  });
+
+  navToggle.addEventListener('click', function(){
+    body.classList.toggle('nav-open');
+  });
+
+  document.querySelectorAll('#sitenav a').forEach(function(a){
+    a.addEventListener('click', function(){
+      body.classList.remove('nav-open');
+    });
+  });
+
+  document.querySelectorAll('.faq-q').forEach(function(q){
+    q.addEventListener('click', function(){
+      var item = q.parentElement;
+      var mark = q.querySelector('.mark');
+      var isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(function(fi){
+        fi.classList.remove('open');
+        fi.querySelector('.mark').textContent = '+';
+      });
+      if(!isOpen){
+        item.classList.add('open');
+        mark.textContent = '−';
+      }
+    });
+  });
+
+  if('IntersectionObserver' in window){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if(entry.isIntersecting){
+          entry.target.classList.add('show');
+          io.unobserve(entry.target);
+        }
+      });
+    }, {threshold:0.12});
+    document.querySelectorAll('.reveal').forEach(function(el){ io.observe(el); });
+  } else {
+    document.querySelectorAll('.reveal').forEach(function(el){ el.classList.add('show'); });
+  }
+})();
+</script>
+
+</body>
+</html>
