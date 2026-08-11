@@ -39,6 +39,13 @@
     padding:8px 22px;text-align:center;
   }
   .demo-flag b{color:#ffd166;}
+  .demo-flag-2{display:block;margin-top:3px;color:#c9d2dd;}
+  /* 実制作では独立ページになる節に付ける印 */
+  .page-chip{
+    display:inline-block;font-size:10.5px;font-weight:700;letter-spacing:.04em;
+    color:var(--navy);background:#eef3f8;border:1px solid #d7e2ee;border-radius:4px;
+    padding:2px 8px;margin-left:10px;vertical-align:middle;white-space:nowrap;
+  }
 
   /* ===== ヘッダー ===== */
   header{position:sticky;top:0;z-index:50;background:var(--white);border-bottom:1px solid var(--line);}
@@ -242,6 +249,8 @@
 <div class="demo-flag">
   本ページは <b>株式会社マルタカ電器 様</b> へのコーポレートサイト <b>リニューアル提案(制作サンプル)</b> です。
   公開情報をもとに「自動化のミナト」が作成した非公式のデモで、実際のサイトではありません。
+  <span class="demo-flag-2">デモのため各ページの内容を1枚にまとめています。実制作では
+  <b>TOP／事業内容／取扱メーカー／企業情報・拠点／ニュース／お問い合わせ</b>の6ページに分けて制作します。</span>
 </div>
 
 <header>
@@ -298,7 +307,7 @@
 
   <section id="products">
     <div class="wrap">
-      <div class="sec-label">PRODUCTS</div>
+      <div class="sec-label">PRODUCTS<span class="page-chip">実制作では独立ページ</span></div>
       <h2 class="sec-title">工場と現場に要るものを、4つの柱で。</h2>
       <p class="sec-lead">
         特定メーカーに偏らない独立系商社として、用途・予算・納期に応じた選択肢をご提案します。
@@ -365,7 +374,7 @@
 
   <section id="makers">
     <div class="wrap">
-      <div class="sec-label">MAKERS</div>
+      <div class="sec-label">MAKERS<span class="page-chip">実制作では独立ページ</span></div>
       <h2 class="sec-title">取扱メーカー<span class="sample-tag">この枠は実データに差し替えます</span></h2>
       <p class="sec-lead">
         独立系商社として、多数のメーカー製品をお取り扱いしています。ロゴ一覧・カテゴリ別の絞り込み・
@@ -403,7 +412,7 @@
 
   <section id="company">
     <div class="wrap">
-      <div class="sec-label">COMPANY</div>
+      <div class="sec-label">COMPANY<span class="page-chip">実制作では独立ページ</span></div>
       <h2 class="sec-title">会社案内・拠点</h2>
       <div class="about-wrap">
         <div>
@@ -442,7 +451,7 @@
 
   <section id="news" style="background:var(--bg);">
     <div class="wrap">
-      <div class="sec-label">NEWS</div>
+      <div class="sec-label">NEWS<span class="page-chip">実制作では独立ページ</span></div>
       <h2 class="sec-title">ニュース<span class="sample-tag">表示例です</span></h2>
       <p class="sec-lead">
         お知らせは御社側で追加・修正できる形にします(専門知識は不要です)。
@@ -467,7 +476,7 @@
   <section id="contact" class="contact">
     <div class="wrap">
       <div class="contact-box">
-        <h2>お問い合わせ</h2>
+        <h2>お問い合わせ<span class="page-chip">実制作では独立ページ</span></h2>
         <p>商品のご相談、お見積り、販売パートナーのご相談を承っています。</p>
         <div class="tel-big">0586-75-5151</div>
         <div class="tel-note">受付時間は御社の実際の営業時間に差し替えます</div>
