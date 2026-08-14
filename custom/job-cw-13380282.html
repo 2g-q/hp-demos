@@ -1,0 +1,1010 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>アトリビューションデスク(デモ)｜Amazon広告×SNS広告 成果計測設定サポート</title>
+<meta name="description" content="X広告・Meta広告からAmazonでの購入までを可視化。Seller Central登録サポートからAmazonアトリビューション設定、代替計測LPの構築まで一気通貫で支援する制作サンプルページです。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@500;700;900&family=Noto+Sans+JP:wght@400;500;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "serviceType": "Amazon広告・SNS広告 成果計測設定サポート",
+  "name": "アトリビューションデスク(デモ)",
+  "description": "Seller Central登録サポート、Amazonアトリビューション設定、代替計測LP構築を行う制作サンプルページです。",
+  "areaServed": "JP",
+  "provider": {
+    "@type": "Organization",
+    "name": "アトリビューションデスク(デモ)",
+    "telephone": "03-0000-0000"
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Seller Centralが「登録保留中」のままでも相談できますか？",
+      "acceptedAnswer": { "@type": "Answer", "text": "はい。保留の原因整理から必要書類のご案内まで伴走します。ログインや機密情報の入力はご依頼者様側で行っていただく形で進めます。" }
+    },
+    {
+      "@type": "Question",
+      "name": "Amazonアソシエイトの規約改定で計測できなくなった分はどうすればいいですか？",
+      "acceptedAnswer": { "@type": "Answer", "text": "有料広告経由が不適格販売となった影響を踏まえ、Amazonアトリビューション、または計測用LP＋UTM設計による代替計測をご提案します。" }
+    },
+    {
+      "@type": "Question",
+      "name": "紙の書籍と電子版、両方のASINを計測対象にできますか？",
+      "acceptedAnswer": { "@type": "Answer", "text": "可能です。ASINごとにトラッキングタグを分けて発行し、媒体・書籍形態別にレポートを分けて確認できるよう設計します。" }
+    }
+  ]
+}
+</script>
+<style>
+  :root{
+    --navy:#16305a;
+    --navy-deep:#0d1f3c;
+    --navy-soft:#eef1f7;
+    --paper:#faf9f6;
+    --ink:#1c2130;
+    --sub:#5b6274;
+    --line:#e2e5ec;
+    --radius-lg:24px;
+    --radius-full:100px;
+    --shadow:0 14px 34px rgba(13,31,60,0.14);
+  }
+  *,*::before,*::after{ box-sizing:border-box; }
+  html{ scroll-behavior:smooth; }
+  body{
+    margin:0;
+    font-family:"Noto Sans JP",sans-serif;
+    color:var(--ink);
+    background:var(--paper);
+    line-height:1.8;
+    -webkit-font-smoothing:antialiased;
+    max-width:100%;
+    overflow-x:hidden;
+  }
+  img{ max-width:100%; height:auto; display:block; }
+  h1,h2,h3,h4{
+    font-family:"Zen Kaku Gothic New",sans-serif;
+    font-weight:700;
+    letter-spacing:.02em;
+    line-height:1.4;
+    margin:0;
+  }
+  .num{ font-family:"Manrope",sans-serif; font-weight:700; }
+  p{ margin:0; }
+  a{ color:inherit; text-decoration:none; }
+  ul{ margin:0; padding:0; list-style:none; }
+  button{ font-family:inherit; cursor:pointer; }
+  .wrap{
+    max-width:1120px;
+    margin:0 auto;
+    padding:0 24px;
+    width:100%;
+  }
+  section{ padding:96px 0; }
+  .section-tag{
+    display:inline-block;
+    font-family:"Manrope",sans-serif;
+    font-size:13px;
+    font-weight:700;
+    letter-spacing:.14em;
+    color:var(--navy);
+    background:var(--navy-soft);
+    padding:6px 16px;
+    border-radius:var(--radius-full);
+    margin-bottom:18px;
+  }
+  .section-head{ max-width:640px; margin:0 auto 56px; text-align:center; }
+  .section-head h2{ font-size:clamp(24px,4vw,34px); }
+  .section-head p{ color:var(--sub); margin-top:14px; font-size:15px; }
+
+  /* header */
+  header{
+    position:fixed;
+    top:0; left:0; right:0;
+    z-index:100;
+    background:rgba(250,249,246,.92);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);
+  }
+  .header-inner{
+    max-width:1120px;
+    margin:0 auto;
+    padding:14px 24px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+  }
+  .logo{
+    font-family:"Zen Kaku Gothic New",sans-serif;
+    font-weight:900;
+    font-size:16px;
+    letter-spacing:.06em;
+    color:var(--navy-deep);
+  }
+  .logo span{ display:block; font-family:"Noto Sans JP",sans-serif; font-weight:500; font-size:11px; color:var(--sub); letter-spacing:.04em; }
+  .burger{
+    display:none;
+    width:44px; height:44px;
+    border:1px solid var(--line);
+    border-radius:12px;
+    background:#fff;
+    position:relative;
+  }
+  .burger span, .burger span::before, .burger span::after{
+    content:"";
+    position:absolute;
+    left:11px; right:11px;
+    height:2px;
+    background:var(--navy-deep);
+    transition:.25s;
+  }
+  .burger span{ top:21px; }
+  .burger span::before{ top:-7px; }
+  .burger span::after{ top:7px; }
+  .burger.open span{ background:transparent; }
+  .burger.open span::before{ top:0; transform:rotate(45deg); }
+  .burger.open span::after{ top:0; transform:rotate(-45deg); }
+
+  /* nav sits OUTSIDE header to avoid backdrop-filter trapping fixed children */
+  nav#mainnav{
+    position:fixed;
+    top:0; right:0;
+    height:100vh;
+    width:min(78vw,320px);
+    background:#fff;
+    box-shadow:-10px 0 30px rgba(13,31,60,.14);
+    transform:translateX(100%);
+    transition:transform .3s ease;
+    z-index:99;
+    padding:96px 32px 32px;
+  }
+  nav#mainnav.open{ transform:translateX(0); }
+  nav#mainnav a{
+    display:block;
+    padding:16px 0;
+    border-bottom:1px solid var(--line);
+    font-weight:500;
+    font-size:15px;
+  }
+  .nav-cta{
+    margin-top:24px;
+    display:block;
+    text-align:center;
+    background:var(--navy);
+    color:#fff !important;
+    padding:14px;
+    border-radius:var(--radius-full);
+    font-weight:700;
+  }
+  .scrim{
+    position:fixed; inset:0;
+    background:rgba(13,31,60,.35);
+    z-index:98;
+    opacity:0; pointer-events:none;
+    transition:.3s;
+  }
+  .scrim.open{ opacity:1; pointer-events:auto; }
+
+  @media (max-width:860px){
+    .burger{ display:block; }
+    .desktop-links{ display:none; }
+  }
+  @media (min-width:861px){
+    nav#mainnav{ position:static; height:auto; width:auto; box-shadow:none; transform:none; padding:0; background:transparent; display:flex; align-items:center; gap:28px; }
+    nav#mainnav a{ border:none; padding:0; font-size:14px; }
+    nav#mainnav .nav-cta{ padding:11px 24px; margin:0; }
+    .scrim{ display:none; }
+  }
+
+  /* hero */
+  .hero{
+    position:relative;
+    margin-top:64px;
+    min-height:640px;
+    display:flex;
+    align-items:flex-end;
+    color:#fff;
+    overflow:hidden;
+  }
+  .hero img{
+    position:absolute; inset:0;
+    width:100%; height:100%;
+    object-fit:cover;
+  }
+  .hero::after{
+    content:"";
+    position:absolute; inset:0;
+    background:linear-gradient(180deg, rgba(13,31,60,.55) 0%, rgba(13,31,60,.72) 55%, rgba(13,31,60,.94) 100%);
+  }
+  .hero-inner{ position:relative; z-index:2; padding:80px 0 56px; width:100%; }
+  .hero-eyebrow{
+    font-size:13px;
+    letter-spacing:.16em;
+    font-weight:700;
+    color:#c9d5ec;
+    margin-bottom:18px;
+  }
+  .hero h1{
+    font-size:clamp(28px,5.4vw,46px);
+    max-width:720px;
+  }
+  .hero-sub{
+    margin-top:22px;
+    max-width:560px;
+    font-size:15.5px;
+    color:#d7deec;
+  }
+  .hero-ctas{ display:flex; flex-wrap:wrap; gap:14px; margin-top:34px; }
+  .btn{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    padding:15px 30px;
+    border-radius:var(--radius-full);
+    font-weight:700;
+    font-size:14.5px;
+    box-shadow:var(--shadow);
+  }
+  .btn-primary{ background:#fff; color:var(--navy-deep); }
+  .btn-ghost{ background:transparent; color:#fff; border:1.5px solid rgba(255,255,255,.6); box-shadow:none; }
+  .hero-stats{
+    position:relative; z-index:2;
+    margin-top:52px;
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:18px;
+    border-top:1px solid rgba(255,255,255,.2);
+    padding-top:28px;
+  }
+  .hero-stats .num{ font-size:clamp(22px,3.6vw,30px); }
+  .hero-stats .label{ font-size:12.5px; color:#c9d5ec; margin-top:4px; }
+  .hero-note{ font-size:11.5px; color:#a9b6d1; margin-top:10px; }
+
+  /* checklist */
+  .check-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:18px;
+    max-width:900px;
+    margin:0 auto;
+  }
+  .check-item{
+    display:flex;
+    gap:14px;
+    background:#fff;
+    border:1px solid var(--line);
+    border-radius:18px;
+    padding:22px 20px;
+  }
+  .check-item svg{ flex:none; margin-top:2px; }
+  .check-item p{ font-size:14.5px; color:var(--ink); }
+  .check-item b{ display:block; font-size:15px; margin-bottom:4px; }
+
+  /* three pillars */
+  .pillars{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:24px;
+  }
+  .pillar{
+    background:#fff;
+    border-radius:var(--radius-lg);
+    padding:32px 26px;
+    border:1px solid var(--line);
+    transition:transform .25s, box-shadow .25s;
+  }
+  .pillar:hover{ transform:translateY(-4px); box-shadow:var(--shadow); }
+  .pillar .icon{
+    width:56px; height:56px;
+    border-radius:16px;
+    background:var(--navy-soft);
+    display:flex; align-items:center; justify-content:center;
+    margin-bottom:20px;
+  }
+  .pillar h3{ font-size:18px; margin-bottom:10px; }
+  .pillar p{ font-size:14px; color:var(--sub); }
+  .pillar .step-no{ font-family:"Manrope",sans-serif; font-size:12px; font-weight:700; color:var(--navy); letter-spacing:.1em; margin-bottom:10px; display:block; }
+
+  /* flow */
+  .flow{
+    display:grid;
+    grid-template-columns:repeat(5,1fr);
+    gap:14px;
+  }
+  .flow-item{
+    background:var(--navy-soft);
+    border-radius:16px;
+    padding:22px 16px;
+    position:relative;
+  }
+  .flow-item .num{ font-size:22px; color:var(--navy); }
+  .flow-item h4{ font-size:14px; margin:10px 0 6px; }
+  .flow-item p{ font-size:12.5px; color:var(--sub); }
+
+  /* dashboard mock */
+  .dash-panel{
+    background:var(--navy-deep);
+    border-radius:var(--radius-lg);
+    padding:36px;
+    color:#fff;
+  }
+  .dash-note{ font-size:12.5px; color:#a9b6d1; margin-bottom:22px; }
+  .dash-grid{ display:grid; grid-template-columns:1fr 1fr; gap:24px; align-items:center; }
+  .dash-kpis{ display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+  .kpi{ background:rgba(255,255,255,.06); border-radius:14px; padding:16px; }
+  .kpi .num{ font-size:24px; }
+  .kpi .label{ font-size:11.5px; color:#a9b6d1; margin-top:4px; }
+  .chart-box{ background:#fff; border-radius:14px; padding:18px; }
+
+  /* profile */
+  .profile{
+    display:grid;
+    grid-template-columns:220px 1fr;
+    gap:36px;
+    align-items:center;
+    background:#fff;
+    border:1px solid var(--line);
+    border-radius:var(--radius-lg);
+    padding:36px;
+  }
+  .profile img{ border-radius:18px; aspect-ratio:1/1; object-fit:cover; }
+  .profile h3{ font-size:20px; }
+  .profile .role{ font-size:13px; color:var(--navy); font-weight:700; margin:6px 0 16px; }
+  .profile p{ font-size:14.5px; color:var(--sub); }
+
+  /* results */
+  .results{ display:grid; grid-template-columns:repeat(4,1fr); gap:18px; }
+  .result-card{ text-align:center; background:#fff; border:1px solid var(--line); border-radius:18px; padding:28px 14px; }
+  .result-card .num{ font-size:30px; color:var(--navy); }
+  .result-card .label{ font-size:12.5px; color:var(--sub); margin-top:6px; }
+
+  /* pricing */
+  .pricing{ display:grid; grid-template-columns:repeat(3,1fr); gap:22px; }
+  .plan{ background:#fff; border:1px solid var(--line); border-radius:var(--radius-lg); padding:32px 26px; }
+  .plan.featured{ background:var(--navy-deep); color:#fff; transform:scale(1.03); box-shadow:var(--shadow); border:none; }
+  .plan .tag{ font-size:12px; font-weight:700; letter-spacing:.08em; color:var(--navy); }
+  .plan.featured .tag{ color:#c9d5ec; }
+  .plan h3{ font-size:20px; margin:10px 0 4px; }
+  .plan .price{ font-family:"Manrope",sans-serif; font-size:28px; font-weight:800; margin:14px 0; }
+  .plan .price small{ font-size:13px; font-weight:500; }
+  .plan ul{ margin-top:18px; }
+  .plan li{ font-size:13.5px; padding:8px 0; border-top:1px solid rgba(0,0,0,.06); display:flex; gap:8px; }
+  .plan.featured li{ border-top:1px solid rgba(255,255,255,.14); }
+  .plan .btn{ width:100%; justify-content:center; margin-top:22px; background:var(--navy); color:#fff; box-shadow:none; }
+  .plan.featured .btn{ background:#fff; color:var(--navy-deep); }
+
+  /* compare table */
+  table{ width:100%; border-collapse:collapse; background:#fff; border-radius:16px; overflow:hidden; }
+  th,td{ padding:16px 14px; font-size:13.5px; text-align:left; border-bottom:1px solid var(--line); }
+  th{ background:var(--navy-soft); font-family:"Zen Kaku Gothic New",sans-serif; font-size:13px; }
+  td.center, th.center{ text-align:center; }
+  .table-wrap{ overflow-x:auto; -webkit-overflow-scrolling:touch; }
+
+  /* voices */
+  .voices{ display:grid; grid-template-columns:repeat(3,1fr); gap:20px; }
+  .voice{ background:#fff; border:1px solid var(--line); border-radius:18px; padding:26px 22px; }
+  .voice p{ font-size:13.5px; color:var(--ink); }
+  .voice .who{ margin-top:16px; font-size:12px; color:var(--sub); font-weight:700; }
+
+  /* faq */
+  .faq-item{ border-bottom:1px solid var(--line); }
+  .faq-q{
+    width:100%;
+    display:flex; justify-content:space-between; align-items:center;
+    padding:22px 4px;
+    background:none; border:none;
+    font-family:"Zen Kaku Gothic New",sans-serif;
+    font-size:15.5px; font-weight:700; color:var(--ink);
+    text-align:left;
+  }
+  .faq-q .mark{ font-family:"Manrope",sans-serif; font-size:20px; color:var(--navy); flex:none; margin-left:16px; }
+  .faq-a{ max-height:0; overflow:hidden; transition:max-height .3s ease; }
+  .faq-a p{ padding:0 4px 22px; font-size:14px; color:var(--sub); max-width:640px; }
+  .faq-item.open .faq-a{ max-height:240px; }
+
+  /* form */
+  .form-panel{ background:#fff; border:1px solid var(--line); border-radius:var(--radius-lg); padding:40px; }
+  .form-grid{ display:grid; grid-template-columns:1fr 1fr; gap:18px; }
+  .field{ display:flex; flex-direction:column; gap:8px; }
+  .field.full{ grid-column:1/-1; }
+  .field label{ font-size:13px; font-weight:700; }
+  .field input, .field select, .field textarea{
+    font-size:16px;
+    padding:13px 14px;
+    border:1px solid var(--line);
+    border-radius:10px;
+    font-family:inherit;
+    width:100%;
+    background:var(--paper);
+  }
+  .field textarea{ resize:vertical; min-height:110px; }
+  .form-submit{ margin-top:22px; width:100%; justify-content:center; border:none; }
+  .form-disclaimer{ font-size:12px; color:var(--sub); margin-top:14px; }
+
+  /* footer */
+  footer{ background:var(--navy-deep); color:#c9d5ec; padding:64px 0 120px; }
+  .footer-grid{ display:grid; grid-template-columns:2fr 1fr 1fr; gap:32px; }
+  footer h4{ color:#fff; font-size:14px; margin-bottom:16px; }
+  footer a, footer p{ font-size:13px; color:#a9b6d1; }
+  footer .foot-logo{ color:#fff; font-family:"Zen Kaku Gothic New",sans-serif; font-weight:900; font-size:17px; margin-bottom:14px; }
+  .footer-bottom{ margin-top:44px; padding-top:24px; border-top:1px solid rgba(255,255,255,.12); font-size:11.5px; color:#8391ab; line-height:1.9; }
+
+  /* sticky mobile CTA */
+  .sticky-cta{
+    position:fixed; left:0; right:0; bottom:0;
+    z-index:90;
+    display:none;
+    background:#fff;
+    border-top:1px solid var(--line);
+    padding:10px 14px;
+    gap:10px;
+    box-shadow:0 -8px 24px rgba(13,31,60,.12);
+  }
+  .sticky-cta a{
+    flex:1;
+    text-align:center;
+    padding:14px 10px;
+    border-radius:var(--radius-full);
+    font-weight:700;
+    font-size:13.5px;
+  }
+  .sticky-cta .tel{ background:var(--navy-soft); color:var(--navy-deep); }
+  .sticky-cta .go{ background:var(--navy); color:#fff; }
+
+  .reveal{ opacity:0; transform:translateY(18px); transition:opacity .6s ease, transform .6s ease; }
+  .reveal.in{ opacity:1; transform:none; }
+
+  @media (prefers-reduced-motion:reduce){
+    *{ transition:none !important; animation:none !important; }
+  }
+
+  @media (max-width:860px){
+    section{ padding:64px 0; }
+    .check-grid{ grid-template-columns:1fr; }
+    .pillars{ grid-template-columns:1fr; }
+    .flow{ grid-template-columns:repeat(2,1fr); }
+    .dash-grid{ grid-template-columns:1fr; }
+    .profile{ grid-template-columns:1fr; text-align:center; }
+    .profile img{ width:140px; margin:0 auto; }
+    .results{ grid-template-columns:1fr 1fr; }
+    .pricing{ grid-template-columns:1fr; }
+    .plan.featured{ transform:none; }
+    .voices{ grid-template-columns:1fr; }
+    .form-grid{ grid-template-columns:1fr; }
+    .footer-grid{ grid-template-columns:1fr; gap:28px; }
+    .hero-stats{ grid-template-columns:1fr; gap:16px; }
+    .sticky-cta{ display:flex; }
+    body{ padding-bottom:0; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <a href="#top" class="logo">ATTRIBUTION DESK<span>Amazon広告×SNS広告 成果計測設定サポート(デモ)</span></a>
+    <button class="burger" id="burger" aria-label="メニュー"><span></span></button>
+  </div>
+</header>
+
+<div class="scrim" id="scrim"></div>
+<nav id="mainnav">
+  <a href="#service">支援内容</a>
+  <a href="#flow">対応の流れ</a>
+  <a href="#pricing">料金プラン</a>
+  <a href="#voice">お客様の声</a>
+  <a href="#faq">FAQ</a>
+  <a href="#contact" class="nav-cta">無料相談へ</a>
+</nav>
+
+<main id="top">
+
+  <section class="hero" style="margin-top:0;padding:0;">
+    <img src="https://images.unsplash.com/photo-1629875499750-a31b83446598?auto=format&fit=crop&w=1200&q=70" alt="東京都心のオフィス街(イメージ)">
+    <div class="wrap hero-inner">
+      <p class="hero-eyebrow">AMAZON ADS × SNS AD ATTRIBUTION SUPPORT</p>
+      <h1>クリックの先が、<br>見えていますか。</h1>
+      <p class="hero-sub">X広告からAmazonでの本の購入まで、数字でつながっていますか。Seller Centralの登録保留、Amazonアトリビューションで商品が認識されない、アソシエイト規約改定で計測が止まった——そんな「見えない」を、設定と設計でつなぎ直します。</p>
+      <div class="hero-ctas">
+        <a href="tel:0300000000" class="btn btn-primary">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.9 21 3 13.1 3 3.5c0-.6.4-1 1-1h3.5c.5 0 1 .4 1 1 0 1.2.2 2.4.6 3.6.1.4 0 .8-.3 1L6.6 10.8z"/></svg>
+          03-0000-0000(仮)へ電話
+        </a>
+        <a href="#contact" class="btn btn-ghost">無料相談フォームへ</a>
+      </div>
+      <div class="hero-stats">
+        <div>
+          <p class="num">92<span style="font-size:16px;">%</span></p>
+          <p class="label">導入後の計測カバレッジ改善率(仮)</p>
+        </div>
+        <div>
+          <p class="num">最短5<span style="font-size:16px;">営業日</span></p>
+          <p class="label">Seller Central登録サポート着手まで(仮)</p>
+        </div>
+        <div>
+          <p class="num">2<span style="font-size:16px;">媒体</span></p>
+          <p class="label">X広告・Meta広告のクロス計測に対応</p>
+        </div>
+      </div>
+      <p class="hero-note">※掲載の数値・実績は制作サンプルの仮の内容です。</p>
+    </div>
+  </section>
+
+  <section id="pain">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="section-tag">こんな状態、ありませんか</span>
+        <h2>「広告は出しているのに、成果が数字で読めない」</h2>
+        <p>書籍のAmazon販売とX広告運用でよくある、計測まわりの停滞ポイントです。</p>
+      </div>
+      <div class="check-grid">
+        <div class="check-item reveal">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="11" fill="#eef1f7"/><path d="M7 12.5l3 3 7-7" stroke="#16305a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <p><b>Amazonアトリビューションで対象ASINが検索できない</b>商品として登録できない状態のまま、計測タグを発行できずにいる。</p>
+        </div>
+        <div class="check-item reveal">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="11" fill="#eef1f7"/><path d="M7 12.5l3 3 7-7" stroke="#16305a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <p><b>Seller Centralの日本登録が「登録保留中」</b>のまま止まっており、原因の切り分けや必要書類の整理が進まない。</p>
+        </div>
+        <div class="check-item reveal">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="11" fill="#eef1f7"/><path d="M7 12.5l3 3 7-7" stroke="#16305a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <p><b>Amazonアソシエイトの代替計測も規約改定で不適格に</b>2026年4月の規約改定で「有料広告経由の購入」が成果対象外となった。</p>
+        </div>
+        <div class="check-item reveal">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="11" fill="#eef1f7"/><path d="M7 12.5l3 3 7-7" stroke="#16305a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <p><b>X広告経由の購入がどれだけ発生しているか不明</b>広告予算の配分判断や継続可否の意思決定材料がない。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="service" style="background:#fff;">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="section-tag">支援内容</span>
+        <h2>計測が止まっている箇所を、3段構えで解消します</h2>
+        <p>登録の壁・設定の壁・規約の壁、それぞれに合わせて対応します。</p>
+      </div>
+      <div class="pillars">
+        <div class="pillar reveal">
+          <span class="step-no">SUPPORT 01</span>
+          <div class="icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#16305a" stroke-width="1.8"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M8 4v5"/></svg></div>
+          <h3>Seller Central登録サポート</h3>
+          <p>「登録保留中」の原因整理、必要な情報・書類の棚卸し、登録手順のご案内まで伴走します。ログインや機密情報の入力はご依頼者様側で行っていただきます。</p>
+        </div>
+        <div class="pillar reveal">
+          <span class="step-no">SUPPORT 02</span>
+          <div class="icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#16305a" stroke-width="1.8"><path d="M4 19V9M12 19V5M20 19v-6"/><path d="M2 19h20"/></svg></div>
+          <h3>Amazonアトリビューション設定</h3>
+          <p>ASINの認識状況を確認し、計測タグの発行・広告媒体側との連携設定まで実施。X広告・Meta広告どちらの計測にも対応します。</p>
+        </div>
+        <div class="pillar reveal">
+          <span class="step-no">SUPPORT 03</span>
+          <div class="icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#16305a" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M8 12h8M12 8v8"/></svg></div>
+          <h3>代替計測の設計・実装</h3>
+          <p>アトリビューションの利用が難しい場合に備え、UTMによるトラッキング設計や計測用LPの構築など、代替手段もあわせてご提案します。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="flow">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="section-tag">対応の流れ</span>
+        <h2>ヒアリングから運用定着まで、約2〜3週間</h2>
+        <p>状況に応じて前後しますが、標準的な進め方は以下の通りです(仮の目安です)。</p>
+      </div>
+      <div class="flow">
+        <div class="flow-item reveal">
+          <p class="num">01</p>
+          <h4>現状ヒアリング</h4>
+          <p>Seller Centralの登録状況、現在の広告運用、既存の計測手段を確認します。</p>
+        </div>
+        <div class="flow-item reveal">
+          <p class="num">02</p>
+          <h4>登録・書類整理</h4>
+          <p>登録保留の原因を切り分け、必要書類と手順をご案内します。</p>
+        </div>
+        <div class="flow-item reveal">
+          <p class="num">03</p>
+          <h4>計測設定</h4>
+          <p>Amazonアトリビューションのタグ発行・広告媒体との連携を設定します。</p>
+        </div>
+        <div class="flow-item reveal">
+          <p class="num">04</p>
+          <h4>代替設計(必要時)</h4>
+          <p>導入が難しい場合、UTM設計・計測用LPを構築します。</p>
+        </div>
+        <div class="flow-item reveal">
+          <p class="num">05</p>
+          <h4>レポート運用</h4>
+          <p>計測結果の見方をご説明し、継続的な確認体制を整えます。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="dashboard" style="background:#fff;">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="section-tag">計測イメージ</span>
+        <h2>設定後は、こんな形で数字が見えるようになります</h2>
+        <p>下記はイメージ図です。実際の広告アカウントに接続すると自動更新される想定のデモです。</p>
+      </div>
+      <div class="dash-panel reveal">
+        <p class="dash-note">※表示している数値はすべて仮のサンプルデータです。</p>
+        <div class="dash-grid">
+          <div class="dash-kpis">
+            <div class="kpi">
+              <p class="num">3,420</p>
+              <p class="label">X広告 クリック数(仮/月)</p>
+            </div>
+            <div class="kpi">
+              <p class="num">861</p>
+              <p class="label">商品ページ 訪問数(仮/月)</p>
+            </div>
+            <div class="kpi">
+              <p class="num">94</p>
+              <p class="label">Amazon購入 計測数(仮/月)</p>
+            </div>
+            <div class="kpi">
+              <p class="num">2.7<span style="font-size:14px;">%</span></p>
+              <p class="label">クリック→購入 転換率(仮)</p>
+            </div>
+          </div>
+          <div class="chart-box">
+            <canvas id="funnelChart" height="220" role="img" aria-label="X広告クリックからAmazon購入までのファネル(仮データ)"></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="profile">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="section-tag">担当者紹介</span>
+        <h2>担当プランナー</h2>
+      </div>
+      <div class="profile reveal">
+        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=1200&q=70" alt="担当プランナー(イメージ・デモ用の仮の人物です)">
+        <div>
+          <h3>担当:遠藤 亮(仮名・デモ用サンプル)</h3>
+          <p class="role">Amazon Ads運用 / Seller Central登録支援 / 計測設計</p>
+          <p>EC事業者・著者向けにAmazon広告とSNS広告の連携設計を担当。Seller Centralの登録トラブル対応や、Amazonアトリビューションの導入設定を数多くサポートしてきました。「広告費が数字にちゃんとつながる状態」を最短距離で作ることを大切にしています。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="results" style="background:#fff;">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="section-tag">実績(仮の内容です)</span>
+        <h2>数字で見る支援実績</h2>
+      </div>
+      <div class="results">
+        <div class="result-card reveal">
+          <p class="num">40<span style="font-size:16px;">件+</span></p>
+          <p class="label">Seller Central登録サポート実績(仮)</p>
+        </div>
+        <div class="result-card reveal">
+          <p class="num">25<span style="font-size:16px;">件+</span></p>
+          <p class="label">Amazonアトリビューション導入実績(仮)</p>
+        </div>
+        <div class="result-card reveal">
+          <p class="num">98<span style="font-size:16px;">%</span></p>
+          <p class="label">継続伴走プランの継続率(仮)</p>
+        </div>
+        <div class="result-card reveal">
+          <p class="num">全国</p>
+          <p class="label">オンライン対応・対応エリア</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="pricing">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="section-tag">料金プラン(仮の内容です)</span>
+        <h2>状況に合わせた3つのプラン</h2>
+        <p>正式な金額はヒアリング後にお見積りします。以下は目安です。</p>
+      </div>
+      <div class="pricing">
+        <div class="plan reveal">
+          <p class="tag">SPOT</p>
+          <h3>スポット診断</h3>
+          <p class="price">¥33,000<small>(税込・仮)</small></p>
+          <ul>
+            <li>・Seller Central登録状況の診断</li>
+            <li>・アトリビューション認識状況の確認</li>
+            <li>・改善レポート(PDF)のご提出</li>
+          </ul>
+          <a href="#contact" class="btn">相談する</a>
+        </div>
+        <div class="plan featured reveal">
+          <p class="tag">おすすめ</p>
+          <h3>導入設定サポート</h3>
+          <p class="price">¥165,000<small>(税込・仮)</small></p>
+          <ul>
+            <li>・Seller Central登録サポート一式</li>
+            <li>・Amazonアトリビューション設定</li>
+            <li>・代替計測(UTM設計)のご提案</li>
+            <li>・設定完了までの伴走(最大4週間)</li>
+          </ul>
+          <a href="#contact" class="btn">相談する</a>
+        </div>
+        <div class="plan reveal">
+          <p class="tag">継続伴走</p>
+          <h3>月次運用サポート</h3>
+          <p class="price">¥55,000<small>/月(税込・仮)</small></p>
+          <ul>
+            <li>・計測データの月次レビュー</li>
+            <li>・広告予算配分のご相談対応</li>
+            <li>・規約改定など変化への追随</li>
+          </ul>
+          <a href="#contact" class="btn">相談する</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="compare" style="background:#fff;">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="section-tag">選ばれる理由</span>
+        <h2>他の選択肢との違い</h2>
+      </div>
+      <div class="table-wrap reveal">
+        <table>
+          <thead>
+            <tr>
+              <th>比較項目</th>
+              <th class="center">アトリビューションデスク</th>
+              <th class="center">一般的な広告代理店</th>
+              <th class="center">自力での対応</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Seller Central登録の実務サポート</td>
+              <td class="center">対応可</td>
+              <td class="center">対応外が多い</td>
+              <td class="center">情報収集に時間</td>
+            </tr>
+            <tr>
+              <td>Amazonアトリビューション設定経験</td>
+              <td class="center">実績あり</td>
+              <td class="center">媒体により差</td>
+              <td class="center">未経験だと難しい</td>
+            </tr>
+            <tr>
+              <td>SNS広告とEC計測の連携設計</td>
+              <td class="center">対応可</td>
+              <td class="center">広告運用のみが中心</td>
+              <td class="center">設計に専門知識が必要</td>
+            </tr>
+            <tr>
+              <td>規約改定への追随</td>
+              <td class="center">継続伴走で対応</td>
+              <td class="center">契約範囲外のことも</td>
+              <td class="center">気づきにくい</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section id="voice">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="section-tag">お客様の声(※仮のサンプルです)</span>
+        <h2>ご相談いただいた方の声</h2>
+      </div>
+      <div class="voices">
+        <div class="voice reveal">
+          <p>「登録保留中」の原因が自分では分からず止まっていましたが、必要な書類が整理されたことで手続きが一気に進みました。</p>
+          <p class="who">書籍著者・個人事業主(仮)</p>
+        </div>
+        <div class="voice reveal">
+          <p>X広告経由の購入が実数で見えるようになり、広告費を止めるべきか続けるべきか判断できるようになりました。</p>
+          <p class="who">EC事業者(仮)</p>
+        </div>
+        <div class="voice reveal">
+          <p>アソシエイトの規約改定で困っていましたが、計測用LPという代替案を提示してもらい助かりました。</p>
+          <p class="who">出版関連事業者(仮)</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="faq" style="background:#fff;">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="section-tag">FAQ</span>
+        <h2>よくあるご質問</h2>
+      </div>
+      <div style="max-width:720px;margin:0 auto;">
+        <div class="faq-item reveal">
+          <button class="faq-q"><span>ログインIDやパスワードを教える必要がありますか？</span><span class="mark">＋</span></button>
+          <div class="faq-a"><p>いいえ。Seller Central・広告アカウントへのログインや機密情報の入力は、すべてご依頼者様側で行っていただきます。当方は手順のご案内・設定サポートに徹します。</p></div>
+        </div>
+        <div class="faq-item reveal">
+          <button class="faq-q"><span>Amazonアトリビューションが使えない場合はどうなりますか？</span><span class="mark">＋</span></button>
+          <div class="faq-a"><p>ASINの認識状況やアカウント種別によっては利用が難しいケースもあります。その場合はUTMパラメータによるトラッキング設計や、計測用ランディングページの構築で代替します。</p></div>
+        </div>
+        <div class="faq-item reveal">
+          <button class="faq-q"><span>Meta広告など他のSNS広告にも対応できますか？</span><span class="mark">＋</span></button>
+          <div class="faq-a"><p>対応可能です。X広告に限らず、Meta広告など複数のSNS広告とEC側の成果計測を連携させる設計をご提案します。</p></div>
+        </div>
+        <div class="faq-item reveal">
+          <button class="faq-q"><span>どのくらいの期間で計測できるようになりますか？</span><span class="mark">＋</span></button>
+          <div class="faq-a"><p>Seller Centralの登録状況によりますが、目安として最短5営業日でサポートに着手し、2〜3週間程度での運用開始を想定しています(仮の目安です)。</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="section-tag">お問い合わせ</span>
+        <h2>まずは無料相談から</h2>
+        <p>現在の登録状況や広告運用の状況をお聞かせください。折り返しご連絡します。</p>
+      </div>
+      <div class="form-panel reveal">
+        <form onsubmit="event.preventDefault();alert('※これはデモページのため送信されません。');">
+          <div class="form-grid">
+            <div class="field">
+              <label for="name">お名前</label>
+              <input id="name" type="text" placeholder="例：山田 太郎" required>
+            </div>
+            <div class="field">
+              <label for="email">メールアドレス</label>
+              <input id="email" type="email" placeholder="例：sample@example.com" required>
+            </div>
+            <div class="field">
+              <label for="tel">電話番号(任意)</label>
+              <input id="tel" type="tel" placeholder="例：090-0000-0000">
+            </div>
+            <div class="field">
+              <label for="topic">ご相談内容</label>
+              <select id="topic">
+                <option>Seller Central登録サポート</option>
+                <option>Amazonアトリビューション設定</option>
+                <option>代替計測(UTM/LP構築)</option>
+                <option>その他・まずは相談したい</option>
+              </select>
+            </div>
+            <div class="field full">
+              <label for="msg">現在の状況・お困りごと</label>
+              <textarea id="msg" placeholder="例：Seller Centralが登録保留中のまま止まっています。ASINも検索できません。"></textarea>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary form-submit">この内容で無料相談を申し込む</button>
+          <p class="form-disclaimer">※本フォームはデモ用のサンプルです。実際の送信・保存は行われません。</p>
+        </form>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <p class="foot-logo">ATTRIBUTION DESK(デモ)</p>
+        <p>Amazon広告×SNS広告の成果計測設定を、登録サポートから代替計測の実装まで一気通貫で支援します。</p>
+      </div>
+      <div>
+        <h4>メニュー</h4>
+        <p><a href="#service">支援内容</a></p>
+        <p><a href="#pricing">料金プラン</a></p>
+        <p><a href="#faq">FAQ</a></p>
+      </div>
+      <div>
+        <h4>連絡先(仮)</h4>
+        <p>TEL：03-0000-0000</p>
+        <p>Mail：demo@attribution-desk.sample</p>
+        <p>対応エリア：全国(オンライン)</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>※本ページは制作サンプル(デモ)です。掲載の内容・数値は仮のもので、写真はイメージです。</p>
+      <p>※写真はイメージです。実制作ではご提供写真や日本人モデルの素材に差し替えます。</p>
+      <p>© ATTRIBUTION DESK(デモ)</p>
+    </div>
+  </div>
+</footer>
+
+<div class="sticky-cta">
+  <a href="tel:0300000000" class="tel">電話で相談(仮)</a>
+  <a href="#contact" class="go">無料相談フォーム</a>
+</div>
+
+<script>
+  var burger = document.getElementById('burger');
+  var nav = document.getElementById('mainnav');
+  var scrim = document.getElementById('scrim');
+  function closeNav(){
+    burger.classList.remove('open');
+    nav.classList.remove('open');
+    scrim.classList.remove('open');
+  }
+  burger.addEventListener('click', function(){
+    var willOpen = !nav.classList.contains('open');
+    burger.classList.toggle('open', willOpen);
+    nav.classList.toggle('open', willOpen);
+    scrim.classList.toggle('open', willOpen);
+  });
+  scrim.addEventListener('click', closeNav);
+  document.querySelectorAll('#mainnav a').forEach(function(a){
+    a.addEventListener('click', closeNav);
+  });
+
+  document.querySelectorAll('.faq-q').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var item = btn.closest('.faq-item');
+      var wasOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(function(i){ i.classList.remove('open'); i.querySelector('.mark').textContent = '＋'; });
+      if(!wasOpen){
+        item.classList.add('open');
+        item.querySelector('.mark').textContent = '－';
+      }
+    });
+  });
+
+  if('IntersectionObserver' in window){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
+      });
+    }, { threshold:0.12 });
+    document.querySelectorAll('.reveal').forEach(function(el){ io.observe(el); });
+  } else {
+    document.querySelectorAll('.reveal').forEach(function(el){ el.classList.add('in'); });
+  }
+
+  var ctx = document.getElementById('funnelChart');
+  if(ctx && window.Chart){
+    new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: ['X広告クリック', '商品ページ訪問', 'Amazon購入'],
+        datasets: [{
+          data: [3420, 861, 94],
+          backgroundColor: ['#c9d5ec', '#7d93bf', '#16305a'],
+          borderRadius: 8,
+          barThickness: 34
+        }]
+      },
+      options: {
+        indexAxis: 'y',
+        responsive: true,
+        plugins: { legend: { display:false }, tooltip:{ callbacks:{ label:function(c){ return ' ' + c.raw.toLocaleString() + '(仮)'; } } } },
+        scales: {
+          x: { grid:{ display:false }, ticks:{ color:'#5b6274', font:{ size:11 } } },
+          y: { grid:{ display:false }, ticks:{ color:'#1c2130', font:{ size:12, family:"'Noto Sans JP',sans-serif" } } }
+        }
+      }
+    });
+  }
+</script>
+
+</body>
+</html>
