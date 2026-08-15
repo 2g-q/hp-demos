@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex,nofollow">
+<title>仕訳無双｜会計事務所 AI仕訳で記帳時間を80%削減</title>
+<meta name="description" content="今の会計ソフトは変えずに使える。AIで仕訳し、顧問先ごとの会計ソフトへ取り込み。仕訳部分だけを一元管理して記帳工数を80%削減します。">
+<meta property="og:title" content="仕訳無双｜会計事務所 AI仕訳で記帳時間を80%削減">
+<meta property="og:description" content="今の会計ソフトは変えずに使える。仕訳部分だけを一元管理して80%の効率化。">
+<meta property="og:type" content="website">
+<style>
+:root{
+  --navy:#0b2545; --navy2:#13315c; --blue:#1d5ba6; --cyan:#12b5c9; --green:#17b978;
+  --orange:#ff7a1a; --gold:#f2b705; --ink:#16202e; --sub:#5a6b80; --line:#e3e9f0;
+  --bg:#ffffff; --bg2:#f4f8fc;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);
+  font-family:"Hiragino Kaku Gothic ProN","Hiragino Sans","Noto Sans JP","Yu Gothic",sans-serif;
+  line-height:1.75;font-size:16px;letter-spacing:.01em}
+img{max-width:100%;height:auto;display:block}
+a{color:inherit}
+.wrap{width:100%;max-width:600px;margin:0 auto;padding:0 20px}
+section{padding:56px 0}
+.sec-head{font-size:22px;line-height:1.5;font-weight:800;margin:0 0 8px;letter-spacing:.01em}
+.sec-lead{color:var(--sub);font-size:15px;margin:0 0 28px}
+.center{text-align:center}
+
+/* ── FV ───────────────────────────────── */
+.fv{background:linear-gradient(160deg,#0b2545 0%,#13315c 55%,#1d5ba6 100%);color:#fff;
+  padding:28px 0 36px;position:relative;overflow:hidden}
+.fv::after{content:"";position:absolute;right:-70px;top:-70px;width:240px;height:240px;
+  background:radial-gradient(circle,rgba(18,181,201,.35),transparent 70%);border-radius:50%}
+.fv-kicker{position:relative;z-index:1;display:inline-block;background:rgba(255,255,255,.12);
+  border:1px solid rgba(255,255,255,.28);border-radius:999px;padding:5px 14px;font-size:12px;
+  font-weight:700;letter-spacing:.04em;margin-bottom:14px}
+.fv-h1{position:relative;z-index:1;margin:0 0 18px;font-weight:900;letter-spacing:-.01em}
+.fv-h1 .l1{display:block;font-size:26px;line-height:1.35}
+.fv-h1 .l2{display:block;font-size:33px;line-height:1.25;margin-top:2px;white-space:nowrap}
+.fv-h1 .l3{display:block;font-size:44px;line-height:1.15;margin-top:2px;white-space:nowrap}
+.fv-h1 .hl{color:var(--gold)}
+.fv-h1 .num{font-size:58px;line-height:1;letter-spacing:-.03em}
+.fv-copy{position:relative;z-index:1;font-size:20px;font-weight:800;line-height:1.5;
+  margin:0 0 10px;color:#fff}
+.fv-copy .mark{background:linear-gradient(transparent 62%,rgba(242,183,5,.55) 62%)}
+.fv-sub{position:relative;z-index:1;font-size:15px;line-height:1.8;color:#dbe6f2;margin:0 0 20px}
+.fv-sub b{color:#fff}
+.badge{position:relative;z-index:1;display:flex;gap:12px;align-items:flex-start;
+  background:#fff;color:var(--ink);border-radius:14px;padding:14px 16px;
+  box-shadow:0 10px 26px rgba(0,0,0,.18);margin-bottom:22px}
+.badge .ico{flex:0 0 auto;width:38px;height:38px;border-radius:50%;
+  background:linear-gradient(140deg,var(--gold),var(--orange));display:flex;align-items:center;
+  justify-content:center;color:#fff;font-weight:900;font-size:13px}
+.badge .txt{font-size:14px;line-height:1.6;font-weight:700}
+.badge .txt em{font-style:normal;color:#c2410c}
+.badge .note{display:block;font-weight:500;font-size:12px;color:var(--sub);margin-top:3px}
+
+/* ── CTA ──────────────────────────────── */
+.cta-main{display:block;background:linear-gradient(135deg,#ff8a2b,#f2660b);color:#fff;
+  text-decoration:none;text-align:center;font-weight:900;font-size:17px;line-height:1.45;
+  padding:18px 18px;border-radius:14px;box-shadow:0 8px 20px rgba(242,102,11,.35);
+  border:0;width:100%;cursor:pointer;font-family:inherit}
+.cta-main small{display:block;font-size:12px;font-weight:700;opacity:.95;margin-top:4px}
+.cta-sub{display:block;text-align:center;margin-top:12px;font-size:14px;color:#cfe0f0;
+  text-decoration:none}
+.cta-sub.on-light{color:var(--blue)}
+.cta-sub u{text-underline-offset:3px}
+.cta-block{padding:36px 0}
+.cta-block.on-light{background:var(--bg2)}
+.cta-note{text-align:center;font-size:12px;color:var(--sub);margin-top:10px}
+
+/* ── 特徴カード ───────────────────────── */
+.feats{display:grid;gap:14px}
+.feat{border:1px solid var(--line);border-radius:14px;padding:18px 16px;background:#fff;
+  display:flex;gap:14px;align-items:flex-start}
+.feat .fico{flex:0 0 auto;width:46px;height:46px;border-radius:12px;
+  background:linear-gradient(140deg,#e8f7fb,#dff3ea);display:flex;align-items:center;justify-content:center}
+.feat h3{margin:0 0 4px;font-size:16px;font-weight:800;line-height:1.5}
+.feat p{margin:0;font-size:14px;color:var(--sub);line-height:1.7}
+
+/* ── チェックリスト ───────────────────── */
+.checks{list-style:none;margin:0;padding:0;display:grid;gap:12px}
+.checks li{display:flex;gap:12px;align-items:flex-start;background:#fff;border:1px solid var(--line);
+  border-left:4px solid var(--cyan);border-radius:10px;padding:14px 16px;font-size:15px;
+  font-weight:700;line-height:1.65}
+.checks .ck{flex:0 0 auto;width:22px;height:22px;border-radius:50%;background:var(--green);
+  color:#fff;display:flex;align-items:center;justify-content:center;font-size:13px;margin-top:2px}
+
+/* ── コアメッセージ ───────────────────── */
+.core{background:linear-gradient(160deg,#0b2545,#13315c);color:#fff}
+.core .voices{list-style:none;margin:0 0 22px;padding:0;display:grid;gap:10px}
+.core .voices li{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.16);
+  border-radius:10px;padding:13px 15px;font-size:14px;line-height:1.7}
+.core .bridge{font-size:15px;line-height:1.9;color:#dbe6f2;margin:0 0 26px}
+.core-msg{background:#fff;color:var(--ink);border-radius:16px;padding:26px 20px;text-align:center;
+  box-shadow:0 14px 30px rgba(0,0,0,.22)}
+.core-msg .label{display:inline-block;background:var(--navy);color:#fff;font-size:11px;
+  font-weight:800;letter-spacing:.08em;border-radius:999px;padding:4px 12px;margin-bottom:12px}
+.core-msg p{margin:0;font-size:21px;font-weight:900;line-height:1.6}
+.core-msg .u{background:linear-gradient(transparent 60%,rgba(18,181,201,.35) 60%)}
+
+/* ── STEP ─────────────────────────────── */
+.steps{display:grid;gap:0;position:relative}
+.step{display:flex;gap:14px;padding-bottom:22px;position:relative}
+.step:last-child{padding-bottom:0}
+.step::before{content:"";position:absolute;left:19px;top:44px;bottom:0;width:2px;
+  background:linear-gradient(var(--cyan),rgba(18,181,201,.15))}
+.step:last-child::before{display:none}
+.step .no{flex:0 0 auto;width:40px;height:40px;border-radius:50%;background:var(--blue);color:#fff;
+  display:flex;align-items:center;justify-content:center;font-weight:900;font-size:13px;
+  position:relative;z-index:1}
+.step h3{margin:8px 0 4px;font-size:16px;font-weight:800;line-height:1.5}
+.step p{margin:0;font-size:14px;color:var(--sub);line-height:1.7}
+
+/* ── 未来像 ───────────────────────────── */
+.future{background:var(--bg2)}
+.future .lead{font-size:19px;font-weight:900;line-height:1.6;margin:0 0 20px}
+.flow{list-style:none;margin:0 0 22px;padding:0;display:grid;gap:10px}
+.flow li{background:#fff;border:1px solid var(--line);border-radius:12px;padding:15px 16px;
+  font-size:15px;line-height:1.7;position:relative;padding-left:44px}
+.flow li::before{content:"";position:absolute;left:16px;top:22px;width:14px;height:14px;
+  border-radius:50%;background:var(--green);opacity:.25}
+.flow li::after{content:"";position:absolute;left:20px;top:26px;width:6px;height:6px;
+  border-radius:50%;background:var(--green)}
+.future .goal{background:linear-gradient(135deg,var(--navy),var(--blue));color:#fff;
+  border-radius:14px;padding:20px;text-align:center;font-size:19px;font-weight:900;line-height:1.6}
+.future .goal .gold{color:var(--gold)}
+
+/* ── テーブル ─────────────────────────── */
+.tw{overflow-x:auto;-webkit-overflow-scrolling:touch;border:1px solid var(--line);border-radius:12px}
+table{border-collapse:collapse;width:100%;min-width:100%;font-size:14px;background:#fff}
+th,td{padding:13px 14px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+thead th{background:var(--navy);color:#fff;font-size:13px;font-weight:800;white-space:nowrap}
+tbody th{width:38%;font-weight:800;background:#fafcfe;line-height:1.55}
+tbody tr:last-child th,tbody tr:last-child td{border-bottom:0}
+.cmp{min-width:520px}
+.cmp thead th:nth-child(2){background:var(--blue)}
+.cmp td.ours{font-weight:800;color:var(--navy);background:#f2f9ff}
+.cmp td.other{color:var(--sub)}
+.roi{margin-top:16px;background:linear-gradient(135deg,#fff7e6,#fff1d6);
+  border:1px solid #f6dfa8;border-radius:14px;padding:18px 16px}
+.roi .ttl{font-size:13px;font-weight:900;color:#a4700a;letter-spacing:.04em;margin:0 0 8px}
+.roi p{margin:0;font-size:14px;line-height:1.8}
+.roi b{font-size:17px;color:#b45309}
+
+/* ── 導入ステップ ─────────────────────── */
+.tl{list-style:none;margin:0;padding:0;counter-reset:tl;display:grid;gap:12px}
+.tl li{background:#fff;border:1px solid var(--line);border-radius:12px;padding:15px 16px 15px 58px;
+  position:relative}
+.tl li::before{counter-increment:tl;content:"STEP " counter(tl);position:absolute;left:14px;top:15px;
+  width:34px;font-size:9px;font-weight:900;color:var(--blue);letter-spacing:.02em;line-height:1.3}
+.tl .name{display:block;font-size:15px;font-weight:800;line-height:1.5}
+.tl .when{display:block;font-size:12px;color:var(--sub);margin-top:2px}
+
+/* ── FAQ ──────────────────────────────── */
+details{border:1px solid var(--line);border-radius:12px;background:#fff;margin-bottom:10px;
+  overflow:hidden}
+summary{cursor:pointer;padding:16px 44px 16px 16px;font-weight:800;font-size:15px;line-height:1.6;
+  position:relative;list-style:none}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"";position:absolute;right:18px;top:22px;width:9px;height:9px;
+  border-right:2px solid var(--blue);border-bottom:2px solid var(--blue);
+  transform:rotate(45deg);transition:transform .2s}
+details[open] summary::after{transform:rotate(-135deg)}
+details .a{padding:0 16px 16px;font-size:14px;color:var(--sub);line-height:1.8;margin:0}
+
+/* ── フォーム ─────────────────────────── */
+.form-sec{background:linear-gradient(160deg,#0b2545,#13315c);color:#fff}
+.form-card{background:#fff;color:var(--ink);border-radius:16px;padding:24px 20px;
+  box-shadow:0 14px 30px rgba(0,0,0,.22)}
+.tabs{display:flex;gap:8px;margin-bottom:20px}
+.tab{flex:1;text-align:center;padding:11px 6px;border-radius:10px;border:1px solid var(--line);
+  background:#fff;font-size:13px;font-weight:800;cursor:pointer;line-height:1.4;color:var(--sub);
+  font-family:inherit}
+.tab[aria-selected="true"]{background:var(--navy);color:#fff;border-color:var(--navy)}
+.field{margin-bottom:16px}
+.field label{display:block;font-size:13px;font-weight:800;margin-bottom:6px}
+.req{display:inline-block;background:#fdecec;color:#c0392b;font-size:10px;font-weight:900;
+  border-radius:4px;padding:2px 6px;margin-left:6px;vertical-align:1px}
+.any{display:inline-block;background:#eef2f6;color:var(--sub);font-size:10px;font-weight:900;
+  border-radius:4px;padding:2px 6px;margin-left:6px;vertical-align:1px}
+.field input,.field select,.field textarea{width:100%;padding:13px 14px;border:1px solid #cfdae6;
+  border-radius:10px;font-size:16px;font-family:inherit;background:#fff;color:var(--ink)}
+.field textarea{min-height:110px;resize:vertical}
+.field input:focus,.field select:focus,.field textarea:focus{outline:2px solid var(--cyan);
+  outline-offset:1px;border-color:var(--cyan)}
+.err{display:none;color:#c0392b;font-size:12px;font-weight:700;margin-top:5px}
+.field.is-error input,.field.is-error select,.field.is-error textarea{border-color:#c0392b;
+  background:#fffafa}
+.field.is-error .err{display:block}
+.privacy{font-size:12px;color:var(--sub);line-height:1.7;margin:0 0 16px}
+.form-note{font-size:12px;color:#cfe0f0;text-align:center;margin-top:14px;line-height:1.7}
+
+/* ── フッター ─────────────────────────── */
+footer{background:#081b33;color:#9fb3c8;padding:28px 0 40px;font-size:12px;line-height:1.9}
+footer .fl{display:flex;flex-wrap:wrap;gap:14px;margin-bottom:12px}
+footer a{color:#cfe0f0;text-decoration:none}
+
+@media (min-width:601px){
+  body{font-size:17px}
+  .wrap{padding:0 24px}
+  section{padding:72px 0}
+  .fv-h1 .l1{font-size:30px}
+  .fv-h1 .l2{font-size:46px}
+  .fv-h1 .num{font-size:64px}
+  .sec-head{font-size:26px}
+  .feats{grid-template-columns:1fr 1fr}
+}
+</style>
+</head>
+<body>
+
+<!-- ① FV -->
+<header class="fv">
+  <div class="wrap">
+    <span class="fv-kicker">税理士・会計事務所さま向け</span>
+    <h1 class="fv-h1">
+      <span class="l1">会計事務所</span>
+      <span class="l2">AI仕訳で記帳時間を</span>
+      <span class="l3 hl"><span class="num">80</span>%削減</span>
+    </h1>
+    <p class="fv-copy"><span class="mark">今の会計ソフトは変えずに使える！</span></p>
+    <p class="fv-sub">「AIで仕訳→顧問先毎の会計ソフトに取り込み」出来るから、<b>仕訳部分だけを一元管理して80%の効率化</b>が可能！</p>
+
+    <div class="badge">
+      <span class="ico">補助<br>金</span>
+      <span class="txt">今なら<em>AI補助金活用で2年間のご利用料が 2/3 補助対象</em>
+        <span class="note">（実質自己負担 1/3）</span>
+      </span>
+    </div>
+
+    <a class="cta-main" href="#trial">まずは無料トライアルで<br>AIの実力を体感する
+      <small>証憑3枚〜・最短即日</small></a>
+    <a class="cta-sub" href="#docs">詳細な料金・機能を知りたい方はこちら<br>→ <u>資料ダウンロード / お問い合わせ</u></a>
+  </div>
+</header>
+
+<!-- ② 4つの特徴 -->
+<section>
+  <div class="wrap">
+    <h2 class="sec-head">仕訳無双の4つの特徴</h2>
+    <p class="sec-lead">会計事務所の「前工程」を、まるごと軽くします。</p>
+    <div class="feats">
+      <div class="feat">
+        <span class="fico" aria-hidden="true">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#1d5ba6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l5-5 4 4 8-8"/><path d="M21 8V3h-5"/></svg>
+        </span>
+        <div>
+          <h3>使うほど精度が上がる</h3>
+          <p>記帳工数を削減しながら、顧問先ごとにAIが育ちます。</p>
+        </div>
+      </div>
+      <div class="feat">
+        <span class="fico" aria-hidden="true">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#17b978" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 3h5v5"/><path d="M21 3l-7 7"/><path d="M8 21H3v-5"/><path d="M3 21l7-7"/><circle cx="12" cy="12" r="2.5"/></svg>
+        </span>
+        <div>
+          <h3>引き継ぎ工数のゼロ化</h3>
+          <p>知見をAIに蓄積し、属人化を防ぎます。</p>
+        </div>
+      </div>
+      <div class="feat">
+        <span class="fico" aria-hidden="true">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#12b5c9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2h9l5 5v15H6z"/><path d="M15 2v5h5"/><path d="M9 13h7M9 17h5"/></svg>
+        </span>
+        <div>
+          <h3>請求書発行まで一気通貫</h3>
+          <p>仕訳から請求書の発行までを、ひとつの流れで。</p>
+        </div>
+      </div>
+      <div class="feat">
+        <span class="fico" aria-hidden="true">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#f2b705" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="6" rx="1.5"/><rect x="3" y="14" width="8" height="6" rx="1.5"/><rect x="13" y="14" width="8" height="6" rx="1.5"/></svg>
+        </span>
+        <div>
+          <h3>会計ソフトはそのまま</h3>
+          <p>既存のソフトを変えずに、前工程を一元管理して効率化します。</p>
+        </div>
+      </div>
+    </div>
+    <p class="sec-lead" style="margin:20px 0 0;font-size:14px">
+      弥生・マネーフォワード・freeeなど、顧問先ごとに契約している別々のシステムでAI仕訳機能を使うと、システムごとに実施可否の違いや仕様の差があり、現場に浸透しづらくなります。仕訳部分は仕訳無双で一元管理するのがおすすめです。
+    </p>
+  </div>
+</section>
+
+<!-- ③ こんな方が使っています -->
+<section style="background:var(--bg2)">
+  <div class="wrap">
+    <h2 class="sec-head">仕訳無双を使う会計事務所の特徴</h2>
+    <p class="sec-lead">ひとつでも当てはまれば、効果を実感していただけます。</p>
+    <ul class="checks">
+      <li><span class="ck" aria-hidden="true">✓</span>記帳代行の工数を減らして、顧問数を増やしたり顧問先との対話時間を増やしたい</li>
+      <li><span class="ck" aria-hidden="true">✓</span>顧問先の会計システムのAI仕訳がバラバラで使いこなせない</li>
+      <li><span class="ck" aria-hidden="true">✓</span>担当者が変わっても仕訳ルールをスムーズに引き継ぎたい</li>
+      <li><span class="ck" aria-hidden="true">✓</span>顧問先の情報や対応履歴がExcel・メールに分散してバラバラだった</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ④ コアメッセージ -->
+<section class="core">
+  <div class="wrap">
+    <h2 class="sec-head" style="color:#fff">現場でいただいた、たくさんのお声</h2>
+    <ul class="voices">
+      <li>現場の税理士さんが、いまだに手作業で仕訳をしていて負担が大きい</li>
+      <li>顧問先毎の会計システムのAIツールを試すも、システム毎にAI精度も異なり使えていない</li>
+      <li>すでに他社ツールを導入しているものの、高額であったり機能が多くて使いこなせない</li>
+      <li>業務効率化やコスト削減を目的にツールを入れたものの、思ったほど効率化できていない</li>
+    </ul>
+    <p class="bridge">貴重な税理士さんのリソースを、少しでも顧問先との対話や、新規顧問先へ使っていただきたい。<br>そんな想いから生まれたのが仕訳無双です。</p>
+    <div class="core-msg">
+      <span class="label">私たちの結論</span>
+      <p>ツールの本当の価値は、<br>現場の<span class="u">「使いやすさ」</span>と<br><span class="u">「情報の一元管理」</span>です。</p>
+    </div>
+  </div>
+</section>
+
+<!-- CTA 2 -->
+<div class="cta-block on-light">
+  <div class="wrap">
+    <a class="cta-main" href="#trial">まずは無料トライアルで<br>AIの実力を体感する
+      <small>強引な営業は一切行いません</small></a>
+    <a class="cta-sub on-light" href="#docs">詳細な料金・機能を知りたい方はこちら<br>→ <u>資料ダウンロード / お問い合わせ</u></a>
+  </div>
+</div>
+
+<!-- ⑤ サポート機能・3STEP -->
+<section>
+  <div class="wrap">
+    <h2 class="sec-head">今お使いの顧問先毎の会計ソフトはそのまま。<br>“前工程”のボトルネックを解消します。</h2>
+    <p class="sec-lead">業務フローは、この3ステップに切り替わります。</p>
+    <div class="steps">
+      <div class="step">
+        <span class="no">01</span>
+        <div>
+          <h3>証憑・データをアップロード</h3>
+          <p>AIが即時に読み取り、抽出した箇所をハイライトで確認できます。</p>
+        </div>
+      </div>
+      <div class="step">
+        <span class="no">02</span>
+        <div>
+          <h3>顧問先ごとの独自ルールをAIが自動学習</h3>
+          <p>修正した内容がそのまま蓄積され、次回から反映されます。</p>
+        </div>
+      </div>
+      <div class="step">
+        <span class="no">03</span>
+        <div>
+          <h3>CSV出力で既存の会計ソフトへ連携</h3>
+          <p>今お使いのソフトへ、そのまま取り込めます。</p>
+        </div>
+      </div>
+    </div>
+    <p style="margin:24px 0 0;font-size:16px;font-weight:800;line-height:1.7">
+      まずは、「記帳代行の工数を最大80%削減する」変化を体感してください。</p>
+  </div>
+</section>
+
+<!-- ⑥ 未来像 -->
+<section class="future">
+  <div class="wrap">
+    <p class="lead">私たちが目指しているのは、<br>単なる「作業時間の削減」ではありません。</p>
+    <ul class="flow">
+      <li>入力作業や確認作業から解放されるから、<b>業務にゆとりができる</b>。</li>
+      <li>ゆとりができるから、<b>顧問数を増やせる</b>、顧問先への提案やコミュニケーションに時間を使える。</li>
+      <li>属人化がなくなるから、<b>引き継ぎや教育のストレスなく組織を拡大できる</b>。</li>
+    </ul>
+    <p class="goal">そして、付加価値の高い<br><span class="gold">「選ばれる会計事務所」</span>へ。</p>
+  </div>
+</section>
+
+<!-- ⑦ 機能一覧 -->
+<section>
+  <div class="wrap">
+    <h2 class="sec-head">「AI仕訳」だけじゃない。<br>会計事務所に必要な機能をこれひとつに。</h2>
+    <p class="sec-lead">日々の記帳から、顧問先の管理・請求・法対応まで。</p>
+    <div class="tw">
+      <table>
+        <thead><tr><th>機能名</th><th>概要・特長</th></tr></thead>
+        <tbody>
+          <tr><th>AI仕訳自動化</th><td>レシート・通帳・請求書から勘定科目・税区分・摘要を自動判定</td></tr>
+          <tr><th>証憑ハイライト</th><td>AIが抽出した数値が原本画像のどこにあるか一目で確認</td></tr>
+          <tr><th>顧問先別ルール学習</th><td>修正履歴から自動学習。使えば使うほど精度向上</td></tr>
+          <tr><th>顧問先情報・履歴一元管理</th><td>基本情報・契約・担当者・決算月・対応履歴を一元管理</td></tr>
+          <tr><th>アラート管理</th><td>決算月接近・未取込・エラー多発を自動通知</td></tr>
+          <tr><th>ワンクリック請求書発行</th><td>顧問先の契約内容に基づきワンクリックで自動作成・発行</td></tr>
+          <tr><th>電子帳簿保存法対応</th><td>タイムスタンプ自動付与など法要件を自動充足</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ⑧ 比較・費用対効果 -->
+<section style="background:var(--bg2)">
+  <div class="wrap">
+    <h2 class="sec-head">圧倒的なコストパフォーマンスと明確な違い</h2>
+    <p class="sec-lead">横にスクロールしてご覧いただけます。</p>
+    <div class="tw">
+      <table class="cmp">
+        <thead><tr><th>比較項目</th><th>仕訳無双</th><th>一般的なAI仕訳ツール</th></tr></thead>
+        <tbody>
+          <tr><th>AI学習</th><td class="ours">顧問先ごとに独立学習</td><td class="other">全社共通ルール or 手動設定</td></tr>
+          <tr><th>ルール設定</th><td class="ours">不要（自動学習・蓄積）</td><td class="other">初期設定に数日〜数週間</td></tr>
+          <tr><th>顧問先管理</th><td class="ours">一元管理機能あり</td><td class="other">別ツールが必要</td></tr>
+          <tr><th>引き継ぎ</th><td class="ours">ゼロ（知見が蓄積・継承）</td><td class="other">引き継ぎ作業が必要</td></tr>
+          <tr><th>会計ソフト連携</th><td class="ours">主要ソフト全対応（CSV）</td><td class="other">限定的</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="roi">
+      <p class="ttl">【AI補助金活用】</p>
+      <p>例）2年間の使用料の<b>2/3（約67%）</b>が補助対象となり、実質<b>40万円程度</b>の投資で2年間<b>約960万円相当</b>のコスト削減効果が得られます（<b>ROI 約24倍</b>）。</p>
+    </div>
+  </div>
+</section>
+
+<!-- CTA 3 -->
+<div class="cta-block">
+  <div class="wrap">
+    <a class="cta-main" href="#trial">まずは無料トライアルで<br>AIの実力を体感する
+      <small>証憑3枚〜・最短即日</small></a>
+    <a class="cta-sub on-light" href="#docs">詳細な料金・機能を知りたい方はこちら<br>→ <u>資料ダウンロード / お問い合わせ</u></a>
+  </div>
+</div>
+
+<!-- ⑨ 導入の流れ -->
+<section>
+  <div class="wrap">
+    <h2 class="sec-head">無料トライアルでは、<br>強引な営業は一切行いません。</h2>
+    <p class="sec-lead">まずは実際の証憑データ（3枚程度）を使って、AIの精度をお試しください。</p>
+    <ol class="tl">
+      <li><span class="name">無料トライアル</span><span class="when">即日</span></li>
+      <li><span class="name">プラン選定・お見積り</span><span class="when">1〜2日</span></li>
+      <li><span class="name">AI補助金の申請サポート</span><span class="when">手続きをサポートします</span></li>
+      <li><span class="name">ご契約・ご利用開始</span><span class="when">最短即日</span></li>
+      <li><span class="name">運用サポート</span><span class="when">導入後随時</span></li>
+    </ol>
+  </div>
+</section>
+
+<!-- ⑪ FAQ -->
+<section style="background:var(--bg2)">
+  <div class="wrap">
+    <h2 class="sec-head">よくあるご質問</h2>
+    <p class="sec-lead">気になる点をタップしてご覧ください。</p>
+    <details open>
+      <summary>今の会計ソフトを変える必要はありますか？</summary>
+      <p class="a">不要です。仕訳無双は前工程の自動化ツールです。</p>
+    </details>
+    <details>
+      <summary>AIの精度は信用できますか？</summary>
+      <p class="a">初回は80%前後、修正を学習し2〜3ヶ月で95%以上へ向上します。</p>
+    </details>
+    <details>
+      <summary>顧問先ごとのルール差に対応できますか？</summary>
+      <p class="a">対応可能です。顧問先ごとに独立してAIが育ちます。</p>
+    </details>
+    <details>
+      <summary>補助金申請は難しいですか？</summary>
+      <p class="a">申請手続きのサポートが可能です。お気軽にご相談ください。</p>
+    </details>
+  </div>
+</section>
+
+<!-- ⑩ 最後のメッセージ + フォーム -->
+<section class="form-sec" id="trial">
+  <div class="wrap">
+    <h2 class="sec-head" style="color:#fff">私たちが大切にしていることは、<br>最初から変わりません。</h2>
+    <p style="color:#dbe6f2;font-size:16px;line-height:1.9;margin:0 0 28px">
+      ツールの本当の価値は、現場の「使いやすさ」と「情報の一元管理」です。<br>
+      単なる作業効率化だけでなく、会計事務所の持続的な成長を一緒に考えられる存在でありたい。それが、仕訳無双です。</p>
+
+    <div class="form-card" id="docs">
+      <div class="tabs" role="tablist">
+        <button class="tab" id="tab-trial" role="tab" aria-selected="true" aria-controls="formPanel" type="button" data-kind="trial">無料トライアル<br>／個別相談</button>
+        <button class="tab" id="tab-docs" role="tab" aria-selected="false" aria-controls="formPanel" type="button" data-kind="docs">資料<br>ダウンロード</button>
+      </div>
+
+      <form id="leadForm" novalidate>
+        <input type="hidden" name="form_kind" id="formKind" value="trial">
+
+        <div class="field" id="f-company">
+          <label for="company">事務所名・会社名<span class="req">必須</span></label>
+          <input type="text" id="company" name="company" autocomplete="organization" required>
+          <span class="err">事務所名・会社名をご入力ください。</span>
+        </div>
+
+        <div class="field" id="f-name">
+          <label for="name">お名前<span class="req">必須</span></label>
+          <input type="text" id="name" name="name" autocomplete="name" required>
+          <span class="err">お名前をご入力ください。</span>
+        </div>
+
+        <div class="field" id="f-email">
+          <label for="email">メールアドレス<span class="req">必須</span></label>
+          <input type="email" id="email" name="email" autocomplete="email" inputmode="email" required>
+          <span class="err">メールアドレスの形式をご確認ください。</span>
+        </div>
+
+        <div class="field" id="f-tel">
+          <label for="tel">お電話番号<span class="any">任意</span></label>
+          <input type="tel" id="tel" name="tel" autocomplete="tel" inputmode="tel">
+        </div>
+
+        <div class="field" id="f-staff">
+          <label for="staff">顧問先の件数<span class="any">任意</span></label>
+          <select id="staff" name="staff">
+            <option value="">選択してください</option>
+            <option>〜20件</option>
+            <option>21〜50件</option>
+            <option>51〜100件</option>
+            <option>101件以上</option>
+          </select>
+        </div>
+
+        <div class="field" id="f-message">
+          <label for="message">ご相談内容<span class="any">任意</span></label>
+          <textarea id="message" name="message" placeholder="お使いの会計ソフトや、お困りの点などをご記入ください。"></textarea>
+        </div>
+
+        <p class="privacy">ご入力いただいた内容は、お問い合わせへの回答およびご案内のためにのみ使用します。</p>
+
+        <button class="cta-main" type="submit" id="submitBtn">
+          <span id="submitLabel">無料トライアルを申し込む</span>
+          <small id="submitNote">証憑3枚〜・強引な営業は行いません</small>
+        </button>
+      </form>
+    </div>
+    <p class="form-note">お急ぎの場合や、ご不明な点だけを伺いたい場合もお気軽にご連絡ください。</p>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="fl">
+      <a href="#trial">無料トライアル</a>
+      <a href="#docs">資料ダウンロード</a>
+    </div>
+    <div>仕訳無双</div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var form = document.getElementById('leadForm');
+  var kind = document.getElementById('formKind');
+  var label = document.getElementById('submitLabel');
+  var note = document.getElementById('submitNote');
+  var tabs = Array.prototype.slice.call(document.querySelectorAll('.tab'));
+
+  var COPY = {
+    trial: {label:'無料トライアルを申し込む', note:'証憑3枚〜・強引な営業は行いません', thanks:'thanks-trial.html'},
+    docs:  {label:'資料をダウンロードする',   note:'料金・機能の詳細をお送りします',   thanks:'thanks-download.html'}
+  };
+
+  function setKind(k){
+    kind.value = k;
+    label.textContent = COPY[k].label;
+    note.textContent = COPY[k].note;
+    tabs.forEach(function(t){ t.setAttribute('aria-selected', String(t.dataset.kind === k)); });
+  }
+  tabs.forEach(function(t){
+    t.addEventListener('click', function(){ setKind(t.dataset.kind); });
+  });
+
+  // 「資料ダウンロード」導線から来たときは資料タブを開く
+  document.querySelectorAll('a[href="#docs"]').forEach(function(a){
+    a.addEventListener('click', function(){ setKind('docs'); });
+  });
+
+  function invalid(id, ok){
+    var f = document.getElementById(id);
+    if (ok) f.classList.remove('is-error'); else f.classList.add('is-error');
+    return ok;
+  }
+
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    var email = document.getElementById('email').value.trim();
+    var ok = true;
+    ok = invalid('f-company', document.getElementById('company').value.trim() !== '') && ok;
+    ok = invalid('f-name', document.getElementById('name').value.trim() !== '') && ok;
+    ok = invalid('f-email', /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) && ok;
+    if (!ok) {
+      var first = form.querySelector('.is-error');
+      if (first) first.scrollIntoView({behavior:'smooth', block:'center'});
+      return;
+    }
+    // 送信先は公開時に設定します(下記 SUBMIT_ENDPOINT)。
+    // 未設定のあいだは入力内容を保持したままサンクスページへ遷移します。
+    var SUBMIT_ENDPOINT = '';
+    var go = COPY[kind.value].thanks;
+    if (!SUBMIT_ENDPOINT) { location.href = go; return; }
+    var btn = document.getElementById('submitBtn');
+    btn.disabled = true;
+    fetch(SUBMIT_ENDPOINT, {method:'POST', body:new FormData(form)})
+      .then(function(){ location.href = go; })
+      .catch(function(){ btn.disabled = false; alert('送信できませんでした。時間をおいて、もう一度お試しください。'); });
+  });
+})();
+</script>
+</body>
+</html>
