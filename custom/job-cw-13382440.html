@@ -1,0 +1,812 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>そら経営相談 | オンライン経営アドバイザリー・サービス紹介LP(デザインサンプル)</title>
+<meta name="description" content="いつでもチャット・ビデオで専門家に相談できる月額制のオンライン経営相談サービス「そら経営相談」の紹介ページ(制作サンプル)。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;700;800&family=Noto+Sans+JP:wght@400;500;700;900&family=Zen+Kaku+Gothic+New:wght@500;700;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#16233f;
+    --navy-2:#233a68;
+    --navy-soft:#eef1f8;
+    --bg:#fbfaf6;
+    --surface:#ffffff;
+    --text:#242730;
+    --muted:#6a6f7a;
+    --border:#e7e3d9;
+    --radius-lg:22px;
+    --radius-md:14px;
+    --radius-pill:100px;
+    --shadow-soft:0 14px 34px rgba(22,35,63,0.10);
+    --shadow-btn:0 10px 24px rgba(22,35,63,0.28);
+    --maxw:1120px;
+  }
+  *,*::before,*::after{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  @media (prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto;}
+    *{animation-duration:0.001ms !important;animation-iteration-count:1 !important;transition-duration:0.001ms !important;}
+  }
+  body{
+    margin:0;
+    width:100%;
+    max-width:100%;
+    overflow-x:hidden;
+    background:var(--bg);
+    color:var(--text);
+    font-family:"Noto Sans JP",sans-serif;
+    font-feature-settings:"palt";
+    line-height:1.85;
+    -webkit-font-smoothing:antialiased;
+  }
+  img{max-width:100%;height:auto;display:block;}
+  a{color:inherit;text-decoration:none;}
+  ul{margin:0;padding:0;list-style:none;}
+  h1,h2,h3,h4{font-family:"Zen Kaku Gothic New","Noto Sans JP",sans-serif;margin:0;color:var(--navy);letter-spacing:0.01em;}
+  p{margin:0;}
+  .num{font-family:"Manrope","Noto Sans JP",sans-serif;font-weight:800;}
+  .wrap{width:100%;max-width:var(--maxw);margin:0 auto;padding:0 24px;}
+  .section{padding:96px 0;}
+  @media (max-width:680px){
+    .section{padding:64px 0;}
+  }
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:8px;
+    font-size:13px;font-weight:700;letter-spacing:0.14em;
+    color:var(--navy);background:var(--navy-soft);
+    padding:6px 16px;border-radius:var(--radius-pill);
+  }
+  .section-head{max-width:640px;margin:0 auto 48px;text-align:center;}
+  .section-head h2{font-size:clamp(24px,4vw,34px);margin-top:14px;}
+  .section-head p{margin-top:16px;color:var(--muted);font-size:15px;}
+  .note{font-size:12.5px;color:var(--muted);margin-top:10px;}
+
+  /* ---------- header ---------- */
+  .site-header{
+    position:fixed;top:0;left:0;right:0;z-index:60;
+    background:rgba(251,250,246,0.86);
+    backdrop-filter:blur(10px);
+    -webkit-backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--border);
+  }
+  .header-inner{
+    width:100%;max-width:var(--maxw);margin:0 auto;padding:14px 20px;
+    display:flex;align-items:center;justify-content:space-between;gap:16px;
+  }
+  .brand{display:flex;flex-direction:column;line-height:1.2;}
+  .brand-main{font-family:"Zen Kaku Gothic New",sans-serif;font-weight:900;font-size:19px;color:var(--navy);}
+  .brand-sub{font-size:10.5px;color:var(--muted);letter-spacing:0.08em;margin-top:2px;}
+  .header-nav-desktop{display:flex;gap:26px;}
+  .header-nav-desktop a{font-size:14px;font-weight:500;color:var(--text);white-space:nowrap;}
+  .header-nav-desktop a:hover{color:var(--navy);}
+  .header-actions{display:flex;align-items:center;gap:12px;}
+  .tel-link{display:flex;align-items:center;gap:6px;font-size:13px;font-weight:700;color:var(--navy);white-space:nowrap;}
+  .btn{
+    display:inline-flex;align-items:center;justify-content:center;gap:8px;
+    border-radius:var(--radius-pill);font-weight:700;font-size:15px;
+    padding:14px 28px;border:none;cursor:pointer;white-space:nowrap;
+    transition:transform .18s ease,box-shadow .18s ease;
+  }
+  .btn-primary{background:var(--navy);color:#fff;box-shadow:var(--shadow-btn);}
+  .btn-primary:hover{transform:translateY(-2px);box-shadow:0 14px 28px rgba(22,35,63,0.34);}
+  .btn-outline{background:transparent;color:var(--navy);border:1.5px solid var(--navy);}
+  .btn-outline:hover{background:var(--navy-soft);}
+  .btn-sm{padding:10px 20px;font-size:13.5px;}
+  .hamburger{
+    display:none;flex-direction:column;justify-content:center;gap:5px;
+    width:40px;height:40px;border:1px solid var(--border);border-radius:10px;
+    background:#fff;cursor:pointer;padding:0;
+  }
+  .hamburger span{width:18px;height:2px;background:var(--navy);margin:0 auto;display:block;transition:transform .2s ease,opacity .2s ease;}
+  .hamburger[aria-expanded="true"] span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+  .hamburger[aria-expanded="true"] span:nth-child(2){opacity:0;}
+  .hamburger[aria-expanded="true"] span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+
+  .mobile-nav{
+    position:fixed;top:0;right:0;height:100%;width:min(78vw,320px);max-width:100%;
+    background:#fff;z-index:80;
+    transform:translateX(100%);transition:transform .28s ease;
+    box-shadow:-16px 0 40px rgba(22,35,63,0.16);
+    padding:88px 28px 28px;
+    overflow-y:auto;
+  }
+  .mobile-nav.is-open{transform:translateX(0);}
+  .mobile-nav li{border-bottom:1px solid var(--border);}
+  .mobile-nav a{display:block;padding:16px 4px;font-size:16px;font-weight:600;}
+  .mobile-nav .btn{width:100%;margin-top:20px;}
+  .nav-scrim{
+    position:fixed;inset:0;background:rgba(22,35,63,0.35);
+    z-index:70;opacity:0;pointer-events:none;transition:opacity .25s ease;
+  }
+  .nav-scrim.is-open{opacity:1;pointer-events:auto;}
+  @media (max-width:900px){
+    .header-nav-desktop{display:none;}
+    .hamburger{display:flex;}
+    .header-actions .btn-sm{display:none;}
+  }
+  @media (max-width:520px){
+    .tel-link span.tel-label{display:none;}
+  }
+
+  /* ---------- hero ---------- */
+  .hero{
+    position:relative;margin-top:78px;
+    min-height:640px;display:flex;align-items:center;
+    color:#fff;overflow:hidden;
+  }
+  .hero-bg{
+    position:absolute;inset:0;
+    background:linear-gradient(180deg,rgba(16,24,44,0.78),rgba(16,24,44,0.90)),
+      url('https://images.unsplash.com/photo-1629875499750-a31b83446598?auto=format&fit=crop&w=1200&q=70') center/cover no-repeat;
+  }
+  .hero-inner{position:relative;z-index:2;padding:88px 0 64px;width:100%;}
+  .hero .eyebrow{background:rgba(255,255,255,0.14);color:#fff;}
+  .hero h1{
+    color:#fff;font-size:clamp(32px,6vw,54px);line-height:1.4;margin-top:22px;
+    font-weight:900;
+  }
+  .hero-lead{
+    margin-top:22px;color:rgba(255,255,255,0.86);font-size:15.5px;
+    max-width:520px;line-height:2;
+  }
+  .hero-cta{display:flex;flex-wrap:wrap;gap:14px;margin-top:34px;}
+  .hero-cta .btn-outline{color:#fff;border-color:rgba(255,255,255,0.6);}
+  .hero-cta .btn-outline:hover{background:rgba(255,255,255,0.12);}
+  .trust-band{
+    position:relative;z-index:2;margin-top:52px;
+    display:grid;grid-template-columns:repeat(3,1fr);gap:20px;
+    max-width:640px;
+  }
+  .trust-item{
+    background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.18);
+    border-radius:var(--radius-md);padding:18px 14px;text-align:center;
+  }
+  .trust-item .num{display:block;font-size:clamp(22px,3.4vw,30px);color:#fff;}
+  .trust-item .label{display:block;font-size:11.5px;color:rgba(255,255,255,0.78);margin-top:6px;letter-spacing:0.04em;}
+  .hero .note{color:rgba(255,255,255,0.62);}
+  @media (max-width:680px){
+    .trust-band{grid-template-columns:repeat(3,1fr);gap:10px;}
+    .trust-item{padding:14px 8px;}
+  }
+
+  /* ---------- reveal ---------- */
+  .reveal{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s ease;}
+  .reveal.is-visible{opacity:1;transform:translateY(0);}
+
+  /* ---------- service ---------- */
+  .service-grid{
+    display:grid;grid-template-columns:1.05fr 0.95fr;gap:56px;align-items:center;
+  }
+  .service-copy p{color:var(--muted);font-size:15px;margin-bottom:14px;}
+  .service-photo{
+    border-radius:var(--radius-lg);overflow:hidden;box-shadow:var(--shadow-soft);
+    aspect-ratio:4/3;
+  }
+  .service-photo img{width:100%;height:100%;object-fit:cover;}
+  .feature-mini-list{margin-top:28px;display:flex;flex-direction:column;gap:18px;}
+  .feature-mini{display:flex;gap:14px;align-items:flex-start;}
+  .feature-mini .icon-badge{flex:none;}
+  .feature-mini h4{font-size:15.5px;}
+  .feature-mini p{font-size:13.5px;color:var(--muted);margin-top:4px;}
+  @media (max-width:860px){
+    .service-grid{grid-template-columns:1fr;}
+    .service-photo{order:-1;aspect-ratio:16/9;}
+  }
+
+  .icon-badge{
+    width:46px;height:46px;border-radius:14px;background:var(--navy-soft);
+    display:flex;align-items:center;justify-content:center;
+  }
+  .icon-badge svg{width:22px;height:22px;stroke:var(--navy);fill:none;stroke-width:1.8;}
+
+  /* ---------- features ---------- */
+  .feature-cards{
+    display:grid;grid-template-columns:repeat(4,1fr);gap:20px;
+  }
+  .feature-card{
+    background:var(--surface);border:1px solid var(--border);
+    border-radius:var(--radius-lg);padding:28px 22px;
+    box-shadow:var(--shadow-soft);
+  }
+  .feature-card .idx{
+    font-family:"Manrope",sans-serif;font-weight:800;font-size:12px;
+    color:var(--navy);background:var(--navy-soft);
+    display:inline-block;padding:4px 10px;border-radius:var(--radius-pill);
+  }
+  .feature-card h3{font-size:16.5px;margin-top:16px;}
+  .feature-card p{font-size:13.5px;color:var(--muted);margin-top:10px;}
+  @media (max-width:980px){
+    .feature-cards{grid-template-columns:repeat(2,1fr);}
+  }
+  @media (max-width:560px){
+    .feature-cards{grid-template-columns:1fr;}
+  }
+
+  /* ---------- flow ---------- */
+  .section-alt{background:var(--navy-soft);}
+  .flow-list{
+    display:grid;grid-template-columns:repeat(4,1fr);gap:0;position:relative;
+  }
+  .flow-item{position:relative;padding:0 18px;text-align:left;}
+  .flow-item .step-num{
+    font-family:"Manrope",sans-serif;font-weight:800;font-size:34px;color:var(--navy);
+    opacity:0.9;
+  }
+  .flow-item h4{font-size:15.5px;margin-top:10px;}
+  .flow-item p{font-size:13px;color:var(--muted);margin-top:8px;}
+  .flow-item::after{
+    content:"";position:absolute;top:20px;right:-8px;width:16px;height:1.5px;background:var(--navy);opacity:0.35;
+  }
+  .flow-item:last-child::after{display:none;}
+  @media (max-width:860px){
+    .flow-list{grid-template-columns:1fr;gap:28px;}
+    .flow-item::after{display:none;}
+    .flow-item{padding:0 4px;border-left:2px solid var(--border);padding-left:20px;}
+  }
+
+  /* ---------- voice ---------- */
+  .voice-photo-band{
+    border-radius:var(--radius-lg);overflow:hidden;margin-bottom:48px;
+    aspect-ratio:21/8;box-shadow:var(--shadow-soft);
+  }
+  .voice-photo-band img{width:100%;height:100%;object-fit:cover;}
+  .voice-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;}
+  .voice-card{
+    background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);
+    padding:28px 24px;box-shadow:var(--shadow-soft);
+  }
+  .voice-quote{font-size:14px;color:var(--text);line-height:1.9;}
+  .voice-person{display:flex;align-items:center;gap:12px;margin-top:20px;}
+  .avatar-circle{
+    width:42px;height:42px;border-radius:50%;background:var(--navy);color:#fff;
+    display:flex;align-items:center;justify-content:center;font-weight:800;font-size:14px;
+    font-family:"Manrope",sans-serif;flex:none;
+  }
+  .voice-person .p-name{font-size:13px;font-weight:700;}
+  .voice-person .p-role{font-size:11.5px;color:var(--muted);}
+  @media (max-width:860px){
+    .voice-cards{grid-template-columns:1fr;}
+  }
+
+  /* ---------- faq ---------- */
+  .faq-list{max-width:760px;margin:0 auto;display:flex;flex-direction:column;gap:12px;}
+  details.faq-item{
+    background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-md);
+    padding:4px 22px;
+  }
+  details.faq-item summary{
+    list-style:none;cursor:pointer;padding:18px 0;
+    display:flex;justify-content:space-between;align-items:center;gap:16px;
+    font-weight:700;font-size:15px;color:var(--navy);
+  }
+  details.faq-item summary::-webkit-details-marker{display:none;}
+  details.faq-item summary::after{
+    content:"+";font-family:"Manrope",sans-serif;font-size:20px;color:var(--navy);flex:none;
+    transition:transform .2s ease;
+  }
+  details.faq-item[open] summary::after{content:"−";}
+  .faq-a{padding:0 0 20px;color:var(--muted);font-size:14px;line-height:1.9;}
+
+  /* ---------- contact ---------- */
+  .contact-grid{display:grid;grid-template-columns:1fr 1.15fr;gap:48px;}
+  .contact-info{
+    background:var(--navy);color:#fff;border-radius:var(--radius-lg);
+    padding:36px 30px;height:fit-content;
+  }
+  .contact-info h3{color:#fff;font-size:19px;}
+  .contact-info p{color:rgba(255,255,255,0.78);font-size:13.5px;margin-top:14px;line-height:1.9;}
+  .contact-info .tel-big{
+    display:block;margin-top:22px;font-family:"Manrope",sans-serif;font-weight:800;
+    font-size:26px;color:#fff;
+  }
+  .contact-info .hours{margin-top:18px;font-size:13px;color:rgba(255,255,255,0.72);}
+  .contact-info .hours-table{margin-top:8px;width:100%;border-collapse:collapse;}
+  .contact-info .hours-table td{padding:6px 0;font-size:13px;color:rgba(255,255,255,0.85);border-bottom:1px solid rgba(255,255,255,0.14);}
+  .form-card{
+    background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);
+    padding:32px;box-shadow:var(--shadow-soft);
+  }
+  .form-row{margin-bottom:18px;}
+  .form-row label{display:block;font-size:13px;font-weight:700;margin-bottom:8px;color:var(--text);}
+  .form-row input,.form-row textarea,.form-row select{
+    width:100%;max-width:100%;padding:13px 14px;border-radius:10px;
+    border:1px solid var(--border);font-size:16px;font-family:inherit;background:#fff;color:var(--text);
+  }
+  .form-row textarea{resize:vertical;min-height:110px;}
+  .form-two{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+  .form-submit{width:100%;margin-top:6px;}
+  .form-thanks{
+    display:none;margin-top:16px;padding:14px 16px;border-radius:10px;
+    background:var(--navy-soft);color:var(--navy);font-size:13.5px;font-weight:600;
+  }
+  .form-thanks.is-shown{display:block;}
+  @media (max-width:900px){
+    .contact-grid{grid-template-columns:1fr;}
+    .form-two{grid-template-columns:1fr;}
+  }
+
+  /* ---------- footer ---------- */
+  footer{background:var(--navy);color:rgba(255,255,255,0.72);padding:56px 0 110px;}
+  .footer-inner{display:flex;flex-wrap:wrap;justify-content:space-between;gap:32px;}
+  .footer-brand h4{color:#fff;font-size:17px;}
+  .footer-brand p{margin-top:10px;font-size:12.5px;max-width:280px;color:rgba(255,255,255,0.6);}
+  .footer-links{display:flex;gap:56px;flex-wrap:wrap;}
+  .footer-links h5{color:#fff;font-size:13px;margin-bottom:14px;letter-spacing:0.06em;}
+  .footer-links li{margin-bottom:10px;}
+  .footer-links a{font-size:13px;color:rgba(255,255,255,0.68);}
+  .footer-bottom{
+    margin-top:44px;padding-top:24px;border-top:1px solid rgba(255,255,255,0.14);
+    font-size:11.5px;color:rgba(255,255,255,0.5);line-height:1.9;
+  }
+  .footer-disclaimer{
+    font-size:12px;color:rgba(255,255,255,0.72);margin-bottom:14px;
+    background:rgba(255,255,255,0.06);padding:14px 16px;border-radius:10px;
+  }
+
+  /* ---------- sticky mobile cta ---------- */
+  .sticky-cta{
+    position:fixed;left:0;right:0;bottom:0;z-index:65;
+    display:none;gap:10px;padding:12px 16px;
+    background:#fff;border-top:1px solid var(--border);
+    box-shadow:0 -8px 24px rgba(22,35,63,0.12);
+  }
+  .sticky-cta a{flex:1;text-align:center;}
+  @media (max-width:680px){
+    .sticky-cta{display:flex;}
+    body{padding-bottom:76px;}
+  }
+</style>
+</head>
+<body id="top">
+
+<header class="site-header" id="siteHeader">
+  <div class="header-inner">
+    <a href="#top" class="brand">
+      <span class="brand-main">そら経営相談</span>
+      <span class="brand-sub">ONLINE BUSINESS ADVISORY</span>
+    </a>
+    <nav class="header-nav-desktop">
+      <a href="#service">サービス紹介</a>
+      <a href="#features">特徴</a>
+      <a href="#flow">ご利用の流れ</a>
+      <a href="#voice">お客様の声</a>
+      <a href="#faq">よくある質問</a>
+      <a href="#contact">お問い合わせ</a>
+    </nav>
+    <div class="header-actions">
+      <a class="tel-link" href="tel:0480000000"><span class="tel-label">048-000-0000</span></a>
+      <a class="btn btn-primary btn-sm" href="#contact">無料相談を予約</a>
+      <button class="hamburger" id="hamburgerBtn" aria-expanded="false" aria-controls="mobileNav" aria-label="メニューを開く">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<div class="nav-scrim" id="navScrim"></div>
+<nav class="mobile-nav" id="mobileNav" aria-hidden="true">
+  <ul>
+    <li><a href="#service">サービス紹介</a></li>
+    <li><a href="#features">特徴</a></li>
+    <li><a href="#flow">ご利用の流れ</a></li>
+    <li><a href="#voice">お客様の声</a></li>
+    <li><a href="#faq">よくある質問</a></li>
+    <li><a href="#contact">お問い合わせ</a></li>
+  </ul>
+  <a class="btn btn-primary" href="#contact">無料相談を予約する</a>
+  <a class="btn btn-outline" href="tel:0480000000" style="margin-top:12px;color:var(--navy);border-color:var(--navy);">電話で相談する</a>
+</nav>
+
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="wrap hero-inner">
+    <span class="eyebrow">オンライン経営相談サービス</span>
+    <h1>決断に、伴走を。</h1>
+    <p class="hero-lead">
+      「この判断で合っているのか」——ひとりで抱え込みがちな経営の迷いに、
+      国家資格を持つ専門家がチャットとビデオ通話で並走します。予約は最短翌日、初回相談は無料です。
+    </p>
+    <div class="hero-cta">
+      <a class="btn btn-primary" href="#contact">無料相談を予約する</a>
+      <a class="btn btn-outline" href="tel:0480000000">電話で相談する(048-000-0000)</a>
+    </div>
+    <div class="trust-band">
+      <div class="trust-item"><span class="num">120<span style="font-size:14px;">名+</span></span><span class="label">登録専門家数</span></div>
+      <div class="trust-item"><span class="num">8,200<span style="font-size:14px;">件+</span></span><span class="label">累計相談件数</span></div>
+      <div class="trust-item"><span class="num">96<span style="font-size:14px;">%</span></span><span class="label">相談満足度</span></div>
+    </div>
+    <p class="note">※上記の登録専門家数・相談件数・満足度はサービス紹介用の仮の数値です。</p>
+  </div>
+</section>
+
+<section class="section" id="service">
+  <div class="wrap">
+    <div class="service-grid reveal">
+      <div class="service-copy">
+        <span class="eyebrow">SERVICE</span>
+        <h2 style="font-size:clamp(22px,3.6vw,30px);margin-top:14px;">そら経営相談とは</h2>
+        <p>
+          「そら経営相談」は、中小企業診断士・税理士など国家資格を持つ専門家に、
+          チャットとビデオ通話で何度でも相談できる月額制のオンライン経営アドバイザリーサービスです。
+          税務や資金繰り、販促の数字づくりまで、経営者がひとりで判断しきれない場面に寄り添います。
+        </p>
+        <p>
+          相談内容とアドバイスはすべてチャットに記録されるため、あとから読み返して社内共有にも使えます。
+          対応エリアはオンライン全国対応、店舗や事務所を離れる時間を取れない方でも利用しやすい設計です。
+        </p>
+        <div class="feature-mini-list">
+          <div class="feature-mini">
+            <span class="icon-badge">
+              <svg viewBox="0 0 24 24"><path d="M4 5h16v11H8l-4 4V5z" stroke-linejoin="round"/></svg>
+            </span>
+            <div>
+              <h4>いつでもチャット相談</h4>
+              <p>営業時間内であれば当日中に返信、思いついた疑問をすぐ相談できます。</p>
+            </div>
+          </div>
+          <div class="feature-mini">
+            <span class="icon-badge">
+              <svg viewBox="0 0 24 24"><rect x="3" y="6" width="14" height="12" rx="2"/><path d="M21 8l-4 3 4 3V8z" stroke-linejoin="round"/></svg>
+            </span>
+            <div>
+              <h4>月1回のビデオ面談</h4>
+              <p>資料を画面共有しながら、数字の背景まで踏み込んで壁打ちできます。</p>
+            </div>
+          </div>
+          <div class="feature-mini">
+            <span class="icon-badge">
+              <svg viewBox="0 0 24 24"><path d="M6 3h9l4 4v14H6V3z"/><path d="M9 12h6M9 15h6M9 9h3" stroke-linecap="round"/></svg>
+            </span>
+            <div>
+              <h4>資料・数値の添削</h4>
+              <p>事業計画書や見積書をアップロードすると、専門家が具体的に手直しします。</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="service-photo">
+        <img src="https://images.unsplash.com/photo-1606336782667-775252a0e5b0?auto=format&fit=crop&w=1200&q=70" alt="ガラス張りのオフィスビルのファサード" loading="lazy">
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section-alt" id="features">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">FEATURES</span>
+      <h2>選ばれる理由</h2>
+      <p>「相談したいのに相手がいない」という経営者の悩みから設計しました。</p>
+    </div>
+    <div class="feature-cards reveal">
+      <div class="feature-card">
+        <span class="idx">01</span>
+        <h3>相談し放題・追加費用なし</h3>
+        <p>月額固定で回数制限なし。相談のたびに費用を気にする必要がありません。</p>
+      </div>
+      <div class="feature-card">
+        <span class="idx">02</span>
+        <h3>全員が国家資格保有者</h3>
+        <p>中小企業診断士・税理士・社会保険労務士など、専門領域ごとに担当が変わります。</p>
+      </div>
+      <div class="feature-card">
+        <span class="idx">03</span>
+        <h3>やり取りが記録に残る</h3>
+        <p>相談履歴と資料はチャットに蓄積され、いつでも読み返して社内共有できます。</p>
+      </div>
+      <div class="feature-card">
+        <span class="idx">04</span>
+        <h3>解約はオンラインで完結</h3>
+        <p>違約金・解約手数料なし。合わないと感じたら管理画面からすぐに手続きできます。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="flow">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">FLOW</span>
+      <h2>ご利用の流れ</h2>
+      <p>お申し込みから初回相談まで、最短で翌日にお会いできます。</p>
+    </div>
+    <div class="flow-list reveal">
+      <div class="flow-item">
+        <span class="step-num">01</span>
+        <h4>無料相談を予約</h4>
+        <p>フォームまたはお電話から、ご希望の日時を送信してください。</p>
+      </div>
+      <div class="flow-item">
+        <span class="step-num">02</span>
+        <h4>専門家とマッチング</h4>
+        <p>相談内容に応じて、担当の専門家を事務局が選定しご連絡します。</p>
+      </div>
+      <div class="flow-item">
+        <span class="step-num">03</span>
+        <h4>初回ヒアリング(30分)</h4>
+        <p>現状の課題と目指したい状態をビデオ通話で丁寧にお伺いします。</p>
+      </div>
+      <div class="flow-item">
+        <span class="step-num">04</span>
+        <h4>月額プランでスタート</h4>
+        <p>ご納得いただいた上で契約、翌日からチャット相談し放題が始まります。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section-alt" id="voice">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">VOICE</span>
+      <h2>ご利用いただいている方の声</h2>
+      <p>※本セクションはサービス紹介用のサンプルの声です。</p>
+    </div>
+    <div class="voice-photo-band reveal">
+      <img src="https://images.unsplash.com/photo-1664596350962-603b0a41524a?auto=format&fit=crop&w=1200&q=70" alt="都心のオフィス街を行き交う人々" loading="lazy">
+    </div>
+    <div class="voice-cards reveal">
+      <div class="voice-card">
+        <p class="voice-quote">
+          資金繰りの相談を夜にチャットで送ったところ、翌朝には具体的な対応策が返ってきて驚きました。
+          顧問税理士とは別に、気軽に聞ける窓口があるのは心強いです。
+        </p>
+        <div class="voice-person">
+          <span class="avatar-circle">T</span>
+          <div>
+            <p class="p-name">飲食業 経営者 T.S様</p>
+            <p class="p-role">利用歴 8ヶ月</p>
+          </div>
+        </div>
+      </div>
+      <div class="voice-card">
+        <p class="voice-quote">
+          事業計画書を添削してもらい、金融機関からの評価が上がりました。
+          月1回の面談で数字の意味を言葉で説明できるようになったのも収穫です。
+        </p>
+        <div class="voice-person">
+          <span class="avatar-circle">K</span>
+          <div>
+            <p class="p-name">小売業 経営者 K.M様</p>
+            <p class="p-role">利用歴 1年2ヶ月</p>
+          </div>
+        </div>
+      </div>
+      <div class="voice-card">
+        <p class="voice-quote">
+          相談内容がすべて記録に残るので、新しく入ったスタッフへの引き継ぎにも使えています。
+          解約手続きが簡単なのも安心して始められた理由です。
+        </p>
+        <div class="voice-person">
+          <span class="avatar-circle">N</span>
+          <div>
+            <p class="p-name">サービス業 経営者 N.Y様</p>
+            <p class="p-role">利用歴 5ヶ月</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="faq">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">FAQ</span>
+      <h2>よくある質問</h2>
+    </div>
+    <div class="faq-list reveal">
+      <details class="faq-item">
+        <summary>初回相談は本当に無料ですか。</summary>
+        <div class="faq-a">はい、初回のヒアリング(30分)は無料です。ご契約の意思がない場合も費用は発生しません。</div>
+      </details>
+      <details class="faq-item">
+        <summary>解約はいつでもできますか。</summary>
+        <div class="faq-a">管理画面からいつでも手続き可能です。違約金・解約手数料はかかりません。</div>
+      </details>
+      <details class="faq-item">
+        <summary>対応エリアはどこですか。</summary>
+        <div class="faq-a">オンライン完結のため全国どこからでもご利用いただけます。店舗や事務所を離れる必要はありません。</div>
+      </details>
+      <details class="faq-item">
+        <summary>相談内容が他の方に知られることはありませんか。</summary>
+        <div class="faq-a">担当専門家には守秘義務があり、相談内容や資料は本サービス以外の目的で利用することはありません。</div>
+      </details>
+      <details class="faq-item">
+        <summary>支払い方法を教えてください。</summary>
+        <div class="faq-a">クレジットカードによる月次自動決済に対応しています(※本ページ紹介の決済手段は仮の内容です)。</div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<section class="section section-alt" id="contact">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">CONTACT</span>
+      <h2>まずは無料相談から</h2>
+      <p>ご記入いただいた内容をもとに、事務局から折り返しご連絡いたします。</p>
+    </div>
+    <div class="contact-grid reveal">
+      <div class="contact-info">
+        <h3>お電話でのお問い合わせ</h3>
+        <p>フォームでのご入力が難しい場合は、お電話でもご相談を承っております。</p>
+        <a class="tel-big" href="tel:0480000000">048-000-0000</a>
+        <div class="hours">
+          <table class="hours-table">
+            <tr><td>平日</td><td>9:00〜18:00</td></tr>
+            <tr><td>土・日・祝</td><td>休業</td></tr>
+          </table>
+        </div>
+        <p style="margin-top:18px;font-size:11.5px;">※電話番号・営業時間は仮の内容です。</p>
+      </div>
+      <div class="form-card">
+        <form id="contactForm">
+          <div class="form-row">
+            <label for="f-name">お名前</label>
+            <input type="text" id="f-name" name="name" placeholder="山田 太郎" required>
+          </div>
+          <div class="form-two">
+            <div class="form-row">
+              <label for="f-company">会社名・屋号</label>
+              <input type="text" id="f-company" name="company" placeholder="そら商事">
+            </div>
+            <div class="form-row">
+              <label for="f-tel">電話番号</label>
+              <input type="tel" id="f-tel" name="tel" placeholder="090-0000-0000">
+            </div>
+          </div>
+          <div class="form-row">
+            <label for="f-mail">メールアドレス</label>
+            <input type="email" id="f-mail" name="email" placeholder="example@mail.com" required>
+          </div>
+          <div class="form-row">
+            <label for="f-msg">ご相談内容</label>
+            <textarea id="f-msg" name="message" placeholder="資金繰りについて相談したい、など"></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary form-submit">無料相談を予約する</button>
+          <p class="form-thanks" id="formThanks">送信ありがとうございます。事務局よりご連絡いたします。(※本ページはデモのため実際には送信されません)</p>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p class="footer-disclaimer">
+      ※本ページは制作サンプル(デモ)です。掲載の内容・数値は仮のもので、写真はイメージです。
+      実制作ではご提供の文章・構成案および写真素材にもとづき制作いたします。
+    </p>
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <h4>そら経営相談(サンプル)</h4>
+        <p>オンライン経営相談サービスの紹介LPデザインサンプルです。募集内容にあわせて構成・情報設計を作成しました。</p>
+      </div>
+      <div class="footer-links">
+        <div>
+          <h5>ページ内リンク</h5>
+          <ul>
+            <li><a href="#service">サービス紹介</a></li>
+            <li><a href="#features">特徴</a></li>
+            <li><a href="#flow">ご利用の流れ</a></li>
+          </ul>
+        </div>
+        <div>
+          <h5>お問い合わせ</h5>
+          <ul>
+            <li><a href="#voice">お客様の声</a></li>
+            <li><a href="#faq">よくある質問</a></li>
+            <li><a href="#contact">お問い合わせ</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      © 2026 そら経営相談(サンプル) 本ページはデザイン提案用の制作サンプルであり、実在のサービスとは関係ありません。
+    </div>
+  </div>
+</footer>
+
+<div class="sticky-cta">
+  <a class="btn btn-outline" href="tel:0480000000" style="border-color:var(--navy);color:var(--navy);">電話で相談</a>
+  <a class="btn btn-primary" href="#contact">無料相談を予約</a>
+</div>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "そら経営相談",
+  "serviceType": "経営相談・コンサルティング",
+  "description": "チャットとビデオ通話で国家資格保有の専門家に何度でも相談できる月額制のオンライン経営アドバイザリーサービス(制作サンプル)。",
+  "areaServed": "JP",
+  "provider": {
+    "@type": "Organization",
+    "name": "そら経営相談(サンプル)",
+    "telephone": "048-000-0000"
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "初回相談は本当に無料ですか。",
+      "acceptedAnswer": { "@type": "Answer", "text": "はい、初回のヒアリング(30分)は無料です。ご契約の意思がない場合も費用は発生しません。" }
+    },
+    {
+      "@type": "Question",
+      "name": "解約はいつでもできますか。",
+      "acceptedAnswer": { "@type": "Answer", "text": "管理画面からいつでも手続き可能です。違約金・解約手数料はかかりません。" }
+    },
+    {
+      "@type": "Question",
+      "name": "対応エリアはどこですか。",
+      "acceptedAnswer": { "@type": "Answer", "text": "オンライン完結のため全国どこからでもご利用いただけます。" }
+    }
+  ]
+}
+</script>
+
+<script>
+(function(){
+  var hamburgerBtn = document.getElementById('hamburgerBtn');
+  var mobileNav = document.getElementById('mobileNav');
+  var navScrim = document.getElementById('navScrim');
+
+  function closeNav(){
+    mobileNav.classList.remove('is-open');
+    mobileNav.setAttribute('aria-hidden','true');
+    navScrim.classList.remove('is-open');
+    hamburgerBtn.setAttribute('aria-expanded','false');
+  }
+  function openNav(){
+    mobileNav.classList.add('is-open');
+    mobileNav.setAttribute('aria-hidden','false');
+    navScrim.classList.add('is-open');
+    hamburgerBtn.setAttribute('aria-expanded','true');
+  }
+  hamburgerBtn.addEventListener('click', function(){
+    var isOpen = mobileNav.classList.contains('is-open');
+    isOpen ? closeNav() : openNav();
+  });
+  navScrim.addEventListener('click', closeNav);
+  mobileNav.querySelectorAll('a').forEach(function(a){
+    a.addEventListener('click', closeNav);
+  });
+
+  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var reveals = document.querySelectorAll('.reveal');
+  if (reduceMotion || !('IntersectionObserver' in window)) {
+    reveals.forEach(function(el){ el.classList.add('is-visible'); });
+  } else {
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+    reveals.forEach(function(el){ io.observe(el); });
+  }
+
+  var form = document.getElementById('contactForm');
+  var thanks = document.getElementById('formThanks');
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    thanks.classList.add('is-shown');
+  });
+})();
+</script>
+
+</body>
+</html>
