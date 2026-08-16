@@ -1,0 +1,986 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Claude Code Web実装パートナー募集｜コードクラフトWeb制作サンプル（デモ）</title>
+<meta name="description" content="HTMLワイヤーをもとにClaude CodeでWebページを実装いただけるパートナーを募集。デザイン・構成は弊社で用意、実装に集中できるフルリモートのお仕事です。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Zen+Kaku+Gothic+New:wght@500;700;900&family=Manrope:wght@500;700;800&display=swap" rel="stylesheet">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org/",
+  "@type": "JobPosting",
+  "title": "Claude Codeを使用したWeb実装パートナー（業務委託）",
+  "description": "弊社が用意するHTML形式のワイヤーフレームをもとに、Claude Codeを使用してWebページを実装いただけるパートナーを募集します。HTML/CSS/JavaScriptの調整、PC・スマホのレスポンシブ対応、表示崩れの修正などをお願いします。デザイン・構成・文章は基本的に弊社で用意します。",
+  "datePosted": "2026-08-16",
+  "validThrough": "2026-12-31",
+  "employmentType": "CONTRACTOR",
+  "hiringOrganization": {
+    "@type": "Organization",
+    "name": "コードクラフトWeb制作サンプル（デモ）",
+    "sameAs": "https://example.com"
+  },
+  "jobLocationType": "TELECOMMUTE",
+  "applicantLocationRequirements": {
+    "@type": "Country",
+    "name": "Japan"
+  },
+  "baseSalary": {
+    "@type": "MonetaryAmount",
+    "currency": "JPY",
+    "value": {
+      "@type": "QuantitativeValue",
+      "value": "ボリューム・経験に応じて相談",
+      "unitText": "案件ごと"
+    }
+  }
+}
+</script>
+<style>
+  :root{
+    --navy:#16264a;
+    --navy-deep:#0d1730;
+    --bg:#ffffff;
+    --bg-soft:#f6f7fb;
+    --text:#1b2133;
+    --text-soft:#5b6478;
+    --border:#e5e8f0;
+    --radius-pill:100px;
+    --shadow:0 14px 34px rgba(22,38,74,0.14);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    font-family:"Noto Sans JP",sans-serif;
+    color:var(--text);
+    background:var(--bg);
+    -webkit-font-smoothing:antialiased;
+    font-feature-settings:"palt";
+    letter-spacing:0.02em;
+    overflow-x:hidden;
+  }
+  img{max-width:100%;height:auto;display:block;}
+  a{color:inherit;text-decoration:none;}
+  ul{list-style:none;margin:0;padding:0;}
+  h1,h2,h3,h4{
+    font-family:"Zen Kaku Gothic New",sans-serif;
+    margin:0;
+    line-height:1.4;
+  }
+  p{line-height:1.9;margin:0;}
+  .num{font-family:"Manrope",sans-serif;}
+  .wrap{
+    width:100%;
+    max-width:1080px;
+    margin:0 auto;
+    padding:0 24px;
+  }
+  .section{
+    padding:96px 0;
+  }
+  @media (max-width:768px){
+    .section{padding:64px 0;}
+  }
+  .section-soft{background:var(--bg-soft);}
+  .eyebrow{
+    display:inline-block;
+    font-family:"Manrope",sans-serif;
+    font-size:12px;
+    font-weight:800;
+    letter-spacing:0.18em;
+    color:var(--navy);
+    background:rgba(22,38,74,0.08);
+    padding:6px 16px;
+    border-radius:var(--radius-pill);
+    margin-bottom:18px;
+  }
+  .section-title{
+    font-size:clamp(24px,4.2vw,36px);
+    font-weight:900;
+    letter-spacing:0.04em;
+  }
+  .section-lead{
+    color:var(--text-soft);
+    margin-top:14px;
+    max-width:640px;
+    font-size:15px;
+  }
+  .btn{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+    padding:16px 32px;
+    border-radius:var(--radius-pill);
+    font-weight:700;
+    font-size:15px;
+    box-shadow:var(--shadow);
+    transition:transform .2s ease, box-shadow .2s ease;
+    border:2px solid transparent;
+    cursor:pointer;
+  }
+  .btn:hover{transform:translateY(-2px);}
+  .btn-primary{background:var(--navy);color:#fff;}
+  .btn-outline{background:#fff;color:var(--navy);border-color:var(--navy);box-shadow:none;}
+
+  /* ---- header ---- */
+  header{
+    position:fixed;
+    top:0;left:0;right:0;
+    z-index:60;
+    background:rgba(255,255,255,0.86);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--border);
+  }
+  .header-in{
+    max-width:1080px;
+    margin:0 auto;
+    padding:14px 24px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+  }
+  .logo{display:flex;flex-direction:column;line-height:1.1;}
+  .logo strong{font-family:"Zen Kaku Gothic New",sans-serif;font-size:18px;font-weight:900;color:var(--navy);letter-spacing:0.05em;}
+  .logo span{font-size:10px;color:var(--text-soft);letter-spacing:0.1em;margin-top:2px;}
+  .nav-desktop{display:flex;gap:28px;align-items:center;}
+  .nav-desktop a{font-size:14px;font-weight:500;color:var(--text);}
+  .nav-desktop a:hover{color:var(--navy);}
+  .nav-cta{padding:11px 22px;font-size:13px;}
+  .hamburger{
+    display:none;
+    width:40px;height:40px;
+    border-radius:50%;
+    border:1px solid var(--border);
+    background:#fff;
+    position:relative;
+    cursor:pointer;
+  }
+  .hamburger span{
+    position:absolute;left:10px;right:10px;
+    height:2px;background:var(--navy);
+    transition:transform .25s ease, opacity .25s ease;
+  }
+  .hamburger span:nth-child(1){top:14px;}
+  .hamburger span:nth-child(2){top:19px;}
+  .hamburger span:nth-child(3){top:24px;}
+  body.nav-open .hamburger span:nth-child(1){transform:translateY(5px) rotate(45deg);}
+  body.nav-open .hamburger span:nth-child(2){opacity:0;}
+  body.nav-open .hamburger span:nth-child(3){transform:translateY(-5px) rotate(-45deg);}
+
+  /* nav drawer kept OUTSIDE header to avoid backdrop-filter containing block bug */
+  #navDrawer{
+    position:fixed;
+    top:0;right:0;bottom:0;
+    width:min(78vw,320px);
+    max-width:100%;
+    background:var(--navy-deep);
+    z-index:70;
+    padding:100px 32px 40px;
+    transform:translateX(100%);
+    transition:transform .3s ease;
+  }
+  body.nav-open #navDrawer{transform:translateX(0);}
+  #navDrawer a{
+    display:block;
+    color:#fff;
+    font-size:16px;
+    font-weight:500;
+    padding:14px 0;
+    border-bottom:1px solid rgba(255,255,255,0.12);
+  }
+  #navScrim{
+    position:fixed;inset:0;
+    background:rgba(13,23,48,0.5);
+    z-index:65;
+    opacity:0;pointer-events:none;
+    transition:opacity .3s ease;
+  }
+  body.nav-open #navScrim{opacity:1;pointer-events:auto;}
+
+  /* ---- hero ---- */
+  .hero{
+    position:relative;
+    margin-top:64px;
+    min-height:640px;
+    display:flex;
+    align-items:center;
+    color:#fff;
+    overflow:hidden;
+  }
+  .hero-bg{
+    position:absolute;inset:0;
+    background:url('https://images.unsplash.com/photo-1629875499750-a31b83446598?auto=format&fit=crop&w=1200&q=70') center/cover;
+  }
+  .hero-bg::after{
+    content:"";
+    position:absolute;inset:0;
+    background:linear-gradient(180deg, rgba(13,23,48,0.86) 0%, rgba(13,23,48,0.78) 55%, rgba(13,23,48,0.92) 100%);
+  }
+  .hero-in{
+    position:relative;
+    z-index:2;
+    width:100%;
+    max-width:1080px;
+    margin:0 auto;
+    padding:80px 24px;
+  }
+  .hero-eyebrow{
+    font-family:"Manrope",sans-serif;
+    font-size:12px;
+    font-weight:800;
+    letter-spacing:0.2em;
+    color:#c9d3ec;
+    border:1px solid rgba(255,255,255,0.3);
+    display:inline-block;
+    padding:7px 16px;
+    border-radius:var(--radius-pill);
+    margin-bottom:24px;
+  }
+  .hero h1{
+    font-size:clamp(30px,5.6vw,52px);
+    font-weight:900;
+    letter-spacing:0.02em;
+    max-width:15ch;
+  }
+  .hero-sub{
+    margin-top:22px;
+    font-size:16px;
+    color:#dfe4f2;
+    max-width:44ch;
+    line-height:1.9;
+  }
+  .hero-cta{
+    display:flex;
+    flex-wrap:wrap;
+    gap:14px;
+    margin-top:36px;
+  }
+  .hero .btn-outline{background:transparent;color:#fff;border-color:rgba(255,255,255,0.5);}
+  .trust-bar{
+    position:relative;
+    z-index:2;
+    margin-top:52px;
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:1px;
+    background:rgba(255,255,255,0.16);
+    border:1px solid rgba(255,255,255,0.16);
+    border-radius:16px;
+    overflow:hidden;
+    max-width:720px;
+  }
+  .trust-item{
+    background:rgba(13,23,48,0.35);
+    padding:18px 14px;
+    text-align:center;
+  }
+  .trust-item .num{font-size:20px;font-weight:800;display:block;}
+  .trust-item small{font-size:11px;color:#c9d3ec;display:block;margin-top:4px;letter-spacing:0.03em;}
+
+  /* ---- checklist ---- */
+  .checklist{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:16px;
+    margin-top:40px;
+  }
+  @media (max-width:640px){.checklist{grid-template-columns:1fr;}}
+  .check-item{
+    display:flex;
+    gap:14px;
+    align-items:flex-start;
+    background:#fff;
+    border:1px solid var(--border);
+    border-radius:14px;
+    padding:18px 20px;
+  }
+  .check-mark{
+    flex:none;
+    width:24px;height:24px;
+    border-radius:50%;
+    background:var(--navy);
+    position:relative;
+    margin-top:2px;
+  }
+  .check-mark::after{
+    content:"";
+    position:absolute;
+    left:7px;top:4px;
+    width:6px;height:11px;
+    border-right:2px solid #fff;
+    border-bottom:2px solid #fff;
+    transform:rotate(45deg);
+  }
+  .check-item p{font-size:14px;color:var(--text-soft);}
+  .check-item strong{display:block;font-size:15px;margin-bottom:4px;}
+
+  /* ---- work cards ---- */
+  .work-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+    gap:20px;
+    margin-top:44px;
+  }
+  .work-card{
+    background:#fff;
+    border:1px solid var(--border);
+    border-radius:18px;
+    padding:28px 24px;
+    box-shadow:0 10px 26px rgba(22,38,74,0.06);
+  }
+  .work-icon{
+    width:44px;height:44px;
+    border-radius:12px;
+    background:rgba(22,38,74,0.08);
+    display:flex;align-items:center;justify-content:center;
+    margin-bottom:18px;
+  }
+  .work-card h3{font-size:17px;font-weight:700;margin-bottom:10px;}
+  .work-card p{font-size:13.5px;color:var(--text-soft);}
+
+  /* ---- features (差別化3) ---- */
+  .feature-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:24px;
+    margin-top:48px;
+  }
+  @media (max-width:900px){.feature-grid{grid-template-columns:1fr;}}
+  .feature-card{
+    text-align:center;
+    padding:36px 24px;
+    border-radius:18px;
+    background:var(--bg-soft);
+    border:1px solid var(--border);
+  }
+  .feature-num{
+    font-family:"Manrope",sans-serif;
+    font-size:13px;
+    font-weight:800;
+    color:var(--navy);
+    letter-spacing:0.1em;
+  }
+  .feature-card h3{margin-top:12px;font-size:18px;font-weight:700;}
+  .feature-card p{margin-top:12px;font-size:13.5px;color:var(--text-soft);}
+
+  /* ---- locality band ---- */
+  .locality{
+    position:relative;
+    min-height:340px;
+    display:flex;
+    align-items:center;
+    color:#fff;
+    overflow:hidden;
+  }
+  .locality-bg{
+    position:absolute;inset:0;
+    background:url('https://images.unsplash.com/photo-1664596350962-603b0a41524a?auto=format&fit=crop&w=1200&q=70') center/cover;
+    filter:grayscale(15%);
+  }
+  .locality-bg::after{
+    content:"";
+    position:absolute;inset:0;
+    background:linear-gradient(90deg, rgba(13,23,48,0.88) 0%, rgba(13,23,48,0.55) 60%, rgba(13,23,48,0.3) 100%);
+  }
+  .locality-in{position:relative;z-index:2;max-width:520px;}
+  .locality h3{font-size:22px;font-weight:800;}
+  .locality p{margin-top:14px;font-size:14px;color:#e2e6f2;}
+  .locality .photo-note{font-size:11px;color:#b9c1d9;margin-top:16px;}
+
+  /* ---- flow ---- */
+  .flow-list{
+    margin-top:48px;
+    display:grid;
+    grid-template-columns:repeat(5,1fr);
+    gap:16px;
+  }
+  @media (max-width:900px){.flow-list{grid-template-columns:repeat(2,1fr);}}
+  @media (max-width:480px){.flow-list{grid-template-columns:1fr;}}
+  .flow-item{
+    background:#fff;
+    border:1px solid var(--border);
+    border-radius:16px;
+    padding:24px 18px;
+    position:relative;
+  }
+  .flow-item .flow-num{
+    font-family:"Manrope",sans-serif;
+    font-weight:800;
+    font-size:22px;
+    color:var(--navy);
+  }
+  .flow-item h4{font-size:14px;font-weight:700;margin-top:10px;}
+  .flow-item p{font-size:12.5px;color:var(--text-soft);margin-top:8px;}
+
+  /* ---- voice ---- */
+  .voice-card{
+    display:flex;
+    gap:28px;
+    align-items:center;
+    background:var(--bg-soft);
+    border-radius:20px;
+    padding:32px;
+    margin-top:44px;
+    border:1px solid var(--border);
+  }
+  @media (max-width:640px){.voice-card{flex-direction:column;text-align:center;}}
+  .voice-photo{
+    flex:none;
+    width:120px;height:120px;
+    border-radius:50%;
+    overflow:hidden;
+    border:3px solid #fff;
+    box-shadow:var(--shadow);
+  }
+  .voice-photo img{width:100%;height:100%;object-fit:cover;}
+  .voice-text p{font-size:14.5px;color:var(--text);line-height:1.9;}
+  .voice-name{margin-top:14px;font-size:13px;font-weight:700;color:var(--navy);}
+  .voice-role{font-size:11.5px;color:var(--text-soft);}
+
+  /* ---- table (要項/時間) ---- */
+  .req-table{
+    width:100%;
+    border-collapse:collapse;
+    margin-top:44px;
+    font-size:14px;
+  }
+  .req-table th,.req-table td{
+    text-align:left;
+    padding:18px 16px;
+    border-bottom:1px solid var(--border);
+    vertical-align:top;
+  }
+  .req-table th{
+    width:150px;
+    color:var(--navy);
+    font-weight:700;
+    font-size:13px;
+    white-space:nowrap;
+  }
+  .req-table td{color:var(--text-soft);}
+  .note-line{
+    margin-top:20px;
+    font-size:12px;
+    color:var(--text-soft);
+    background:var(--bg-soft);
+    border-radius:10px;
+    padding:12px 16px;
+  }
+
+  /* ---- faq ---- */
+  .faq-item{
+    border-bottom:1px solid var(--border);
+  }
+  .faq-q{
+    width:100%;
+    text-align:left;
+    background:none;
+    border:none;
+    padding:22px 4px;
+    font-size:15px;
+    font-weight:700;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    cursor:pointer;
+    color:var(--text);
+    font-family:inherit;
+  }
+  .faq-q .sign{
+    flex:none;
+    width:22px;height:22px;
+    border-radius:50%;
+    border:1.5px solid var(--navy);
+    position:relative;
+  }
+  .faq-q .sign::before,.faq-q .sign::after{
+    content:"";
+    position:absolute;
+    background:var(--navy);
+    left:50%;top:50%;
+    transform:translate(-50%,-50%);
+  }
+  .faq-q .sign::before{width:10px;height:1.6px;}
+  .faq-q .sign::after{width:1.6px;height:10px;transition:transform .25s ease;}
+  .faq-item.open .faq-q .sign::after{transform:translate(-50%,-50%) rotate(90deg) scale(0);}
+  .faq-a{
+    max-height:0;
+    overflow:hidden;
+    transition:max-height .3s ease;
+  }
+  .faq-a p{padding:0 4px 22px;font-size:13.5px;color:var(--text-soft);}
+
+  /* ---- form ---- */
+  .apply-form{
+    margin-top:44px;
+    background:#fff;
+    border:1px solid var(--border);
+    border-radius:20px;
+    padding:36px;
+    box-shadow:var(--shadow);
+  }
+  @media (max-width:640px){.apply-form{padding:24px 18px;}}
+  .form-row{margin-bottom:20px;}
+  .form-row label{
+    display:block;
+    font-size:13px;
+    font-weight:700;
+    margin-bottom:8px;
+    color:var(--navy);
+  }
+  .form-row .req{color:#b23b3b;font-size:11px;margin-left:4px;}
+  .form-row input,.form-row textarea{
+    width:100%;
+    max-width:100%;
+    border:1px solid var(--border);
+    border-radius:10px;
+    padding:13px 14px;
+    font-size:16px;
+    font-family:inherit;
+    background:var(--bg-soft);
+  }
+  .form-row textarea{min-height:110px;resize:vertical;}
+  .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:0 20px;}
+  @media (max-width:640px){.form-grid{grid-template-columns:1fr;}}
+  #formMsg{
+    margin-top:16px;
+    font-size:13px;
+    color:var(--navy);
+    display:none;
+    background:var(--bg-soft);
+    padding:14px 16px;
+    border-radius:10px;
+  }
+
+  /* ---- footer ---- */
+  footer{
+    background:var(--navy-deep);
+    color:#c9d0e3;
+    padding:64px 0 120px;
+  }
+  .foot-grid{
+    display:grid;
+    grid-template-columns:1.4fr 1fr 1fr;
+    gap:36px;
+  }
+  @media (max-width:768px){.foot-grid{grid-template-columns:1fr;gap:28px;}}
+  .foot-logo{font-family:"Zen Kaku Gothic New",sans-serif;font-size:18px;font-weight:900;color:#fff;}
+  .foot-grid h4{font-size:13px;color:#fff;margin-bottom:14px;letter-spacing:0.05em;}
+  .foot-grid p,.foot-grid a{font-size:13px;line-height:2;color:#a9b1c9;}
+  .foot-disclaimer{
+    margin-top:48px;
+    padding-top:24px;
+    border-top:1px solid rgba(255,255,255,0.12);
+    font-size:11.5px;
+    color:#8891ab;
+    line-height:1.9;
+  }
+
+  /* ---- sticky mobile cta ---- */
+  .mobile-cta{
+    display:none;
+    position:fixed;
+    left:0;right:0;bottom:0;
+    z-index:55;
+    background:#fff;
+    border-top:1px solid var(--border);
+    padding:10px 14px;
+    gap:10px;
+    box-shadow:0 -8px 24px rgba(0,0,0,0.08);
+  }
+  .mobile-cta a{
+    flex:1;
+    text-align:center;
+    padding:14px 8px;
+    border-radius:var(--radius-pill);
+    font-size:13.5px;
+    font-weight:700;
+  }
+  @media (max-width:768px){
+    .mobile-cta{display:flex;}
+    body{padding-bottom:76px;}
+  }
+
+  /* ---- reveal ---- */
+  .reveal{opacity:0;transform:translateY(18px);transition:opacity .6s ease, transform .6s ease;}
+  .reveal.in{opacity:1;transform:none;}
+  @media (prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto;}
+    .reveal{opacity:1;transform:none;transition:none;}
+    .btn:hover{transform:none;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-in">
+    <a href="#top" class="logo">
+      <strong>CODE CRAFT</strong>
+      <span>コードクラフト Web制作サンプル（デモ）</span>
+    </a>
+    <nav class="nav-desktop">
+      <a href="#work">仕事内容</a>
+      <a href="#features">選ばれる理由</a>
+      <a href="#flow">流れ</a>
+      <a href="#voice">パートナーの声</a>
+      <a href="#requirements">募集要項</a>
+      <a href="#faq">FAQ</a>
+      <a href="#apply" class="btn btn-primary nav-cta">応募する</a>
+    </nav>
+    <button class="hamburger" id="hamburgerBtn" aria-label="メニューを開く">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<div id="navScrim"></div>
+<nav id="navDrawer">
+  <a href="#work">仕事内容</a>
+  <a href="#features">選ばれる理由</a>
+  <a href="#flow">流れ</a>
+  <a href="#voice">パートナーの声</a>
+  <a href="#requirements">募集要項</a>
+  <a href="#faq">FAQ</a>
+  <a href="#apply">応募する</a>
+</nav>
+
+<div id="top"></div>
+
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-in">
+    <span class="hero-eyebrow">CLAUDE CODE 実装パートナー募集・業務委託</span>
+    <h1>ワイヤーはある。<br>あとは、動かす人だけ。</h1>
+    <p class="hero-sub">デザイン・構成・文章は弊社で用意します。HTMLワイヤーフレームをもとに、Claude Codeで実装いただけるパートナーを探しています。フルリモート・案件ベースで、対応が良ければ継続的にご相談します。</p>
+    <div class="hero-cta">
+      <a href="#apply" class="btn btn-primary">この案件に応募する</a>
+      <a href="#work" class="btn btn-outline">お願いしたい業務を見る</a>
+    </div>
+    <div class="trust-bar">
+      <div class="trust-item"><span class="num">継続</span><small>実績次第で継続依頼あり</small></div>
+      <div class="trust-item"><span class="num">Remote</span><small>フルリモート・全国対応</small></div>
+      <div class="trust-item"><span class="num">相談制</span><small>報酬はご経験に応じて相談</small></div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="checklist-sec">
+  <div class="wrap">
+    <span class="eyebrow reveal">こんな方を探しています</span>
+    <h2 class="section-title reveal">応募条件</h2>
+    <p class="section-lead reveal">高度なデザインスキルは必須ではありません。ワイヤーをもとに、丁寧に・確実に実装いただける方を歓迎します。</p>
+    <div class="checklist">
+      <div class="check-item reveal">
+        <span class="check-mark"></span>
+        <div><strong>Claude Codeでの実装経験</strong><p>Claude Codeを使用したWeb実装のご経験がある方。</p></div>
+      </div>
+      <div class="check-item reveal">
+        <span class="check-mark"></span>
+        <div><strong>HTML/CSS/JSの基礎知識</strong><p>基本的な読み書き・調整ができる方。</p></div>
+      </div>
+      <div class="check-item reveal">
+        <span class="check-mark"></span>
+        <div><strong>レスポンシブ対応が可能</strong><p>PC・スマホ双方の表示崩れに対応できる方。</p></div>
+      </div>
+      <div class="check-item reveal">
+        <span class="check-mark"></span>
+        <div><strong>スムーズなご連絡</strong><p>比較的スムーズに連絡が取れ、指示に沿って丁寧に対応いただける方。</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section-soft" id="work">
+  <div class="wrap">
+    <span class="eyebrow reveal">WHAT YOU’LL DO</span>
+    <h2 class="section-title reveal">お願いしたい業務</h2>
+    <p class="section-lead reveal">弊社が進める複数のWebページ・LP制作案件について、実装部分を中心にご担当いただきます。</p>
+    <div class="work-grid">
+      <div class="work-card reveal">
+        <div class="work-icon">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="2" y="3" width="16" height="12" rx="2" stroke="#16264a" stroke-width="1.6"/><path d="M2 6h16" stroke="#16264a" stroke-width="1.6"/><path d="M6 17h8" stroke="#16264a" stroke-width="1.6"/></svg>
+        </div>
+        <h3>ワイヤーからの実装</h3>
+        <p>HTML形式のワイヤーフレームをもとに、Claude Codeを使用してWebページを実装いただきます。</p>
+      </div>
+      <div class="work-card reveal">
+        <div class="work-icon">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M3 10l4-6 3 4 3-3 4 8" stroke="#16264a" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <h3>HTML/CSS/JSの調整</h3>
+        <p>デザインの意図に沿って、細部のスタイルや挙動を調整していただきます。</p>
+      </div>
+      <div class="work-card reveal">
+        <div class="work-icon">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="5" y="2" width="10" height="16" rx="2" stroke="#16264a" stroke-width="1.6"/><path d="M9 15h2" stroke="#16264a" stroke-width="1.6" stroke-linecap="round"/></svg>
+        </div>
+        <h3>PC/スマホのレスポンシブ対応</h3>
+        <p>どちらの画面幅でも崩れなく表示されるよう調整いただきます。</p>
+      </div>
+      <div class="work-card reveal">
+        <div class="work-icon">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 3v8" stroke="#16264a" stroke-width="1.6" stroke-linecap="round"/><path d="M6 7l4-4 4 4" stroke="#16264a" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M4 13v3a1 1 0 001 1h10a1 1 0 001-1v-3" stroke="#16264a" stroke-width="1.6" stroke-linecap="round"/></svg>
+        </div>
+        <h3>不具合の修正</h3>
+        <p>表示崩れや軽微な不具合を発見・修正いただきます。</p>
+      </div>
+      <div class="work-card reveal">
+        <div class="work-icon">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="2" y="4" width="16" height="12" rx="1.5" stroke="#16264a" stroke-width="1.6"/><circle cx="7" cy="9" r="1.4" stroke="#16264a" stroke-width="1.4"/><path d="M11 12l2-2 4 4" stroke="#16264a" stroke-width="1.6" stroke-linecap="round"/></svg>
+        </div>
+        <h3>画像・リンクの差し替え</h3>
+        <p>必要に応じて画像やリンク等の差し替え作業を行っていただきます。</p>
+      </div>
+      <div class="work-card reveal">
+        <div class="work-icon">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 2l2.2 4.6 5 .7-3.6 3.6.9 5.1-4.5-2.4-4.5 2.4.9-5.1-3.6-3.6 5-.7z" stroke="#16264a" stroke-width="1.4" stroke-linejoin="round"/></svg>
+        </div>
+        <h3>公開作業（案件による）</h3>
+        <p>案件によってはVercel等への公開作業までお願いする場合があります。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="features">
+  <div class="wrap">
+    <span class="eyebrow reveal">なぜこの仕事を選ぶ人が多いか</span>
+    <h2 class="section-title reveal">選ばれる理由</h2>
+    <div class="feature-grid">
+      <div class="feature-card reveal">
+        <span class="feature-num">01</span>
+        <h3>デザインは、用意されている</h3>
+        <p>デザイン・構成・文章は基本的に弊社側で用意します。ゼロからの提案は不要で、実装に集中いただけます。</p>
+      </div>
+      <div class="feature-card reveal">
+        <span class="feature-num">02</span>
+        <h3>単発で終わらない</h3>
+        <p>今回の対応が良ければ、今後もWebサイト・LP実装を継続的にご相談する予定です。</p>
+      </div>
+      <div class="feature-card reveal">
+        <span class="feature-num">03</span>
+        <h3>フルリモート・柔軟な働き方</h3>
+        <p>案件ベースのご依頼のため、ご自身のペースや副業としても調整いただきやすい働き方です。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="locality">
+  <div class="locality-bg"></div>
+  <div class="wrap locality-in">
+    <h3 class="reveal">拠点は東京・日比谷イメージ、業務はどこからでも</h3>
+    <p class="reveal">ご依頼元とのやり取りはオンラインで完結します。全国どこにお住まいでも、比較的スムーズにご連絡いただければ問題ございません。ご連絡がつきやすい時間帯の目安は平日10:00〜18:00です（※仮の内容です）。</p>
+    <p class="photo-note">※写真はイメージです。実制作ではご提供写真や日本人モデルの素材に差し替えます。</p>
+  </div>
+</section>
+
+<section class="section section-soft" id="flow">
+  <div class="wrap">
+    <span class="eyebrow reveal">HOW IT WORKS</span>
+    <h2 class="section-title reveal">お仕事の流れ</h2>
+    <p class="section-lead reveal">ご応募から初回のご依頼、継続のご相談までの目安です。</p>
+    <div class="flow-list">
+      <div class="flow-item reveal"><span class="flow-num num">01</span><h4>応募フォーム送信</h4><p>下記フォームよりご応募ください。</p></div>
+      <div class="flow-item reveal"><span class="flow-num num">02</span><h4>やり取り・条件確認</h4><p>経験や対応可能な範囲をご相談します。</p></div>
+      <div class="flow-item reveal"><span class="flow-num num">03</span><h4>ワイヤー共有</h4><p>初回案件のワイヤーと要件をお渡しします。</p></div>
+      <div class="flow-item reveal"><span class="flow-num num">04</span><h4>実装・納品</h4><p>Claude Codeで実装いただき、確認のうえ納品します。</p></div>
+      <div class="flow-item reveal"><span class="flow-num num">05</span><h4>継続のご相談</h4><p>対応が良ければ、次の案件をご相談します。</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="voice">
+  <div class="wrap">
+    <span class="eyebrow reveal">PARTNER’S VOICE</span>
+    <h2 class="section-title reveal">パートナーの声</h2>
+    <div class="voice-card reveal">
+      <div class="voice-photo">
+        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=1200&q=70" alt="実装パートターのイメージ写真">
+      </div>
+      <div class="voice-text">
+        <p>「ワイヤーと要件がしっかり用意されているので、実装に集中できました。やり取りもチャットで完結し、在宅でも進めやすかったです。最初の案件のあと、続けて別のLPもご依頼いただけました。」</p>
+        <div class="voice-name">田中さん（仮名）・実装パートナー</div>
+        <div class="voice-role">※お客様の声は演出用の仮の内容です</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section-soft" id="requirements">
+  <div class="wrap">
+    <span class="eyebrow reveal">JOB SUMMARY</span>
+    <h2 class="section-title reveal">募集要項</h2>
+    <table class="req-table reveal">
+      <tr><th>職種</th><td>Claude Codeを使用したWeb実装パートナー（業務委託）</td></tr>
+      <tr><th>業務内容</th><td>HTMLワイヤーをもとにしたWebページ実装／HTML・CSS・JSの調整／PC・スマホのレスポンシブ対応／表示崩れや軽微な不具合の修正／画像・リンク等の差し替え／案件により公開作業（Vercel等）</td></tr>
+      <tr><th>応募条件</th><td>Claude Codeを使用したWeb実装経験がある方／HTML・CSS・JSの基本的な知識がある方／レスポンシブ対応が可能な方／比較的スムーズに連絡が取れる方／指示内容に沿って丁寧に実装いただける方</td></tr>
+      <tr><th>歓迎</th><td>高度なWebデザインやゼロからのデザイン制作スキルは必須ではありません</td></tr>
+      <tr><th>報酬</th><td>ページのボリュームや実装内容、ご経験に応じてご相談。応募時に費用感の目安をいただけるとスムーズですが、無くても問題ありません</td></tr>
+      <tr><th>勤務形態</th><td>フルリモート・案件ベースの業務委託</td></tr>
+      <tr><th>継続</th><td>今回の対応が良ければ、今後もWebサイト・LP等の実装を継続的にご相談します</td></tr>
+    </table>
+    <p class="note-line reveal">※上記は募集内容をもとに整理した目安です。詳細は応募後のやり取りで確認させていただきます。</p>
+  </div>
+</section>
+
+<section class="section" id="faq">
+  <div class="wrap">
+    <span class="eyebrow reveal">FAQ</span>
+    <h2 class="section-title reveal">よくあるご質問</h2>
+    <div style="margin-top:36px;">
+      <div class="faq-item reveal">
+        <button class="faq-q"><span>Claude Codeの実務経験が浅くても応募できますか？</span><span class="sign"></span></button>
+        <div class="faq-a"><p>Claude Codeを使ったWeb実装のご経験があれば、経験年数は問いません。まずはお気軽にご応募ください。</p></div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-q"><span>報酬はどのように決まりますか？</span><span class="sign"></span></button>
+        <div class="faq-a"><p>ページのボリュームや実装内容、ご経験に応じてご相談のうえ決定します。応募時に費用感の目安をいただけるとスムーズですが、無くても問題ありません。</p></div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-q"><span>デザインもこちらで考える必要がありますか？</span><span class="sign"></span></button>
+        <div class="faq-a"><p>いいえ。デザイン・構成・文章は基本的に弊社で用意いたします。ワイヤーフレームをもとにした実装を中心にお願いしています。</p></div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-q"><span>Vercel等への公開作業も必須ですか？</span><span class="sign"></span></button>
+        <div class="faq-a"><p>案件によりお願いする場合がございますが、必須ではありません。対応可否は応募時にお知らせください。</p></div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-q"><span>副業として対応できますか？</span><span class="sign"></span></button>
+        <div class="faq-a"><p>可能です。案件ベースでのご依頼となるため、ご都合に合わせて調整いただけます。</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section-soft" id="apply">
+  <div class="wrap">
+    <span class="eyebrow reveal">ENTRY</span>
+    <h2 class="section-title reveal">応募フォーム</h2>
+    <p class="section-lead reveal">以下の内容をご記載のうえ送信してください。折り返しご連絡いたします。（※本フォームはデモのため送信は行われません）</p>
+    <form class="apply-form reveal" id="applyForm">
+      <div class="form-grid">
+        <div class="form-row">
+          <label>お名前<span class="req">必須</span></label>
+          <input type="text" placeholder="山田 太郎" required>
+        </div>
+        <div class="form-row">
+          <label>メールアドレス<span class="req">必須</span></label>
+          <input type="email" placeholder="example@mail.com" required>
+        </div>
+      </div>
+      <div class="form-row">
+        <label>Claude Codeの使用経験<span class="req">必須</span></label>
+        <textarea placeholder="使用歴、実装した案件の概要などをご記入ください" required></textarea>
+      </div>
+      <div class="form-row">
+        <label>Webサイト・LPの実装経験</label>
+        <textarea placeholder="これまでの実装経験をご記入ください"></textarea>
+      </div>
+      <div class="form-grid">
+        <div class="form-row">
+          <label>使用可能な言語・ツール</label>
+          <input type="text" placeholder="HTML / CSS / JavaScript / Vercel など">
+        </div>
+        <div class="form-row">
+          <label>対応可能な納期目安</label>
+          <input type="text" placeholder="例：ご依頼から1〜2週間">
+        </div>
+      </div>
+      <div class="form-row">
+        <label>ポートフォリオ・過去の制作物（あれば）</label>
+        <input type="text" placeholder="URLをご記入ください">
+      </div>
+      <div class="form-row">
+        <label>費用感の目安（任意）</label>
+        <input type="text" placeholder="同程度のページを実装する場合の目安があればご記入ください">
+      </div>
+      <button type="submit" class="btn btn-primary" style="width:100%;">この内容で応募する</button>
+      <div id="formMsg">送信ありがとうございます。※本ページはデモのため実際の送信は行われません。</div>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot-grid">
+    <div>
+      <div class="foot-logo">CODE CRAFT</div>
+      <p style="margin-top:12px;">コードクラフトWeb制作サンプル（デモ）<br>フルリモート・全国対応（架空の制作会社です）</p>
+    </div>
+    <div>
+      <h4>お問い合わせ</h4>
+      <p>TEL：048-000-0000（デモ用ダミー番号）<br>MAIL：demo@example.com</p>
+    </div>
+    <div>
+      <h4>メニュー</h4>
+      <p>
+        <a href="#work">仕事内容</a><br>
+        <a href="#requirements">募集要項</a><br>
+        <a href="#faq">FAQ</a><br>
+        <a href="#apply">応募フォーム</a>
+      </p>
+    </div>
+  </div>
+  <div class="wrap foot-disclaimer">
+    ※本ページは制作サンプル（デモ）です。掲載の内容・数値は仮のもので、写真はイメージです。会社名・人物名・お客様の声・電話番号はすべて架空のものであり、実在の団体・人物とは関係ありません。
+  </div>
+</footer>
+
+<div class="mobile-cta">
+  <a href="#apply" class="btn btn-primary">応募する</a>
+  <a href="mailto:demo@example.com" class="btn btn-outline">問い合わせる</a>
+</div>
+
+<script>
+  const body = document.body;
+  const hamburgerBtn = document.getElementById('hamburgerBtn');
+  const navScrim = document.getElementById('navScrim');
+  function closeNav(){ body.classList.remove('nav-open'); }
+  hamburgerBtn.addEventListener('click', () => body.classList.toggle('nav-open'));
+  navScrim.addEventListener('click', closeNav);
+  document.querySelectorAll('#navDrawer a').forEach(a => a.addEventListener('click', closeNav));
+
+  document.querySelectorAll('.faq-item').forEach(item => {
+    const q = item.querySelector('.faq-q');
+    const a = item.querySelector('.faq-a');
+    q.addEventListener('click', () => {
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item.open').forEach(other => {
+        other.classList.remove('open');
+        other.querySelector('.faq-a').style.maxHeight = null;
+      });
+      if(!isOpen){
+        item.classList.add('open');
+        a.style.maxHeight = a.scrollHeight + 'px';
+      }
+    });
+  });
+
+  const applyForm = document.getElementById('applyForm');
+  const formMsg = document.getElementById('formMsg');
+  applyForm.addEventListener('submit', function(e){
+    e.preventDefault();
+    formMsg.style.display = 'block';
+  });
+
+  if('IntersectionObserver' in window){
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if(entry.isIntersecting){
+          entry.target.classList.add('in');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+  } else {
+    document.querySelectorAll('.reveal').forEach(el => el.classList.add('in'));
+  }
+</script>
+</body>
+</html>
