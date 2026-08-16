@@ -17,7 +17,7 @@
 }
 *{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%}
-body{margin:0;background:var(--bg);color:var(--ink);
+body{margin:0;background:var(--bg);color:var(--ink);word-break:auto-phrase;line-break:strict;text-wrap:pretty;
   font-family:"Hiragino Kaku Gothic ProN","Hiragino Sans","Noto Sans JP","Yu Gothic",sans-serif;
   line-height:1.75;font-size:16px;letter-spacing:.01em}
 img{max-width:100%;height:auto;display:block}
@@ -27,6 +27,7 @@ section{padding:56px 0}
 .sec-head{font-size:22px;line-height:1.5;font-weight:800;margin:0 0 8px;letter-spacing:.01em}
 .sec-lead{color:var(--sub);font-size:15px;margin:0 0 28px}
 .center{text-align:center}
+.nb{white-space:nowrap}
 
 /* ── FV ───────────────────────────────── */
 .fv{background:linear-gradient(160deg,#0b2545 0%,#13315c 55%,#1d5ba6 100%);color:#fff;
@@ -50,12 +51,24 @@ section{padding:56px 0}
 .badge{position:relative;z-index:1;display:flex;gap:12px;align-items:flex-start;
   background:#fff;color:var(--ink);border-radius:14px;padding:14px 16px;
   box-shadow:0 10px 26px rgba(0,0,0,.18);margin-bottom:22px}
-.badge .ico{flex:0 0 auto;width:38px;height:38px;border-radius:50%;
+.badge .ico{flex:0 0 auto;padding:6px 10px;border-radius:999px;white-space:nowrap;
   background:linear-gradient(140deg,var(--gold),var(--orange));display:flex;align-items:center;
   justify-content:center;color:#fff;font-weight:900;font-size:13px}
 .badge .txt{font-size:14px;line-height:1.6;font-weight:700}
 .badge .txt em{font-style:normal;color:#c2410c}
 .badge .note{display:block;font-weight:500;font-size:12px;color:var(--sub);margin-top:3px}
+.subsidy{background:#fdf6e8;border:1px solid #f0e0bd;border-radius:16px;padding:22px 20px}
+.subsidy-head{margin:0 0 10px;font-size:15px;font-weight:800;color:#a8631a;letter-spacing:.02em}
+.subsidy-body{margin:0;font-size:16px;line-height:2;color:var(--ink)}
+.subsidy-body strong{color:#a8631a;font-weight:800}
+/* 先方指示 2026-08-16 ①「文字が多いので、流し見でも伝わるようイラストを入れたい」
+   → 外部の写真素材は使わず、この場で描いたSVGを直接埋め込む(通信ゼロ・どの画面幅でも
+   ぼやけない・利用許諾の問題が起きない)。 */
+.illust{margin:0 0 26px}
+.illust svg{display:block;width:100%;height:auto}
+.illust svg text{font-family:inherit;font-weight:700}
+.illust-cols{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:8px;text-align:center;font-size:12px;line-height:1.5;font-weight:700;color:var(--ink)}
+.illust-cap{margin:10px 0 0;text-align:center;font-size:13px;color:var(--sub)}
 
 /* ── CTA ──────────────────────────────── */
 .cta-main{display:block;background:linear-gradient(135deg,#ff8a2b,#f2660b);color:#fff;
@@ -221,12 +234,12 @@ footer a{color:#cfe0f0;text-decoration:none}
       <span class="l2">AI仕訳で記帳時間を</span>
       <span class="l3 hl"><span class="num">80</span>%削減</span>
     </h1>
-    <p class="fv-copy"><span class="mark">今の会計ソフトは変えずに使える！</span></p>
-    <p class="fv-sub">「AIで仕訳→顧問先毎の会計ソフトに取り込み」出来るから、<b>仕訳部分だけを一元管理して80%の効率化</b>が可能！</p>
+    <p class="fv-copy"><span class="mark">今の会計ソフトは<span class="nb">変えずに使える！</span></span></p>
+    <p class="fv-sub">「AIで仕訳→顧問先毎の会計ソフトに取り込み」出来るから、<b><span class="nb">仕訳部分だけを一元管理</span>して<span class="nb">80%の効率化</span></b>が可能！</p>
 
     <div class="badge">
-      <span class="ico">補助<br>金</span>
-      <span class="txt">今なら<em>AI補助金活用で2年間のご利用料が 2/3 補助対象</em>
+      <span class="ico">補助金</span>
+      <span class="txt">今なら<em><span class="nb">AI補助金活用</span>で<span class="nb">2年間のご利用料</span>が <span class="nb">2/3 補助対象</span></em>
         <span class="note">（実質自己負担 1/3）</span>
       </span>
     </div>
@@ -236,6 +249,16 @@ footer a{color:#cfe0f0;text-decoration:none}
     <a class="cta-sub" href="#docs">詳細な料金・機能を知りたい方はこちら<br>→ <u>資料ダウンロード / お問い合わせ</u></a>
   </div>
 </header>
+
+<!-- ①-2 AI補助金活用の試算(先方指示 2026-08-16 添付画像の記載内容をそのまま掲載) -->
+<section style="padding-bottom:0">
+  <div class="wrap">
+    <div class="subsidy">
+      <p class="subsidy-head">【AI補助金活用】</p>
+      <p class="subsidy-body">例）<span class="nb">2年間の使用料</span>の<strong class="nb">2/3（約67%）</strong>が補助対象となり、実質<strong class="nb">40万円程度</strong>の投資で<span class="nb">2年間</span><strong class="nb">約960万円相当</strong>の<span class="nb">コスト削減効果</span>が得られます（<strong class="nb">ROI 約24倍</strong>）。</p>
+    </div>
+  </div>
+</section>
 
 <!-- ② 4つの特徴 -->
 <section>
@@ -289,12 +312,99 @@ footer a{color:#cfe0f0;text-decoration:none}
 <!-- ③ こんな方が使っています -->
 <section style="background:var(--bg2)">
   <div class="wrap">
-    <h2 class="sec-head">仕訳無双を使う会計事務所の特徴</h2>
-    <p class="sec-lead">ひとつでも当てはまれば、効果を実感していただけます。</p>
+    <h2 class="sec-head">仕訳無双を使う<span class="nb">会計事務所</span>の特徴</h2>
+    <p class="sec-lead">ひとつでも当てはまれば、<span class="nb">効果を実感</span>していただけます。</p>
+
+    <figure class="illust">
+      <svg viewBox="0 0 520 340" role="img" aria-label="書類の山に囲まれ、夜遅くまで記帳作業に追われる税理士">
+  <!-- 床 -->
+  <line x1="24" y1="326" x2="496" y2="326" stroke="#e3e9f0" stroke-width="4" stroke-linecap="round"/>
+  <!-- 壁掛け時計(23時ごろ) -->
+  <circle cx="90" cy="70" r="30" fill="#ffffff" stroke="#13315c" stroke-width="5"/>
+  <line x1="90" y1="70" x2="90" y2="52" stroke="#16202e" stroke-width="3" stroke-linecap="round"/>
+  <line x1="90" y1="70" x2="80" y2="58" stroke="#16202e" stroke-width="4" stroke-linecap="round"/>
+  <circle cx="90" cy="70" r="3" fill="#16202e"/>
+  <!-- 夜の窓 -->
+  <rect x="326" y="24" width="158" height="122" rx="8" fill="#e3e9f0"/>
+  <rect x="334" y="32" width="142" height="106" rx="3" fill="#13315c"/>
+  <rect x="401" y="32" width="7" height="106" fill="#e3e9f0"/>
+  <rect x="334" y="81" width="142" height="7" fill="#e3e9f0"/>
+  <circle cx="368" cy="57" r="13" fill="#f2b705"/>
+  <circle cx="440" cy="52" r="2.5" fill="#ffffff"/>
+  <circle cx="455" cy="112" r="2" fill="#ffffff"/>
+  <circle cx="352" cy="118" r="2" fill="#ffffff"/>
+  <circle cx="424" cy="100" r="2" fill="#ffffff"/>
+  <!-- 左の書類の山 -->
+  <g>
+    <rect x="38" y="308" width="66" height="18" fill="#ffffff" stroke="#13315c" stroke-width="2"/>
+    <rect x="42" y="290" width="66" height="18" fill="#ffffff" stroke="#13315c" stroke-width="2"/>
+    <rect x="39" y="272" width="66" height="18" fill="#12b5c9"/>
+    <rect x="44" y="254" width="66" height="18" fill="#ffffff" stroke="#13315c" stroke-width="2"/>
+    <rect x="40" y="236" width="66" height="18" fill="#f2b705"/>
+    <rect x="45" y="218" width="66" height="18" fill="#ffffff" stroke="#13315c" stroke-width="2"/>
+    <rect x="38" y="200" width="66" height="18" fill="#ffffff" stroke="#13315c" stroke-width="2"/>
+    <rect x="44" y="182" width="66" height="18" fill="#1d5ba6"/>
+    <rect x="40" y="164" width="66" height="18" fill="#ffffff" stroke="#13315c" stroke-width="2" transform="rotate(-6 73 173)"/>
+  </g>
+  <!-- 右の書類の山 -->
+  <g>
+    <rect x="432" y="310" width="64" height="16" fill="#ffffff" stroke="#13315c" stroke-width="2"/>
+    <rect x="436" y="294" width="64" height="16" fill="#1d5ba6"/>
+    <rect x="430" y="278" width="64" height="16" fill="#ffffff" stroke="#13315c" stroke-width="2"/>
+    <rect x="434" y="262" width="64" height="16" fill="#f2b705"/>
+    <rect x="430" y="246" width="64" height="16" fill="#ffffff" stroke="#13315c" stroke-width="2"/>
+    <rect x="436" y="230" width="64" height="16" fill="#ffffff" stroke="#13315c" stroke-width="2"/>
+    <rect x="430" y="214" width="64" height="16" fill="#12b5c9"/>
+    <rect x="434" y="198" width="64" height="16" fill="#ffffff" stroke="#13315c" stroke-width="2" transform="rotate(5 466 206)"/>
+  </g>
+  <!-- 人物(腕→胴→首→髪→顔) -->
+  <path d="M216,206 Q198,224 197,240" stroke="#0b2545" stroke-width="13" fill="none" stroke-linecap="round"/>
+  <path d="M284,206 Q298,222 298,240" stroke="#0b2545" stroke-width="13" fill="none" stroke-linecap="round"/>
+  <path d="M205,262 v-46 q0,-20 20,-20 h50 q20,0 20,20 v46 z" fill="#0b2545"/>
+  <rect x="241" y="178" width="18" height="24" fill="#f6d3b4"/>
+  <circle cx="250" cy="147" r="31" fill="#16202e"/>
+  <circle cx="250" cy="155" r="29" fill="#f6d3b4"/>
+  <path d="M233,147 L244,143" stroke="#16202e" stroke-width="2.2" stroke-linecap="round"/>
+  <path d="M256,143 L267,147" stroke="#16202e" stroke-width="2.2" stroke-linecap="round"/>
+  <circle cx="240" cy="153" r="2.8" fill="#16202e"/>
+  <circle cx="260" cy="153" r="2.8" fill="#16202e"/>
+  <path d="M243,170 q7,-5 14,0" stroke="#16202e" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+  <path d="M283,120 q9,13 0,19 q-9,-6 0,-19 z" fill="#12b5c9"/>
+  <!-- 机 -->
+  <rect x="123" y="264" width="13" height="62" fill="#13315c"/>
+  <rect x="384" y="264" width="13" height="62" fill="#13315c"/>
+  <rect x="110" y="252" width="300" height="14" rx="4" fill="#13315c"/>
+  <!-- 机の上の書類の山 -->
+  <g>
+    <rect x="350" y="242" width="48" height="10" fill="#ffffff" stroke="#13315c" stroke-width="2"/>
+    <rect x="354" y="232" width="48" height="10" fill="#ffffff" stroke="#13315c" stroke-width="2"/>
+    <rect x="350" y="222" width="48" height="10" fill="#12b5c9"/>
+    <rect x="353" y="212" width="48" height="10" fill="#ffffff" stroke="#13315c" stroke-width="2"/>
+    <rect x="350" y="202" width="48" height="10" fill="#ffffff" stroke="#13315c" stroke-width="2" transform="rotate(-5 374 207)"/>
+  </g>
+  <!-- 電卓と記帳中の書類 -->
+  <rect x="168" y="230" width="36" height="22" rx="3" fill="#1d5ba6"/>
+  <rect x="172" y="234" width="28" height="5" fill="#ffffff"/>
+  <circle cx="176" cy="245" r="1.8" fill="#ffffff"/>
+  <circle cx="184" cy="245" r="1.8" fill="#ffffff"/>
+  <circle cx="192" cy="245" r="1.8" fill="#ffffff"/>
+  <circle cx="176" cy="249" r="1.8" fill="#ffffff"/>
+  <circle cx="184" cy="249" r="1.8" fill="#ffffff"/>
+  <circle cx="192" cy="249" r="1.8" fill="#ffffff"/>
+  <rect x="252" y="245" width="58" height="7" fill="#ffffff" stroke="#13315c" stroke-width="2"/>
+  <rect x="256" y="238" width="50" height="7" fill="#ffffff" stroke="#13315c" stroke-width="2"/>
+  <!-- 手とペン -->
+  <circle cx="197" cy="243" r="7" fill="#f6d3b4"/>
+  <circle cx="298" cy="243" r="7" fill="#f6d3b4"/>
+  <line x1="300" y1="240" x2="313" y2="229" stroke="#16202e" stroke-width="2.5" stroke-linecap="round"/>
+</svg>
+      <figcaption class="illust-cap">証憑の確認と入力に追われ、<span class="nb">事務所の時間</span>が奪われていませんか。</figcaption>
+    </figure>
+
     <ul class="checks">
-      <li><span class="ck" aria-hidden="true">✓</span>記帳代行の工数を減らして、顧問数を増やしたり顧問先との対話時間を増やしたい</li>
-      <li><span class="ck" aria-hidden="true">✓</span>顧問先の会計システムのAI仕訳がバラバラで使いこなせない</li>
-      <li><span class="ck" aria-hidden="true">✓</span>担当者が変わっても仕訳ルールをスムーズに引き継ぎたい</li>
+      <li><span class="ck" aria-hidden="true">✓</span>記帳代行の工数を減らして、顧問数を増やしたり<span class="nb">顧問先との対話時間</span>を増やしたい</li>
+      <li><span class="ck" aria-hidden="true">✓</span>顧問先の会計システムの<span class="nb">AI仕訳</span>がバラバラで使いこなせない</li>
+      <li><span class="ck" aria-hidden="true">✓</span>担当者が変わっても<span class="nb">仕訳ルール</span>をスムーズに引き継ぎたい</li>
       <li><span class="ck" aria-hidden="true">✓</span>顧問先の情報や対応履歴がExcel・メールに分散してバラバラだった</li>
     </ul>
   </div>
@@ -330,20 +440,61 @@ footer a{color:#cfe0f0;text-decoration:none}
 <!-- ⑤ サポート機能・3STEP -->
 <section>
   <div class="wrap">
-    <h2 class="sec-head">今お使いの顧問先毎の会計ソフトはそのまま。<br>“前工程”のボトルネックを解消します。</h2>
-    <p class="sec-lead">業務フローは、この3ステップに切り替わります。</p>
+    <h2 class="sec-head">今お使いの顧問先毎の<span class="nb">会計ソフト</span>はそのまま。<br>“前工程”のボトルネックを解消します。</h2>
+    <p class="sec-lead">業務フローは、この<span class="nb">3ステップ</span>に<span class="nb">切り替わります</span>。</p>
+
+    <figure class="illust">
+      <svg viewBox="0 0 520 165" role="img" aria-label="紙の書類をAIが読み取り、CSVで既存の会計ソフトへ渡す流れ図">
+  <!-- 段階タグ -->
+  <text x="90" y="34" font-size="22" fill="#5a6b80" text-anchor="middle">これまで</text>
+  <text x="430" y="34" font-size="22" fill="#5a6b80" text-anchor="middle">これから</text>
+  <!-- 紙の書類(レシート・通帳・請求書) -->
+  <rect x="52" y="66" width="44" height="58" rx="3" fill="#ffffff" stroke="#13315c" stroke-width="2.5" transform="rotate(-12 74 95)"/>
+  <rect x="76" y="63" width="44" height="58" rx="3" fill="#ffffff" stroke="#13315c" stroke-width="2.5" transform="rotate(9 98 92)"/>
+  <rect x="62" y="62" width="48" height="64" rx="3" fill="#ffffff" stroke="#13315c" stroke-width="2.5"/>
+  <line x1="70" y1="77" x2="102" y2="77" stroke="#5a6b80" stroke-width="2.5" stroke-linecap="round"/>
+  <line x1="70" y1="87" x2="102" y2="87" stroke="#5a6b80" stroke-width="2.5" stroke-linecap="round"/>
+  <line x1="70" y1="97" x2="94" y2="97" stroke="#5a6b80" stroke-width="2.5" stroke-linecap="round"/>
+  <circle cx="86" cy="113" r="9" fill="#f2b705"/>
+  <text x="86" y="118" font-size="20" font-weight="bold" fill="#16202e" text-anchor="middle">¥</text>
+  <!-- 矢印1 -->
+  <path d="M140,95 H162" stroke="#1d5ba6" stroke-width="6" stroke-linecap="round" fill="none"/>
+  <polygon points="162,83 184,95 162,107" fill="#1d5ba6"/>
+  <!-- AI -->
+  <rect x="225" y="60" width="70" height="70" rx="16" fill="#12b5c9"/>
+  <text x="260" y="105" font-size="37.8" font-weight="bold" fill="#ffffff" text-anchor="middle">AI</text>
+  <path d="M296,44 L298.5,51.5 L306,54 L298.5,56.5 L296,64 L293.5,56.5 L286,54 L293.5,51.5 Z" fill="#f2b705"/>
+  <path d="M222,126 L224,132 L230,134 L224,136 L222,142 L220,136 L214,134 L220,132 Z" fill="#f2b705"/>
+  <!-- 矢印2 -->
+  <path d="M316,95 H338" stroke="#1d5ba6" stroke-width="6" stroke-linecap="round" fill="none"/>
+  <polygon points="338,83 360,95 338,107" fill="#1d5ba6"/>
+  <!-- 既存の会計ソフト(モニター) -->
+  <rect x="388" y="56" width="84" height="58" rx="6" fill="#13315c"/>
+  <rect x="395" y="63" width="70" height="44" rx="2" fill="#ffffff"/>
+  <rect x="401" y="69" width="58" height="5" fill="#e3e9f0"/>
+  <rect x="403" y="92" width="9" height="11" fill="#17b978"/>
+  <rect x="417" y="84" width="9" height="19" fill="#1d5ba6"/>
+  <rect x="431" y="88" width="9" height="15" fill="#12b5c9"/>
+  <rect x="424" y="114" width="12" height="10" fill="#13315c"/>
+  <rect x="408" y="124" width="44" height="7" rx="3.5" fill="#13315c"/>
+  <rect x="372" y="96" width="46" height="24" rx="6" fill="#17b978"/>
+  <text x="395" y="113" font-size="20" font-weight="bold" fill="#ffffff" text-anchor="middle">CSV</text>
+  </svg>
+      <div class="illust-cols"><span>レシート・通帳・<span class="nb">請求書</span></span><span><span class="nb">AIが読み取り</span>・<span class="nb">自動仕訳</span></span><span>CSVで既存の<span class="nb">会計ソフトへ</span></span></div><figcaption class="illust-cap">前工程をひとつにまとめ、会計ソフトはそのままお使いいただけます。</figcaption>
+    </figure>
+
     <div class="steps">
       <div class="step">
         <span class="no">01</span>
         <div>
           <h3>証憑・データをアップロード</h3>
-          <p>AIが即時に読み取り、抽出した箇所をハイライトで確認できます。</p>
+          <p>AIが即時に読み取り、<span class="nb">抽出した箇所</span>をハイライトで確認できます。</p>
         </div>
       </div>
       <div class="step">
         <span class="no">02</span>
         <div>
-          <h3>顧問先ごとの独自ルールをAIが自動学習</h3>
+          <h3>顧問先ごとの<span class="nb">独自ルール</span>を<span class="nb">AIが自動学習</span></h3>
           <p>修正した内容がそのまま蓄積され、次回から反映されます。</p>
         </div>
       </div>
@@ -351,24 +502,93 @@ footer a{color:#cfe0f0;text-decoration:none}
         <span class="no">03</span>
         <div>
           <h3>CSV出力で既存の会計ソフトへ連携</h3>
-          <p>今お使いのソフトへ、そのまま取り込めます。</p>
+          <p>今お使いのソフトへ、<span class="nb">そのまま</span>取り込めます。</p>
         </div>
       </div>
     </div>
     <p style="margin:24px 0 0;font-size:16px;font-weight:800;line-height:1.7">
-      まずは、「記帳代行の工数を最大80%削減する」変化を体感してください。</p>
+      まずは、「記帳代行の工数を<span class="nb">最大80%削減する</span>」変化を体感してください。</p>
   </div>
 </section>
 
 <!-- ⑥ 未来像 -->
 <section class="future">
   <div class="wrap">
-    <p class="lead">私たちが目指しているのは、<br>単なる「作業時間の削減」ではありません。</p>
+    <p class="lead">私たちが目指しているのは、<br>単なる「作業時間の削減」<span class="nb">ではありません</span>。</p>
     <ul class="flow">
-      <li>入力作業や確認作業から解放されるから、<b>業務にゆとりができる</b>。</li>
-      <li>ゆとりができるから、<b>顧問数を増やせる</b>、顧問先への提案やコミュニケーションに時間を使える。</li>
-      <li>属人化がなくなるから、<b>引き継ぎや教育のストレスなく組織を拡大できる</b>。</li>
+      <li>入力作業や確認作業から<span class="nb">解放される</span>から、<b>業務にゆとりができる</b>。</li>
+      <li>ゆとりができるから、<b><span class="nb">顧問数を増やせる</span></b>、顧問先への<span class="nb">提案</span>や<span class="nb">コミュニケーション</span>に時間を使える。</li>
+      <li>属人化がなくなるから、<b><span class="nb">引き継ぎ</span>や<span class="nb">教育</span>のストレスなく<span class="nb">組織を拡大</span>できる</b>。</li>
     </ul>
+    <figure class="illust" style="margin:26px 0 0">
+      <svg viewBox="0 0 520 340" role="img" aria-label="入力作業から解放され、机をはさんで顧問先と落ち着いて話す税理士">
+  <!-- 明るさの後光 -->
+  <circle cx="260" cy="172" r="146" fill="#ffffff"/>
+  <!-- 床 -->
+  <line x1="70" y1="314" x2="450" y2="314" stroke="#e3e9f0" stroke-width="4" stroke-linecap="round"/>
+  <!-- きらめき -->
+  <path d="M110,83 L112.5,89.5 L119,92 L112.5,94.5 L110,101 L107.5,94.5 L101,92 L107.5,89.5 Z" fill="#f2b705"/>
+  <path d="M414,93 L416,98 L421,100 L416,102 L414,107 L412,102 L407,100 L412,98 Z" fill="#f2b705"/>
+  <circle cx="306" cy="70" r="4" fill="#12b5c9"/>
+  <!-- 吹き出し(前向きな提案) -->
+  <polygon points="210,118 226,124 178,148" fill="#ffffff" stroke="#12b5c9" stroke-width="2.5" stroke-linejoin="round"/>
+  <ellipse cx="232" cy="100" rx="38" ry="27" fill="#ffffff" stroke="#12b5c9" stroke-width="2.5"/>
+  <path d="M216,100 l10,10 l20,-20" stroke="#17b978" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- 税理士(左・右向きに着席) -->
+  <rect x="86" y="210" width="12" height="74" rx="5" fill="#13315c"/>
+  <rect x="86" y="272" width="80" height="12" rx="4" fill="#13315c"/>
+  <rect x="92" y="284" width="10" height="30" fill="#13315c"/>
+  <rect x="150" y="284" width="10" height="30" fill="#13315c"/>
+  <rect x="132" y="188" width="15" height="30" fill="#f6d3b4"/>
+  <path d="M112,276 q-2,-20 2,-38 q3,-24 22,-24 h20 q19,0 22,24 q4,18 2,38 z" fill="#0b2545"/>
+  <rect x="148" y="258" width="48" height="16" rx="8" fill="#0b2545"/>
+  <rect x="182" y="270" width="13" height="42" fill="#13315c"/>
+  <rect x="182" y="306" width="24" height="8" rx="4" fill="#16202e"/>
+  <circle cx="138" cy="165" r="26" fill="#16202e"/>
+  <circle cx="143" cy="170" r="25" fill="#f6d3b4"/>
+  <path d="M137,161 q5,-4 10,-1" stroke="#16202e" stroke-width="2" fill="none" stroke-linecap="round"/>
+  <path d="M152,160 q5,-2 9,2" stroke="#16202e" stroke-width="2" fill="none" stroke-linecap="round"/>
+  <circle cx="143" cy="169" r="2.6" fill="#16202e"/>
+  <circle cx="156" cy="169" r="2.6" fill="#16202e"/>
+  <path d="M144,181 q7,5 13,-1" stroke="#16202e" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+  <!-- 顧問先(右・左向きに着席) -->
+  <rect x="422" y="210" width="12" height="74" rx="5" fill="#13315c"/>
+  <rect x="354" y="272" width="80" height="12" rx="4" fill="#13315c"/>
+  <rect x="360" y="284" width="10" height="30" fill="#13315c"/>
+  <rect x="418" y="284" width="10" height="30" fill="#13315c"/>
+  <rect x="373" y="188" width="15" height="30" fill="#f6d3b4"/>
+  <path d="M408,276 q2,-20 -2,-38 q-3,-24 -22,-24 h-20 q-19,0 -22,24 q-4,18 -2,38 z" fill="#1d5ba6"/>
+  <rect x="326" y="258" width="48" height="16" rx="8" fill="#1d5ba6"/>
+  <rect x="325" y="270" width="13" height="42" fill="#13315c"/>
+  <rect x="314" y="306" width="24" height="8" rx="4" fill="#16202e"/>
+  <circle cx="382" cy="165" r="26" fill="#5a6b80"/>
+  <circle cx="377" cy="170" r="25" fill="#f6d3b4"/>
+  <path d="M359,160 q4,-2 9,2" stroke="#16202e" stroke-width="2" fill="none" stroke-linecap="round"/>
+  <path d="M373,161 q5,-4 10,-1" stroke="#16202e" stroke-width="2" fill="none" stroke-linecap="round"/>
+  <circle cx="364" cy="169" r="2.6" fill="#16202e"/>
+  <circle cx="377" cy="169" r="2.6" fill="#16202e"/>
+  <path d="M363,181 q6,6 13,1" stroke="#16202e" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+  <!-- 机と資料(上向きのグラフ) -->
+  <rect x="232" y="204" width="56" height="30" rx="3" fill="#ffffff" stroke="#13315c" stroke-width="2"/>
+  <path d="M238,226 l12,-7 l9,4 l13,-10" stroke="#17b978" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <polygon points="270,206 279,211 269,216" fill="#17b978"/>
+  <rect x="208" y="244" width="11" height="70" fill="#13315c"/>
+  <rect x="301" y="244" width="11" height="70" fill="#13315c"/>
+  <rect x="196" y="232" width="128" height="12" rx="4" fill="#13315c"/>
+  <!-- 腕(机に手を置く) -->
+  <path d="M158,222 Q180,226 196,228" stroke="#0b2545" stroke-width="11" fill="none" stroke-linecap="round"/>
+  <circle cx="200" cy="228" r="6" fill="#f6d3b4"/>
+  <path d="M362,222 Q340,226 324,228" stroke="#1d5ba6" stroke-width="11" fill="none" stroke-linecap="round"/>
+  <circle cx="320" cy="228" r="6" fill="#f6d3b4"/>
+  <!-- 観葉植物 -->
+  <circle cx="468" cy="250" r="15" fill="#17b978"/>
+  <circle cx="455" cy="262" r="11" fill="#17b978"/>
+  <circle cx="481" cy="262" r="11" fill="#17b978"/>
+  <path d="M450,272 h38 l-6,40 h-26 z" fill="#ff7a1a"/>
+</svg>
+      <figcaption class="illust-cap">空いた時間を、顧問先との対話と提案に。</figcaption>
+    </figure>
+
     <p class="goal">そして、付加価値の高い<br><span class="gold">「選ばれる会計事務所」</span>へ。</p>
   </div>
 </section>
