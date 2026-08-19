@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex,nofollow">
+<title>LINE公式アカウント 設計・構築のご説明｜自動化のミナト</title>
+<style>
+  :root{
+    --green:#06C755; --green-dark:#049c43; --green-pale:#e8f9ef;
+    --ink:#1c2a24; --gray:#5f6f68; --line:#dde8e3;
+    --orange:#f08a1d; --orange-pale:#fdf3e4;
+    --blue:#2b6cb0; --blue-pale:#ebf3fb;
+    --card-shadow:0 10px 30px rgba(16,60,38,.08);
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Hiragino Kaku Gothic ProN","Noto Sans JP",Meiryo,sans-serif;
+    color:var(--ink);background:#fbfdfc;line-height:1.8;overflow-x:hidden;-webkit-text-size-adjust:100%;}
+  img{max-width:100%;display:block;}
+  .wrap{max-width:1000px;margin:0 auto;padding:0 22px;}
+
+  .hero{background:linear-gradient(135deg,#04b04b 0%,#06C755 55%,#3ddc7f 100%);color:#fff;padding:52px 0 110px;position:relative;overflow:hidden;}
+  .hero::after{content:"";position:absolute;left:50%;bottom:-1px;transform:translateX(-50%);width:130%;height:70px;background:#fbfdfc;border-radius:100% 100% 0 0;}
+  .hero .wrap{position:relative;z-index:2;}
+  .hero-badge{display:inline-block;background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.55);border-radius:999px;padding:4px 16px;font-size:12.5px;font-weight:700;letter-spacing:.06em;margin-bottom:18px;}
+  .hero h1{font-size:33px;line-height:1.45;font-weight:800;margin-bottom:14px;}
+  .hero p.lead{font-size:15.5px;max-width:660px;opacity:.97;}
+
+  section{padding:52px 0;}
+  .sec-label{display:inline-block;background:var(--green-pale);color:var(--green-dark);font-size:12px;font-weight:800;letter-spacing:.1em;border-radius:6px;padding:4px 12px;margin-bottom:14px;}
+  h2.sec{font-size:25px;font-weight:800;line-height:1.5;margin-bottom:12px;}
+  h2.sec small{display:block;font-size:14.5px;font-weight:500;color:var(--gray);margin-top:8px;line-height:1.7;}
+  h3{font-size:18px;font-weight:800;margin:34px 0 12px;padding-left:12px;border-left:4px solid var(--green);}
+  p{margin-bottom:14px;}
+  .muted{color:var(--gray);font-size:14px;}
+
+  .card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:24px;box-shadow:var(--card-shadow);margin-bottom:18px;}
+
+  .steps{counter-reset:s;}
+  .step{background:#fff;border:1px solid var(--line);border-radius:14px;padding:22px 24px 22px 68px;position:relative;margin-bottom:14px;box-shadow:var(--card-shadow);}
+  .step::before{counter-increment:s;content:counter(s);position:absolute;left:22px;top:22px;width:32px;height:32px;border-radius:50%;background:var(--green);color:#fff;font-weight:800;display:flex;align-items:center;justify-content:center;font-size:15px;}
+  .step b{display:block;font-size:16.5px;margin-bottom:6px;}
+  .step p{margin-bottom:0;font-size:14.5px;color:var(--gray);}
+  .step .ex{margin-top:10px;background:var(--green-pale);border-radius:8px;padding:10px 14px;font-size:13.5px;color:var(--green-dark);}
+
+  .tbl-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;margin-bottom:10px;}
+  table{border-collapse:collapse;width:100%;min-width:640px;background:#fff;font-size:14px;}
+  th,td{border:1px solid var(--line);padding:11px 13px;text-align:left;vertical-align:top;}
+  th{background:var(--green-pale);color:var(--green-dark);font-weight:800;white-space:nowrap;}
+  td.num{white-space:nowrap;font-weight:700;}
+  tr.total td{background:#f5faf7;font-weight:800;}
+
+  .flow{display:flex;flex-direction:column;gap:0;margin:22px 0;}
+  .fl{background:#fff;border:1px solid var(--line);border-radius:12px;padding:16px 20px;box-shadow:var(--card-shadow);}
+  .fl b{display:block;font-size:15.5px;margin-bottom:4px;}
+  .fl span{font-size:13.5px;color:var(--gray);}
+  .fl.hl{border-color:var(--green);background:var(--green-pale);}
+  .arrow{text-align:center;color:var(--green);font-size:20px;line-height:1;padding:8px 0;font-weight:700;}
+
+  .note{background:var(--orange-pale);border-left:4px solid var(--orange);border-radius:0 10px 10px 0;padding:16px 20px;margin:18px 0;font-size:14.5px;}
+  .note b{color:#b5620c;}
+  .fact{background:var(--blue-pale);border-left:4px solid var(--blue);border-radius:0 10px 10px 0;padding:16px 20px;margin:18px 0;font-size:14.5px;}
+  .fact b{color:var(--blue);}
+
+  pre{background:#1e2b26;color:#e6f2ec;border-radius:12px;padding:18px 20px;overflow-x:auto;font-size:12.5px;line-height:1.75;margin-bottom:14px;
+      font-family:"SF Mono",Menlo,Consolas,monospace;-webkit-overflow-scrolling:touch;}
+  pre .c{color:#7fa895;}
+  pre .k{color:#7fd8a8;}
+
+  .shot{border:1px solid var(--line);border-radius:12px;overflow:hidden;box-shadow:var(--card-shadow);margin-bottom:10px;}
+  figcaption{font-size:13px;color:var(--gray);margin-bottom:20px;}
+
+  .pill{display:inline-block;background:var(--green);color:#fff;font-size:11.5px;font-weight:800;border-radius:999px;padding:3px 11px;margin-right:8px;vertical-align:middle;}
+  .pill.gray{background:#8a9a93;}
+
+  .toc{background:#fff;border:1px solid var(--line);border-radius:14px;padding:22px 24px;box-shadow:var(--card-shadow);}
+  .toc a{display:block;color:var(--ink);text-decoration:none;padding:9px 0;border-bottom:1px dashed var(--line);font-weight:700;font-size:15px;}
+  .toc a:last-child{border-bottom:none;}
+  .toc a span{display:block;font-weight:400;font-size:13.5px;color:var(--gray);margin-top:2px;}
+  .toc a:hover{color:var(--green-dark);}
+
+  footer{background:#1c2a24;color:#cfe0d8;padding:36px 0;font-size:13px;}
+  footer .wrap{max-width:1000px;}
+  footer b{color:#fff;}
+  a{color:var(--green-dark);}
+
+  @media(max-width:640px){
+    .hero h1{font-size:25px;} h2.sec{font-size:21px;} section{padding:38px 0;}
+    .step{padding:20px 18px 20px 60px;} .step::before{left:16px;}
+  }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="wrap">
+    <div class="hero-badge">2026年8月22日 オンライン面談 資料</div>
+    <h1>LINE公式アカウント<br>設計・構築のご説明</h1>
+    <p class="lead">当日お話しする「導線設計の考え方」「タグ・フォーム連携の実装」「部分的にお願いいただく場合の進め方」を、先にこのページにまとめました。面談中もこの画面を共有しながらご説明します。</p>
+  </div>
+</div>
+
+<section style="padding-top:8px;">
+  <div class="wrap">
+    <div class="toc">
+      <a href="#s1">01 ── 導線設計の考え方<span>何を作るかの前に、何を決めるか。目的から逆算する4つの手順</span></a>
+      <a href="#s2">02 ── 友だちを分ける4つの手段<span>LINE公式の標準機能で何ができ、どこに制限があるか(管理画面で実測)</span></a>
+      <a href="#s3">03 ── フォーム連携の実装<span>なぜGoogleフォームを使うのか。回答からセグメントを作るまでの流れ</span></a>
+      <a href="#s4">04 ── 追加の月額費用が出ない理由<span>使うものと、その料金の内訳</span></a>
+      <a href="#s5">05 ── 部分的にお願いいただく場合<span>作業単位に分けた範囲と費用</span></a>
+      <a href="#s6">06 ── 進め方<span>着手から公開までと、公開後にお渡しするもの</span></a>
+    </div>
+  </div>
+</section>
+
+<section id="s1" style="background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line);">
+  <div class="wrap">
+    <div class="sec-label">SECTION 01</div>
+    <h2 class="sec">導線設計の考え方
+      <small>「リッチメニューを作る」「ステップ配信を組む」から入ると、作ったあとに何を直せばいいか分からなくなります。先に目的と数字を決めてから、必要な機能だけを選びます。</small></h2>
+
+    <div class="steps">
+      <div class="step">
+        <b>ゴールを1つだけ決める</b>
+        <p>予約・来店・購入・問い合わせ・資料請求。複数あっても、このアカウントで一番増やしたいものを1つに絞ります。ここが2つ以上あると、リッチメニューもメッセージも焦点がぼやけます。</p>
+        <div class="ex">例：整体院なら「初回予約」。物販なら「初回購入」。この1つに向かって全部の導線を引きます。</div>
+      </div>
+      <div class="step">
+        <b>入口ごとに、最初の1通を変える</b>
+        <p>友だち追加の入口は1つではありません。店頭のPOP、Instagramのプロフィール、チラシのQRコード、広告。どこから来たかで知りたいことが違うので、あいさつメッセージを出し分けます。</p>
+        <div class="ex">LINE公式では入口ごとに別のQRコード・URLを発行でき、あとから「どの入口から何人来たか」も分かります。</div>
+      </div>
+      <div class="step">
+        <b>反応した人と、しない人で道を分ける</b>
+        <p>全員に同じ配信を続けるとブロックが増えます。押した人・押さなかった人、予約した人・まだの人で、次に届く内容を変えます。この分岐が「タグ」と「オーディエンス」の役割です。</p>
+        <div class="ex">分岐の作り方は SECTION 02 で、管理画面の実際の選択肢に沿ってご説明します。</div>
+      </div>
+      <div class="step">
+        <b>見る数字を、配信を作る前に決める</b>
+        <p>1通ごとに「開封→タップ→ゴール到達」のどれを見るかを先に決めます。決めておかないと、配信後に良かったか悪かったか判断できず、改善が感覚になります。</p>
+        <div class="ex">この表は納品物に含めます。公開後は数字を見ながら文面を差し替えていきます。</div>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:26px;">
+      <b style="font-size:16px;">この考え方で作った構築サンプル</b>
+      <p class="muted" style="margin:8px 0 12px;">架空の整体院を題材に、あいさつ・自動診断・ステップ配信・予約リマインドまでを組んだデモです。トーク画面のイメージ、シナリオ設計図、配信設計表をご覧いただけます。</p>
+      <a href="https://2g-q.github.io/hp-demos/line.html" target="_blank" rel="noopener">https://2g-q.github.io/hp-demos/line.html</a>
+    </div>
+  </div>
+</section>
+
+<section id="s2">
+  <div class="wrap">
+    <div class="sec-label">SECTION 02</div>
+    <h2 class="sec">友だちを分ける4つの手段と、その制限
+      <small>「タグで配信を出し分ける」と一言で言っても、LINE公式の中では手段が分かれています。下の表は管理画面を実際に開いて確認した内容です。</small></h2>
+
+    <div class="tbl-scroll">
+    <table>
+      <tr>
+        <th>手段</th><th>何で分かれるか</th><th>自動／手動</th><th>使うときの制限</th>
+      </tr>
+      <tr>
+        <td><b>チャットタグ</b></td>
+        <td>チャット画面で友だちに付けたタグ</td>
+        <td>手動で付ける<br>(会話しながら)</td>
+        <td><b>人数の下限なし</b>。友だちが少ない立ち上げ期でも使える</td>
+      </tr>
+      <tr>
+        <td><b>友だち追加経路</b></td>
+        <td>どのQRコード・URLから追加したか</td>
+        <td>自動</td>
+        <td>配信先に指定するには<b>50人以上</b>必要</td>
+      </tr>
+      <tr>
+        <td><b>行動</b></td>
+        <td>メッセージやリッチメニューを開いた・押した</td>
+        <td>自動</td>
+        <td>配信先に指定するには<b>50人以上</b>必要</td>
+      </tr>
+      <tr>
+        <td><b>ユーザーIDの読み込み</b></td>
+        <td>外部システム(フォーム等)から渡した名簿</td>
+        <td>自動<br>(仕組みを作れば)</td>
+        <td>Messaging APIの設定が必要。SECTION 03 で説明します</td>
+      </tr>
+    </table>
+    </div>
+    <p class="muted">※ 2026年8月19日に LINE Official Account Manager の「オーディエンス作成」画面で確認した内容です。</p>
+
+    <figure style="margin-top:24px;">
+      <div class="shot"><img src="line-brief-assets/audience_types.png" alt="LINE Official Account Manager のオーディエンスタイプ選択画面"></div>
+      <figcaption>実際の管理画面。各項目の左上に付いている「50人以上」が、配信先に指定するための下限です。「チャットタグ」だけこの表示がありません。</figcaption>
+    </figure>
+
+    <div class="note">
+      <b>ここが実務で効きます。</b>　立ち上げ直後は友だちが50人に届かないため、自動で貯まるはずのオーディエンスがどれも配信に使えません。この時期は<b>チャットタグ</b>と<b>入口ごとのあいさつ出し分け</b>で回し、友だちが増えてからオーディエンス配信に切り替えます。最初からオーディエンス前提で設計すると、公開直後に「分けられない」ことに気づく作りになります。
+    </div>
+  </div>
+</section>
+
+<section id="s3" style="background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line);">
+  <div class="wrap">
+    <div class="sec-label">SECTION 03</div>
+    <h2 class="sec">フォーム連携の実装
+      <small>アンケートや予約の回答内容で配信を分けたい場合の作り方です。まず「LINEの中だけで完結できるか」を確認したうえで、外に出す判断をしています。</small></h2>
+
+    <h3>LINEの中だけで完結できるか、を先に確認しています</h3>
+    <p>まず前提として、<b>LINE公式アカウントにフォームを作る機能はありません</b>。管理画面で回答を集められるのは「リサーチ」というアンケート機能だけです(ほかに「拡張機能」がありますが、これは月額のかかる外部サービスの紹介欄です)。</p>
+    <p>そしてリサーチは、<b>予約・問い合わせのフォームの代わりには使えません</b>。管理画面に明記されている制限は次の2点です。</p>
+
+    <div class="fact">
+      <b>実際の画面に書かれている内容(2026年8月19日 確認)</b><br>
+      ・「個人情報の取得を目的としたリサーチを配信することはできません」<br>
+      ・「回答数が20件未満の場合は、リサーチ結果をダウンロードできません」
+    </div>
+
+    <p>お名前・連絡先・希望日時を伺うフォームは、この規約に触れます。また回答が20件集まるまで結果を取り出せないため、少数のお客様を丁寧に扱う業種ほど使えません。リサーチは「好きな味はどれですか」のような、統計として集める用途に向いた機能です。</p>
+    <p>そのため<b>個人情報を伴うフォームは Googleフォームを使います</b>。追加の月額費用はかかりません。</p>
+
+    <h3>回答をセグメントに変えるまでの流れ</h3>
+
+    <div class="flow">
+      <div class="fl"><b>1. 友だち追加</b><span>入口ごとのQRコード・URLで、来た経路が分かる状態にしておきます</span></div>
+      <div class="arrow">▼</div>
+      <div class="fl"><b>2. リッチメニュー／配信からフォームへ誘導</b><span>「ご予約はこちら」「30秒アンケート」などのボタンから開いてもらいます</span></div>
+      <div class="arrow">▼</div>
+      <div class="fl hl"><b>3. Googleフォームで回答を受ける</b><span>お名前・希望日時・お悩みなど。LINEのどなたからの回答かを紐づけて受け取ります</span></div>
+      <div class="arrow">▼</div>
+      <div class="fl hl"><b>4. 回答をきっかけに処理が自動で走る</b><span>Google Apps Script(GAS)が回答を読み、内容で振り分けます</span></div>
+      <div class="arrow">▼</div>
+      <div class="fl"><b>5. 分けた名簿をLINEへ渡す</b><span>「腰痛」と答えた方、「今月中に来店希望」と答えた方、といった単位でオーディエンスを作ります</span></div>
+      <div class="arrow">▼</div>
+      <div class="fl"><b>6. その相手だけに配信</b><span>回答内容に合った案内が届きます。関係ない方には送らないのでブロックが増えません</span></div>
+    </div>
+
+    <h3>4番の処理のコード例</h3>
+    <p class="muted">Googleフォームの回答が入った瞬間に動く部分です。実際の案件では、フォームの項目名と分け方をヒアリングしてから調整します。</p>
+
+<pre><span class="c">// Googleフォームに回答が入ると自動で実行される</span>
+<span class="k">function</span> onFormSubmit(e) {
+  <span class="k">const</span> ans = e.namedValues;
+  <span class="k">const</span> userId = ans[<span class="k">'LINE_USER_ID'</span>][0];   <span class="c">// 誰からの回答か</span>
+  <span class="k">const</span> nayami = ans[<span class="k">'お悩み'</span>][0];          <span class="c">// 回答内容</span>
+
+  <span class="c">// 回答ごとに名簿シートを分けて貯める</span>
+  <span class="k">const</span> sheet = SpreadsheetApp
+    .openById(SHEET_ID)
+    .getSheetByName(nayami);        <span class="c">// 「腰痛」「肩こり」…</span>
+  sheet.appendRow([userId, <span class="k">new</span> Date()]);
+
+  <span class="c">// LINEへ名簿を渡してオーディエンスを作る</span>
+  UrlFetchApp.fetch(
+    <span class="k">'https://api.line.me/v2/bot/audienceGroup/upload'</span>, {
+      method: <span class="k">'put'</span>,
+      contentType: <span class="k">'application/json'</span>,
+      headers: { Authorization: <span class="k">'Bearer '</span> + CHANNEL_TOKEN },
+      payload: JSON.stringify({
+        audienceGroupId: AUDIENCE_ID[nayami],
+        audiences: [{ id: userId }]
+      })
+    });
+}</pre>
+
+    <div class="note">
+      <b>この資料での区別。</b>　SECTION 02 の表と、上の「リサーチ」の制限は、管理画面を開いて確認した内容です。このコードは実装の設計例で、貴社の案件ではフォーム項目と分け方が決まってから作ります。動作確認は公開前に必ず一緒に行います。
+    </div>
+  </div>
+</section>
+
+<section id="s4">
+  <div class="wrap">
+    <div class="sec-label">SECTION 04</div>
+    <h2 class="sec">追加の月額費用が出ない理由
+      <small>この構成で使うものと、その料金です。月額のかかる外部ツールを前提にしていません。</small></h2>
+
+    <div class="tbl-scroll">
+    <table>
+      <tr><th>使うもの</th><th>役割</th><th>料金</th></tr>
+      <tr><td>LINE公式アカウント</td><td>配信・リッチメニュー・タグ・自動応答</td><td class="num">無料〜<br><span class="muted" style="font-weight:400;">配信数に応じたLINEの料金プラン</span></td></tr>
+      <tr><td>Googleフォーム</td><td>個人情報を伴うフォームの受け口</td><td class="num">無料</td></tr>
+      <tr><td>Googleスプレッドシート</td><td>回答の蓄積・名簿</td><td class="num">無料</td></tr>
+      <tr><td>Google Apps Script</td><td>回答の振り分けとLINEへの連携</td><td class="num">無料</td></tr>
+      <tr><td>LINE Messaging API</td><td>名簿からオーディエンスを作る</td><td class="num">無料</td></tr>
+      <tr class="total"><td colspan="2">構築後にかかり続ける費用</td><td class="num">0円<br><span class="muted" style="font-weight:400;">(LINEの配信プラン料金を除く)</span></td></tr>
+    </table>
+    </div>
+
+    <p class="muted">※ 配信通数が多くなる場合はLINE公式アカウント側の料金プラン(ライト・スタンダード)が発生します。これはどのツールを使っても共通で、当方の構築とは別のLINE社への費用です。</p>
+    <p>月額制の外部ツールを使うと機能は増えますが、解約した時点で配信シナリオごと止まります。標準機能で組んでおけば、この先どなたが引き継いでも動き続けます。</p>
+  </div>
+</section>
+
+<section id="s5" style="background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line);">
+  <div class="wrap">
+    <div class="sec-label">SECTION 05</div>
+    <h2 class="sec">部分的にお願いいただく場合
+      <small>ご提案している標準構築 50,000円(税込) の内訳です。すでにご自身で進めている部分や、社内で対応される部分は外していただけます。</small></h2>
+
+    <h3>標準構築の内訳</h3>
+    <div class="tbl-scroll">
+    <table>
+      <tr><th>作業</th><th>お渡しするもの</th><th>費用(税込)</th></tr>
+      <tr><td><b>ヒアリング・導線設計</b></td><td>シナリオ設計図、配信設計表(目的とKPI)</td><td class="num">15,000円</td></tr>
+      <tr><td><b>リッチメニュー制作</b></td><td>デザイン1点、管理画面への設定まで</td><td class="num">12,000円</td></tr>
+      <tr><td><b>ステップ配信</b></td><td>2〜3パターンの文面作成と設定</td><td class="num">15,000円</td></tr>
+      <tr><td><b>あいさつ・自動応答・タグ設計</b></td><td>入口別あいさつ、キーワード応答、タグ設計表</td><td class="num">5,000円</td></tr>
+      <tr><td><b>公開前の動作確認・マニュアル</b></td><td>実機での確認、運用マニュアル</td><td class="num">3,000円</td></tr>
+      <tr class="total"><td colspan="2">標準構築 一式</td><td class="num">50,000円</td></tr>
+    </table>
+    </div>
+    <p class="muted">上から順に依存しています。導線設計だけを外して他をお願いいただくことは可能ですが、その場合は設計方針を先にご共有ください。</p>
+
+    <h3>範囲が広がる場合(オプション)</h3>
+    <p class="muted">下記は標準構築に含まれない作業です。分量が案件ごとに大きく変わるため、内容を伺ってからお見積りします。</p>
+    <div class="tbl-scroll">
+    <table>
+      <tr><th>作業</th><th>内容</th><th>費用</th></tr>
+      <tr><td><b>フォーム連携の実装</b></td><td>SECTION 03 の仕組み。Googleフォーム作成、GAS実装、オーディエンス連携、動作確認</td><td class="num">ご相談</td></tr>
+      <tr><td>リッチメニュー追加</td><td>1点ごと(デザイン・設定込み)</td><td class="num">ご相談</td></tr>
+      <tr><td>ステップ配信の追加</td><td>1パターンごと</td><td class="num">ご相談</td></tr>
+      <tr><td>公開後の運用</td><td>配信代行、数字のレポート、文面改善(月次)</td><td class="num">ご相談</td></tr>
+    </table>
+    </div>
+
+    <div class="note">
+      <b>1回分の小さな範囲からでもお引き受けします。</b>　たとえば「リッチメニューだけ」「ステップ配信の文面だけ」といった形でも構いません。まず1件ご一緒したうえで、続けてお任せいただけるかご判断いただければと思います。
+    </div>
+  </div>
+</section>
+
+<section id="s6">
+  <div class="wrap">
+    <div class="sec-label">SECTION 06</div>
+    <h2 class="sec">進め方
+      <small>お受けしてから公開までの流れと、公開後にお渡しするものです。</small></h2>
+
+    <div class="flow">
+      <div class="fl"><b>1. ヒアリング</b><span>目的・商材・お客様像・すでにある仕組みを伺います。テキストのやり取りでも、オンラインでも構いません</span></div>
+      <div class="arrow">▼</div>
+      <div class="fl"><b>2. 導線案を1つお見せする</b><span>いきなり作り込まず、まず設計図を1案。ここで方向が合っているかを確認します</span></div>
+      <div class="arrow">▼</div>
+      <div class="fl"><b>3. 制作・設定</b><span>リッチメニュー、配信文面、タグ、自動応答。途中経過も随時共有します</span></div>
+      <div class="arrow">▼</div>
+      <div class="fl hl"><b>4. 公開前に一緒に動作確認</b><span>実際のスマホで、送り先と条件が意図どおりかを確認してから公開します</span></div>
+      <div class="arrow">▼</div>
+      <div class="fl"><b>5. 納品</b><span>設計図・配信設計表・運用マニュアル。ご自身で文面を差し替える手順もお渡しします</span></div>
+    </div>
+
+    <div class="card">
+      <b style="font-size:16px;">ご連絡について</b>
+      <p class="muted" style="margin:8px 0 0;">継続してのご対応が可能です。ご連絡はその日のうちにお返しします。オンラインでの打ち合わせにも対応できます。制作物は人の目で確認してからお渡しします。</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p><b>自動化のミナト</b>　LINE公式アカウント 設計・構築</p>
+    <p style="margin-top:10px;">本ページは2026年8月22日のオンライン面談用にご用意した説明資料です。検索エンジンには表示されない設定にしています。</p>
+    <p style="margin-top:10px;font-size:12.5px;opacity:.8;">SECTION 02 の表・オーディエンスの人数条件・SECTION 03 のリサーチ機能の制限は、2026年8月19日に LINE Official Account Manager の実画面で確認した内容です。SECTION 03 のコードは実装の設計例です。SECTION 01 でご紹介している構築サンプルは、架空の店舗を題材にしたデモです。</p>
+  </div>
+</footer>
+
+</body>
+</html>
