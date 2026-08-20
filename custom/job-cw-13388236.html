@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Webコーダー募集 | 参考URLを、正解にする仕事。 - Web制作会社サンプル</title>
+<meta name="description" content="Webサイト下層ページ(40〜50ページ)のコーディングをお願いできる方を募集。デザインデータなし・参考URLをもとにしたコーディング案件です。※採用サンプルページ">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Zen+Kaku+Gothic+New:wght@500;700;900&family=Manrope:wght@500;700;800&display=swap" rel="stylesheet">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org/",
+  "@type": "JobPosting",
+  "title": "Webコーダー(下層ページ・TOPページコーディング)",
+  "description": "Webサイト下層ページ40〜50ページのコーディング業務。ヘッダー・フッターは支給。デザインデータなし、参考URLをもとにコーディング。TOPページは長めのLP風。",
+  "hiringOrganization": {
+    "@type": "Organization",
+    "name": "Web制作会社サンプル"
+  },
+  "employmentType": "CONTRACTOR",
+  "jobLocationType": "TELECOMMUTE",
+  "baseSalary": {
+    "@type": "MonetaryAmount",
+    "currency": "JPY",
+    "value": { "@type": "QuantitativeValue", "value": 70000, "unitText": "案件単価(税込)" }
+  }
+}
+</script>
+<style>
+  :root{
+    --navy:#16264a;
+    --navy-light:#24406e;
+    --navy-pale:#eef1f7;
+    --bg:#fbfaf6;
+    --text:#1c1c1e;
+    --gray:#6b6f76;
+    --line:#e7e4da;
+    --radius:14px;
+    font-size:16px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:"Noto Sans JP",sans-serif;
+    line-height:1.85;
+    letter-spacing:.02em;
+    font-feature-settings:"palt";
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+    width:100%;
+    max-width:100%;
+  }
+  img{max-width:100%;display:block;}
+  a{color:inherit;text-decoration:none;}
+  .en{font-family:"Manrope",sans-serif;}
+  h1,h2,h3,h4{font-family:"Zen Kaku Gothic New",sans-serif;letter-spacing:.04em;}
+  .wrap{width:100%;max-width:1080px;margin:0 auto;padding:0 24px;}
+  section{padding:96px 0;}
+  @media(max-width:600px){ section{padding:72px 0;} .wrap{padding:0 20px;} }
+
+  /* ---- header ---- */
+  .site-header{
+    position:fixed;top:0;left:0;width:100%;max-width:100%;z-index:200;
+    display:flex;align-items:center;justify-content:space-between;
+    padding:16px 24px;
+    background:rgba(251,250,246,.88);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);
+  }
+  .logo{font-family:"Zen Kaku Gothic New",sans-serif;font-weight:900;font-size:1.05rem;color:var(--navy);}
+  .logo span{color:var(--gray);font-size:.7rem;font-weight:500;display:block;letter-spacing:.08em;}
+  .nav-links{display:flex;gap:32px;font-size:.92rem;font-weight:500;}
+  .hamburger{
+    display:none;width:44px;height:44px;border:1px solid var(--line);border-radius:10px;
+    background:#fff;position:relative;cursor:pointer;flex-shrink:0;
+  }
+  .hamburger span{
+    position:absolute;left:11px;width:22px;height:2px;background:var(--navy);transition:.25s;
+  }
+  .hamburger span:nth-child(1){top:15px;}
+  .hamburger span:nth-child(2){top:21px;}
+  .hamburger span:nth-child(3){top:27px;}
+  .hamburger.open span:nth-child(1){transform:translateY(6px) rotate(45deg);}
+  .hamburger.open span:nth-child(2){opacity:0;}
+  .hamburger.open span:nth-child(3){transform:translateY(-6px) rotate(-45deg);}
+
+  #mobileNav{
+    position:fixed;inset:0;z-index:190;background:var(--navy);
+    display:flex;flex-direction:column;align-items:center;justify-content:center;gap:28px;
+    transform:translateY(-100%);transition:transform .35s ease;
+  }
+  #mobileNav.open{transform:translateY(0);}
+  #mobileNav a{color:#fff;font-size:1.1rem;font-weight:700;font-family:"Zen Kaku Gothic New",sans-serif;}
+
+  @media(max-width:840px){
+    .nav-links{display:none;}
+    .hamburger{display:block;}
+  }
+
+  /* ---- hero ---- */
+  .hero{
+    position:relative;min-height:92vh;display:flex;align-items:flex-end;
+    padding:0 0 72px;overflow:hidden;
+  }
+  .hero-bg{
+    position:absolute;inset:0;
+    background:linear-gradient(180deg,rgba(15,24,48,.35) 0%,rgba(12,20,42,.82) 82%),
+      url('https://images.unsplash.com/photo-1629875499750-a31b83446598?auto=format&fit=crop&w=1200&q=70') center/cover no-repeat;
+  }
+  .hero-inner{position:relative;z-index:2;color:#fff;width:100%;}
+  .hero-eyebrow{
+    display:inline-block;font-size:.78rem;font-weight:700;letter-spacing:.14em;
+    border:1px solid rgba(255,255,255,.5);border-radius:100px;padding:6px 16px;margin-bottom:20px;
+  }
+  .hero h1{
+    font-size:clamp(1.9rem,6vw,3.1rem);font-weight:900;line-height:1.5;margin-bottom:20px;
+  }
+  .hero p{font-size:1rem;max-width:520px;color:rgba(255,255,255,.88);margin-bottom:36px;}
+  .cta-row{display:flex;gap:14px;flex-wrap:wrap;}
+  .btn{
+    display:inline-flex;align-items:center;gap:8px;
+    padding:16px 30px;border-radius:100px;font-weight:700;font-size:.96rem;
+    box-shadow:0 10px 26px rgba(22,38,74,.25);
+    transition:transform .2s ease, box-shadow .2s ease;
+  }
+  .btn:active{transform:scale(.97);}
+  .btn-primary{background:var(--navy-light);color:#fff;}
+  .btn-outline{background:#fff;color:var(--navy);}
+  .hero-badges{
+    display:flex;gap:12px;flex-wrap:wrap;margin-top:44px;
+  }
+  .hero-badge{
+    background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.35);
+    border-radius:10px;padding:10px 16px;font-size:.8rem;color:#fff;
+  }
+  .hero-badge b{font-family:"Manrope",sans-serif;font-size:1.1rem;display:block;}
+
+  /* ---- kpi ---- */
+  .kpi{background:var(--navy);color:#fff;padding:56px 0;}
+  .kpi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;text-align:center;}
+  @media(max-width:700px){.kpi-grid{grid-template-columns:repeat(2,1fr);}}
+  .kpi-num{font-family:"Manrope",sans-serif;font-size:clamp(1.6rem,4vw,2.4rem);font-weight:800;}
+  .kpi-label{font-size:.78rem;color:rgba(255,255,255,.7);margin-top:6px;}
+
+  /* ---- section heading ---- */
+  .sec-head{max-width:640px;margin:0 auto 56px;text-align:center;}
+  .sec-tag{
+    font-size:.76rem;color:var(--navy-light);font-weight:700;letter-spacing:.18em;
+    display:block;margin-bottom:12px;
+  }
+  .sec-head h2{font-size:clamp(1.5rem,4vw,2rem);font-weight:900;line-height:1.6;}
+  .sec-head p{color:var(--gray);margin-top:16px;font-size:.94rem;}
+
+  /* ---- mission ---- */
+  .mission{background:#fff;}
+  .mission-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center;}
+  @media(max-width:800px){.mission-grid{grid-template-columns:1fr;gap:32px;}}
+  .mission-img{border-radius:var(--radius);overflow:hidden;aspect-ratio:4/3;}
+  .mission-img img{width:100%;height:100%;object-fit:cover;}
+  .mission-text h3{font-size:1.35rem;font-weight:900;line-height:1.7;margin-bottom:20px;}
+  .mission-text p{color:var(--gray);font-size:.94rem;margin-bottom:14px;}
+
+  /* ---- work list ---- */
+  .work-list{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;}
+  @media(max-width:700px){.work-list{grid-template-columns:1fr;}}
+  .work-card{
+    background:#fff;border:1px solid var(--line);border-radius:var(--radius);
+    padding:28px 26px;display:flex;gap:18px;
+  }
+  .work-ico{
+    flex-shrink:0;width:44px;height:44px;border-radius:50%;background:var(--navy-pale);
+    display:flex;align-items:center;justify-content:center;
+  }
+  .work-ico svg{width:20px;height:20px;stroke:var(--navy);fill:none;stroke-width:2;}
+  .work-card h4{font-size:1rem;font-weight:700;margin-bottom:8px;}
+  .work-card p{font-size:.88rem;color:var(--gray);}
+
+  /* ---- persona ---- */
+  .persona-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
+  @media(max-width:800px){.persona-grid{grid-template-columns:1fr;}}
+  .persona-card{
+    background:#fff;border-radius:var(--radius);padding:32px 26px;text-align:center;
+    border:1px solid var(--line);
+  }
+  .persona-num{
+    font-family:"Manrope",sans-serif;font-weight:800;font-size:1.6rem;color:var(--navy-light);
+    display:inline-flex;align-items:center;justify-content:center;
+    width:52px;height:52px;border-radius:50%;background:var(--navy-pale);margin-bottom:18px;
+  }
+  .persona-card h4{font-size:1.02rem;font-weight:700;margin-bottom:10px;}
+  .persona-card p{font-size:.86rem;color:var(--gray);}
+
+  /* ---- voice ---- */
+  .voice{background:#fff;}
+  .voice-card{
+    display:grid;grid-template-columns:180px 1fr;gap:36px;align-items:center;
+    background:var(--navy-pale);border-radius:var(--radius);padding:36px;
+  }
+  @media(max-width:640px){.voice-card{grid-template-columns:1fr;text-align:center;}}
+  .voice-photo{width:100%;aspect-ratio:1/1;border-radius:50%;overflow:hidden;margin:0 auto;}
+  .voice-photo img{width:100%;height:100%;object-fit:cover;}
+  .voice-quote{font-size:1.05rem;font-weight:700;line-height:1.9;margin-bottom:14px;}
+  .voice-name{font-size:.82rem;color:var(--gray);}
+
+  /* ---- ai note ---- */
+  .ai-note{
+    background:linear-gradient(135deg,var(--navy) 0%,var(--navy-light) 100%);
+    color:#fff;border-radius:var(--radius);padding:44px 36px;
+  }
+  .ai-note h3{font-size:1.2rem;font-weight:900;margin-bottom:16px;}
+  .ai-note p{font-size:.92rem;color:rgba(255,255,255,.85);margin-bottom:10px;}
+  .ai-note ul{list-style:none;margin-top:18px;display:flex;flex-direction:column;gap:8px;}
+  .ai-note li{font-size:.88rem;padding-left:22px;position:relative;}
+  .ai-note li::before{content:"✓";position:absolute;left:0;color:#9fc3ff;font-weight:700;}
+
+  /* ---- table ---- */
+  .req-table{width:100%;max-width:100%;border-collapse:collapse;background:#fff;border-radius:var(--radius);overflow:hidden;border:1px solid var(--line);}
+  .req-table tr{border-bottom:1px solid var(--line);}
+  .req-table tr:last-child{border-bottom:none;}
+  .req-table th,.req-table td{padding:18px 20px;text-align:left;font-size:.88rem;vertical-align:top;}
+  .req-table th{background:var(--navy-pale);width:34%;font-weight:700;color:var(--navy);}
+  .req-table td{color:var(--text);}
+  @media(max-width:600px){
+    .req-table, .req-table tbody, .req-table tr, .req-table th, .req-table td{display:block;width:100%;}
+    .req-table th{width:100%;border-bottom:none;padding-bottom:6px;}
+    .req-table td{padding-top:0;padding-bottom:18px;}
+  }
+  .note-flag{color:var(--gray);font-size:.78rem;}
+
+  /* ---- flow ---- */
+  .flow-list{display:flex;flex-direction:column;gap:0;}
+  .flow-item{
+    display:grid;grid-template-columns:60px 1fr;gap:20px;padding:22px 0;border-bottom:1px solid var(--line);
+  }
+  .flow-item:last-child{border-bottom:none;}
+  .flow-step{
+    font-family:"Manrope",sans-serif;font-weight:800;font-size:1.3rem;color:var(--navy-light);
+  }
+  .flow-item h4{font-size:.98rem;font-weight:700;margin-bottom:6px;}
+  .flow-item p{font-size:.86rem;color:var(--gray);}
+
+  /* ---- faq ---- */
+  .faq-item{border-bottom:1px solid var(--line);}
+  .faq-q{
+    width:100%;text-align:left;background:none;border:none;padding:22px 4px;
+    display:flex;justify-content:space-between;align-items:center;font-size:.96rem;font-weight:700;cursor:pointer;
+    font-family:"Noto Sans JP",sans-serif;color:var(--text);
+  }
+  .faq-q .mark{font-family:"Manrope",sans-serif;font-size:1.3rem;color:var(--navy-light);flex-shrink:0;margin-left:16px;}
+  .faq-a{max-height:0;overflow:hidden;transition:max-height .3s ease;font-size:.88rem;color:var(--gray);}
+  .faq-a div{padding:0 4px 22px;}
+  .faq-item.open .faq-a{max-height:240px;}
+
+  /* ---- form ---- */
+  .apply-form{background:#fff;border-radius:var(--radius);border:1px solid var(--line);padding:40px;}
+  @media(max-width:600px){.apply-form{padding:28px 20px;}}
+  .form-row{margin-bottom:20px;}
+  .form-row label{display:block;font-size:.84rem;font-weight:700;margin-bottom:8px;}
+  .form-row input, .form-row textarea{
+    width:100%;max-width:100%;padding:14px 16px;border:1px solid var(--line);border-radius:8px;
+    font-size:16px;font-family:inherit;background:var(--bg);
+  }
+  .form-row textarea{resize:vertical;min-height:100px;}
+  .form-two{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
+  @media(max-width:560px){.form-two{grid-template-columns:1fr;}}
+  .form-submit{
+    width:100%;max-width:100%;padding:17px;border:none;border-radius:100px;background:var(--navy);
+    color:#fff;font-weight:700;font-size:1rem;cursor:pointer;
+  }
+  .form-msg{display:none;text-align:center;padding:16px;background:var(--navy-pale);border-radius:8px;font-size:.88rem;margin-top:16px;}
+
+  /* ---- footer ---- */
+  footer{background:var(--navy);color:rgba(255,255,255,.75);padding:60px 0 120px;}
+  .footer-grid{display:flex;justify-content:space-between;flex-wrap:wrap;gap:32px;margin-bottom:32px;}
+  footer .logo2{color:#fff;font-weight:900;font-family:"Zen Kaku Gothic New",sans-serif;font-size:1.1rem;margin-bottom:10px;}
+  footer p{font-size:.82rem;line-height:1.9;}
+  .footer-disclaimer{
+    border-top:1px solid rgba(255,255,255,.15);padding-top:24px;font-size:.76rem;color:rgba(255,255,255,.5);
+  }
+
+  /* ---- sticky cta ---- */
+  .sticky-cta{
+    position:fixed;bottom:0;left:0;width:100%;max-width:100%;z-index:150;
+    display:none;background:#fff;border-top:1px solid var(--line);
+    padding:12px 16px;gap:10px;box-shadow:0 -6px 20px rgba(0,0,0,.08);
+  }
+  .sticky-cta a{
+    flex:1;text-align:center;padding:15px;border-radius:100px;font-weight:700;font-size:.92rem;
+  }
+  .sticky-cta .btn-outline{border:1px solid var(--navy);color:var(--navy);}
+  .sticky-cta .btn-primary{background:var(--navy);color:#fff;}
+  @media(max-width:760px){ .sticky-cta{display:flex;} body{padding-bottom:78px;} }
+
+  /* ---- reveal ---- */
+  .reveal{opacity:0;transform:translateY(24px);transition:opacity .7s ease, transform .7s ease;}
+  .reveal.show{opacity:1;transform:translateY(0);}
+  @media(prefers-reduced-motion:reduce){
+    .reveal{opacity:1;transform:none;transition:none;}
+    html{scroll-behavior:auto;}
+  }
+
+  .photo-note{font-size:.72rem;color:var(--gray);margin-top:8px;text-align:right;}
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="logo">Web制作会社サンプル<span>CODING PARTNER RECRUIT</span></div>
+  <nav class="nav-links">
+    <a href="#work">仕事内容</a>
+    <a href="#requirements">募集要項</a>
+    <a href="#faq">FAQ</a>
+    <a href="#apply">応募フォーム</a>
+  </nav>
+  <button class="hamburger" id="hamburgerBtn" aria-label="メニュー"><span></span><span></span><span></span></button>
+</header>
+
+<nav id="mobileNav">
+  <a href="#work" class="nav-close">仕事内容</a>
+  <a href="#persona" class="nav-close">求める人物像</a>
+  <a href="#requirements" class="nav-close">募集要項</a>
+  <a href="#faq" class="nav-close">FAQ</a>
+  <a href="#apply" class="nav-close">応募フォーム</a>
+</nav>
+
+<main>
+
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="wrap hero-inner">
+      <span class="hero-eyebrow">Webコーダー募集 ・ 業務委託</span>
+      <h1>参考URLを、<br>正解にする仕事。</h1>
+      <p>デザインデータは、ありません。頼りになるのは参考URLと、コードで精度を作る力だけ。TOPページはLP級のロング仕様、下層は40〜50ページ。量産フェーズを一緒に走ってくれる方を探しています。</p>
+      <div class="cta-row">
+        <a href="#apply" class="btn btn-primary">応募フォームへ進む</a>
+        <a href="#work" class="btn btn-outline">仕事内容を見る</a>
+      </div>
+      <div class="hero-badges">
+        <div class="hero-badge"><b class="en">¥70,000</b>案件報酬(税込)</div>
+        <div class="hero-badge"><b class="en">40-50</b>下層ページ規模</div>
+        <div class="hero-badge"><b class="en">TOP</b>LP風ロング仕様</div>
+      </div>
+    </div>
+  </section>
+
+  <div class="kpi">
+    <div class="wrap kpi-grid">
+      <div><div class="kpi-num en">¥70,000</div><div class="kpi-label">報酬(税込)</div></div>
+      <div><div class="kpi-num en">40-50P</div><div class="kpi-label">コーディング規模</div></div>
+      <div><div class="kpi-num en">0点</div><div class="kpi-label">支給デザインデータ</div></div>
+      <div><div class="kpi-num en">日中</div><div class="kpi-label">対応必須の稼働帯</div></div>
+    </div>
+  </div>
+
+  <section class="mission">
+    <div class="wrap mission-grid">
+      <div class="mission-img reveal">
+        <img src="https://images.unsplash.com/photo-1664596350962-603b0a41524a?auto=format&fit=crop&w=1200&q=70" alt="都心のオフィス街を歩く人々の後ろ姿">
+      </div>
+      <div class="mission-text reveal">
+        <span class="sec-tag">MISSION</span>
+        <h3>デザインが無いから、<br>コーダーの判断が仕上がりを決める。</h3>
+        <p>今回お願いしたいのは、PSDやFigmaが用意されていない案件です。参考URLの構成・余白・階層を読み解き、支給済みのヘッダー・フッターと矛盾なくつなげる。判断力と再現力の両方が求められる仕事だと思っています。</p>
+        <p>TOPページはLP風のロング構成、下層は40〜50ページという量。だからこそ、経験に裏打ちされたスピードと、崩れないレスポンシブ実装が必要です。</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="work">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span class="sec-tag">WORK CONTENT</span>
+        <h2>お願いしたい仕事内容</h2>
+        <p>Webサイトの下層ページコーディングが中心の業務です。</p>
+      </div>
+      <div class="work-list">
+        <div class="work-card reveal">
+          <div class="work-ico"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/></svg></div>
+          <div><h4>下層ページのコーディング(40〜50ページ)</h4><p>参考URLをもとに、HTML/CSS/JavaScriptで構築いただきます。</p></div>
+        </div>
+        <div class="work-card reveal">
+          <div class="work-ico"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg></div>
+          <div><h4>ヘッダー・フッターは支給フォーマット</h4><p>共通パーツはこちらでご用意するため、内部の作り込みに集中いただけます。</p></div>
+        </div>
+        <div class="work-card reveal">
+          <div class="work-ico"><svg viewBox="0 0 24 24"><path d="M4 19h16"/><path d="M4 15l5-8 4 5 3-4 4 7"/></svg></div>
+          <div><h4>デザインデータ(PSD/Figma等)なし</h4><p>参考URLをもとにコーディングいただく案件です。デザイン読解力が活きます。</p></div>
+        </div>
+        <div class="work-card reveal">
+          <div class="work-ico"><svg viewBox="0 0 24 24"><path d="M3 12l4-7h10l4 7-9 9-9-9z"/></svg></div>
+          <div><h4>TOPページはLP風のロング仕様</h4><p>下層ページより情報量・演出ともに厚みのある、TOPページ専用の作り込みです。</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="persona" style="background:#fff;">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span class="sec-tag">WHO WE'RE LOOKING FOR</span>
+        <h2>求める人物像</h2>
+      </div>
+      <div class="persona-grid">
+        <div class="persona-card reveal">
+          <div class="persona-num en">01</div>
+          <h4>豊富なコーディング経験</h4>
+          <p>HTML/CSS/JavaScriptでの実務経験が豊富で、迷いなく手を動かせる方。</p>
+        </div>
+        <div class="persona-card reveal">
+          <div class="persona-num en">02</div>
+          <h4>崩れないレスポンシブ実装</h4>
+          <p>あらゆる画面幅で崩れず、量産しても品質が落ちない実装力のある方。</p>
+        </div>
+        <div class="persona-card reveal">
+          <div class="persona-num en">03</div>
+          <h4>柔軟でスピーディーな修正対応</h4>
+          <p>日中の連絡・対応が可能で、修正依頼にも素早く動ける方(夜間のみの対応は対象外です)。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="voice">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span class="sec-tag">VOICE</span>
+        <h2>ご担当者より</h2>
+      </div>
+      <div class="voice-card reveal">
+        <div class="voice-photo">
+          <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=1200&q=70" alt="制作ディレクターのポートレート">
+        </div>
+        <div>
+          <p class="voice-quote">「量産の中でも、ページごとの精度を落とさない方に来ていただきたいです。」</p>
+          <p style="font-size:.88rem;color:var(--gray);margin-bottom:14px;">参考URLの意図を汲み取って形にしてくださる方となら、40〜50ページという規模でも安心してお任せできます。修正のやり取りもスピーディーに進めたいので、日中しっかりコミュニケーションが取れる方だとうれしいです。</p>
+          <p class="voice-name">制作ディレクター 中村(仮名・サンプル)</p>
+        </div>
+      </div>
+      <p class="photo-note">※写真はイメージです。実制作ではご提供写真や日本人モデルの素材に差し替えます。人物名・コメントはサンプルです。</p>
+    </div>
+  </section>
+
+  <section style="background:#fff;">
+    <div class="wrap">
+      <div class="ai-note reveal">
+        <h3>AIツールの活用について</h3>
+        <p>AIを活用してコーディングを進めていただくこと自体は問題ありません。透明性を大事にしたいので、ご応募の際に下記をお知らせください。</p>
+        <ul>
+          <li>使用しているAIツール(例:コード生成・補完系ツールなど)</li>
+          <li>どの程度AIを活用しているか(補助的/大部分など)</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="requirements">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span class="sec-tag">REQUIREMENTS</span>
+        <h2>募集要項</h2>
+      </div>
+      <table class="req-table reveal">
+        <tr><th>業務内容</th><td>Webサイト下層ページのコーディング(40〜50ページ)、およびTOPページ(LP風ロング仕様)のコーディング</td></tr>
+        <tr><th>支給されるもの</th><td>ヘッダー・フッターのフォーマット、参考URL(コーディング対象の参考サイト)</td></tr>
+        <tr><th>支給されないもの</th><td>デザインデータ(PSD・Figma等)</td></tr>
+        <tr><th>必要スキル</th><td>HTML / CSS / JavaScriptでのコーディング経験が豊富な方、レスポンシブ対応ができる方</td></tr>
+        <tr><th>稼働条件</th><td>日中も連絡・対応が可能な方。夜間のみの作業・ご連絡となる方は今回対象外です。</td></tr>
+        <tr><th>修正対応</th><td>修正依頼に柔軟かつスピーディーに対応いただける体制を求めています。</td></tr>
+        <tr><th>AI利用</th><td>活用可。応募時に使用ツールと活用度合いをお知らせください。</td></tr>
+        <tr><th>報酬</th><td>70,000円(税込)</td></tr>
+        <tr><th>契約形態</th><td>業務委託を想定しています<span class="note-flag">※詳細はご相談の上で決定します(仮の内容です)</span></td></tr>
+      </table>
+    </div>
+  </section>
+
+  <section style="background:#fff;">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span class="sec-tag">FLOW</span>
+        <h2>応募の流れ</h2>
+        <p>一般的な流れの例です。進行状況により前後する場合があります。(※仮の内容です)</p>
+      </div>
+      <div class="flow-list reveal">
+        <div class="flow-item">
+          <div class="flow-step en">01</div>
+          <div><h4>応募フォームより送信</h4><p>実績・経験年数・対応可能時間帯・AI利用有無・修正対応の体制をご記入ください。</p></div>
+        </div>
+        <div class="flow-item">
+          <div class="flow-step en">02</div>
+          <div><h4>内容の確認</h4><p>いただいた実績・体制をもとに確認させていただきます。</p></div>
+        </div>
+        <div class="flow-item">
+          <div class="flow-step en">03</div>
+          <div><h4>条件のすり合わせ</h4><p>稼働時間帯や進め方について、簡単にすり合わせを行います。</p></div>
+        </div>
+        <div class="flow-item">
+          <div class="flow-step en">04</div>
+          <div><h4>ご契約・稼働開始</h4><p>合意のうえ、コーディング業務を開始いただきます。</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="faq">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span class="sec-tag">FAQ</span>
+        <h2>よくあるご質問</h2>
+      </div>
+      <div class="reveal">
+        <div class="faq-item">
+          <button class="faq-q">デザインデータはもらえますか？<span class="mark">＋</span></button>
+          <div class="faq-a"><div>PSD・Figma等のデザインデータはご用意がありません。参考URLをもとにコーディングいただく案件です。ヘッダー・フッターのフォーマットのみ、こちらでご用意します。</div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">夜間のみの対応でも応募できますか？<span class="mark">＋</span></button>
+          <div class="faq-a"><div>恐れ入りますが、日中の連絡・対応が可能な方を対象としております。夜間のみの作業・ご連絡となる方は今回対象外です。</div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">AIツールを使ってコーディングしても良いですか？<span class="mark">＋</span></button>
+          <div class="faq-a"><div>問題ございません。ご応募の際に、使用しているAIツールと活用度合いをお知らせください。</div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">修正対応はどのくらい発生しますか？<span class="mark">＋</span></button>
+          <div class="faq-a"><div>参考URLをもとにした量産コーディングのため、細かな調整依頼が発生します。柔軟かつスピーディーに対応いただける方を求めています。</div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">報酬の内訳を教えてください。<span class="mark">＋</span></button>
+          <div class="faq-a"><div>本案件の報酬は70,000円(税込)です。下層ページ40〜50ページ分とTOPページのコーディングを含みます。</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="apply" style="background:#fff;">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span class="sec-tag">APPLY</span>
+        <h2>応募フォーム</h2>
+        <p>コーディング実績・ポートフォリオ／経験年数／対応可能な時間帯／AI利用の有無／修正対応の体制をご記入ください。</p>
+      </div>
+      <form class="apply-form reveal" id="applyForm">
+        <div class="form-two">
+          <div class="form-row"><label>お名前</label><input type="text" placeholder="山田 太郎" required></div>
+          <div class="form-row"><label>メールアドレス</label><input type="email" placeholder="example@mail.com" required></div>
+        </div>
+        <div class="form-row"><label>ポートフォリオ・実績URL</label><input type="text" placeholder="https://"></div>
+        <div class="form-two">
+          <div class="form-row"><label>コーディング経験年数</label><input type="text" placeholder="例:5年"></div>
+          <div class="form-row"><label>対応可能な時間帯</label><input type="text" placeholder="例:平日10:00〜18:00"></div>
+        </div>
+        <div class="form-row"><label>AI利用の有無(利用時はツール名・活用度合いも)</label><input type="text" placeholder="例:〇〇を補助的に利用"></div>
+        <div class="form-row"><label>修正対応のスピード・対応可能な体制</label><textarea placeholder="例:平日は当日中に一次対応可能です"></textarea></div>
+        <button type="submit" class="form-submit">この内容で応募する</button>
+        <div class="form-msg" id="formMsg">ご応募ありがとうございます。※本デモではフォームは送信されません。</div>
+      </form>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <div class="logo2">Web制作会社サンプル</div>
+        <p>所在地：非公開(全国リモート体制)<br>電話番号：03-0000-0000(ダミー)<br>受付時間：日中対応(平日想定・仮の内容です)</p>
+      </div>
+      <div>
+        <p><a href="#work">仕事内容</a><br><a href="#requirements">募集要項</a><br><a href="#faq">FAQ</a><br><a href="#apply">応募フォーム</a></p>
+      </div>
+    </div>
+    <div class="footer-disclaimer">
+      ※本ページは制作サンプル(デモ)です。掲載の内容・数値は仮のもので、写真はイメージです。<br>
+      会社名・担当者名・コメント・応募フローの詳細はサンプルとして作成した架空のものであり、実在の団体・人物とは関係ありません。
+    </div>
+  </div>
+</footer>
+
+<div class="sticky-cta">
+  <a href="tel:0300000000" class="btn-outline">電話で問い合わせ</a>
+  <a href="#apply" class="btn-primary">応募フォームへ</a>
+</div>
+
+<script>
+  const hamburgerBtn = document.getElementById('hamburgerBtn');
+  const mobileNav = document.getElementById('mobileNav');
+  hamburgerBtn.addEventListener('click', () => {
+    hamburgerBtn.classList.toggle('open');
+    mobileNav.classList.toggle('open');
+  });
+  document.querySelectorAll('#mobileNav a').forEach(a => {
+    a.addEventListener('click', () => {
+      hamburgerBtn.classList.remove('open');
+      mobileNav.classList.remove('open');
+    });
+  });
+
+  document.querySelectorAll('.faq-q').forEach(q => {
+    q.addEventListener('click', () => {
+      const item = q.parentElement;
+      item.classList.toggle('open');
+      q.querySelector('.mark').textContent = item.classList.contains('open') ? '−' : '＋';
+    });
+  });
+
+  const applyForm = document.getElementById('applyForm');
+  applyForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    document.getElementById('formMsg').style.display = 'block';
+  });
+
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('show');
+        io.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
+
+</body>
+</html>
