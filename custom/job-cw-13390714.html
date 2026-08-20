@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>貸別荘 COMOREBI(コモレビ)| 自然の中、大人の秘密基地</title>
+<meta name="description" content="都心を離れ、木々に囲まれた一棟貸しの隠れ家。子ども歓迎、大人の時間も大切に。自然の中でリフレッシュする、大人の秘密基地。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;600;700&family=Noto+Sans+JP:wght@400;500;700&family=Manrope:wght@500;700&display=swap" rel="stylesheet">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "LodgingBusiness",
+  "name": "貸別荘 COMOREBI",
+  "alternateName": "COMOREBI Private Villa",
+  "description": "自然に囲まれた一棟貸しの貸別荘。大人の秘密基地をコンセプトに、家族や親しい仲間との非日常を提供。",
+  "telephone": "048-000-0000",
+  "priceRange": "¥¥",
+  "address": {
+    "@type": "PostalAddress",
+    "addressRegion": "◯◯県◯◯郡(仮)",
+    "addressCountry": "JP"
+  },
+  "amenityFeature": [
+    {"@type": "LocationFeatureSpecification", "name": "一棟貸し切り"},
+    {"@type": "LocationFeatureSpecification", "name": "BBQスペース"},
+    {"@type": "LocationFeatureSpecification", "name": "焚き火スペース"}
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "子ども連れでも利用できますか?",
+      "acceptedAnswer": {"@type": "Answer", "text": "はい、歓迎しています。一棟貸し切りのため周囲を気にせずお子様と過ごせます。"}
+    },
+    {
+      "@type": "Question",
+      "name": "大人数での宴会利用は可能ですか?",
+      "acceptedAnswer": {"@type": "Answer", "text": "静けさを大切にする宿のため、大音量でのパーティー目的でのご利用はお断りしております。"}
+    },
+    {
+      "@type": "Question",
+      "name": "予約はどこから行えますか?",
+      "acceptedAnswer": {"@type": "Answer", "text": "外部予約サイトAirHostのページよりご予約いただけます。"}
+    }
+  ]
+}
+</script>
+<style>
+  :root{
+    --bg:#faf8f2;
+    --bg-alt:#eef2ea;
+    --ink:#232821;
+    --ink-soft:#5b6255;
+    --accent:#33513f;
+    --accent-dark:#182720;
+    --accent-tint:#dfe7db;
+    --line:#e3e0d3;
+    --radius-lg:28px;
+    --radius-sm:14px;
+    --shadow:0 18px 40px -22px rgba(24,39,32,0.35);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--ink);
+    font-family:"Noto Sans JP",sans-serif;
+    font-feature-settings:"palt";
+    letter-spacing:0.02em;
+    line-height:1.85;
+    overflow-x:hidden;
+    width:100%;
+  }
+  img{max-width:100%;width:100%;display:block;object-fit:cover;}
+  a{color:inherit;text-decoration:none;}
+  .num{font-family:"Manrope",sans-serif;}
+  h1,h2,h3,h4{
+    font-family:"Shippori Mincho",serif;
+    font-weight:600;
+    line-height:1.5;
+    margin:0;
+    color:var(--accent-dark);
+  }
+  .en-sub{
+    font-family:"Manrope",sans-serif;
+    font-size:0.72rem;
+    letter-spacing:0.18em;
+    text-transform:uppercase;
+    color:var(--accent);
+    font-weight:700;
+  }
+  .wrap{
+    max-width:1080px;
+    width:100%;
+    margin:0 auto;
+    padding:0 24px;
+  }
+  section{
+    padding:96px 0;
+  }
+  .section-head{
+    text-align:center;
+    max-width:640px;
+    margin:0 auto 56px;
+  }
+  .section-head h2{
+    font-size:clamp(1.7rem,4vw,2.4rem);
+    margin-top:10px;
+  }
+  .section-head p{
+    color:var(--ink-soft);
+    margin-top:16px;
+  }
+  .btn{
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    padding:15px 30px;
+    border-radius:100px;
+    font-weight:700;
+    font-size:0.95rem;
+    box-shadow:var(--shadow);
+    transition:transform .25s ease, box-shadow .25s ease;
+    white-space:nowrap;
+  }
+  .btn:hover{transform:translateY(-2px);}
+  .btn-primary{background:var(--accent);color:#fdfbf6;}
+  .btn-ghost{background:transparent;color:#fdfbf6;border:1px solid rgba(253,251,246,0.55);box-shadow:none;}
+  .btn-line{background:#fdfbf6;color:var(--accent-dark);border:1px solid var(--line);box-shadow:none;}
+
+  /* ---------- header ---------- */
+  header{
+    position:fixed;top:0;left:0;right:0;z-index:60;
+    background:rgba(250,248,242,0.86);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-row{
+    max-width:1080px;margin:0 auto;padding:16px 24px;
+    display:flex;align-items:center;justify-content:space-between;
+  }
+  .brand{
+    font-family:"Shippori Mincho",serif;
+    font-size:1.15rem;font-weight:700;letter-spacing:0.08em;color:var(--accent-dark);
+  }
+  .brand span{display:block;font-family:"Manrope",sans-serif;font-size:0.6rem;letter-spacing:0.2em;color:var(--ink-soft);font-weight:500;}
+  .burger{
+    width:42px;height:42px;border-radius:50%;border:1px solid var(--line);
+    background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;
+    cursor:pointer;
+  }
+  .burger span{width:18px;height:2px;background:var(--accent-dark);display:block;transition:.25s;}
+  .burger.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+  .burger.open span:nth-child(2){opacity:0;}
+  .burger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+
+  /* nav is a sibling of header, not nested inside the backdrop-filter box */
+  nav#mobileNav{
+    position:fixed;top:0;right:-100%;bottom:0;width:min(78vw,320px);z-index:70;
+    background:var(--accent-dark);padding:96px 32px 32px;
+    transition:right .35s ease;
+    display:flex;flex-direction:column;gap:6px;
+  }
+  nav#mobileNav.open{right:0;}
+  nav#mobileNav a{
+    color:#f2efe6;font-size:1.02rem;padding:14px 0;border-bottom:1px solid rgba(255,255,255,0.12);
+  }
+  nav#mobileNav .nav-book{margin-top:20px;}
+  .scrim{
+    position:fixed;inset:0;background:rgba(20,26,20,0.4);z-index:65;
+    opacity:0;pointer-events:none;transition:opacity .3s ease;
+  }
+  .scrim.show{opacity:1;pointer-events:auto;}
+
+  /* ---------- hero ---------- */
+  .hero{
+    position:relative;
+    margin-top:0;
+    padding:150px 0 110px;
+    background:linear-gradient(180deg,#1c2c22 0%,#26382b 60%,#33513f 100%);
+    color:#f4f1e6;
+    overflow:hidden;
+  }
+  .hero-art{
+    position:absolute;inset:0;opacity:0.5;pointer-events:none;
+  }
+  .hero-inner{position:relative;z-index:2;max-width:760px;margin:0 auto;text-align:center;padding:0 24px;}
+  .hero .en-sub{color:#c9d6c1;}
+  .hero h1{
+    color:#fbf8ef;font-size:clamp(2.1rem,6vw,3.6rem);margin-top:14px;
+  }
+  .hero-lead{margin-top:22px;color:#e3e5d8;font-size:1.02rem;max-width:520px;margin-left:auto;margin-right:auto;}
+  .hero-actions{display:flex;flex-wrap:wrap;gap:14px;justify-content:center;margin-top:38px;}
+  .trust-strip{
+    display:grid;grid-template-columns:repeat(3,1fr);gap:20px;
+    max-width:640px;margin:56px auto 0;
+    border-top:1px solid rgba(255,255,255,0.18);padding-top:32px;
+  }
+  .trust-strip div{text-align:center;}
+  .trust-strip strong{display:block;font-family:"Manrope",sans-serif;font-size:1.7rem;color:#fbf8ef;}
+  .trust-strip span{font-size:0.78rem;color:#c9d6c1;}
+
+  /* ---------- concept ---------- */
+  .concept-grid{
+    display:grid;grid-template-columns:repeat(3,1fr);gap:24px;
+  }
+  .concept-card{
+    background:#fff;border:1px solid var(--line);border-radius:var(--radius-lg);
+    padding:32px 26px;text-align:left;
+  }
+  .concept-card .icon{width:44px;height:44px;margin-bottom:18px;}
+  .concept-card h3{font-size:1.15rem;margin-bottom:12px;}
+  .concept-card p{color:var(--ink-soft);font-size:0.92rem;}
+
+  /* ---------- rooms ---------- */
+  .bg-alt{background:var(--bg-alt);}
+  .room-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;}
+  .room-card{
+    background:#fff;border-radius:var(--radius-lg);overflow:hidden;border:1px solid var(--line);
+  }
+  .room-card figure{margin:0;aspect-ratio:4/3;overflow:hidden;}
+  .room-card .body{padding:24px 24px 28px;}
+  .room-card h3{font-size:1.1rem;}
+  .room-card .en-sub{display:block;margin-top:2px;margin-bottom:10px;}
+  .room-card p{color:var(--ink-soft);font-size:0.9rem;margin:0;}
+
+  /* ---------- stay ---------- */
+  .stay-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
+  .stay-card figure{margin:0;aspect-ratio:1/1;border-radius:var(--radius-lg);overflow:hidden;}
+  .stay-card h3{font-size:1.05rem;margin-top:18px;}
+  .stay-card p{color:var(--ink-soft);font-size:0.88rem;margin-top:8px;}
+
+  /* ---------- owner ---------- */
+  .owner{
+    display:grid;grid-template-columns:280px 1fr;gap:48px;align-items:center;
+  }
+  .owner figure{margin:0;border-radius:var(--radius-lg);overflow:hidden;aspect-ratio:1/1;}
+  .owner blockquote{
+    margin:0;font-family:"Shippori Mincho",serif;font-size:1.2rem;color:var(--accent-dark);line-height:1.9;
+  }
+  .owner cite{display:block;margin-top:20px;font-style:normal;color:var(--ink-soft);font-size:0.88rem;}
+
+  /* ---------- price ---------- */
+  .price-table{
+    width:100%;border-collapse:collapse;background:#fff;border-radius:var(--radius-lg);overflow:hidden;
+    box-shadow:var(--shadow);
+  }
+  .price-table th,.price-table td{
+    padding:18px 20px;text-align:left;border-bottom:1px solid var(--line);font-size:0.94rem;
+  }
+  .price-table th{background:var(--accent-tint);color:var(--accent-dark);width:38%;font-weight:700;}
+  .price-table tr:last-child th, .price-table tr:last-child td{border-bottom:none;}
+  .price-note{margin-top:18px;font-size:0.82rem;color:var(--ink-soft);}
+
+  /* ---------- access ---------- */
+  .access-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:start;}
+  .map-dummy{
+    aspect-ratio:4/3;border-radius:var(--radius-lg);background:
+      repeating-linear-gradient(45deg,var(--accent-tint) 0 12px,#fff 12px 24px);
+    border:1px solid var(--line);
+    display:flex;align-items:center;justify-content:center;flex-direction:column;gap:8px;
+    color:var(--accent-dark);
+  }
+  .map-dummy span{font-family:"Manrope",sans-serif;font-size:0.75rem;letter-spacing:0.15em;color:var(--ink-soft);}
+  .access-list dt{font-weight:700;color:var(--accent-dark);margin-top:18px;font-size:0.9rem;}
+  .access-list dt:first-child{margin-top:0;}
+  .access-list dd{margin:4px 0 0;color:var(--ink-soft);font-size:0.92rem;}
+  .checkio-table{width:100%;border-collapse:collapse;margin-top:20px;}
+  .checkio-table td{padding:10px 0;border-bottom:1px solid var(--line);font-size:0.9rem;}
+  .checkio-table td:first-child{color:var(--ink-soft);width:45%;}
+  .checkio-table td:last-child{font-family:"Manrope",sans-serif;font-weight:700;color:var(--accent-dark);}
+
+  /* ---------- faq ---------- */
+  .faq-item{border-bottom:1px solid var(--line);padding:22px 0;}
+  .faq-q{
+    display:flex;justify-content:space-between;align-items:center;gap:16px;cursor:pointer;
+    font-weight:700;color:var(--accent-dark);font-size:0.98rem;
+  }
+  .faq-q .mark{font-family:"Manrope",sans-serif;font-size:1.3rem;color:var(--accent);flex-shrink:0;}
+  .faq-a{max-height:0;overflow:hidden;transition:max-height .35s ease;font-size:0.9rem;color:var(--ink-soft);}
+  .faq-a p{margin:14px 0 0;}
+  .faq-item.open .faq-a{max-height:200px;}
+  .faq-item.open .mark{transform:rotate(45deg);}
+
+  /* ---------- book cta ---------- */
+  .book{
+    background:var(--accent-dark);color:#f4f1e6;text-align:center;border-radius:var(--radius-lg);
+    padding:64px 32px;
+  }
+  .book h2{color:#fbf8ef;font-size:clamp(1.5rem,4vw,2.1rem);}
+  .book p{color:#cfd8c8;margin-top:14px;max-width:480px;margin-left:auto;margin-right:auto;}
+  .book .hero-actions{margin-top:32px;}
+  .book small{display:block;margin-top:18px;color:#a9b7a1;font-size:0.76rem;}
+
+  /* ---------- footer ---------- */
+  footer{background:#fdfbf6;border-top:1px solid var(--line);padding:56px 0 120px;}
+  .footer-grid{display:flex;flex-wrap:wrap;justify-content:space-between;gap:32px;}
+  .footer-brand .brand{font-size:1.1rem;}
+  .footer-note{max-width:560px;color:var(--ink-soft);font-size:0.85rem;}
+  .footer-disclaimer{
+    margin-top:40px;padding-top:24px;border-top:1px solid var(--line);
+    font-size:0.78rem;color:#8a8f80;line-height:1.9;
+  }
+
+  /* ---------- sticky mobile cta ---------- */
+  .sticky-cta{
+    position:fixed;left:0;right:0;bottom:0;z-index:80;
+    display:none;gap:10px;padding:12px 16px calc(12px + env(safe-area-inset-bottom));
+    background:#fff;border-top:1px solid var(--line);
+    box-shadow:0 -12px 30px -20px rgba(24,39,32,0.4);
+  }
+  .sticky-cta a{flex:1;justify-content:center;padding:14px 12px;font-size:0.85rem;}
+
+  /* ---------- reveal ---------- */
+  .reveal{opacity:0;transform:translateY(24px);transition:opacity .7s ease, transform .7s ease;}
+  .reveal.in{opacity:1;transform:translateY(0);}
+
+  /* ---------- responsive ---------- */
+  @media (max-width:900px){
+    .concept-grid,.stay-grid{grid-template-columns:1fr;}
+    .room-grid{grid-template-columns:1fr;}
+    .owner{grid-template-columns:1fr;}
+    .owner figure{max-width:220px;margin:0 auto;}
+    .access-grid{grid-template-columns:1fr;}
+    section{padding:72px 0;}
+    .trust-strip{grid-template-columns:repeat(3,1fr);gap:12px;}
+  }
+  @media (max-width:780px){
+    .sticky-cta{display:flex;}
+    body{padding-bottom:0;}
+  }
+  @media (max-width:480px){
+    .hero{padding:130px 0 90px;}
+    .trust-strip strong{font-size:1.3rem;}
+    .price-table th,.price-table td{padding:14px 12px;font-size:0.85rem;}
+  }
+  input,textarea,select{font-size:16px;}
+  @media (prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto;}
+    .reveal{opacity:1;transform:none;transition:none;}
+    .btn:hover{transform:none;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="nav-row">
+    <a href="#top" class="brand">COMOREBI<span>PRIVATE VILLA IN THE WOODS</span></a>
+    <div class="burger" id="burger" aria-label="メニューを開く / Menu"><span></span><span></span><span></span></div>
+  </div>
+</header>
+<div class="scrim" id="scrim"></div>
+<nav id="mobileNav">
+  <a href="#concept">コンセプト</a>
+  <a href="#rooms">お部屋</a>
+  <a href="#stay">過ごし方</a>
+  <a href="#price">料金</a>
+  <a href="#access">アクセス</a>
+  <a href="#faq">よくある質問</a>
+  <a href="#book" class="btn btn-primary nav-book">AirHostで予約する</a>
+</nav>
+
+<section class="hero" id="top">
+  <svg class="hero-art" viewBox="0 0 1200 500" preserveAspectRatio="none" aria-hidden="true">
+    <polyline points="0,420 120,300 220,380 340,220 460,360 600,200 740,360 880,240 1020,380 1200,300 1200,500 0,500" fill="#233529" opacity="0.7"/>
+    <polyline points="0,460 160,360 300,430 440,300 580,420 720,320 860,440 1000,340 1200,430 1200,500 0,500" fill="#182720" opacity="0.85"/>
+    <circle cx="960" cy="110" r="60" fill="#e9e2c6" opacity="0.18"/>
+  </svg>
+  <div class="hero-inner">
+    <span class="en-sub">Close the city. Open the forest.</span>
+    <h1>都会を閉じて、自然をひらく。</h1>
+    <p class="hero-lead">木々に囲まれた一棟貸しの隠れ家。子どもは歓迎、はしゃぐのは自然の中で。家族や親しい人と過ごす、大人の秘密基地です。</p>
+    <div class="hero-actions">
+      <a class="btn btn-primary" href="https://airhost.example.com/comorebi" target="_blank" rel="noopener">AirHostで予約する</a>
+      <a class="btn btn-ghost" href="tel:0480000000">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6.6 10.8a15 15 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11 11 0 0 0 3.4.55 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1 11 11 0 0 0 .55 3.4 1 1 0 0 1-.25 1z"/></svg>
+        048-000-0000
+      </a>
+    </div>
+    <div class="trust-strip">
+      <div><strong class="num">4</strong><span>室(仮)</span></div>
+      <div><strong class="num">10</strong><span>名まで宿泊(仮)</span></div>
+      <div><strong class="num">1</strong><span>棟丸ごと貸切</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="concept">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="en-sub">Concept</span>
+      <h2>静けさは、最高のもてなし。</h2>
+      <p>スタイリッシュな空間で、自然と向き合う時間を。大人数での宴会や大音量でのご利用はご遠慮いただき、静けさを大切にするお客様のための宿です。</p>
+    </div>
+    <div class="concept-grid">
+      <div class="concept-card reveal">
+        <svg class="icon" viewBox="0 0 48 48" fill="none" stroke="#33513f" stroke-width="1.6"><path d="M24 6 12 24h8l-6 18 22-24h-9z"/></svg>
+        <h3>自然の中、リフレッシュ</h3>
+        <p class="en-sub">Reset in Nature</p>
+        <p>都心の喧騒を離れ、木漏れ日と風の音だけがある時間。焚き火を囲みながら、何もしない贅沢を味わえます。</p>
+      </div>
+      <div class="concept-card reveal">
+        <svg class="icon" viewBox="0 0 48 48" fill="none" stroke="#33513f" stroke-width="1.6"><rect x="9" y="16" width="30" height="22" rx="3"/><path d="M16 16v-4a8 8 0 0 1 16 0v4"/></svg>
+        <h3>大人の秘密基地</h3>
+        <p class="en-sub">A Grown-up Hideaway</p>
+        <p>一棟貸し切りだから、誰にも気兼ねなく過ごせる。夜は静かにグラスを傾ける、そんな大人の時間も用意しています。</p>
+      </div>
+      <div class="concept-card reveal">
+        <svg class="icon" viewBox="0 0 48 48" fill="none" stroke="#33513f" stroke-width="1.6"><circle cx="24" cy="16" r="6"/><path d="M12 40c0-8 5-13 12-13s12 5 12 13"/></svg>
+        <h3>子ども歓迎、家族の時間</h3>
+        <p class="en-sub">Family Friendly</p>
+        <p>広い庭と貸切空間で、お子様も周りを気にせずのびのびと。パリピ利用はお断りし、家族や親しい方との時間を守ります。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="rooms" class="bg-alt">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="en-sub">Rooms &amp; Space</span>
+      <h2>設えは、静かに上質を。</h2>
+      <p>和の落ち着きと、大人の秘密基地らしい陰影のある空間。滞在シーンに合わせてくつろげる4つの部屋をご用意しています。</p>
+    </div>
+    <div class="room-grid">
+      <div class="room-card reveal">
+        <figure><img src="https://images.unsplash.com/photo-1496113329550-ce8886d06d54?auto=format&fit=crop&w=1200&q=70" alt="畳と障子の和室、日差しが差し込む落ち着いた空間"></figure>
+        <div class="body">
+          <h3>和室</h3><span class="en-sub">Tatami Room</span>
+          <p>畳の香りと障子越しの光。家族でごろりと寝転がれる、いちばん落ち着く部屋です。</p>
+        </div>
+      </div>
+      <div class="room-card reveal">
+        <figure><img src="https://images.unsplash.com/photo-1712232907812-4bd219a99a49?auto=format&fit=crop&w=1200&q=70" alt="障子に日差しが差し込む和室のディテール"></figure>
+        <div class="body">
+          <h3>離れの間</h3><span class="en-sub">Quiet Annex</span>
+          <p>本を片手に静かに過ごす、離れのような一室。朝はいちばん光が美しい部屋です。</p>
+        </div>
+      </div>
+      <div class="room-card reveal">
+        <figure><img src="https://images.unsplash.com/photo-1600948836101-f9ffda59d250?auto=format&fit=crop&w=1200&q=70" alt="黒壁と丸ミラーのある落ち着いたラウンジ空間"></figure>
+        <div class="body">
+          <h3>秘密基地ラウンジ</h3><span class="en-sub">Hideaway Lounge</span>
+          <p>陰影を活かした大人の空間。夜、静かに語らうための一角です。</p>
+        </div>
+      </div>
+      <div class="room-card reveal">
+        <figure><img src="https://images.unsplash.com/photo-1633681926022-84c23e8cb2d6?auto=format&fit=crop&w=1200&q=70" alt="観葉植物のある白基調の明るいリビング空間"></figure>
+        <div class="body">
+          <h3>リビング</h3><span class="en-sub">Living Room</span>
+          <p>緑を眺めながら家族で過ごす、光あふれるメインスペース。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="stay">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="en-sub">How to Stay</span>
+      <h2>予定は少なく、余白は多く。</h2>
+      <p>季節ごとの自然を感じながら、思い思いの時間を過ごせます。紅葉の秋も、雪見の冬も、それぞれの表情があります。</p>
+    </div>
+    <div class="stay-grid">
+      <div class="stay-card reveal">
+        <figure><img src="https://images.unsplash.com/photo-1490645935967-10de6ba17061?auto=format&fit=crop&w=1200&q=70" alt="庭先で楽しめる食事のプレート"></figure>
+        <h3>庭でのBBQと食事</h3>
+        <p>庭のBBQスペースで、地元の食材を炭火で。朝はテラスでゆっくり朝食も。</p>
+      </div>
+      <div class="stay-card reveal">
+        <figure><img src="https://images.unsplash.com/photo-1753164725860-ffcd260b7b32?auto=format&fit=crop&w=1200&q=70" alt="陶芸のろくろを回す手元"></figure>
+        <h3>近隣の陶芸体験(仮)</h3>
+        <p>近隣工房での陶芸体験など、自然とものづくりに触れる時間もご案内できます。※内容は仮のご案内です。</p>
+      </div>
+      <div class="stay-card reveal">
+        <figure><img src="https://images.unsplash.com/photo-1470337458703-46ad1756a187?auto=format&fit=crop&w=1200&q=70" alt="夜、カクテルを注ぐ手元"></figure>
+        <h3>大人の夜時間</h3>
+        <p>子どもが眠った後は、焚き火とグラス片手にゆっくりと。大人だけの静かな時間です。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="owner" class="bg-alt">
+  <div class="wrap owner reveal">
+    <figure><img src="https://images.unsplash.com/photo-1629875499750-a31b83446598?auto=format&fit=crop&w=1200&q=70" alt="管理人の笑顔のポートレート"></figure>
+    <div>
+      <span class="en-sub">Message from the Caretaker</span>
+      <h2 style="margin-top:10px;font-size:1.3rem;">「何もしない時間を、いちばん大切にしてほしい」</h2>
+      <blockquote style="margin-top:18px;">
+        都会のスケジュールから離れて、木々の音に耳を澄ませる。そんな時間を求める方に向けて、この場所を用意しました。子どもたちには自然の中で思い切り過ごしてほしいし、大人には静かな夜の時間を用意したい。COMOREBIは、そんな願いから生まれた一棟貸しの別荘です。
+      </blockquote>
+      <cite>管理人(※仮のプロフィールです)</cite>
+    </div>
+  </div>
+</section>
+
+<section id="price">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="en-sub">Price &amp; Info</span>
+      <h2>ご利用料金</h2>
+      <p>正式な料金・空室状況はAirHost予約ページにてご確認いただけます。</p>
+    </div>
+    <table class="price-table reveal">
+      <tr><th>1棟貸切(素泊まり)</th><td class="num">¥58,000〜/泊(仮)</td></tr>
+      <tr><th>定員</th><td>10名まで(仮) ※添い寝のお子様は別途ご相談</td></tr>
+      <tr><th>客室数</th><td>4部屋(仮)</td></tr>
+      <tr><th>BBQセット</th><td>1組 ¥6,000〜(仮・要予約)</td></tr>
+      <tr><th>清掃料</th><td>1棟 ¥8,000(仮)</td></tr>
+    </table>
+    <p class="price-note">※料金・定員は仮の内容です。正式な料金・プランはAirHost予約ページをご確認ください。</p>
+  </div>
+</section>
+
+<section id="access" class="bg-alt">
+  <div class="wrap access-grid">
+    <div class="reveal">
+      <span class="en-sub">Access</span>
+      <h2 style="margin-top:10px;">アクセス</h2>
+      <dl class="access-list">
+        <dt>所在地</dt><dd>◯◯県◯◯郡(※仮の内容です。正式な所在地はご予約時にご案内します)</dd>
+        <dt>アクセス</dt><dd>最寄IC・駅から車で約90分(仮) / お車でのお越しを推奨</dd>
+        <dt>駐車場</dt><dd>敷地内に2台分あり(仮)</dd>
+      </dl>
+      <table class="checkio-table">
+        <tr><td>チェックイン</td><td>15:00〜</td></tr>
+        <tr><td>チェックアウト</td><td>〜11:00</td></tr>
+        <tr><td>定休日</td><td>不定休</td></tr>
+      </table>
+    </div>
+    <div class="reveal">
+      <div class="map-dummy">
+        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#33513f" stroke-width="1.6"><path d="M12 21s-7-6.5-7-11a7 7 0 0 1 14 0c0 4.5-7 11-7 11z"/><circle cx="12" cy="10" r="2.6"/></svg>
+        <span>MAP(ダミー表示)</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="faq">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="en-sub">FAQ</span>
+      <h2>よくあるご質問</h2>
+    </div>
+    <div style="max-width:680px;margin:0 auto;">
+      <div class="faq-item reveal">
+        <div class="faq-q"><span>子ども連れでも利用できますか?</span><span class="mark">+</span></div>
+        <div class="faq-a"><p>はい、歓迎しています。一棟貸し切りのため、周囲を気にせずお子様と自然の中で過ごせます。</p></div>
+      </div>
+      <div class="faq-item reveal">
+        <div class="faq-q"><span>大人数での宴会・パーティー利用は可能ですか?</span><span class="mark">+</span></div>
+        <div class="faq-a"><p>静けさを大切にする宿のため、大音量でのパーティー目的でのご利用はお断りしております。あらかじめご了承ください。</p></div>
+      </div>
+      <div class="faq-item reveal">
+        <div class="faq-q"><span>予約はどのように行えますか?</span><span class="mark">+</span></div>
+        <div class="faq-a"><p>外部予約サイトAirHostのページよりご予約いただけます。空室状況・正式料金もそちらでご確認ください。</p></div>
+      </div>
+      <div class="faq-item reveal">
+        <div class="faq-q"><span>ペット同伴は可能ですか?</span><span class="mark">+</span></div>
+        <div class="faq-a"><p>可否は棟により異なります(仮)。ご予約前にお問い合わせください。</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="book" class="bg-alt">
+  <div class="wrap">
+    <div class="book reveal">
+      <span class="en-sub" style="color:#cfd8c8;">Book Your Stay</span>
+      <h2>自然の中の秘密基地へ、ようこそ。</h2>
+      <p>ご予約はAirHostの予約ページより承っております。お電話でのお問い合わせもお気軽にどうぞ。</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="https://airhost.example.com/comorebi" target="_blank" rel="noopener">AirHostで予約する</a>
+        <a class="btn btn-ghost" href="tel:0480000000">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6.6 10.8a15 15 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11 11 0 0 0 3.4.55 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1 11 11 0 0 0 .55 3.4 1 1 0 0 1-.25 1z"/></svg>
+          048-000-0000
+        </a>
+      </div>
+      <small>※AirHost予約ページへのリンクは実制作時に正式なURLへ差し替えます。</small>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="#top" class="brand">COMOREBI<span>PRIVATE VILLA IN THE WOODS</span></a>
+        <p class="footer-note" style="margin-top:14px;">自然の中、大人の秘密基地。一棟貸し切りの隠れ家で、家族や親しい方との非日常を。</p>
+      </div>
+      <div class="footer-note">
+        <p>所在地:◯◯県◯◯郡(仮)<br>電話:048-000-0000(仮)<br>予約:AirHost予約ページより</p>
+      </div>
+    </div>
+    <div class="footer-disclaimer">
+      <p>※本ページは制作サンプル(デモ)です。掲載の内容・数値は仮のもので、写真はイメージです。</p>
+      <p>※写真はイメージです。実制作ではご提供写真や日本人モデルの素材に差し替えます。</p>
+      <p>This page is a design sample (demo). Content, figures and photos shown are tentative for demonstration purposes.</p>
+    </div>
+  </div>
+</footer>
+
+<div class="sticky-cta">
+  <a class="btn btn-line" href="tel:0480000000">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6.6 10.8a15 15 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11 11 0 0 0 3.4.55 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1 11 11 0 0 0 .55 3.4 1 1 0 0 1-.25 1z"/></svg>
+    電話
+  </a>
+  <a class="btn btn-primary" href="https://airhost.example.com/comorebi" target="_blank" rel="noopener">AirHostで予約</a>
+</div>
+
+<script>
+  const burger = document.getElementById('burger');
+  const mobileNav = document.getElementById('mobileNav');
+  const scrim = document.getElementById('scrim');
+  function toggleNav(){
+    burger.classList.toggle('open');
+    mobileNav.classList.toggle('open');
+    scrim.classList.toggle('show');
+  }
+  burger.addEventListener('click', toggleNav);
+  scrim.addEventListener('click', toggleNav);
+  mobileNav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    if(mobileNav.classList.contains('open')) toggleNav();
+  }));
+
+  document.querySelectorAll('.faq-q').forEach(q => {
+    q.addEventListener('click', () => {
+      q.parentElement.classList.toggle('open');
+    });
+  });
+
+  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(!prefersReduced && 'IntersectionObserver' in window){
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if(entry.isIntersecting){
+          entry.target.classList.add('in');
+          io.unobserve(entry.target);
+        }
+      });
+    }, {threshold:0.15});
+    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+  } else {
+    document.querySelectorAll('.reveal').forEach(el => el.classList.add('in'));
+  }
+</script>
+</body>
+</html>
