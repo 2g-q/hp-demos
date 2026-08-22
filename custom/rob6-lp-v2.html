@@ -603,6 +603,31 @@
     color:var(--gold-bright);
   }
 
+  /* ---------- 唎酒師チャット(LP内ウィンドウ) ---------- */
+  .kiki-fab{ position:fixed; left:14px; bottom:98px; z-index:60; z-index:60;
+    background:rgba(16,26,51,.94); border:1px solid rgba(201,169,106,.6); border-radius:100px;
+    box-shadow:0 6px 18px rgba(0,0,0,.3); cursor:pointer; padding:10px 16px;
+    color:#e3c88a; font-size:12px; letter-spacing:.08em; line-height:1; }
+  .kiki-fab img{ display:none; }
+  .kiki-panel{ left:12px; right:auto; }
+  .kiki-panel{ position:fixed; left:12px; bottom:158px; z-index:61; width:min(340px, calc(100vw - 24px));
+    max-height:calc(100vh - 210px); background:#fff; border:1px solid #d9d4c8;
+    box-shadow:0 18px 44px rgba(0,0,0,.28); display:none; overflow-y:auto; }
+  .kiki-panel.open{ display:block; }
+  .kiki-head{ position:sticky; top:0; z-index:2; background:#101a33; color:#fff; padding:12px 14px; display:flex; align-items:center; gap:9px; }
+  .kiki-head .av{ width:30px; height:30px; border-radius:50%; background:#e3c88a; color:#101a33; display:flex; align-items:center; justify-content:center; font-size:12px; font-weight:700; }
+  .kiki-head .nm{ font-size:13px; letter-spacing:.06em; }
+  .kiki-head .rl{ font-size:10px; color:#b9b2a4; display:block; margin-top:2px; }
+  .kiki-head .cl{ margin-left:auto; color:#b9b2a4; font-size:18px; cursor:pointer; line-height:1; }
+  .kiki-log{ padding:14px; max-height:min(34vh,240px); overflow-y:auto; background:#faf8f4; }
+  .kiki-msg{ font-size:13px; line-height:1.9; margin-bottom:10px; }
+  .kiki-msg.bot{ background:#fff; border:1px solid #eae5da; padding:10px 12px; color:#3a352e; }
+  .kiki-msg.me{ background:#101a33; color:#fff; padding:9px 12px; margin-left:auto; max-width:80%; text-align:left; }
+  .kiki-qs{ padding:10px 12px 14px; border-top:1px solid #eae5da; background:#fff; display:grid; gap:7px; }
+  .kiki-q{ border:1px solid var(--gold,#c9a96a); color:#8a6d33; background:#fff; font-size:12.5px; line-height:1.6;
+    padding:8px 11px; text-align:left; cursor:pointer; }
+  .kiki-note{ font-size:10.5px; color:#9a9285; padding:0 12px 12px; line-height:1.7; background:#fff; }
+
   /* ---------- 三つの酒どころ ---------- */
   .sake3{ background:var(--paper); padding:56px 0; }
   .sake3 .lead{ font-size:15px; line-height:2.1; color:#5b5347; max-width:640px; margin:0 auto 30px; text-align:center; }
@@ -1005,6 +1030,21 @@
   </div>
 </footer>
 
+<!-- ============ 唎酒師チャット ============ -->
+<div class="kiki-fab" id="kikiFab" role="button" tabindex="0" aria-label="唎酒師にきく"><img src="../rob6-assets/roburi.png" alt="国際唎酒師 ロイリ"><span class="lbl" data-i18n="kikiFab">唎酒師にきく</span></div>
+<div class="kiki-panel" id="kikiPanel" aria-live="polite">
+  <div class="kiki-head">
+    <div class="av">利</div>
+    <div><span class="nm" data-i18n="kikiName">ロイリ</span><span class="rl" data-i18n="kikiRole">国際唎酒師</span></div>
+    <span class="cl" id="kikiClose" role="button" tabindex="0" aria-label="閉じる">×</span>
+  </div>
+  <div class="kiki-log" id="kikiLog">
+    <div class="kiki-msg bot" data-i18n="kikiHello">こんばんは。日本酒のことでしたら、なんなりと。まずは気になるものをお選びください。</div>
+  </div>
+  <div class="kiki-qs" id="kikiQs"></div>
+  <p class="kiki-note" data-i18n="kikiNote">※ 制作中の画面です。ご用意した質問にお答えします。</p>
+</div>
+
 <!-- ============ 追従CTA ============ -->
 <div class="sticky-cta" id="stickyCta">
   <div class="sticky-inner">
@@ -1093,6 +1133,11 @@
       demoNote: '※本ページは制作サンプル(デモ)です。掲載の文章はご提供いただいた構成案の原稿、商品写真は現在のショップ掲載画像を使用しています。お客様の声は構成案に記載の内容をそのまま掲載しています(掲載例)。購入ボタンは現在のオンラインショップの商品ページに接続しています。英語・繁體中文の訳文は仮のものです。※閲覧数・ボタンの押下数を計測する仕組みを、公開時に組み込みます。',
       toast2: 'デモのため実際の画面には進みません',
       stickyBuy: '購入する',
+      kikiFab: '唎酒師にきく',
+      kikiName: 'ロイリ',
+      kikiRole: '国際唎酒師',
+      kikiHello: 'こんばんは。日本酒のことでしたら、なんなりと。まずは気になるものをお選びください。',
+      kikiNote: '※ 制作中の画面です。ご用意した質問にお答えします。',
       s3Title: '水が変われば、酒が変わる',
       s3Lead: '同じ米から造っても、仕込む水が違えば味わいは変わります。日本酒の歴史を担ってきた三つの土地を、水の性質から見てみます。',
       s3aR: 'NADA',
@@ -1193,6 +1238,11 @@
       demoNote: '* This page is a production sample (demo). The text is from the draft provided by the client, and product photos are from the current shop listing. Customer voices are sample entries reproduced as written in the draft. Purchase buttons do not work in this demo. English and Traditional Chinese translations are provisional. View counts and button clicks will be measured by analytics added at release.',
       toast2: 'This is a demo. This action is disabled.',
       stickyBuy: 'Buy now',
+      kikiFab: 'Ask the sommelier',
+      kikiName: 'Roiri',
+      kikiRole: 'International Kikisake-shi',
+      kikiHello: 'Good evening. Ask me anything about sake. Please pick a question to start.',
+      kikiNote: '* This page is in production. I can answer the prepared questions.',
       s3Title: 'Different water, different sake',
       s3Lead: 'Even from the same rice, the water used in brewing changes the taste. Here are three regions that shaped the history of sake, seen through their water.',
       s3aR: 'NADA',
@@ -1293,6 +1343,11 @@
       demoNote: '※ 本頁為製作範例(Demo)。文案採用客戶提供之構成案原稿(顧客心得為版面示意)，商品照片使用現行商店刊載圖片。購買按鈕為展示用，不會實際運作。英文與繁體中文譯文為暫譯。※瀏覽次數與按鈕點擊次數的統計功能，將於正式公開時加入。',
       toast2: '此為示範頁面，此操作不會執行。',
       stickyBuy: '立即購買',
+      kikiFab: '詢問唎酒師',
+      kikiName: '羅伊利',
+      kikiRole: '國際唎酒師',
+      kikiHello: '晚安。關於日本酒，任何問題都歡迎。請先選擇您感興趣的項目。',
+      kikiNote: '※ 本頁面製作中。可回答已備妥的問題。',
       s3Title: '水不同，酒就不同',
       s3Lead: '即使使用相同的米，釀造用水不同，風味也會改變。以下從水質來看承載日本酒歷史的三個產地。',
       s3aR: 'NADA',
@@ -1336,6 +1391,8 @@
       if (dict[key] !== undefined) el.innerHTML = dict[key];
     });
     document.documentElement.lang = dict._lang;
+    window.__kikiLang = (dict._lang || 'ja').slice(0,2) === 'zh' ? 'zh' : ((dict._lang||'ja').slice(0,2) === 'en' ? 'en' : 'ja');
+    if (window.__kikiRender) window.__kikiRender();
     document.title = dict.docTitle;
     toastEl.textContent = dict.toast;
     if (dict.notice) {
@@ -1418,6 +1475,64 @@
     targets.forEach(function(el){ io.observe(el); });
   }
 })();
+
+  /* ---------- 唎酒師チャット ---------- */
+  var KIKI = {
+    ja: [
+      ['ロブ6は、どんな味わいですか。',
+       '六種の純米酒を重ねた酒です。ひとつの蔵では出せない、幾重にも折り重なる複雑さが持ち味です。冷やしすぎず、常温に近い温度からお試しください。'],
+      ['甘口と辛口は、どこで決まりますか。',
+       '大まかには、酒に残る糖の量で決まります。ただ実際の印象は、酸の量や香りにも左右されます。数値より、まずご自身の舌で確かめるのがたしかです。'],
+      ['冷やと燗、どちらが合いますか。',
+       '同じ酒でも温度で表情が変わります。冷やせば輪郭が締まり、温めれば香りがひらきます。一本を二通りで愉しむのも、日本酒の面白さです。'],
+      ['開けたあとは、どう保存しますか。',
+       'お届け後は冷蔵庫(五度以下)での保管をおすすめします。開栓後は風味が変わりやすいため、二週間以内を目安にお召し上がりください。']
+    ],
+    en: [
+      ['What does ROB6 taste like?',
+       'It layers six junmai sakes. The appeal is a complexity no single brewery can reach. Try it near room temperature rather than well chilled.'],
+      ['What makes a sake dry or sweet?',
+       'Broadly, the sugar left in the sake. But acidity and aroma shape the impression just as much. Rather than numbers, trust your own palate first.'],
+      ['Chilled or warmed?',
+       'The same sake shows a different face by temperature. Chilled, the outline tightens; warmed, the aroma opens. Enjoying one bottle two ways is part of sake.'],
+      ['How should I store it after opening?',
+       'Keep it refrigerated (below 5C). After opening the flavour changes easily, so please enjoy it within about two weeks.']
+    ],
+    zh: [
+      ['ROB6 是什麼樣的風味？',
+       '由六種純米酒調和而成。單一酒藏無法達到的層次複雜度，正是其魅力。建議不要過度冰鎮，接近常溫時再品嚐。'],
+      ['甘口與辛口的差別在哪裡？',
+       '大致取決於酒中殘留的糖分。不過實際印象也受酸度與香氣影響。與其看數值，不如先用自己的舌頭確認。'],
+      ['冷飲與溫飲，哪個好？',
+       '同一支酒會因溫度而展現不同面貌。冰鎮後輪廓收斂，溫熱後香氣舒展。一瓶兩種喝法，也是日本酒的樂趣。'],
+      ['開瓶後如何保存？',
+       '收到後建議冷藏保存(五度以下)。開瓶後風味容易變化，請以兩週為限盡早飲用。']
+    ]
+  };
+  (function(){
+    var fab=document.getElementById('kikiFab'), panel=document.getElementById('kikiPanel');
+    var close=document.getElementById('kikiClose'), log=document.getElementById('kikiLog'), qs=document.getElementById('kikiQs');
+    if(!fab||!panel||!qs||!log) return;
+    function lang(){ return (window.__kikiLang||'ja'); }
+    function renderQs(){
+      qs.innerHTML='';
+      (KIKI[lang()]||KIKI.ja).forEach(function(pair){
+        var b=document.createElement('button');
+        b.type='button'; b.className='kiki-q'; b.textContent=pair[0];
+        b.addEventListener('click', function(){
+          var me=document.createElement('div'); me.className='kiki-msg me'; me.textContent=pair[0]; log.appendChild(me);
+          var bot=document.createElement('div'); bot.className='kiki-msg bot'; bot.textContent=pair[1]; log.appendChild(bot);
+          log.scrollTop=log.scrollHeight;
+        });
+        qs.appendChild(b);
+      });
+    }
+    window.__kikiRender = renderQs;
+    renderQs();
+    fab.addEventListener('click', function(){ panel.classList.toggle('open'); });
+    close.addEventListener('click', function(){ panel.classList.remove('open'); });
+  })();
+
 </script>
 </body>
 </html>
