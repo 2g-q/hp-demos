@@ -603,6 +603,19 @@
     color:var(--gold-bright);
   }
 
+  /* ---------- 三つの酒どころ ---------- */
+  .sake3{ background:var(--paper); padding:56px 0; }
+  .sake3 .lead{ font-size:15px; line-height:2.1; color:#5b5347; max-width:640px; margin:0 auto 30px; text-align:center; }
+  .sake3-grid{ display:grid; gap:16px; max-width:900px; margin:0 auto; }
+  .sake3-card{ background:#fff; border:1px solid #e2ded5; padding:22px 20px; }
+  .sake3-card .region{ font-size:11px; letter-spacing:.28em; color:#b08d2a; }
+  .sake3-card h3{ font-size:19px; letter-spacing:.08em; margin:8px 0 4px; color:var(--navy); }
+  .sake3-card .nick{ font-size:12px; color:#8a8274; letter-spacing:.06em; }
+  .sake3-card .water{ display:inline-block; margin:12px 0 10px; padding:3px 10px; border:1px solid var(--gold); border-radius:100px; font-size:11px; color:#8a6d33; letter-spacing:.06em; }
+  .sake3-card p{ font-size:13.5px; line-height:2; color:#4a453d; }
+  .sake3-note{ max-width:900px; margin:22px auto 0; font-size:12px; line-height:1.9; color:#8a8274; text-align:center; }
+  @media (min-width:760px){ .sake3-grid{ grid-template-columns:repeat(3,1fr); } }
+
   /* ---------- LINE友だち追加(最優先CTA) ---------- */
   .btn-line{
     display:block;
@@ -875,6 +888,39 @@
   </div>
 </section>
 
+<!-- ============ 6.4 三つの酒どころ ============ -->
+<section class="sake3" id="sake3">
+  <div class="wrap reveal">
+    <span class="sec-label">Terroir</span>
+    <h2 class="sec-title" style="color:var(--navy);" data-i18n="s3Title">水が変われば、酒が変わる</h2>
+    <p class="lead" data-i18n="s3Lead">同じ米から造っても、仕込む水が違えば味わいは変わります。日本酒の歴史を担ってきた三つの土地を、水の性質から見てみます。</p>
+    <div class="sake3-grid">
+      <div class="sake3-card">
+        <span class="region" data-i18n="s3aR">NADA</span>
+        <h3 data-i18n="s3aT">灘</h3>
+        <span class="nick" data-i18n="s3aN">「灘の男酒」</span>
+        <span class="water" data-i18n="s3aW">ミネラルの多い水</span>
+        <p data-i18n="s3aB">六甲山から流れる水にはミネラルが多く含まれます。ミネラルは酵母の働きを助けるため、発酵が活発に進み、しっかりとした飲みごたえのある酒になります。</p>
+      </div>
+      <div class="sake3-card">
+        <span class="region" data-i18n="s3bR">FUSHIMI</span>
+        <h3 data-i18n="s3bT">伏見</h3>
+        <span class="nick" data-i18n="s3bN">「伏見の女酒」</span>
+        <span class="water" data-i18n="s3bW">やわらかな軟水</span>
+        <p data-i18n="s3bB">伏見で汲まれるのは軟水です。発酵はおだやかに進み、口当たりのやわらかい、すっきりとした味わいに仕上がります。</p>
+      </div>
+      <div class="sake3-card">
+        <span class="region" data-i18n="s3cR">HIROSHIMA</span>
+        <h3 data-i18n="s3cT">広島</h3>
+        <span class="nick" data-i18n="s3cN">西条</span>
+        <span class="water" data-i18n="s3cW">ミネラルの少ない超軟水</span>
+        <p data-i18n="s3cB">広島の水はミネラルがほとんど含まれません。そのままでは発酵が進みにくく、造るのが難しい水でした。試行錯誤の末に醸造の技術が確立され、この地でも酒が造れるようになりました。</p>
+      </div>
+    </div>
+    <p class="sake3-note" data-i18n="s3Note">ロブ6は、全国の蔵から選び抜いた六種の純米酒をブレンドしています。ひとつの土地では届かない複雑さは、この違いを重ねることで生まれます。</p>
+  </div>
+</section>
+
 <!-- ============ 6.5 アンケート・お問い合わせ ============ -->
 <section class="coupon-sec" id="coupon">
   <div class="wrap reveal">
@@ -1047,6 +1093,24 @@
       demoNote: '※本ページは制作サンプル(デモ)です。掲載の文章はご提供いただいた構成案の原稿、商品写真は現在のショップ掲載画像を使用しています。お客様の声は構成案に記載の内容をそのまま掲載しています(掲載例)。購入ボタンは現在のオンラインショップの商品ページに接続しています。英語・繁體中文の訳文は仮のものです。※閲覧数・ボタンの押下数を計測する仕組みを、公開時に組み込みます。',
       toast2: 'デモのため実際の画面には進みません',
       stickyBuy: '購入する',
+      s3Title: '水が変われば、酒が変わる',
+      s3Lead: '同じ米から造っても、仕込む水が違えば味わいは変わります。日本酒の歴史を担ってきた三つの土地を、水の性質から見てみます。',
+      s3aR: 'NADA',
+      s3aT: '灘',
+      s3aN: '「灘の男酒」',
+      s3aW: 'ミネラルの多い水',
+      s3aB: '六甲山から流れる水にはミネラルが多く含まれます。ミネラルは酵母の働きを助けるため、発酵が活発に進み、しっかりとした飲みごたえのある酒になります。',
+      s3bR: 'FUSHIMI',
+      s3bT: '伏見',
+      s3bN: '「伏見の女酒」',
+      s3bW: 'やわらかな軟水',
+      s3bB: '伏見で汲まれるのは軟水です。発酵はおだやかに進み、口当たりのやわらかい、すっきりとした味わいに仕上がります。',
+      s3cR: 'HIROSHIMA',
+      s3cT: '広島',
+      s3cN: '西条',
+      s3cW: 'ミネラルの少ない超軟水',
+      s3cB: '広島の水はミネラルがほとんど含まれません。そのままでは発酵が進みにくく、造るのが難しい水でした。試行錯誤の末に醸造の技術が確立され、この地でも酒が造れるようになりました。',
+      s3Note: 'ロブ6は、全国の蔵から選び抜いた六種の純米酒をブレンドしています。ひとつの土地では届かない複雑さは、この違いを重ねることで生まれます。',
       lineCta: 'LINEで友だちになる<small>お酒選びのご相談とお得なご案内</small>',
       stickyLine: 'LINE友だち追加',
       footLaw: '特定商取引法に基づく表記',
@@ -1129,6 +1193,24 @@
       demoNote: '* This page is a production sample (demo). The text is from the draft provided by the client, and product photos are from the current shop listing. Customer voices are sample entries reproduced as written in the draft. Purchase buttons do not work in this demo. English and Traditional Chinese translations are provisional. View counts and button clicks will be measured by analytics added at release.',
       toast2: 'This is a demo. This action is disabled.',
       stickyBuy: 'Buy now',
+      s3Title: 'Different water, different sake',
+      s3Lead: 'Even from the same rice, the water used in brewing changes the taste. Here are three regions that shaped the history of sake, seen through their water.',
+      s3aR: 'NADA',
+      s3aT: 'Nada',
+      s3aN: '\'Otoko-zake\' (masculine sake)',
+      s3aW: 'Mineral-rich water',
+      s3aB: 'Water flowing from Mount Rokko is rich in minerals. Minerals support the yeast, so fermentation is vigorous and the sake gains a firm, full body.',
+      s3bR: 'FUSHIMI',
+      s3bT: 'Fushimi',
+      s3bN: '\'Onna-zake\' (feminine sake)',
+      s3bW: 'Soft water',
+      s3bB: 'Fushimi draws soft water. Fermentation proceeds gently, giving a smooth mouthfeel and a clean finish.',
+      s3cR: 'HIROSHIMA',
+      s3cT: 'Hiroshima',
+      s3cN: 'Saijo',
+      s3cW: 'Very soft water, low in minerals',
+      s3cB: 'Hiroshima water contains almost no minerals. Fermentation was difficult, and brewing here was long considered hard. Through repeated trials a brewing method was established, and sake could finally be made in this region.',
+      s3Note: 'ROB6 blends six junmai sakes selected from breweries across Japan. A complexity beyond the reach of any single region comes from layering these differences.',
       lineCta: 'Add us on LINE<small>Sake advice and special offers</small>',
       stickyLine: 'Add on LINE',
       footLaw: 'Legal Notice (Specified Commercial Transactions Act)',
@@ -1211,6 +1293,24 @@
       demoNote: '※ 本頁為製作範例(Demo)。文案採用客戶提供之構成案原稿(顧客心得為版面示意)，商品照片使用現行商店刊載圖片。購買按鈕為展示用，不會實際運作。英文與繁體中文譯文為暫譯。※瀏覽次數與按鈕點擊次數的統計功能，將於正式公開時加入。',
       toast2: '此為示範頁面，此操作不會執行。',
       stickyBuy: '立即購買',
+      s3Title: '水不同，酒就不同',
+      s3Lead: '即使使用相同的米，釀造用水不同，風味也會改變。以下從水質來看承載日本酒歷史的三個產地。',
+      s3aR: 'NADA',
+      s3aT: '灘',
+      s3aN: '「灘之男酒」',
+      s3aW: '礦物質豐富的水',
+      s3aB: '源自六甲山的水含有豐富礦物質。礦物質有助酵母作用，發酵旺盛，釀出扎實而有厚度的酒。',
+      s3bR: 'FUSHIMI',
+      s3bT: '伏見',
+      s3bN: '「伏見之女酒」',
+      s3bW: '柔和的軟水',
+      s3bB: '伏見汲取的是軟水。發酵緩和進行，口感柔和、尾韻清爽。',
+      s3cR: 'HIROSHIMA',
+      s3cT: '廣島',
+      s3cN: '西條',
+      s3cW: '礦物質極少的超軟水',
+      s3cB: '廣島的水幾乎不含礦物質，發酵不易進行，長久以來被視為難以釀酒之地。經過反覆嘗試確立了釀造技術，此地終於也能釀出好酒。',
+      s3Note: 'ROB6 調和了自日本各地酒藏精選的六種純米酒。單一產地無法達到的複雑度，正是由這些差異疊加而生。',
       lineCta: '加入LINE好友<small>提供選酒諮詢與優惠資訊</small>',
       stickyLine: '加入LINE好友',
       footLaw: '特定商取引法標示',
