@@ -635,6 +635,18 @@
   .yonkoma .cap{ margin-top:12px; font-size:12px; line-height:1.9; color:#b9b2a4; text-align:center;
     font-family:-apple-system,"Hiragino Sans",sans-serif; }
 
+  /* ---- 日本酒クイズへの入口(先方仕様の構成順③。出題は唎酒師のウィンドウで) ---- */
+  .quizcta{ background:var(--cream); padding:56px 0; }
+  .quizcta .box{ max-width:640px; margin:0 auto; padding:0 20px; text-align:center; }
+  .quizcta .card{ border:1px solid rgba(16,26,51,.18); background:#fff; padding:30px 22px; }
+  .quizcta h2{ font-size:21px; line-height:1.6; margin:0 0 10px; color:var(--navy); }
+  .quizcta p{ font-size:14px; line-height:2; color:#4a5163; margin:0 0 20px; }
+  .quizcta .go{ display:inline-block; border:0; cursor:pointer; background:var(--navy); color:#f2ede2;
+    font-size:15px; font-weight:700; letter-spacing:.06em; padding:15px 34px; border-radius:999px;
+    font-family:inherit; }
+  .quizcta .go:hover{ background:#1a2647; }
+  .quizcta .sub{ margin:14px 0 0; font-size:12px; color:#7d8496; }
+
   /* ---------- 三つの酒どころ ---------- */
   .sake3{ background:var(--paper); padding:56px 0; }
   .sake3 .lead{ font-size:15px; line-height:2.1; color:#5b5347; max-width:640px; margin:0 auto 30px; text-align:center; }
@@ -874,6 +886,19 @@
       </div>
       <p class="toast" data-i18n="pairToast">「今夜も乾杯、ロイリとともに。」</p>
       <p data-i18n="pairClose">―― ボトルを開けた瞬間、あなたの自宅は特別な空間へと変わります。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 4.5 日本酒クイズ(先方仕様の構成順③) ============ -->
+<section class="quizcta">
+  <div class="box reveal">
+    <div class="card">
+      <span class="sec-label" data-i18n="quizLabel">Quiz</span>
+      <h2 data-i18n="quizTitle">日本酒の知識、<br>どのくらいご存じですか。</h2>
+      <p data-i18n="quizLead">国際唎酒師が5問お出しします。答え合わせのたびに、短い解説をお付けします。<br>ご登録も、お名前の入力もいりません。</p>
+      <button type="button" class="go" id="quizGo" data-i18n="quizBtn">5問にこたえてみる</button>
+      <p class="sub" data-i18n="quizSub">※ 1分ほどで終わります。</p>
     </div>
   </div>
 </section>
@@ -1149,6 +1174,11 @@
       toast2: 'デモのため実際の画面には進みません',
       stickyBuy: '購入する',
       yonkomaCap: '一杯目で、空気が変わる。',
+      quizLabel: 'Quiz',
+      quizTitle: '日本酒の知識、<br>どのくらいご存じですか。',
+      quizLead: '国際唎酒師が5問お出しします。答え合わせのたびに、短い解説をお付けします。<br>ご登録も、お名前の入力もいりません。',
+      quizBtn: '5問にこたえてみる',
+      quizSub: '※ 1分ほどで終わります。',
       kikiFab: '唎酒師にきく',
       kikiName: 'ロイリ',
       kikiRole: '国際唎酒師',
@@ -1255,6 +1285,11 @@
       toast2: 'This is a demo. This action is disabled.',
       stickyBuy: 'Buy now',
       yonkomaCap: 'The first glass changes the room.',
+      quizLabel: 'Quiz',
+      quizTitle: 'How much do you know about sake?',
+      quizLead: 'Our certified sommelier asks five questions, with a short note after each answer.<br>No sign-up, no name required.',
+      quizBtn: 'Take the five questions',
+      quizSub: '* About one minute.',
       kikiFab: 'Ask the sommelier',
       kikiName: 'Roiri',
       kikiRole: 'International Kikisake-shi',
@@ -1361,6 +1396,11 @@
       toast2: '此為示範頁面，此操作不會執行。',
       stickyBuy: '立即購買',
       yonkomaCap: '第一杯，氣氛就變了。',
+      quizLabel: 'Quiz',
+      quizTitle: '您對日本酒的了解有多少呢？',
+      quizLead: '國際唎酒師為您出五道題，每題作答後附上簡短解說。<br>無需註冊，也不必留下姓名。',
+      quizBtn: '挑戰五道題',
+      quizSub: '※ 約一分鐘即可完成。',
       kikiFab: '詢問唎酒師',
       kikiName: '羅伊利',
       kikiRole: '國際唎酒師',
@@ -1631,7 +1671,13 @@
       qs.appendChild(qb);
     }
     window.__kikiRender = renderQs;
+    window.__kikiStartQuiz = function(){ panel.classList.add('open'); startQuiz(); };
     renderQs();
+    var quizGo = document.getElementById('quizGo');
+    if (quizGo) quizGo.addEventListener('click', function(){
+      window.__kikiStartQuiz();
+      panel.scrollIntoView({behavior:'smooth', block:'nearest'});
+    });
     fab.addEventListener('click', function(){ panel.classList.toggle('open'); });
     close.addEventListener('click', function(){ panel.classList.remove('open'); });
   })();
