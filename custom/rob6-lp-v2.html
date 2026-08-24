@@ -1476,6 +1476,53 @@
   }
 })();
 
+
+  /* ---------- 日本酒クイズ(唎酒師が出題) ----------
+     出典=国税庁「清酒の製法品質表示基準」(特定名称の要件・使用原料)で裏を取った範囲。
+     先方からいただいた設問案(AI生成)を、公的基準で確認できる形に整えている。 */
+  var QUIZ = {
+    ja: [
+      { q:'日本酒を造る基本の原料は、次のうちどれでしょう。', a:['麦、ホップ、水','米、米こうじ、水','さつまいも、米こうじ、水'], c:1,
+        e:'米と米こうじと水。これに酵母を加えて発酵させます。一つ目はビール、三つ目は芋焼酎の原料です。' },
+      { q:'「純米大吟醸酒」を名乗るための決まりは、次のうちどれでしょう。', a:['精米歩合60パーセント以下','醸造アルコールを加えている','精米歩合50パーセント以下'], c:2,
+        e:'米を半分以上削ります。手間をかけたぶん、香りが華やかに出ます。' },
+      { q:'ラベルに「日本酒度 プラス10」とあれば、どんな味わいでしょう。', a:['かなりの甘口','かなりの辛口','酸味が強い'], c:1,
+        e:'数字が大きいほど辛口に、小さいほど甘口に傾きます。ただし酸の量でも印象は変わります。' },
+      { q:'「酒米の王様」と呼ばれる品種は、次のうちどれでしょう。', a:['五百万石','山田錦','雄町'], c:1,
+        e:'山田錦。兵庫県を中心に育てられ、品評会でもよく使われます。' },
+      { q:'搾ったあと、火入れを一度もせずに瓶詰めしたお酒を何と呼ぶでしょう。', a:['生酒','古酒','原酒'], c:0,
+        e:'生酒。加熱していないぶん、みずみずしさが残ります。冷蔵で保管し、お早めにどうぞ。' }
+    ],
+    en: [
+      { q:'Which are the basic ingredients of sake?', a:['Barley, hops, water','Rice, rice koji, water','Sweet potato, rice koji, water'], c:1,
+        e:'Rice, rice koji and water, with yeast added for fermentation. The first is beer, the third is imo-shochu.' },
+      { q:'What is required to call a sake Junmai Daiginjo?', a:['Rice polished to 60% or less','Brewers alcohol added','Rice polished to 50% or less'], c:2,
+        e:'More than half of each grain is polished away. That care is what brings out the delicate aroma.' },
+      { q:'A label reads Sake Meter Value +10. What does that suggest?', a:['Very sweet','Very dry','High acidity'], c:1,
+        e:'Higher numbers lean dry, lower numbers lean sweet. Acidity also shapes the impression.' },
+      { q:'Which rice variety is known as the king of sake rice?', a:['Gohyakumangoku','Yamada Nishiki','Omachi'], c:1,
+        e:'Yamada Nishiki, grown mainly in Hyogo and often used for competition sake.' },
+      { q:'What do you call sake bottled without any pasteurisation?', a:['Namazake','Koshu','Genshu'], c:0,
+        e:'Namazake. Without heating it keeps a fresh liveliness. Keep it chilled and drink it early.' }
+    ],
+    zh: [
+      { q:'釀造日本酒的基本原料是下列何者？', a:['大麥、啤酒花、水','米、米麴、水','番薯、米麴、水'], c:1,
+        e:'米、米麴與水，再加入酵母發酵。第一項是啤酒，第三項是番薯燒酒的原料。' },
+      { q:'要標示為「純米大吟釀酒」，條件是下列何者？', a:['精米步合60%以下','添加釀造酒精','精米步合50%以下'], c:2,
+        e:'將米粒削去一半以上。正因這番功夫，香氣才顯得細緻華麗。' },
+      { q:'標籤上寫著「日本酒度 +10」，代表什麼樣的風味？', a:['相當甜口','相當辛口','酸味強烈'], c:1,
+        e:'數字越大越偏辛口，越小越偏甜口。不過酸度也會影響實際印象。' },
+      { q:'被稱為「酒米之王」的品種是下列何者？', a:['五百万石','山田錦','雄町'], c:1,
+        e:'山田錦。主要種植於兵庫縣，品評會上也經常使用。' },
+      { q:'壓榨後完全不經火入便裝瓶的酒，稱作什麼？', a:['生酒','古酒','原酒'], c:0,
+        e:'生酒。未經加熱，保有鮮活的風味。請冷藏保存並盡早飲用。' }
+    ]
+  };
+  var QUIZ_UI = {
+    ja:{ right:'そのとおりです。', start:'日本酒クイズに挑戦する', intro:'では、五問お出しします。気軽にどうぞ。', wrong:'惜しいですね。正解は', done:'五問すべて終わりました。お付き合いありがとうございました。', score:'正解数' },
+    en:{ right:'Correct. ', start:'Try the sake quiz', intro:'Five questions, then. Take them lightly.', wrong:'Not quite. The answer is', done:'That is all five. Thank you for playing along.', score:'Correct' },
+    zh:{ right:'正確。', start:'挑戰日本酒測驗', intro:'那麼，出五題。請輕鬆作答。', wrong:'可惜。正確答案是', done:'五題結束了。感謝您的參與。', score:'答對' }
+  };
   /* ---------- 唎酒師チャット ---------- */
   var KIKI = {
     ja: [
@@ -1514,18 +1561,56 @@
     var close=document.getElementById('kikiClose'), log=document.getElementById('kikiLog'), qs=document.getElementById('kikiQs');
     if(!fab||!panel||!qs||!log) return;
     function lang(){ return (window.__kikiLang||'ja'); }
+    function say(cls, text){
+      var d=document.createElement('div'); d.className='kiki-msg '+cls; d.textContent=text;
+      log.appendChild(d); log.scrollTop=log.scrollHeight;
+    }
+    var quizIdx=-1, quizScore=0;
+    function quizNext(){
+      var L=QUIZ[lang()]||QUIZ.ja, U=QUIZ_UI[lang()]||QUIZ_UI.ja;
+      quizIdx++;
+      if(quizIdx>=L.length){
+        say('bot', U.done+' '+U.score+' '+quizScore+' / '+L.length);
+        quizIdx=-1; quizScore=0; renderQs(); return;
+      }
+      var item=L[quizIdx];
+      say('bot', (quizIdx+1)+'. '+item.q);
+      qs.innerHTML='';
+      item.a.forEach(function(choice,i){
+        var b=document.createElement('button');
+        b.type='button'; b.className='kiki-q'; b.textContent=choice;
+        b.addEventListener('click', function(){
+          say('me', choice);
+          if(i===item.c){ quizScore++; say('bot', U.right+item.e); }
+          else { say('bot', U.wrong+'「'+item.a[item.c]+'」です。'+item.e); }
+          setTimeout(quizNext, 400);
+        });
+        qs.appendChild(b);
+      });
+    }
+    function startQuiz(){
+      var U=QUIZ_UI[lang()]||QUIZ_UI.ja;
+      quizIdx=-1; quizScore=0;
+      say('bot', U.intro);
+      quizNext();
+    }
     function renderQs(){
       qs.innerHTML='';
       (KIKI[lang()]||KIKI.ja).forEach(function(pair){
         var b=document.createElement('button');
         b.type='button'; b.className='kiki-q'; b.textContent=pair[0];
         b.addEventListener('click', function(){
-          var me=document.createElement('div'); me.className='kiki-msg me'; me.textContent=pair[0]; log.appendChild(me);
-          var bot=document.createElement('div'); bot.className='kiki-msg bot'; bot.textContent=pair[1]; log.appendChild(bot);
-          log.scrollTop=log.scrollHeight;
+          say('me', pair[0]); say('bot', pair[1]);
         });
         qs.appendChild(b);
       });
+      var U=QUIZ_UI[lang()]||QUIZ_UI.ja;
+      var qb=document.createElement('button');
+      qb.type='button'; qb.className='kiki-q';
+      qb.style.borderColor='#101a33'; qb.style.color='#101a33'; qb.style.fontWeight='700';
+      qb.textContent=U.start;
+      qb.addEventListener('click', startQuiz);
+      qs.appendChild(qb);
     }
     window.__kikiRender = renderQs;
     renderQs();
