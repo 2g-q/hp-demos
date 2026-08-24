@@ -615,13 +615,19 @@
     box-shadow:0 18px 44px rgba(0,0,0,.28); display:none; overflow-y:auto; }
   .kiki-panel.open{ display:block; }
   .kiki-head{ position:sticky; top:0; z-index:2; background:#101a33; color:#fff; padding:12px 14px; display:flex; align-items:center; gap:9px; }
-  .kiki-head .av{ width:30px; height:30px; border-radius:50%; background:#e3c88a; color:#101a33; display:flex; align-items:center; justify-content:center; font-size:12px; font-weight:700; }
+  .kiki-head .av{ display:flex; flex:0 0 auto; }
+  .kiki-head .av img{ width:30px; height:30px; border-radius:50%; border:1.5px solid #101a33; display:block; }
+  .kiki-head .av img+img{ margin-left:-9px; }
   .kiki-head .nm{ font-size:13px; letter-spacing:.06em; }
   .kiki-head .rl{ font-size:10px; color:#b9b2a4; display:block; margin-top:2px; }
   .kiki-head .cl{ margin-left:auto; color:#b9b2a4; font-size:18px; cursor:pointer; line-height:1; }
   .kiki-log{ padding:14px; max-height:min(34vh,240px); overflow-y:auto; background:#faf8f4; }
   .kiki-msg{ font-size:13px; line-height:1.9; margin-bottom:10px; }
-  .kiki-msg.bot{ background:#fff; border:1px solid #eae5da; padding:10px 12px; color:#3a352e; }
+  .kiki-msg.bot{ background:#fff; border:1px solid #eae5da; padding:10px 12px; color:#3a352e;
+    display:flex; gap:8px; align-items:flex-start; }
+  .kiki-msg.bot .ico{ width:26px; height:26px; border-radius:50%; flex:0 0 26px; margin-top:2px; }
+  .kiki-msg.bot .tx{ flex:1; min-width:0; }
+  .kiki-msg.luika{ background:#fdf8f2; border-color:#efe0cf; }
   .kiki-msg.me{ background:#101a33; color:#fff; padding:9px 12px; margin-left:auto; max-width:80%; text-align:left; }
   .kiki-qs{ padding:10px 12px 14px; border-top:1px solid #eae5da; background:#fff; display:grid; gap:7px; }
   .kiki-q{ border:1px solid var(--gold,#c9a96a); color:#8a6d33; background:#fff; font-size:12.5px; line-height:1.6;
@@ -1074,12 +1080,13 @@
 <div class="kiki-fab" id="kikiFab" role="button" tabindex="0" aria-label="唎酒師にきく"><img src="../rob6-assets/roburi.png" alt="国際唎酒師 ロイリ"><span class="lbl" data-i18n="kikiFab">唎酒師にきく</span></div>
 <div class="kiki-panel" id="kikiPanel" aria-live="polite">
   <div class="kiki-head">
-    <div class="av">利</div>
-    <div><span class="nm" data-i18n="kikiName">ロイリ</span><span class="rl" data-i18n="kikiRole">国際唎酒師</span></div>
+    <div class="av"><img src="../rob6-assets/roburi_icon.png" alt="ロイリ"><img src="../rob6-assets/luika_icon.png" alt="ルイカ"></div>
+    <div><span class="nm" data-i18n="kikiName">ロイリ ＆ ルイカ</span><span class="rl" data-i18n="kikiRole">国際唎酒師と、お店のスタッフ</span></div>
     <span class="cl" id="kikiClose" role="button" tabindex="0" aria-label="閉じる">×</span>
   </div>
   <div class="kiki-log" id="kikiLog">
-    <div class="kiki-msg bot" data-i18n="kikiHello">こんばんは。日本酒のことでしたら、なんなりと。まずは気になるものをお選びください。</div>
+    <div class="kiki-msg bot"><img class="ico" src="../rob6-assets/roburi_icon.png" alt="ロイリ"><span class="tx" data-i18n="kikiHello">こんばんは。日本酒のことでしたら、なんなりと。まずは気になるものをお選びください。</span></div>
+    <div class="kiki-msg bot luika"><img class="ico" src="../rob6-assets/luika_icon.png" alt="ルイカ"><span class="tx" data-i18n="kikiHello2">わたしはルイカ。むずかしい話は、わたしが言い直しますね。</span></div>
   </div>
   <div class="kiki-qs" id="kikiQs"></div>
   <p class="kiki-note" data-i18n="kikiNote">※ 制作中の画面です。ご用意した質問にお答えします。</p>
@@ -1179,9 +1186,10 @@
       quizLead: '国際唎酒師が5問お出しします。答え合わせのたびに、短い解説をお付けします。<br>ご登録も、お名前の入力もいりません。',
       quizBtn: '5問にこたえてみる',
       quizSub: '※ 1分ほどで終わります。',
+      kikiName: 'ロイリ ＆ ルイカ',
+      kikiRole: '国際唎酒師と、お店のスタッフ',
+      kikiHello2: 'わたしはルイカ。むずかしい話は、わたしが言い直しますね。',
       kikiFab: '唎酒師にきく',
-      kikiName: 'ロイリ',
-      kikiRole: '国際唎酒師',
       kikiHello: 'こんばんは。日本酒のことでしたら、なんなりと。まずは気になるものをお選びください。',
       kikiNote: '※ 制作中の画面です。ご用意した質問にお答えします。',
       s3Title: '水が変われば、酒が変わる',
@@ -1290,9 +1298,10 @@
       quizLead: 'Our certified sommelier asks five questions, with a short note after each answer.<br>No sign-up, no name required.',
       quizBtn: 'Take the five questions',
       quizSub: '* About one minute.',
+      kikiName: 'Roiri & Luika',
+      kikiRole: 'Certified sommelier, and shop staff',
+      kikiHello2: "I am Luika. If it gets technical, I will put it plainly.",
       kikiFab: 'Ask the sommelier',
-      kikiName: 'Roiri',
-      kikiRole: 'International Kikisake-shi',
       kikiHello: 'Good evening. Ask me anything about sake. Please pick a question to start.',
       kikiNote: '* This page is in production. I can answer the prepared questions.',
       s3Title: 'Different water, different sake',
@@ -1401,9 +1410,10 @@
       quizLead: '國際唎酒師為您出五道題，每題作答後附上簡短解說。<br>無需註冊，也不必留下姓名。',
       quizBtn: '挑戰五道題',
       quizSub: '※ 約一分鐘即可完成。',
+      kikiName: '羅伊利 ＆ Luika',
+      kikiRole: '國際唎酒師與店內人員',
+      kikiHello2: '我是 Luika。太專業的部分，由我來說得簡單一些。',
       kikiFab: '詢問唎酒師',
-      kikiName: '羅伊利',
-      kikiRole: '國際唎酒師',
       kikiHello: '晚安。關於日本酒，任何問題都歡迎。請先選擇您感興趣的項目。',
       kikiNote: '※ 本頁面製作中。可回答已備妥的問題。',
       s3Title: '水不同，酒就不同',
@@ -1577,41 +1587,53 @@
     ]
   };
   var QUIZ_UI = {
-    ja:{ right:'そのとおりです。', start:'日本酒クイズに挑戦する', intro:'では、五問お出しします。気軽にどうぞ。', wrong:'惜しいですね。正解は', done:'五問すべて終わりました。お付き合いありがとうございました。', score:'正解数' },
-    en:{ right:'Correct. ', start:'Try the sake quiz', intro:'Five questions, then. Take them lightly.', wrong:'Not quite. The answer is', done:'That is all five. Thank you for playing along.', score:'Correct' },
-    zh:{ right:'正確。', start:'挑戰日本酒測驗', intro:'那麼，出五題。請輕鬆作答。', wrong:'可惜。正確答案是', done:'五題結束了。感謝您的參與。', score:'答對' }
+    ja:{ right:'そのとおりです。', start:'日本酒クイズに挑戦する', intro:'では、五問お出しします。気軽にどうぞ。', wrong:'惜しいですね。正解は', done:'五問すべて終わりました。お付き合いありがとうございました。', score:'正解数', luikaDone:'わたしも、ひとつ勉強になりました。' },
+    en:{ right:'Correct. ', start:'Try the sake quiz', intro:'Five questions, then. Take them lightly.', wrong:'Not quite. The answer is', done:'That is all five. Thank you for playing along.', score:'Correct', luikaDone:'I learned something too.' },
+    zh:{ right:'正確。', start:'挑戰日本酒測驗', intro:'那麼，出五題。請輕鬆作答。', wrong:'可惜。正確答案是', done:'五題結束了。感謝您的參與。', score:'答對', luikaDone:'我也學到了一課。' }
   };
   /* ---------- 唎酒師チャット ---------- */
   var KIKI = {
     ja: [
       ['ロブ6は、どんな味わいですか。',
-       '六種の純米酒を重ねた酒です。ひとつの蔵では出せない、幾重にも折り重なる複雑さが持ち味です。冷やしすぎず、常温に近い温度からお試しください。'],
+       '六種の純米酒を重ねた酒です。ひとつの蔵では出せない、幾重にも折り重なる複雑さが持ち味です。冷やしすぎず、常温に近い温度からお試しください。',
+       '一本の中に、六つの蔵の味が入っているんですね。'],
       ['甘口と辛口は、どこで決まりますか。',
-       '大まかには、酒に残る糖の量で決まります。ただ実際の印象は、酸の量や香りにも左右されます。数値より、まずご自身の舌で確かめるのがたしかです。'],
+       '大まかには、酒に残る糖の量で決まります。ただ実際の印象は、酸の量や香りにも左右されます。数値より、まずご自身の舌で確かめるのがたしかです。',
+       '数字より、まず飲んでみる。それでいいんですね。'],
       ['冷やと燗、どちらが合いますか。',
-       '同じ酒でも温度で表情が変わります。冷やせば輪郭が締まり、温めれば香りがひらきます。一本を二通りで愉しむのも、日本酒の面白さです。'],
+       '同じ酒でも温度で表情が変わります。冷やせば輪郭が締まり、温めれば香りがひらきます。一本を二通りで愉しむのも、日本酒の面白さです。',
+       '同じ一本で、二回たのしめるということですね。'],
       ['開けたあとは、どう保存しますか。',
-       'お届け後は冷蔵庫(五度以下)での保管をおすすめします。開栓後は風味が変わりやすいため、二週間以内を目安にお召し上がりください。']
+       'お届け後は冷蔵庫(五度以下)での保管をおすすめします。開栓後は風味が変わりやすいため、二週間以内を目安にお召し上がりください。',
+       '冷蔵庫で、開けたら二週間。覚えておきます。']
     ],
     en: [
       ['What does ROB6 taste like?',
-       'It layers six junmai sakes. The appeal is a complexity no single brewery can reach. Try it near room temperature rather than well chilled.'],
+       'It layers six junmai sakes. The appeal is a complexity no single brewery can reach. Try it near room temperature rather than well chilled.',
+       'So one bottle holds six breweries.'],
       ['What makes a sake dry or sweet?',
-       'Broadly, the sugar left in the sake. But acidity and aroma shape the impression just as much. Rather than numbers, trust your own palate first.'],
+       'Broadly, the sugar left in the sake. But acidity and aroma shape the impression just as much. Rather than numbers, trust your own palate first.',
+       'Numbers aside. Just taste it first.'],
       ['Chilled or warmed?',
-       'The same sake shows a different face by temperature. Chilled, the outline tightens; warmed, the aroma opens. Enjoying one bottle two ways is part of sake.'],
+       'The same sake shows a different face by temperature. Chilled, the outline tightens; warmed, the aroma opens. Enjoying one bottle two ways is part of sake.',
+       'One bottle, two ways to enjoy it.'],
       ['How should I store it after opening?',
-       'Keep it refrigerated (below 5C). After opening the flavour changes easily, so please enjoy it within about two weeks.']
+       'Keep it refrigerated (below 5C). After opening the flavour changes easily, so please enjoy it within about two weeks.',
+       'Fridge, and two weeks once opened. Noted.']
     ],
     zh: [
       ['ROB6 是什麼樣的風味？',
-       '由六種純米酒調和而成。單一酒藏無法達到的層次複雜度，正是其魅力。建議不要過度冰鎮，接近常溫時再品嚐。'],
+       '由六種純米酒調和而成。單一酒藏無法達到的層次複雜度，正是其魅力。建議不要過度冰鎮，接近常溫時再品嚐。',
+       '一瓶裡就有六家酒藏的味道呢。'],
       ['甘口與辛口的差別在哪裡？',
-       '大致取決於酒中殘留的糖分。不過實際印象也受酸度與香氣影響。與其看數值，不如先用自己的舌頭確認。'],
+       '大致取決於酒中殘留的糖分。不過實際印象也受酸度與香氣影響。與其看數值，不如先用自己的舌頭確認。',
+       '比起數字，先喝喝看就好。'],
       ['冷飲與溫飲，哪個好？',
-       '同一支酒會因溫度而展現不同面貌。冰鎮後輪廓收斂，溫熱後香氣舒展。一瓶兩種喝法，也是日本酒的樂趣。'],
+       '同一支酒會因溫度而展現不同面貌。冰鎮後輪廓收斂，溫熱後香氣舒展。一瓶兩種喝法，也是日本酒的樂趣。',
+       '同一瓶能享受兩種風味呢。'],
       ['開瓶後如何保存？',
-       '收到後建議冷藏保存(五度以下)。開瓶後風味容易變化，請以兩週為限盡早飲用。']
+       '收到後建議冷藏保存(五度以下)。開瓶後風味容易變化，請以兩週為限盡早飲用。',
+       '冷藏，開瓶後兩週。記住了。']
     ]
   };
   (function(){
@@ -1619,8 +1641,17 @@
     var close=document.getElementById('kikiClose'), log=document.getElementById('kikiLog'), qs=document.getElementById('kikiQs');
     if(!fab||!panel||!qs||!log) return;
     function lang(){ return (window.__kikiLang||'ja'); }
-    function say(cls, text){
-      var d=document.createElement('div'); d.className='kiki-msg '+cls; d.textContent=text;
+    var ICON={ roburi:'../rob6-assets/roburi_icon.png', luika:'../rob6-assets/luika_icon.png' };
+    function say(cls, text, who){
+      var d=document.createElement('div'); d.className='kiki-msg '+cls;
+      if(cls.indexOf('bot')>=0){
+        who = who || 'roburi';
+        if(who==='luika') d.className+=' luika';
+        var i=document.createElement('img'); i.className='ico'; i.src=ICON[who];
+        i.alt = (who==='luika' ? 'ルイカ' : 'ロイリ'); i.loading='lazy';
+        var t=document.createElement('span'); t.className='tx'; t.textContent=text;
+        d.appendChild(i); d.appendChild(t);
+      } else { d.textContent=text; }
       log.appendChild(d); log.scrollTop=log.scrollHeight;
     }
     var quizIdx=-1, quizScore=0;
@@ -1628,7 +1659,8 @@
       var L=QUIZ[lang()]||QUIZ.ja, U=QUIZ_UI[lang()]||QUIZ_UI.ja;
       quizIdx++;
       if(quizIdx>=L.length){
-        say('bot', U.done+' '+U.score+' '+quizScore+' / '+L.length);
+        say('bot', U.done+' '+U.score+' '+quizScore+' / '+L.length, 'roburi');
+        if(U.luikaDone) setTimeout(function(){ say('bot', U.luikaDone, 'luika'); }, 550);
         quizIdx=-1; quizScore=0; renderQs(); return;
       }
       var item=L[quizIdx];
@@ -1658,7 +1690,8 @@
         var b=document.createElement('button');
         b.type='button'; b.className='kiki-q'; b.textContent=pair[0];
         b.addEventListener('click', function(){
-          say('me', pair[0]); say('bot', pair[1]);
+          say('me', pair[0]); say('bot', pair[1], 'roburi');
+          if(pair[2]) setTimeout(function(){ say('bot', pair[2], 'luika'); }, 550);
         });
         qs.appendChild(b);
       });
