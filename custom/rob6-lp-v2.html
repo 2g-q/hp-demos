@@ -647,10 +647,10 @@
   .quizcta .card{ border:1px solid rgba(16,26,51,.18); background:#fff; padding:30px 22px; }
   .quizcta h2{ font-size:21px; line-height:1.6; margin:0 0 10px; color:var(--navy); }
   .quizcta p{ font-size:14px; line-height:2; color:#4a5163; margin:0 0 20px; }
-  .quizcta .go{ display:inline-block; border:0; cursor:pointer; background:var(--navy); color:#f2ede2;
+  .quizcta .go, #diagGo{ display:inline-block; border:0; cursor:pointer; background:var(--navy); color:#f2ede2;
     font-size:15px; font-weight:700; letter-spacing:.06em; padding:15px 34px; border-radius:999px;
     font-family:inherit; }
-  .quizcta .go:hover{ background:#1a2647; }
+  .quizcta .go:hover, #diagGo:hover{ background:#1a2647; }
   .quizcta .sub{ margin:14px 0 0; font-size:12px; color:#7d8496; }
 
   /* ---------- 三つの酒どころ ---------- */
@@ -989,6 +989,10 @@
       </div>
     </div>
     <p class="sake3-note" data-i18n="s3Note">ロブ6は、全国の蔵から選び抜いた六種の純米酒をブレンドしています。ひとつの土地では届かない複雑さは、この違いを重ねることで生まれます。</p>
+    <div style="text-align:center; margin-top:26px;">
+      <button type="button" class="go" id="diagGo" data-i18n="s3DiagBtn">三つの酒どころから、一本を探す</button>
+      <p class="sub" data-i18n="s3DiagSub" style="margin:12px 0 0; font-size:12px; color:#7d8496;">※ 三つの質問にお答えいただくだけです。ご登録はいりません。</p>
+    </div>
   </div>
 </section>
 
@@ -1181,6 +1185,8 @@
       toast2: 'デモのため実際の画面には進みません',
       stickyBuy: '購入する',
       yonkomaCap: '一杯目で、空気が変わる。',
+      s3DiagBtn: '三つの酒どころから、一本を探す',
+      s3DiagSub: '※ 三つの質問にお答えいただくだけです。ご登録はいりません。',
       quizLabel: 'Quiz',
       quizTitle: '日本酒の知識、<br>どのくらいご存じですか。',
       quizLead: '国際唎酒師が5問お出しします。答え合わせのたびに、短い解説をお付けします。<br>ご登録も、お名前の入力もいりません。',
@@ -1293,6 +1299,8 @@
       toast2: 'This is a demo. This action is disabled.',
       stickyBuy: 'Buy now',
       yonkomaCap: 'The first glass changes the room.',
+      s3DiagBtn: 'Find your region among the three',
+      s3DiagSub: '* Just three questions. No sign-up.',
       quizLabel: 'Quiz',
       quizTitle: 'How much do you know about sake?',
       quizLead: 'Our certified sommelier asks five questions, with a short note after each answer.<br>No sign-up, no name required.',
@@ -1405,6 +1413,8 @@
       toast2: '此為示範頁面，此操作不會執行。',
       stickyBuy: '立即購買',
       yonkomaCap: '第一杯，氣氛就變了。',
+      s3DiagBtn: '從三大酒鄉中，找出您的一本',
+      s3DiagSub: '※ 只要回答三個問題，無需註冊。',
       quizLabel: 'Quiz',
       quizTitle: '您對日本酒的了解有多少呢？',
       quizLead: '國際唎酒師為您出五道題，每題作答後附上簡短解說。<br>無需註冊，也不必留下姓名。',
@@ -1591,6 +1601,88 @@
     en:{ right:'Correct. ', start:'Try the sake quiz', intro:'Five questions, then. Take them lightly.', wrong:'Not quite. The answer is', done:'That is all five. Thank you for playing along.', score:'Correct', luikaDone:'I learned something too.' },
     zh:{ right:'正確。', start:'挑戰日本酒測驗', intro:'那麼，出五題。請輕鬆作答。', wrong:'可惜。正確答案是', done:'五題結束了。感謝您的參與。', score:'答對', luikaDone:'我也學到了一課。' }
   };
+
+  /* ---------- 三つの酒どころ診断(カラットシーク第一段) ----------
+     結果の本文は2026-08-22のキックオフで先方が説明した水質の話に基づく。
+     🔴ロブ6が灘/伏見/広島の酒を含むとは書かない(未確認のため)。締めは事実のみ。 */
+  var DIAG = {
+    ja: {
+      intro: 'では、三つ伺います。お好みから、三つの土地のどれに近いかを探します。',
+      qs: [
+        { q:'お酒と一緒に召し上がるなら、どのお料理でしょう。',
+          a:[['肉や揚げ物など、味のしっかりしたもの','nada'],
+             ['煮物や焼き魚など、出汁の効いたもの','fushimi'],
+             ['お刺身や冷奴など、素材の味が立つもの','hiroshima']] },
+        { q:'お酒そのものは、どちらがお好みですか。',
+          a:[['飲みごたえのある、力強い味','nada'],
+             ['やわらかく、ふくらみのある味','fushimi'],
+             ['澄んでいて、すっきりした味','hiroshima']] },
+        { q:'召し上がるのは、どんな場面が多いでしょう。',
+          a:[['一日の終わりに、しっかり一杯','nada'],
+             ['どなたかと話しながら、ゆっくり','fushimi'],
+             ['ひとりで、静かに味わう','hiroshima']] }
+      ],
+      res: {
+        nada:     ['灘(なだ)', '六甲山から流れる水にはミネラルが多く、酵母の働きを助けます。発酵が活発に進むぶん、飲みごたえのある力強い酒になります。「灘の男酒」と呼ばれてきました。'],
+        fushimi:  ['伏見(ふしみ)', '伏見で汲まれるのは軟水です。発酵はおだやかに進み、口当たりのやわらかい、すっきりとした酒に仕上がります。「伏見の女酒」と呼ばれてきました。'],
+        hiroshima:['広島(西条)', '広島の水はミネラルがほとんど含まれず、そのままでは発酵が進みにくい土地でした。試行錯誤の末に醸造の技術が確立され、澄んだ味わいの酒が生まれました。']
+      },
+      close: 'ロブ6は、全国の蔵から選んだ六種を重ねた酒です。お好みの傾向がつかめたところで、一度お試しください。',
+      luika: 'わたしも同じ質問に答えてみます。土地で味が変わるって、面白いですね。',
+      start: '三つの酒どころから、一本を探す'
+    },
+    en: {
+      intro: 'Three questions, then. We will find which of the three regions suits you.',
+      qs: [
+        { q:'What would you eat alongside it?',
+          a:[['Rich dishes such as meat or fried food','nada'],
+             ['Simmered dishes or grilled fish, built on dashi','fushimi'],
+             ['Sashimi or chilled tofu, where the ingredient speaks','hiroshima']] },
+        { q:'And the sake itself?',
+          a:[['Full bodied, with real weight','nada'],
+             ['Soft, with a gentle roundness','fushimi'],
+             ['Clear and clean','hiroshima']] },
+        { q:'When do you usually drink?',
+          a:[['One good glass at the end of the day','nada'],
+             ['Slowly, while talking with someone','fushimi'],
+             ['Alone, quietly','hiroshima']] }
+      ],
+      res: {
+        nada:     ['Nada', 'Water from Mount Rokko carries plenty of minerals, which help the yeast along. Fermentation runs briskly, giving sake with real weight. It has long been called the mens sake of Nada.'],
+        fushimi:  ['Fushimi', 'Fushimi draws soft water. Fermentation proceeds gently, giving sake that is soft on the palate and clean. It has long been called the womens sake of Fushimi.'],
+        hiroshima:['Hiroshima (Saijo)', 'Hiroshima water holds almost no minerals, so fermentation was hard to sustain. Brewing technique was established through long trial and error, and clear, clean sake was born here.']
+      },
+      close: 'ROB6 layers six junmai sakes chosen from breweries across Japan. Now that you know your leaning, please try a glass.',
+      luika: 'I answered the same three. It is interesting how the land changes the taste.',
+      start: 'Find your region among the three'
+    },
+    zh: {
+      intro: '那麼，請回答三個問題。從您的喜好，找出最接近哪一個產地。',
+      qs: [
+        { q:'您會搭配什麼料理呢？',
+          a:[['肉類或炸物等味道濃郁的料理','nada'],
+             ['燉煮或烤魚等以高湯為底的料理','fushimi'],
+             ['生魚片或冷豆腐等能吃出食材本味的料理','hiroshima']] },
+        { q:'酒本身，您偏好哪一種？',
+          a:[['厚實有份量的味道','nada'],
+             ['柔和而圓潤的味道','fushimi'],
+             ['清澈而俐落的味道','hiroshima']] },
+        { q:'您通常在什麼場合品飲？',
+          a:[['一天結束時，好好喝上一杯','nada'],
+             ['與人閒聊，慢慢地喝','fushimi'],
+             ['獨自一人，安靜品味','hiroshima']] }
+      ],
+      res: {
+        nada:     ['灘', '六甲山流下的水含有豐富礦物質，能幫助酵母運作。發酵旺盛，釀出厚實有份量的酒，自古被稱為「灘之男酒」。'],
+        fushimi:  ['伏見', '伏見取用的是軟水。發酵和緩，釀成口感柔和、俐落的酒，自古被稱為「伏見之女酒」。'],
+        hiroshima:['廣島(西條)', '廣島的水幾乎不含礦物質，原本難以順利發酵。經過反覆嘗試確立了釀造技術，才誕生了清澈的酒。']
+      },
+      close: 'ROB6 是選自全國酒藏的六種純米酒調和而成。既然知道了您的偏好，不妨試上一杯。',
+      luika: '我也回答了同樣的三題。產地會改變味道，真有意思。',
+      start: '從三大酒鄉中，找出您的一本'
+    }
+  };
+
   /* ---------- 唎酒師チャット ---------- */
   var KIKI = {
     ja: [
@@ -1678,6 +1770,43 @@
         qs.appendChild(b);
       });
     }
+    /* ---- 三つの酒どころ診断 ---- */
+    var diagIdx=-1, diagScore=null;
+    function diagNext(){
+      var D=DIAG[lang()]||DIAG.ja;
+      diagIdx++;
+      if(diagIdx>=D.qs.length){
+        var best=null;
+        for(var k in diagScore){ if(best===null || diagScore[k]>diagScore[best]) best=k; }
+        var r=D.res[best];
+        say('bot', r[0]+' — '+r[1], 'roburi');
+        setTimeout(function(){ say('bot', D.close, 'roburi'); }, 500);
+        setTimeout(function(){ say('bot', D.luika, 'luika'); }, 1050);
+        diagIdx=-1; diagScore=null;
+        setTimeout(renderQs, 1100);
+        return;
+      }
+      var item=D.qs[diagIdx];
+      say('bot', (diagIdx+1)+'. '+item.q, 'roburi');
+      qs.innerHTML='';
+      item.a.forEach(function(pair){
+        var b=document.createElement('button');
+        b.type='button'; b.className='kiki-q'; b.textContent=pair[0];
+        b.addEventListener('click', function(){
+          say('me', pair[0]);
+          diagScore[pair[1]] = (diagScore[pair[1]]||0) + 1;
+          setTimeout(diagNext, 380);
+        });
+        qs.appendChild(b);
+      });
+    }
+    function startDiag(){
+      var D=DIAG[lang()]||DIAG.ja;
+      diagIdx=-1; diagScore={nada:0, fushimi:0, hiroshima:0};
+      say('bot', D.intro, 'roburi');
+      diagNext();
+    }
+
     function startQuiz(){
       var U=QUIZ_UI[lang()]||QUIZ_UI.ja;
       quizIdx=-1; quizScore=0;
@@ -1695,6 +1824,13 @@
         });
         qs.appendChild(b);
       });
+      var D=DIAG[lang()]||DIAG.ja;
+      var db=document.createElement('button');
+      db.type='button'; db.className='kiki-q';
+      db.style.borderColor='#101a33'; db.style.color='#101a33'; db.style.fontWeight='700';
+      db.textContent=D.start;
+      db.addEventListener('click', startDiag);
+      qs.appendChild(db);
       var U=QUIZ_UI[lang()]||QUIZ_UI.ja;
       var qb=document.createElement('button');
       qb.type='button'; qb.className='kiki-q';
@@ -1705,7 +1841,13 @@
     }
     window.__kikiRender = renderQs;
     window.__kikiStartQuiz = function(){ panel.classList.add('open'); startQuiz(); };
+    window.__kikiStartDiag = function(){ panel.classList.add('open'); startDiag(); };
     renderQs();
+    var diagGo = document.getElementById('diagGo');
+    if (diagGo) diagGo.addEventListener('click', function(){
+      window.__kikiStartDiag();
+      panel.scrollIntoView({behavior:'smooth', block:'nearest'});
+    });
     var quizGo = document.getElementById('quizGo');
     if (quizGo) quizGo.addEventListener('click', function(){
       window.__kikiStartQuiz();
