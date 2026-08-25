@@ -167,15 +167,16 @@
     width:100%;
     max-width:480px;
     margin:0 auto;
-    background:linear-gradient(135deg, #c9a96a 0%, #b8944e 100%);
+    background:linear-gradient(180deg, #d8bc80 0%, #c9a96a 46%, #b8944e 100%);
     color:#1a1509;
     font-weight:700;
     font-size:18px;
     line-height:1.5;
+    letter-spacing:.03em;
     text-align:center;
     padding:20px 24px;
     border-radius:100px;
-    box-shadow:0 10px 28px rgba(0,0,0,.32);
+    box-shadow:0 10px 28px rgba(0,0,0,.32), inset 0 1px 0 rgba(255,255,255,.4);
     transition:transform .2s ease, box-shadow .2s ease;
   }
   .btn-cta:hover{ transform:translateY(-2px); box-shadow:0 14px 34px rgba(0,0,0,.4); }
@@ -281,14 +282,14 @@
   }
   .hero-visual{
     position:relative;
-    max-width:180px;
-    margin:0 auto 18px;
+    max-width:212px;
+    margin:0 auto 20px;
   }
   .hero-bottle{
     border-radius:14px;
     overflow:hidden;
     border:1px solid rgba(201,169,106,.45);
-    box-shadow:0 24px 60px rgba(0,0,0,.5);
+    box-shadow:0 24px 60px rgba(0,0,0,.5), 0 2px 10px rgba(0,0,0,.35);
   }
   .hero-roburi{
     position:absolute;
@@ -341,6 +342,14 @@
   }
 
   /* ---------- ストーリー ---------- */
+  .story, .urgency, .final{ position:relative; }
+  .story::before, .urgency::before, .final::before{
+    content:"";
+    position:absolute;
+    top:0; left:0; right:0;
+    height:1px;
+    background:linear-gradient(90deg, transparent, rgba(201,169,106,.5), transparent);
+  }
   .story{ background:var(--navy-deep); color:var(--text-on-navy); }
   .story p{ color:var(--sub-on-navy); margin-bottom:1.4em; }
   .story-cards{ display:grid; gap:22px; margin:44px 0; }
@@ -463,7 +472,7 @@
   .voice-note{ font-size:13px; color:var(--ink-soft); margin-top:22px; text-align:center; }
 
   /* ---------- FAQ ---------- */
-  .faq{ background:#eef0f4; }
+  .faq{ background:#f2ede2; }
   .faq details{
     background:var(--paper-card);
     border:1px solid var(--line);
@@ -503,11 +512,12 @@
     text-align:center;
   }
   .final-card .product-img{
-    max-width:240px;
+    max-width:420px;
     margin:0 auto 26px;
     border-radius:12px;
     overflow:hidden;
     border:1px solid rgba(201,169,106,.4);
+    box-shadow:0 16px 40px rgba(0,0,0,.35);
   }
   .final-card h2{
     font-family:'Shippori Mincho',serif;
@@ -595,8 +605,9 @@
     border-radius:100px;
   }
   .sticky-buy{
-    background:linear-gradient(135deg, #c9a96a 0%, #b8944e 100%);
+    background:linear-gradient(180deg, #d8bc80 0%, #c9a96a 46%, #b8944e 100%);
     color:#1a1509;
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.4);
   }
   .sticky-coupon{
     border:1.5px solid var(--gold);
@@ -637,15 +648,15 @@
   /* ---------- つかみの4コマ ---------- */
   .yonkoma{ background:var(--navy); padding:0 0 34px; }
   .yonkoma .inner{ max-width:900px; margin:0 auto; padding:0 16px; }
-  .yonkoma img{ width:100%; display:block; border:1px solid rgba(201,169,106,.35); }
+  .yonkoma img{ width:100%; display:block; border:1px solid rgba(201,169,106,.35); border-radius:10px; }
   .yonkoma .cap{ margin-top:12px; font-size:12px; line-height:1.9; color:#b9b2a4; text-align:center;
     font-family:-apple-system,"Hiragino Sans",sans-serif; }
 
   /* ---- 日本酒クイズへの入口(先方仕様の構成順③。出題は唎酒師のウィンドウで) ---- */
-  .quizcta{ background:var(--cream); padding:56px 0; }
+  .quizcta{ background:#f2ede2; padding:72px 0; }
   .quizcta .box{ max-width:640px; margin:0 auto; padding:0 20px; text-align:center; }
-  .quizcta .card{ border:1px solid rgba(16,26,51,.18); background:#fff; padding:30px 22px; }
-  .quizcta h2{ font-size:21px; line-height:1.6; margin:0 0 10px; color:var(--navy); }
+  .quizcta .card{ border:1px solid rgba(16,26,51,.14); background:#fff; border-radius:14px; padding:34px 24px 32px; }
+  .quizcta h2{ font-family:'Shippori Mincho',serif; font-weight:600; letter-spacing:.04em; font-size:21px; line-height:1.6; margin:0 0 12px; color:var(--navy); }
   .quizcta p{ font-size:14px; line-height:2; color:#4a5163; margin:0 0 20px; }
   .quizcta .go, #diagGo{ display:inline-block; border:0; cursor:pointer; background:var(--navy); color:#f2ede2;
     font-size:15px; font-weight:700; letter-spacing:.06em; padding:15px 34px; border-radius:999px;
@@ -654,12 +665,12 @@
   .quizcta .sub{ margin:14px 0 0; font-size:12px; color:#7d8496; }
 
   /* ---------- 三つの酒どころ ---------- */
-  .sake3{ background:var(--paper); padding:56px 0; }
+  .sake3{ background:#f2ede2; padding:72px 0; }
   .sake3 .lead{ font-size:15px; line-height:2.1; color:#5b5347; max-width:640px; margin:0 auto 30px; text-align:center; }
   .sake3-grid{ display:grid; gap:16px; max-width:900px; margin:0 auto; }
-  .sake3-card{ background:#fff; border:1px solid #e2ded5; padding:22px 20px; }
+  .sake3-card{ background:#fff; border:1px solid #e2ded5; border-radius:14px; padding:24px 22px; }
   .sake3-card .region{ font-size:11px; letter-spacing:.28em; color:#b08d2a; }
-  .sake3-card h3{ font-size:19px; letter-spacing:.08em; margin:8px 0 4px; color:var(--navy); }
+  .sake3-card h3{ font-family:'Shippori Mincho',serif; font-weight:600; font-size:19px; letter-spacing:.08em; margin:8px 0 4px; color:var(--navy); }
   .sake3-card .nick{ font-size:12px; color:#8a8274; letter-spacing:.06em; }
   .sake3-card .water{ display:inline-block; margin:12px 0 10px; padding:3px 10px; border:1px solid var(--gold); border-radius:100px; font-size:11px; color:#8a6d33; letter-spacing:.06em; }
   .sake3-card p{ font-size:13.5px; line-height:2; color:#4a453d; }
@@ -766,7 +777,7 @@
   <div class="wrap">
     <div class="hero-head">
       <div class="hero-brand">
-        <img src="../rob6-assets/item2.png" alt="ロブ6 ロゴマーク">
+        <img src="../rob6-assets/logo-rb6.png" alt="ロブ6 ロゴマーク">
         <span data-i18n="brand">ロイヤルブレンド6</span>
       </div>
     </div>
@@ -777,7 +788,7 @@
 
       <div class="hero-visual">
         <div class="hero-bottle">
-          <img src="../rob6-assets/item1-bottle.jpg" alt="ロイヤルブレンド6(ロブ6) 720ml ボトル" width="414" height="907">
+          <img src="../rob6-assets/bottle-hero.jpg" alt="ロイヤルブレンド6(ロブ6) 720ml ボトル" width="828" height="1814">
         </div>
         <div class="hero-roburi">
           <img src="../rob6-assets/roburi.png" alt="ブランドキャラクター ロイリ">
@@ -1043,7 +1054,7 @@
   <div class="wrap">
     <div class="final-card reveal">
       <div class="product-img">
-        <img src="../rob6-assets/item1-bottle.jpg" alt="ロイヤルブレンド6(ロブ6) 720ml" loading="lazy" width="414" height="907">
+        <img src="../rob6-assets/bottle-wide.jpg" alt="ロイヤルブレンド6(ロブ6) 720ml" loading="lazy" width="1800" height="1187">
       </div>
       <h2 data-i18n="finalName">ロイヤルブレンド6(ロブ6)<br>［720ml］</h2>
       <p class="price-strike" data-i18n="priceStrike">通常価格 <span class="num">5,395</span>円(税込)</p>
@@ -1066,7 +1077,7 @@
 <footer>
   <div class="wrap">
     <div class="brand">
-      <img src="../rob6-assets/item2.png" alt="ロブ6 ロゴマーク" loading="lazy">
+      <img src="../rob6-assets/logo-rb6.png" alt="ロブ6 ロゴマーク" loading="lazy">
       <span data-i18n="footBrand">ロイヤルグリーンフーズ</span>
     </div>
     <div class="foot-links">
