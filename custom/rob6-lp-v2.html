@@ -615,11 +615,16 @@
   }
 
   /* ---------- 唎酒師チャット(LP内ウィンドウ) ---------- */
-  .kiki-fab{ position:fixed; left:14px; bottom:98px; z-index:60; z-index:60;
-    background:rgba(16,26,51,.94); border:1px solid rgba(201,169,106,.6); border-radius:100px;
-    box-shadow:0 6px 18px rgba(0,0,0,.3); cursor:pointer; padding:10px 16px;
-    color:#e3c88a; font-size:12px; letter-spacing:.08em; line-height:1; }
-  .kiki-fab img{ display:none; }
+  .kiki-fab{ position:fixed; left:14px; bottom:96px; z-index:60;
+    background:rgba(16,26,51,.96); border:1px solid rgba(201,169,106,.75); border-radius:100px;
+    box-shadow:0 8px 22px rgba(0,0,0,.38); cursor:pointer; padding:7px 16px 7px 7px;
+    color:#e3c88a; font-size:13px; letter-spacing:.06em; line-height:1;
+    display:flex; align-items:center; gap:10px; }
+  /* 🔴顔を出す。以前 display:none にしていたためテキストだけの小さいボタンになっていた
+     (2026-08-27 CIO指摘「唎酒師にきくが小さい」)。ヒーローのバッジは外して重複を避ける。 */
+  .kiki-fab img{ display:block; width:42px; height:42px; border-radius:50%;
+    border:1.5px solid var(--gold); object-fit:cover; }
+  .kiki-fab .lbl{ padding-right:2px; }
   .kiki-panel{ left:12px; right:auto; }
   .kiki-panel{ position:fixed; left:12px; bottom:158px; z-index:61; width:min(340px, calc(100vw - 24px));
     max-height:calc(100vh - 210px); background:#fff; border:1px solid #d9d4c8;
@@ -789,9 +794,6 @@
       <div class="hero-visual">
         <div class="hero-bottle">
           <img src="../rob6-assets/bottle-hero.jpg" alt="ロイヤルブレンド6(ロブ6) 720ml ボトル" width="828" height="1814">
-        </div>
-        <div class="hero-roburi">
-          <img src="../rob6-assets/roburi.png" alt="ブランドキャラクター ロイリ">
         </div>
       </div>
 
@@ -1045,6 +1047,10 @@
         <summary><span class="q">Q</span><span data-i18n="q4">購入に条件はありますか？</span><span class="mark">＋</span></summary>
         <p class="answer" data-i18n="a4">この特別記念販売は先着20名様、お一人様1本までとさせていただいております。北海道・沖縄・離島へのお届けは4,500円(税込・送料込)となります。</p>
       </details>
+      <details>
+        <summary><span class="q">Q</span><span data-i18n="q5">海外への発送はできますか？</span><span class="mark">＋</span></summary>
+        <p class="answer" data-i18n="a5">お問い合わせください。国際配送での対応を準備しております。国際運賃が高額になりますので、お届け先を伺ったうえで、事前にお見積りをお出しします。</p>
+      </details>
     </div>
   </div>
 </section>
@@ -1092,7 +1098,7 @@
 </footer>
 
 <!-- ============ 唎酒師チャット ============ -->
-<div class="kiki-fab" id="kikiFab" role="button" tabindex="0" aria-label="唎酒師にきく"><img src="../rob6-assets/roburi.png" alt="国際唎酒師 ロイリ"><span class="lbl" data-i18n="kikiFab">唎酒師にきく</span></div>
+<div class="kiki-fab" id="kikiFab" role="button" tabindex="0" aria-label="唎酒師にきく"><img src="../rob6-assets/roburi_icon.png" alt="国際唎酒師 ロイリ"><span class="lbl" data-i18n="kikiFab">唎酒師にきく</span></div>
 <div class="kiki-panel" id="kikiPanel" aria-live="polite">
   <div class="kiki-head">
     <div class="av"><img src="../rob6-assets/roburi_icon.png" alt="ロイリ"><img src="../rob6-assets/luika_icon.png" alt="ルイカ"></div>
@@ -1170,7 +1176,9 @@
       voiceSample: '※掲載例です。',
       faqTitle: 'よくあるご質問',
       q1: '送料はいくらですか？',
-      a1: '全国送料無料でお届けします。',
+      a1: '本州へのお届けは、送料込みの価格です。北海道・沖縄・離島へのお届けは4,500円(税込・送料込)となります。',
+      q5: '海外への発送はできますか？',
+      a5: 'お問い合わせください。国際配送での対応を準備しております。国際運賃が高額になりますので、お届け先を伺ったうえで、事前にお見積りをお出しします。',
       q2: '日本酒に賞味期限はありますか？また、保存方法は？',
       a2: '日本酒には明確な賞味期限はございませんが、本製品はデリケートなアッサンブラージュ(調合)を行っているため、お届け後は冷蔵庫(5℃以下)での保管をおすすめします。開栓後は風味が変化しやすいため、2週間以内を目安にお早めにお召し上がりいただくと、本来の豊かな味わいを最も美味しく愉しめます。',
       q3: '注文からどのくらいで届きますか？',
@@ -1284,7 +1292,9 @@
       voiceSample: '※ Sample entries.',
       faqTitle: 'Frequently asked questions',
       q1: 'How much is shipping?',
-      a1: 'Shipping is free nationwide in Japan.',
+      a1: 'For Honshu, shipping is included in the price. For Hokkaido, Okinawa and remote islands, the price is 4,500 yen (tax and shipping included).',
+      q5: 'Do you ship overseas?',
+      a5: 'Please contact us. We are preparing international shipping. International freight is costly, so we will quote you in advance once we know the destination.',
       q2: 'Does sake have an expiry date? How should I store it?',
       a2: 'Sake has no strict expiry date, but because this product is a delicate assemblage, we recommend refrigerating it (below 5°C) after arrival. Once opened, the flavor changes easily, so for the fullest taste please enjoy it within about two weeks.',
       q3: 'How soon will it arrive?',
@@ -1398,7 +1408,9 @@
       voiceSample: '※版面示意。',
       faqTitle: '常見問題',
       q1: '運費是多少？',
-      a1: '日本全國免運費。',
+      a1: '寄送至本州為含運價格。寄送至北海道、沖繩及離島為 4,500 日圓(含稅・含運)。',
+      q5: '可以寄送到海外嗎？',
+      a5: '請與我們聯繫。國際配送正在準備中。國際運費較高，我們會在確認寄送地點後，事先提供報價。',
       q2: '日本酒有保存期限嗎？該如何保存？',
       a2: '日本酒並無明確的保存期限，但本品經過細膩的調和(Assemblage)，送達後建議冷藏保存(5℃以下)。開瓶後風味容易變化，建議以2週為限盡早飲用，最能享受原本豐富的味道。',
       q3: '下單後多久送達？',
