@@ -1,0 +1,335 @@
+<!doctype html>
+<html lang="ja"><head><meta charset="utf-8">
+<meta name="robots" content="noindex,nofollow">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>じゅんまいムゲン LINEショップ 画面モックアップ</title>
+<style>
+:root{ --ink:#1A1A1A; --gold:#D4AF37; --paper:#FBFAF7; --line:#E2DED5; --sub:#6B6459; --line-green:#06C755; }
+*{box-sizing:border-box; margin:0; padding:0;}
+body{ font-family:"Hiragino Mincho ProN","Yu Mincho",serif; background:#8a8a8a; }
+.sheet{ width:390px; background:var(--paper); margin:0; position:relative; overflow:hidden; }
+/* LINE のヘッダー */
+.linebar{ height:44px; background:var(--line-green); color:#fff; display:flex; align-items:center; padding:0 12px; font-family:-apple-system,"Hiragino Sans",sans-serif; font-size:15px; }
+.linebar .x{ font-size:20px; line-height:1; margin-right:12px; }
+.linebar .t{ font-weight:600; letter-spacing:.02em; }
+.shopbar{ background:var(--ink); color:#fff; padding:14px 16px; display:flex; align-items:baseline; justify-content:space-between; }
+.shopbar .name{ font-size:19px; letter-spacing:.14em; color:var(--gold); }
+.shopbar .en{ font-size:9px; letter-spacing:.18em; color:#B9B2A4; font-family:-apple-system,sans-serif; }
+.nav{ display:flex; gap:0; background:#fff; border-bottom:1px solid var(--line); font-size:12px; font-family:-apple-system,"Hiragino Sans",sans-serif; }
+.nav div{ flex:1; text-align:center; padding:10px 0; color:var(--sub); }
+.nav div.on{ color:var(--ink); border-bottom:2px solid var(--gold); font-weight:600; }
+.body{ padding:16px; }
+.hero{ background:linear-gradient(160deg,#1A1A1A 0%,#2c2722 100%); color:#fff; padding:26px 18px; }
+.hero .cap{ font-size:10px; letter-spacing:.3em; color:var(--gold); font-family:-apple-system,sans-serif; }
+.hero h1{ font-size:22px; line-height:1.5; margin-top:10px; font-weight:400; letter-spacing:.06em; }
+.hero p{ font-size:12px; line-height:1.9; color:#CFC8BA; margin-top:12px; font-family:-apple-system,"Hiragino Sans",sans-serif; }
+.sec-t{ font-size:13px; letter-spacing:.12em; color:var(--ink); border-left:3px solid var(--gold); padding-left:9px; margin:18px 0 12px; }
+.card{ background:#fff; border:1px solid var(--line); margin-bottom:12px; }
+.card .ph{ height:118px; background:#EDE9E0; display:flex; align-items:center; justify-content:center; color:#A79E8C; font-size:10px; letter-spacing:.2em; font-family:-apple-system,sans-serif;}
+.card .in{ padding:11px 12px; }
+.card .nm{ font-size:13px; line-height:1.6; color:var(--ink); }
+.card .pr{ font-size:15px; color:var(--ink); margin-top:7px; font-family:-apple-system,sans-serif; font-weight:600; }
+.card .pr small{ font-size:10px; color:var(--sub); font-weight:400; }
+.foot{ background:var(--ink); color:#B9B2A4; padding:18px 16px 22px; font-family:-apple-system,"Hiragino Sans",sans-serif; font-size:11px; line-height:2.2; }
+.foot a{ color:#fff; text-decoration:underline; display:block; }
+.foot .cp{ margin-top:12px; font-size:9px; color:#7A7367; }
+.card .buy{ display:block; background:var(--gold); color:#1A1A1A; text-align:center; font-size:12px; font-weight:700; letter-spacing:.1em; padding:9px 0; margin-top:9px; font-family:-apple-system,"Hiragino Sans",sans-serif; }
+.hl{ outline:2px solid #E2003C; outline-offset:2px; }
+.note{ position:absolute; background:#E2003C; color:#fff; font-size:9px; padding:2px 7px; font-family:-apple-system,sans-serif; letter-spacing:.04em; }
+/* 汎用パーツ */
+.row{ display:flex; justify-content:space-between; font-size:12px; padding:9px 0; border-bottom:1px solid var(--line); font-family:-apple-system,"Hiragino Sans",sans-serif; }
+.row.tot{ font-size:15px; font-weight:700; border-bottom:none; padding-top:13px; }
+.btn{ background:var(--ink); color:var(--gold); text-align:center; padding:14px; font-size:14px; letter-spacing:.14em; margin-top:16px; }
+.btn.g{ background:var(--gold); color:#1A1A1A; font-weight:700; }
+.fld{ margin-bottom:13px; font-family:-apple-system,"Hiragino Sans",sans-serif; }
+.fld label{ font-size:10px; color:var(--sub); letter-spacing:.08em; display:block; margin-bottom:5px; }
+.fld .inp{ border:1px solid var(--line); background:#fff; padding:11px; font-size:13px; color:var(--ink); }
+.fld .inp.ph{ color:#B3AC9E; }
+.pay{ border:1px solid var(--line); background:#fff; padding:12px; font-size:12.5px; display:flex; align-items:center; gap:9px; margin-bottom:9px; font-family:-apple-system,"Hiragino Sans",sans-serif; }
+.pay.on{ border:2px solid var(--gold); }
+.dot{ width:14px; height:14px; border-radius:50%; border:1px solid #B3AC9E; flex:0 0 auto; }
+.dot.on{ border:4px solid var(--gold); }
+.legal{ font-family:-apple-system,"Hiragino Sans",sans-serif; font-size:9.5px; line-height:1.85; color:#3a352e; }
+.legal dt{ color:var(--ink); font-weight:700; margin-top:9px; font-size:10px; border-bottom:1px solid var(--line); padding-bottom:3px; }
+.legal dd{ margin-top:4px; }
+.done{ text-align:center; padding:40px 20px; }
+.done .mk{ width:58px; height:58px; border:2px solid var(--gold); border-radius:50%; margin:0 auto 18px; color:var(--gold); font-size:26px; line-height:54px; }
+.done h2{ font-size:17px; letter-spacing:.1em; }
+.done p{ font-size:12px; color:var(--sub); line-height:2; margin-top:12px; font-family:-apple-system,"Hiragino Sans",sans-serif; }
+</style></head>
+<body>
+<!-- s0a Instagram投稿 -->
+<div class="sheet" id="s0a">
+  <div class="linebar" style="background:#111;"><span class="x">‹</span><span class="t">Instagram</span></div>
+  <div style="background:#fff;">
+    <div style="display:flex;align-items:center;gap:9px;padding:10px 12px;border-bottom:1px solid #eee;font-family:-apple-system,'Hiragino Sans',sans-serif;">
+      <div style="width:32px;height:32px;border-radius:50%;background:linear-gradient(45deg,#f09433,#dc2743,#bc1888);padding:2px;">
+        <div style="width:100%;height:100%;border-radius:50%;background:#EDE9E0;"></div></div>
+      <div><div style="font-size:12.5px;font-weight:700;">jummai_mugen</div>
+      <div style="font-size:10.5px;color:#8a8274;">じゅんまいムゲン</div></div>
+    </div>
+    <div style="height:300px;background:#EDE9E0;display:flex;align-items:center;justify-content:center;color:#A79E8C;font-size:10px;letter-spacing:.2em;font-family:-apple-system,sans-serif;">投稿画像(ロブ6)</div>
+    <div style="padding:11px 12px;font-family:-apple-system,'Hiragino Sans',sans-serif;">
+      <div style="font-size:12px;line-height:1.9;color:#1A1A1A;">
+        <b>jummai_mugen</b> 六種の純米酒がひとつに。<br>
+        ひとつの蔵では届かない複雑さを、一本に重ねました。<br>
+        <span style="color:#00376b;">詳しくはプロフィールのリンクから</span>
+      </div>
+    </div>
+  </div>
+  <div class="foot"><div class="cp">Instagram</div></div>
+</div>
+
+<!-- s0b Instagramプロフィール -->
+<div class="sheet" id="s0b">
+  <div class="linebar" style="background:#111;"><span class="x">‹</span><span class="t">jummai_mugen</span></div>
+  <div style="background:#fff;padding:16px 14px;font-family:-apple-system,'Hiragino Sans',sans-serif;">
+    <div style="display:flex;align-items:center;gap:16px;">
+      <div style="width:72px;height:72px;border-radius:50%;background:#EDE9E0;flex:0 0 auto;"></div>
+      <div style="display:flex;gap:18px;font-size:12px;text-align:center;">
+        <div><b style="font-size:15px;display:block;">—</b>投稿</div>
+        <div><b style="font-size:15px;display:block;">—</b>フォロワー</div>
+      </div>
+    </div>
+    <div style="margin-top:12px;font-size:12.5px;line-height:1.8;">
+      <b>じゅんまいムゲン</b><br>
+      <span style="color:#5b5347;">六種の純米酒をブレンドした「ロイヤルブレンド6」。<br>ロイヤルグリーンフーズ</span>
+    </div>
+    <a style="display:block;margin-top:8px;font-size:12.5px;color:#00376b;text-decoration:none;">2g-q.github.io/hp-demos/custom/rob6-lp-v2.html</a>
+    <div style="margin-top:12px;display:flex;gap:6px;"><div style="flex:1;background:#0095f6;color:#fff;text-align:center;font-size:12.5px;font-weight:600;padding:7px 0;border-radius:6px;">フォロー</div><div style="flex:1;border:1px solid #dbdbdb;text-align:center;font-size:12.5px;font-weight:600;padding:7px 0;border-radius:6px;">メッセージ</div></div>
+  </div>
+  <div class="foot"><div class="cp">Instagram プロフィール</div></div>
+</div>
+
+<!-- s0c 販売ページ(LP) -->
+<div class="sheet" id="s0c">
+  <div class="shopbar"><span class="name">ロイヤルブレンド6</span><span class="en">ROB6</span></div>
+  <div class="hero"><div class="cap">ROYAL BLEND SAKE</div>
+    <h1>六種の純米酒が<br>ひとつになる。</h1>
+    <p>特定銘柄三種の純米大吟醸に十年以上の熟成古酒を重ね、六種の純米酒にたどり着きました。</p>
+  </div>
+  <div class="body">
+    <div class="sec-t">ご購入・ご相談</div>
+    <div style="background:#06C755;color:#fff;text-align:center;padding:14px;font-size:14px;font-weight:700;font-family:-apple-system,'Hiragino Sans',sans-serif;border-radius:100px;">LINEで友だちになる</div>
+    <div style="font-size:11px;color:#6B6459;text-align:center;margin-top:8px;font-family:-apple-system,'Hiragino Sans',sans-serif;">お酒選びのご相談とお得なご案内</div>
+    <div class="btn g" style="margin-top:18px;">特別価格で「ロブ6」を購入する</div>
+  </div>
+  <div class="foot"><a>特定商取引法に基づく表記</a><a>お問い合わせ</a><div class="cp">© ロイヤルグリーンフーズ</div></div>
+</div>
+
+<!-- s1 TOP -->
+<div class="sheet" id="s1">
+  <div class="linebar"><span class="x">×</span><span class="t">じゅんまいムゲン</span></div>
+  <div class="shopbar"><span class="name">じゅんまいムゲン</span><span class="en">JUMMAI MUGEN</span></div>
+  <div class="nav"><div class="on">ホーム</div><div>商品一覧</div><div>特集</div><div>よくある質問</div></div>
+  <div class="hero"><div class="cap">ROYAL BLEND SAKE</div>
+    <h1>六種の純米酒が<br>ひとつになる。</h1>
+    <p>特定銘柄三種の純米大吟醸に十年以上の熟成古酒を重ね、六種の純米酒にたどり着きました。</p>
+  </div>
+  <div class="body">
+    <div class="sec-t">新着のお酒</div>
+    <div class="card"><div class="ph">商品画像</div><div class="in">
+      <div class="nm">純米酒六種のブレンド酒 ロイヤルブレンド酒 ロブ6</div><div class="pr">2,500円 <small>(税込・送料込)</small><div class="buy">購入する</div></div></div></div>
+    <div class="card"><div class="ph">商品画像</div><div class="in">
+      <div class="nm">鯉川 純米大吟醸 亀の尾 720ml 全国新酒鑑評会 金賞受賞酒</div><div class="pr">4,180円 <small>(税込)</small><div class="buy">購入する</div></div></div></div>
+  </div>
+  <div class="foot">
+    <a>特定商取引法に基づく表記</a>
+    <a>お問い合わせ</a>
+    <a>プライバシーポリシー</a>
+    <a>利用規約</a>
+    <div class="cp">© ロイヤルグリーンフーズ</div>
+  </div>
+</div>
+
+<!-- s2 商品一覧 -->
+<div class="sheet" id="s2">
+  <div class="linebar"><span class="x">×</span><span class="t">じゅんまいムゲン</span></div>
+  <div class="shopbar"><span class="name">じゅんまいムゲン</span><span class="en">JUMMAI MUGEN</span></div>
+  <div class="nav"><div>ホーム</div><div class="on">商品一覧</div><div>特集</div><div>よくある質問</div></div>
+  <div class="body">
+    <div class="sec-t">日本酒</div>
+    <div class="card"><div class="ph">商品画像</div><div class="in">
+      <div class="nm">純米酒六種のブレンド酒 ロイヤルブレンド酒 ロブ6</div><div class="pr">2,500円 <small>(税込・本州)</small><div class="buy">購入する</div></div></div></div>
+    <div class="card"><div class="ph">商品画像</div><div class="in">
+      <div class="nm">鯉川 純米大吟醸 亀の尾 720ml 全国新酒鑑評会 金賞受賞酒</div><div class="pr">4,180円 <small>(税込)</small><div class="buy">購入する</div></div></div></div>
+    <div class="card"><div class="ph">商品画像</div><div class="in">
+      <div class="nm">SASA 響 純米吟醸酒 爽やかなスッキリとした飲み飽きない味わい</div><div class="pr">2,490円 <small>(税込)</small><div class="buy">購入する</div></div></div></div>
+    <div class="sec-t">酒器</div>
+    <div class="card"><div class="ph">商品画像</div><div class="in">
+      <div class="nm">日本酒の隠れた香りと味わいが目覚める 新たな酒器「SHUWAN」</div><div class="pr">3,450円 <small>(税込)</small><div class="buy">購入する</div></div></div></div>
+  </div>
+  <div class="foot"><a>特定商取引法に基づく表記</a><a>お問い合わせ</a><div class="cp">© ロイヤルグリーンフーズ</div></div>
+</div>
+
+<!-- s3 商品詳細 -->
+<div class="sheet" id="s3">
+  <div class="linebar"><span class="x">×</span><span class="t">じゅんまいムゲン</span></div>
+  <div class="shopbar"><span class="name">じゅんまいムゲン</span><span class="en">JUMMAI MUGEN</span></div>
+  <div class="card" style="border:none;margin:0"><div class="ph" style="height:210px">商品画像</div></div>
+  <div class="body">
+    <div style="font-size:15px;line-height:1.7;letter-spacing:.04em">純米酒六種のブレンド酒<br>ロイヤルブレンド酒 ロブ6</div>
+    <div style="font-size:24px;margin-top:12px;font-family:-apple-system,sans-serif;font-weight:700">2,500<span style="font-size:13px">円</span>
+      <span style="font-size:11px;color:#6B6459;font-weight:400">(税込・送料込／本州)</span></div>
+    <div style="font-size:11px;color:#6B6459;line-height:2;margin-top:8px;font-family:-apple-system,'Hiragino Sans',sans-serif">
+      北海道・沖縄・離島 4,500円(税込)<br>香港向け 空輸 5,395円(税込)</div>
+    <div class="sec-t">この酒について</div>
+    <div style="font-size:11.5px;line-height:2;color:#3a352e;font-family:-apple-system,'Hiragino Sans',sans-serif">
+      特定銘柄三種の純米大吟醸・純米吟醸・純米無濾過原酒・純米原酒・特別純米に、十年以上の熟成古酒を重ねました。試行錯誤を繰り返し、六種の純米酒をベースにたどり着いた一本です。<br><br>
+      内容量 720ml ／ 保存方法 冷暗所</div>
+    <div class="row" style="margin-top:14px"><span>数量</span><span>1</span></div>
+    <div class="btn g">購入する</div>
+    <div class="btn" style="margin-top:9px">カートに入れる</div>
+  </div>
+  <div class="foot"><a>特定商取引法に基づく表記</a><a>お問い合わせ</a><div class="cp">© ロイヤルグリーンフーズ</div></div>
+</div>
+
+<!-- s4 カート -->
+<div class="sheet" id="s4">
+  <div class="linebar"><span class="x">×</span><span class="t">じゅんまいムゲン</span></div>
+  <div class="shopbar"><span class="name">じゅんまいムゲン</span><span class="en">JUMMAI MUGEN</span></div>
+  <div class="body">
+    <div class="sec-t">カート</div>
+    <div style="display:flex;gap:11px;border:1px solid #E2DED5;background:#fff;padding:11px">
+      <div style="width:74px;height:74px;background:#EDE9E0;flex:0 0 auto;display:flex;align-items:center;justify-content:center;color:#A79E8C;font-size:9px;font-family:-apple-system,sans-serif">商品画像</div>
+      <div><div style="font-size:12px;line-height:1.6">純米酒六種のブレンド酒<br>ロイヤルブレンド酒 ロブ6</div>
+      <div style="font-size:14px;margin-top:7px;font-family:-apple-system,sans-serif;font-weight:600">2,500円</div>
+      <div style="font-size:11px;color:#6B6459;margin-top:3px;font-family:-apple-system,sans-serif">数量 1</div></div>
+    </div>
+    <div style="margin-top:16px">
+      <div class="row"><span>商品小計</span><span>2,500円</span></div>
+      <div class="row"><span>送料(関東)</span><span>0円</span></div>
+      <div class="row"><span>消費税</span><span>込</span></div>
+      <div class="row tot"><span>合計</span><span>2,500円</span></div>
+    </div>
+    <div class="btn g">お会計へ進む</div>
+    <div style="font-size:10px;color:#6B6459;margin-top:12px;line-height:1.9;font-family:-apple-system,'Hiragino Sans',sans-serif">
+      20歳未満の方への酒類の販売はいたしません。</div>
+  </div>
+  <div class="foot"><a>特定商取引法に基づく表記</a><a>お問い合わせ</a><div class="cp">© ロイヤルグリーンフーズ</div></div>
+</div>
+
+<!-- s5 お届け先 -->
+<div class="sheet" id="s5">
+  <div class="linebar"><span class="x">×</span><span class="t">じゅんまいムゲン</span></div>
+  <div class="shopbar"><span class="name">じゅんまいムゲン</span><span class="en">JUMMAI MUGEN</span></div>
+  <div class="body">
+    <div class="sec-t">お届け先の入力</div>
+    <div class="fld"><label>お名前</label><div class="inp ph">山田 太郎</div></div>
+    <div class="fld"><label>郵便番号</label><div class="inp ph">150-0011</div></div>
+    <div class="fld"><label>ご住所</label><div class="inp ph">東京都渋谷区東3-16-3</div></div>
+    <div class="fld"><label>電話番号</label><div class="inp ph">090-0000-0000</div></div>
+    <div class="fld"><label>メールアドレス</label><div class="inp ph">example@example.com</div></div>
+    <div class="fld"><label>年齢の確認</label><div class="pay on"><span class="dot on"></span>20歳以上です</div></div>
+    <div class="btn g">お支払い方法へ</div>
+  </div>
+  <div class="foot"><a>特定商取引法に基づく表記</a><a>お問い合わせ</a><div class="cp">© ロイヤルグリーンフーズ</div></div>
+</div>
+
+<!-- s6 支払い方法 -->
+<div class="sheet" id="s6">
+  <div class="linebar"><span class="x">×</span><span class="t">じゅんまいムゲン</span></div>
+  <div class="shopbar"><span class="name">じゅんまいムゲン</span><span class="en">JUMMAI MUGEN</span></div>
+  <div class="body">
+    <div class="sec-t">お支払い方法</div>
+    <div class="pay on"><span class="dot on"></span>クレジットカード</div>
+    <div class="pay"><span class="dot"></span>コンビニ決済</div>
+    <div class="pay"><span class="dot"></span>あと払い(ペイディ)</div>
+    <div class="pay"><span class="dot"></span>PayPay 残高</div>
+    <div class="pay"><span class="dot"></span>銀行振込</div>
+    <div style="margin-top:16px">
+      <div class="row"><span>商品小計</span><span>2,500円</span></div>
+      <div class="row"><span>送料</span><span>0円</span></div>
+      <div class="row tot"><span>お支払い金額</span><span>2,500円</span></div>
+    </div>
+    <div class="btn g">カード情報の入力へ</div>
+  </div>
+  <div class="foot"><a>特定商取引法に基づく表記</a><a>お問い合わせ</a><div class="cp">© ロイヤルグリーンフーズ</div></div>
+</div>
+
+<!-- s7 カード入力 -->
+<div class="sheet" id="s7">
+  <div class="linebar"><span class="x">×</span><span class="t">じゅんまいムゲン</span></div>
+  <div class="shopbar"><span class="name">じゅんまいムゲン</span><span class="en">JUMMAI MUGEN</span></div>
+  <div class="body">
+    <div class="sec-t">カード情報の入力</div>
+    <div style="border:1px solid #E2DED5;background:#fff;padding:14px">
+      <div class="fld"><label>カード番号</label><div class="inp ph">4242 4242 4242 4242</div></div>
+      <div style="display:flex;gap:11px">
+        <div class="fld" style="flex:1"><label>有効期限</label><div class="inp ph">MM / YY</div></div>
+        <div class="fld" style="flex:1"><label>セキュリティコード</label><div class="inp ph">123</div></div>
+      </div>
+      <div class="fld" style="margin-bottom:0"><label>カード名義</label><div class="inp ph">TARO YAMADA</div></div>
+      <div style="font-size:9.5px;color:#6B6459;margin-top:12px;line-height:1.9;font-family:-apple-system,'Hiragino Sans',sans-serif">
+        決済は KOMOJU(株式会社DEGICA)を通じて行われます。カード情報は当店では保持しません。<br>
+        本人認証(EMV 3-Dセキュア)に対応しています。</div>
+    </div>
+    <div class="row tot" style="margin-top:16px"><span>お支払い金額</span><span>2,500円</span></div>
+    <div class="btn g">この内容で支払う</div>
+  </div>
+  <div class="foot"><a>特定商取引法に基づく表記</a><a>お問い合わせ</a><div class="cp">© ロイヤルグリーンフーズ</div></div>
+</div>
+
+<!-- s8 完了 -->
+<div class="sheet" id="s8">
+  <div class="linebar"><span class="x">×</span><span class="t">じゅんまいムゲン</span></div>
+  <div class="shopbar"><span class="name">じゅんまいムゲン</span><span class="en">JUMMAI MUGEN</span></div>
+  <div class="done">
+    <div class="mk">✓</div>
+    <h2>ご注文が完了しました</h2>
+    <p>注文番号 JM-2609-000128<br>ご登録のメールアドレスと LINE のトークに<br>確認のご連絡をお送りしました。</p>
+    <div style="margin:22px 0;text-align:left">
+      <div class="row"><span>お支払い方法</span><span>クレジットカード</span></div>
+      <div class="row"><span>お届け先</span><span>東京都渋谷区</span></div>
+      <div class="row tot"><span>お支払い金額</span><span>2,500円</span></div>
+    </div>
+    <div class="btn">ホームへ戻る</div>
+  </div>
+  <div class="foot"><a>特定商取引法に基づく表記</a><a>お問い合わせ</a><div class="cp">© ロイヤルグリーンフーズ</div></div>
+</div>
+
+<!-- s9 特商法 -->
+<div class="sheet" id="s9">
+  <div class="linebar"><span class="x">×</span><span class="t">じゅんまいムゲン</span></div>
+  <div class="shopbar"><span class="name">じゅんまいムゲン</span><span class="en">JUMMAI MUGEN</span></div>
+  <div class="body">
+    <div class="sec-t">特定商取引法に基づく表記</div>
+    <dl class="legal">
+      <dt>販売業者</dt><dd>ロイヤルグリーンフーズ</dd>
+      <dt>運営統括責任者</dt><dd>滝澤 信夫</dd>
+      <dt>所在地</dt><dd>〒257-0028 神奈川県秦野市東田原200-34</dd>
+      <dt>電話番号</dt><dd>0463-45-0846（受付時間 平日9:00〜18:00）</dd>
+      <dt>お問い合わせ</dt><dd>本サイトのお問い合わせフォームより承ります。</dd>
+      <dt>販売価格</dt><dd>各商品ページに表示された金額(税込)とします。商品代金以外に送料や各種手数料がかかる場合があります。</dd>
+      <dt>商品代金以外の必要料金</dt><dd>送料(地域別／北海道1,430円・東北1,100円・関東990円・中部990円・関西1,100円・中国1,320円・四国1,320円・九州1,430円・沖縄2,750円・離島2,970円)、カートン代330円(税込)、クール便代330円(税込)</dd>
+      <dt>お支払い方法</dt><dd>クレジットカード、コンビニ決済、あと払い(ペイディ)、PayPal、銀行振込、キャリア決済、Amazon Pay、楽天ペイ、PayPay残高</dd>
+      <dt>お支払い時期</dt><dd>クレジットカード・PayPal・キャリア決済・Amazon Pay・楽天ペイ・PayPay残高は、ご注文時点でお支払いが確定します。コンビニ決済・銀行振込は、ご注文から約3日間の期限内にお支払いください。期限を過ぎると自動でキャンセルとなります。あと払い(ペイディ)は1か月分をまとめて翌月10日までにお支払いください。</dd>
+      <dt>商品の引渡時期</dt><dd>配送のご依頼を受けてから遅くとも4日以内に発送いたします。最短4日、最長6日程度でお届けします。お取り寄せ商品は出荷までに10営業日かかる場合があります(最短7日・最長10日前後)。</dd>
+      <dt>返品・交換</dt><dd>商品に欠陥がある場合を除き、返品には応じかねます。</dd>
+      <dt>酒類販売管理者標識</dt><dd>販売場の名称及び所在地：神奈川県秦野市東田原200-34／酒類販売管理者の氏名：滝澤 信夫／酒類販売管理研修受講年月日：2026年1月16日(番号2600106e)／次回研修の受講期限：2029年1月15日／研修実施団体名：全国小売酒販組合中央会</dd>
+      <dt>酒類販売免許</dt><dd>平法0139号(平塚税務署／2023年5月25日)、自己商標酒類卸売業免許 平法第132号(平塚税務署／2026年6月23日)、輸出入酒類卸売業免許(同上)</dd>
+      <dt>未成年者の飲酒防止</dt><dd>20歳未満の方への酒類の販売はいたしません。</dd>
+    </dl>
+  </div>
+  <div class="foot"><a>特定商取引法に基づく表記</a><a>お問い合わせ</a><div class="cp">© ロイヤルグリーンフーズ</div></div>
+</div>
+
+<!-- s10 問い合わせ -->
+<div class="sheet" id="s10">
+  <div class="linebar"><span class="x">×</span><span class="t">じゅんまいムゲン</span></div>
+  <div class="shopbar"><span class="name">じゅんまいムゲン</span><span class="en">JUMMAI MUGEN</span></div>
+  <div class="body">
+    <div class="sec-t">お問い合わせ</div>
+    <div style="font-size:11px;line-height:2;color:#3a352e;font-family:-apple-system,'Hiragino Sans',sans-serif;margin-bottom:14px">
+      ご注文・商品についてのお問い合わせは、下記のフォームより承ります。<br>受付時間 平日9:00〜18:00(土日祝を除く)</div>
+    <div class="fld"><label>お名前</label><div class="inp ph">山田 太郎</div></div>
+    <div class="fld"><label>メールアドレス</label><div class="inp ph">example@example.com</div></div>
+    <div class="fld"><label>電話番号(任意)</label><div class="inp ph">090-0000-0000</div></div>
+    <div class="fld"><label>注文番号(任意)</label><div class="inp ph">JM-2609-000128</div></div>
+    <div class="fld"><label>お問い合わせ内容</label><div class="inp ph" style="height:86px">ご記入ください</div></div>
+    <div class="pay"><span class="dot"></span>利用規約とプライバシーポリシーに同意します</div>
+    <div class="btn g">送信する</div>
+  </div>
+  <div class="foot"><a>特定商取引法に基づく表記</a><a>お問い合わせ</a><div class="cp">© ロイヤルグリーンフーズ</div></div>
+</div>
+</body></html>
