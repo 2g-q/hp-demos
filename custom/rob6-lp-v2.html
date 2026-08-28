@@ -71,7 +71,8 @@
   body{
     font-family:'Noto Sans JP', sans-serif;
     font-size:17px;
-    line-height:1.9;
+    line-height:1.95;
+    letter-spacing:.012em;
     color:var(--ink);
     background:var(--paper);
     -webkit-font-smoothing:antialiased;
@@ -86,9 +87,9 @@
   .serif{ font-family:'Shippori Mincho', serif; }
   .num{ font-family:'Manrope','Noto Sans JP',sans-serif; }
 
-  .wrap{ max-width:760px; margin:0 auto; padding:0 22px; }
+  .wrap{ max-width:760px; margin:0 auto; padding:0 24px; }
 
-  section{ padding:88px 0; }
+  section{ padding:82px 0; }
   @media (min-width:768px){ section{ padding:104px 0; } }
 
   /* ---------- 言語バー(固定) ---------- */
@@ -145,19 +146,19 @@
     display:block;
     font-family:'Manrope',sans-serif;
     font-weight:600;
-    font-size:13px;
-    letter-spacing:.28em;
+    font-size:12px;
+    letter-spacing:.3em;
     color:var(--gold);
-    margin-bottom:14px;
+    margin-bottom:16px;
     text-transform:uppercase;
   }
   .sec-title{
     font-family:'Shippori Mincho', serif;
     font-weight:600;
     font-size:clamp(24px, 5.6vw, 32px);
-    line-height:1.55;
-    letter-spacing:.04em;
-    margin-bottom:28px;
+    line-height:1.6;
+    letter-spacing:.055em;
+    margin-bottom:30px;
   }
   .on-navy .sec-title{ color:var(--text-on-navy); }
 
@@ -167,20 +168,21 @@
     width:100%;
     max-width:480px;
     margin:0 auto;
-    background:linear-gradient(180deg, #d8bc80 0%, #c9a96a 46%, #b8944e 100%);
+    background:linear-gradient(180deg, var(--gold-bright) 0%, var(--gold) 72%);
+    border:1px solid rgba(255,255,255,.28);
     color:#1a1509;
     font-weight:700;
-    font-size:18px;
+    font-size:17px;
     line-height:1.5;
     letter-spacing:.03em;
     text-align:center;
-    padding:20px 24px;
+    padding:18px 24px;
     border-radius:100px;
-    box-shadow:0 10px 28px rgba(0,0,0,.32), inset 0 1px 0 rgba(255,255,255,.4);
+    box-shadow:0 8px 20px rgba(10,20,46,.22), inset 0 1px 0 rgba(255,255,255,.42);
     transition:transform .2s ease, box-shadow .2s ease;
   }
-  .btn-cta:hover{ transform:translateY(-2px); box-shadow:0 14px 34px rgba(0,0,0,.4); }
-  .hero-cta{ padding:15px 24px; font-size:17px; }
+  .btn-cta:hover{ transform:translateY(-1px); box-shadow:0 10px 24px rgba(10,20,46,.28), inset 0 1px 0 rgba(255,255,255,.42); }
+  .hero-cta{ padding:16px 24px; font-size:16.5px; }
   .hero .btn-note{ margin-top:10px; }
   .btn-note{
     text-align:center;
@@ -194,20 +196,20 @@
     max-width:480px;
     margin:0 auto;
     background:transparent;
-    border:1.5px solid var(--gold);
+    border:1px solid var(--gold);
     color:var(--navy);
     font-family:inherit;
     font-weight:700;
     font-size:16px;
     line-height:1.5;
     text-align:center;
-    padding:14px 24px;
+    padding:15px 24px;
     min-height:48px;
     border-radius:100px;
     cursor:pointer;
     transition:background .2s ease;
   }
-  .btn-sub:hover{ background:rgba(201,169,106,.12); }
+  .btn-sub:hover{ background:rgba(201,169,106,.09); }
   .on-navy .btn-sub{ color:var(--text-on-navy); }
   .coupon-sec{ background:var(--paper); text-align:center; }
   .coupon-sec .btn-cta{ margin-bottom:18px; }
@@ -242,7 +244,7 @@
     background:
       radial-gradient(120% 90% at 50% 0%, #1e3468 0%, var(--navy) 42%, var(--navy-deep) 100%);
     color:var(--text-on-navy);
-    padding:0 0 44px;
+    padding:0 0 48px;
     position:relative;
     overflow:hidden;
   }
@@ -257,39 +259,39 @@
     display:flex;
     align-items:center;
     justify-content:space-between;
-    padding:10px 0;
+    padding:12px 0 8px;
   }
   .hero-brand{ display:flex; align-items:center; gap:10px; }
   .hero-brand img{ width:44px; height:44px; border-radius:50%; background:#fff; padding:3px; }
   .hero-brand span{ font-family:'Shippori Mincho',serif; font-size:15px; letter-spacing:.14em; color:var(--sub-on-navy); }
-  .hero-body{ padding-top:10px; text-align:center; }
+  .hero-body{ padding-top:14px; text-align:center; }
   .hero-copy{
     font-family:'Shippori Mincho', serif;
-    font-weight:700;
+    font-weight:600;
     font-size:clamp(29px, 7.6vw, 44px);
-    line-height:1.45;
-    letter-spacing:.06em;
-    margin-bottom:14px;
+    line-height:1.5;
+    letter-spacing:.075em;
+    margin-bottom:16px;
   }
   html[lang="en"] .hero-copy{ font-size:clamp(25px, 6.4vw, 38px); letter-spacing:.02em; }
   .hero-copy .accent{ color:var(--gold-bright); }
   .hero-sub{
-    font-size:14.5px;
+    font-size:15px;
     color:var(--sub-on-navy);
     max-width:520px;
-    margin:0 auto 14px;
-    line-height:1.75;
+    margin:0 auto 18px;
+    line-height:1.85;
   }
   .hero-visual{
     position:relative;
-    max-width:212px;
-    margin:0 auto 20px;
+    max-width:224px;
+    margin:0 auto 24px;
   }
   .hero-bottle{
-    border-radius:14px;
+    border-radius:10px;
     overflow:hidden;
     border:1px solid rgba(201,169,106,.45);
-    box-shadow:0 24px 60px rgba(0,0,0,.5), 0 2px 10px rgba(0,0,0,.35);
+    box-shadow:0 22px 50px rgba(0,0,0,.42), 0 2px 8px rgba(0,0,0,.28);
   }
   .hero-roburi{
     position:absolute;
@@ -309,8 +311,8 @@
     margin:0 auto 14px;
     background:rgba(255,255,255,.06);
     border:1px solid rgba(201,169,106,.55);
-    border-radius:12px;
-    padding:12px 16px;
+    border-radius:8px;
+    padding:11px 16px 12px;
     text-align:center;
   }
   .coupon-banner .slash{ font-size:13px; letter-spacing:.08em; color:var(--gold-bright); display:block; margin-bottom:4px; }
@@ -324,21 +326,22 @@
     font-family:'Shippori Mincho',serif;
     font-size:clamp(21px, 5vw, 26px);
     font-weight:600;
-    line-height:1.8;
-    letter-spacing:.03em;
-    margin-bottom:26px;
+    line-height:1.85;
+    letter-spacing:.045em;
+    margin-bottom:30px;
     color:var(--navy);
   }
   .intro p{ margin-bottom:1.4em; color:var(--ink); }
   .intro p:last-child{ margin-bottom:0; }
   .intro-quote{
-    border-left:3px solid var(--gold);
-    padding:6px 0 6px 20px;
+    border-left:2px solid var(--gold);
+    padding:10px 0 10px 20px;
     font-family:'Shippori Mincho',serif;
     font-size:19px;
     font-weight:600;
     color:var(--navy);
-    margin:30px 0;
+    margin:34px 0;
+    background:linear-gradient(90deg, rgba(201,169,106,.09), transparent 82%);
   }
 
   /* ---------- ストーリー ---------- */
@@ -352,21 +355,23 @@
   }
   .story{ background:var(--navy-deep); color:var(--text-on-navy); }
   .story p{ color:var(--sub-on-navy); margin-bottom:1.4em; }
-  .story-cards{ display:grid; gap:22px; margin:44px 0; }
+  .story-cards{ display:grid; gap:16px; margin:40px 0 44px; }
   .story-card{
     background:rgba(255,255,255,.05);
     border:1px solid rgba(201,169,106,.35);
-    border-radius:14px;
-    padding:30px 26px;
+    border-radius:10px;
+    padding:28px 24px;
+    box-shadow:0 14px 34px rgba(0,0,0,.12);
   }
   .story-card .no{ font-family:'Manrope',sans-serif; font-weight:800; font-size:15px; letter-spacing:.2em; color:var(--gold); display:block; margin-bottom:10px; }
   .story-card h3{ font-family:'Shippori Mincho',serif; font-size:20px; font-weight:600; line-height:1.6; color:var(--text-on-navy); margin-bottom:12px; }
   .story-card p{ margin:0; font-size:16px; }
-  .figure-block{ margin:48px 0 0; }
-  .figure-block figure{ margin:0 0 26px; }
+  .figure-block{ margin:52px 0 0; }
+  .figure-block figure{ margin:0 0 28px; }
   .figure-block img{
-    border-radius:10px;
+    border-radius:7px;
     border:1px solid rgba(255,255,255,.14);
+    box-shadow:0 14px 30px rgba(0,0,0,.2);
   }
   .figure-block figcaption{
     font-family:'Shippori Mincho',serif;
@@ -383,33 +388,34 @@
     margin:6px 0 34px;
     text-align:center;
   }
-  .figure-grid{ display:grid; gap:20px; }
+  .figure-grid{ display:grid; gap:18px; }
   @media (min-width:640px){ .figure-grid{ grid-template-columns:1fr 1fr; } }
 
   /* ---------- ペアリング ---------- */
   .pairing{ background:var(--paper); }
-  .pairing-lead{ margin-bottom:40px; }
-  .pair-grid{ display:grid; gap:18px; }
+  .pairing-lead{ margin-bottom:42px; }
+  .pair-grid{ display:grid; gap:14px; }
   @media (min-width:640px){ .pair-grid{ grid-template-columns:1fr 1fr; } }
   .pair-card{
     background:var(--paper-card);
     border:1px solid var(--line);
-    border-radius:14px;
-    padding:28px 24px 26px;
+    border-radius:10px;
+    padding:26px 24px 25px;
     position:relative;
+    box-shadow:0 10px 24px rgba(16,26,51,.045);
   }
   .pair-card::before{
     content:"";
     display:block;
-    width:34px;
-    height:3px;
+    width:30px;
+    height:2px;
     background:var(--gold);
     border-radius:2px;
     margin-bottom:16px;
   }
   .pair-card h3{ font-family:'Shippori Mincho',serif; font-size:19px; font-weight:600; color:var(--navy); margin-bottom:10px; letter-spacing:.03em; }
   .pair-card p{ font-size:16px; color:var(--ink-soft); }
-  .pairing-close{ margin-top:48px; text-align:center; }
+  .pairing-close{ margin-top:52px; text-align:center; }
   .pairing-close .toast{ font-family:'Shippori Mincho',serif; font-size:clamp(20px, 4.6vw, 24px); font-weight:600; color:var(--navy); letter-spacing:.05em; margin-bottom:14px; }
   .pairing-close p{ color:var(--ink-soft); font-size:16px; }
   .pairing-roburi{
@@ -439,12 +445,13 @@
 
   /* ---------- お客様の声 ---------- */
   .voice{ background:var(--paper); }
-  .voice-list{ display:grid; gap:24px; }
+  .voice-list{ display:grid; gap:18px; }
   .voice-card{
     background:var(--paper-card);
     border:1px solid var(--line);
-    border-radius:14px;
-    padding:30px 26px;
+    border-radius:10px;
+    padding:28px 24px;
+    box-shadow:0 10px 26px rgba(16,26,51,.045);
   }
   .voice-head{
     display:flex;
@@ -456,7 +463,7 @@
     flex:0 0 auto;
     width:52px; height:52px;
     border-radius:50%;
-    background:var(--navy);
+    background:linear-gradient(145deg, var(--navy), var(--navy-soft));
     color:var(--gold-bright);
     font-family:'Manrope',sans-serif;
     font-weight:800;
@@ -476,9 +483,10 @@
   .faq details{
     background:var(--paper-card);
     border:1px solid var(--line);
-    border-radius:12px;
-    margin-bottom:14px;
+    border-radius:9px;
+    margin-bottom:12px;
     overflow:hidden;
+    box-shadow:0 8px 20px rgba(16,26,51,.035);
   }
   .faq summary{
     list-style:none;
@@ -486,7 +494,7 @@
     display:flex;
     align-items:flex-start;
     gap:12px;
-    padding:20px 22px;
+    padding:21px 22px;
     font-weight:700;
     font-size:17px;
     color:var(--navy);
@@ -507,17 +515,18 @@
   .final-card{
     background:rgba(255,255,255,.05);
     border:1px solid rgba(201,169,106,.5);
-    border-radius:18px;
-    padding:40px 26px;
+    border-radius:12px;
+    padding:38px 26px 40px;
     text-align:center;
+    box-shadow:0 24px 60px rgba(0,0,0,.16);
   }
   .final-card .product-img{
     max-width:420px;
     margin:0 auto 26px;
-    border-radius:12px;
+    border-radius:8px;
     overflow:hidden;
     border:1px solid rgba(201,169,106,.4);
-    box-shadow:0 16px 40px rgba(0,0,0,.35);
+    box-shadow:0 18px 42px rgba(0,0,0,.3);
   }
   .final-card h2{
     font-family:'Shippori Mincho',serif;
@@ -529,7 +538,7 @@
   .price-strike{ font-size:16px; color:#9aa2ba; text-decoration:line-through; text-decoration-color:#9aa2ba; }
   .price-now{ font-size:15px; color:var(--sub-on-navy); margin:6px 0 4px; }
   .price-now strong{ font-family:'Manrope','Noto Sans JP',sans-serif; font-size:34px; font-weight:800; color:var(--gold-bright); letter-spacing:.01em; }
-  .coupon-code{ display:inline-block; margin:16px 0 26px; padding:10px 22px; border:1px dashed var(--gold); border-radius:8px; font-size:15px; color:var(--text-on-navy); letter-spacing:.04em; }
+  .coupon-code{ display:inline-block; margin:18px 0 28px; padding:11px 22px; border:1px solid rgba(201,169,106,.68); border-radius:7px; font-size:15px; color:var(--text-on-navy); letter-spacing:.04em; }
   .coupon-code b{ font-size:18px; color:var(--gold-bright); letter-spacing:.12em; }
   .pay-labels{ display:flex; flex-wrap:wrap; justify-content:center; gap:10px; margin-top:26px; }
   .pay-labels span{ border:1px solid rgba(255,255,255,.35); border-radius:6px; padding:7px 16px; font-size:13px; color:var(--sub-on-navy); letter-spacing:.04em; }
@@ -546,7 +555,7 @@
   footer{
     background:#070d1f;
     color:#9aa2ba;
-    padding:56px 0 130px;
+    padding:60px 0 132px;
     font-size:14px;
   }
   footer .brand{
@@ -559,8 +568,8 @@
   footer .brand span{ font-family:'Shippori Mincho',serif; color:#d5d9e5; letter-spacing:.1em; font-size:16px; }
   .age-note{
     border:1px solid rgba(255,255,255,.2);
-    border-radius:10px;
-    padding:14px 18px;
+    border-radius:8px;
+    padding:16px 18px;
     margin-bottom:24px;
     line-height:1.8;
   }
@@ -577,12 +586,13 @@
     position:fixed;
     left:0; right:0; bottom:0;
     z-index:50;
-    padding:12px 16px calc(12px + env(safe-area-inset-bottom));
+    padding:10px 16px calc(10px + env(safe-area-inset-bottom));
     background:rgba(7,13,31,.92);
     backdrop-filter:blur(8px);
     border-top:1px solid rgba(201,169,106,.4);
     transform:translateY(110%);
     transition:transform .35s ease;
+    box-shadow:0 -10px 28px rgba(0,0,0,.14);
   }
   .sticky-cta.show{ transform:translateY(0); }
   .sticky-inner{
@@ -605,7 +615,7 @@
     border-radius:100px;
   }
   .sticky-buy{
-    background:linear-gradient(180deg, #d8bc80 0%, #c9a96a 46%, #b8944e 100%);
+    background:linear-gradient(180deg, var(--gold-bright) 0%, var(--gold) 70%);
     color:#1a1509;
     box-shadow:inset 0 1px 0 rgba(255,255,255,.4);
   }
@@ -617,7 +627,7 @@
   /* ---------- 唎酒師チャット(LP内ウィンドウ) ---------- */
   .kiki-fab{ position:fixed; left:14px; bottom:96px; z-index:60;
     background:rgba(16,26,51,.96); border:1px solid rgba(201,169,106,.75); border-radius:100px;
-    box-shadow:0 8px 22px rgba(0,0,0,.38); cursor:pointer; padding:7px 16px 7px 7px;
+    box-shadow:0 8px 22px rgba(0,0,0,.28); cursor:pointer; padding:7px 16px 7px 7px;
     color:#e3c88a; font-size:13px; letter-spacing:.06em; line-height:1;
     display:flex; align-items:center; gap:10px; }
   /* 🔴顔を出す。以前 display:none にしていたためテキストだけの小さいボタンになっていた
@@ -628,7 +638,7 @@
   .kiki-panel{ left:12px; right:auto; }
   .kiki-panel{ position:fixed; left:12px; bottom:158px; z-index:61; width:min(340px, calc(100vw - 24px));
     max-height:calc(100vh - 210px); background:#fff; border:1px solid #d9d4c8;
-    box-shadow:0 18px 44px rgba(0,0,0,.28); display:none; overflow-y:auto; }
+    border-radius:10px; box-shadow:0 18px 44px rgba(0,0,0,.24); display:none; overflow-y:auto; }
   .kiki-panel.open{ display:block; }
   .kiki-head{ position:sticky; top:0; z-index:2; background:#101a33; color:#fff; padding:12px 14px; display:flex; align-items:center; gap:9px; }
   .kiki-head .av{ display:flex; flex:0 0 auto; }
@@ -651,29 +661,32 @@
   .kiki-note{ font-size:10.5px; color:#9a9285; padding:0 12px 12px; line-height:1.7; background:#fff; }
 
   /* ---------- つかみの4コマ ---------- */
-  .yonkoma{ background:var(--navy); padding:0 0 34px; }
+  .yonkoma{ background:var(--navy); padding:0 0 38px; }
   .yonkoma .inner{ max-width:900px; margin:0 auto; padding:0 16px; }
-  .yonkoma img{ width:100%; display:block; border:1px solid rgba(201,169,106,.35); border-radius:10px; }
+  .yonkoma img{ width:100%; display:block; border:1px solid rgba(201,169,106,.3); border-radius:7px;
+    box-shadow:0 16px 38px rgba(0,0,0,.18); }
   .yonkoma .cap{ margin-top:12px; font-size:12px; line-height:1.9; color:#b9b2a4; text-align:center;
     font-family:-apple-system,"Hiragino Sans",sans-serif; }
 
   /* ---- 日本酒クイズへの入口(先方仕様の構成順③。出題は唎酒師のウィンドウで) ---- */
-  .quizcta{ background:#f2ede2; padding:72px 0; }
+  .quizcta{ background:#f2ede2; padding:76px 0; }
   .quizcta .box{ max-width:640px; margin:0 auto; padding:0 20px; text-align:center; }
-  .quizcta .card{ border:1px solid rgba(16,26,51,.14); background:#fff; border-radius:14px; padding:34px 24px 32px; }
+  .quizcta .card{ border:1px solid rgba(16,26,51,.14); background:#fff; border-radius:10px; padding:36px 24px 34px;
+    box-shadow:0 12px 30px rgba(16,26,51,.05); }
   .quizcta h2{ font-family:'Shippori Mincho',serif; font-weight:600; letter-spacing:.04em; font-size:21px; line-height:1.6; margin:0 0 12px; color:var(--navy); }
   .quizcta p{ font-size:14px; line-height:2; color:#4a5163; margin:0 0 20px; }
   .quizcta .go, #diagGo{ display:inline-block; border:0; cursor:pointer; background:var(--navy); color:#f2ede2;
     font-size:15px; font-weight:700; letter-spacing:.06em; padding:15px 34px; border-radius:999px;
-    font-family:inherit; }
+    font-family:inherit; box-shadow:0 7px 18px rgba(16,26,51,.16); }
   .quizcta .go:hover, #diagGo:hover{ background:#1a2647; }
   .quizcta .sub{ margin:14px 0 0; font-size:12px; color:#7d8496; }
 
   /* ---------- 三つの酒どころ ---------- */
-  .sake3{ background:#f2ede2; padding:72px 0; }
+  .sake3{ background:#f2ede2; padding:78px 0; }
   .sake3 .lead{ font-size:15px; line-height:2.1; color:#5b5347; max-width:640px; margin:0 auto 30px; text-align:center; }
-  .sake3-grid{ display:grid; gap:16px; max-width:900px; margin:0 auto; }
-  .sake3-card{ background:#fff; border:1px solid #e2ded5; border-radius:14px; padding:24px 22px; }
+  .sake3-grid{ display:grid; gap:14px; max-width:900px; margin:0 auto; }
+  .sake3-card{ background:#fff; border:1px solid #e2ded5; border-radius:10px; padding:26px 22px;
+    box-shadow:0 9px 24px rgba(16,26,51,.04); }
   .sake3-card .region{ font-size:11px; letter-spacing:.28em; color:#b08d2a; }
   .sake3-card h3{ font-family:'Shippori Mincho',serif; font-weight:600; font-size:19px; letter-spacing:.08em; margin:8px 0 4px; color:var(--navy); }
   .sake3-card .nick{ font-size:12px; color:#8a8274; letter-spacing:.06em; }
@@ -697,13 +710,49 @@
     padding:18px 20px;
     border-radius:100px;
     text-decoration:none;
-    box-shadow:0 6px 18px rgba(6,199,85,.28);
+    box-shadow:0 6px 16px rgba(6,199,85,.2), inset 0 1px 0 rgba(255,255,255,.18);
   }
   .btn-line small{ display:block; font-size:12px; font-weight:400; opacity:.92; margin-top:4px; letter-spacing:.02em; }
   .sticky-line{ background:#06C755; color:#fff; }
   .foot-links{ margin:18px 0 26px; display:flex; flex-wrap:wrap; gap:14px; justify-content:center; }
   .foot-links a{ color:rgba(255,255,255,.72); font-size:13px; text-decoration:underline; }
   .foot-links a:hover{ color:#fff; }
+
+  /* ---------- モバイルの静かな密度調整 ---------- */
+  .quizcta, .sake3, .coupon-sec, .faq{
+    border-top:1px solid rgba(16,26,51,.06);
+  }
+  @media (max-width:480px){
+    .wrap{ padding-right:20px; padding-left:20px; }
+    section{ padding:76px 0; }
+    .sec-title{ margin-bottom:27px; }
+    .lang-bar-inner{ gap:6px; padding-right:10px; padding-left:10px; }
+    .lang-btn{ font-size:14px; padding-right:13px; padding-left:13px; }
+    .hero{ padding-bottom:44px; }
+    .hero .wrap{ padding-right:22px; padding-left:22px; }
+    .hero-copy{ font-size:clamp(29px, 7.7vw, 32px); letter-spacing:.06em; }
+    .hero-brand span{ font-size:14px; }
+    .hero-visual{ max-width:218px; }
+    .coupon-banner .main{ font-size:15.5px; }
+    .intro-quote{ padding-left:17px; font-size:18px; }
+    .story-card{ padding:25px 21px; }
+    .figure-block{ margin-top:46px; }
+    .pair-card{ padding:24px 21px; }
+    .pairing-close{ margin-top:48px; }
+    .voice-card{ padding:26px 22px; }
+    .faq summary{ padding:19px 18px; font-size:16px; }
+    .faq .answer{ padding:0 18px 20px 46px; }
+    .final .wrap{ padding-right:17px; padding-left:17px; }
+    .final-card{ padding:30px 18px 34px; }
+    .final-card .product-img{ margin-bottom:24px; }
+    .pay-labels{ gap:8px; }
+    .pay-labels span{ padding:7px 12px; }
+    .sticky-inner a{ font-size:14px; }
+    .quizcta .box{ padding-right:20px; padding-left:20px; }
+    .quizcta .card{ padding:32px 21px 30px; }
+    .quizcta .go, #diagGo{ width:100%; padding-right:18px; padding-left:18px; }
+    .sake3-card{ padding:24px 21px; }
+  }
 
   /* ---------- デモ用トースト ---------- */
   .demo-toast{
