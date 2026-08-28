@@ -636,10 +636,26 @@
     border:1.5px solid var(--gold); object-fit:cover; }
   .kiki-fab .lbl{ padding-right:2px; }
   .kiki-panel{ left:12px; right:auto; }
-  .kiki-panel{ position:fixed; left:12px; bottom:158px; z-index:61; width:min(340px, calc(100vw - 24px));
-    max-height:calc(100vh - 210px); background:#fff; border:1px solid #d9d4c8;
-    border-radius:10px; box-shadow:0 18px 44px rgba(0,0,0,.24); display:none; overflow-y:auto; }
+  /* 🔴🔴2026-08-28: スマホ実機で「画面より大きく表示されUIが死ぬ」報告。
+     原因=`100vh` はモバイルのブラウザで**アドレスバーを含む高さ**になり、実際に見える
+     領域より大きい。CDPのエミュレートはアドレスバーを再現しないので検証で捕まらなかった。
+     → `dvh`(実際に見えている高さ)を使い、さらに余裕を持たせる。
+     dvh 非対応の環境のために vh を先に書いてフォールバックにする。 */
+  .kiki-panel{ position:fixed; left:12px; bottom:150px; z-index:61; width:min(340px, calc(100vw - 24px));
+    max-height:calc(100vh - 230px);
+    max-height:calc(100dvh - 230px);
+    background:#fff; border:1px solid #d9d4c8;
+    border-radius:10px; box-shadow:0 18px 44px rgba(0,0,0,.24); display:none;
+    overflow-y:auto; -webkit-overflow-scrolling:touch;
+    /* パネルが縦に潰れても閉じるボタンに手が届くよう最低限の高さを確保 */
+    min-height:120px; }
   .kiki-panel.open{ display:block; }
+  /* 🔴縦が短い端末(横向き・小型)では、下から出す形だと必ず溢れる。
+     画面の上下に余白を残した「シート」にして、中でスクロールさせる。 */
+  @media (max-height: 560px){
+    .kiki-panel{ top:8px; bottom:8px; max-height:none; height:auto; }
+    .kiki-fab{ bottom:12px; }
+  }
   .kiki-head{ position:sticky; top:0; z-index:2; background:#101a33; color:#fff; padding:12px 14px; display:flex; align-items:center; gap:9px; }
   .kiki-head .av{ display:flex; flex:0 0 auto; }
   .kiki-head .av img{ width:30px; height:30px; border-radius:50%; border:1.5px solid #101a33; display:block; }
@@ -647,7 +663,8 @@
   .kiki-head .nm{ font-size:13px; letter-spacing:.06em; }
   .kiki-head .rl{ font-size:10px; color:#b9b2a4; display:block; margin-top:2px; }
   .kiki-head .cl{ margin-left:auto; color:#b9b2a4; font-size:18px; cursor:pointer; line-height:1; }
-  .kiki-log{ padding:14px; max-height:min(34vh,240px); overflow-y:auto; background:#faf8f4; }
+  .kiki-log{ padding:14px; max-height:min(34vh,240px); max-height:min(34dvh,240px);
+    overflow-y:auto; -webkit-overflow-scrolling:touch; background:#faf8f4; }
   .kiki-msg{ font-size:13px; line-height:1.9; margin-bottom:10px; }
   .kiki-msg.bot{ background:#fff; border:1px solid #eae5da; padding:10px 12px; color:#3a352e;
     display:flex; gap:8px; align-items:flex-start; }
@@ -1169,15 +1186,15 @@
 </footer>
 
 <!-- ============ 唎酒師チャット ============ -->
-<div class="kiki-fab" id="kikiFab" role="button" tabindex="0" aria-label="唎酒師にきく"><img src="../rob6-assets/roburi_icon.png" alt="国際唎酒師 ロイリ"><span class="lbl" data-i18n="kikiFab">唎酒師にきく</span></div>
+<div class="kiki-fab" id="kikiFab" role="button" tabindex="0" aria-label="唎酒師にきく"><img src="../rob6-assets/kikisake-icon.svg" alt="国際唎酒師"><span class="lbl" data-i18n="kikiFab">唎酒師にきく</span></div>
 <div class="kiki-panel" id="kikiPanel" aria-live="polite">
   <div class="kiki-head">
-    <div class="av"><img src="../rob6-assets/roburi_icon.png" alt="ロイリ"><img src="../rob6-assets/luika_icon.png" alt="ルイカ"></div>
-    <div><span class="nm" data-i18n="kikiName">ロイリ ＆ ルイカ</span><span class="rl" data-i18n="kikiRole">国際唎酒師と、お店のスタッフ</span></div>
+    <div class="av"><img src="../rob6-assets/kikisake-icon.svg" alt="国際唎酒師"><img src="../rob6-assets/luika_icon.png" alt="ルイカ"></div>
+    <div><span class="nm" data-i18n="kikiName">唎酒師 ＆ ルイカ</span><span class="rl" data-i18n="kikiRole">国際唎酒師と、お店のスタッフ</span></div>
     <span class="cl" id="kikiClose" role="button" tabindex="0" aria-label="閉じる">×</span>
   </div>
   <div class="kiki-log" id="kikiLog">
-    <div class="kiki-msg bot"><img class="ico" src="../rob6-assets/roburi_icon.png" alt="ロイリ"><span class="tx" data-i18n="kikiHello">こんばんは。日本酒のことでしたら、なんなりと。まずは気になるものをお選びください。</span></div>
+    <div class="kiki-msg bot"><img class="ico" src="../rob6-assets/kikisake-icon.svg" alt="国際唎酒師"><span class="tx" data-i18n="kikiHello">こんばんは。日本酒のことでしたら、なんなりと。まずは気になるものをお選びください。</span></div>
     <div class="kiki-msg bot luika"><img class="ico" src="../rob6-assets/luika_icon.png" alt="ルイカ"><span class="tx" data-i18n="kikiHello2">わたしはルイカ。むずかしい話は、わたしが言い直しますね。</span></div>
   </div>
   <div class="kiki-qs" id="kikiQs"></div>
@@ -1282,7 +1299,7 @@
       quizLead: '国際唎酒師が5問お出しします。答え合わせのたびに、短い解説をお付けします。<br>ご登録も、お名前の入力もいりません。',
       quizBtn: '5問にこたえてみる',
       quizSub: '※ 1分ほどで終わります。',
-      kikiName: 'ロイリ ＆ ルイカ',
+      kikiName: '唎酒師 ＆ ルイカ',
       kikiRole: '国際唎酒師と、お店のスタッフ',
       kikiHello2: 'わたしはルイカ。むずかしい話は、わたしが言い直しますね。',
       kikiFab: '唎酒師にきく',
@@ -1398,7 +1415,7 @@
       quizLead: 'Our International Kikisake-shi (Sommelier of Sake) presents five questions, each followed by a brief explanation.<br>No sign-up or name required.',
       quizBtn: 'Try the five-question quiz',
       quizSub: '* About one minute.',
-      kikiName: 'Roiri & Luika',
+      kikiName: 'Sake Sommelier & Luika',
       kikiRole: 'International Kikisake-shi and shop staff',
       kikiHello2: "I am Luika. If it gets technical, I will put it plainly.",
       kikiFab: 'Ask our sake sommelier',
@@ -1514,7 +1531,7 @@
       quizLead: '國際唎酒師為您出五道題，每題作答後附上簡短解說。<br>無需註冊，也不必留下姓名。',
       quizBtn: '挑戰五道題',
       quizSub: '※ 約一分鐘即可完成。',
-      kikiName: 'Roiri ＆ Luika',
+      kikiName: '唎酒師 ＆ Luika',
       kikiRole: '國際唎酒師與店內人員',
       kikiHello2: '我是Luika。遇到較難的內容，我會用簡單易懂的方式重新說明。',
       kikiFab: '向唎酒師提問',
@@ -1827,14 +1844,16 @@
     var close=document.getElementById('kikiClose'), log=document.getElementById('kikiLog'), qs=document.getElementById('kikiQs');
     if(!fab||!panel||!qs||!log) return;
     function lang(){ return (window.__kikiLang||'ja'); }
-    var ICON={ roburi:'../rob6-assets/roburi_icon.png', luika:'../rob6-assets/luika_icon.png' };
+    // 🔴2026-08-28 CIO指示「ロイリは唎酒師ではないので、ここには使わないで」。
+    //   チャットの唎酒師は専用アイコン(kikisake-icon.svg)。本文中のロイリ(ブランドキャラクター)は残す。
+    var ICON={ roburi:'../rob6-assets/kikisake-icon.svg', luika:'../rob6-assets/luika_icon.png' };
     function say(cls, text, who){
       var d=document.createElement('div'); d.className='kiki-msg '+cls;
       if(cls.indexOf('bot')>=0){
         who = who || 'roburi';
         if(who==='luika') d.className+=' luika';
         var i=document.createElement('img'); i.className='ico'; i.src=ICON[who];
-        i.alt = (who==='luika' ? 'ルイカ' : 'ロイリ'); i.loading='lazy';
+        i.alt = (who==='luika' ? 'ルイカ' : '国際唎酒師'); i.loading='lazy';
         var t=document.createElement('span'); t.className='tx'; t.textContent=text;
         d.appendChild(i); d.appendChild(t);
       } else { d.textContent=text; }

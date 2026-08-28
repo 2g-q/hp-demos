@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120" role="img" aria-label="国際唎酒師">
+  <defs>
+    <clipPath id="c"><circle cx="60" cy="60" r="60"/></clipPath>
+  </defs>
+  <g clip-path="url(#c)">
+    <rect width="120" height="120" fill="#101a33"/>
+    <!-- 肩・和装 -->
+    <path d="M60 68c-19 0-34 11-38 27-1 5-1 15-1 25h78c0-10 0-20-1-25-4-16-19-27-38-27z" fill="#1b2a4d"/>
+    <!-- 襟(左右) -->
+    <path d="M60 70 L44 96 L52 120 L60 96 Z" fill="#f2ede2"/>
+    <path d="M60 70 L76 96 L68 120 L60 96 Z" fill="#e8e1d3"/>
+    <path d="M60 70 L44 96" stroke="#c9a96a" stroke-width="1.6" fill="none"/>
+    <path d="M60 70 L76 96" stroke="#c9a96a" stroke-width="1.6" fill="none"/>
+    <!-- 頭部 -->
+    <ellipse cx="60" cy="44" rx="20" ry="22" fill="#e8cfae"/>
+    <!-- 白髪(側頭部) -->
+    <path d="M40 42c0-13 9-21 20-21s20 8 20 21c0 3-.4 6-1 8-1-9-6-13-19-13s-18 4-19 13c-.6-2-1-5-1-8z" fill="#e9e6e0"/>
+    <!-- 眉 -->
+    <path d="M49 44c2-1.4 5-1.4 7 0" stroke="#c9c4bb" stroke-width="2" stroke-linecap="round" fill="none"/>
+    <path d="M64 44c2-1.4 5-1.4 7 0" stroke="#c9c4bb" stroke-width="2" stroke-linecap="round" fill="none"/>
+    <!-- 目(細く・穏やか) -->
+    <path d="M50 52c2 1.6 4.6 1.6 6.6 0" stroke="#3a3a3a" stroke-width="1.8" stroke-linecap="round" fill="none"/>
+    <path d="M63.4 52c2 1.6 4.6 1.6 6.6 0" stroke="#3a3a3a" stroke-width="1.8" stroke-linecap="round" fill="none"/>
+    <!-- 口髭・髭 -->
+    <path d="M53 61c3 2 11 2 14 0" stroke="#e9e6e0" stroke-width="2.4" stroke-linecap="round" fill="none"/>
+    <path d="M56 65c2.4 3 5.6 3 8 0" stroke="#e9e6e0" stroke-width="2.2" stroke-linecap="round" fill="none"/>
+  </g>
+  <circle cx="60" cy="60" r="58.5" fill="none" stroke="#c9a96a" stroke-width="3"/>
+</svg>
