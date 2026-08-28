@@ -763,6 +763,28 @@
     .sticky-cta{ transition:none; }
     html{ scroll-behavior:auto; }
   }
+
+  /* ── アクセシビリティ(2026-08-28。通常の閲覧では見た目が変わらない3点) ── */
+
+  /* (1) フッターの法務リンクのタップ領域を44px以上にする。
+         実測でこの4件だけ高さが44px未満だった(スマホで押しにくい)。
+         文字サイズと見た目の配置は変えず、押せる範囲だけ広げる。 */
+  .foot-links a{ display:inline-block; padding:12px 4px; }
+
+  /* (2) 動きを減らす設定にしている人には、スクロール表示のアニメーションを出さない。
+         .reveal は既定で transform+opacity のトランジションを持つ。 */
+  @media (prefers-reduced-motion: reduce){
+    .reveal, .reveal.in{ transition:none !important; transform:none !important; opacity:1 !important; }
+    *, *::before, *::after{ animation-duration:.001ms !important; animation-iteration-count:1 !important;
+      transition-duration:.001ms !important; scroll-behavior:auto !important; }
+  }
+
+  /* (3) キーボード操作のときだけ輪郭を出す(:focus ではなく :focus-visible)。
+         マウスで押したときには出ないので、見た目は変わらない。 */
+  a:focus-visible, button:focus-visible, summary:focus-visible,
+  [role="button"]:focus-visible, [tabindex]:focus-visible{
+    outline:2px solid var(--gold); outline-offset:3px; border-radius:3px;
+  }
 </style>
 </head>
 <body>
