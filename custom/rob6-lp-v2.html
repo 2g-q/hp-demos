@@ -67,7 +67,12 @@
     --sub-on-navy:#c7cbda;
   }
   *{ margin:0; padding:0; box-sizing:border-box; }
-  html{ scroll-behavior:smooth; }
+  /* 🔴2026-08-29: 「下にスクロールすると白い背景が出る」報告。
+     原因=`html` に背景色が無く、body の生成り(--paper #f7f4ee)がオーバースクロール時に見えていた。
+     ページの上端(ヒーロー)も下端(フッター)も濃紺なので、html をフッター色に揃えると
+     上下どちらのバウンスでも地の色が続いて見える。overscroll-behavior-y でバウンス自体も抑える
+     (iOS Safari では効かないことがあるため、背景色との2段構えにする)。 */
+  html{ scroll-behavior:smooth; background:#070d1f; overscroll-behavior-y:none; }
   body{
     font-family:'Noto Sans JP', sans-serif;
     font-size:17px;
