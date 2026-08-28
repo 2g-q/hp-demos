@@ -1,0 +1,18 @@
+kuramap.svg の地図部分について
+
+ベース素材: ディフォルメ都道府県日本地図 (deformed-japan-prefecture-map.svg)
+作者: lalamalink
+出所: https://github.com/lalamalink/japan-map-svg
+ライセンス: CC0 1.0 Universal (パブリックドメイン / No rights reserved)
+        https://creativecommons.org/publicdomain/zero/1.0/
+版: 2026.06.30
+
+CC0 のためクレジット表記は不要だが、由来を追えるように記録する。
+商用利用・改変・再配布・組み込みが可能であることを LICENSE 全文で確認済み(2026-08-29)。
+
+当方による改変:
+- 全都道府県の塗りを #dcd8cd、県境を #f7f4ee に変更
+- 京都(26)・広島(34)・愛媛(38)・新潟(15)・福島(07)・群馬(10)の6県を #c9a96a で塗り分け
+  ※県の同定は data-code(JIS X 0401)と data-name の突合で機械確認済み
+- 各県に引き出し線・ラベル・注記を追加
+- <img> から読むため font-family をOSのシステムフォントへ変更(外部CSSが届かないため)

@@ -944,7 +944,7 @@
 
     <div class="figure-block reveal">
       <figure>
-        <img src="../rob6-assets/item5.jpg" alt="調合の候補となった蔵の分布図(京都・広島・愛媛・新潟・福島・群馬)" loading="lazy" width="920" height="920">
+        <img src="../rob6-assets/kuramap.svg" alt="調合の候補となった純米酒の産地(京都・広島・愛媛・新潟・福島・群馬)" loading="lazy" width="1000" height="1065">
         <figcaption data-i18n="figCap1">銘醸地から集めた原酒の蔵の分布</figcaption>
       </figure>
       <figure>
@@ -1191,15 +1191,15 @@
 </footer>
 
 <!-- ============ 唎酒師チャット ============ -->
-<div class="kiki-fab" id="kikiFab" role="button" tabindex="0" aria-label="唎酒師にきく"><img src="../rob6-assets/kikisake-icon.svg" alt="国際唎酒師"><span class="lbl" data-i18n="kikiFab">唎酒師にきく</span></div>
+<div class="kiki-fab" id="kikiFab" role="button" tabindex="0" aria-label="唎酒師にきく"><img src="../rob6-assets/kikisake_icon.png" alt="国際唎酒師"><span class="lbl" data-i18n="kikiFab">唎酒師にきく</span></div>
 <div class="kiki-panel" id="kikiPanel" aria-live="polite">
   <div class="kiki-head">
-    <div class="av"><img src="../rob6-assets/kikisake-icon.svg" alt="国際唎酒師"><img src="../rob6-assets/luika_icon.png" alt="ルイカ"></div>
+    <div class="av"><img src="../rob6-assets/kikisake_icon.png" alt="国際唎酒師"><img src="../rob6-assets/luika_icon.png" alt="ルイカ"></div>
     <div><span class="nm" data-i18n="kikiName">唎酒師 ＆ ルイカ</span><span class="rl" data-i18n="kikiRole">国際唎酒師と、お店のスタッフ</span></div>
     <span class="cl" id="kikiClose" role="button" tabindex="0" aria-label="閉じる">×</span>
   </div>
   <div class="kiki-log" id="kikiLog">
-    <div class="kiki-msg bot"><img class="ico" src="../rob6-assets/kikisake-icon.svg" alt="国際唎酒師"><span class="tx" data-i18n="kikiHello">こんばんは。日本酒のことでしたら、なんなりと。まずは気になるものをお選びください。</span></div>
+    <div class="kiki-msg bot"><img class="ico" src="../rob6-assets/kikisake_icon.png" alt="国際唎酒師"><span class="tx" data-i18n="kikiHello">こんばんは。日本酒のことでしたら、なんなりと。まずは気になるものをお選びください。</span></div>
     <div class="kiki-msg bot luika"><img class="ico" src="../rob6-assets/luika_icon.png" alt="ルイカ"><span class="tx" data-i18n="kikiHello2">わたしはルイカ。むずかしい話は、わたしが言い直しますね。</span></div>
   </div>
   <div class="kiki-qs" id="kikiQs"></div>
@@ -1850,8 +1850,8 @@
     if(!fab||!panel||!qs||!log) return;
     function lang(){ return (window.__kikiLang||'ja'); }
     // 🔴2026-08-28 CIO指示「ロイリは唎酒師ではないので、ここには使わないで」。
-    //   チャットの唎酒師は専用アイコン(kikisake-icon.svg)。本文中のロイリ(ブランドキャラクター)は残す。
-    var ICON={ roburi:'../rob6-assets/kikisake-icon.svg', luika:'../rob6-assets/luika_icon.png' };
+    //   チャットの唎酒師は専用アイコン(kikisake_icon.png)。本文中のロイリ(ブランドキャラクター)は残す。
+    var ICON={ roburi:'../rob6-assets/kikisake_icon.png', luika:'../rob6-assets/luika_icon.png' };
     function say(cls, text, who){
       var d=document.createElement('div'); d.className='kiki-msg '+cls;
       if(cls.indexOf('bot')>=0){
