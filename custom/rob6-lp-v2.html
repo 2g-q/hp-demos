@@ -405,11 +405,17 @@
     background:var(--paper-card);
     border:1px solid var(--line);
     border-radius:10px;
-    padding:26px 24px 25px;
+    padding:0 0 25px;          /* 写真を上端いっぱいに敷くため余白は本文側が持つ */
     position:relative;
+    overflow:hidden;
     box-shadow:0 10px 24px rgba(16,26,51,.045);
   }
-  .pair-card::before{
+  .pair-card > .pair-body{ padding:22px 24px 0; }
+  .pair-photo{
+    display:block; width:100%; height:auto; aspect-ratio:1/1;
+    object-fit:cover; background:#eee9df;
+  }
+  .pair-card .pair-body::before{
     content:"";
     display:block;
     width:30px;
@@ -759,7 +765,8 @@
     .intro-quote{ padding-left:17px; font-size:18px; }
     .story-card{ padding:25px 21px; }
     .figure-block{ margin-top:46px; }
-    .pair-card{ padding:24px 21px; }
+    .pair-card{ padding:0 0 22px; }
+    .pair-card > .pair-body{ padding:20px 21px 0; }
     .pairing-close{ margin-top:48px; }
     .voice-card{ padding:26px 22px; }
     .faq summary{ padding:19px 18px; font-size:16px; }
@@ -975,20 +982,32 @@
 
     <div class="pair-grid">
       <div class="pair-card reveal">
-        <h3 data-i18n="p1t">お刺身・焼き魚</h3>
-        <p data-i18n="p1p">魚の繊細な脂の旨味を、深い複雑味がさらに何倍にも膨らませます。</p>
+        <img class="pair-photo" src="../rob6-assets/pair1.jpg" alt="ロブ6と白身魚のお刺身" loading="lazy" width="760" height="760">
+        <div class="pair-body">
+          <h3 data-i18n="p1t">お刺身・焼き魚</h3>
+          <p data-i18n="p1p">魚の繊細な脂の旨味を、深い複雑味がさらに何倍にも膨らませます。</p>
+        </div>
       </div>
       <div class="pair-card reveal">
-        <h3 data-i18n="p2t">おでん・鍋</h3>
-        <p data-i18n="p2p">出汁の旨味と、貴醸酒ベースの豊かな旨味が口の中で究極に調和。</p>
+        <img class="pair-photo" src="../rob6-assets/pair2.jpg" alt="ロブ6とおでん" loading="lazy" width="760" height="760">
+        <div class="pair-body">
+          <h3 data-i18n="p2t">おでん・鍋</h3>
+          <p data-i18n="p2p">出汁の旨味と、貴醸酒ベースの豊かな旨味が口の中で究極に調和。</p>
+        </div>
       </div>
       <div class="pair-card reveal">
-        <h3 data-i18n="p3t">焼き鳥(タレ)・鶏料理</h3>
-        <p data-i18n="p3p">お肉の濃厚なコクに負けない、しっかりとしたボディ感。</p>
+        <img class="pair-photo" src="../rob6-assets/pair3.jpg" alt="ロブ6とタレの焼き鳥" loading="lazy" width="760" height="760">
+        <div class="pair-body">
+          <h3 data-i18n="p3t">焼き鳥(タレ)・鶏料理</h3>
+          <p data-i18n="p3p">お肉の濃厚なコクに負けない、しっかりとしたボディ感。</p>
+        </div>
       </div>
       <div class="pair-card reveal">
-        <h3 data-i18n="p4t">チーズ・漬物</h3>
-        <p data-i18n="p4p">発酵食品同士が引き立て合う、計算された大人のマリアージュ。</p>
+        <img class="pair-photo" src="../rob6-assets/pair4.jpg" alt="ロブ6とチーズ・漬物" loading="lazy" width="760" height="760">
+        <div class="pair-body">
+          <h3 data-i18n="p4t">チーズ・漬物</h3>
+          <p data-i18n="p4p">発酵食品同士が引き立て合う、計算された大人のマリアージュ。</p>
+        </div>
       </div>
     </div>
 
