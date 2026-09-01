@@ -951,11 +951,11 @@
 
     <div class="figure-block reveal">
       <figure>
-        <img src="../rob6-assets/kuramap.svg" alt="調合の候補となった純米酒の産地(京都・広島・愛媛・新潟・福島・群馬)" loading="lazy" width="1400" height="1491">
+        <img src="../rob6-assets/kuramap-ja.svg" data-i18n-src="../rob6-assets/kuramap-{lang}.svg" alt="調合の候補となった純米酒の産地と蔵元(京都・広島・愛媛・新潟・福島・群馬)" loading="lazy" width="1300" height="1391">
         <figcaption data-i18n="figCap1">銘醸地から集めた原酒の蔵の分布</figcaption>
       </figure>
       <figure>
-        <img src="../rob6-assets/tastemap.svg" alt="候補となった原酒の味わいの位置づけ(辛口〜甘口・淡麗〜濃厚)" loading="lazy" width="1400" height="1050">
+        <img src="../rob6-assets/tastemap-ja.svg" data-i18n-src="../rob6-assets/tastemap-{lang}.svg" alt="候補となった原酒の蔵元と銘柄・味わいの位置づけ(辛口〜甘口・淡麗〜濃厚)" loading="lazy" width="1500" height="1064">
         <figcaption data-i18n="figCap2">候補となった原酒の味わいの位置づけ</figcaption>
       </figure>
       <p class="figure-note" data-i18n="figNote">※図は調合の候補となった純米酒とその味わいの位置づけです。<br>ロブ6の配合銘柄は非公開です。</p>
@@ -1602,6 +1602,11 @@
     document.querySelectorAll('[data-i18n]').forEach(function(el){
       var key = el.getAttribute('data-i18n');
       if (dict[key] !== undefined) el.innerHTML = dict[key];
+    });
+    // 🔴図(産地の分布・味わいの位置づけ)は中の文字もSVGに焼き込んであるため、
+    //   言語ごとにファイルを差し替える。<img> の中身は data-i18n では切り替わらない。
+    document.querySelectorAll('[data-i18n-src]').forEach(function(el){
+      el.setAttribute('src', el.getAttribute('data-i18n-src').replace('{lang}', code));
     });
     document.documentElement.lang = dict._lang;
     window.__kikiLang = (dict._lang || 'ja').slice(0,2) === 'zh' ? 'zh' : ((dict._lang||'ja').slice(0,2) === 'en' ? 'en' : 'ja');
