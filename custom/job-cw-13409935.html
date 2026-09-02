@@ -1,0 +1,1659 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fishlle! ecforce運用パートナー募集 | CVR改善・業務効率化</title>
+<meta name="description" content="未利用魚のサブスクリプションサービス Fishlle!（フィシュル）のecforce運用、CVR改善、LTV向上、業務効率化を担うパートナー募集デモページです。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+JP:wght@400;500;700;900&family=Zen+Kaku+Gothic+New:wght@500;700;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --accent:#0e7c73;
+  --ink:#152321;
+  --muted:#66736f;
+  --line:#dce6e3;
+  --paper:#ffffff;
+  --soft:#f4faf8;
+  --soft2:#eef6f3;
+  --shadow:0 18px 50px rgba(21,35,33,.12);
+  --radius:8px;
+  --font-body:"Noto Sans JP",system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  --font-head:"Zen Kaku Gothic New","Noto Sans JP",sans-serif;
+  --font-num:"Manrope",sans-serif;
+}
+*{
+  box-sizing:border-box;
+}
+html{
+  scroll-behavior:smooth;
+  overflow-x:hidden;
+}
+body{
+  margin:0;
+  font-family:var(--font-body);
+  color:var(--ink);
+  background:linear-gradient(180deg,#fbfefd 0%,#ffffff 48%,#f7fbfa 100%);
+  font-feature-settings:"palt";
+  letter-spacing:0;
+  line-height:1.8;
+  overflow-x:hidden;
+}
+a{
+  color:inherit;
+  text-decoration:none;
+}
+img{
+  display:block;
+  width:100%;
+  max-width:100%;
+  height:auto;
+}
+button,
+input,
+textarea,
+select{
+  font:inherit;
+}
+.container{
+  width:min(1120px,calc(100% - 40px));
+  max-width:100%;
+  margin:0 auto;
+}
+.site-header{
+  position:fixed;
+  top:0;
+  left:0;
+  right:0;
+  z-index:50;
+  background:rgba(255,255,255,.88);
+  border-bottom:1px solid rgba(220,230,227,.82);
+  backdrop-filter:blur(16px);
+}
+.header-inner{
+  height:72px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:20px;
+}
+.logo{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  font-family:var(--font-head);
+  font-weight:900;
+  letter-spacing:.02em;
+  white-space:nowrap;
+}
+.logo-mark{
+  width:34px;
+  height:34px;
+  border-radius:50%;
+  background:var(--accent);
+  position:relative;
+  flex:0 0 auto;
+}
+.logo-mark::before{
+  content:"";
+  position:absolute;
+  width:17px;
+  height:9px;
+  border:2px solid #fff;
+  border-left:0;
+  border-radius:50% 55% 55% 50%;
+  top:11px;
+  left:7px;
+}
+.logo-mark::after{
+  content:"";
+  position:absolute;
+  width:7px;
+  height:7px;
+  border-left:2px solid #fff;
+  border-top:2px solid #fff;
+  transform:rotate(-45deg);
+  top:12px;
+  right:5px;
+}
+.desktop-nav{
+  display:flex;
+  align-items:center;
+  gap:22px;
+  color:#40504c;
+  font-size:14px;
+  font-weight:700;
+}
+.desktop-nav a{
+  position:relative;
+}
+.desktop-nav a::after{
+  content:"";
+  position:absolute;
+  left:0;
+  right:0;
+  bottom:-8px;
+  height:2px;
+  background:var(--accent);
+  transform:scaleX(0);
+  transform-origin:left;
+  transition:transform .2s ease;
+}
+.desktop-nav a:hover::after{
+  transform:scaleX(1);
+}
+.header-actions{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+.tel-link{
+  font-family:var(--font-num);
+  font-weight:800;
+  color:var(--accent);
+  white-space:nowrap;
+}
+.btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  min-height:48px;
+  padding:12px 22px;
+  border-radius:100px;
+  border:1px solid transparent;
+  font-weight:900;
+  line-height:1.2;
+  cursor:pointer;
+  transition:transform .2s ease,box-shadow .2s ease,background .2s ease;
+}
+.btn svg{
+  width:18px;
+  height:18px;
+  flex:0 0 auto;
+}
+.btn-primary{
+  background:var(--accent);
+  color:#fff;
+  box-shadow:0 14px 30px rgba(14,124,115,.24);
+}
+.btn-primary:hover{
+  transform:translateY(-2px);
+  box-shadow:0 18px 38px rgba(14,124,115,.3);
+}
+.btn-ghost{
+  background:#fff;
+  color:var(--accent);
+  border-color:rgba(14,124,115,.28);
+}
+.btn-ghost:hover{
+  transform:translateY(-2px);
+  box-shadow:0 12px 24px rgba(21,35,33,.08);
+}
+.menu-button{
+  display:none;
+  width:46px;
+  height:46px;
+  border:1px solid var(--line);
+  border-radius:50%;
+  background:#fff;
+  align-items:center;
+  justify-content:center;
+}
+.menu-lines{
+  width:18px;
+  height:12px;
+  position:relative;
+}
+.menu-lines::before,
+.menu-lines::after,
+.menu-lines span{
+  content:"";
+  position:absolute;
+  left:0;
+  width:18px;
+  height:2px;
+  background:var(--ink);
+  border-radius:2px;
+}
+.menu-lines::before{
+  top:0;
+}
+.menu-lines span{
+  top:5px;
+}
+.menu-lines::after{
+  bottom:0;
+}
+.mobile-nav{
+  position:fixed;
+  top:72px;
+  left:0;
+  right:0;
+  z-index:49;
+  display:none;
+  background:#fff;
+  border-bottom:1px solid var(--line);
+  box-shadow:0 20px 40px rgba(21,35,33,.12);
+}
+.mobile-nav.is-open{
+  display:block;
+}
+.mobile-nav a{
+  display:block;
+  padding:15px 24px;
+  border-top:1px solid var(--line);
+  font-weight:800;
+}
+.hero{
+  padding:128px 0 82px;
+  background:
+    radial-gradient(circle at 12% 14%,rgba(14,124,115,.08),transparent 28%),
+    linear-gradient(180deg,#ffffff 0%,#f3faf8 100%);
+}
+.hero-grid{
+  display:grid;
+  grid-template-columns:minmax(0,1.05fr) minmax(320px,.95fr);
+  gap:52px;
+  align-items:center;
+}
+.badge{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  padding:7px 13px;
+  border-radius:100px;
+  color:var(--accent);
+  background:rgba(14,124,115,.08);
+  border:1px solid rgba(14,124,115,.16);
+  font-size:13px;
+  font-weight:900;
+}
+.badge::before{
+  content:"";
+  width:8px;
+  height:8px;
+  border-radius:50%;
+  background:var(--accent);
+}
+.hero h1{
+  margin:22px 0 18px;
+  font-family:var(--font-head);
+  font-size:clamp(38px,6vw,72px);
+  line-height:1.08;
+  letter-spacing:0;
+  font-weight:900;
+}
+.accent-line{
+  color:var(--accent);
+}
+.hero-copy{
+  max-width:690px;
+  color:#43514e;
+  font-size:18px;
+  line-height:2;
+}
+.hero-actions{
+  display:flex;
+  flex-wrap:wrap;
+  align-items:center;
+  gap:14px;
+  margin-top:32px;
+}
+.hero-note{
+  margin-top:16px;
+  color:var(--muted);
+  font-size:13px;
+}
+.trust-band{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:1px;
+  margin-top:38px;
+  max-width:690px;
+  border:1px solid var(--line);
+  background:var(--line);
+  border-radius:var(--radius);
+  overflow:hidden;
+}
+.trust-item{
+  background:#fff;
+  padding:18px 18px 16px;
+}
+.trust-number{
+  font-family:var(--font-num);
+  color:var(--accent);
+  font-size:26px;
+  line-height:1;
+  font-weight:800;
+}
+.trust-label{
+  margin-top:7px;
+  font-size:13px;
+  color:#52615d;
+  font-weight:700;
+}
+.hero-panel{
+  position:relative;
+}
+.visual-card{
+  overflow:hidden;
+  border-radius:var(--radius);
+  background:#fff;
+  box-shadow:var(--shadow);
+  border:1px solid rgba(220,230,227,.88);
+}
+.visual-card img{
+  aspect-ratio:4/3;
+  object-fit:cover;
+}
+.visual-caption{
+  padding:22px 24px 24px;
+}
+.visual-caption strong{
+  display:block;
+  font-family:var(--font-head);
+  font-size:22px;
+  line-height:1.45;
+}
+.visual-caption p{
+  margin:10px 0 0;
+  color:var(--muted);
+  font-size:14px;
+}
+.mini-dashboard{
+  position:absolute;
+  right:-22px;
+  bottom:-34px;
+  width:260px;
+  max-width:72%;
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  box-shadow:0 20px 45px rgba(21,35,33,.16);
+  padding:18px;
+}
+.dashboard-head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin-bottom:14px;
+}
+.dashboard-head span{
+  color:var(--muted);
+  font-size:12px;
+  font-weight:900;
+}
+.dashboard-value{
+  font-family:var(--font-num);
+  font-size:28px;
+  color:var(--accent);
+  font-weight:800;
+  line-height:1;
+}
+.bar-list{
+  display:grid;
+  gap:10px;
+}
+.bar{
+  height:9px;
+  background:#e8f1ee;
+  border-radius:99px;
+  overflow:hidden;
+}
+.bar span{
+  display:block;
+  height:100%;
+  background:var(--accent);
+  border-radius:99px;
+}
+.section{
+  padding:98px 0;
+}
+.section-tight{
+  padding-top:72px;
+}
+.section-head{
+  max-width:760px;
+  margin:0 auto 46px;
+  text-align:center;
+}
+.kicker{
+  font-family:var(--font-num);
+  color:var(--accent);
+  font-size:13px;
+  font-weight:800;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+}
+.section-title{
+  margin:10px 0 0;
+  font-family:var(--font-head);
+  font-size:clamp(30px,4vw,48px);
+  line-height:1.22;
+  font-weight:900;
+}
+.section-lead{
+  margin:16px auto 0;
+  max-width:720px;
+  color:#53625e;
+  font-size:16px;
+}
+.problem-grid{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:18px;
+}
+.problem-card{
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  padding:28px;
+}
+.icon-line{
+  width:42px;
+  height:42px;
+  border-radius:50%;
+  border:2px solid var(--accent);
+  position:relative;
+  margin-bottom:20px;
+}
+.icon-line::before{
+  content:"";
+  position:absolute;
+  width:18px;
+  height:2px;
+  background:var(--accent);
+  top:19px;
+  left:10px;
+}
+.icon-line::after{
+  content:"";
+  position:absolute;
+  width:2px;
+  height:18px;
+  background:var(--accent);
+  top:10px;
+  left:18px;
+}
+.problem-card h3,
+.service-card h3,
+.voice-card h3{
+  margin:0 0 10px;
+  font-family:var(--font-head);
+  font-size:21px;
+  line-height:1.45;
+}
+.problem-card p,
+.service-card p,
+.voice-card p{
+  margin:0;
+  color:var(--muted);
+  font-size:15px;
+}
+.band{
+  background:var(--soft);
+  border-block:1px solid var(--line);
+}
+.split{
+  display:grid;
+  grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);
+  gap:54px;
+  align-items:start;
+}
+.sticky-copy{
+  position:sticky;
+  top:108px;
+}
+.copy-mark{
+  writing-mode:vertical-rl;
+  color:var(--accent);
+  font-family:var(--font-head);
+  font-weight:900;
+  letter-spacing:.08em;
+  border-left:2px solid var(--accent);
+  padding-left:12px;
+  float:left;
+  margin-right:22px;
+  min-height:170px;
+}
+.feature-list{
+  display:grid;
+  gap:16px;
+}
+.feature-item{
+  display:grid;
+  grid-template-columns:34px minmax(0,1fr);
+  gap:14px;
+  padding:22px;
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+}
+.check{
+  width:34px;
+  height:34px;
+  border-radius:50%;
+  background:rgba(14,124,115,.1);
+  position:relative;
+}
+.check::before{
+  content:"";
+  position:absolute;
+  width:14px;
+  height:7px;
+  border-left:3px solid var(--accent);
+  border-bottom:3px solid var(--accent);
+  transform:rotate(-45deg);
+  left:9px;
+  top:10px;
+}
+.feature-item h3{
+  margin:0 0 6px;
+  font-family:var(--font-head);
+  font-size:20px;
+}
+.feature-item p{
+  margin:0;
+  color:var(--muted);
+  font-size:15px;
+}
+.service-grid{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:18px;
+}
+.service-card{
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  padding:28px;
+  min-height:100%;
+}
+.service-number{
+  font-family:var(--font-num);
+  color:var(--accent);
+  font-weight:800;
+  font-size:15px;
+  margin-bottom:18px;
+}
+.task-list{
+  margin:20px 0 0;
+  padding:0;
+  list-style:none;
+  display:grid;
+  gap:10px;
+}
+.task-list li{
+  position:relative;
+  padding-left:18px;
+  color:#44534f;
+  font-size:14px;
+}
+.task-list li::before{
+  content:"";
+  position:absolute;
+  left:0;
+  top:.83em;
+  width:7px;
+  height:7px;
+  border-radius:50%;
+  background:var(--accent);
+}
+.flow-wrap{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+  gap:20px;
+  align-items:stretch;
+}
+.flow-card{
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  padding:30px;
+}
+.flow-card h3{
+  margin:0 0 18px;
+  font-family:var(--font-head);
+  font-size:24px;
+}
+.flow-step{
+  display:grid;
+  grid-template-columns:86px minmax(0,1fr);
+  gap:16px;
+  padding:17px 0;
+  border-top:1px solid var(--line);
+}
+.flow-step:first-of-type{
+  border-top:0;
+}
+.flow-time{
+  font-family:var(--font-num);
+  font-weight:800;
+  color:var(--accent);
+}
+.flow-step strong{
+  display:block;
+  line-height:1.5;
+}
+.flow-step span{
+  display:block;
+  color:var(--muted);
+  font-size:14px;
+  margin-top:4px;
+}
+.requirements{
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  overflow:hidden;
+}
+.req-row{
+  display:grid;
+  grid-template-columns:230px minmax(0,1fr);
+  border-top:1px solid var(--line);
+}
+.req-row:first-child{
+  border-top:0;
+}
+.req-head{
+  background:var(--soft);
+  padding:20px 24px;
+  font-weight:900;
+}
+.req-body{
+  padding:20px 24px;
+  color:#43514e;
+}
+.req-body ul{
+  margin:0;
+  padding-left:1.2em;
+}
+.req-body li{
+  margin:.2em 0;
+}
+.price-box{
+  display:grid;
+  grid-template-columns:minmax(0,.92fr) minmax(0,1.08fr);
+  gap:0;
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  overflow:hidden;
+  box-shadow:var(--shadow);
+}
+.price-main{
+  padding:36px;
+  background:var(--accent);
+  color:#fff;
+}
+.price-label{
+  font-weight:900;
+  opacity:.9;
+}
+.price-value{
+  margin-top:10px;
+  font-family:var(--font-num);
+  font-size:48px;
+  line-height:1;
+  font-weight:800;
+}
+.price-value small{
+  font-family:var(--font-body);
+  font-size:15px;
+  font-weight:700;
+}
+.price-main p{
+  margin:16px 0 0;
+  opacity:.9;
+}
+.price-detail{
+  padding:34px 36px;
+}
+.price-detail h3{
+  margin:0 0 14px;
+  font-family:var(--font-head);
+  font-size:24px;
+}
+.price-detail p{
+  margin:0 0 18px;
+  color:var(--muted);
+}
+.note-box{
+  margin-top:18px;
+  padding:14px 16px;
+  background:var(--soft);
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  color:#52615d;
+  font-size:13px;
+}
+.voice-grid{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:18px;
+}
+.voice-card{
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  padding:28px;
+}
+.voice-name{
+  margin-top:20px;
+  padding-top:18px;
+  border-top:1px solid var(--line);
+  color:var(--accent);
+  font-weight:900;
+  font-size:14px;
+}
+.faq-list{
+  display:grid;
+  gap:12px;
+  max-width:900px;
+  margin:0 auto;
+}
+.faq-item{
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  overflow:hidden;
+}
+.faq-q{
+  width:100%;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:16px;
+  padding:20px 22px;
+  border:0;
+  background:#fff;
+  color:var(--ink);
+  text-align:left;
+  font-weight:900;
+  cursor:pointer;
+}
+.faq-q span{
+  min-width:0;
+}
+.faq-icon{
+  width:22px;
+  height:22px;
+  border-radius:50%;
+  border:1px solid var(--accent);
+  position:relative;
+  flex:0 0 auto;
+}
+.faq-icon::before,
+.faq-icon::after{
+  content:"";
+  position:absolute;
+  background:var(--accent);
+  left:6px;
+  right:6px;
+  top:10px;
+  height:2px;
+}
+.faq-icon::after{
+  transform:rotate(90deg);
+  transition:transform .2s ease;
+}
+.faq-item.is-open .faq-icon::after{
+  transform:rotate(0deg);
+}
+.faq-a{
+  display:none;
+  padding:0 22px 22px;
+  color:var(--muted);
+}
+.faq-item.is-open .faq-a{
+  display:block;
+}
+.form-wrap{
+  display:grid;
+  grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);
+  gap:32px;
+  align-items:start;
+}
+.contact-side{
+  background:var(--soft);
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  padding:30px;
+}
+.contact-side h3{
+  margin:0 0 12px;
+  font-family:var(--font-head);
+  font-size:24px;
+}
+.contact-side p{
+  margin:0;
+  color:var(--muted);
+}
+.contact-tel{
+  display:block;
+  margin-top:22px;
+  font-family:var(--font-num);
+  color:var(--accent);
+  font-size:30px;
+  font-weight:800;
+  line-height:1.2;
+}
+.contact-form{
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  padding:30px;
+}
+.form-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:16px;
+}
+.field{
+  display:grid;
+  gap:7px;
+}
+.field.full{
+  grid-column:1/-1;
+}
+label{
+  font-size:14px;
+  font-weight:900;
+}
+input,
+textarea,
+select{
+  width:100%;
+  max-width:100%;
+  min-height:48px;
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  background:#fff;
+  padding:12px 14px;
+  font-size:16px;
+  color:var(--ink);
+}
+textarea{
+  min-height:138px;
+  resize:vertical;
+}
+.form-submit{
+  margin-top:20px;
+  display:flex;
+  align-items:center;
+  gap:12px;
+  flex-wrap:wrap;
+}
+.form-note{
+  color:var(--muted);
+  font-size:13px;
+}
+.footer{
+  padding:44px 0 96px;
+  background:#12211f;
+  color:#d9e6e3;
+}
+.footer-grid{
+  display:flex;
+  justify-content:space-between;
+  gap:24px;
+  align-items:flex-start;
+}
+.footer small{
+  display:block;
+  color:#aebfbb;
+  line-height:1.7;
+}
+.footer-note{
+  margin-top:18px;
+  padding-top:18px;
+  border-top:1px solid rgba(255,255,255,.16);
+  color:#c8d8d4;
+  font-size:13px;
+}
+.sticky-cta{
+  position:fixed;
+  left:0;
+  right:0;
+  bottom:0;
+  z-index:60;
+  display:none;
+  padding:10px 12px calc(10px + env(safe-area-inset-bottom));
+  background:rgba(255,255,255,.94);
+  border-top:1px solid var(--line);
+  box-shadow:0 -12px 30px rgba(21,35,33,.12);
+}
+.sticky-cta-inner{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+  width:100%;
+  max-width:100%;
+}
+.reveal{
+  opacity:0;
+  transform:translateY(20px);
+  transition:opacity .55s ease,transform .55s ease;
+}
+.reveal.is-visible{
+  opacity:1;
+  transform:translateY(0);
+}
+@media (prefers-reduced-motion:reduce){
+  html{
+    scroll-behavior:auto;
+  }
+  *,
+  *::before,
+  *::after{
+    transition:none!important;
+    animation:none!important;
+  }
+  .reveal{
+    opacity:1;
+    transform:none;
+  }
+}
+@media (max-width:960px){
+  .desktop-nav,
+  .header-actions{
+    display:none;
+  }
+  .menu-button{
+    display:inline-flex;
+  }
+  .hero-grid,
+  .split,
+  .flow-wrap,
+  .price-box,
+  .form-wrap{
+    grid-template-columns:1fr;
+  }
+  .hero-panel{
+    max-width:680px;
+  }
+  .problem-grid,
+  .service-grid,
+  .voice-grid{
+    grid-template-columns:1fr;
+  }
+  .sticky-copy{
+    position:static;
+  }
+  .copy-mark{
+    writing-mode:horizontal-tb;
+    float:none;
+    min-height:0;
+    border-left:0;
+    border-bottom:2px solid var(--accent);
+    padding:0 0 8px;
+    margin:0 0 20px;
+  }
+}
+@media (max-width:640px){
+  .container{
+    width:min(100% - 28px,1120px);
+  }
+  .header-inner{
+    height:66px;
+  }
+  .mobile-nav{
+    top:66px;
+  }
+  .hero{
+    padding:104px 0 62px;
+  }
+  .hero h1{
+    font-size:39px;
+  }
+  .hero-copy{
+    font-size:16px;
+  }
+  .hero-actions .btn{
+    width:100%;
+  }
+  .trust-band{
+    grid-template-columns:1fr;
+  }
+  .section{
+    padding:76px 0;
+  }
+  .section-head{
+    text-align:left;
+    margin-bottom:32px;
+  }
+  .problem-card,
+  .service-card,
+  .voice-card,
+  .flow-card,
+  .contact-side,
+  .contact-form{
+    padding:22px;
+  }
+  .mini-dashboard{
+    position:relative;
+    right:auto;
+    bottom:auto;
+    width:100%;
+    max-width:100%;
+    margin-top:14px;
+  }
+  .flow-step{
+    grid-template-columns:72px minmax(0,1fr);
+  }
+  .req-row{
+    grid-template-columns:1fr;
+  }
+  .req-head{
+    padding:14px 18px;
+  }
+  .req-body{
+    padding:16px 18px;
+  }
+  .price-main,
+  .price-detail{
+    padding:26px 22px;
+  }
+  .price-value{
+    font-size:40px;
+  }
+  .form-grid{
+    grid-template-columns:1fr;
+  }
+  .footer-grid{
+    display:grid;
+  }
+  .sticky-cta{
+    display:block;
+  }
+}
+</style>
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"JobPosting",
+  "title":"Fishlle! ecforce運用・CVR改善パートナー",
+  "description":"未利用魚を活用したお魚のサブスクリプションサービス Fishlle!（フィシュル）の自社EC運用、ecforce設定、CVR改善、LTV改善、受注から出荷までの業務効率化を担うパートナー募集です。",
+  "employmentType":"CONTRACTOR",
+  "hiringOrganization":{
+    "@type":"Organization",
+    "name":"Fishlle!（フィシュル）"
+  },
+  "jobLocationType":"TELECOMMUTE",
+  "baseSalary":{
+    "@type":"MonetaryAmount",
+    "currency":"JPY",
+    "value":{
+      "@type":"QuantitativeValue",
+      "value":200000,
+      "unitText":"MONTH"
+    }
+  },
+  "datePosted":"2026-08-28",
+  "validThrough":"2026-12-31"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"FAQPage",
+  "mainEntity":[
+    {
+      "@type":"Question",
+      "name":"ecforceのどの範囲まで担当しますか？",
+      "acceptedAnswer":{"@type":"Answer","text":"定期購入の設定、アップセル・クロスセル、ダッシュボード確認、LPやカート導線の改善提案までを想定しています。"}
+    },
+    {
+      "@type":"Question",
+      "name":"稼働時間は固定ですか？",
+      "acceptedAnswer":{"@type":"Answer","text":"週の稼働可能時間を応募時に共有いただき、月額20万円程度で優先度の高い範囲から設計する想定です。"}
+    }
+  ]
+}
+</script>
+</head>
+<body>
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="logo" href="#top" aria-label="Fishlle! パートナー募集トップ">
+      <span class="logo-mark" aria-hidden="true"></span>
+      <span>Fishlle! Partner</span>
+    </a>
+    <nav class="desktop-nav" aria-label="主要ナビゲーション">
+      <a href="#mission">課題</a>
+      <a href="#work">依頼範囲</a>
+      <a href="#requirements">募集要項</a>
+      <a href="#faq">FAQ</a>
+      <a href="#entry">応募</a>
+    </nav>
+    <div class="header-actions">
+      <a class="tel-link" href="tel:050-0000-0000">050-0000-0000</a>
+      <a class="btn btn-primary" href="#entry">
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        応募する
+      </a>
+    </div>
+    <button class="menu-button" type="button" aria-label="メニューを開閉" aria-controls="mobileNav" aria-expanded="false">
+      <span class="menu-lines" aria-hidden="true"><span></span></span>
+    </button>
+  </div>
+</header>
+
+<nav class="mobile-nav" id="mobileNav" aria-label="スマートフォン用ナビゲーション">
+  <a href="#mission">課題</a>
+  <a href="#work">依頼範囲</a>
+  <a href="#requirements">募集要項</a>
+  <a href="#faq">FAQ</a>
+  <a href="#entry">応募</a>
+</nav>
+
+<main id="top">
+  <section class="hero">
+    <div class="container hero-grid">
+      <div class="hero-text reveal">
+        <span class="badge">ecforce運用経験者向け・業務委託募集</span>
+        <h1>獲るより、活かす。<br><span class="accent-line">売るより、続く。</span></h1>
+        <p class="hero-copy">
+          未利用魚を活用したお魚のサブスクリプションサービス「Fishlle!（フィシュル）」で、
+          ecforceの運用、CVR改善、LTV向上、受注から出荷までの省力化を丸ごと進めるパートナーを募集します。
+        </p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#entry">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M4 7h16v10H4z" stroke="currentColor" stroke-width="2" />
+              <path d="M4 7l8 6 8-6" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+            </svg>
+            稼働条件を送る
+          </a>
+          <a class="btn btn-ghost" href="tel:050-0000-0000">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M7 4h4l2 5-3 2c1.2 2.4 2.6 3.8 5 5l2-3 5 2v4c0 1.1-.9 2-2 2C10.6 21 3 13.4 3 4c0-1.1.9-2 2-2h2z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            電話で相談
+          </a>
+        </div>
+        <p class="hero-note">電話番号はデモ用です。実際の応募導線ではフォーム・チャット・面談予約などに差し替えます。</p>
+        <div class="trust-band" aria-label="募集条件の概要">
+          <div class="trust-item">
+            <div class="trust-number">20<span style="font-size:15px">万円</span></div>
+            <div class="trust-label">月額目安・税抜</div>
+          </div>
+          <div class="trust-item">
+            <div class="trust-number">EC</div>
+            <div class="trust-label">CVR・LTV改善</div>
+          </div>
+          <div class="trust-item">
+            <div class="trust-number">Ops</div>
+            <div class="trust-label">受注から発送連携</div>
+          </div>
+        </div>
+      </div>
+      <div class="hero-panel reveal">
+        <div class="visual-card">
+          <img src="https://images.unsplash.com/photo-1490645935967-10de6ba17061?auto=format&fit=crop&w=1200&q=70" alt="食卓に並ぶ健康的な料理のイメージ">
+          <div class="visual-caption">
+            <strong>食べる体験まで見据えた、EC運用の再設計。</strong>
+            <p>※写真はイメージです。実制作ではご提供写真や日本人モデルの素材に差し替えます。</p>
+          </div>
+        </div>
+        <div class="mini-dashboard" aria-label="改善ダッシュボードのイメージ">
+          <div class="dashboard-head">
+            <span>CVR改善メモ</span>
+            <div class="dashboard-value">+12</div>
+          </div>
+          <div class="bar-list" aria-hidden="true">
+            <div class="bar"><span style="width:74%"></span></div>
+            <div class="bar"><span style="width:56%"></span></div>
+            <div class="bar"><span style="width:88%"></span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="mission">
+    <div class="container">
+      <div class="section-head reveal">
+        <div class="kicker">Current Issues</div>
+        <h2 class="section-title">いま必要なのは、設定代行だけではありません。</h2>
+        <p class="section-lead">
+          ecforceを動かせることに加えて、買われやすさ、続けやすさ、運用しやすさまで同じテーブルで考えられる方を探しています。
+        </p>
+      </div>
+      <div class="problem-grid">
+        <article class="problem-card reveal">
+          <div class="icon-line" aria-hidden="true"></div>
+          <h3>定期購入の見せ方が、継続理由まで届いていない</h3>
+          <p>初回購入の訴求だけでなく、2回目以降の期待値や解約前の受け皿をページ上で整える必要があります。</p>
+        </article>
+        <article class="problem-card reveal">
+          <div class="icon-line" aria-hidden="true"></div>
+          <h3>アップセル・クロスセルを機能として使い切れていない</h3>
+          <p>単なるおすすめ枠ではなく、献立、保存、家族人数などの文脈に合わせて提案できる設計が必要です。</p>
+        </article>
+        <article class="problem-card reveal">
+          <div class="icon-line" aria-hidden="true"></div>
+          <h3>受注から発送連携までの事務作業が積み上がる</h3>
+          <p>日々の管理事務、問い合わせ対応、物流連携の手順を整理し、設定とツールで省力化していきます。</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section band">
+    <div class="container split">
+      <div class="sticky-copy reveal">
+        <div class="copy-mark">福岡から、食卓へ。</div>
+        <div class="kicker">Mindset</div>
+        <h2 class="section-title">未利用魚の価値を、ECの現場で伝え切る。</h2>
+        <p class="section-lead">
+          Fishlle!（フィシュル）の事業コンセプトは、未利用魚の活用とフードロス削減。
+          ただ美しいページを作るだけでなく、初めての方にも「なぜ選ぶのか」が自然に伝わる導線へ育てます。
+        </p>
+      </div>
+      <div class="feature-list">
+        <div class="feature-item reveal">
+          <div class="check" aria-hidden="true"></div>
+          <div>
+            <h3>購買前の不安を減らす</h3>
+            <p>味、調理のしやすさ、量、配送タイミング、保存方法を購入前に理解できる配置へ見直します。</p>
+          </div>
+        </div>
+        <div class="feature-item reveal">
+          <div class="check" aria-hidden="true"></div>
+          <div>
+            <h3>定期便の納得感を高める</h3>
+            <p>未利用魚の背景だけでなく、毎月の食卓でどう役立つかを継続理由として言語化します。</p>
+          </div>
+        </div>
+        <div class="feature-item reveal">
+          <div class="check" aria-hidden="true"></div>
+          <div>
+            <h3>運用担当者の手戻りを減らす</h3>
+            <p>受注、出荷、問い合わせ、キャンペーン更新を小さく標準化し、属人化した作業を見える化します。</p>
+          </div>
+        </div>
+        <div class="feature-item reveal">
+          <div class="check" aria-hidden="true"></div>
+          <div>
+            <h3>改善の優先順位を持つ</h3>
+            <p>見た目の修正だけで終わらせず、売上・継続・作業時間への影響が大きい順に手を入れます。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="work">
+    <div class="container">
+      <div class="section-head reveal">
+        <div class="kicker">Scope</div>
+        <h2 class="section-title">お任せしたい範囲</h2>
+        <p class="section-lead">
+          月額20万円くらいでできる範囲を相談しながら、ecforce設定、サイト改善、業務効率化を並行して進める想定です。
+        </p>
+      </div>
+      <div class="service-grid">
+        <article class="service-card reveal">
+          <div class="service-number">01 / ecforce Settings</div>
+          <h3>ecforceの設定・運用</h3>
+          <p>定期購入や販促機能を、施策の意図が伝わる形で設定します。</p>
+          <ul class="task-list">
+            <li>定期購入の各種設定</li>
+            <li>アップセル・クロスセル機能の設定</li>
+            <li>ダッシュボード確認と数値の読み取り</li>
+            <li>キャンペーン反映前後の表示確認</li>
+          </ul>
+        </article>
+        <article class="service-card reveal">
+          <div class="service-number">02 / CVR & LTV</div>
+          <h3>ページ改善・デザイン提案</h3>
+          <p>買いやすく、続けたくなる見せ方へ、LPやカート内UIを見直します。</p>
+          <ul class="task-list">
+            <li>LP構成とファーストビュー改善</li>
+            <li>バナー制作の提案</li>
+            <li>カート内UIと文言の見直し</li>
+            <li>継続理由を伝えるコンテンツ整理</li>
+          </ul>
+        </article>
+        <article class="service-card reveal">
+          <div class="service-number">03 / Operation</div>
+          <h3>管理事務の省力化</h3>
+          <p>日々の受注管理や発送連携を整理し、少ない手数で回る形を作ります。</p>
+          <ul class="task-list">
+            <li>受注から出荷までのフロー整理</li>
+            <li>自動化ツールの活用提案</li>
+            <li>問い合わせ対応スキーム改善</li>
+            <li>更新作業のチェックリスト化</li>
+          </ul>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section band">
+    <div class="container">
+      <div class="section-head reveal">
+        <div class="kicker">Work Rhythm</div>
+        <h2 class="section-title">改善と運用を、同じ週の中で進める。</h2>
+        <p class="section-lead">
+          週稼働時間に合わせ、定例確認、設定作業、デザイン改善、運用整理を小さく回す想定です。
+          稼働例は仮の内容です。
+        </p>
+      </div>
+      <div class="flow-wrap">
+        <div class="flow-card reveal">
+          <h3>月初から月中</h3>
+          <div class="flow-step">
+            <div class="flow-time">Day 1</div>
+            <div>
+              <strong>数値と相談事項の確認</strong>
+              <span>CVR、継続、問い合わせ、出荷まわりの詰まりを確認します。</span>
+            </div>
+          </div>
+          <div class="flow-step">
+            <div class="flow-time">Day 3</div>
+            <div>
+              <strong>優先施策を3件以内に絞る</strong>
+              <span>売上影響と作業量を見て、当月に実行する範囲を決めます。</span>
+            </div>
+          </div>
+          <div class="flow-step">
+            <div class="flow-time">Day 7</div>
+            <div>
+              <strong>ecforce設定・ページ反映</strong>
+              <span>設定変更、表示確認、関係者への共有まで行います。</span>
+            </div>
+          </div>
+        </div>
+        <div class="flow-card reveal">
+          <h3>月中から月末</h3>
+          <div class="flow-step">
+            <div class="flow-time">Day 14</div>
+            <div>
+              <strong>バナー・導線の追加改善</strong>
+              <span>LP、商品詳細、カート内の迷いを減らす改修を進めます。</span>
+            </div>
+          </div>
+          <div class="flow-step">
+            <div class="flow-time">Day 21</div>
+            <div>
+              <strong>受注・発送フローの整備</strong>
+              <span>手作業の発生箇所を洗い出し、省力化案を反映します。</span>
+            </div>
+          </div>
+          <div class="flow-step">
+            <div class="flow-time">Day 28</div>
+            <div>
+              <strong>振り返りと翌月提案</strong>
+              <span>成果、未着手、次の改善候補を1枚で共有します。</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="note-box reveal">※上記スケジュールは仮の内容です。実際の稼働可能時間、社内確認フロー、キャンペーン頻度に合わせて調整します。</div>
+    </div>
+  </section>
+
+  <section class="section" id="requirements">
+    <div class="container">
+      <div class="section-head reveal">
+        <div class="kicker">Requirements</div>
+        <h2 class="section-title">募集要項</h2>
+        <p class="section-lead">
+          ecforceの実務運用経験を必須とし、自社ECの改善とバックオフィス効率化まで一緒に考えられる方を歓迎します。
+        </p>
+      </div>
+      <div class="requirements reveal">
+        <div class="req-row">
+          <div class="req-head">募集職種</div>
+          <div class="req-body">Fishlle!（フィシュル）ECサイト運営・CVR改善・業務効率化パートナー</div>
+        </div>
+        <div class="req-row">
+          <div class="req-head">必須経験</div>
+          <div class="req-body">ecforceの実務運用経験。設定作業やダッシュボードの操作経験を含みます。</div>
+        </div>
+        <div class="req-row">
+          <div class="req-head">歓迎経験</div>
+          <div class="req-body">
+            <ul>
+              <li>自社ECサイトでのCVR改善・LTV改善の実績</li>
+              <li>LP・バナー制作などのWebデザインスキル</li>
+              <li>Canva、Photoshop、Illustrator等の制作経験</li>
+              <li>受注管理・物流連携などの効率化ノウハウ</li>
+            </ul>
+          </div>
+        </div>
+        <div class="req-row">
+          <div class="req-head">人物像</div>
+          <div class="req-body">自発的に改善案を出し、未利用魚の活用・フードロス削減という事業コンセプトに共感いただける方。</div>
+        </div>
+        <div class="req-row">
+          <div class="req-head">契約金額</div>
+          <div class="req-body">月額20万円くらいを目安に、作業ボリュームと週稼働可能時間に応じて相談。</div>
+        </div>
+        <div class="req-row">
+          <div class="req-head">勤務地</div>
+          <div class="req-body">リモート想定。必要に応じてオンライン打ち合わせを実施します。※仮の内容です。</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-tight">
+    <div class="container">
+      <div class="price-box reveal">
+        <div class="price-main">
+          <div class="price-label">Contract Budget</div>
+          <div class="price-value">200,000<small>円 / 月 税抜</small></div>
+          <p>募集文に記載された金額をもとに掲載しています。実際の業務範囲は稼働可能時間と優先度に合わせて調整します。</p>
+        </div>
+        <div class="price-detail">
+          <h3>最初の1か月で見たい成果</h3>
+          <p>大きなリニューアルよりも、買われやすさと作業時間に直結する改善から着手します。</p>
+          <ul class="task-list">
+            <li>ecforce設定状況と運用ルールの棚卸し</li>
+            <li>LP・商品詳細・カート内UIの改善候補整理</li>
+            <li>アップセル・クロスセルの優先施策提案</li>
+            <li>受注から発送連携までの省力化ポイント共有</li>
+          </ul>
+          <div class="note-box">※成果項目は仮の内容です。実制作では現状データと社内体制を確認して調整します。</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section band">
+    <div class="container">
+      <div class="section-head reveal">
+        <div class="kicker">Ideal Partner</div>
+        <h2 class="section-title">こんな提案ができる方を探しています。</h2>
+      </div>
+      <div class="voice-grid">
+        <article class="voice-card reveal">
+          <h3>買われやすくするなら、まずここです。</h3>
+          <p>ファーストビュー、定期便の見せ方、配送不安の解消など、購入前の迷いを減らす提案ができる。</p>
+          <div class="voice-name">CVR改善の視点</div>
+        </article>
+        <article class="voice-card reveal">
+          <h3>続けてもらうには、この導線が必要です。</h3>
+          <p>初回獲得だけでなく、継続理由、同梱物、マイページ、問い合わせ導線まで見渡せる。</p>
+          <div class="voice-name">LTV改善の視点</div>
+        </article>
+        <article class="voice-card reveal">
+          <h3>この作業は設定で減らせます。</h3>
+          <p>受注管理、発送連携、問い合わせ対応の手順を見直し、運用負荷を下げる仕組みを考えられる。</p>
+          <div class="voice-name">業務効率化の視点</div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="faq">
+    <div class="container">
+      <div class="section-head reveal">
+        <div class="kicker">FAQ</div>
+        <h2 class="section-title">よくある質問</h2>
+      </div>
+      <div class="faq-list">
+        <div class="faq-item reveal is-open">
+          <button class="faq-q" type="button">
+            <span>ecforceの設定だけの担当でも応募できますか？</span>
+            <span class="faq-icon" aria-hidden="true"></span>
+          </button>
+          <div class="faq-a">設定作業の経験は必須ですが、今回は購買促進や業務効率化まで一緒に考えられる方を特に歓迎しています。</div>
+        </div>
+        <div class="faq-item reveal">
+          <button class="faq-q" type="button">
+            <span>デザイン制作ツールは指定されていますか？</span>
+            <span class="faq-icon" aria-hidden="true"></span>
+          </button>
+          <div class="faq-a">Canva、Photoshop、Illustrator等の経験が歓迎条件です。実際の制作環境は相談のうえ決定します。</div>
+        </div>
+        <div class="faq-item reveal">
+          <button class="faq-q" type="button">
+            <span>週の稼働時間はどのくらい必要ですか？</span>
+            <span class="faq-icon" aria-hidden="true"></span>
+          </button>
+          <div class="faq-a">週稼働可能時間を応募時にお知らせください。月額20万円くらいでできる範囲を相談する想定です。</div>
+        </div>
+        <div class="faq-item reveal">
+          <button class="faq-q" type="button">
+            <span>事業コンセプトへの共感は選考で重視されますか？</span>
+            <span class="faq-icon" aria-hidden="true"></span>
+          </button>
+          <div class="faq-a">はい。未利用魚の活用・フードロス削減に共感し、ECの現場から価値を届ける姿勢を重視しています。</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section band" id="entry">
+    <div class="container">
+      <div class="section-head reveal">
+        <div class="kicker">Entry</div>
+        <h2 class="section-title">週稼働時間と得意領域をお知らせください。</h2>
+        <p class="section-lead">
+          ecforceで触ってきた範囲、CVR・LTV改善の経験、バックオフィス効率化の実績が分かる内容を歓迎します。
+        </p>
+      </div>
+      <div class="form-wrap">
+        <aside class="contact-side reveal">
+          <h3>応募前の相談</h3>
+          <p>まずは対応可能範囲の確認だけでも構いません。電話番号はデモ用です。</p>
+          <a class="contact-tel" href="tel:050-0000-0000">050-0000-0000</a>
+          <div class="note-box">受付時間 10:00-18:00 / 土日祝休み ※仮の内容です。</div>
+        </aside>
+        <form class="contact-form reveal" action="#" method="post">
+          <div class="form-grid">
+            <div class="field">
+              <label for="name">お名前</label>
+              <input id="name" name="name" type="text" placeholder="山田 太郎">
+            </div>
+            <div class="field">
+              <label for="email">メールアドレス</label>
+              <input id="email" name="email" type="email" placeholder="sample@example.com">
+            </div>
+            <div class="field">
+              <label for="hours">週稼働可能時間</label>
+              <select id="hours" name="hours">
+                <option>週5時間未満</option>
+                <option>週5〜10時間</option>
+                <option>週10〜20時間</option>
+                <option>週20時間以上</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="skill">主な得意領域</label>
+              <select id="skill" name="skill">
+                <option>ecforce設定</option>
+                <option>CVR・LTV改善</option>
+                <option>LP・バナー制作</option>
+                <option>受注管理・物流連携</option>
+              </select>
+            </div>
+            <div class="field full">
+              <label for="message">実績・相談内容</label>
+              <textarea id="message" name="message" placeholder="ecforceの運用経験、改善実績、対応可能な範囲をご記入ください。"></textarea>
+            </div>
+          </div>
+          <div class="form-submit">
+            <button class="btn btn-primary" type="button">
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              デモ送信
+            </button>
+            <span class="form-note">このフォームはデモです。送信処理は行われません。</span>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="logo">
+          <span class="logo-mark" aria-hidden="true"></span>
+          <span>Fishlle! Partner</span>
+        </div>
+        <small>未利用魚を活かすEC運用・改善パートナー募集ページ</small>
+      </div>
+      <small>電話: 050-0000-0000<br>所在地: 記載なし ※仮の内容です</small>
+    </div>
+    <div class="footer-note">
+      ※本ページは制作サンプル(デモ)です。掲載の内容・数値は仮のもので、写真はイメージです。
+      実制作ではご提供情報・実データ・正式な応募導線に差し替えます。
+    </div>
+  </div>
+</footer>
+
+<div class="sticky-cta" aria-label="固定応募メニュー">
+  <div class="sticky-cta-inner">
+    <a class="btn btn-ghost" href="tel:050-0000-0000">電話相談</a>
+    <a class="btn btn-primary" href="#entry">応募する</a>
+  </div>
+</div>
+
+<script>
+const menuButton=document.querySelector(".menu-button");
+const mobileNav=document.querySelector("#mobileNav");
+menuButton.addEventListener("click",()=>{
+  const open=mobileNav.classList.toggle("is-open");
+  menuButton.setAttribute("aria-expanded",String(open));
+});
+mobileNav.querySelectorAll("a").forEach(link=>{
+  link.addEventListener("click",()=>{
+    mobileNav.classList.remove("is-open");
+    menuButton.setAttribute("aria-expanded","false");
+  });
+});
+document.querySelectorAll(".faq-q").forEach(button=>{
+  button.addEventListener("click",()=>{
+    button.closest(".faq-item").classList.toggle("is-open");
+  });
+});
+const prefersReduced=window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+if(!prefersReduced){
+  const observer=new IntersectionObserver(entries=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting){
+        entry.target.classList.add("is-visible");
+        observer.unobserve(entry.target);
+      }
+    });
+  },{threshold:.14});
+  document.querySelectorAll(".reveal").forEach(el=>observer.observe(el));
+}else{
+  document.querySelectorAll(".reveal").forEach(el=>el.classList.add("is-visible"));
+}
+</script>
+</body>
+</html>

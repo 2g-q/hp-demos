@@ -1,0 +1,1672 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>くりこま高原ファーム ECデモ | 宮城県北部のお米を産地直送</title>
+  <meta name="description" content="宮城県北部のお米農家向けECサイト制作デモ。20〜30商品規模を想定した、軽く運用しやすい自社ECトップページです。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+JP:wght@400;500;700;900&family=Zen+Kaku+Gothic+New:wght@500;700;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #fbfaf5;
+      --paper: #ffffff;
+      --ink: #1d2a22;
+      --muted: #66736a;
+      --line: #e7e2d6;
+      --soft: #f4f1e8;
+      --accent: #2f7d4a;
+      --accent-dark: #246239;
+      --shadow: 0 18px 48px rgba(47, 125, 74, 0.16);
+      --radius: 8px;
+      --container: 1160px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      overflow-x: hidden;
+    }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background:
+        linear-gradient(180deg, rgba(47, 125, 74, 0.05), transparent 360px),
+        var(--bg);
+      font-family: "Noto Sans JP", system-ui, sans-serif;
+      font-feature-settings: "palt";
+      letter-spacing: 0;
+      line-height: 1.8;
+      overflow-x: hidden;
+    }
+
+    img,
+    svg,
+    iframe {
+      max-width: 100%;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button,
+    input,
+    select,
+    textarea {
+      font: inherit;
+    }
+
+    input,
+    select,
+    textarea {
+      font-size: 16px;
+    }
+
+    .container {
+      width: min(var(--container), calc(100% - 40px));
+      margin: 0 auto;
+    }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(251, 250, 245, 0.92);
+      border-bottom: 1px solid rgba(231, 226, 214, 0.8);
+    }
+
+    .header-inner {
+      height: 76px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 0;
+    }
+
+    .brand-mark {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: var(--accent);
+      color: #fff;
+      display: grid;
+      place-items: center;
+      flex: 0 0 auto;
+      box-shadow: 0 10px 26px rgba(47, 125, 74, 0.22);
+    }
+
+    .brand-text {
+      display: grid;
+      line-height: 1.25;
+      min-width: 0;
+    }
+
+    .brand-name {
+      font-family: "Zen Kaku Gothic New", sans-serif;
+      font-weight: 900;
+      font-size: 18px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .brand-sub {
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .desktop-nav {
+      display: flex;
+      align-items: center;
+      gap: 22px;
+      color: var(--muted);
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .desktop-nav a:hover {
+      color: var(--accent);
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .icon-button {
+      width: 44px;
+      height: 44px;
+      border: 1px solid var(--line);
+      border-radius: 50%;
+      background: var(--paper);
+      color: var(--ink);
+      display: grid;
+      place-items: center;
+      cursor: pointer;
+    }
+
+    .icon-button:hover {
+      border-color: rgba(47, 125, 74, 0.35);
+      color: var(--accent);
+    }
+
+    .menu-button {
+      display: none;
+    }
+
+    .mobile-nav {
+      position: fixed;
+      inset: 76px 0 auto 0;
+      z-index: 49;
+      background: var(--paper);
+      border-bottom: 1px solid var(--line);
+      transform: translateY(-120%);
+      transition: transform 0.28s ease;
+      box-shadow: 0 22px 40px rgba(29, 42, 34, 0.08);
+    }
+
+    .mobile-nav.is-open {
+      transform: translateY(0);
+    }
+
+    .mobile-nav a {
+      display: block;
+      width: min(100% - 40px, var(--container));
+      margin: 0 auto;
+      padding: 16px 0;
+      border-bottom: 1px solid var(--line);
+      font-weight: 700;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      min-height: 48px;
+      padding: 0 22px;
+      border-radius: 100px;
+      border: 1px solid transparent;
+      background: var(--accent);
+      color: #fff;
+      font-weight: 800;
+      box-shadow: var(--shadow);
+      cursor: pointer;
+      transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+      white-space: nowrap;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      background: var(--accent-dark);
+      box-shadow: 0 22px 58px rgba(47, 125, 74, 0.22);
+    }
+
+    .btn.secondary {
+      background: var(--paper);
+      color: var(--accent);
+      border-color: rgba(47, 125, 74, 0.28);
+      box-shadow: none;
+    }
+
+    .btn.secondary:hover {
+      background: rgba(47, 125, 74, 0.06);
+      box-shadow: none;
+    }
+
+    .hero {
+      padding: 72px 0 92px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.02fr) minmax(320px, 0.98fr);
+      gap: 54px;
+      align-items: center;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      color: var(--accent);
+      font-weight: 900;
+      font-size: 13px;
+      margin: 0 0 18px;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 34px;
+      height: 2px;
+      background: var(--accent);
+      display: inline-block;
+    }
+
+    h1,
+    h2,
+    h3 {
+      font-family: "Zen Kaku Gothic New", sans-serif;
+      line-height: 1.28;
+      letter-spacing: 0;
+      margin: 0;
+    }
+
+    h1 {
+      font-size: clamp(38px, 6vw, 72px);
+      font-weight: 900;
+      max-width: 720px;
+    }
+
+    .hero-copy {
+      margin: 24px 0 0;
+      max-width: 620px;
+      color: var(--muted);
+      font-size: 17px;
+      line-height: 2;
+    }
+
+    .hero-cta {
+      margin-top: 34px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .trust-strip {
+      margin-top: 40px;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.72);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+
+    .trust-item {
+      padding: 18px;
+      border-right: 1px solid var(--line);
+    }
+
+    .trust-item:last-child {
+      border-right: 0;
+    }
+
+    .trust-num {
+      font-family: "Manrope", sans-serif;
+      font-size: 26px;
+      font-weight: 800;
+      color: var(--accent);
+      line-height: 1.1;
+    }
+
+    .trust-label {
+      margin-top: 6px;
+      font-size: 12px;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    .hero-visual {
+      position: relative;
+      min-height: 520px;
+      border-radius: 8px;
+      background:
+        radial-gradient(circle at 18% 18%, rgba(47, 125, 74, 0.12), transparent 28%),
+        linear-gradient(135deg, #ffffff, #f3f0e6);
+      border: 1px solid var(--line);
+      overflow: hidden;
+      box-shadow: 0 28px 70px rgba(29, 42, 34, 0.11);
+    }
+
+    .field-art {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    .floating-card {
+      position: absolute;
+      left: 26px;
+      right: 26px;
+      bottom: 26px;
+      background: rgba(255, 255, 255, 0.9);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 22px;
+      box-shadow: 0 18px 44px rgba(29, 42, 34, 0.12);
+    }
+
+    .cart-line {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--line);
+      font-weight: 700;
+    }
+
+    .cart-line:last-child {
+      border-bottom: 0;
+    }
+
+    .price {
+      font-family: "Manrope", sans-serif;
+      color: var(--accent);
+      font-weight: 800;
+      white-space: nowrap;
+    }
+
+    section {
+      padding: 100px 0;
+    }
+
+    .section-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 28px;
+      margin-bottom: 42px;
+    }
+
+    .section-title {
+      font-size: clamp(28px, 4vw, 44px);
+      font-weight: 900;
+    }
+
+    .section-lead {
+      max-width: 560px;
+      margin: 14px 0 0;
+      color: var(--muted);
+    }
+
+    .small-note {
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.7;
+    }
+
+    .features {
+      background: var(--paper);
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .feature-card {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 28px;
+      background: #fff;
+    }
+
+    .feature-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: rgba(47, 125, 74, 0.1);
+      color: var(--accent);
+      display: grid;
+      place-items: center;
+      margin-bottom: 22px;
+    }
+
+    .feature-card h3 {
+      font-size: 21px;
+      margin-bottom: 12px;
+    }
+
+    .feature-card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .products {
+      padding-top: 104px;
+    }
+
+    .toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 28px;
+    }
+
+    .chip {
+      border: 1px solid var(--line);
+      background: var(--paper);
+      color: var(--muted);
+      border-radius: 100px;
+      padding: 9px 15px;
+      font-weight: 700;
+      font-size: 13px;
+      cursor: pointer;
+    }
+
+    .chip.is-active {
+      background: var(--accent);
+      color: #fff;
+      border-color: var(--accent);
+    }
+
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .product-card {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+    }
+
+    .product-visual {
+      aspect-ratio: 4 / 3;
+      background:
+        linear-gradient(135deg, rgba(47, 125, 74, 0.1), transparent),
+        var(--soft);
+      display: grid;
+      place-items: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .rice-bag {
+      width: 52%;
+      max-width: 128px;
+      aspect-ratio: 0.72;
+      background: #fff;
+      border: 2px solid rgba(47, 125, 74, 0.22);
+      border-radius: 7px 7px 12px 12px;
+      display: grid;
+      place-items: center;
+      box-shadow: 0 18px 34px rgba(29, 42, 34, 0.08);
+    }
+
+    .rice-bag span {
+      writing-mode: vertical-rl;
+      font-family: "Zen Kaku Gothic New", sans-serif;
+      font-weight: 900;
+      color: var(--accent);
+      letter-spacing: 0;
+    }
+
+    .product-body {
+      padding: 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      flex: 1;
+    }
+
+    .product-title {
+      font-size: 17px;
+      font-weight: 900;
+      line-height: 1.5;
+    }
+
+    .product-meta {
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.6;
+      min-height: 42px;
+    }
+
+    .product-footer {
+      margin-top: auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .mini-btn {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      border: 0;
+      background: var(--accent);
+      color: #fff;
+      display: grid;
+      place-items: center;
+      cursor: pointer;
+      flex: 0 0 auto;
+    }
+
+    .story {
+      background: var(--soft);
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .story-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+      gap: 48px;
+      align-items: center;
+    }
+
+    .story-panel {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 34px;
+    }
+
+    .vertical-copy {
+      writing-mode: vertical-rl;
+      font-family: "Zen Kaku Gothic New", sans-serif;
+      font-weight: 900;
+      font-size: clamp(30px, 4vw, 48px);
+      line-height: 1.55;
+      letter-spacing: 0;
+      color: var(--accent);
+      min-height: 360px;
+      margin: 0 auto;
+    }
+
+    .timeline {
+      display: grid;
+      gap: 16px;
+    }
+
+    .timeline-item {
+      display: grid;
+      grid-template-columns: 92px minmax(0, 1fr);
+      gap: 18px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .timeline-item:last-child {
+      border-bottom: 0;
+      padding-bottom: 0;
+    }
+
+    .month {
+      font-family: "Manrope", sans-serif;
+      font-weight: 800;
+      color: var(--accent);
+    }
+
+    .timeline-item h3 {
+      font-size: 18px;
+      margin-bottom: 6px;
+    }
+
+    .timeline-item p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .guide-grid {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 22px;
+      align-items: start;
+    }
+
+    .guide-card {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 30px;
+    }
+
+    .guide-list {
+      display: grid;
+      gap: 14px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .guide-list li {
+      display: grid;
+      grid-template-columns: 28px minmax(0, 1fr);
+      gap: 12px;
+      color: var(--muted);
+    }
+
+    .check {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: rgba(47, 125, 74, 0.1);
+      color: var(--accent);
+      display: grid;
+      place-items: center;
+      font-weight: 900;
+      line-height: 1;
+    }
+
+    .shipping-table {
+      width: 100%;
+      border-collapse: collapse;
+      overflow: hidden;
+      border-radius: var(--radius);
+      font-size: 14px;
+    }
+
+    .shipping-table th,
+    .shipping-table td {
+      padding: 14px;
+      border-bottom: 1px solid var(--line);
+      text-align: left;
+    }
+
+    .shipping-table th {
+      background: rgba(47, 125, 74, 0.08);
+      color: var(--accent);
+      font-weight: 900;
+    }
+
+    .faq {
+      background: var(--paper);
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .faq-list {
+      display: grid;
+      gap: 12px;
+    }
+
+    .faq-item {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: #fff;
+      overflow: hidden;
+    }
+
+    .faq-q {
+      width: 100%;
+      border: 0;
+      background: transparent;
+      color: var(--ink);
+      padding: 20px 22px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      text-align: left;
+      font-weight: 900;
+      cursor: pointer;
+    }
+
+    .faq-symbol {
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      border: 1px solid rgba(47, 125, 74, 0.25);
+      color: var(--accent);
+      display: grid;
+      place-items: center;
+      flex: 0 0 auto;
+      font-family: "Manrope", sans-serif;
+      font-weight: 800;
+    }
+
+    .faq-a {
+      display: none;
+      padding: 0 22px 22px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .faq-item.is-open .faq-a {
+      display: block;
+    }
+
+    .faq-item.is-open .faq-symbol {
+      background: var(--accent);
+      color: #fff;
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 0.9fr 1.1fr;
+      gap: 28px;
+      align-items: start;
+    }
+
+    .contact-panel {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 30px;
+    }
+
+    .info-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+    }
+
+    .info-table th,
+    .info-table td {
+      padding: 14px 0;
+      border-bottom: 1px solid var(--line);
+      text-align: left;
+      vertical-align: top;
+    }
+
+    .info-table th {
+      width: 104px;
+      color: var(--accent);
+      font-weight: 900;
+    }
+
+    .form {
+      display: grid;
+      gap: 16px;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .field label {
+      display: block;
+      font-weight: 800;
+      margin-bottom: 8px;
+      font-size: 13px;
+    }
+
+    .field input,
+    .field select,
+    .field textarea {
+      width: 100%;
+      max-width: 100%;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fff;
+      padding: 13px 14px;
+      color: var(--ink);
+    }
+
+    .field textarea {
+      min-height: 126px;
+      resize: vertical;
+    }
+
+    .site-footer {
+      padding: 46px 0 110px;
+      background: var(--ink);
+      color: #fff;
+    }
+
+    .footer-grid {
+      display: flex;
+      justify-content: space-between;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+
+    .footer-note {
+      margin-top: 28px;
+      color: rgba(255, 255, 255, 0.72);
+      font-size: 12px;
+      line-height: 1.8;
+    }
+
+    .sticky-cta {
+      position: fixed;
+      right: 18px;
+      bottom: 18px;
+      z-index: 60;
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .sticky-cta .btn {
+      min-height: 52px;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .reveal.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        scroll-behavior: auto !important;
+        transition: none !important;
+        animation: none !important;
+      }
+
+      .reveal {
+        opacity: 1;
+        transform: none;
+      }
+    }
+
+    @media (max-width: 980px) {
+      .desktop-nav,
+      .header-actions .btn {
+        display: none;
+      }
+
+      .menu-button {
+        display: grid;
+      }
+
+      .hero-grid,
+      .story-grid,
+      .guide-grid,
+      .contact-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-visual {
+        min-height: 430px;
+      }
+
+      .feature-grid,
+      .product-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .section-head {
+        display: block;
+      }
+    }
+
+    @media (max-width: 620px) {
+      .container {
+        width: min(100% - 28px, var(--container));
+      }
+
+      .header-inner {
+        height: 66px;
+      }
+
+      .mobile-nav {
+        inset-top: 66px;
+      }
+
+      .brand-name {
+        font-size: 15px;
+      }
+
+      .brand-sub {
+        display: none;
+      }
+
+      .hero {
+        padding: 44px 0 72px;
+      }
+
+      h1 {
+        font-size: 40px;
+      }
+
+      .hero-copy {
+        font-size: 15px;
+      }
+
+      .hero-cta {
+        display: grid;
+      }
+
+      .trust-strip {
+        grid-template-columns: 1fr;
+      }
+
+      .trust-item {
+        border-right: 0;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .trust-item:last-child {
+        border-bottom: 0;
+      }
+
+      .hero-visual {
+        min-height: 360px;
+      }
+
+      .floating-card {
+        left: 14px;
+        right: 14px;
+        bottom: 14px;
+        padding: 16px;
+      }
+
+      section {
+        padding: 76px 0;
+      }
+
+      .feature-grid,
+      .product-grid,
+      .form-row {
+        grid-template-columns: 1fr;
+      }
+
+      .story-panel {
+        padding: 24px;
+      }
+
+      .vertical-copy {
+        writing-mode: horizontal-tb;
+        min-height: 0;
+        font-size: 32px;
+      }
+
+      .timeline-item {
+        grid-template-columns: 70px minmax(0, 1fr);
+      }
+
+      .sticky-cta {
+        left: 10px;
+        right: 10px;
+        bottom: 10px;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .sticky-cta .btn {
+        min-width: 0;
+        padding: 0 12px;
+        font-size: 13px;
+      }
+    }
+  </style>
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Store",
+      "name": "くりこま高原ファーム",
+      "description": "宮城県北部のお米を産地直送する農家ECサイトの制作サンプルです。",
+      "address": {
+        "@type": "PostalAddress",
+        "addressRegion": "宮城県",
+        "addressLocality": "宮城県北部"
+      },
+      "telephone": "0228-00-0000",
+      "url": "https://example.com/demo-kougenfarm"
+    }
+  </script>
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "商品数が20〜30点でも自社ECにできますか？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "はい。白米、玄米、ギフト、加工品など少数の商品構成でも、カテゴリと在庫を整理した運用しやすいECにできます。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "BASEからの移行を想定できますか？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "商品情報、決済、配送、受注通知、特定商取引法表記などを確認し、自社EC向けに再設計する想定です。"
+          }
+        }
+      ]
+    }
+  </script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="#top" aria-label="トップへ">
+        <span class="brand-mark" aria-hidden="true">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <path d="M12 20V6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            <path d="M12 14C8.7 14 6 11.3 6 8V6h2c3.3 0 6 2.7 6 6v2h-2Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+            <path d="M12 17c3.3 0 6-2.7 6-6V9h-2c-3.3 0-6 2.7-6 6v2h2Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+          </svg>
+        </span>
+        <span class="brand-text">
+          <span class="brand-name">くりこま高原ファーム</span>
+          <span class="brand-sub">宮城県北部のお米を産地直送</span>
+        </span>
+      </a>
+      <nav class="desktop-nav" aria-label="主要ナビゲーション">
+        <a href="#products">商品</a>
+        <a href="#story">米づくり</a>
+        <a href="#guide">ご利用案内</a>
+        <a href="#faq">FAQ</a>
+        <a href="#contact">見積もり相談</a>
+      </nav>
+      <div class="header-actions">
+        <a class="btn secondary" href="tel:0228000000">0228-00-0000</a>
+        <a class="btn" href="#products">商品を見る</a>
+        <button class="icon-button menu-button" type="button" aria-label="メニューを開く" aria-controls="mobileNav" aria-expanded="false">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+            <path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <nav class="mobile-nav" id="mobileNav" aria-label="スマートフォンナビゲーション">
+    <a href="#products">商品</a>
+    <a href="#story">米づくり</a>
+    <a href="#guide">ご利用案内</a>
+    <a href="#faq">FAQ</a>
+    <a href="#contact">見積もり相談</a>
+  </nav>
+
+  <main id="top">
+    <section class="hero">
+      <div class="container hero-grid">
+        <div class="reveal">
+          <p class="eyebrow">自社EC化デモ / 20〜30商品規模を想定</p>
+          <h1>土から届く、いつもの一膳。</h1>
+          <p class="hero-copy">
+            宮城県北部の農家が、白米・玄米・ギフトを迷わず選べるように整理したECトップページです。
+            BASE販売の実績を活かしながら、商品登録、配送設定、受注導線をシンプルに運用できる構成にしています。
+          </p>
+          <div class="hero-cta">
+            <a class="btn" href="#products">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M6 6h15l-2 9H8L6 6Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+                <path d="M6 6 5 3H2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                <circle cx="9" cy="20" r="1.5" fill="currentColor"/>
+                <circle cx="18" cy="20" r="1.5" fill="currentColor"/>
+              </svg>
+              商品を見る
+            </a>
+            <a class="btn secondary" href="#contact">EC構築の相談をする</a>
+          </div>
+          <div class="trust-strip" aria-label="サイト想定">
+            <div class="trust-item">
+              <div class="trust-num">20-30</div>
+              <div class="trust-label">商品点数の想定<br>※募集文より</div>
+            </div>
+            <div class="trust-item">
+              <div class="trust-num">BASE</div>
+              <div class="trust-label">既存販売から移行<br>※募集文より</div>
+            </div>
+            <div class="trust-item">
+              <div class="trust-num">宮城</div>
+              <div class="trust-label">県北部から直送<br>※地名は募集文より</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-visual reveal" aria-label="田んぼとECのイメージ">
+          <svg class="field-art" viewBox="0 0 640 640" preserveAspectRatio="xMidYMid slice" role="img" aria-label="稲穂と田んぼの抽象イラスト">
+            <rect width="640" height="640" fill="#fbfaf5"/>
+            <path d="M0 424C108 360 206 342 318 382C420 418 520 410 640 336V640H0V424Z" fill="#e8efe3"/>
+            <path d="M0 494C104 442 220 434 334 470C430 500 540 492 640 438V640H0V494Z" fill="#dce8d6"/>
+            <path d="M0 562C98 526 215 520 338 544C448 566 544 562 640 526V640H0V562Z" fill="#cfe0c8"/>
+            <g stroke="#2f7d4a" stroke-width="4" stroke-linecap="round" opacity="0.9">
+              <path d="M104 366c20-60 50-105 90-136"/>
+              <path d="M154 372c24-72 56-128 96-168"/>
+              <path d="M212 366c22-64 54-112 96-146"/>
+              <path d="M426 368c-20-62-50-108-91-140"/>
+              <path d="M482 374c-24-72-56-128-98-168"/>
+            </g>
+            <g fill="none" stroke="#2f7d4a" stroke-width="3" stroke-linecap="round">
+              <path d="M194 230c-28 0-52-18-62-43c31-4 57 10 71 36"/>
+              <path d="M250 204c-29-2-52-22-59-49c32-1 58 16 69 44"/>
+              <path d="M308 220c-29 0-54-17-64-43c32-4 59 11 72 38"/>
+              <path d="M335 228c28-2 53-22 61-49c-32-1-59 17-70 45"/>
+              <path d="M384 206c29 1 54-16 64-42c-31-4-59 12-72 38"/>
+            </g>
+            <circle cx="500" cy="118" r="54" fill="rgba(47,125,74,0.12)"/>
+          </svg>
+          <div class="floating-card">
+            <div class="cart-line">
+              <span>令和新米 ひとめぼれ 5kg</span>
+              <span class="price">¥3,280</span>
+            </div>
+            <div class="cart-line">
+              <span>玄米 20kg</span>
+              <span class="price">¥12,800</span>
+            </div>
+            <div class="cart-line">
+              <span>ギフト食べ比べ 3種</span>
+              <span class="price">¥5,980</span>
+            </div>
+            <p class="small-note">※価格・商品名は仮の内容です。実制作では正式な商品情報に差し替えます。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="features" id="features">
+      <div class="container">
+        <div class="section-head reveal">
+          <div>
+            <p class="eyebrow">BASEから自社ECへ</p>
+            <h2 class="section-title">小さく始めて、育てやすい設計。</h2>
+          </div>
+          <p class="section-lead">
+            参考サイトの素朴で信頼感のある販売導線を、スマートフォンで買いやすい構成に再設計したデモです。
+          </p>
+        </div>
+
+        <div class="feature-grid">
+          <article class="feature-card reveal">
+            <div class="feature-icon" aria-hidden="true">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+                <path d="M4 6h16v12H4V6Z" stroke="currentColor" stroke-width="2"/>
+                <path d="M8 10h8M8 14h5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <h3>商品登録が軽い</h3>
+            <p>
+              白米、玄米、ギフト、加工品をカテゴリ別に整理。20〜30商品規模なら、複雑な管理画面にしすぎない方が運用が続きます。
+            </p>
+          </article>
+
+          <article class="feature-card reveal">
+            <div class="feature-icon" aria-hidden="true">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+                <path d="M3 8h12v9H3V8Z" stroke="currentColor" stroke-width="2"/>
+                <path d="M15 11h3l3 3v3h-6v-6Z" stroke="currentColor" stroke-width="2"/>
+                <circle cx="7" cy="19" r="2" stroke="currentColor" stroke-width="2"/>
+                <circle cx="18" cy="19" r="2" stroke="currentColor" stroke-width="2"/>
+              </svg>
+            </div>
+            <h3>送料案内を明快に</h3>
+            <p>
+              重量、地域、ギフト発送を購入前に確認できる見せ方へ。お米ECで迷いやすい配送条件を先回りして表示します。
+            </p>
+          </article>
+
+          <article class="feature-card reveal">
+            <div class="feature-icon" aria-hidden="true">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+                <path d="M5 12 10 17 20 7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <h3>安心材料を商品近くに</h3>
+            <p>
+              産地、精米時期、保存方法、返品条件を購入ボタンの近くへ。説明ページに飛ばなくても判断できるECにします。
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="products" id="products">
+      <div class="container">
+        <div class="section-head reveal">
+          <div>
+            <p class="eyebrow">Online Shop</p>
+            <h2 class="section-title">毎日の米、贈る米。</h2>
+          </div>
+          <p class="section-lead">
+            商品数は募集文の「通常20〜30程度」を想定。ここでは主要カテゴリだけを抜き出したトップページ表示です。
+          </p>
+        </div>
+
+        <div class="toolbar reveal" aria-label="商品カテゴリ">
+          <button class="chip is-active" type="button">すべて</button>
+          <button class="chip" type="button">白米</button>
+          <button class="chip" type="button">玄米</button>
+          <button class="chip" type="button">ギフト</button>
+          <button class="chip" type="button">加工品</button>
+        </div>
+
+        <div class="product-grid">
+          <article class="product-card reveal">
+            <div class="product-visual">
+              <div class="rice-bag"><span>白米</span></div>
+            </div>
+            <div class="product-body">
+              <h3 class="product-title">宮城県北部産 ひとめぼれ 5kg</h3>
+              <p class="product-meta">炊きたてはふっくら、冷めてもほどける定番米。</p>
+              <div class="product-footer">
+                <span class="price">¥3,280</span>
+                <button class="mini-btn" type="button" aria-label="カートに入れる">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                    <path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </article>
+
+          <article class="product-card reveal">
+            <div class="product-visual">
+              <div class="rice-bag"><span>玄米</span></div>
+            </div>
+            <div class="product-body">
+              <h3 class="product-title">玄米 ひとめぼれ 20kg</h3>
+              <p class="product-meta">ご家庭の精米機やまとめ買い向けの大容量。</p>
+              <div class="product-footer">
+                <span class="price">¥12,800</span>
+                <button class="mini-btn" type="button" aria-label="カートに入れる">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                    <path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </article>
+
+          <article class="product-card reveal">
+            <div class="product-visual">
+              <div class="rice-bag"><span>三種</span></div>
+            </div>
+            <div class="product-body">
+              <h3 class="product-title">食べ比べギフト 3種セット</h3>
+              <p class="product-meta">ご自宅用にも季節の贈答にも選びやすい構成。</p>
+              <div class="product-footer">
+                <span class="price">¥5,980</span>
+                <button class="mini-btn" type="button" aria-label="カートに入れる">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                    <path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </article>
+
+          <article class="product-card reveal">
+            <div class="product-visual">
+              <div class="rice-bag"><span>餅</span></div>
+            </div>
+            <div class="product-body">
+              <h3 class="product-title">切り餅 詰め合わせ</h3>
+              <p class="product-meta">冬のご家庭用、年末年始のまとめ買い導線に。</p>
+              <div class="product-footer">
+                <span class="price">¥1,480</span>
+                <button class="mini-btn" type="button" aria-label="カートに入れる">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                    <path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <p class="small-note" style="margin-top:18px;">
+          ※商品名・価格・在庫表示は仮の内容です。実制作ではBASEの商品一覧、配送条件、決済方法に合わせて設定します。
+        </p>
+      </div>
+    </section>
+
+    <section class="story" id="story">
+      <div class="container story-grid">
+        <div class="story-panel reveal">
+          <p class="vertical-copy">派手さより、まっすぐな産直。</p>
+        </div>
+        <div class="reveal">
+          <p class="eyebrow">Rice Calendar</p>
+          <h2 class="section-title">作り手の時間が、買う理由になる。</h2>
+          <p class="section-lead">
+            お米は商品スペックだけでは伝わりきりません。田植え、管理、収穫、保管の流れをトップページに置くことで、
+            初めてのお客様にも産地直送の価値が届きます。
+          </p>
+
+          <div class="timeline" style="margin-top:32px;">
+            <div class="timeline-item">
+              <div class="month">SPRING</div>
+              <div>
+                <h3>種まきと田植え</h3>
+                <p>宮城県北部の気候に合わせて、苗の状態を見ながら田んぼへ移します。</p>
+              </div>
+            </div>
+            <div class="timeline-item">
+              <div class="month">SUMMER</div>
+              <div>
+                <h3>水と稲の管理</h3>
+                <p>日々の見回りや水管理を、読みやすい短文と写真枠で伝える想定です。</p>
+              </div>
+            </div>
+            <div class="timeline-item">
+              <div class="month">AUTUMN</div>
+              <div>
+                <h3>収穫と保管</h3>
+                <p>新米予約、精米時期、発送開始のお知らせをECと連動させます。</p>
+              </div>
+            </div>
+          </div>
+
+          <p class="small-note" style="margin-top:18px;">
+            ※農作業の詳細は仮の内容です。実制作ではご提供いただく写真・文章をもとに編集します。
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section id="guide">
+      <div class="container">
+        <div class="section-head reveal">
+          <div>
+            <p class="eyebrow">Shopping Guide</p>
+            <h2 class="section-title">買う前の不安を、先にほどく。</h2>
+          </div>
+          <p class="section-lead">
+            参考サイトにある買い物ガイド、送料、支払い、返品案内を、スマホでも読みやすい形にまとめます。
+          </p>
+        </div>
+
+        <div class="guide-grid">
+          <div class="guide-card reveal">
+            <h3 style="margin-bottom:18px;">自社ECで用意する基本機能</h3>
+            <ul class="guide-list">
+              <li>
+                <span class="check">✓</span>
+                <span>商品一覧、商品詳細、カート、決済、受注メールの基本導線</span>
+              </li>
+              <li>
+                <span class="check">✓</span>
+                <span>白米・玄米・ギフト・加工品のカテゴリ管理</span>
+              </li>
+              <li>
+                <span class="check">✓</span>
+                <span>配送重量や地域別送料を考慮した設定</span>
+              </li>
+              <li>
+                <span class="check">✓</span>
+                <span>お知らせ、休業日、発送休止日の更新枠</span>
+              </li>
+              <li>
+                <span class="check">✓</span>
+                <span>特定商取引法表記、プライバシーポリシー、FAQ</span>
+              </li>
+            </ul>
+          </div>
+
+          <div class="guide-card reveal">
+            <h3 style="margin-bottom:18px;">配送・営業案内</h3>
+            <table class="shipping-table">
+              <tr>
+                <th>発送</th>
+                <td>ご注文確認後、順次発送 ※仮の内容です</td>
+              </tr>
+              <tr>
+                <th>送料</th>
+                <td>地域・重量別に自動計算 ※仮の内容です</td>
+              </tr>
+              <tr>
+                <th>支払い</th>
+                <td>クレジットカード、銀行振込、代引き等を想定</td>
+              </tr>
+              <tr>
+                <th>休業日</th>
+                <td>土日祝・季節休業をカレンダー表示</td>
+              </tr>
+            </table>
+            <p class="small-note" style="margin-top:14px;">
+              ※実制作では利用するECカートの仕様に合わせて、決済・配送・在庫管理の可否を確認します。
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="faq" id="faq">
+      <div class="container">
+        <div class="section-head reveal">
+          <div>
+            <p class="eyebrow">FAQ</p>
+            <h2 class="section-title">見積もり前に整理したいこと。</h2>
+          </div>
+          <p class="section-lead">
+            コーディングとEC選定・設置を依頼する前提で、制作範囲がぶれやすい点を先に言語化しています。
+          </p>
+        </div>
+
+        <div class="faq-list">
+          <div class="faq-item is-open reveal">
+            <button class="faq-q" type="button">
+              <span>参考サイトと同じ程度なら、どんなページが必要ですか？</span>
+              <span class="faq-symbol">−</span>
+            </button>
+            <div class="faq-a">
+              トップ、商品一覧、商品詳細、買い物ガイド、FAQ、問い合わせ、特定商取引法表記、会社概要が基本です。
+              お知らせや発送休止日を更新できる仕組みもあると、農繁期の案内がしやすくなります。
+            </div>
+          </div>
+
+          <div class="faq-item reveal">
+            <button class="faq-q" type="button">
+              <span>リーズナブルに作るなら、どのECが向いていますか？</span>
+              <span class="faq-symbol">＋</span>
+            </button>
+            <div class="faq-a">
+              商品数が20〜30程度で設定が複雑でなければ、Shopify、カラーミー、Makeshop、WooCommerceなどを比較し、
+              月額費用、決済手数料、配送設定、更新担当者の使いやすさで選ぶのが現実的です。
+            </div>
+          </div>
+
+          <div class="faq-item reveal">
+            <button class="faq-q" type="button">
+              <span>BASEのデータはそのまま使えますか？</span>
+              <span class="faq-symbol">＋</span>
+            </button>
+            <div class="faq-a">
+              商品名、価格、説明、画像、在庫などを整理して移行する想定です。
+              決済や受注履歴の扱いは利用するECサービスごとに異なるため、選定時に確認します。
+            </div>
+          </div>
+
+          <div class="faq-item reveal">
+            <button class="faq-q" type="button">
+              <span>このデモで写真を使っていない理由は？</span>
+              <span class="faq-symbol">＋</span>
+            </button>
+            <div class="faq-a">
+              募集内容に合う米農家・田んぼ・商品写真が指定素材内に無いため、転用感を避けて図形と商品UIで構成しています。
+              ※写真はイメージです。実制作ではご提供写真や日本人モデルの素材に差し替えます。
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="container">
+        <div class="section-head reveal">
+          <div>
+            <p class="eyebrow">Contact</p>
+            <h2 class="section-title">EC選定から設置まで、見積もり前提で。</h2>
+          </div>
+          <p class="section-lead">
+            ディレクションは発注者側、実装側はコーディング・EC選定・設置を担当する想定の問い合わせ導線です。
+          </p>
+        </div>
+
+        <div class="contact-grid">
+          <div class="contact-panel reveal">
+            <h3 style="margin-bottom:16px;">店舗情報</h3>
+            <table class="info-table">
+              <tr>
+                <th>名称</th>
+                <td>くりこま高原ファーム</td>
+              </tr>
+              <tr>
+                <th>所在地</th>
+                <td>宮城県北部</td>
+              </tr>
+              <tr>
+                <th>電話</th>
+                <td><a href="tel:0228000000">0228-00-0000</a></td>
+              </tr>
+              <tr>
+                <th>営業時間</th>
+                <td>8:30〜17:00 ※仮の内容です</td>
+              </tr>
+              <tr>
+                <th>定休日</th>
+                <td>土日祝 ※仮の内容です</td>
+              </tr>
+            </table>
+            <p class="small-note" style="margin-top:14px;">
+              ※電話番号はデモ用のダミーです。住所は募集文の地名範囲に留めています。
+            </p>
+          </div>
+
+          <form class="contact-panel form reveal" action="#" method="post">
+            <div class="form-row">
+              <div class="field">
+                <label for="name">お名前</label>
+                <input id="name" name="name" type="text" placeholder="山田 太郎">
+              </div>
+              <div class="field">
+                <label for="email">メールアドレス</label>
+                <input id="email" name="email" type="email" placeholder="sample@example.com">
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="field">
+                <label for="platform">検討中のEC</label>
+                <select id="platform" name="platform">
+                  <option>未定・選定から相談</option>
+                  <option>Shopify</option>
+                  <option>カラーミーショップ</option>
+                  <option>WooCommerce</option>
+                  <option>その他</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="items">商品点数</label>
+                <select id="items" name="items">
+                  <option>20〜30点程度</option>
+                  <option>10点未満</option>
+                  <option>30点以上</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="field">
+              <label for="message">相談内容</label>
+              <textarea id="message" name="message" placeholder="BASEからの移行、商品登録、配送設定、デザイン調整など"></textarea>
+            </div>
+
+            <button class="btn" type="submit">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M4 12h14M12 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              見積もり相談を送る
+            </button>
+            <p class="small-note">
+              ※このフォームはデモ表示です。送信機能は実制作時に設置します。
+            </p>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div class="sticky-cta" aria-label="固定問い合わせ導線">
+    <a class="btn secondary" href="tel:0228000000">電話する</a>
+    <a class="btn" href="#contact">相談する</a>
+  </div>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <strong>くりこま高原ファーム</strong>
+          <div class="small-note" style="color:rgba(255,255,255,0.72);margin-top:6px;">
+            宮城県北部のお米を産地直送
+          </div>
+        </div>
+        <div class="small-note" style="color:rgba(255,255,255,0.72);">
+          商品一覧 / お買い物ガイド / よくある質問 / お問い合わせ
+        </div>
+      </div>
+      <p class="footer-note">
+        ※本ページは制作サンプル(デモ)です。掲載の内容・数値は仮のもので、写真はイメージです。
+      </p>
+    </div>
+  </footer>
+
+  <script>
+    const menuButton = document.querySelector(".menu-button");
+    const mobileNav = document.querySelector("#mobileNav");
+
+    menuButton.addEventListener("click", () => {
+      const isOpen = mobileNav.classList.toggle("is-open");
+      menuButton.setAttribute("aria-expanded", String(isOpen));
+    });
+
+    mobileNav.querySelectorAll("a").forEach((link) => {
+      link.addEventListener("click", () => {
+        mobileNav.classList.remove("is-open");
+        menuButton.setAttribute("aria-expanded", "false");
+      });
+    });
+
+    document.querySelectorAll(".faq-q").forEach((button) => {
+      button.addEventListener("click", () => {
+        const item = button.closest(".faq-item");
+        const symbol = item.querySelector(".faq-symbol");
+        item.classList.toggle("is-open");
+        symbol.textContent = item.classList.contains("is-open") ? "−" : "＋";
+      });
+    });
+
+    document.querySelectorAll(".chip").forEach((chip) => {
+      chip.addEventListener("click", () => {
+        document.querySelectorAll(".chip").forEach((item) => item.classList.remove("is-active"));
+        chip.classList.add("is-active");
+      });
+    });
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("is-visible");
+          observer.unobserve(entry.target);
+        }
+      });
+    }, {
+      threshold: 0.14
+    });
+
+    document.querySelectorAll(".reveal").forEach((element) => {
+      observer.observe(element);
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,1438 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>品川CMS制作補助パートナー募集サンプル｜天王洲アイル出社歓迎</title>
+<meta name="description" content="東京都品川区・天王洲アイル駅周辺で、WordPress系CMSのホームページ作成補助・更新修正を継続して支援するパートナー募集のデモページです。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+JP:wght@400;500;700;900&family=Zen+Kaku+Gothic+New:wght@500;700;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --base:#ffffff;
+  --soft:#f7f9fb;
+  --paper:#fbfcfd;
+  --ink:#18202a;
+  --muted:#5d6875;
+  --line:#dfe6ee;
+  --accent:#123f72;
+  --accent-weak:#e8f0f8;
+  --shadow:0 18px 45px rgba(18,63,114,.14);
+  --radius:8px;
+  --container:1120px;
+}
+*{
+  box-sizing:border-box;
+}
+html{
+  scroll-behavior:smooth;
+  overflow-x:hidden;
+}
+body{
+  margin:0;
+  color:var(--ink);
+  background:var(--base);
+  font-family:"Noto Sans JP",system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  font-feature-settings:"palt" 1;
+  letter-spacing:0;
+  line-height:1.8;
+  overflow-x:hidden;
+}
+img,
+svg,
+iframe{
+  max-width:100%;
+}
+img{
+  display:block;
+  height:auto;
+}
+a{
+  color:inherit;
+  text-decoration:none;
+}
+button,
+input,
+textarea,
+select{
+  font:inherit;
+}
+button{
+  cursor:pointer;
+}
+.container{
+  width:min(100% - 40px,var(--container));
+  max-width:100%;
+  margin-inline:auto;
+}
+.header{
+  position:fixed;
+  top:0;
+  left:0;
+  right:0;
+  z-index:20;
+  background:rgba(255,255,255,.88);
+  border-bottom:1px solid rgba(223,230,238,.84);
+  backdrop-filter:blur(14px);
+}
+.header__inner{
+  min-height:76px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:20px;
+}
+.logo{
+  display:flex;
+  flex-direction:column;
+  gap:1px;
+  min-width:0;
+}
+.logo__main{
+  font-family:"Zen Kaku Gothic New",sans-serif;
+  font-weight:900;
+  line-height:1.25;
+  font-size:18px;
+  color:var(--accent);
+}
+.logo__sub{
+  font-size:11px;
+  color:var(--muted);
+  line-height:1.4;
+}
+.nav{
+  display:flex;
+  align-items:center;
+  gap:24px;
+  font-size:14px;
+  font-weight:700;
+}
+.nav a{
+  color:#253140;
+}
+.header__actions{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+.btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  min-height:48px;
+  padding:0 22px;
+  border-radius:100px;
+  border:1px solid transparent;
+  font-weight:800;
+  line-height:1.2;
+  white-space:nowrap;
+  transition:transform .2s ease,box-shadow .2s ease,background .2s ease;
+}
+.btn svg{
+  width:18px;
+  height:18px;
+  flex:0 0 auto;
+}
+.btn--primary{
+  color:#fff;
+  background:var(--accent);
+  box-shadow:0 12px 25px rgba(18,63,114,.24);
+}
+.btn--primary:hover{
+  transform:translateY(-2px);
+  box-shadow:0 16px 30px rgba(18,63,114,.28);
+}
+.btn--ghost{
+  color:var(--accent);
+  background:#fff;
+  border-color:var(--line);
+}
+.btn--ghost:hover{
+  background:var(--accent-weak);
+}
+.menu-btn{
+  display:none;
+  width:44px;
+  height:44px;
+  border:1px solid var(--line);
+  border-radius:100px;
+  background:#fff;
+  position:relative;
+}
+.menu-btn span{
+  position:absolute;
+  left:13px;
+  width:18px;
+  height:2px;
+  background:var(--accent);
+  border-radius:2px;
+  transition:transform .2s ease,top .2s ease,opacity .2s ease;
+}
+.menu-btn span:nth-child(1){
+  top:15px;
+}
+.menu-btn span:nth-child(2){
+  top:21px;
+}
+.menu-btn span:nth-child(3){
+  top:27px;
+}
+.menu-btn.is-open span:nth-child(1){
+  top:21px;
+  transform:rotate(45deg);
+}
+.menu-btn.is-open span:nth-child(2){
+  opacity:0;
+}
+.menu-btn.is-open span:nth-child(3){
+  top:21px;
+  transform:rotate(-45deg);
+}
+.mobile-nav{
+  position:fixed;
+  z-index:19;
+  top:76px;
+  left:0;
+  right:0;
+  display:none;
+  background:#fff;
+  border-bottom:1px solid var(--line);
+  box-shadow:0 18px 35px rgba(24,32,42,.08);
+}
+.mobile-nav.is-open{
+  display:block;
+}
+.mobile-nav__inner{
+  width:min(100% - 40px,var(--container));
+  max-width:100%;
+  margin:auto;
+  padding:18px 0 22px;
+  display:grid;
+  gap:12px;
+}
+.mobile-nav a{
+  padding:12px 4px;
+  border-bottom:1px solid var(--line);
+  font-weight:800;
+}
+.hero{
+  padding:142px 0 78px;
+  background:
+    linear-gradient(90deg,rgba(255,255,255,.96) 0%,rgba(255,255,255,.92) 48%,rgba(255,255,255,.58) 100%),
+    url("https://images.unsplash.com/photo-1664596350962-603b0a41524a?auto=format&fit=crop&w=1200&q=70") center/cover no-repeat;
+}
+.hero__grid{
+  display:grid;
+  grid-template-columns:minmax(0,1.04fr) minmax(280px,.96fr);
+  gap:54px;
+  align-items:end;
+}
+.eyebrow{
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  color:var(--accent);
+  font-size:13px;
+  font-weight:900;
+  letter-spacing:0;
+  margin:0 0 18px;
+}
+.eyebrow::before{
+  content:"";
+  width:34px;
+  height:2px;
+  background:var(--accent);
+}
+.hero h1{
+  margin:0;
+  font-family:"Zen Kaku Gothic New",sans-serif;
+  font-weight:900;
+  font-size:clamp(38px,6vw,68px);
+  line-height:1.12;
+  letter-spacing:0;
+  max-width:850px;
+}
+.hero__copy{
+  margin:26px 0 0;
+  max-width:670px;
+  color:#354252;
+  font-size:17px;
+  line-height:2;
+}
+.hero__copy strong{
+  color:var(--accent);
+  font-weight:900;
+}
+.hero__cta{
+  display:flex;
+  flex-wrap:wrap;
+  gap:12px;
+  margin-top:34px;
+}
+.hero__note{
+  margin-top:18px;
+  color:var(--muted);
+  font-size:13px;
+}
+.hero-card{
+  background:rgba(255,255,255,.94);
+  border:1px solid rgba(223,230,238,.9);
+  border-radius:var(--radius);
+  box-shadow:var(--shadow);
+  padding:28px;
+  max-width:100%;
+}
+.hero-card__title{
+  margin:0 0 18px;
+  font-family:"Zen Kaku Gothic New",sans-serif;
+  font-size:21px;
+  line-height:1.5;
+}
+.hero-card__list{
+  margin:0;
+  padding:0;
+  list-style:none;
+  display:grid;
+  gap:14px;
+}
+.hero-card__list li{
+  display:grid;
+  grid-template-columns:22px minmax(0,1fr);
+  gap:10px;
+  align-items:start;
+  color:#334050;
+  font-size:14px;
+}
+.check{
+  width:22px;
+  height:22px;
+  border-radius:50%;
+  background:var(--accent-weak);
+  position:relative;
+  margin-top:3px;
+}
+.check::after{
+  content:"";
+  position:absolute;
+  left:7px;
+  top:5px;
+  width:6px;
+  height:10px;
+  border-right:2px solid var(--accent);
+  border-bottom:2px solid var(--accent);
+  transform:rotate(45deg);
+}
+.stats{
+  background:#fff;
+  border-top:1px solid var(--line);
+  border-bottom:1px solid var(--line);
+}
+.stats__grid{
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+}
+.stat{
+  padding:24px 24px;
+  border-left:1px solid var(--line);
+}
+.stat:last-child{
+  border-right:1px solid var(--line);
+}
+.stat__num{
+  display:block;
+  font-family:"Manrope",sans-serif;
+  font-size:34px;
+  line-height:1;
+  font-weight:800;
+  color:var(--accent);
+}
+.stat__label{
+  display:block;
+  margin-top:8px;
+  color:var(--muted);
+  font-size:13px;
+  line-height:1.6;
+}
+.section{
+  padding:104px 0;
+}
+.section--soft{
+  background:var(--soft);
+}
+.section__head{
+  display:grid;
+  grid-template-columns:minmax(0,.86fr) minmax(260px,.64fr);
+  gap:36px;
+  align-items:end;
+  margin-bottom:46px;
+}
+.section__head h2{
+  margin:0;
+  font-family:"Zen Kaku Gothic New",sans-serif;
+  font-size:clamp(30px,4vw,46px);
+  line-height:1.25;
+  letter-spacing:0;
+}
+.section__head p{
+  margin:0;
+  color:var(--muted);
+  line-height:2;
+}
+.cards{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:20px;
+}
+.card{
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  padding:28px;
+}
+.card__icon{
+  width:46px;
+  height:46px;
+  border-radius:50%;
+  border:1px solid var(--accent);
+  display:grid;
+  place-items:center;
+  color:var(--accent);
+  margin-bottom:22px;
+}
+.card__icon svg{
+  width:22px;
+  height:22px;
+}
+.card h3{
+  margin:0 0 12px;
+  font-family:"Zen Kaku Gothic New",sans-serif;
+  font-size:21px;
+  line-height:1.45;
+}
+.card p{
+  margin:0;
+  color:var(--muted);
+  font-size:14px;
+  line-height:2;
+}
+.work-grid{
+  display:grid;
+  grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);
+  gap:34px;
+  align-items:stretch;
+}
+.photo-panel{
+  min-height:480px;
+  border-radius:var(--radius);
+  overflow:hidden;
+  border:1px solid var(--line);
+  background:#e9eef4;
+}
+.photo-panel img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+.work-list{
+  display:grid;
+  gap:14px;
+}
+.work-item{
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  padding:24px 26px;
+  display:grid;
+  grid-template-columns:86px minmax(0,1fr);
+  gap:18px;
+}
+.work-item__tag{
+  font-family:"Manrope",sans-serif;
+  color:var(--accent);
+  font-weight:800;
+  font-size:13px;
+  line-height:1.2;
+}
+.work-item h3{
+  margin:0 0 8px;
+  font-size:19px;
+  font-family:"Zen Kaku Gothic New",sans-serif;
+  line-height:1.45;
+}
+.work-item p{
+  margin:0;
+  color:var(--muted);
+  font-size:14px;
+  line-height:1.9;
+}
+.timeline{
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:18px;
+  counter-reset:step;
+}
+.step{
+  position:relative;
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  padding:28px 24px;
+}
+.step::before{
+  counter-increment:step;
+  content:counter(step,decimal-leading-zero);
+  display:block;
+  font-family:"Manrope",sans-serif;
+  color:var(--accent);
+  font-weight:800;
+  font-size:15px;
+  margin-bottom:18px;
+}
+.step h3{
+  margin:0 0 10px;
+  font-family:"Zen Kaku Gothic New",sans-serif;
+  font-size:19px;
+}
+.step p{
+  margin:0;
+  color:var(--muted);
+  font-size:14px;
+  line-height:1.9;
+}
+.voice-layout{
+  display:grid;
+  grid-template-columns:minmax(0,.78fr) minmax(0,1.22fr);
+  gap:34px;
+  align-items:start;
+}
+.message{
+  background:var(--accent);
+  color:#fff;
+  border-radius:var(--radius);
+  padding:34px 30px;
+  position:sticky;
+  top:104px;
+}
+.message__label{
+  margin:0 0 18px;
+  font-size:13px;
+  font-weight:900;
+  opacity:.86;
+}
+.message p{
+  margin:0;
+  font-family:"Zen Kaku Gothic New",sans-serif;
+  font-size:28px;
+  line-height:1.65;
+  font-weight:900;
+}
+.voice-cards{
+  display:grid;
+  gap:16px;
+}
+.voice{
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  padding:26px;
+}
+.voice h3{
+  margin:0 0 10px;
+  font-size:18px;
+  font-family:"Zen Kaku Gothic New",sans-serif;
+}
+.voice p{
+  margin:0;
+  color:var(--muted);
+  font-size:14px;
+  line-height:2;
+}
+.requirements{
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  overflow:hidden;
+}
+.req-row{
+  display:grid;
+  grid-template-columns:240px minmax(0,1fr);
+  border-bottom:1px solid var(--line);
+}
+.req-row:last-child{
+  border-bottom:0;
+}
+.req-row dt,
+.req-row dd{
+  margin:0;
+  padding:20px 24px;
+}
+.req-row dt{
+  background:var(--accent-weak);
+  color:var(--accent);
+  font-weight:900;
+}
+.req-row dd{
+  color:#344152;
+}
+.req-row ul{
+  margin:0;
+  padding-left:1.1em;
+}
+.req-row li{
+  margin:.2em 0;
+}
+.two-col{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+  gap:22px;
+}
+.info-box{
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  padding:30px;
+}
+.info-box h3{
+  margin:0 0 14px;
+  font-family:"Zen Kaku Gothic New",sans-serif;
+  font-size:22px;
+}
+.info-box p{
+  margin:0;
+  color:var(--muted);
+}
+.map{
+  margin-top:20px;
+  aspect-ratio:16/9;
+  width:100%;
+  max-width:100%;
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  overflow:hidden;
+  background:
+    linear-gradient(135deg,#f0f4f8 25%,transparent 25%) 0 0/28px 28px,
+    linear-gradient(225deg,#f0f4f8 25%,transparent 25%) 0 0/28px 28px,
+    #fff;
+  display:grid;
+  place-items:center;
+  color:var(--muted);
+  text-align:center;
+  padding:20px;
+}
+.faq{
+  display:grid;
+  gap:14px;
+}
+.faq-item{
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  overflow:hidden;
+}
+.faq-q{
+  width:100%;
+  max-width:100%;
+  border:0;
+  background:#fff;
+  color:var(--ink);
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:16px;
+  padding:22px 24px;
+  text-align:left;
+  font-weight:900;
+}
+.faq-q span{
+  min-width:0;
+}
+.faq-q::after{
+  content:"+";
+  flex:0 0 auto;
+  width:28px;
+  height:28px;
+  border-radius:50%;
+  border:1px solid var(--accent);
+  color:var(--accent);
+  display:grid;
+  place-items:center;
+  font-family:"Manrope",sans-serif;
+  font-weight:800;
+}
+.faq-item.is-open .faq-q::after{
+  content:"-";
+}
+.faq-a{
+  display:none;
+  padding:0 24px 24px;
+  color:var(--muted);
+}
+.faq-item.is-open .faq-a{
+  display:block;
+}
+.form-wrap{
+  display:grid;
+  grid-template-columns:minmax(0,.82fr) minmax(0,1.18fr);
+  gap:36px;
+  align-items:start;
+}
+.form-lead{
+  background:var(--accent);
+  color:#fff;
+  border-radius:var(--radius);
+  padding:32px;
+}
+.form-lead h2{
+  margin:0 0 16px;
+  font-family:"Zen Kaku Gothic New",sans-serif;
+  font-size:32px;
+  line-height:1.35;
+}
+.form-lead p{
+  margin:0 0 20px;
+  opacity:.9;
+}
+.form-lead dl{
+  margin:0;
+  display:grid;
+  gap:10px;
+}
+.form-lead div{
+  display:grid;
+  grid-template-columns:84px minmax(0,1fr);
+  gap:12px;
+}
+.form-lead dt,
+.form-lead dd{
+  margin:0;
+  font-size:14px;
+}
+.form-lead dt{
+  opacity:.72;
+}
+.form{
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  padding:30px;
+}
+.form-grid{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:18px;
+}
+.field{
+  display:grid;
+  gap:8px;
+}
+.field--full{
+  grid-column:1/-1;
+}
+label{
+  font-weight:900;
+  font-size:14px;
+}
+input,
+textarea,
+select{
+  width:100%;
+  max-width:100%;
+  border:1px solid var(--line);
+  border-radius:6px;
+  background:#fff;
+  padding:13px 14px;
+  font-size:16px;
+  color:var(--ink);
+}
+textarea{
+  min-height:150px;
+  resize:vertical;
+}
+.form__note{
+  margin:16px 0 0;
+  color:var(--muted);
+  font-size:13px;
+}
+.form__submit{
+  margin-top:22px;
+}
+.footer{
+  padding:40px 0 96px;
+  background:#101820;
+  color:#fff;
+}
+.footer__grid{
+  display:flex;
+  justify-content:space-between;
+  gap:24px;
+  align-items:flex-start;
+}
+.footer small{
+  color:rgba(255,255,255,.68);
+  line-height:1.8;
+}
+.footer__note{
+  margin-top:18px;
+  color:rgba(255,255,255,.72);
+  font-size:12px;
+  line-height:1.8;
+}
+.sticky-cta{
+  position:fixed;
+  left:0;
+  right:0;
+  bottom:0;
+  z-index:30;
+  display:none;
+  padding:10px 12px calc(10px + env(safe-area-inset-bottom));
+  background:rgba(255,255,255,.92);
+  border-top:1px solid var(--line);
+}
+.sticky-cta__inner{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:8px;
+  max-width:100%;
+}
+.reveal{
+  opacity:0;
+  transform:translateY(18px);
+  transition:opacity .6s ease,transform .6s ease;
+}
+.reveal.is-visible{
+  opacity:1;
+  transform:none;
+}
+@media (prefers-reduced-motion:reduce){
+  html{
+    scroll-behavior:auto;
+  }
+  *,
+  *::before,
+  *::after{
+    animation:none!important;
+    transition:none!important;
+  }
+  .reveal{
+    opacity:1;
+    transform:none;
+  }
+}
+@media (max-width:980px){
+  .nav,
+  .header__actions{
+    display:none;
+  }
+  .menu-btn{
+    display:block;
+  }
+  .hero{
+    padding-top:126px;
+  }
+  .hero__grid,
+  .section__head,
+  .work-grid,
+  .voice-layout,
+  .form-wrap{
+    grid-template-columns:1fr;
+  }
+  .hero-card{
+    max-width:680px;
+  }
+  .cards,
+  .timeline{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+  }
+  .message{
+    position:static;
+  }
+}
+@media (max-width:640px){
+  .container{
+    width:min(100% - 28px,var(--container));
+  }
+  .header__inner{
+    min-height:68px;
+  }
+  .mobile-nav{
+    top:68px;
+  }
+  .logo__main{
+    font-size:16px;
+  }
+  .logo__sub{
+    font-size:10px;
+  }
+  .hero{
+    padding:112px 0 54px;
+    background:
+      linear-gradient(180deg,rgba(255,255,255,.98) 0%,rgba(255,255,255,.9) 58%,rgba(255,255,255,.78) 100%),
+      url("https://images.unsplash.com/photo-1664596350962-603b0a41524a?auto=format&fit=crop&w=1200&q=70") center/cover no-repeat;
+  }
+  .hero h1{
+    font-size:38px;
+  }
+  .hero__copy{
+    font-size:15px;
+  }
+  .btn{
+    width:100%;
+    max-width:100%;
+    min-height:48px;
+    padding:0 16px;
+    font-size:14px;
+  }
+  .hero__cta{
+    display:grid;
+    grid-template-columns:1fr;
+  }
+  .stats__grid,
+  .cards,
+  .timeline,
+  .two-col,
+  .form-grid{
+    grid-template-columns:1fr;
+  }
+  .stat{
+    border-left:0;
+    border-bottom:1px solid var(--line);
+    padding:20px 4px;
+  }
+  .stat:last-child{
+    border-right:0;
+    border-bottom:0;
+  }
+  .section{
+    padding:76px 0;
+  }
+  .section__head{
+    margin-bottom:32px;
+  }
+  .card,
+  .info-box,
+  .form,
+  .form-lead,
+  .hero-card{
+    padding:24px;
+  }
+  .work-item{
+    grid-template-columns:1fr;
+    gap:8px;
+    padding:22px;
+  }
+  .photo-panel{
+    min-height:280px;
+  }
+  .req-row{
+    grid-template-columns:1fr;
+  }
+  .req-row dt,
+  .req-row dd{
+    padding:16px 18px;
+  }
+  .form-lead div{
+    grid-template-columns:1fr;
+    gap:2px;
+  }
+  .footer__grid{
+    display:grid;
+  }
+  .sticky-cta{
+    display:block;
+  }
+  .footer{
+    padding-bottom:112px;
+  }
+}
+</style>
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"JobPosting",
+  "title":"ホームページの作成と更新、修正の補助業務",
+  "description":"東京都品川区、天王洲アイル駅周辺での出社勤務歓迎。WordPressをベースとしたCMSで、テンプレートを活用したホームページ作成補助、文章修正、画像差し替え、バナー作成、JavaScript入れ込みなどを継続的に支援する業務です。",
+  "employmentType":"CONTRACTOR",
+  "jobLocation":{
+    "@type":"Place",
+    "address":{
+      "@type":"PostalAddress",
+      "addressRegion":"東京都",
+      "addressLocality":"品川区",
+      "streetAddress":"天王洲アイル駅周辺"
+    }
+  },
+  "baseSalary":{
+    "@type":"MonetaryAmount",
+    "currency":"JPY",
+    "value":{
+      "@type":"QuantitativeValue",
+      "minValue":50000,
+      "maxValue":300000,
+      "unitText":"MONTH"
+    }
+  },
+  "skills":"HTML, CSS, JavaScript, jQuery, WordPress, Movable Type, Photoshop, Illustrator",
+  "hiringOrganization":{
+    "@type":"Organization",
+    "name":"品川CMS制作補助 採用サンプル"
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"FAQPage",
+  "mainEntity":[
+    {
+      "@type":"Question",
+      "name":"完全リモートでも応募できますか？",
+      "acceptedAnswer":{
+        "@type":"Answer",
+        "text":"募集内容では東京都品川区、天王洲アイル駅周辺へ週2から3日程度出社できる方が歓迎条件です。稼働時間や出社頻度は相談しながら決定する想定です。"
+      }
+    },
+    {
+      "@type":"Question",
+      "name":"ゼロからのコーディング案件ですか？",
+      "acceptedAnswer":{
+        "@type":"Answer",
+        "text":"事前に用意されたテンプレートサイトへHTMLやCSSを追加、上書きする形が中心です。WordPressをベースとしたCMSでの作成補助や更新修正が主な業務です。"
+      }
+    }
+  ]
+}
+</script>
+</head>
+<body>
+<header class="header">
+  <div class="container header__inner">
+    <a class="logo" href="#top" aria-label="トップへ">
+      <span class="logo__main">品川CMS制作補助 採用サンプル</span>
+      <span class="logo__sub">天王洲アイル出社歓迎・継続パートナー募集</span>
+    </a>
+    <nav class="nav" aria-label="主要ナビゲーション">
+      <a href="#work">業務内容</a>
+      <a href="#flow">進め方</a>
+      <a href="#requirements">募集要項</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+    <div class="header__actions">
+      <a class="btn btn--ghost" href="tel:03-0000-0000">
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6.6 4.8 8.8 4c.8-.3 1.6.1 2 .8l1 2.2c.3.7.1 1.5-.5 2l-1.1.9c.9 1.8 2.1 3 3.9 3.9l.9-1.1c.5-.6 1.3-.8 2-.5l2.2 1c.7.3 1.1 1.2.8 2l-.8 2.2c-.3.8-1 1.3-1.9 1.3C10.6 18.8 5.2 13.4 5.2 6.7c0-.8.5-1.6 1.4-1.9Z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        電話相談
+      </a>
+      <a class="btn btn--primary" href="#apply">応募フォーム</a>
+    </div>
+    <button class="menu-btn" type="button" aria-label="メニューを開閉" aria-controls="mobileNav" aria-expanded="false">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </div>
+</header>
+<nav class="mobile-nav" id="mobileNav" aria-label="モバイルナビゲーション">
+  <div class="mobile-nav__inner">
+    <a href="#work">業務内容</a>
+    <a href="#flow">進め方</a>
+    <a href="#requirements">募集要項</a>
+    <a href="#faq">FAQ</a>
+    <a href="#apply">応募フォーム</a>
+  </div>
+</nav>
+<main id="top">
+  <section class="hero">
+    <div class="container hero__grid">
+      <div>
+        <p class="eyebrow">東京都品川区・天王洲アイル駅周辺</p>
+        <h1>作って終わりではなく、育てるCMS補助。</h1>
+        <p class="hero__copy">
+          WordPress系CMSのテンプレートをベースに、医院ホームページの新規作成補助、文章修正、画像差し替え、バナー作成まで。
+          <strong>週2〜3日程度の出社歓迎</strong>で、月契約の継続パートナーを募集する想定のデモページです。
+        </p>
+        <div class="hero__cta">
+          <a class="btn btn--primary" href="#apply">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 6.5h16v11H4v-11Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="m4.8 7.2 7.2 5 7.2-5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            経験年数を添えて応募
+          </a>
+          <a class="btn btn--ghost" href="tel:03-0000-0000">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6.6 4.8 8.8 4c.8-.3 1.6.1 2 .8l1 2.2c.3.7.1 1.5-.5 2l-1.1.9c.9 1.8 2.1 3 3.9 3.9l.9-1.1c.5-.6 1.3-.8 2-.5l2.2 1c.7.3 1.1 1.2.8 2l-.8 2.2c-.3.8-1 1.3-1.9 1.3C10.6 18.8 5.2 13.4 5.2 6.7c0-.8.5-1.6 1.4-1.9Z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            03-0000-0000
+          </a>
+        </div>
+        <p class="hero__note">※電話番号はデモ用のダミーです。実制作時は正式な窓口に差し替えます。</p>
+      </div>
+      <aside class="hero-card reveal">
+        <h2 class="hero-card__title">応募時に必ず確認したいこと</h2>
+        <ul class="hero-card__list">
+          <li><span class="check"></span><span>コーディング経験歴とデザイン経験歴をそれぞれ何年ほどか記載</span></li>
+          <li><span class="check"></span><span>HTML/CSS/JavaScript、jQueryの対応範囲</span></li>
+          <li><span class="check"></span><span>WordPress、Movable Type、CMS更新の実績</span></li>
+          <li><span class="check"></span><span>Photoshop、Illustratorでの画像修正経験</span></li>
+        </ul>
+      </aside>
+    </div>
+  </section>
+  <section class="stats" aria-label="募集条件の要点">
+    <div class="container stats__grid">
+      <div class="stat">
+        <span class="stat__num">2-3</span>
+        <span class="stat__label">週の出社歓迎日数<br>天王洲アイル駅周辺</span>
+      </div>
+      <div class="stat">
+        <span class="stat__num">5-30</span>
+        <span class="stat__label">月契約金額の目安<br>万円・稼働時間に応じて相談</span>
+      </div>
+      <div class="stat">
+        <span class="stat__num">CMS</span>
+        <span class="stat__label">テンプレートをベースに<br>追加・上書きで制作補助</span>
+      </div>
+      <div class="stat">
+        <span class="stat__num">1W</span>
+        <span class="stat__label">数日から1週間以内の<br>更新・修正案件も想定</span>
+      </div>
+    </div>
+  </section>
+  <section class="section" id="fit">
+    <div class="container">
+      <div class="section__head reveal">
+        <h2>ゼロから作る人より、現場を止めない人へ。</h2>
+        <p>完成品を一気に作る募集ではなく、複数サイトを継続して整える補助業務。CMS、既存テンプレート、支給原稿、既存JavaScriptを扱いながら、正確に積み上げられる方に向いた案件です。</p>
+      </div>
+      <div class="cards">
+        <article class="card reveal">
+          <div class="card__icon">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 5h14v14H5V5Z" stroke="currentColor" stroke-width="1.8"/><path d="M8 9h8M8 13h5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+          </div>
+          <h3>テンプレート運用に強い</h3>
+          <p>既存CMSのルールを読み取り、HTMLとCSSを追加・上書き。崩さず、増やし、整える作業が中心です。</p>
+        </article>
+        <article class="card reveal">
+          <div class="card__icon">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 7h16M7 4v16M17 4v16M4 17h16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M9 9h6v6H9V9Z" stroke="currentColor" stroke-width="1.8"/></svg>
+          </div>
+          <h3>画像と原稿を扱える</h3>
+          <p>バナー作成、画像リサイズ、差し替え、原稿データからのページ作成など、日々の更新に必要な手数を任せられます。</p>
+        </article>
+        <article class="card reveal">
+          <div class="card__icon">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 8h10M7 12h6M7 16h10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M5 4h14c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H5c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2Z" stroke="currentColor" stroke-width="1.8"/></svg>
+          </div>
+          <h3>医療系の更新にも対応</h3>
+          <p>医院ホームページの作成補助が含まれるため、清潔感、読みやすさ、表記の慎重さを大切にできる方を想定しています。</p>
+        </article>
+      </div>
+    </div>
+  </section>
+  <section class="section section--soft" id="work">
+    <div class="container">
+      <div class="section__head reveal">
+        <h2>主な業務は、制作補助と更新修正。</h2>
+        <p>デザインを白紙から起こすよりも、用意されたテンプレートや既存サイトを読み解き、必要なパーツを正確に追加する力が活きます。</p>
+      </div>
+      <div class="work-grid">
+        <div class="photo-panel reveal">
+          <img src="https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&w=1200&q=70" alt="医院ホームページ制作を想定した歯科クリニック内装のイメージ写真">
+        </div>
+        <div class="work-list">
+          <article class="work-item reveal">
+            <span class="work-item__tag">CREATE</span>
+            <div>
+              <h3>サイト作成補助</h3>
+              <p>トップページ等にコンテンツパーツを追加しながら、CMSテンプレートをベースに新規ホームページを作成します。</p>
+            </div>
+          </article>
+          <article class="work-item reveal">
+            <span class="work-item__tag">MOVE</span>
+            <div>
+              <h3>ページ引っ越し</h3>
+              <p>リニューアル前のサイトから新しいサイトへ、文章や画像を整理しながら移行します。</p>
+            </div>
+          </article>
+          <article class="work-item reveal">
+            <span class="work-item__tag">UPDATE</span>
+            <div>
+              <h3>文字・画像の入れ替え</h3>
+              <p>既にあるページのお知らせ追加、原稿反映、画像差し替え、画像リサイズなどを行います。</p>
+            </div>
+          </article>
+          <article class="work-item reveal">
+            <span class="work-item__tag">SCRIPT</span>
+            <div>
+              <h3>既存JavaScriptの入れ込み</h3>
+              <p>他サイトで実装済みのスライダー、プルダウンなどを、指示に沿って該当ページへ組み込みます。</p>
+            </div>
+          </article>
+        </div>
+      </div>
+      <p style="margin:18px 0 0;color:var(--muted);font-size:13px;">※写真はイメージです。実制作ではご提供写真や日本人モデルの素材に差し替えます。</p>
+    </div>
+  </section>
+  <section class="section" id="flow">
+    <div class="container">
+      <div class="section__head reveal">
+        <h2>相談しながら、無理のない月契約へ。</h2>
+        <p>稼働時間、契約金額、出社頻度は固定ではなく相談前提。短納期の細かな修正もあるため、連絡の取りやすさと段取りの共有を重視します。</p>
+      </div>
+      <div class="timeline">
+        <article class="step reveal">
+          <h3>経験確認</h3>
+          <p>コーディング、デザイン、CMS、画像ソフトの経験年数と制作実績を確認します。</p>
+        </article>
+        <article class="step reveal">
+          <h3>稼働相談</h3>
+          <p>月稼働時間、出社可能日、急ぎ更新への対応可否をすり合わせます。</p>
+        </article>
+        <article class="step reveal">
+          <h3>マニュアル共有</h3>
+          <p>CMSの操作方法やテンプレートの更新ルールを共有し、作業範囲を明確にします。</p>
+        </article>
+        <article class="step reveal">
+          <h3>継続依頼</h3>
+          <p>複数サイトの作成補助、更新修正、画像作業を月契約で継続して進めます。</p>
+        </article>
+      </div>
+    </div>
+  </section>
+  <section class="section section--soft">
+    <div class="container voice-layout">
+      <aside class="message reveal">
+        <p class="message__label">現場からの一言</p>
+        <p>派手な一案より、今日直せる一手。</p>
+      </aside>
+      <div class="voice-cards">
+        <article class="voice reveal">
+          <h3>医療系サイトの細かな表記に気を配れる方へ</h3>
+          <p>医院ホームページは、清潔感だけでなく、診療内容やお知らせの読みやすさが大切です。誤字修正、画像差し替え、余白調整のような小さな作業ほど、サイト全体の信頼感に直結します。</p>
+        </article>
+        <article class="voice reveal">
+          <h3>AI活用にも前向きな制作体制</h3>
+          <p>募集内容では、AIを活用したデザイン作成や更新業務にも力を入れている想定です。効率化しつつ、最終的な見た目と文章の自然さを人の目で整えられる方に向いています。</p>
+        </article>
+        <article class="voice reveal">
+          <h3>当日中の細かな修正が発生することも</h3>
+          <p>納期は数日以内、1週間以内のものが中心ですが、文字修正やお知らせ追加など当日中の作業が発生する場合もあります。対応範囲は相談しながら決定します。</p>
+        </article>
+      </div>
+    </div>
+  </section>
+  <section class="section" id="requirements">
+    <div class="container">
+      <div class="section__head reveal">
+        <h2>募集要項</h2>
+        <p>募集文に記載された条件をもとにしたデモ表示です。実際の契約条件、稼働時間、選考方法は正式な募集内容に合わせて調整します。</p>
+      </div>
+      <dl class="requirements reveal">
+        <div class="req-row">
+          <dt>契約形態</dt>
+          <dd>月契約での継続依頼を想定</dd>
+        </div>
+        <div class="req-row">
+          <dt>月稼働時間</dt>
+          <dd>応相談</dd>
+        </div>
+        <div class="req-row">
+          <dt>月契約金額</dt>
+          <dd>5万〜30万円目安。稼働時間に応じて決定</dd>
+        </div>
+        <div class="req-row">
+          <dt>勤務地</dt>
+          <dd>東京都品川区、最寄り駅は天王洲アイル駅。週2〜3日程度の出社可の方歓迎</dd>
+        </div>
+        <div class="req-row">
+          <dt>主な業務</dt>
+          <dd>
+            <ul>
+              <li>医院ホームページの作成補助</li>
+              <li>文章の修正、画像の差し替え、画像リサイズ</li>
+              <li>バナー作成</li>
+              <li>原稿データからのページ作成</li>
+              <li>既存JavaScriptの入れ込み</li>
+            </ul>
+          </dd>
+        </div>
+        <div class="req-row">
+          <dt>必要スキル</dt>
+          <dd>HTML/CSS/JavaScript、jQuery、Photoshop、Illustrator</dd>
+        </div>
+        <div class="req-row">
+          <dt>歓迎経験</dt>
+          <dd>WordPress、Movable Type、ウェブサービスのコーディング実績、医療系デザイン経験</dd>
+        </div>
+        <div class="req-row">
+          <dt>応募時の必須連絡</dt>
+          <dd>コーディング経験歴とデザイン経験歴を、それぞれ何年ほどか記載してください。</dd>
+        </div>
+      </dl>
+    </div>
+  </section>
+  <section class="section section--soft" id="access">
+    <div class="container">
+      <div class="section__head reveal">
+        <h2>天王洲アイル駅周辺で、現場に近い働き方。</h2>
+        <p>出社歓迎のため、テンプレートの使い方や更新ルールを対面で確認しやすい環境を想定しています。細かな修正の背景まで共有しやすいのが強みです。</p>
+      </div>
+      <div class="two-col">
+        <div class="info-box reveal">
+          <h3>所在地</h3>
+          <p>東京都品川区・天王洲アイル駅周辺</p>
+          <div class="map" aria-label="地図のダミー表示">
+            <span>地図エリア<br>※デモのため簡易表示です</span>
+          </div>
+        </div>
+        <div class="info-box reveal">
+          <h3>稼働イメージ</h3>
+          <p>週2〜3日程度の出社歓迎。細かな更新や修正は、数日以内、1週間以内、または当日中の相談が発生する想定です。月の稼働時間と金額は、作業範囲に応じて調整します。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="section" id="faq">
+    <div class="container">
+      <div class="section__head reveal">
+        <h2>よくある質問</h2>
+        <p>応募前に確認されやすい内容を、募集文に沿って整理しています。条件は正式なやり取りで確定します。</p>
+      </div>
+      <div class="faq">
+        <div class="faq-item reveal is-open">
+          <button class="faq-q" type="button"><span>デザイン作成はゼロから必要ですか？</span></button>
+          <div class="faq-a">サイトのデザイン作成は必須ではなく、CMSテンプレートをベースにトップページ等へコンテンツパーツを追加する作業が中心です。デザイナーが作ったデザインの追加修正が発生する場合があります。</div>
+        </div>
+        <div class="faq-item reveal">
+          <button class="faq-q" type="button"><span>PhotoshopやIllustratorは必須ですか？</span></button>
+          <div class="faq-a">募集文ではPhotoshop、Illustratorを使えるとありがたいとされています。画像修正、バナー作成、リサイズなどの作業が想定されています。</div>
+        </div>
+        <div class="faq-item reveal">
+          <button class="faq-q" type="button"><span>出社はどの程度必要ですか？</span></button>
+          <div class="faq-a">東京都品川区、天王洲アイル駅周辺で、週2〜3日程度の出社が可能な方が歓迎条件です。具体的な頻度は相談しながら決定します。</div>
+        </div>
+        <div class="faq-item reveal">
+          <button class="faq-q" type="button"><span>応募時に何を送ればよいですか？</span></button>
+          <div class="faq-a">コーディング経験歴とデザイン経験歴をそれぞれ何年ほどか、制作実績や過去コード、WordPressやMovable Typeの実績があれば併せて送る想定です。</div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="section section--soft" id="apply">
+    <div class="container form-wrap">
+      <div class="form-lead reveal">
+        <h2>経験年数が、最初の会話を早くする。</h2>
+        <p>応募時は、コーディング経験歴とデザイン経験歴を分けて記載してください。CMS更新や医療系サイトの経験がある場合は、具体的な担当範囲も添えると伝わりやすくなります。</p>
+        <dl>
+          <div>
+            <dt>電話</dt>
+            <dd><a href="tel:03-0000-0000">03-0000-0000</a></dd>
+          </div>
+          <div>
+            <dt>場所</dt>
+            <dd>東京都品川区・天王洲アイル駅周辺</dd>
+          </div>
+          <div>
+            <dt>契約</dt>
+            <dd>月契約・継続依頼想定</dd>
+          </div>
+        </dl>
+      </div>
+      <form class="form reveal" action="#" method="post">
+        <div class="form-grid">
+          <div class="field">
+            <label for="name">お名前</label>
+            <input id="name" name="name" type="text" autocomplete="name" placeholder="山田 太郎">
+          </div>
+          <div class="field">
+            <label for="email">メールアドレス</label>
+            <input id="email" name="email" type="email" autocomplete="email" placeholder="sample@example.com">
+          </div>
+          <div class="field">
+            <label for="coding">コーディング経験歴</label>
+            <input id="coding" name="coding" type="text" placeholder="例：HTML/CSS 5年、jQuery 3年">
+          </div>
+          <div class="field">
+            <label for="design">デザイン経験歴</label>
+            <input id="design" name="design" type="text" placeholder="例：Webデザイン 4年">
+          </div>
+          <div class="field">
+            <label for="visit">出社可能日数</label>
+            <select id="visit" name="visit">
+              <option>週2〜3日程度の出社が可能</option>
+              <option>一部日程で出社可能</option>
+              <option>相談したい</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="tool">使用可能ツール</label>
+            <input id="tool" name="tool" type="text" placeholder="WordPress、Photoshopなど">
+          </div>
+          <div class="field field--full">
+            <label for="message">制作実績・対応範囲</label>
+            <textarea id="message" name="message" placeholder="CMS更新、医院サイト、バナー作成、既存JavaScript実装など、担当した内容を記載してください。"></textarea>
+          </div>
+        </div>
+        <p class="form__note">※このフォームはデモです。送信機能は実装していません。掲載内容は仮の内容です。</p>
+        <div class="form__submit">
+          <button class="btn btn--primary" type="submit">応募内容を確認する</button>
+        </div>
+      </form>
+    </div>
+  </section>
+</main>
+<footer class="footer">
+  <div class="container footer__grid">
+    <div>
+      <strong>品川CMS制作補助 採用サンプル</strong>
+      <p class="footer__note">※本ページは制作サンプル(デモ)です。掲載の内容・数値は仮のもので、写真はイメージです。</p>
+    </div>
+    <small>所在地：東京都品川区・天王洲アイル駅周辺<br>電話：03-0000-0000</small>
+  </div>
+</footer>
+<div class="sticky-cta" aria-label="固定応募導線">
+  <div class="sticky-cta__inner">
+    <a class="btn btn--ghost" href="tel:03-0000-0000">電話相談</a>
+    <a class="btn btn--primary" href="#apply">応募する</a>
+  </div>
+</div>
+<script>
+(function(){
+  const menuBtn=document.querySelector(".menu-btn");
+  const mobileNav=document.querySelector(".mobile-nav");
+  if(menuBtn&&mobileNav){
+    menuBtn.addEventListener("click",function(){
+      const open=menuBtn.classList.toggle("is-open");
+      mobileNav.classList.toggle("is-open",open);
+      menuBtn.setAttribute("aria-expanded",String(open));
+    });
+    mobileNav.querySelectorAll("a").forEach(function(link){
+      link.addEventListener("click",function(){
+        menuBtn.classList.remove("is-open");
+        mobileNav.classList.remove("is-open");
+        menuBtn.setAttribute("aria-expanded","false");
+      });
+    });
+  }
+  document.querySelectorAll(".faq-q").forEach(function(button){
+    button.addEventListener("click",function(){
+      const item=button.closest(".faq-item");
+      if(item){
+        item.classList.toggle("is-open");
+      }
+    });
+  });
+  const targets=document.querySelectorAll(".reveal");
+  if(!("IntersectionObserver" in window)){
+    targets.forEach(function(el){el.classList.add("is-visible");});
+    return;
+  }
+  const observer=new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      if(entry.isIntersecting){
+        entry.target.classList.add("is-visible");
+        observer.unobserve(entry.target);
+      }
+    });
+  },{threshold:.12});
+  targets.forEach(function(el){observer.observe(el);});
+})();
+</script>
+</body>
+</html>

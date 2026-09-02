@@ -1,0 +1,1996 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shopify × LINE・L Message連携デモ | レンタルサービス移行サンプル</title>
+  <meta name="description" content="レンタルサービスのShopify移行、衣装選択、口コミ表示、LINE公式アカウント・L Message連携までを想定した制作サンプルページです。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+JP:wght@400;500;700;900&family=Zen+Kaku+Gothic+New:wght@500;700;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --accent: #163b6d;
+      --accent-soft: #eef4fb;
+      --ink: #18202a;
+      --text: #3d4652;
+      --muted: #6c7582;
+      --line: #dbe3ec;
+      --bg: #fbfcfd;
+      --white: #ffffff;
+      --shadow: 0 18px 44px rgba(22, 59, 109, 0.14);
+      --radius: 8px;
+      --font-body: "Noto Sans JP", sans-serif;
+      --font-head: "Zen Kaku Gothic New", sans-serif;
+      --font-num: "Manrope", sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      overflow-x: hidden;
+    }
+
+    body {
+      margin: 0;
+      color: var(--text);
+      background: var(--bg);
+      font-family: var(--font-body);
+      font-feature-settings: "palt";
+      line-height: 1.78;
+      overflow-x: hidden;
+    }
+
+    body.is-locked {
+      overflow: hidden;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+      height: auto;
+    }
+
+    button,
+    input,
+    select,
+    textarea {
+      font: inherit;
+    }
+
+    input,
+    select,
+    textarea {
+      font-size: 16px;
+    }
+
+    .container {
+      width: min(1120px, calc(100% - 40px));
+      max-width: 100%;
+      margin: 0 auto;
+    }
+
+    .section {
+      padding: 104px 0;
+    }
+
+    .section.compact {
+      padding: 88px 0;
+    }
+
+    .header {
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      background: rgba(255, 255, 255, 0.92);
+      border-bottom: 1px solid rgba(219, 227, 236, 0.8);
+      backdrop-filter: blur(16px);
+    }
+
+    .header-inner {
+      width: min(1180px, calc(100% - 32px));
+      max-width: 100%;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 72px;
+      gap: 18px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 0;
+    }
+
+    .brand-mark {
+      flex: 0 0 auto;
+      width: 38px;
+      max-width: 100%;
+      aspect-ratio: 1;
+      border-radius: 50%;
+      background: var(--accent);
+      position: relative;
+      box-shadow: 0 10px 22px rgba(22, 59, 109, 0.2);
+    }
+
+    .brand-mark::before,
+    .brand-mark::after {
+      content: "";
+      position: absolute;
+      background: var(--white);
+      border-radius: 999px;
+    }
+
+    .brand-mark::before {
+      width: 18px;
+      max-width: 100%;
+      height: 3px;
+      top: 15px;
+      left: 10px;
+    }
+
+    .brand-mark::after {
+      width: 11px;
+      max-width: 100%;
+      height: 3px;
+      top: 21px;
+      left: 17px;
+    }
+
+    .brand-text {
+      display: grid;
+      gap: 0;
+      min-width: 0;
+    }
+
+    .brand-name {
+      font-family: var(--font-head);
+      font-weight: 900;
+      color: var(--ink);
+      letter-spacing: 0;
+      line-height: 1.2;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .brand-sub {
+      font-size: 12px;
+      color: var(--muted);
+      line-height: 1.3;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .desktop-nav {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .desktop-nav a {
+      position: relative;
+      white-space: nowrap;
+    }
+
+    .desktop-nav a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -8px;
+      width: 100%;
+      max-width: 100%;
+      height: 2px;
+      transform: scaleX(0);
+      transform-origin: left;
+      background: var(--accent);
+      transition: transform 0.22s ease;
+    }
+
+    .desktop-nav a:hover::after {
+      transform: scaleX(1);
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex: 0 0 auto;
+    }
+
+    .tel-link {
+      font-family: var(--font-num);
+      font-weight: 800;
+      color: var(--accent);
+      white-space: nowrap;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      border: 0;
+      border-radius: 100px;
+      padding: 13px 22px;
+      background: var(--accent);
+      color: var(--white);
+      font-weight: 800;
+      line-height: 1.2;
+      box-shadow: var(--shadow);
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+      max-width: 100%;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 22px 54px rgba(22, 59, 109, 0.2);
+    }
+
+    .btn svg {
+      width: 18px;
+      max-width: 100%;
+      height: 18px;
+      flex: 0 0 auto;
+    }
+
+    .btn.secondary {
+      background: var(--white);
+      color: var(--accent);
+      border: 1px solid var(--line);
+      box-shadow: 0 12px 32px rgba(24, 32, 42, 0.08);
+    }
+
+    .menu-btn {
+      display: none;
+      width: 44px;
+      max-width: 100%;
+      aspect-ratio: 1;
+      border: 1px solid var(--line);
+      border-radius: 50%;
+      background: var(--white);
+      align-items: center;
+      justify-content: center;
+      padding: 0;
+      cursor: pointer;
+    }
+
+    .menu-lines {
+      width: 18px;
+      max-width: 100%;
+      display: grid;
+      gap: 5px;
+    }
+
+    .menu-lines span {
+      display: block;
+      height: 2px;
+      background: var(--accent);
+      border-radius: 999px;
+    }
+
+    .mobile-nav {
+      position: fixed;
+      inset: 72px 0 auto 0;
+      z-index: 38;
+      background: rgba(255, 255, 255, 0.98);
+      border-bottom: 1px solid var(--line);
+      padding: 20px;
+      transform: translateY(-120%);
+      transition: transform 0.24s ease;
+      box-shadow: 0 18px 38px rgba(24, 32, 42, 0.08);
+    }
+
+    .mobile-nav.is-open {
+      transform: translateY(0);
+    }
+
+    .mobile-nav a {
+      display: block;
+      padding: 13px 0;
+      border-bottom: 1px solid var(--line);
+      font-weight: 800;
+      color: var(--ink);
+    }
+
+    .hero {
+      padding: 74px 0 92px;
+      background:
+        linear-gradient(180deg, #ffffff 0%, #f7f9fc 100%);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: auto -10% -34% -10%;
+      height: 48%;
+      background: var(--accent-soft);
+      border-radius: 50% 50% 0 0;
+      z-index: 0;
+    }
+
+    .hero-grid {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+      gap: 54px;
+      align-items: center;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--accent);
+      font-weight: 900;
+      font-size: 14px;
+      letter-spacing: 0;
+      margin-bottom: 18px;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 32px;
+      max-width: 100%;
+      height: 2px;
+      background: var(--accent);
+      border-radius: 999px;
+      flex: 0 0 auto;
+    }
+
+    .hero h1 {
+      margin: 0;
+      color: var(--ink);
+      font-family: var(--font-head);
+      font-size: clamp(38px, 5vw, 64px);
+      line-height: 1.12;
+      letter-spacing: 0;
+      font-weight: 900;
+    }
+
+    .hero-copy {
+      margin: 24px 0 0;
+      font-size: 17px;
+      line-height: 2;
+      max-width: 43em;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 14px;
+      margin-top: 34px;
+    }
+
+    .hero-note {
+      margin-top: 18px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .trust-band {
+      margin-top: 36px;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.86);
+      border-radius: var(--radius);
+      overflow: hidden;
+      max-width: 100%;
+    }
+
+    .trust-item {
+      padding: 20px 18px;
+      border-right: 1px solid var(--line);
+    }
+
+    .trust-item:last-child {
+      border-right: 0;
+    }
+
+    .trust-num {
+      display: block;
+      font-family: var(--font-num);
+      font-size: 28px;
+      font-weight: 800;
+      color: var(--accent);
+      line-height: 1.1;
+    }
+
+    .trust-label {
+      display: block;
+      margin-top: 6px;
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    .hero-visual {
+      position: relative;
+      min-width: 0;
+    }
+
+    .visual-frame {
+      background: var(--white);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      max-width: 100%;
+    }
+
+    .visual-photo {
+      aspect-ratio: 16 / 10;
+      object-fit: cover;
+      width: 100%;
+      max-width: 100%;
+      filter: saturate(0.88);
+    }
+
+    .flow-panel {
+      padding: 24px;
+      display: grid;
+      gap: 14px;
+    }
+
+    .flow-row {
+      display: grid;
+      grid-template-columns: auto minmax(0, 1fr) auto;
+      align-items: center;
+      gap: 12px;
+      padding: 14px;
+      background: #f8fafc;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+    }
+
+    .flow-dot {
+      width: 30px;
+      max-width: 100%;
+      aspect-ratio: 1;
+      border-radius: 50%;
+      background: var(--accent);
+      color: var(--white);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-num);
+      font-weight: 800;
+      font-size: 13px;
+      flex: 0 0 auto;
+    }
+
+    .flow-title {
+      color: var(--ink);
+      font-weight: 900;
+      line-height: 1.45;
+    }
+
+    .flow-sub {
+      font-size: 12px;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    .arrow-line {
+      width: 22px;
+      max-width: 100%;
+      height: 2px;
+      background: var(--accent);
+      position: relative;
+      opacity: 0.85;
+    }
+
+    .arrow-line::after {
+      content: "";
+      position: absolute;
+      right: 0;
+      top: -4px;
+      width: 8px;
+      max-width: 100%;
+      height: 8px;
+      border-right: 2px solid var(--accent);
+      border-top: 2px solid var(--accent);
+      transform: rotate(45deg);
+    }
+
+    .section-head {
+      margin-bottom: 42px;
+      display: grid;
+      gap: 12px;
+    }
+
+    .section-head.center {
+      text-align: center;
+      justify-items: center;
+    }
+
+    .section-kicker {
+      color: var(--accent);
+      font-family: var(--font-num);
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: 0;
+      text-transform: uppercase;
+    }
+
+    .section-title {
+      margin: 0;
+      color: var(--ink);
+      font-family: var(--font-head);
+      font-size: clamp(30px, 3.4vw, 46px);
+      line-height: 1.28;
+      letter-spacing: 0;
+      font-weight: 900;
+    }
+
+    .section-lead {
+      margin: 0;
+      max-width: 46em;
+      color: var(--text);
+      font-size: 16px;
+      line-height: 2;
+    }
+
+    .cards-3 {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 22px;
+    }
+
+    .card {
+      background: var(--white);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 28px;
+      box-shadow: 0 10px 28px rgba(24, 32, 42, 0.05);
+      max-width: 100%;
+    }
+
+    .card-icon {
+      width: 46px;
+      max-width: 100%;
+      aspect-ratio: 1;
+      border-radius: 50%;
+      border: 1px solid var(--line);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+      background: var(--accent-soft);
+      color: var(--accent);
+    }
+
+    .card-icon svg {
+      width: 22px;
+      max-width: 100%;
+      height: 22px;
+    }
+
+    .card h3 {
+      margin: 0 0 12px;
+      color: var(--ink);
+      font-family: var(--font-head);
+      font-size: 21px;
+      line-height: 1.45;
+      letter-spacing: 0;
+    }
+
+    .card p {
+      margin: 0;
+      font-size: 15px;
+      line-height: 1.9;
+    }
+
+    .pale {
+      background: var(--accent-soft);
+    }
+
+    .architecture {
+      display: grid;
+      grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+      gap: 44px;
+      align-items: start;
+    }
+
+    .check-list {
+      display: grid;
+      gap: 14px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .check-list li {
+      display: grid;
+      grid-template-columns: auto minmax(0, 1fr);
+      gap: 12px;
+      align-items: start;
+      background: var(--white);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 16px;
+    }
+
+    .check-mark {
+      width: 24px;
+      max-width: 100%;
+      aspect-ratio: 1;
+      border-radius: 50%;
+      background: var(--accent);
+      color: var(--white);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      font-weight: 900;
+      line-height: 1;
+      margin-top: 3px;
+    }
+
+    .system-map {
+      background: var(--white);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 30px;
+      box-shadow: var(--shadow);
+      max-width: 100%;
+    }
+
+    .system-node {
+      display: grid;
+      grid-template-columns: auto minmax(0, 1fr);
+      gap: 15px;
+      align-items: center;
+      padding: 18px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: #fbfcfd;
+      margin-bottom: 14px;
+    }
+
+    .system-node:last-child {
+      margin-bottom: 0;
+    }
+
+    .node-badge {
+      width: 38px;
+      max-width: 100%;
+      aspect-ratio: 1;
+      border-radius: 50%;
+      background: var(--accent);
+      color: var(--white);
+      font-family: var(--font-num);
+      font-weight: 800;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .node-title {
+      display: block;
+      color: var(--ink);
+      font-weight: 900;
+      line-height: 1.45;
+    }
+
+    .node-text {
+      display: block;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.6;
+      margin-top: 2px;
+    }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: 22px;
+    }
+
+    .product-demo {
+      background: var(--white);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: 0 14px 36px rgba(24, 32, 42, 0.08);
+      max-width: 100%;
+    }
+
+    .product-top {
+      padding: 24px;
+      border-bottom: 1px solid var(--line);
+      display: grid;
+      gap: 12px;
+    }
+
+    .product-title {
+      margin: 0;
+      color: var(--ink);
+      font-family: var(--font-head);
+      font-size: 24px;
+      letter-spacing: 0;
+      line-height: 1.35;
+    }
+
+    .product-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      border: 1px solid var(--line);
+      border-radius: 100px;
+      padding: 6px 12px;
+      font-size: 12px;
+      font-weight: 800;
+      color: var(--accent);
+      background: var(--white);
+      max-width: 100%;
+    }
+
+    .choice-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+      padding: 24px;
+    }
+
+    .choice {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 10px;
+      background: #fbfcfd;
+      display: grid;
+      gap: 9px;
+      min-width: 0;
+    }
+
+    .choice-swatch {
+      aspect-ratio: 1;
+      border-radius: 6px;
+      background:
+        linear-gradient(135deg, rgba(22, 59, 109, 0.12), rgba(22, 59, 109, 0.04)),
+        repeating-linear-gradient(45deg, #ffffff 0 8px, #eef4fb 8px 16px);
+      border: 1px solid var(--line);
+      max-width: 100%;
+    }
+
+    .choice-name {
+      color: var(--ink);
+      font-size: 13px;
+      font-weight: 900;
+      line-height: 1.45;
+      overflow-wrap: anywhere;
+    }
+
+    .review-box {
+      padding: 0 24px 24px;
+    }
+
+    .review-inner {
+      border-top: 1px solid var(--line);
+      padding-top: 20px;
+      display: grid;
+      gap: 10px;
+    }
+
+    .stars {
+      font-family: var(--font-num);
+      color: var(--accent);
+      font-weight: 800;
+      letter-spacing: 0;
+    }
+
+    .review-text {
+      margin: 0;
+      font-size: 14px;
+      line-height: 1.8;
+    }
+
+    .data-table {
+      width: 100%;
+      max-width: 100%;
+      border-collapse: collapse;
+      background: var(--white);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      overflow: hidden;
+      display: table;
+      box-shadow: 0 10px 28px rgba(24, 32, 42, 0.05);
+    }
+
+    .data-table th,
+    .data-table td {
+      padding: 16px;
+      border-bottom: 1px solid var(--line);
+      text-align: left;
+      vertical-align: top;
+      font-size: 14px;
+      line-height: 1.65;
+    }
+
+    .data-table th {
+      width: 34%;
+      max-width: 100%;
+      color: var(--ink);
+      background: #f8fafc;
+      font-weight: 900;
+    }
+
+    .data-table tr:last-child th,
+    .data-table tr:last-child td {
+      border-bottom: 0;
+    }
+
+    .pricing {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 22px;
+    }
+
+    .price-card {
+      background: var(--white);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 30px;
+      position: relative;
+      max-width: 100%;
+    }
+
+    .price-card.recommended {
+      border-color: var(--accent);
+      box-shadow: var(--shadow);
+    }
+
+    .price-label {
+      color: var(--accent);
+      font-weight: 900;
+      font-size: 13px;
+      margin-bottom: 12px;
+    }
+
+    .price-name {
+      margin: 0 0 14px;
+      color: var(--ink);
+      font-family: var(--font-head);
+      font-size: 24px;
+      line-height: 1.35;
+      letter-spacing: 0;
+    }
+
+    .price-value {
+      font-family: var(--font-num);
+      color: var(--accent);
+      font-size: 34px;
+      font-weight: 800;
+      line-height: 1.1;
+      margin-bottom: 6px;
+    }
+
+    .price-small {
+      color: var(--muted);
+      font-size: 13px;
+      margin-bottom: 20px;
+    }
+
+    .price-list {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      display: grid;
+      gap: 10px;
+      font-size: 14px;
+    }
+
+    .price-list li {
+      padding-left: 18px;
+      position: relative;
+    }
+
+    .price-list li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0.74em;
+      width: 7px;
+      max-width: 100%;
+      height: 7px;
+      background: var(--accent);
+      border-radius: 50%;
+    }
+
+    .timeline {
+      display: grid;
+      gap: 16px;
+    }
+
+    .timeline-item {
+      display: grid;
+      grid-template-columns: auto minmax(0, 1fr);
+      gap: 18px;
+      padding: 22px;
+      background: var(--white);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      max-width: 100%;
+    }
+
+    .timeline-num {
+      width: 42px;
+      max-width: 100%;
+      aspect-ratio: 1;
+      border-radius: 50%;
+      background: var(--accent);
+      color: var(--white);
+      font-family: var(--font-num);
+      font-weight: 800;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex: 0 0 auto;
+    }
+
+    .timeline-title {
+      margin: 0 0 4px;
+      color: var(--ink);
+      font-family: var(--font-head);
+      font-size: 20px;
+      letter-spacing: 0;
+      line-height: 1.45;
+    }
+
+    .timeline-text {
+      margin: 0;
+      font-size: 14px;
+      line-height: 1.85;
+    }
+
+    .faq-list {
+      display: grid;
+      gap: 12px;
+    }
+
+    details {
+      background: var(--white);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 0;
+      overflow: hidden;
+      max-width: 100%;
+    }
+
+    summary {
+      cursor: pointer;
+      list-style: none;
+      padding: 20px 22px;
+      color: var(--ink);
+      font-weight: 900;
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      align-items: center;
+    }
+
+    summary::-webkit-details-marker {
+      display: none;
+    }
+
+    summary::after {
+      content: "+";
+      color: var(--accent);
+      font-family: var(--font-num);
+      font-size: 22px;
+      line-height: 1;
+      flex: 0 0 auto;
+    }
+
+    details[open] summary::after {
+      content: "-";
+    }
+
+    .faq-body {
+      padding: 0 22px 20px;
+      color: var(--text);
+      font-size: 14px;
+      line-height: 1.9;
+    }
+
+    .contact {
+      background: var(--white);
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+      gap: 44px;
+      align-items: start;
+    }
+
+    .contact-panel {
+      background: #f8fafc;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 30px;
+      max-width: 100%;
+    }
+
+    .contact-panel h3 {
+      margin: 0 0 18px;
+      color: var(--ink);
+      font-family: var(--font-head);
+      font-size: 24px;
+      letter-spacing: 0;
+    }
+
+    .info-list {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      display: grid;
+      gap: 14px;
+      font-size: 14px;
+    }
+
+    .info-list span {
+      display: block;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 800;
+      margin-bottom: 2px;
+    }
+
+    .form {
+      display: grid;
+      gap: 16px;
+      background: var(--white);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 30px;
+      box-shadow: var(--shadow);
+      max-width: 100%;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: 14px;
+    }
+
+    .field {
+      display: grid;
+      gap: 7px;
+      min-width: 0;
+    }
+
+    .field label {
+      color: var(--ink);
+      font-size: 13px;
+      font-weight: 900;
+    }
+
+    .field input,
+    .field select,
+    .field textarea {
+      width: 100%;
+      max-width: 100%;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      padding: 13px 14px;
+      background: #fbfcfd;
+      color: var(--ink);
+      outline: none;
+    }
+
+    .field textarea {
+      min-height: 128px;
+      resize: vertical;
+    }
+
+    .field input:focus,
+    .field select:focus,
+    .field textarea:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 4px rgba(22, 59, 109, 0.08);
+    }
+
+    .submit-note {
+      margin: 0;
+      font-size: 12px;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .footer {
+      padding: 40px 0 96px;
+      background: var(--ink);
+      color: rgba(255, 255, 255, 0.82);
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 28px;
+      align-items: start;
+    }
+
+    .footer strong {
+      display: block;
+      color: var(--white);
+      font-family: var(--font-head);
+      font-size: 20px;
+      letter-spacing: 0;
+      margin-bottom: 8px;
+    }
+
+    .footer p {
+      margin: 0;
+      font-size: 13px;
+      line-height: 1.8;
+      max-width: 58em;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 18px;
+      flex-wrap: wrap;
+      font-size: 13px;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+
+    .sticky-cta {
+      position: fixed;
+      right: 18px;
+      bottom: 18px;
+      z-index: 45;
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      background: rgba(255, 255, 255, 0.92);
+      border: 1px solid var(--line);
+      border-radius: 100px;
+      padding: 8px;
+      box-shadow: 0 18px 42px rgba(24, 32, 42, 0.16);
+      backdrop-filter: blur(14px);
+      max-width: calc(100% - 36px);
+    }
+
+    .sticky-cta .tel-link {
+      padding: 0 8px;
+      font-size: 14px;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .reveal.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (max-width: 980px) {
+      .desktop-nav,
+      .header-actions {
+        display: none;
+      }
+
+      .menu-btn {
+        display: inline-flex;
+      }
+
+      .hero-grid,
+      .architecture,
+      .contact-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .cards-3,
+      .pricing {
+        grid-template-columns: 1fr;
+      }
+
+      .feature-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero {
+        padding-top: 54px;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .container {
+        width: min(100% - 28px, 1120px);
+        max-width: 100%;
+      }
+
+      .header-inner {
+        width: min(100% - 24px, 1180px);
+        max-width: 100%;
+        min-height: 66px;
+      }
+
+      .mobile-nav {
+        inset: 66px 0 auto 0;
+      }
+
+      .brand-sub {
+        display: none;
+      }
+
+      .section {
+        padding: 78px 0;
+      }
+
+      .section.compact {
+        padding: 70px 0;
+      }
+
+      .hero {
+        padding: 42px 0 72px;
+      }
+
+      .hero h1 {
+        font-size: clamp(35px, 10vw, 44px);
+      }
+
+      .hero-copy {
+        font-size: 15px;
+        line-height: 1.95;
+      }
+
+      .hero-actions {
+        align-items: stretch;
+      }
+
+      .hero-actions .btn {
+        width: 100%;
+        max-width: 100%;
+      }
+
+      .trust-band {
+        grid-template-columns: 1fr;
+      }
+
+      .trust-item {
+        border-right: 0;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .trust-item:last-child {
+        border-bottom: 0;
+      }
+
+      .flow-panel,
+      .system-map,
+      .card,
+      .price-card,
+      .form,
+      .contact-panel {
+        padding: 22px;
+      }
+
+      .flow-row {
+        grid-template-columns: auto minmax(0, 1fr);
+      }
+
+      .arrow-line {
+        display: none;
+      }
+
+      .choice-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .data-table,
+      .data-table tbody,
+      .data-table tr,
+      .data-table th,
+      .data-table td {
+        display: block;
+        width: 100%;
+        max-width: 100%;
+      }
+
+      .data-table th {
+        border-bottom: 0;
+        padding-bottom: 6px;
+      }
+
+      .data-table td {
+        padding-top: 6px;
+      }
+
+      .form-row {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .sticky-cta {
+        left: 10px;
+        right: 10px;
+        bottom: 10px;
+        justify-content: space-between;
+        border-radius: 18px;
+      }
+
+      .sticky-cta .tel-link {
+        display: none;
+      }
+
+      .sticky-cta .btn {
+        flex: 1 1 auto;
+        padding: 13px 12px;
+        font-size: 14px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+
+      .reveal {
+        opacity: 1;
+        transform: none;
+      }
+    }
+  </style>
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ProfessionalService",
+      "name": "Shopify連携サンプル",
+      "description": "レンタルサービスのShopify移行、商品ページ制作、LINE公式アカウント、L Message連携までを想定した制作デモです。",
+      "telephone": "03-0000-0000",
+      "areaServed": "日本",
+      "url": "https://example.com"
+    }
+  </script>
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "既存のLINE友だちもShopify注文と紐付けできますか？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "会員ID、メールアドレス、LINE遷移時のパラメーター、手動照合導線を組み合わせ、既存友だちも対象にした設計を検討します。実装方法はL Message側で利用できる項目と権限により調整します。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "月額費用を抑えた構成にできますか？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "CRM PLUS on LINE、Shopify Flow、Make、Zapier、カスタム開発を比較し、要件に対して過不足の少ない構成を提案する想定です。"
+          }
+        }
+      ]
+    }
+  </script>
+</head>
+<body>
+  <header class="header">
+    <div class="header-inner">
+      <a class="brand" href="#top" aria-label="Shopify連携サンプル トップへ">
+        <span class="brand-mark" aria-hidden="true"></span>
+        <span class="brand-text">
+          <span class="brand-name">Shopify連携サンプル</span>
+          <span class="brand-sub">Rental Service Migration Demo</span>
+        </span>
+      </a>
+      <nav class="desktop-nav" aria-label="主要ナビゲーション">
+        <a href="#solution">実現方法</a>
+        <a href="#product">商品ページ</a>
+        <a href="#cost">費用目安</a>
+        <a href="#flow">進行</a>
+        <a href="#contact">相談</a>
+      </nav>
+      <div class="header-actions">
+        <a class="tel-link" href="tel:0300000000">03-0000-0000</a>
+        <a class="btn" href="#contact">
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M5 12h13M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          連携相談を送る
+        </a>
+      </div>
+      <button class="menu-btn" type="button" aria-label="メニューを開閉" aria-expanded="false">
+        <span class="menu-lines" aria-hidden="true">
+          <span></span>
+          <span></span>
+        </span>
+      </button>
+    </div>
+  </header>
+
+  <nav class="mobile-nav" aria-label="スマートフォン用ナビゲーション">
+    <a href="#solution">実現方法</a>
+    <a href="#product">商品ページ</a>
+    <a href="#cost">費用目安</a>
+    <a href="#flow">進行</a>
+    <a href="#contact">相談</a>
+  </nav>
+
+  <main id="top">
+    <section class="hero">
+      <div class="container hero-grid">
+        <div class="hero-copy-area reveal">
+          <span class="eyebrow">Shopify / LINE / L Message</span>
+          <h1>買った人を、迷わずLINEへ。</h1>
+          <p class="hero-copy">
+            レンタルサービスの既存サイトをShopifyへ移行し、商品・衣装選択、口コミ表示、購入完了後のLINE誘導、L Messageへの顧客情報反映までをひとつの導線として設計するデモページです。
+          </p>
+          <div class="hero-actions">
+            <a class="btn" href="#contact">
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M4 5h16v11H7l-3 3V5Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+              </svg>
+              仕様相談を依頼
+            </a>
+            <a class="btn secondary" href="tel:0300000000">
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M8 5c.4 3 1.8 5.7 4 7.9 2.2 2.2 4.9 3.6 7.9 4l-2.2 3.1c-.4.6-1.1.9-1.8.7C9.7 19.6 4.4 14.3 3.3 8.1c-.1-.7.2-1.4.7-1.8L7.1 4c.4-.3.8-.1.9.4Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+              </svg>
+              電話で確認
+            </a>
+          </div>
+          <p class="hero-note">※仮の内容です。実制作では詳細仕様書と現行サイトを確認したうえで要件を確定します。</p>
+          <div class="trust-band" aria-label="対応範囲">
+            <div class="trust-item">
+              <span class="trust-num">01</span>
+              <span class="trust-label">Shopify商品ページ制作</span>
+            </div>
+            <div class="trust-item">
+              <span class="trust-num">02</span>
+              <span class="trust-label">LINE遷移URLの設計</span>
+            </div>
+            <div class="trust-item">
+              <span class="trust-num">03</span>
+              <span class="trust-label">L Message反映の検証</span>
+            </div>
+          </div>
+        </div>
+        <div class="hero-visual reveal">
+          <div class="visual-frame">
+            <img class="visual-photo" src="https://images.unsplash.com/photo-1664596350962-603b0a41524a?auto=format&fit=crop&w=1200&q=70" alt="日本のオフィス街でスマートフォンを使う利用者のイメージ">
+            <div class="flow-panel">
+              <div class="flow-row">
+                <span class="flow-dot">1</span>
+                <div>
+                  <div class="flow-title">Shopifyで商品・衣装を選択</div>
+                  <div class="flow-sub">注文情報に選択内容を保存</div>
+                </div>
+                <span class="arrow-line" aria-hidden="true"></span>
+              </div>
+              <div class="flow-row">
+                <span class="flow-dot">2</span>
+                <div>
+                  <div class="flow-title">Thank youページからLINEへ誘導</div>
+                  <div class="flow-sub">注文番号を含む動的URLを生成</div>
+                </div>
+                <span class="arrow-line" aria-hidden="true"></span>
+              </div>
+              <div class="flow-row">
+                <span class="flow-dot">3</span>
+                <div>
+                  <div class="flow-title">L Messageの顧客情報へ反映</div>
+                  <div class="flow-sub">確認項目を管理画面で見える化</div>
+                </div>
+                <span class="arrow-line" aria-hidden="true"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="solution" class="section">
+      <div class="container">
+        <div class="section-head center reveal">
+          <span class="section-kicker">Solution</span>
+          <h2 class="section-title">制作だけで終わらせない、注文後の連携設計。</h2>
+          <p class="section-lead">
+            募集内容で重視されているのは、きれいなShopifyサイトだけではなく、注文データとLINEユーザーをどう結び、エルメ上で運用できる状態にするかです。
+          </p>
+        </div>
+        <div class="cards-3">
+          <article class="card reveal">
+            <span class="card-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none">
+                <path d="M6 4h12v16H6V4Z" stroke="currentColor" stroke-width="2"/>
+                <path d="M9 8h6M9 12h6M9 16h4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+              </svg>
+            </span>
+            <h3>スマホ前提の商品ページ</h3>
+            <p>
+              レンタル商品、プラン、衣装写真、口コミを縦長画面で比較しやすく整理。選択した衣装名は注文情報へ残す想定です。
+            </p>
+          </article>
+          <article class="card reveal">
+            <span class="card-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none">
+                <path d="M4 6h16v9H8l-4 4V6Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+                <path d="M8 10h8M8 13h5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+              </svg>
+            </span>
+            <h3>購入完了後のLINE誘導</h3>
+            <p>
+              Thank youページで取得可能な注文情報を確認し、LINE連携ボタンから必要なパラメーターを渡す導線を設計します。
+            </p>
+          </article>
+          <article class="card reveal">
+            <span class="card-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none">
+                <path d="M12 4v16M5 8h14M7 16h10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                <path d="M6 4h12v16H6V4Z" stroke="currentColor" stroke-width="2"/>
+              </svg>
+            </span>
+            <h3>エルメで確認できる状態</h3>
+            <p>
+              注文番号、購入商品、選択衣装、注文日をL Message側の友だち情報や配信文面へ反映する流れを検証します。
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section pale">
+      <div class="container architecture">
+        <div class="reveal">
+          <div class="section-head">
+            <span class="section-kicker">Architecture</span>
+            <h2 class="section-title">低コスト案から、安定運用案まで比較。</h2>
+            <p class="section-lead">
+              検討中の「注文情報を含むLINE遷移URL」案を軸にしつつ、CRM PLUS on LINE、Shopify Flow、Make、Zapier、カスタム開発のどれが最小構成になるかを整理します。
+            </p>
+          </div>
+          <ul class="check-list">
+            <li>
+              <span class="check-mark">✓</span>
+              <span>既存LINE友だちを紐付けるための確認導線を用意</span>
+            </li>
+            <li>
+              <span class="check-mark">✓</span>
+              <span>注文情報に保存する衣装名・プラン名のデータ形式を統一</span>
+            </li>
+            <li>
+              <span class="check-mark">✓</span>
+              <span>月額アプリ費用と開発費のバランスを事前に見積もり</span>
+            </li>
+            <li>
+              <span class="check-mark">✓</span>
+              <span>運用担当者がエルメを開くだけで確認できる項目を設計</span>
+            </li>
+          </ul>
+        </div>
+        <div class="system-map reveal" aria-label="連携構成のサンプル">
+          <div class="system-node">
+            <span class="node-badge">S</span>
+            <span>
+              <span class="node-title">Shopify</span>
+              <span class="node-text">商品、プラン、衣装、口コミ、注文情報を管理</span>
+            </span>
+          </div>
+          <div class="system-node">
+            <span class="node-badge">T</span>
+            <span>
+              <span class="node-title">Thank youページ</span>
+              <span class="node-text">注文番号・商品情報をもとにLINE遷移URLを生成</span>
+            </span>
+          </div>
+          <div class="system-node">
+            <span class="node-badge">L</span>
+            <span>
+              <span class="node-title">LINE公式アカウント</span>
+              <span class="node-text">購入者を友だち追加または既存友だちとして認識</span>
+            </span>
+          </div>
+          <div class="system-node">
+            <span class="node-badge">M</span>
+            <span>
+              <span class="node-title">L Message</span>
+              <span class="node-text">注文番号、購入商品、選択衣装、注文日を確認</span>
+            </span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="product" class="section">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="section-kicker">Product Page</span>
+          <h2 class="section-title">衣装を選びやすく、注文情報にも残す。</h2>
+          <p class="section-lead">
+            レンタルサービスでは、商品写真を見るだけでなく「どの衣装を選んだか」が後続対応の要になります。商品ページ上の選択体験と管理画面の見え方を同時に設計します。
+          </p>
+        </div>
+        <div class="feature-grid">
+          <article class="product-demo reveal">
+            <div class="product-top">
+              <h3 class="product-title">レンタルプラン商品ページ例</h3>
+              <div class="product-meta">
+                <span class="pill">スマホ最適化</span>
+                <span class="pill">口コミ移行</span>
+                <span class="pill">衣装選択</span>
+              </div>
+            </div>
+            <div class="choice-grid" aria-label="衣装選択の見本">
+              <div class="choice">
+                <span class="choice-swatch"></span>
+                <span class="choice-name">衣装A：フォーマル</span>
+              </div>
+              <div class="choice">
+                <span class="choice-swatch"></span>
+                <span class="choice-name">衣装B：ナチュラル</span>
+              </div>
+              <div class="choice">
+                <span class="choice-swatch"></span>
+                <span class="choice-name">衣装C：季節限定</span>
+              </div>
+            </div>
+            <div class="review-box">
+              <div class="review-inner">
+                <div class="stars">5.0 / sample review</div>
+                <p class="review-text">「写真で比較しやすく、到着前の確認もスムーズでした。」※仮の口コミです。</p>
+              </div>
+            </div>
+          </article>
+          <div class="reveal">
+            <table class="data-table" aria-label="注文情報に保存する項目">
+              <tbody>
+                <tr>
+                  <th>注文番号</th>
+                  <td>Shopifyの注文番号をLINE連携時の識別キーとして利用する想定です。</td>
+                </tr>
+                <tr>
+                  <th>購入商品／プラン</th>
+                  <td>商品名、バリエーション、レンタルプランをL Message側で確認できる形に整えます。</td>
+                </tr>
+                <tr>
+                  <th>選択衣装</th>
+                  <td>写真を見て選んだ衣装名を注文メタフィールドまたはラインアイテム属性へ保存します。</td>
+                </tr>
+                <tr>
+                  <th>注文日</th>
+                  <td>購入完了後の対応タイミングが分かるよう、日付情報を渡します。</td>
+                </tr>
+                <tr>
+                  <th>LINEユーザー</th>
+                  <td>新規友だち追加と既存友だちの両方を考慮し、紐付け方法を分けて検証します。</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="cost" class="section pale">
+      <div class="container">
+        <div class="section-head center reveal">
+          <span class="section-kicker">Cost</span>
+          <h2 class="section-title">必要機能に合わせた費用感を先に分ける。</h2>
+          <p class="section-lead">
+            金額は詳細仕様書の確認後に確定します。ここでは、募集内容から想定される構成別の仮目安を置いています。
+          </p>
+        </div>
+        <div class="pricing">
+          <article class="price-card reveal">
+            <div class="price-label">初期検証</div>
+            <h3 class="price-name">連携調査プラン</h3>
+            <div class="price-value">¥80,000</div>
+            <div class="price-small">※仮の内容です</div>
+            <ul class="price-list">
+              <li>現行サイトと仕様書の確認</li>
+              <li>L Message側の項目整理</li>
+              <li>連携方法の比較表作成</li>
+              <li>実装範囲と月額費用の提示</li>
+            </ul>
+          </article>
+          <article class="price-card recommended reveal">
+            <div class="price-label">推奨</div>
+            <h3 class="price-name">Shopify移行＋LINE連携</h3>
+            <div class="price-value">¥450,000</div>
+            <div class="price-small">※仮の内容です</div>
+            <ul class="price-list">
+              <li>Shopifyトップ・商品ページ制作</li>
+              <li>衣装選択UIの構築</li>
+              <li>口コミ表示の移行設計</li>
+              <li>購入完了ページからLINE誘導</li>
+              <li>L Message反映テスト</li>
+            </ul>
+          </article>
+          <article class="price-card reveal">
+            <div class="price-label">拡張</div>
+            <h3 class="price-name">自動化強化プラン</h3>
+            <div class="price-value">¥680,000</div>
+            <div class="price-small">※仮の内容です</div>
+            <ul class="price-list">
+              <li>Shopify FlowやMake連携</li>
+              <li>既存友だち向け照合導線</li>
+              <li>管理用ログ出力</li>
+              <li>運用マニュアル作成</li>
+              <li>公開後の初期改善</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="flow" class="section">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="section-kicker">Project Flow</span>
+          <h2 class="section-title">要件定義を短く、検証を早く。</h2>
+          <p class="section-lead">
+            LINEとL Messageの連携は、管理画面で実際に受け取れるデータ項目の確認が重要です。先に小さく検証し、制作範囲を固めます。
+          </p>
+        </div>
+        <div class="timeline">
+          <div class="timeline-item reveal">
+            <span class="timeline-num">1</span>
+            <div>
+              <h3 class="timeline-title">仕様書・現行サイトの確認</h3>
+              <p class="timeline-text">
+                商品構成、衣装選択、口コミデータ、購入完了後の導線、現在のL Message運用を確認します。
+              </p>
+            </div>
+          </div>
+          <div class="timeline-item reveal">
+            <span class="timeline-num">2</span>
+            <div>
+              <h3 class="timeline-title">連携方式の比較と提案</h3>
+              <p class="timeline-text">
+                パラメーターインポート、CRM PLUS on LINE、Shopify Flow、Make、Zapier、カスタム開発を比較します。
+              </p>
+            </div>
+          </div>
+          <div class="timeline-item reveal">
+            <span class="timeline-num">3</span>
+            <div>
+              <h3 class="timeline-title">Shopify商品ページ制作</h3>
+              <p class="timeline-text">
+                スマホで商品、衣装、口コミを見やすくし、選択内容が注文情報に残るように構築します。
+              </p>
+            </div>
+          </div>
+          <div class="timeline-item reveal">
+            <span class="timeline-num">4</span>
+            <div>
+              <h3 class="timeline-title">LINE誘導とL Message反映テスト</h3>
+              <p class="timeline-text">
+                購入完了ページからLINEへ移動し、注文番号や選択衣装が確認できるかをテストします。
+              </p>
+            </div>
+          </div>
+          <div class="timeline-item reveal">
+            <span class="timeline-num">5</span>
+            <div>
+              <h3 class="timeline-title">公開前チェックと運用引き継ぎ</h3>
+              <p class="timeline-text">
+                スマホ表示、注文データ、LINE遷移、既存友だち対応、管理画面での確認手順を整えます。
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section compact pale">
+      <div class="container">
+        <div class="section-head center reveal">
+          <span class="section-kicker">FAQ</span>
+          <h2 class="section-title">応募前に確認されやすいこと。</h2>
+        </div>
+        <div class="faq-list">
+          <details class="reveal">
+            <summary>今回の方法は、パラメーター付きLINE遷移URLに限定されますか？</summary>
+            <div class="faq-body">
+              限定しません。募集内容の検討案を尊重しつつ、L Message側で受け取れる項目、Shopify側で取得できる注文情報、月額コストを比較して実現方法を提案する想定です。
+            </div>
+          </details>
+          <details class="reveal">
+            <summary>既存の口コミは移行できますか？</summary>
+            <div class="faq-body">
+              口コミの保存形式と権利関係を確認したうえで、星評価、感想、写真の表示方法を決めます。写真はイメージです。実制作ではご提供写真や日本人モデルの素材に差し替えます。
+            </div>
+          </details>
+          <details class="reveal">
+            <summary>既存のLINE友だちはどう扱いますか？</summary>
+            <div class="faq-body">
+              既存友だちについては、注文完了後の本人確認導線、LINE内メッセージからの照合、手動確認の併用などを検討します。必須要件として設計段階から分けて扱います。
+            </div>
+          </details>
+          <details class="reveal">
+            <summary>納期の目安はどれくらいですか？</summary>
+            <div class="faq-body">
+              詳細仕様書と既存データ量の確認後に確定します。仮の目安として、調査と設計に1〜2週間、Shopify制作と連携検証に3〜6週間を想定しています。
+            </div>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="section contact">
+      <div class="container contact-grid">
+        <div class="contact-panel reveal">
+          <h3>相談時に確認したい項目</h3>
+          <ul class="info-list">
+            <li>
+              <span>Shopify制作</span>
+              既存サイトの商品数、カテゴリ、レンタルプラン、決済方法。
+            </li>
+            <li>
+              <span>口コミ移行</span>
+              星評価、感想、写真の保存形式と掲載許可。
+            </li>
+            <li>
+              <span>LINE連携</span>
+              友だち追加導線、既存友だちの照合方法、L Messageの利用項目。
+            </li>
+            <li>
+              <span>費用</span>
+              初期制作費、必要なアプリ月額、外部自動化ツールの有無。
+            </li>
+            <li>
+              <span>連絡先</span>
+              03-0000-0000／平日 10:00〜18:00 ※仮の内容です。
+            </li>
+          </ul>
+        </div>
+        <form class="form reveal" action="#" method="post">
+          <div class="form-row">
+            <div class="field">
+              <label for="name">お名前</label>
+              <input id="name" name="name" type="text" placeholder="山田 太郎">
+            </div>
+            <div class="field">
+              <label for="company">サービス名</label>
+              <input id="company" name="company" type="text" placeholder="レンタルサービス名">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="field">
+              <label for="email">メールアドレス</label>
+              <input id="email" name="email" type="email" placeholder="sample@example.com">
+            </div>
+            <div class="field">
+              <label for="budget">ご予算感</label>
+              <select id="budget" name="budget">
+                <option>未定</option>
+                <option>30万円前後</option>
+                <option>50万円前後</option>
+                <option>70万円以上</option>
+              </select>
+            </div>
+          </div>
+          <div class="field">
+            <label for="message">相談内容</label>
+            <textarea id="message" name="message" placeholder="Shopify移行、衣装選択、LINE・L Message連携で確認したい内容をご記入ください。"></textarea>
+          </div>
+          <button class="btn" type="submit">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M4 12h15M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            デモ相談を送信
+          </button>
+          <p class="submit-note">このフォームは制作サンプルです。送信機能は実装していません。</p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <div class="sticky-cta" aria-label="固定連絡ボタン">
+    <a class="tel-link" href="tel:0300000000">03-0000-0000</a>
+    <a class="btn" href="#contact">
+      <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <path d="M5 12h13M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      連携相談
+    </a>
+  </div>
+
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div>
+        <strong>Shopify連携サンプル</strong>
+        <p>
+          レンタルサービスのShopify移行、LINE公式アカウント、L Message連携までを想定した単一ページの制作デモです。
+        </p>
+        <p>
+          ※本ページは制作サンプル(デモ)です。掲載の内容・数値は仮のもので、写真はイメージです。
+        </p>
+      </div>
+      <div class="footer-links">
+        <a href="#solution">実現方法</a>
+        <a href="#product">商品ページ</a>
+        <a href="#contact">相談</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const menuButton = document.querySelector(".menu-btn");
+    const mobileNav = document.querySelector(".mobile-nav");
+    const mobileLinks = document.querySelectorAll(".mobile-nav a");
+
+    function closeMenu() {
+      mobileNav.classList.remove("is-open");
+      menuButton.setAttribute("aria-expanded", "false");
+      document.body.classList.remove("is-locked");
+    }
+
+    menuButton.addEventListener("click", () => {
+      const isOpen = mobileNav.classList.toggle("is-open");
+      menuButton.setAttribute("aria-expanded", String(isOpen));
+      document.body.classList.toggle("is-locked", isOpen);
+    });
+
+    mobileLinks.forEach((link) => {
+      link.addEventListener("click", closeMenu);
+    });
+
+    const revealTargets = document.querySelectorAll(".reveal");
+
+    if ("IntersectionObserver" in window) {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-visible");
+            observer.unobserve(entry.target);
+          }
+        });
+      }, {
+        threshold: 0.14
+      });
+
+      revealTargets.forEach((target) => observer.observe(target));
+    } else {
+      revealTargets.forEach((target) => target.classList.add("is-visible"));
+    }
+  </script>
+</body>
+</html>

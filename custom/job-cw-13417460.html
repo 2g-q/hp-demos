@@ -1,0 +1,1576 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>兵庫カフェサンプル｜旅の途中に、いつもの一杯。</title>
+  <meta name="description" content="兵庫県で12月頃オープン予定のカフェを想定した制作デモです。近隣の方にも観光の方にも伝わる、ナチュラルで清潔感のある公式サイトのトップページ。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700&family=Noto+Sans+JP:wght@400;500;700&family=Zen+Kaku+Gothic+New:wght@500;700;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #fbfaf6;
+      --paper: #ffffff;
+      --ink: #222623;
+      --muted: #6e756f;
+      --line: #e8e2d8;
+      --soft: #f3efe7;
+      --accent: #3f7f6b;
+      --accent-dark: #2e6655;
+      --shadow: 0 18px 40px rgba(34, 38, 35, 0.12);
+      --radius: 8px;
+      --container: 1120px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      overflow-x: hidden;
+    }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: var(--bg);
+      font-family: "Noto Sans JP", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      font-feature-settings: "palt";
+      letter-spacing: 0;
+      line-height: 1.8;
+      overflow-x: hidden;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+      height: auto;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button,
+    input,
+    textarea,
+    select {
+      font: inherit;
+    }
+
+    .site-header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 40;
+      background: rgba(251, 250, 246, 0.92);
+      border-bottom: 1px solid rgba(232, 226, 216, 0.9);
+    }
+
+    .header-inner {
+      width: min(var(--container), calc(100% - 40px));
+      max-width: 100%;
+      margin: 0 auto;
+      height: 74px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .brand {
+      display: inline-flex;
+      flex-direction: column;
+      gap: 2px;
+      min-width: 0;
+    }
+
+    .brand-name {
+      font-family: "Zen Kaku Gothic New", sans-serif;
+      font-weight: 900;
+      font-size: 20px;
+      line-height: 1.2;
+      letter-spacing: 0;
+    }
+
+    .brand-sub {
+      color: var(--muted);
+      font-size: 11px;
+      line-height: 1.2;
+    }
+
+    .desktop-nav {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      color: #3c423d;
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .desktop-nav a {
+      position: relative;
+      padding: 8px 0;
+    }
+
+    .desktop-nav a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 2px;
+      width: 0;
+      height: 2px;
+      background: var(--accent);
+      transition: width 0.2s ease;
+    }
+
+    .desktop-nav a:hover::after {
+      width: 100%;
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .tel-link {
+      font-family: "Manrope", sans-serif;
+      font-weight: 700;
+      color: var(--accent-dark);
+      white-space: nowrap;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      min-height: 46px;
+      padding: 12px 22px;
+      border-radius: 100px;
+      border: 1px solid transparent;
+      font-weight: 700;
+      line-height: 1.2;
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+      max-width: 100%;
+    }
+
+    .btn svg {
+      width: 17px;
+      height: 17px;
+      flex: 0 0 auto;
+    }
+
+    .btn-primary {
+      color: #ffffff;
+      background: var(--accent);
+      box-shadow: 0 14px 28px rgba(63, 127, 107, 0.25);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      background: var(--accent-dark);
+      box-shadow: 0 18px 36px rgba(63, 127, 107, 0.3);
+    }
+
+    .btn-secondary {
+      color: var(--accent-dark);
+      background: #ffffff;
+      border-color: rgba(63, 127, 107, 0.28);
+    }
+
+    .menu-button {
+      display: none;
+      width: 44px;
+      height: 44px;
+      border: 1px solid var(--line);
+      border-radius: 100px;
+      background: #ffffff;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
+
+    .menu-lines {
+      width: 18px;
+      height: 12px;
+      position: relative;
+    }
+
+    .menu-lines span {
+      position: absolute;
+      left: 0;
+      width: 18px;
+      height: 2px;
+      background: var(--ink);
+      border-radius: 2px;
+      transition: transform 0.2s ease, top 0.2s ease;
+    }
+
+    .menu-lines span:first-child {
+      top: 0;
+    }
+
+    .menu-lines span:last-child {
+      top: 10px;
+    }
+
+    .mobile-nav {
+      position: fixed;
+      top: 74px;
+      left: 0;
+      right: 0;
+      z-index: 35;
+      display: none;
+      background: rgba(255, 255, 255, 0.98);
+      border-bottom: 1px solid var(--line);
+      box-shadow: var(--shadow);
+    }
+
+    .mobile-nav.is-open {
+      display: block;
+    }
+
+    .mobile-nav-inner {
+      width: min(var(--container), calc(100% - 40px));
+      max-width: 100%;
+      margin: 0 auto;
+      padding: 18px 0 22px;
+      display: grid;
+      gap: 10px;
+    }
+
+    .mobile-nav a {
+      padding: 12px 0;
+      font-weight: 700;
+      border-bottom: 1px solid var(--line);
+    }
+
+    main {
+      padding-top: 74px;
+    }
+
+    .section {
+      padding: 104px 0;
+    }
+
+    .section-tight {
+      padding: 86px 0;
+    }
+
+    .container {
+      width: min(var(--container), calc(100% - 40px));
+      max-width: 100%;
+      margin: 0 auto;
+    }
+
+    .hero {
+      min-height: calc(100svh - 74px);
+      display: grid;
+      align-items: center;
+      padding: 48px 0 72px;
+      background:
+        linear-gradient(90deg, rgba(251, 250, 246, 0.96) 0%, rgba(251, 250, 246, 0.82) 46%, rgba(251, 250, 246, 0.28) 100%),
+        url("https://images.unsplash.com/photo-1506459225024-1428097a7e18?auto=format&fit=crop&w=1200&q=70") center right / cover no-repeat;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.04fr) minmax(280px, 0.7fr);
+      gap: 56px;
+      align-items: end;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--accent-dark);
+      font-weight: 700;
+      font-size: 14px;
+      margin-bottom: 18px;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 34px;
+      height: 1px;
+      background: var(--accent);
+    }
+
+    h1,
+    h2,
+    h3 {
+      margin: 0;
+      font-family: "Zen Kaku Gothic New", sans-serif;
+      font-weight: 900;
+      letter-spacing: 0;
+      line-height: 1.25;
+    }
+
+    h1 {
+      max-width: 720px;
+      font-size: clamp(42px, 6vw, 82px);
+    }
+
+    .lead {
+      max-width: 620px;
+      margin: 26px 0 0;
+      color: #3f4741;
+      font-size: 18px;
+      line-height: 2;
+    }
+
+    .hero-actions {
+      margin-top: 34px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .hero-note {
+      margin-top: 18px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .status-panel {
+      background: rgba(255, 255, 255, 0.9);
+      border: 1px solid rgba(232, 226, 216, 0.9);
+      border-radius: var(--radius);
+      padding: 26px;
+      box-shadow: var(--shadow);
+      max-width: 100%;
+    }
+
+    .status-title {
+      font-family: "Zen Kaku Gothic New", sans-serif;
+      font-size: 18px;
+      font-weight: 900;
+      margin-bottom: 18px;
+    }
+
+    .status-list {
+      display: grid;
+      gap: 15px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .status-list li {
+      display: grid;
+      grid-template-columns: 92px 1fr;
+      gap: 12px;
+      padding-bottom: 14px;
+      border-bottom: 1px solid var(--line);
+      font-size: 14px;
+    }
+
+    .status-list li:last-child {
+      border-bottom: 0;
+      padding-bottom: 0;
+    }
+
+    .status-label {
+      color: var(--muted);
+      font-weight: 700;
+    }
+
+    .status-value {
+      color: var(--ink);
+      font-weight: 700;
+    }
+
+    .trust-band {
+      background: var(--paper);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .trust-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1px;
+      background: var(--line);
+      border-left: 1px solid var(--line);
+      border-right: 1px solid var(--line);
+    }
+
+    .trust-item {
+      background: #ffffff;
+      padding: 28px 24px;
+    }
+
+    .trust-num {
+      display: block;
+      font-family: "Manrope", sans-serif;
+      color: var(--accent-dark);
+      font-size: 28px;
+      font-weight: 700;
+      line-height: 1.1;
+    }
+
+    .trust-text {
+      display: block;
+      margin-top: 8px;
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .section-head {
+      display: grid;
+      grid-template-columns: minmax(0, 0.78fr) minmax(260px, 0.5fr);
+      gap: 48px;
+      align-items: end;
+      margin-bottom: 42px;
+    }
+
+    .section-kicker {
+      color: var(--accent-dark);
+      font-family: "Manrope", sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+
+    .section-title {
+      font-size: clamp(30px, 4vw, 48px);
+    }
+
+    .section-copy {
+      color: var(--muted);
+      margin: 0;
+      line-height: 2;
+    }
+
+    .concept {
+      background: var(--bg);
+    }
+
+    .concept-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .concept-card {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 30px;
+      min-height: 250px;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .concept-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 16px 34px rgba(34, 38, 35, 0.09);
+    }
+
+    .mark {
+      width: 44px;
+      height: 44px;
+      border-radius: 100px;
+      border: 1px solid rgba(63, 127, 107, 0.34);
+      position: relative;
+      margin-bottom: 22px;
+    }
+
+    .mark::before,
+    .mark::after {
+      content: "";
+      position: absolute;
+      background: var(--accent);
+      border-radius: 2px;
+    }
+
+    .mark::before {
+      width: 18px;
+      height: 2px;
+      top: 21px;
+      left: 13px;
+    }
+
+    .mark::after {
+      width: 2px;
+      height: 18px;
+      top: 13px;
+      left: 21px;
+    }
+
+    .concept-card h3 {
+      font-size: 22px;
+      margin-bottom: 14px;
+    }
+
+    .concept-card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    .menu-preview {
+      background: #ffffff;
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .menu-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 0.82fr) minmax(280px, 0.58fr);
+      gap: 46px;
+      align-items: center;
+    }
+
+    .menu-photo {
+      aspect-ratio: 4 / 3;
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+
+    .menu-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .menu-list {
+      display: grid;
+      gap: 18px;
+      margin-top: 28px;
+    }
+
+    .menu-row {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 14px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .menu-row strong {
+      font-size: 17px;
+    }
+
+    .menu-row span {
+      color: var(--muted);
+      font-size: 14px;
+      grid-column: 1 / -1;
+      line-height: 1.7;
+    }
+
+    .price {
+      font-family: "Manrope", sans-serif;
+      color: var(--accent-dark);
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .note {
+      margin-top: 16px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .visit {
+      background: var(--soft);
+    }
+
+    .visit-grid {
+      display: grid;
+      grid-template-columns: minmax(280px, 0.55fr) minmax(0, 0.95fr);
+      gap: 42px;
+      align-items: stretch;
+    }
+
+    .visit-info {
+      background: #ffffff;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 30px;
+    }
+
+    .info-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 22px;
+      font-size: 15px;
+    }
+
+    .info-table th,
+    .info-table td {
+      padding: 15px 0;
+      border-bottom: 1px solid var(--line);
+      vertical-align: top;
+      text-align: left;
+    }
+
+    .info-table th {
+      width: 92px;
+      color: var(--muted);
+      font-weight: 700;
+    }
+
+    .photo-stack {
+      display: grid;
+      grid-template-columns: 1fr 0.72fr;
+      gap: 18px;
+      align-items: end;
+    }
+
+    .photo-main,
+    .photo-sub {
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      background: #ddd;
+    }
+
+    .photo-main {
+      aspect-ratio: 5 / 4;
+    }
+
+    .photo-sub {
+      aspect-ratio: 4 / 5;
+      margin-bottom: 32px;
+    }
+
+    .photo-main img,
+    .photo-sub img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .pages {
+      background: var(--bg);
+    }
+
+    .page-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 12px;
+    }
+
+    .page-card {
+      background: #ffffff;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 24px 18px;
+      min-height: 168px;
+    }
+
+    .page-number {
+      display: block;
+      color: var(--accent-dark);
+      font-family: "Manrope", sans-serif;
+      font-weight: 700;
+      margin-bottom: 18px;
+    }
+
+    .page-card h3 {
+      font-size: 18px;
+      margin-bottom: 10px;
+    }
+
+    .page-card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.7;
+    }
+
+    .access {
+      background: #ffffff;
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .access-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 0.7fr) minmax(280px, 0.52fr);
+      gap: 42px;
+      align-items: stretch;
+    }
+
+    .map-frame {
+      min-height: 390px;
+      border-radius: var(--radius);
+      overflow: hidden;
+      border: 1px solid var(--line);
+      background:
+        linear-gradient(135deg, rgba(63, 127, 107, 0.13), rgba(255, 255, 255, 0.5)),
+        repeating-linear-gradient(0deg, transparent 0 38px, rgba(63, 127, 107, 0.1) 38px 39px),
+        repeating-linear-gradient(90deg, transparent 0 38px, rgba(63, 127, 107, 0.1) 38px 39px);
+      position: relative;
+    }
+
+    .map-pin {
+      position: absolute;
+      left: 50%;
+      top: 48%;
+      transform: translate(-50%, -50%);
+      width: 62px;
+      height: 62px;
+      border-radius: 100px;
+      background: var(--accent);
+      box-shadow: 0 18px 32px rgba(63, 127, 107, 0.28);
+    }
+
+    .map-pin::after {
+      content: "";
+      position: absolute;
+      left: 21px;
+      top: 21px;
+      width: 20px;
+      height: 20px;
+      border-radius: 100px;
+      background: #ffffff;
+    }
+
+    .access-panel {
+      background: var(--bg);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 30px;
+    }
+
+    .access-panel h3 {
+      font-size: 24px;
+      margin-bottom: 16px;
+    }
+
+    .access-panel p {
+      margin: 0 0 20px;
+      color: var(--muted);
+    }
+
+    .route-list {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      display: grid;
+      gap: 12px;
+    }
+
+    .route-list li {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+    }
+
+    .route-list li::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      margin-top: 12px;
+      border-radius: 100px;
+      background: var(--accent);
+      flex: 0 0 auto;
+    }
+
+    .faq {
+      background: var(--bg);
+    }
+
+    .faq-list {
+      display: grid;
+      gap: 14px;
+    }
+
+    details {
+      background: #ffffff;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 0 24px;
+    }
+
+    summary {
+      cursor: pointer;
+      padding: 22px 0;
+      font-weight: 700;
+      list-style: none;
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+    }
+
+    summary::-webkit-details-marker {
+      display: none;
+    }
+
+    summary::after {
+      content: "+";
+      color: var(--accent-dark);
+      font-family: "Manrope", sans-serif;
+      font-size: 22px;
+      line-height: 1;
+    }
+
+    details[open] summary::after {
+      content: "-";
+    }
+
+    details p {
+      margin: 0;
+      padding: 0 0 22px;
+      color: var(--muted);
+    }
+
+    .contact {
+      background: var(--soft);
+    }
+
+    .contact-box {
+      display: grid;
+      grid-template-columns: minmax(260px, 0.5fr) minmax(0, 0.7fr);
+      gap: 44px;
+      align-items: start;
+    }
+
+    .contact-copy {
+      padding-top: 10px;
+    }
+
+    .contact-copy p {
+      color: var(--muted);
+      margin: 18px 0 0;
+    }
+
+    .form {
+      background: #ffffff;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 30px;
+      display: grid;
+      gap: 18px;
+    }
+
+    .form-row {
+      display: grid;
+      gap: 8px;
+    }
+
+    label {
+      font-weight: 700;
+      font-size: 14px;
+    }
+
+    input,
+    textarea,
+    select {
+      width: 100%;
+      max-width: 100%;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: #ffffff;
+      min-height: 48px;
+      padding: 12px 14px;
+      font-size: 16px;
+      color: var(--ink);
+    }
+
+    textarea {
+      min-height: 132px;
+      resize: vertical;
+    }
+
+    .submit-note {
+      color: var(--muted);
+      font-size: 12px;
+      margin: 0;
+      line-height: 1.7;
+    }
+
+    .site-footer {
+      background: #242824;
+      color: #ffffff;
+      padding: 48px 0 96px;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 28px;
+      align-items: start;
+    }
+
+    .footer-brand {
+      font-family: "Zen Kaku Gothic New", sans-serif;
+      font-size: 22px;
+      font-weight: 900;
+    }
+
+    .footer-text {
+      margin: 12px 0 0;
+      color: rgba(255, 255, 255, 0.72);
+      font-size: 13px;
+      max-width: 720px;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      color: rgba(255, 255, 255, 0.78);
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .sticky-cta {
+      position: fixed;
+      left: 50%;
+      bottom: 16px;
+      transform: translateX(-50%);
+      width: min(560px, calc(100% - 28px));
+      max-width: 100%;
+      z-index: 45;
+      display: none;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      padding: 8px;
+      border: 1px solid rgba(232, 226, 216, 0.9);
+      border-radius: 100px;
+      background: rgba(255, 255, 255, 0.94);
+      box-shadow: var(--shadow);
+    }
+
+    .sticky-cta .btn {
+      min-height: 46px;
+      padding: 11px 14px;
+      font-size: 14px;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .reveal.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (max-width: 980px) {
+      .desktop-nav,
+      .header-actions {
+        display: none;
+      }
+
+      .menu-button {
+        display: inline-flex;
+      }
+
+      .hero {
+        min-height: auto;
+        padding: 54px 0 64px;
+        background:
+          linear-gradient(180deg, rgba(251, 250, 246, 0.97) 0%, rgba(251, 250, 246, 0.9) 54%, rgba(251, 250, 246, 0.52) 100%),
+          url("https://images.unsplash.com/photo-1506459225024-1428097a7e18?auto=format&fit=crop&w=1200&q=70") center / cover no-repeat;
+      }
+
+      .hero-grid,
+      .section-head,
+      .menu-layout,
+      .visit-grid,
+      .access-grid,
+      .contact-box {
+        grid-template-columns: 1fr;
+      }
+
+      .status-panel {
+        max-width: 520px;
+      }
+
+      .trust-grid,
+      .concept-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .page-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .sticky-cta {
+        display: grid;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .header-inner,
+      .container,
+      .mobile-nav-inner {
+        width: min(100% - 28px, var(--container));
+      }
+
+      .brand-name {
+        font-size: 18px;
+      }
+
+      .brand-sub {
+        font-size: 10px;
+      }
+
+      .section {
+        padding: 78px 0;
+      }
+
+      .section-tight {
+        padding: 68px 0;
+      }
+
+      h1 {
+        font-size: 42px;
+      }
+
+      .lead {
+        font-size: 16px;
+        line-height: 1.9;
+      }
+
+      .hero-actions {
+        align-items: stretch;
+        flex-direction: column;
+      }
+
+      .hero-actions .btn {
+        width: 100%;
+      }
+
+      .status-list li {
+        grid-template-columns: 82px 1fr;
+      }
+
+      .trust-grid,
+      .concept-grid,
+      .page-grid,
+      .photo-stack {
+        grid-template-columns: 1fr;
+      }
+
+      .trust-item {
+        padding: 24px 20px;
+      }
+
+      .concept-card,
+      .visit-info,
+      .access-panel,
+      .form {
+        padding: 24px;
+      }
+
+      .photo-sub {
+        margin-bottom: 0;
+      }
+
+      .menu-row {
+        grid-template-columns: 1fr;
+      }
+
+      .price {
+        white-space: normal;
+      }
+
+      .map-frame {
+        min-height: 300px;
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .site-footer {
+        padding-bottom: 112px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      *,
+      *::before,
+      *::after {
+        transition: none !important;
+        animation: none !important;
+      }
+
+      .reveal {
+        opacity: 1;
+        transform: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="#top" aria-label="兵庫カフェサンプル トップへ">
+        <span class="brand-name">兵庫カフェサンプル</span>
+        <span class="brand-sub">Hyogo Local Cafe / Opening in December</span>
+      </a>
+      <nav class="desktop-nav" aria-label="メインナビゲーション">
+        <a href="#concept">お店のこと</a>
+        <a href="#menu">メニュー</a>
+        <a href="#visit">営業案内</a>
+        <a href="#access">アクセス</a>
+        <a href="#contact">お問い合わせ</a>
+      </nav>
+      <div class="header-actions">
+        <a class="tel-link" href="tel:078-000-0000">078-000-0000</a>
+        <a class="btn btn-primary" href="#contact">
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M4 6.5h16v11H4v-11Z" stroke="currentColor" stroke-width="1.8"/>
+            <path d="m4.5 7 7.5 6 7.5-6" stroke="currentColor" stroke-width="1.8"/>
+          </svg>
+          予約・お問い合わせ
+        </a>
+      </div>
+      <button class="menu-button" type="button" aria-label="メニューを開く" aria-controls="mobileNav" aria-expanded="false">
+        <span class="menu-lines" aria-hidden="true">
+          <span></span>
+          <span></span>
+        </span>
+      </button>
+    </div>
+  </header>
+
+  <nav class="mobile-nav" id="mobileNav" aria-label="スマートフォンナビゲーション">
+    <div class="mobile-nav-inner">
+      <a href="#concept">お店のこと</a>
+      <a href="#menu">メニュー</a>
+      <a href="#visit">営業案内</a>
+      <a href="#access">アクセス</a>
+      <a href="#contact">お問い合わせ</a>
+    </div>
+  </nav>
+
+  <main id="top">
+    <section class="hero">
+      <div class="container hero-grid">
+        <div class="hero-copy reveal">
+          <div class="eyebrow">兵庫県に12月頃オープン予定</div>
+          <h1>旅の途中に、いつもの一杯。</h1>
+          <p class="lead">近所の方がふらっと寄れて、兵庫を訪れた方の記憶にも残る。焼き菓子とコーヒーの香りで迎える、清潔であたたかなカフェの公式サイトデモです。</p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="tel:078-000-0000">
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M7.4 4.8 10 7.4 8.2 10c.9 1.9 2.3 3.3 4.1 4.2l2.6-1.8 2.7 2.6-1 3.8c-.2.6-.8 1-1.4.9C9.8 19 5.1 14.3 4.3 8.8c-.1-.6.3-1.2.9-1.4l2.2-.6Z" stroke="currentColor" stroke-width="1.8"/>
+              </svg>
+              電話で相談
+            </a>
+            <a class="btn btn-secondary" href="#menu">メニューを見る</a>
+          </div>
+          <p class="hero-note">※掲載内容は仮の構成です。実制作ではご提供写真・原稿に合わせて調整します。</p>
+        </div>
+        <aside class="status-panel reveal" aria-label="オープン予定情報">
+          <div class="status-title">オープン準備中のご案内</div>
+          <ul class="status-list">
+            <li>
+              <span class="status-label">開店予定</span>
+              <span class="status-value">12月頃</span>
+            </li>
+            <li>
+              <span class="status-label">所在地</span>
+              <span class="status-value">兵庫県内</span>
+            </li>
+            <li>
+              <span class="status-label">想定客層</span>
+              <span class="status-value">近隣の方・観光で訪れる方</span>
+            </li>
+            <li>
+              <span class="status-label">サイト構成</span>
+              <span class="status-value">トップ、店舗紹介、メニュー、アクセス、お問い合わせ</span>
+            </li>
+          </ul>
+        </aside>
+      </div>
+    </section>
+
+    <section class="trust-band" aria-label="サイトの見せ方">
+      <div class="container">
+        <div class="trust-grid">
+          <div class="trust-item">
+            <span class="trust-num">5</span>
+            <span class="trust-text">ページ程度を想定</span>
+          </div>
+          <div class="trust-item">
+            <span class="trust-num">390px</span>
+            <span class="trust-text">スマホ幅まで読みやすく</span>
+          </div>
+          <div class="trust-item">
+            <span class="trust-num">11月</span>
+            <span class="trust-text">納品目安に合わせた設計</span>
+          </div>
+          <div class="trust-item">
+            <span class="trust-num">12月</span>
+            <span class="trust-text">開店告知に使える導線</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section concept" id="concept">
+      <div class="container">
+        <div class="section-head reveal">
+          <div>
+            <div class="section-kicker">Concept</div>
+            <h2 class="section-title">写真を見る前から、店の空気が伝わる言葉。</h2>
+          </div>
+          <p class="section-copy">店名やロゴがまだ固まる前でも、サイトの骨格は先に作れます。兵庫の街歩き、観光の休憩、近所の朝時間まで想像できるよう、情報量を絞りながら余白で見せます。</p>
+        </div>
+        <div class="concept-grid">
+          <article class="concept-card reveal">
+            <div class="mark" aria-hidden="true"></div>
+            <h3>立ち寄りやすい</h3>
+            <p>営業時間、最寄り駅、席数、予約可否をすぐ見つけられる設計。スマートフォンで迷わず来店につながる導線を置きます。</p>
+          </article>
+          <article class="concept-card reveal">
+            <div class="mark" aria-hidden="true"></div>
+            <h3>写真が主役</h3>
+            <p>料理、焼き菓子、店内、外観の写真が入った瞬間に完成度が上がるよう、余白と比率を先に整えたレイアウトです。</p>
+          </article>
+          <article class="concept-card reveal">
+            <div class="mark" aria-hidden="true"></div>
+            <h3>更新しやすい</h3>
+            <p>季節メニューや臨時休業のお知らせを差し替えやすい構成。開店前の告知から通常営業まで自然に使えます。</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section menu-preview" id="menu">
+      <div class="container menu-layout">
+        <div class="menu-photo reveal">
+          <img src="https://images.unsplash.com/photo-1568254183919-78a4f43a2877?auto=format&fit=crop&w=1200&q=70" alt="ショーケースに並ぶパンと焼き菓子のイメージ写真">
+        </div>
+        <div class="reveal">
+          <div class="section-kicker">Menu</div>
+          <h2 class="section-title">朝にも、旅の休憩にも。</h2>
+          <p class="section-copy">価格と内容は仮のサンプルです。実制作では、看板メニューを先頭に置き、写真だけでも味の方向性が伝わる並びにします。</p>
+          <div class="menu-list">
+            <div class="menu-row">
+              <strong>季節の焼き菓子セット</strong>
+              <b class="price">¥780</b>
+              <span>ドリンクと小さな焼き菓子を合わせた、初回来店でも選びやすいセット。※仮の内容です。</span>
+            </div>
+            <div class="menu-row">
+              <strong>ハンドドリップコーヒー</strong>
+              <b class="price">¥520</b>
+              <span>香りをゆっくり楽しめる一杯として掲載想定。豆の説明が入ると、こだわりが伝わります。※仮の内容です。</span>
+            </div>
+            <div class="menu-row">
+              <strong>兵庫散策の軽食プレート</strong>
+              <b class="price">¥1,180</b>
+              <span>観光の途中にも頼みやすい軽食枠。地元食材の表記がある場合はここで強く見せます。※仮の内容です。</span>
+            </div>
+          </div>
+          <p class="note">※写真はイメージです。実制作ではご提供写真や日本人モデルの素材に差し替えます。</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section visit" id="visit">
+      <div class="container visit-grid">
+        <div class="visit-info reveal">
+          <div class="section-kicker">Shop Info</div>
+          <h2 class="section-title">開店前から、来店の不安を減らす。</h2>
+          <table class="info-table">
+            <tbody>
+              <tr>
+                <th>店名</th>
+                <td>兵庫カフェサンプル</td>
+              </tr>
+              <tr>
+                <th>所在地</th>
+                <td>兵庫県内</td>
+              </tr>
+              <tr>
+                <th>電話</th>
+                <td><a href="tel:078-000-0000">078-000-0000</a></td>
+              </tr>
+              <tr>
+                <th>営業時間</th>
+                <td>10:00-18:00 ※仮の内容です</td>
+              </tr>
+              <tr>
+                <th>定休日</th>
+                <td>水曜日 ※仮の内容です</td>
+              </tr>
+              <tr>
+                <th>開店予定</th>
+                <td>12月頃</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="photo-stack reveal">
+          <div class="photo-main">
+            <img src="https://images.unsplash.com/photo-1470337458703-46ad1756a187?auto=format&fit=crop&w=1200&q=70" alt="グラスに飲み物を注ぐ手元のイメージ写真">
+          </div>
+          <div class="photo-sub">
+            <img src="https://images.unsplash.com/photo-1494515426402-f1980ace7a9c?auto=format&fit=crop&w=1200&q=70" alt="日本の街並みにある店舗前のイメージ写真">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section pages" aria-label="想定ページ構成">
+      <div class="container">
+        <div class="section-head reveal">
+          <div>
+            <div class="section-kicker">Site Plan</div>
+            <h2 class="section-title">5ページ構成でも、迷わない導線に。</h2>
+          </div>
+          <p class="section-copy">募集内容にあった想定ページを、開店準備中から公開しやすい順番で整理します。素材が増えたら、各ページに写真と文章を自然に展開できます。</p>
+        </div>
+        <div class="page-grid">
+          <article class="page-card reveal">
+            <span class="page-number">01</span>
+            <h3>トップページ</h3>
+            <p>雰囲気、開店予定、予約導線を最短で伝える入口。</p>
+          </article>
+          <article class="page-card reveal">
+            <span class="page-number">02</span>
+            <h3>店舗紹介</h3>
+            <p>店主の想い、空間づくり、過ごし方を言葉にするページ。</p>
+          </article>
+          <article class="page-card reveal">
+            <span class="page-number">03</span>
+            <h3>メニュー</h3>
+            <p>看板商品、ドリンク、軽食、季節メニューを写真付きで掲載。</p>
+          </article>
+          <article class="page-card reveal">
+            <span class="page-number">04</span>
+            <h3>アクセス</h3>
+            <p>駅からの道順、駐車場、観光導線をスマホで確認しやすく。</p>
+          </article>
+          <article class="page-card reveal">
+            <span class="page-number">05</span>
+            <h3>お問い合わせ</h3>
+            <p>取材、予約、貸切相談などをフォームで受けられる構成。</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section access" id="access">
+      <div class="container access-grid">
+        <div class="map-frame reveal" role="img" aria-label="兵庫県内の店舗位置を想定したダミーマップ">
+          <div class="map-pin" aria-hidden="true"></div>
+        </div>
+        <div class="access-panel reveal">
+          <div class="section-kicker">Access</div>
+          <h2 class="section-title">兵庫の街歩きに、寄り道をひとつ。</h2>
+          <p>住所の詳細が決まり次第、Googleマップや駅からの写真付き道案内を掲載できます。観光の方には「近くの見どころから徒歩何分か」まで載せると来店判断が速くなります。</p>
+          <ul class="route-list">
+            <li>最寄り駅から徒歩圏を想定 ※仮の内容です</li>
+            <li>近隣観光の休憩スポットとして紹介できる構成</li>
+            <li>外観写真を入れると初回来店時の迷いを減らせます</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="section faq" aria-label="よくある質問">
+      <div class="container">
+        <div class="section-head reveal">
+          <div>
+            <div class="section-kicker">FAQ</div>
+            <h2 class="section-title">開店前に聞かれそうなことを、先に置く。</h2>
+          </div>
+          <p class="section-copy">営業時間や予約、支払い方法など、SNSだけでは流れてしまう情報をサイト側で受け止めます。内容はすべて仮のサンプルです。</p>
+        </div>
+        <div class="faq-list">
+          <details class="reveal">
+            <summary>オープン日は決まっていますか？</summary>
+            <p>12月頃のオープン予定として掲載しています。正式な日付が決まり次第、トップページとお知らせで案内する想定です。</p>
+          </details>
+          <details class="reveal">
+            <summary>予約はできますか？</summary>
+            <p>このデモでは電話とフォームの導線を用意しています。実制作では、予約の有無や外部予約サービスの利用に合わせて調整します。</p>
+          </details>
+          <details class="reveal">
+            <summary>観光途中でも立ち寄れますか？</summary>
+            <p>はい。荷物がある方や短時間利用の方にも伝わるよう、アクセス、席数、メニュー提供時間を見やすく掲載する構成です。</p>
+          </details>
+          <details class="reveal">
+            <summary>写真や文章がまだ少なくても作れますか？</summary>
+            <p>作れます。先に構成とトーンを決め、提供素材がそろった段階で写真や原稿を差し替える進め方を想定しています。</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <section class="section contact" id="contact">
+      <div class="container contact-box">
+        <div class="contact-copy reveal">
+          <div class="section-kicker">Contact</div>
+          <h2 class="section-title">開店前の相談も、来店予約もここから。</h2>
+          <p>フォームは送信動作のないダミーです。実制作では、問い合わせ先メール、予約管理、Instagram連携などに合わせて実装できます。</p>
+          <p class="note">電話番号はデモ用のダミーです。実在の店舗情報ではありません。</p>
+        </div>
+        <form class="form reveal" action="#" method="post">
+          <div class="form-row">
+            <label for="name">お名前</label>
+            <input id="name" name="name" type="text" placeholder="山田 花子">
+          </div>
+          <div class="form-row">
+            <label for="email">メールアドレス</label>
+            <input id="email" name="email" type="email" placeholder="sample@example.com">
+          </div>
+          <div class="form-row">
+            <label for="kind">お問い合わせ内容</label>
+            <select id="kind" name="kind">
+              <option>来店について</option>
+              <option>予約について</option>
+              <option>取材・掲載について</option>
+              <option>その他</option>
+            </select>
+          </div>
+          <div class="form-row">
+            <label for="message">メッセージ</label>
+            <textarea id="message" name="message" placeholder="ご相談内容をご記入ください"></textarea>
+          </div>
+          <button class="btn btn-primary" type="button">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M4 6.5h16v11H4v-11Z" stroke="currentColor" stroke-width="1.8"/>
+              <path d="m4.5 7 7.5 6 7.5-6" stroke="currentColor" stroke-width="1.8"/>
+            </svg>
+            送信内容を確認
+          </button>
+          <p class="submit-note">※このフォームは制作サンプル用のダミーです。送信はされません。</p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <div class="sticky-cta" aria-label="固定お問い合わせ導線">
+    <a class="btn btn-secondary" href="tel:078-000-0000">電話する</a>
+    <a class="btn btn-primary" href="#contact">問い合わせ</a>
+  </div>
+
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div>
+        <div class="footer-brand">兵庫カフェサンプル</div>
+        <p class="footer-text">旅の途中に、いつもの一杯。兵庫県で12月頃オープン予定のカフェ公式サイトを想定したトップページデモです。</p>
+        <p class="footer-text">※本ページは制作サンプル(デモ)です。掲載の内容・数値は仮のもので、写真はイメージです。</p>
+      </div>
+      <div class="footer-links">
+        <a href="#concept">お店のこと</a>
+        <a href="#menu">メニュー</a>
+        <a href="#access">アクセス</a>
+        <a href="#contact">お問い合わせ</a>
+      </div>
+    </div>
+  </footer>
+
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "CafeOrCoffeeShop",
+      "name": "兵庫カフェサンプル",
+      "description": "兵庫県で12月頃オープン予定のカフェを想定した制作サンプルです。",
+      "address": {
+        "@type": "PostalAddress",
+        "addressRegion": "兵庫県",
+        "addressCountry": "JP"
+      },
+      "telephone": "078-000-0000",
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": ["Monday", "Tuesday", "Thursday", "Friday", "Saturday", "Sunday"],
+          "opens": "10:00",
+          "closes": "18:00"
+        }
+      ]
+    }
+  </script>
+
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "オープン日は決まっていますか？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "12月頃のオープン予定として掲載しています。正式な日付が決まり次第、トップページとお知らせで案内する想定です。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "予約はできますか？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "このデモでは電話とフォームの導線を用意しています。実制作では予約の有無や外部予約サービスの利用に合わせて調整します。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "写真や文章がまだ少なくても作れますか？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "先に構成とトーンを決め、提供素材がそろった段階で写真や原稿を差し替える進め方を想定しています。"
+          }
+        }
+      ]
+    }
+  </script>
+
+  <script>
+    const menuButton = document.querySelector(".menu-button");
+    const mobileNav = document.querySelector("#mobileNav");
+    const mobileLinks = mobileNav.querySelectorAll("a");
+
+    menuButton.addEventListener("click", () => {
+      const isOpen = mobileNav.classList.toggle("is-open");
+      menuButton.setAttribute("aria-expanded", String(isOpen));
+    });
+
+    mobileLinks.forEach((link) => {
+      link.addEventListener("click", () => {
+        mobileNav.classList.remove("is-open");
+        menuButton.setAttribute("aria-expanded", "false");
+      });
+    });
+
+    const revealTargets = document.querySelectorAll(".reveal");
+
+    if ("IntersectionObserver" in window) {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-visible");
+            observer.unobserve(entry.target);
+          }
+        });
+      }, {
+        threshold: 0.14
+      });
+
+      revealTargets.forEach((target) => observer.observe(target));
+    } else {
+      revealTargets.forEach((target) => target.classList.add("is-visible"));
+    }
+  </script>
+</body>
+</html>

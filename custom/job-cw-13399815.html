@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MEGURU(めぐる) | つくる手から、めぐる街へ。</title>
+<meta name="description" content="窯元と焼き菓子屋の手仕事を、季節ごとの菓子折りと定期便で届けるストーリー型ブランド MEGURU。売上の一部は地域貢献活動へ還元します。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;700&family=Noto+Sans+JP:wght@400;500;700&family=Manrope:wght@600;700&display=swap" rel="stylesheet">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "OnlineStore",
+  "name": "MEGURU(めぐる)",
+  "description": "窯元と焼き菓子屋の手仕事を、季節の菓子折りと定期便で届けるストーリー型ECブランドのデモページです。",
+  "url": "https://example.com/meguru-demo",
+  "areaServed": "JP",
+  "sameAs": ["https://example.com/instagram-demo", "https://example.com/line-demo"]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {"@type":"Question","name":"定期便はいつでも解約できますか?","acceptedAnswer":{"@type":"Answer","text":"はい。マイページからいつでも休止・お届け周期の変更・解約のお手続きができます。次回発送の5日前までのお手続きで反映されます。"}},
+    {"@type":"Question","name":"予約商品はいつ発送されますか?","acceptedAnswer":{"@type":"Answer","text":"発売日を境にページ表示が自動的に「予約受付中」から「購入する」へ切り替わり、発売日以降に順次発送いたします。"}},
+    {"@type":"Question","name":"支払い方法を教えてください","acceptedAnswer":{"@type":"Answer","text":"クレジットカードをはじめとする各種オンライン決済に対応予定です(本ページはデモのため決済は動作しません)。"}},
+    {"@type":"Question","name":"送料はどのくらいですか?","acceptedAnswer":{"@type":"Answer","text":"地域・お届け方法により異なります。実制作時に配送料設定機能で自由に設定いただけます。"}}
+  ]
+}
+</script>
+<style>
+:root{
+  --bg:#FAF6EF;
+  --bg-alt:#F2E9DC;
+  --card:#FFFFFF;
+  --ink:#2A211B;
+  --ink-soft:#665A4E;
+  --accent:#A6432D;
+  --accent-dark:#833323;
+  --accent-soft:#F1DFCF;
+  --line:#E3D6C4;
+  --radius:100px;
+  --maxw:1120px;
+}
+*,*::before,*::after{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--ink);
+  font-family:'Noto Sans JP',sans-serif;
+  font-feature-settings:"palt";
+  letter-spacing:.02em;
+  line-height:1.85;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+  width:100%;
+  max-width:100%;
+}
+img{max-width:100%;height:auto;display:block;}
+h1,h2,h3,h4{font-family:'Shippori Mincho',serif;font-weight:700;line-height:1.5;margin:0;color:var(--ink);}
+p{margin:0;}
+a{color:inherit;text-decoration:none;}
+.num{font-family:'Manrope',sans-serif;}
+.container{width:100%;max-width:var(--maxw);margin:0 auto;padding:0 24px;}
+section{padding:96px 0;width:100%;max-width:100%;overflow:hidden;}
+.section-tag{
+  display:inline-block;font-size:12.5px;letter-spacing:.28em;color:var(--accent);
+  font-weight:700;margin-bottom:14px;
+}
+.section-head{max-width:640px;margin:0 auto 56px;text-align:center;}
+.section-head h2{font-size:clamp(24px,4vw,34px);}
+.section-head .lead{margin-top:16px;color:var(--ink-soft);font-size:15px;}
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  padding:15px 34px;border-radius:var(--radius);font-weight:700;font-size:14.5px;
+  letter-spacing:.05em;cursor:pointer;border:1px solid transparent;
+  transition:transform .2s ease, box-shadow .2s ease, background .2s ease;
+  white-space:nowrap;
+}
+.btn-primary{background:var(--accent);color:#fff;box-shadow:0 10px 24px -8px rgba(166,67,45,.55);}
+.btn-primary:hover{background:var(--accent-dark);transform:translateY(-2px);}
+.btn-outline{background:transparent;color:var(--accent);border-color:var(--accent);}
+.btn-outline:hover{background:var(--accent-soft);transform:translateY(-2px);}
+.btn:active{transform:translateY(0);}
+
+/* reveal */
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .7s ease, transform .7s ease;}
+.reveal.in{opacity:1;transform:translateY(0);}
+@media (prefers-reduced-motion:reduce){
+  .reveal{opacity:1;transform:none;transition:none;}
+  html{scroll-behavior:auto;}
+}
+
+/* ---------- header ---------- */
+header{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  background:rgba(250,246,239,.86);backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line);
+}
+.nav-bar{display:flex;align-items:center;justify-content:space-between;padding:16px 24px;max-width:var(--maxw);margin:0 auto;}
+.brand{display:flex;align-items:center;gap:10px;font-family:'Shippori Mincho',serif;font-weight:700;font-size:19px;}
+.brand .mark{
+  width:34px;height:34px;border-radius:50%;border:1.6px solid var(--accent);
+  display:flex;align-items:center;justify-content:center;font-size:15px;color:var(--accent);
+}
+.nav-links{display:flex;gap:30px;font-size:13.5px;}
+.nav-links a{color:var(--ink-soft);transition:color .2s;}
+.nav-links a:hover{color:var(--accent);}
+.nav-cta{display:flex;align-items:center;gap:14px;}
+.nav-cta .btn{padding:11px 22px;font-size:13px;}
+.hamburger{
+  display:none;width:42px;height:42px;border-radius:50%;border:1px solid var(--line);
+  background:#fff;align-items:center;justify-content:center;flex-direction:column;gap:5px;cursor:pointer;
+}
+.hamburger span{width:18px;height:2px;background:var(--ink);transition:transform .2s, opacity .2s;}
+.hamburger.active span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+.hamburger.active span:nth-child(2){opacity:0;}
+.hamburger.active span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+
+/* mobile nav panel — sibling of header, not nested, avoids fixed-in-backdrop-filter clipping */
+#mobileNav{
+  position:fixed;inset:0;z-index:99;background:var(--bg);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:26px;
+  transform:translateY(-100%);opacity:0;transition:transform .35s ease, opacity .35s ease;
+  visibility:hidden;
+}
+#mobileNav.open{transform:translateY(0);opacity:1;visibility:visible;}
+#mobileNav a{font-family:'Shippori Mincho',serif;font-size:21px;color:var(--ink);}
+#mobileNav .btn{margin-top:10px;}
+
+@media (max-width:880px){
+  .nav-links,.nav-cta .btn-outline{display:none;}
+  .hamburger{display:flex;}
+}
+
+/* ---------- hero ---------- */
+.hero{
+  position:relative;min-height:100vh;display:flex;align-items:flex-end;
+  padding:0 0 90px;margin-top:0;
+  background:linear-gradient(180deg,rgba(30,20,14,.15),rgba(24,16,11,.72)),
+    url('https://images.unsplash.com/photo-1712232907812-4bd219a99a49?auto=format&fit=crop&w=1200&q=70') center/cover no-repeat;
+}
+.hero-inner{max-width:var(--maxw);margin:0 auto;padding:0 24px;width:100%;color:#fff;}
+.hero .kicker{
+  display:inline-block;font-size:12.5px;letter-spacing:.32em;color:#F1DFCF;margin-bottom:22px;
+  border:1px solid rgba(255,255,255,.4);padding:6px 16px;border-radius:100px;
+}
+.hero h1{
+  font-size:clamp(30px,5.6vw,54px);color:#fff;max-width:14ch;
+}
+.hero .sub{
+  margin-top:22px;max-width:46ch;color:#EFE6DA;font-size:15.5px;line-height:2;
+}
+.hero .cta-row{margin-top:34px;display:flex;gap:14px;flex-wrap:wrap;}
+.hero .stats{
+  margin-top:56px;display:grid;grid-template-columns:repeat(3,1fr);gap:18px;
+  max-width:640px;padding-top:26px;border-top:1px solid rgba(255,255,255,.28);
+}
+.hero .stat b{display:block;font-family:'Manrope',sans-serif;font-size:26px;color:#fff;}
+.hero .stat span{font-size:12px;color:#D9CBBB;}
+.hero .note{margin-top:12px;font-size:11px;color:#C9B9A6;}
+
+/* ---------- story ---------- */
+.story-grid{display:grid;grid-template-columns:1.05fr 1fr;gap:64px;align-items:center;}
+.story-grid img{border-radius:14px;aspect-ratio:4/5;object-fit:cover;box-shadow:0 24px 50px -24px rgba(42,33,27,.4);}
+.story-text .section-tag{margin-bottom:16px;}
+.story-text h2{font-size:clamp(24px,4vw,32px);margin-bottom:22px;}
+.story-text p{color:var(--ink-soft);font-size:15px;margin-bottom:16px;}
+.story-text p:last-of-type{margin-bottom:0;}
+@media (max-width:820px){.story-grid{grid-template-columns:1fr;gap:32px;}}
+
+/* ---------- products ---------- */
+.bg-alt{background:var(--bg-alt);}
+.product-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;}
+.p-card{
+  background:var(--card);border-radius:18px;overflow:hidden;border:1px solid var(--line);
+  transition:transform .25s ease, box-shadow .25s ease;
+}
+.p-card:hover{transform:translateY(-6px);box-shadow:0 22px 40px -20px rgba(42,33,27,.28);}
+.p-card .thumb{position:relative;aspect-ratio:4/3;overflow:hidden;}
+.p-card .thumb img{width:100%;height:100%;object-fit:cover;}
+.badge{
+  position:absolute;top:14px;left:14px;background:#fff;color:var(--accent);
+  font-size:11.5px;font-weight:700;padding:6px 14px;border-radius:100px;letter-spacing:.05em;
+  box-shadow:0 6px 14px -6px rgba(0,0,0,.25);
+}
+.badge.on{background:var(--accent);color:#fff;}
+.p-body{padding:22px 22px 26px;}
+.p-body h3{font-size:17px;margin-bottom:8px;}
+.p-body p{color:var(--ink-soft);font-size:13.5px;margin-bottom:16px;}
+.p-price{display:flex;align-items:baseline;justify-content:space-between;}
+.p-price .num{font-size:20px;font-weight:700;color:var(--accent);}
+.p-price .tax{font-size:11px;color:var(--ink-soft);}
+.fine{margin-top:34px;text-align:center;font-size:11.5px;color:var(--ink-soft);}
+
+/* ---------- schedule ---------- */
+.schedule-banner{
+  position:relative;border-radius:20px;overflow:hidden;padding:52px 40px;color:#fff;
+  background:linear-gradient(180deg,rgba(24,14,10,.35),rgba(20,12,9,.78)),
+    url('https://images.unsplash.com/photo-1573455494060-c5595004fb6c?auto=format&fit=crop&w=1200&q=70') center/cover no-repeat;
+}
+.timeline{display:flex;gap:0;margin-top:34px;flex-wrap:wrap;}
+.t-step{flex:1;min-width:150px;position:relative;padding:0 18px 0 0;}
+.t-step .dot{width:12px;height:12px;border-radius:50%;background:#fff;margin-bottom:14px;}
+.t-step h4{color:#fff;font-size:14.5px;margin-bottom:6px;}
+.t-step p{color:#E7D9C9;font-size:12.5px;}
+.demo-card{
+  margin-top:38px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.25);
+  border-radius:16px;padding:24px;backdrop-filter:blur(4px);
+}
+.demo-card .row{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;}
+.demo-toggle{display:flex;gap:8px;}
+.demo-toggle button{
+  padding:8px 16px;border-radius:100px;font-size:12px;border:1px solid rgba(255,255,255,.4);
+  background:transparent;color:#fff;cursor:pointer;
+}
+.demo-toggle button.active{background:#fff;color:var(--accent-dark);font-weight:700;}
+#demoState{font-size:12px;color:#E7D9C9;margin-top:12px;}
+#demoState b{color:#fff;}
+
+/* ---------- subscription ---------- */
+.sub-wrap{display:grid;grid-template-columns:.9fr 1.1fr;gap:56px;align-items:start;}
+.sub-wrap img{border-radius:16px;aspect-ratio:1/1;object-fit:cover;}
+.plan-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:28px;}
+.plan{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:24px 20px;text-align:center;}
+.plan.featured{border-color:var(--accent);box-shadow:0 18px 34px -20px rgba(166,67,45,.4);position:relative;}
+.plan.featured::before{
+  content:"人気";position:absolute;top:-12px;left:50%;transform:translateX(-50%);
+  background:var(--accent);color:#fff;font-size:11px;padding:4px 14px;border-radius:100px;
+}
+.plan h4{font-size:15px;margin-bottom:6px;}
+.plan .p{font-family:'Manrope',sans-serif;font-size:22px;color:var(--accent);margin:10px 0;}
+.plan .p span{font-size:11px;color:var(--ink-soft);}
+.plan ul{list-style:none;margin:14px 0 0;padding:0;text-align:left;font-size:12.5px;color:var(--ink-soft);}
+.plan li{padding:5px 0;padding-left:18px;position:relative;}
+.plan li::before{content:"✓";position:absolute;left:0;color:var(--accent);font-weight:700;}
+.cycle-mock{margin-top:30px;background:var(--bg-alt);border-radius:16px;padding:22px;}
+.cycle-mock h4{font-size:13.5px;margin-bottom:14px;}
+.pill-group{display:flex;gap:10px;flex-wrap:wrap;}
+.pill{padding:9px 18px;border-radius:100px;border:1px solid var(--line);background:#fff;font-size:12.5px;cursor:pointer;}
+.pill.active{background:var(--accent);color:#fff;border-color:var(--accent);}
+.manage-row{display:flex;gap:10px;margin-top:18px;flex-wrap:wrap;}
+.manage-row button{
+  font-size:12px;padding:9px 16px;border-radius:100px;border:1px solid var(--line);background:#fff;cursor:pointer;color:var(--ink-soft);
+}
+@media (max-width:880px){.sub-wrap{grid-template-columns:1fr;}.plan-grid{grid-template-columns:1fr;}}
+
+/* ---------- contribution ---------- */
+.contrib-wrap{display:grid;grid-template-columns:1fr .95fr;gap:56px;align-items:center;}
+.contrib-wrap img{border-radius:16px;aspect-ratio:4/3;object-fit:cover;}
+.gauge{margin-top:26px;background:var(--bg-alt);border-radius:16px;padding:20px 22px;}
+.gauge .row{display:flex;justify-content:space-between;font-size:12.5px;color:var(--ink-soft);margin-bottom:10px;}
+.gauge .bar{height:8px;border-radius:100px;background:#E3D6C4;overflow:hidden;}
+.gauge .bar i{display:block;height:100%;width:34%;background:var(--accent);border-radius:100px;}
+.gauge .foot{margin-top:10px;font-size:11px;color:var(--ink-soft);}
+@media (max-width:880px){.contrib-wrap{grid-template-columns:1fr;}}
+
+/* ---------- product listing ---------- */
+.listing-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;}
+.l-card{background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden;}
+.l-card .thumb{aspect-ratio:1/1;overflow:hidden;background:var(--bg-alt);}
+.l-card .thumb img{width:100%;height:100%;object-fit:cover;}
+.l-card .info{padding:14px;}
+.l-card h5{font-size:13px;margin-bottom:4px;}
+.l-card .price{font-size:12px;color:var(--accent);font-weight:700;}
+.l-card.soon .thumb{
+  position:relative;display:flex;align-items:center;justify-content:center;
+  background:linear-gradient(160deg,#e9ddca,#f4ede2);
+}
+.l-card.soon .lock{width:34px;height:34px;color:var(--accent);}
+.l-card.soon h5{color:var(--ink-soft);}
+@media (max-width:820px){.listing-grid{grid-template-columns:repeat(2,1fr);}}
+
+/* ---------- sns / contact ---------- */
+.sns-row{display:flex;justify-content:center;gap:18px;margin-top:26px;}
+.sns-row a{
+  width:52px;height:52px;border-radius:50%;border:1px solid var(--line);background:#fff;
+  display:flex;align-items:center;justify-content:center;transition:transform .2s, border-color .2s;
+}
+.sns-row a:hover{transform:translateY(-3px);border-color:var(--accent);}
+.sns-row svg{width:20px;height:20px;stroke:var(--accent);fill:none;}
+
+.form-wrap{max-width:640px;margin:0 auto;background:var(--card);border:1px solid var(--line);border-radius:20px;padding:44px 36px;}
+.form-row{margin-bottom:20px;}
+.form-row label{display:block;font-size:13px;color:var(--ink-soft);margin-bottom:8px;}
+.form-row input,.form-row select,.form-row textarea{
+  width:100%;max-width:100%;padding:13px 16px;border:1px solid var(--line);border-radius:10px;
+  font-family:inherit;font-size:16px;background:#fff;color:var(--ink);
+}
+.form-row textarea{min-height:120px;resize:vertical;}
+.form-note{font-size:11.5px;color:var(--ink-soft);margin-top:6px;}
+.form-wrap .btn{width:100%;margin-top:6px;}
+
+/* ---------- faq ---------- */
+.faq-list{max-width:720px;margin:0 auto;}
+.faq-item{border-bottom:1px solid var(--line);}
+.faq-q{
+  width:100%;text-align:left;background:none;border:none;padding:22px 4px;
+  display:flex;justify-content:space-between;align-items:center;cursor:pointer;
+  font-family:'Shippori Mincho',serif;font-size:15.5px;color:var(--ink);
+}
+.faq-q .icon{font-size:20px;color:var(--accent);font-family:'Manrope',sans-serif;transition:transform .2s;}
+.faq-item.open .icon{transform:rotate(45deg);}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .3s ease;}
+.faq-item.open .faq-a{max-height:200px;}
+.faq-a p{padding:0 4px 22px;color:var(--ink-soft);font-size:13.5px;}
+
+/* ---------- footer ---------- */
+footer{background:#211812;color:#E7DACB;padding:70px 0 30px;}
+.footer-grid{display:grid;grid-template-columns:1.3fr 1fr 1fr 1fr;gap:40px;}
+.footer-grid h5{color:#fff;font-size:13.5px;margin-bottom:16px;font-weight:700;}
+.footer-grid ul{list-style:none;margin:0;padding:0;}
+.footer-grid li{margin-bottom:10px;font-size:13px;}
+.footer-grid a{color:#C9B9A6;transition:color .2s;}
+.footer-grid a:hover{color:#fff;}
+.f-brand{display:flex;align-items:center;gap:10px;font-family:'Shippori Mincho',serif;font-size:19px;color:#fff;margin-bottom:14px;}
+.f-brand .mark{width:32px;height:32px;border-radius:50%;border:1.4px solid #E7DACB;display:flex;align-items:center;justify-content:center;font-size:14px;}
+.footer-grid p{font-size:12.5px;color:#B7A996;line-height:1.9;}
+.footer-bottom{
+  margin-top:54px;padding-top:26px;border-top:1px solid rgba(255,255,255,.12);
+  font-size:11.5px;color:#9C8D7A;line-height:1.9;
+}
+.footer-bottom .disclaimer{color:#D9CBBB;margin-bottom:8px;}
+@media (max-width:880px){.footer-grid{grid-template-columns:1fr 1fr;}}
+@media (max-width:520px){.footer-grid{grid-template-columns:1fr;}}
+
+/* ---------- mobile sticky cta ---------- */
+.sticky-cta{
+  display:none;position:fixed;left:0;right:0;bottom:0;z-index:90;
+  background:#fff;border-top:1px solid var(--line);padding:12px 16px;
+  gap:10px;box-shadow:0 -10px 24px -14px rgba(0,0,0,.2);
+}
+.sticky-cta .btn{flex:1;padding:14px 10px;font-size:13px;}
+@media (max-width:600px){
+  .sticky-cta{display:flex;}
+  body{padding-bottom:76px;}
+}
+
+@media (max-width:600px){
+  section{padding:64px 0;}
+  .product-grid{grid-template-columns:1fr;}
+  .timeline{flex-direction:column;gap:22px;}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="nav-bar">
+    <a class="brand" href="#top"><span class="mark">巡</span>MEGURU</a>
+    <nav class="nav-links">
+      <a href="#story">ストーリー</a>
+      <a href="#products">商品</a>
+      <a href="#schedule">販売スケジュール</a>
+      <a href="#subscription">定期便</a>
+      <a href="#contribution">地域貢献</a>
+      <a href="#faq">よくある質問</a>
+    </nav>
+    <div class="nav-cta">
+      <a class="btn btn-outline" href="#contact">お問い合わせ</a>
+      <button class="hamburger" id="hamburger" aria-label="メニューを開く" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<nav id="mobileNav">
+  <a href="#story">ストーリー</a>
+  <a href="#products">商品</a>
+  <a href="#schedule">販売スケジュール</a>
+  <a href="#subscription">定期便</a>
+  <a href="#contribution">地域貢献</a>
+  <a href="#listing">商品一覧</a>
+  <a href="#faq">よくある質問</a>
+  <a class="btn btn-primary" href="#contact">お問い合わせ</a>
+</nav>
+
+<div id="top"></div>
+
+<section class="hero">
+  <div class="hero-inner">
+    <span class="kicker">STORY DRIVEN E-COMMERCE / MEGURU</span>
+    <h1>つくる手から、めぐる街へ。</h1>
+    <p class="sub">窯元と焼き菓子屋が手がけるひと品に、少しの寄付を添えて。買うたびに、誰かの暮らしがめぐっていく——それがMEGURUの物語です。</p>
+    <div class="cta-row">
+      <a class="btn btn-primary" href="#products">商品を見る</a>
+      <a class="btn btn-outline" style="border-color:#fff;color:#fff;" href="#subscription">定期便について</a>
+    </div>
+    <div class="stats">
+      <div class="stat"><b class="num">18</b><span>取扱い窯元・農園 ※仮</span></div>
+      <div class="stat"><b class="num">92%</b><span>定期便 継続率 ※仮</span></div>
+      <div class="stat"><b class="num">¥120,000</b><span>地域貢献 累計還元額 ※仮</span></div>
+    </div>
+    <p class="note">※本セクションの数値はデモ用の仮の内容です。</p>
+  </div>
+</section>
+
+<section id="story">
+  <div class="container story-grid">
+    <img class="reveal" loading="lazy" src="https://images.unsplash.com/photo-1753164725860-ffcd260b7b32?auto=format&fit=crop&w=1200&q=70" alt="ろくろを回す職人の手元">
+    <div class="story-text reveal">
+      <span class="section-tag">OUR STORY</span>
+      <h2>小さな窯と、焼き菓子屋から生まれた。</h2>
+      <p>MEGURUは、地方の小さな窯元と焼き菓子屋の手仕事を、丁寧に東京の食卓へ届けるために生まれたブランドです。大量生産では出せない温度と質感を、季節ごとの菓子折りというかたちに閉じ込めています。</p>
+      <p>ひとつの器、ひと箱の菓子には、それをつくった人の時間が宿っています。買うことが、誰かの手仕事を続ける力になる——私たちは、そんな循環（めぐり）をつくりたいと考えています。</p>
+    </div>
+  </div>
+</section>
+
+<section id="products" class="bg-alt">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="section-tag">PRODUCTS</span>
+      <h2>季節をまとう、代表の3品</h2>
+      <p class="lead">通常販売の商品に加え、数量限定のコラボ商品は予約販売からスタートします。</p>
+    </div>
+    <div class="product-grid">
+      <div class="p-card reveal">
+        <div class="thumb">
+          <img loading="lazy" src="https://images.unsplash.com/photo-1555507036-ab1f4038808a?auto=format&fit=crop&w=1200&q=70" alt="焼き菓子折り「四季」">
+          <span class="badge on">通常販売中</span>
+        </div>
+        <div class="p-body">
+          <h3>菓子折り「四季」</h3>
+          <p>焼き菓子6種と煎茶をひと箱に。季節の意匠で包む定番ギフト。</p>
+          <div class="p-price"><span class="num">¥4,980</span><span class="tax">税込 ※仮価格</span></div>
+        </div>
+      </div>
+      <div class="p-card reveal">
+        <div class="thumb">
+          <img loading="lazy" src="https://images.unsplash.com/photo-1549931319-a545dcf3bc73?auto=format&fit=crop&w=1200&q=70" alt="焙じ茶とバウムのセット">
+          <span class="badge on">通常販売中</span>
+        </div>
+        <div class="p-body">
+          <h3>焙じ茶とバウムのセット</h3>
+          <p>香ばしい焙じ茶と、しっとり生地のバウムクーヘンの組み合わせ。</p>
+          <div class="p-price"><span class="num">¥3,600</span><span class="tax">税込 ※仮価格</span></div>
+        </div>
+      </div>
+      <div class="p-card reveal">
+        <div class="thumb">
+          <img loading="lazy" src="https://images.unsplash.com/photo-1506459225024-1428097a7e18?auto=format&fit=crop&w=1200&q=70" alt="窯元コラボ限定ギフトボックス">
+          <span class="badge" id="productBadge">予約受付中</span>
+        </div>
+        <div class="p-body">
+          <h3>窯元コラボ 限定ギフトボックス</h3>
+          <p>数量100個限定。発売日を境に表示とボタンが自動で切り替わります。</p>
+          <div class="p-price"><span class="num">¥6,800</span><span class="tax">税込 ※仮価格</span></div>
+        </div>
+      </div>
+    </div>
+    <p class="fine">※価格・在庫は仮の内容です。実制作では在庫管理・注文/顧客管理機能と連携します。</p>
+  </div>
+</section>
+
+<section id="schedule">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="section-tag">SALES SCHEDULE</span>
+      <h2>予約販売から、通常販売へ。自動で切り替わる仕組み</h2>
+      <p class="lead">発売日を設定するだけで、表示とボタンのラベルが自動的に切り替わります。</p>
+    </div>
+    <div class="schedule-banner reveal">
+      <div class="timeline">
+        <div class="t-step"><span class="dot"></span><h4>予約受付開始</h4><p>2026年9月1日〜 商品ページを公開し「予約受付中」を表示</p></div>
+        <div class="t-step"><span class="dot"></span><h4>発売日</h4><p>2026年9月20日 0時に自動で表示が切り替わる</p></div>
+        <div class="t-step"><span class="dot"></span><h4>通常販売</h4><p>「購入する」ボタンに切り替わり、在庫がある限り販売継続</p></div>
+      </div>
+      <div class="demo-card">
+        <div class="row">
+          <div>
+            <h4 style="color:#fff;font-size:14.5px;">表示切り替えデモ</h4>
+            <p id="demoState">本日の日付では <b id="demoLabel">—</b> の表示になります。</p>
+          </div>
+          <div class="demo-toggle">
+            <button id="btnReserve" type="button">予約表示</button>
+            <button id="btnSale" type="button">通常表示</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="subscription" class="bg-alt">
+  <div class="container">
+    <div class="sub-wrap">
+      <img class="reveal" loading="lazy" src="https://images.unsplash.com/photo-1496113329550-ce8886d06d54?auto=format&fit=crop&w=1200&q=70" alt="畳と障子の和室">
+      <div class="reveal">
+        <span class="section-tag">SUBSCRIPTION</span>
+        <h2 style="font-size:clamp(24px,4vw,32px);margin-bottom:16px;">続けるほど、めぐりが大きくなる定期便</h2>
+        <p style="color:var(--ink-soft);font-size:15px;">配送サイクルは自由に選べ、マイページからいつでも休止・変更・解約が可能です。</p>
+        <div class="plan-grid">
+          <div class="plan">
+            <h4>お試し便</h4>
+            <div class="p num">¥3,200<span>/回</span></div>
+            <ul><li>1品お届け</li><li>2ヶ月ごと発送</li><li>いつでも解約可</li></ul>
+          </div>
+          <div class="plan featured">
+            <h4>スタンダード便</h4>
+            <div class="p num">¥5,400<span>/回</span></div>
+            <ul><li>2品お届け</li><li>1ヶ月ごと発送</li><li>初回10%OFF</li><li>休止・スキップ自由</li></ul>
+          </div>
+          <div class="plan">
+            <h4>まとめ便</h4>
+            <div class="p num">¥9,800<span>/回</span></div>
+            <ul><li>4品お届け</li><li>2週間ごと発送</li><li>送料無料</li></ul>
+          </div>
+        </div>
+        <div class="cycle-mock">
+          <h4>お届け周期を選ぶ(操作イメージ)</h4>
+          <div class="pill-group">
+            <button class="pill" type="button">2週間ごと</button>
+            <button class="pill active" type="button">1ヶ月ごと</button>
+            <button class="pill" type="button">2ヶ月ごと</button>
+          </div>
+          <div class="manage-row">
+            <button type="button">次回をスキップ</button>
+            <button type="button">お届け先を変更</button>
+            <button type="button">定期便を解約</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contribution">
+  <div class="container">
+    <div class="contrib-wrap">
+      <div class="reveal">
+        <span class="section-tag">LOCAL CONTRIBUTION</span>
+        <h2 style="font-size:clamp(24px,4vw,32px);margin-bottom:16px;">ひと箱ごとに、地域の居場所づくりへ。</h2>
+        <p style="color:var(--ink-soft);font-size:15px;">MEGURUは売上の一部を、産地となる地域の高齢者サロンや子ども食堂などの地域貢献活動に還元しています。買うことが、その土地の暮らしを支える一歩になります。</p>
+        <div class="gauge">
+          <div class="row"><span>今月の還元累計</span><span class="num" style="color:var(--accent);font-weight:700;">¥42,000 ※仮</span></div>
+          <div class="bar"><i></i></div>
+          <p class="foot">※将来的には購入数に応じて還元額がリアルタイムに増えていく動的表示への拡張も設計可能です。</p>
+        </div>
+      </div>
+      <img class="reveal" loading="lazy" src="https://images.unsplash.com/photo-1769506551162-f56c343f0642?auto=format&fit=crop&w=1200&q=70" alt="日本庭園を眺める後ろ姿の二人">
+    </div>
+  </div>
+</section>
+
+<section id="listing" class="bg-alt">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="section-tag">ALL PRODUCTS</span>
+      <h2>商品一覧</h2>
+      <p class="lead">今後追加されるコラボ商品は「近日公開」として先行表示されます。</p>
+    </div>
+    <div class="listing-grid">
+      <div class="l-card reveal">
+        <div class="thumb"><img loading="lazy" src="https://images.unsplash.com/photo-1555507036-ab1f4038808a?auto=format&fit=crop&w=800&q=70" alt="菓子折り四季"></div>
+        <div class="info"><h5>菓子折り「四季」</h5><span class="price">¥4,980</span></div>
+      </div>
+      <div class="l-card reveal">
+        <div class="thumb"><img loading="lazy" src="https://images.unsplash.com/photo-1549931319-a545dcf3bc73?auto=format&fit=crop&w=800&q=70" alt="焙じ茶バウムセット"></div>
+        <div class="info"><h5>焙じ茶とバウムのセット</h5><span class="price">¥3,600</span></div>
+      </div>
+      <div class="l-card reveal">
+        <div class="thumb"><img loading="lazy" src="https://images.unsplash.com/photo-1568254183919-78a4f43a2877?auto=format&fit=crop&w=800&q=70" alt="焼き菓子ショーケース"></div>
+        <div class="info"><h5>季節の焼き菓子 詰め合わせ</h5><span class="price">¥2,980</span></div>
+      </div>
+      <div class="l-card soon reveal">
+        <div class="thumb">
+          <svg class="lock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>
+        </div>
+        <div class="info"><h5>コラボ商品「近日公開」</h5><span class="price" style="color:var(--ink-soft);">Coming Soon</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="sns">
+  <div class="container" style="text-align:center;">
+    <span class="section-tag">FOLLOW US</span>
+    <h2 style="font-size:clamp(22px,3.6vw,28px);">つくり手の日常を、SNSで。</h2>
+    <p style="color:var(--ink-soft);font-size:14px;margin-top:12px;">窯元の様子や菓子折りができるまでを発信しています。</p>
+    <div class="sns-row">
+      <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="0.6" fill="currentColor" stroke="none"/></svg></a>
+      <a href="#" aria-label="LINE公式アカウント"><svg viewBox="0 0 24 24"><path d="M4 12a8 6.5 0 1 1 8 6.5c-1 0-2-.1-3-.4L5 20l1-3.3A6.4 6.4 0 0 1 4 12Z"/></svg></a>
+      <a href="#" aria-label="X"><svg viewBox="0 0 24 24"><path d="M5 5l14 14M19 5 5 19"/></svg></a>
+    </div>
+  </div>
+</section>
+
+<section id="contact" class="bg-alt">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="section-tag">CONTACT</span>
+      <h2>お問い合わせ</h2>
+      <p class="lead">商品や定期便についてのご質問は、こちらのフォームからお気軽にどうぞ。</p>
+    </div>
+    <form class="form-wrap reveal" onsubmit="event.preventDefault();alert('これはデモフォームです。実際の送信は行われません。');">
+      <div class="form-row">
+        <label for="f-name">お名前</label>
+        <input id="f-name" type="text" placeholder="例)めぐり 花子" required>
+      </div>
+      <div class="form-row">
+        <label for="f-mail">メールアドレス</label>
+        <input id="f-mail" type="email" placeholder="example@meguru-demo.jp" required>
+      </div>
+      <div class="form-row">
+        <label for="f-type">お問い合わせ種別</label>
+        <select id="f-type">
+          <option>商品について</option>
+          <option>定期便について</option>
+          <option>予約販売について</option>
+          <option>その他</option>
+        </select>
+      </div>
+      <div class="form-row">
+        <label for="f-msg">お問い合わせ内容</label>
+        <textarea id="f-msg" placeholder="お問い合わせ内容をご記入ください"></textarea>
+      </div>
+      <button class="btn btn-primary" type="submit">送信する(デモ)</button>
+      <p class="form-note">※本フォームはデモのため送信されません。実制作では確認メール送信・スパム対策を実装します。</p>
+    </form>
+  </div>
+</section>
+
+<section id="faq">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="section-tag">FAQ</span>
+      <h2>よくある質問</h2>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item reveal">
+        <button class="faq-q" type="button">定期便はいつでも解約できますか?<span class="icon">+</span></button>
+        <div class="faq-a"><p>はい。マイページからいつでも休止・お届け周期の変更・解約のお手続きができます。次回発送の5日前までのお手続きで反映されます。</p></div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-q" type="button">予約商品はいつ発送されますか?<span class="icon">+</span></button>
+        <div class="faq-a"><p>発売日を境にページ表示が自動で「購入する」に切り替わり、発売日以降に順次発送いたします。</p></div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-q" type="button">支払い方法を教えてください<span class="icon">+</span></button>
+        <div class="faq-a"><p>クレジットカードをはじめとする各種オンライン決済に対応予定です(本ページはデモのため決済は動作しません)。</p></div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-q" type="button">送料はどのくらいですか?<span class="icon">+</span></button>
+        <div class="faq-a"><p>地域・お届け方法により異なります。実制作では配送料設定機能で自由に設定いただけます。</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="sticky-cta">
+  <a class="btn btn-outline" href="#products">商品を見る</a>
+  <a class="btn btn-primary" href="#subscription">定期便に申し込む</a>
+</div>
+
+<footer>
+  <div class="container footer-grid">
+    <div>
+      <div class="f-brand"><span class="mark">巡</span>MEGURU</div>
+      <p>窯元と焼き菓子屋の手仕事を届けるストーリー型ECブランドのデモです。買うたびに、誰かの暮らしがめぐっていく——そんな循環をめざしています。</p>
+    </div>
+    <div>
+      <h5>ページ内リンク</h5>
+      <ul>
+        <li><a href="#story">ブランドストーリー</a></li>
+        <li><a href="#products">商品紹介</a></li>
+        <li><a href="#subscription">定期便案内</a></li>
+        <li><a href="#contribution">地域貢献</a></li>
+      </ul>
+    </div>
+    <div>
+      <h5>法的表記</h5>
+      <ul>
+        <li><a href="#">特定商取引法に基づく表記</a></li>
+        <li><a href="#">プライバシーポリシー</a></li>
+        <li><a href="#">利用規約</a></li>
+      </ul>
+    </div>
+    <div>
+      <h5>お問い合わせ</h5>
+      <ul>
+        <li>電話 048-000-0000(ダミー)</li>
+        <li><a href="#contact">お問い合わせフォーム</a></li>
+        <li>所在地: デモのため非公開</li>
+      </ul>
+    </div>
+  </div>
+  <div class="container footer-bottom">
+    <p class="disclaimer">※本ページは制作サンプル(デモ)です。掲載の内容・数値は仮のもので、写真はイメージです。</p>
+    <p>※写真はイメージです。実制作ではご提供写真や日本人モデルの素材に差し替えます。</p>
+    <p>© 2026 MEGURU(めぐる) — Demo Page</p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var hamburger = document.getElementById('hamburger');
+  var mobileNav = document.getElementById('mobileNav');
+  hamburger.addEventListener('click', function(){
+    var open = mobileNav.classList.toggle('open');
+    hamburger.classList.toggle('active', open);
+    hamburger.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+  mobileNav.querySelectorAll('a').forEach(function(a){
+    a.addEventListener('click', function(){
+      mobileNav.classList.remove('open');
+      hamburger.classList.remove('active');
+      hamburger.setAttribute('aria-expanded', 'false');
+    });
+  });
+
+  var observer = ('IntersectionObserver' in window) ? new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){ e.target.classList.add('in'); observer.unobserve(e.target); }
+    });
+  }, {threshold:.15}) : null;
+  document.querySelectorAll('.reveal').forEach(function(el){
+    if(observer){ observer.observe(el); } else { el.classList.add('in'); }
+  });
+
+  document.querySelectorAll('.faq-item').forEach(function(item){
+    item.querySelector('.faq-q').addEventListener('click', function(){
+      var isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(function(i){ i.classList.remove('open'); i.querySelector('.icon').textContent='+'; });
+      if(!isOpen){ item.classList.add('open'); item.querySelector('.icon').textContent='×'; }
+    });
+  });
+
+  document.querySelectorAll('.pill-group .pill').forEach(function(p){
+    p.addEventListener('click', function(){
+      p.parentElement.querySelectorAll('.pill').forEach(function(x){ x.classList.remove('active'); });
+      p.classList.add('active');
+    });
+  });
+
+  var releaseDate = new Date('2026-09-20T00:00:00+09:00');
+  var badge = document.getElementById('productBadge');
+  var demoLabel = document.getElementById('demoLabel');
+  var btnReserve = document.getElementById('btnReserve');
+  var btnSale = document.getElementById('btnSale');
+
+  function applyState(isOnSale){
+    if(isOnSale){
+      badge.textContent = '購入する';
+      badge.classList.add('on');
+      demoLabel.textContent = '通常販売(購入する)';
+      btnSale.classList.add('active'); btnReserve.classList.remove('active');
+    } else {
+      badge.textContent = '予約受付中';
+      badge.classList.remove('on');
+      demoLabel.textContent = '予約受付中';
+      btnReserve.classList.add('active'); btnSale.classList.remove('active');
+    }
+  }
+  var today = new Date();
+  applyState(today >= releaseDate);
+  btnReserve.addEventListener('click', function(){ applyState(false); });
+  btnSale.addEventListener('click', function(){ applyState(true); });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,1570 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>株式会社Argon｜広告運用マーケター採用デモ</title>
+<meta name="description" content="株式会社Argonの広告運用マーケター募集デモページ。美容サロン・整体院向け採用支援のMeta広告運用、LP改善、レポーティングを担うフルリモート案件です。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+JP:wght@400;500;700;900&family=Zen+Kaku+Gothic+New:wght@500;700;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --base: #ffffff;
+  --paper: #f8faf9;
+  --ink: #17231f;
+  --muted: #5d6b66;
+  --line: #dfe8e4;
+  --accent: #0f6b57;
+  --accent-dark: #0a4c3d;
+  --accent-soft: #e4f3ef;
+  --shadow: 0 18px 42px rgba(15, 107, 87, 0.16);
+  --radius: 8px;
+  --container: 1120px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+}
+
+body {
+  margin: 0;
+  font-family: "Noto Sans JP", sans-serif;
+  color: var(--ink);
+  background: var(--base);
+  line-height: 1.8;
+  letter-spacing: 0;
+  font-feature-settings: "palt";
+  overflow-x: hidden;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+.header {
+  position: fixed;
+  inset: 0 0 auto 0;
+  z-index: 20;
+  background: rgba(255, 255, 255, 0.88);
+  border-bottom: 1px solid rgba(223, 232, 228, 0.85);
+  backdrop-filter: blur(16px);
+}
+
+.header__inner {
+  width: min(calc(100% - 40px), var(--container));
+  max-width: 100%;
+  margin: 0 auto;
+  min-height: 76px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.logo {
+  display: grid;
+  gap: 2px;
+}
+
+.logo__mark {
+  font-family: "Manrope", sans-serif;
+  font-weight: 800;
+  font-size: 22px;
+  line-height: 1;
+  color: var(--accent-dark);
+}
+
+.logo__sub {
+  font-size: 11px;
+  color: var(--muted);
+  line-height: 1.2;
+}
+
+.header__links {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.header__links a {
+  position: relative;
+  white-space: nowrap;
+}
+
+.header__links a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -6px;
+  width: 0;
+  height: 2px;
+  background: var(--accent);
+  transition: width 0.2s ease;
+}
+
+.header__links a:hover::after {
+  width: 100%;
+}
+
+.menu-button {
+  display: none;
+  width: 44px;
+  max-width: 100%;
+  height: 44px;
+  border: 1px solid var(--line);
+  background: var(--base);
+  border-radius: 100px;
+  align-items: center;
+  justify-content: center;
+  color: var(--ink);
+}
+
+.menu-button svg {
+  width: 21px;
+  max-width: 100%;
+  height: 21px;
+}
+
+.mobile-nav {
+  position: fixed;
+  z-index: 19;
+  top: 76px;
+  left: 0;
+  right: 0;
+  background: rgba(255, 255, 255, 0.97);
+  border-bottom: 1px solid var(--line);
+  padding: 16px 20px 22px;
+  transform: translateY(-130%);
+  transition: transform 0.25s ease;
+}
+
+.mobile-nav.is-open {
+  transform: translateY(0);
+}
+
+.mobile-nav a {
+  display: block;
+  padding: 12px 0;
+  font-weight: 700;
+  border-bottom: 1px solid var(--line);
+}
+
+.cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  min-height: 52px;
+  padding: 0 24px;
+  border-radius: 100px;
+  background: var(--accent);
+  color: #fff;
+  font-weight: 900;
+  box-shadow: var(--shadow);
+  border: 1px solid var(--accent);
+  transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+}
+
+.cta:hover {
+  transform: translateY(-2px);
+  background: var(--accent-dark);
+  box-shadow: 0 22px 48px rgba(15, 107, 87, 0.2);
+}
+
+.cta--ghost {
+  background: var(--base);
+  color: var(--accent-dark);
+  box-shadow: none;
+}
+
+.cta--ghost:hover {
+  color: #fff;
+}
+
+.cta svg {
+  width: 18px;
+  max-width: 100%;
+  height: 18px;
+  flex: 0 0 auto;
+}
+
+main {
+  padding-top: 76px;
+}
+
+.section {
+  padding: 104px 0;
+}
+
+.section--soft {
+  background: var(--paper);
+}
+
+.container {
+  width: min(calc(100% - 40px), var(--container));
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+.kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--accent-dark);
+  font-weight: 900;
+  font-size: 13px;
+  letter-spacing: 0.04em;
+  margin-bottom: 18px;
+}
+
+.kicker::before {
+  content: "";
+  width: 28px;
+  max-width: 100%;
+  height: 2px;
+  background: var(--accent);
+}
+
+.heading {
+  font-family: "Zen Kaku Gothic New", "Noto Sans JP", sans-serif;
+  font-weight: 900;
+  line-height: 1.35;
+  letter-spacing: 0;
+  margin: 0;
+}
+
+.heading--xl {
+  font-size: clamp(36px, 7vw, 72px);
+  max-width: 9.8em;
+}
+
+.heading--lg {
+  font-size: clamp(30px, 4.8vw, 50px);
+  max-width: 12em;
+}
+
+.heading--md {
+  font-size: clamp(22px, 3vw, 30px);
+}
+
+.lead {
+  color: var(--muted);
+  font-size: 17px;
+  max-width: 680px;
+  margin: 22px 0 0;
+}
+
+.hero {
+  position: relative;
+  min-height: calc(100svh - 76px);
+  display: grid;
+  align-items: center;
+  padding: 76px 0 44px;
+  overflow: hidden;
+  background:
+    linear-gradient(90deg, rgba(255,255,255,0.98) 0%, rgba(255,255,255,0.9) 46%, rgba(255,255,255,0.48) 74%, rgba(255,255,255,0.22) 100%),
+    url("https://images.unsplash.com/photo-1664596350962-603b0a41524a?auto=format&fit=crop&w=1200&q=70") center right / cover no-repeat;
+}
+
+.hero::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 120px;
+  background: linear-gradient(to bottom, rgba(255,255,255,0), #fff);
+  pointer-events: none;
+}
+
+.hero__inner {
+  position: relative;
+  z-index: 1;
+  width: min(calc(100% - 40px), var(--container));
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+.hero__copy {
+  max-width: 760px;
+}
+
+.hero__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 15px;
+  border: 1px solid rgba(15, 107, 87, 0.22);
+  border-radius: 100px;
+  background: rgba(255, 255, 255, 0.78);
+  color: var(--accent-dark);
+  font-weight: 900;
+  font-size: 13px;
+  margin-bottom: 24px;
+}
+
+.hero__badge span {
+  width: 8px;
+  max-width: 100%;
+  height: 8px;
+  border-radius: 100px;
+  background: var(--accent);
+}
+
+.hero__text {
+  max-width: 650px;
+  margin: 24px 0 0;
+  font-size: 18px;
+  color: #35433f;
+}
+
+.hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 34px;
+}
+
+.hero__note {
+  margin-top: 18px;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.hero__stats {
+  margin-top: 48px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  width: min(100%, 760px);
+  max-width: 100%;
+  border: 1px solid rgba(223, 232, 228, 0.95);
+  background: rgba(255, 255, 255, 0.86);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+.stat {
+  padding: 22px 24px;
+  border-right: 1px solid var(--line);
+}
+
+.stat:last-child {
+  border-right: 0;
+}
+
+.stat__num {
+  font-family: "Manrope", sans-serif;
+  font-weight: 800;
+  font-size: clamp(26px, 5vw, 40px);
+  line-height: 1;
+  color: var(--accent-dark);
+}
+
+.stat__label {
+  margin-top: 8px;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.note-bar {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  width: min(calc(100% - 40px), var(--container));
+  max-width: 100%;
+  margin: -26px auto 0;
+  position: relative;
+  z-index: 2;
+  background: var(--accent-dark);
+  color: #fff;
+  border-radius: var(--radius);
+  padding: 20px 24px;
+  box-shadow: var(--shadow);
+}
+
+.note-bar__line {
+  width: 3px;
+  max-width: 100%;
+  align-self: stretch;
+  background: rgba(255,255,255,0.5);
+  border-radius: 999px;
+  flex: 0 0 auto;
+}
+
+.note-bar p {
+  margin: 0;
+  font-weight: 700;
+  line-height: 1.75;
+}
+
+.split {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  gap: clamp(36px, 7vw, 72px);
+  align-items: center;
+}
+
+.panel {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: clamp(24px, 4vw, 32px);
+}
+
+.panel--accent {
+  background: var(--accent-soft);
+  border-color: rgba(15, 107, 87, 0.16);
+}
+
+.check-list {
+  display: grid;
+  gap: 14px;
+  margin: 28px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.check-list li {
+  display: grid;
+  grid-template-columns: 22px minmax(0, 1fr);
+  gap: 12px;
+  align-items: start;
+  color: #34423e;
+}
+
+.check-list li::before {
+  content: "✓";
+  display: grid;
+  place-items: center;
+  width: 22px;
+  max-width: 100%;
+  height: 22px;
+  border-radius: 100px;
+  background: var(--accent);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 900;
+  line-height: 1;
+  margin-top: 4px;
+}
+
+.image-card {
+  position: relative;
+  border-radius: var(--radius);
+  overflow: hidden;
+  min-height: 520px;
+  max-width: 100%;
+  border: 1px solid var(--line);
+  background: var(--paper);
+}
+
+.image-card img {
+  width: 100%;
+  max-width: 100%;
+  height: 100%;
+  min-height: 520px;
+  object-fit: cover;
+}
+
+.image-card__caption {
+  position: absolute;
+  left: 20px;
+  right: 20px;
+  bottom: 20px;
+  padding: 18px 20px;
+  background: rgba(255,255,255,0.92);
+  border-radius: var(--radius);
+  font-weight: 900;
+  color: var(--accent-dark);
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 22px;
+  margin-top: 42px;
+}
+
+.card {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 28px;
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 18px 40px rgba(23, 35, 31, 0.08);
+}
+
+.card__icon {
+  width: 46px;
+  max-width: 100%;
+  height: 46px;
+  border-radius: 100px;
+  background: var(--accent-soft);
+  color: var(--accent-dark);
+  display: grid;
+  place-items: center;
+  margin-bottom: 20px;
+}
+
+.card__icon svg {
+  width: 24px;
+  max-width: 100%;
+  height: 24px;
+}
+
+.card h3 {
+  margin: 0;
+  font-family: "Zen Kaku Gothic New", sans-serif;
+  font-size: 21px;
+  line-height: 1.45;
+}
+
+.card p {
+  margin: 14px 0 0;
+  color: var(--muted);
+  font-size: 15px;
+}
+
+.timeline {
+  display: grid;
+  gap: 16px;
+  margin-top: 36px;
+}
+
+.timeline__item {
+  display: grid;
+  grid-template-columns: 88px minmax(0, 1fr);
+  gap: 22px;
+  align-items: start;
+  padding: 22px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.timeline__time {
+  font-family: "Manrope", sans-serif;
+  font-weight: 800;
+  color: var(--accent-dark);
+}
+
+.timeline__body h3 {
+  margin: 0;
+  font-size: 18px;
+  line-height: 1.5;
+}
+
+.timeline__body p {
+  margin: 8px 0 0;
+  color: var(--muted);
+}
+
+.role-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+  margin-top: 40px;
+}
+
+.role-box {
+  padding: 24px;
+  border-radius: var(--radius);
+  border: 1px solid var(--line);
+  background: #fff;
+}
+
+.role-box h3 {
+  margin: 0 0 14px;
+  font-family: "Zen Kaku Gothic New", sans-serif;
+  font-size: 20px;
+}
+
+.role-box ul {
+  margin: 0;
+  padding-left: 1.25em;
+  color: var(--muted);
+}
+
+.role-box li + li {
+  margin-top: 8px;
+}
+
+.voice {
+  display: grid;
+  grid-template-columns: 140px minmax(0, 1fr);
+  gap: 28px;
+  align-items: center;
+  margin-top: 42px;
+  padding: 30px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: #fff;
+}
+
+.voice__photo {
+  width: 140px;
+  max-width: 100%;
+  aspect-ratio: 1;
+  border-radius: 100%;
+  overflow: hidden;
+  background: var(--paper);
+}
+
+.voice__photo img {
+  width: 100%;
+  max-width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.voice blockquote {
+  margin: 0;
+  font-family: "Zen Kaku Gothic New", sans-serif;
+  font-size: clamp(20px, 3vw, 28px);
+  line-height: 1.65;
+  font-weight: 900;
+}
+
+.voice p {
+  margin: 14px 0 0;
+  color: var(--muted);
+}
+
+.requirements {
+  margin-top: 38px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: #fff;
+}
+
+.req-row {
+  display: grid;
+  grid-template-columns: minmax(120px, 0.34fr) minmax(0, 1fr);
+  border-bottom: 1px solid var(--line);
+}
+
+.req-row:last-child {
+  border-bottom: 0;
+}
+
+.req-row dt,
+.req-row dd {
+  margin: 0;
+  padding: 20px 22px;
+}
+
+.req-row dt {
+  background: var(--paper);
+  font-weight: 900;
+  color: var(--accent-dark);
+}
+
+.req-row dd {
+  color: #34423e;
+}
+
+.flow {
+  counter-reset: flow;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+  margin-top: 40px;
+}
+
+.flow__item {
+  counter-increment: flow;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 24px;
+}
+
+.flow__item::before {
+  content: counter(flow, decimal-leading-zero);
+  display: block;
+  font-family: "Manrope", sans-serif;
+  font-size: 28px;
+  font-weight: 800;
+  color: var(--accent);
+  line-height: 1;
+  margin-bottom: 18px;
+}
+
+.flow__item h3 {
+  margin: 0;
+  font-size: 18px;
+}
+
+.flow__item p {
+  margin: 10px 0 0;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.faq {
+  margin-top: 38px;
+  display: grid;
+  gap: 12px;
+}
+
+.faq details {
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: #fff;
+  padding: 0;
+}
+
+.faq summary {
+  cursor: pointer;
+  padding: 20px 22px;
+  font-weight: 900;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.faq summary::-webkit-details-marker {
+  display: none;
+}
+
+.faq summary::after {
+  content: "+";
+  font-family: "Manrope", sans-serif;
+  font-size: 24px;
+  color: var(--accent);
+}
+
+.faq details[open] summary::after {
+  content: "-";
+}
+
+.faq p {
+  margin: 0;
+  padding: 0 22px 22px;
+  color: var(--muted);
+}
+
+.form {
+  display: grid;
+  gap: 18px;
+  margin-top: 38px;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: clamp(24px, 4vw, 34px);
+}
+
+.form__grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.field {
+  display: grid;
+  gap: 7px;
+}
+
+.field label {
+  font-size: 14px;
+  font-weight: 900;
+  color: var(--accent-dark);
+}
+
+.field input,
+.field select,
+.field textarea {
+  width: 100%;
+  max-width: 100%;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  min-height: 52px;
+  padding: 12px 14px;
+  font-size: 16px;
+  background: var(--paper);
+  color: var(--ink);
+}
+
+.field textarea {
+  min-height: 140px;
+  resize: vertical;
+}
+
+.form__note {
+  margin: 0;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.footer {
+  background: #0e1714;
+  color: #fff;
+  padding: 54px 0 96px;
+}
+
+.footer__inner {
+  width: min(calc(100% - 40px), var(--container));
+  max-width: 100%;
+  margin: 0 auto;
+  display: grid;
+  gap: 18px;
+}
+
+.footer__brand {
+  font-family: "Manrope", sans-serif;
+  font-size: 24px;
+  font-weight: 800;
+}
+
+.footer p {
+  margin: 0;
+  color: rgba(255,255,255,0.76);
+  font-size: 14px;
+}
+
+.sticky-cta {
+  position: fixed;
+  z-index: 30;
+  left: 50%;
+  bottom: 18px;
+  transform: translateX(-50%);
+  width: min(calc(100% - 28px), 560px);
+  max-width: 100%;
+  display: none;
+  gap: 10px;
+  padding: 10px;
+  border: 1px solid rgba(223,232,228,0.8);
+  border-radius: 100px;
+  background: rgba(255,255,255,0.94);
+  box-shadow: 0 18px 44px rgba(23,35,31,0.16);
+}
+
+.sticky-cta a {
+  flex: 1 1 0;
+  min-width: 0;
+  min-height: 48px;
+  padding: 0 12px;
+  font-size: 14px;
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity 0.55s ease, transform 0.55s ease;
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (max-width: 880px) {
+  .header__links {
+    display: none;
+  }
+
+  .menu-button {
+    display: inline-flex;
+  }
+
+  .hero {
+    min-height: auto;
+    padding: 62px 0 40px;
+    background:
+      linear-gradient(180deg, rgba(255,255,255,0.97) 0%, rgba(255,255,255,0.92) 55%, rgba(255,255,255,0.78) 100%),
+      url("https://images.unsplash.com/photo-1664596350962-603b0a41524a?auto=format&fit=crop&w=1200&q=70") center / cover no-repeat;
+  }
+
+  .split,
+  .cards,
+  .role-grid,
+  .flow {
+    grid-template-columns: 1fr;
+  }
+
+  .image-card,
+  .image-card img {
+    min-height: 360px;
+  }
+
+  .voice {
+    grid-template-columns: 1fr;
+  }
+
+  .voice__photo {
+    width: 112px;
+  }
+
+  .sticky-cta {
+    display: flex;
+  }
+
+  .footer {
+    padding-bottom: 126px;
+  }
+}
+
+@media (max-width: 560px) {
+  .container,
+  .header__inner,
+  .hero__inner,
+  .note-bar,
+  .footer__inner {
+    width: min(calc(100% - 28px), var(--container));
+  }
+
+  .header__inner {
+    min-height: 68px;
+  }
+
+  main {
+    padding-top: 68px;
+  }
+
+  .mobile-nav {
+    top: 68px;
+  }
+
+  .section {
+    padding: 82px 0;
+  }
+
+  .hero__actions {
+    flex-direction: column;
+  }
+
+  .cta {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .hero__stats {
+    grid-template-columns: 1fr;
+  }
+
+  .stat {
+    border-right: 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .stat:last-child {
+    border-bottom: 0;
+  }
+
+  .note-bar {
+    margin-top: -18px;
+    padding: 18px;
+  }
+
+  .timeline__item {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .req-row {
+    grid-template-columns: 1fr;
+  }
+
+  .req-row dt,
+  .req-row dd {
+    padding: 16px 18px;
+  }
+
+  .form__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .sticky-cta {
+    border-radius: 22px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
+}
+</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "JobPosting",
+  "title": "広告運用のマーケター",
+  "description": "株式会社Argonの広告運用マーケター募集。美容サロン・整体サロン向けサービスにおけるMeta広告の設計、入稿、運用改善、LPディレクション、クリエイティブ制作、月次レポート、オンライン定例を担当します。",
+  "hiringOrganization": {
+    "@type": "Organization",
+    "name": "株式会社Argon"
+  },
+  "employmentType": "CONTRACTOR",
+  "jobLocationType": "TELECOMMUTE",
+  "applicantLocationRequirements": {
+    "@type": "Country",
+    "name": "Japan"
+  },
+  "baseSalary": {
+    "@type": "MonetaryAmount",
+    "currency": "JPY",
+    "value": {
+      "@type": "QuantitativeValue",
+      "minValue": 450000,
+      "maxValue": 600000,
+      "unitText": "MONTH"
+    }
+  },
+  "datePosted": "2026-08-31",
+  "validThrough": "2026-12-31"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "完全フルリモートで参画できますか？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "募集文ではフルリモート案件として記載されています。月1回のクライアント定例はオンライン想定です。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "主な広告媒体は何ですか？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Meta広告、InstagramおよびFacebookがメインです。"
+      }
+    }
+  ]
+}
+</script>
+</head>
+<body>
+<header class="header">
+  <div class="header__inner">
+    <a href="#top" class="logo" aria-label="株式会社Argon 採用トップへ">
+      <span class="logo__mark">Argon</span>
+      <span class="logo__sub">Recruiting Marketing Partner</span>
+    </a>
+    <nav class="header__links" aria-label="主要ナビゲーション">
+      <a href="#mission">仕事の核</a>
+      <a href="#role">業務内容</a>
+      <a href="#requirements">募集要項</a>
+      <a href="#entry">応募</a>
+      <a class="cta" href="#entry">
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        応募する
+      </a>
+    </nav>
+    <button class="menu-button" type="button" aria-label="メニューを開閉" aria-expanded="false" aria-controls="mobileNav">
+      <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+    </button>
+  </div>
+</header>
+
+<nav class="mobile-nav" id="mobileNav" aria-label="モバイルナビゲーション">
+  <a href="#mission">仕事の核</a>
+  <a href="#role">業務内容</a>
+  <a href="#requirements">募集要項</a>
+  <a href="#entry">応募</a>
+</nav>
+
+<main id="top">
+  <section class="hero">
+    <div class="hero__inner">
+      <div class="hero__copy reveal">
+        <div class="hero__badge"><span></span>月45万円から・フルリモート・継続案件</div>
+        <h1 class="heading heading--xl">応募を増やす広告運用。</h1>
+        <p class="hero__text">
+          株式会社Argonは、美容サロン・整体サロンの採用を専門に支援する会社です。
+          Meta広告を起点に、LP、クリエイティブ、月次改善までつなぎ、採用単価を見ながら動けるマーケターを募集します。
+        </p>
+        <div class="hero__actions">
+          <a class="cta" href="#entry">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            実績を添えて応募する
+          </a>
+          <a class="cta cta--ghost" href="tel:048-000-0000">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M6.6 10.8c1.6 3.2 3.4 5 6.6 6.6l2.2-2.2c.3-.3.8-.4 1.2-.3 1.3.4 2.6.6 4 .6.7 0 1.2.5 1.2 1.2v3.5c0 .7-.5 1.2-1.2 1.2C10.7 21.4 2.6 13.3 2.6 3.4c0-.7.5-1.2 1.2-1.2h3.5c.7 0 1.2.5 1.2 1.2 0 1.4.2 2.7.6 4 .1.4 0 .9-.3 1.2l-2.2 2.2z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            048-000-0000
+          </a>
+        </div>
+        <p class="hero__note">※電話番号はデモ用のダミーです。応募受付は下部フォーム想定です。</p>
+        <div class="hero__stats" aria-label="募集概要">
+          <div class="stat">
+            <div class="stat__num">45-60</div>
+            <div class="stat__label">万円/月 税抜の契約金額</div>
+          </div>
+          <div class="stat">
+            <div class="stat__num">700+</div>
+            <div class="stat__label">全国の美容室・サロン支援</div>
+          </div>
+          <div class="stat">
+            <div class="stat__num">Meta</div>
+            <div class="stat__label">Instagram/Facebook広告が中心</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="note-bar reveal">
+    <div class="note-bar__line"></div>
+    <p>
+      求人広告を「出す」だけではなく、応募数と採用単価を見て改善する役割です。
+      美容業界の現場感と、数字に向き合う運用力の両方を重視します。
+    </p>
+  </div>
+
+  <section class="section" id="mission">
+    <div class="container">
+      <div class="split">
+        <div class="reveal">
+          <div class="kicker">MISSION</div>
+          <h2 class="heading heading--lg">美容業界の採用を、仕組みで前へ。</h2>
+          <p class="lead">
+            オフィスワーカー向けの採用支援は多い一方で、美容サロン、鍼灸整骨院、歯科医院など、
+            専門スキル職の採用支援はまだ整っていません。Argonはその領域に特化し、
+            「美容業界の求人といえばArgon」と言われる会社を目指しています。
+          </p>
+          <ul class="check-list">
+            <li>求人媒体運用、SNS運用、広告運用、LP制作まで横断して支援</li>
+            <li>美容室、ネイルサロン、アイサロン、エステサロンなど全国700店舗以上を支援</li>
+            <li>応募数だけでなく、採用単価と継続改善を見据えたマーケティングを実行</li>
+          </ul>
+        </div>
+        <div class="image-card reveal">
+          <img src="https://images.unsplash.com/photo-1633681926022-84c23e8cb2d6?auto=format&fit=crop&w=1200&q=70" alt="白基調のサロン内装イメージ">
+          <div class="image-card__caption">※写真はイメージです。実制作ではご提供写真や日本人モデルの素材に差し替えます。</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--soft">
+    <div class="container">
+      <div class="reveal">
+        <div class="kicker">WHY ARGON</div>
+        <h2 class="heading heading--lg">運用者に求めるのは、管理画面の外を見る力。</h2>
+        <p class="lead">
+          媒体の配信調整だけで完結しない仕事です。採用LP、画像・動画クリエイティブ、クライアント定例、
+          レポートの見せ方まで含めて、応募につながる道筋を設計します。
+        </p>
+      </div>
+      <div class="cards">
+        <article class="card reveal">
+          <div class="card__icon">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M4 19V5M4 19h16M8 16v-5M12 16V8M16 16v-8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <h3>採用KPIから逆算する</h3>
+          <p>
+            クリック率やCPAだけでなく、応募数、採用単価、職種ごとの温度感を見ながら改善します。
+          </p>
+        </article>
+        <article class="card reveal">
+          <div class="card__icon">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M4 5h16v10H7l-3 3V5zM9 9h6M9 12h4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <h3>現場の言葉を広告に変える</h3>
+          <p>
+            美容サロンや整体院の採用課題を読み取り、求職者に届く訴求へ整理します。
+          </p>
+        </article>
+        <article class="card reveal">
+          <div class="card__icon">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M5 12a7 7 0 0 1 12-5M19 12a7 7 0 0 1-12 5M17 4v4h-4M7 20v-4h4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <h3>改善サイクルを回し切る</h3>
+          <p>
+            レポートで終わらせず、次月の入稿、LP修正、クリエイティブ更新まで実行に落とします。
+          </p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="role">
+    <div class="container">
+      <div class="reveal">
+        <div class="kicker">ROLE</div>
+        <h2 class="heading heading--lg">まず任せたい仕事、伸びた先の仕事。</h2>
+        <p class="lead">
+          最初はMeta広告運用とLP・クリエイティブのディレクションが中心です。
+          業務に慣れてきたら、運用フローの型づくりやメンバー育成にも関われます。
+        </p>
+      </div>
+      <div class="role-grid">
+        <div class="role-box reveal">
+          <h3>まずお任せする業務</h3>
+          <ul>
+            <li>Meta広告の設計、入稿、運用改善</li>
+            <li>採用LP、集客LPのディレクション</li>
+            <li>広告クリエイティブのディレクション、制作</li>
+            <li>月次レポートの作成</li>
+            <li>クライアント定例への参加、オンライン月1回</li>
+            <li>応募数、採用単価を伸ばす改善サイクルの実行</li>
+          </ul>
+        </div>
+        <div class="role-box reveal">
+          <h3>慣れてきたら関われる業務</h3>
+          <ul>
+            <li>運用フローの型づくり</li>
+            <li>マニュアル整備</li>
+            <li>メンバーの採用、育成</li>
+            <li>事業数値の管理</li>
+            <li>代表への月次報告</li>
+            <li>美容業界求人No.1を目指す事業づくり</li>
+          </ul>
+        </div>
+      </div>
+      <div class="timeline reveal">
+        <div class="timeline__item">
+          <div class="timeline__time">Week 1</div>
+          <div class="timeline__body">
+            <h3>既存アカウントと支援先の理解</h3>
+            <p>媒体構成、過去レポート、LP、クリエイティブ、職種別の応募状況を確認します。</p>
+          </div>
+        </div>
+        <div class="timeline__item">
+          <div class="timeline__time">Week 2-4</div>
+          <div class="timeline__body">
+            <h3>Meta広告の改善着手</h3>
+            <p>配信設計、入稿、日次確認、クリエイティブ差し替えの優先順位づけを進めます。</p>
+          </div>
+        </div>
+        <div class="timeline__item">
+          <div class="timeline__time">Month 2</div>
+          <div class="timeline__body">
+            <h3>月次レポートと定例の型化</h3>
+            <p>応募数と採用単価を軸に、クライアントへ伝わる報告と次月施策をまとめます。</p>
+          </div>
+        </div>
+        <div class="timeline__item">
+          <div class="timeline__time">Next</div>
+          <div class="timeline__body">
+            <h3>運用フローの標準化</h3>
+            <p>担当件数の増加に耐えられるよう、手順、判断基準、制作依頼の型を整備します。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--soft">
+    <div class="container">
+      <div class="split">
+        <div class="image-card reveal">
+          <img src="https://images.unsplash.com/photo-1664596350962-603b0a41524a?auto=format&fit=crop&w=1200&q=70" alt="東京のオフィス街を歩く人の後ろ姿">
+          <div class="image-card__caption">全国の支援先とオンラインでつながる、フルリモート前提の働き方。</div>
+        </div>
+        <div class="reveal">
+          <div class="kicker">WORK STYLE</div>
+          <h2 class="heading heading--lg">毎月の定額報酬で、腰を据えて改善できる。</h2>
+          <p class="lead">
+            単発の広告設定ではなく、継続案件として毎月定額で報酬を支払う想定です。
+            担当件数に応じて月45万円から60万円程度へ報酬が変動します。
+          </p>
+          <ul class="check-list">
+            <li>契約金額は月45万円から60万円程度、税抜</li>
+            <li>担当件数に応じて報酬変更</li>
+            <li>継続案件のため、毎月定額で報酬支払い</li>
+            <li>システム利用料は契約金額税込から差し引き</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="requirements">
+    <div class="container">
+      <div class="reveal">
+        <div class="kicker">REQUIREMENTS</div>
+        <h2 class="heading heading--lg">募集要項。</h2>
+        <p class="lead">
+          募集文に記載された条件をもとにした要項です。
+          詳細な稼働時間や担当件数は、応募後の面談で確認する想定です。
+        </p>
+      </div>
+      <dl class="requirements reveal">
+        <div class="req-row">
+          <dt>募集職種</dt>
+          <dd>広告運用のマーケター</dd>
+        </div>
+        <div class="req-row">
+          <dt>契約形態</dt>
+          <dd>業務委託想定・継続案件</dd>
+        </div>
+        <div class="req-row">
+          <dt>勤務場所</dt>
+          <dd>フルリモート</dd>
+        </div>
+        <div class="req-row">
+          <dt>報酬</dt>
+          <dd>月45万円から60万円程度、税抜。担当件数に応じて変更。</dd>
+        </div>
+        <div class="req-row">
+          <dt>主な媒体</dt>
+          <dd>Meta広告、Instagram、Facebook</dd>
+        </div>
+        <div class="req-row">
+          <dt>対象領域</dt>
+          <dd>美容サロン、整体サロン、美容室、ネイルサロン、アイサロン、エステサロンなど</dd>
+        </div>
+        <div class="req-row">
+          <dt>重視する点</dt>
+          <dd>Web広告運用の経験と実績</dd>
+        </div>
+        <div class="req-row">
+          <dt>応募方法</dt>
+          <dd>自己紹介や実績を提示して応募</dd>
+        </div>
+      </dl>
+    </div>
+  </section>
+
+  <section class="section section--soft">
+    <div class="container">
+      <div class="reveal">
+        <div class="kicker">VOICE</div>
+        <h2 class="heading heading--lg">代表からの一言。</h2>
+      </div>
+      <div class="voice reveal">
+        <div class="voice__photo">
+          <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=1200&q=70" alt="採用担当者のイメージ写真">
+        </div>
+        <div>
+          <blockquote>
+            広告運用は、採用の入口を変える仕事です。数字を見て、現場の声を聞き、次の一手まで持ち込める方と組みたいです。
+          </blockquote>
+          <p>株式会社Argon 採用担当 ※仮の内容です。写真はイメージです。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="reveal">
+        <div class="kicker">FLOW</div>
+        <h2 class="heading heading--lg">応募から参画まで。</h2>
+        <p class="lead">
+          自己紹介と実績を確認したうえで、オンライン面談に進む想定です。
+          スピードよりも、運用方針と相性の確認を大切にします。
+        </p>
+      </div>
+      <div class="flow">
+        <article class="flow__item reveal">
+          <h3>フォーム送信</h3>
+          <p>広告運用実績、得意領域、稼働可能時期を送信します。</p>
+        </article>
+        <article class="flow__item reveal">
+          <h3>実績確認</h3>
+          <p>Meta広告やLP改善の経験、レポート作成経験を確認します。</p>
+        </article>
+        <article class="flow__item reveal">
+          <h3>オンライン面談</h3>
+          <p>担当件数、進め方、コミュニケーション頻度をすり合わせます。</p>
+        </article>
+        <article class="flow__item reveal">
+          <h3>業務開始</h3>
+          <p>既存アカウントの理解から入り、改善施策に着手します。</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--soft">
+    <div class="container">
+      <div class="reveal">
+        <div class="kicker">FAQ</div>
+        <h2 class="heading heading--lg">よくある質問。</h2>
+      </div>
+      <div class="faq">
+        <details class="reveal">
+          <summary>フルリモートで参画できますか？</summary>
+          <p>募集タイトルではフルリモート案件として記載されています。クライアント定例はオンラインで月1回の想定です。</p>
+        </details>
+        <details class="reveal">
+          <summary>Meta広告以外の媒体経験は必要ですか？</summary>
+          <p>募集文ではMeta広告がメインとされています。Web広告運用の経験と実績が重視されています。</p>
+        </details>
+        <details class="reveal">
+          <summary>制作業務も担当しますか？</summary>
+          <p>広告クリエイティブのディレクション・制作、採用LPや集客LPのディレクションが業務範囲に含まれます。</p>
+        </details>
+        <details class="reveal">
+          <summary>報酬は固定ですか？</summary>
+          <p>月45万円から60万円程度で、担当件数に応じて報酬を変更する旨が募集文に記載されています。</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="entry">
+    <div class="container">
+      <div class="split">
+        <div class="reveal">
+          <div class="kicker">ENTRY</div>
+          <h2 class="heading heading--lg">自己紹介と実績を、まず送ってください。</h2>
+          <p class="lead">
+            美容業界の知識は参画後に深められます。
+            まずはWeb広告運用でどんな改善をしてきたか、どの数字を見て判断してきたかを知りたいです。
+          </p>
+          <ul class="check-list">
+            <li>担当した媒体、月額予算、改善したKPI</li>
+            <li>LPやクリエイティブ改善に関わった経験</li>
+            <li>クライアント定例や月次レポートの経験</li>
+            <li>稼働開始可能時期と、月の対応可能件数</li>
+          </ul>
+        </div>
+        <form class="form reveal" action="#" method="post">
+          <div class="form__grid">
+            <div class="field">
+              <label for="name">お名前</label>
+              <input id="name" name="name" type="text" placeholder="山田 太郎">
+            </div>
+            <div class="field">
+              <label for="email">メールアドレス</label>
+              <input id="email" name="email" type="email" placeholder="sample@example.com">
+            </div>
+          </div>
+          <div class="form__grid">
+            <div class="field">
+              <label for="experience">広告運用経験</label>
+              <select id="experience" name="experience">
+                <option>3年以上</option>
+                <option>1年以上3年未満</option>
+                <option>1年未満</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="start">稼働開始時期</label>
+              <select id="start" name="start">
+                <option>すぐに可能</option>
+                <option>1か月以内</option>
+                <option>相談したい</option>
+              </select>
+            </div>
+          </div>
+          <div class="field">
+            <label for="portfolio">実績・自己紹介</label>
+            <textarea id="portfolio" name="portfolio" placeholder="Meta広告の運用実績、改善した指標、LPやクリエイティブ制作の関与範囲をご記入ください。"></textarea>
+          </div>
+          <p class="form__note">※このフォームはデモです。送信機能は実装されていません。</p>
+          <button class="cta" type="button">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            応募内容を送信する
+          </button>
+        </form>
+      </div>
+    </div>
+  </section>
+</main>
+
+<div class="sticky-cta" aria-label="固定応募導線">
+  <a class="cta cta--ghost" href="tel:048-000-0000">電話</a>
+  <a class="cta" href="#entry">応募</a>
+</div>
+
+<footer class="footer">
+  <div class="footer__inner">
+    <div class="footer__brand">Argon</div>
+    <p>株式会社Argon｜広告運用マーケター採用ページ</p>
+    <p>連絡先: 048-000-0000（ダミー）</p>
+    <p>※本ページは制作サンプル(デモ)です。掲載の内容・数値は仮のもので、写真はイメージです。</p>
+  </div>
+</footer>
+
+<script>
+const menuButton = document.querySelector(".menu-button");
+const mobileNav = document.querySelector(".mobile-nav");
+const mobileLinks = document.querySelectorAll(".mobile-nav a");
+
+menuButton.addEventListener("click", () => {
+  const isOpen = mobileNav.classList.toggle("is-open");
+  menuButton.setAttribute("aria-expanded", String(isOpen));
+});
+
+mobileLinks.forEach((link) => {
+  link.addEventListener("click", () => {
+    mobileNav.classList.remove("is-open");
+    menuButton.setAttribute("aria-expanded", "false");
+  });
+});
+
+const revealTargets = document.querySelectorAll(".reveal");
+
+if ("IntersectionObserver" in window) {
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("is-visible");
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+
+  revealTargets.forEach((target) => observer.observe(target));
+} else {
+  revealTargets.forEach((target) => target.classList.add("is-visible"));
+}
+</script>
+</body>
+</html>

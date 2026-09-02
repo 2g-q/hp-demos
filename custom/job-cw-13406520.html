@@ -1,0 +1,855 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>ノビシロクラウド | LP・Web改善を一緒に進めるWebディレクター募集(サンプル案件)</title>
+<meta name="description" content="BtoB SaaS運営会社が、LP・Webサイトの構成からデザイン・実装まで一気通貫で対応できるWebディレクター/Web制作者を募集。完全リモート・業務委託・週数時間からOK。※本ページは制作サンプルです。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Zen+Kaku+Gothic+New:wght@500;700;900&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org/",
+  "@type": "JobPosting",
+  "title": "LP・Webサイト改善パートナー(Webディレクター/Web制作者)",
+  "description": "BtoB向けSaaSを運営する企業にて、代表のマーケティング意図を理解しながらLP・Webサイトの構成/デザイン/実装まで一気通貫で対応する業務委託パートナーを募集。既存LPの改善、ページ追加・改修、CTA導線改善、Webクリエイティブ制作、LPO改善を担当。",
+  "hiringOrganization": {
+    "@type": "Organization",
+    "name": "ノビシロクラウド(BtoB SaaS/サンプル案件)"
+  },
+  "employmentType": "CONTRACTOR",
+  "datePosted": "2026-08-27",
+  "jobLocationType": "TELECOMMUTE",
+  "applicantLocationRequirements": {
+    "@type": "Country",
+    "name": "JP"
+  },
+  "directApply": true
+}
+</script>
+<style>
+  :root{
+    --navy:#1c3252;
+    --navy-deep:#12233b;
+    --paper:#faf8f4;
+    --paper-2:#f2efe8;
+    --ink:#22262e;
+    --ink-soft:#5b6270;
+    --line:#e3ded3;
+    --radius:100px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  @media (prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto;}
+    *{animation-duration:0.01ms !important; transition-duration:0.01ms !important;}
+  }
+  body{
+    margin:0;
+    width:100%;
+    max-width:100%;
+    overflow-x:hidden;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:"Noto Sans JP",sans-serif;
+    font-feature-settings:"palt";
+    letter-spacing:0.02em;
+    line-height:1.85;
+  }
+  img{max-width:100%; display:block;}
+  a{color:inherit; text-decoration:none;}
+  .en-num{font-family:"Manrope",sans-serif;}
+  h1,h2,h3{
+    font-family:"Zen Kaku Gothic New",sans-serif;
+    color:var(--navy-deep);
+    margin:0;
+    line-height:1.5;
+  }
+  .wrap{
+    width:100%;
+    max-width:1080px;
+    margin:0 auto;
+    padding:0 24px;
+  }
+  section{
+    padding:96px 0;
+    max-width:100%;
+  }
+  .eyebrow{
+    display:inline-block;
+    font-family:"Manrope",sans-serif;
+    font-weight:700;
+    font-size:12px;
+    letter-spacing:0.22em;
+    color:var(--navy);
+    background:rgba(28,50,82,0.08);
+    padding:6px 16px;
+    border-radius:var(--radius);
+    margin-bottom:18px;
+  }
+  .sec-title{
+    font-size:clamp(24px,4.4vw,36px);
+    font-weight:900;
+    margin-bottom:14px;
+  }
+  .sec-lead{
+    color:var(--ink-soft);
+    font-size:15px;
+    max-width:640px;
+    margin-bottom:56px;
+  }
+  .btn{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+    padding:16px 30px;
+    border-radius:var(--radius);
+    font-weight:700;
+    font-size:15px;
+    cursor:pointer;
+    border:none;
+    white-space:nowrap;
+  }
+  .btn-primary{
+    background:var(--navy);
+    color:#fff;
+    box-shadow:0 12px 28px rgba(28,50,82,0.32);
+  }
+  .btn-ghost{
+    background:#fff;
+    color:var(--navy);
+    border:1.5px solid var(--navy);
+  }
+
+  /* header */
+  header{
+    position:fixed;
+    top:0; left:0; right:0;
+    z-index:50;
+    background:rgba(250,248,244,0.86);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .head-inner{
+    max-width:1080px;
+    margin:0 auto;
+    padding:14px 24px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+  }
+  .logo{
+    font-family:"Zen Kaku Gothic New",sans-serif;
+    font-weight:900;
+    font-size:17px;
+    color:var(--navy-deep);
+    line-height:1.3;
+  }
+  .logo span{
+    display:block;
+    font-family:"Noto Sans JP",sans-serif;
+    font-weight:500;
+    font-size:10px;
+    color:var(--ink-soft);
+    letter-spacing:0.05em;
+  }
+  .desk-nav{
+    display:flex;
+    gap:28px;
+    font-size:14px;
+    font-weight:500;
+  }
+  .head-cta{display:flex; align-items:center; gap:14px;}
+  .head-cta .btn{padding:11px 20px; font-size:13px;}
+  .burger{
+    width:42px; height:42px;
+    border-radius:50%;
+    border:1px solid var(--line);
+    background:#fff;
+    display:none;
+    align-items:center;
+    justify-content:center;
+    cursor:pointer;
+  }
+  .burger span,.burger span::before,.burger span::after{
+    content:"";
+    display:block;
+    width:18px; height:2px;
+    background:var(--navy-deep);
+    position:relative;
+    transition:0.25s;
+  }
+  .burger span::before{position:absolute; top:-6px;}
+  .burger span::after{position:absolute; top:6px;}
+  .burger.open span{background:transparent;}
+  .burger.open span::before{transform:rotate(45deg); top:0;}
+  .burger.open span::after{transform:rotate(-45deg); top:0;}
+
+  /* mobile nav drawer (sibling of header, not nested, to avoid backdrop-filter clipping) */
+  #navDrawer{
+    position:fixed;
+    top:0; right:-100%;
+    width:min(78vw,320px);
+    height:100vh;
+    background:var(--navy-deep);
+    z-index:60;
+    padding:100px 32px 32px;
+    transition:right 0.3s ease;
+    display:flex;
+    flex-direction:column;
+    gap:26px;
+  }
+  #navDrawer.open{right:0;}
+  #navDrawer a{color:#fff; font-size:16px; font-weight:500;}
+  #navDrawer .btn{margin-top:12px;}
+  #scrim{
+    position:fixed; inset:0;
+    background:rgba(10,16,26,0.5);
+    z-index:55;
+    opacity:0; visibility:hidden;
+    transition:0.25s;
+  }
+  #scrim.open{opacity:1; visibility:visible;}
+
+  /* hero */
+  .hero{
+    position:relative;
+    margin-top:66px;
+    padding:120px 0 90px;
+    background:linear-gradient(180deg,rgba(18,35,59,0.82),rgba(18,35,59,0.72)),
+      url('https://images.unsplash.com/photo-1629875499750-a31b83446598?auto=format&fit=crop&w=1200&q=70') center/cover;
+    color:#fff;
+  }
+  .hero .wrap{position:relative; z-index:2;}
+  .hero-tag{
+    font-size:12px;
+    letter-spacing:0.2em;
+    font-weight:700;
+    color:#cfe0f4;
+    margin-bottom:18px;
+  }
+  .hero h1{
+    color:#fff;
+    font-size:clamp(28px,6vw,46px);
+    font-weight:900;
+    margin-bottom:22px;
+  }
+  .hero h1 small{
+    display:block;
+    font-size:0.42em;
+    font-weight:500;
+    color:#cfe0f4;
+    margin-top:14px;
+    letter-spacing:0.05em;
+  }
+  .hero p.lead{
+    max-width:560px;
+    color:#e6ecf5;
+    font-size:15px;
+    margin-bottom:36px;
+  }
+  .hero-ctas{display:flex; flex-wrap:wrap; gap:14px; margin-bottom:56px;}
+  .stat-band{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:16px;
+    border-top:1px solid rgba(255,255,255,0.22);
+    padding-top:32px;
+  }
+  .stat-band div{text-align:left;}
+  .stat-num{
+    font-family:"Manrope",sans-serif;
+    font-weight:800;
+    font-size:clamp(20px,3.6vw,28px);
+    color:#fff;
+  }
+  .stat-lbl{font-size:11px; color:#cfe0f4; margin-top:4px;}
+
+  /* reveal */
+  .reveal{opacity:0; transform:translateY(24px); transition:opacity 0.7s ease, transform 0.7s ease;}
+  .reveal.in{opacity:1; transform:translateY(0);}
+
+  /* message section */
+  .msg-grid{
+    display:grid;
+    grid-template-columns:1fr 1.3fr;
+    gap:48px;
+    align-items:center;
+  }
+  .msg-photo{
+    border-radius:24px;
+    overflow:hidden;
+    aspect-ratio:4/5;
+  }
+  .msg-photo img{width:100%; height:100%; object-fit:cover;}
+  .msg-quote{
+    font-family:"Zen Kaku Gothic New",sans-serif;
+    font-size:clamp(20px,3vw,26px);
+    font-weight:700;
+    color:var(--navy-deep);
+    margin-bottom:20px;
+  }
+  .msg-body p{color:var(--ink-soft); font-size:14.5px; margin:0 0 14px;}
+  .msg-sign{font-size:13px; color:var(--ink-soft); margin-top:18px;}
+
+  /* checklist */
+  .check-list{list-style:none; margin:0; padding:0; display:grid; gap:16px;}
+  .check-list li{
+    display:flex;
+    gap:14px;
+    align-items:flex-start;
+    background:#fff;
+    border:1px solid var(--line);
+    border-radius:16px;
+    padding:18px 20px;
+    font-size:14.5px;
+  }
+  .check-ic{
+    flex:none;
+    width:26px; height:26px;
+    border-radius:50%;
+    background:var(--navy);
+    position:relative;
+  }
+  .check-ic::after{
+    content:"";
+    position:absolute;
+    left:8px; top:5px;
+    width:6px; height:11px;
+    border-right:2px solid #fff;
+    border-bottom:2px solid #fff;
+    transform:rotate(45deg);
+  }
+
+  /* work grid */
+  .work-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+    gap:22px;
+  }
+  .work-card{
+    background:#fff;
+    border:1px solid var(--line);
+    border-radius:20px;
+    padding:28px 24px;
+  }
+  .work-ic{
+    width:46px; height:46px;
+    border-radius:50%;
+    border:1.5px solid var(--navy);
+    margin-bottom:18px;
+    position:relative;
+  }
+  .work-card h3{font-size:16px; margin-bottom:10px;}
+  .work-card p{font-size:13.5px; color:var(--ink-soft); margin:0;}
+
+  /* merit section with bg */
+  .merit-sec{
+    background:linear-gradient(180deg,rgba(250,248,244,0.97),rgba(250,248,244,0.97)),
+      url('https://images.unsplash.com/photo-1664596350962-603b0a41524a?auto=format&fit=crop&w=1200&q=70') center/cover;
+  }
+  .merit-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:22px;
+  }
+  .merit-card{
+    background:#fff;
+    border-radius:20px;
+    padding:32px 26px;
+    border-top:4px solid var(--navy);
+  }
+  .merit-card .en-num{
+    font-size:34px;
+    font-weight:800;
+    color:var(--navy);
+    display:block;
+    margin-bottom:10px;
+  }
+  .merit-card h3{font-size:16px; margin-bottom:10px;}
+  .merit-card p{font-size:13.5px; color:var(--ink-soft); margin:0;}
+
+  /* table */
+  table.req{
+    width:100%;
+    max-width:100%;
+    border-collapse:collapse;
+    background:#fff;
+    border-radius:18px;
+    overflow:hidden;
+    border:1px solid var(--line);
+  }
+  table.req tr{border-bottom:1px solid var(--line);}
+  table.req tr:last-child{border-bottom:none;}
+  table.req th,table.req td{
+    text-align:left;
+    padding:18px 20px;
+    font-size:14px;
+    vertical-align:top;
+  }
+  table.req th{
+    width:34%;
+    background:var(--paper-2);
+    color:var(--navy-deep);
+    font-weight:700;
+  }
+  table.req td{color:var(--ink-soft);}
+  .note-tag{
+    display:inline-block;
+    font-size:11px;
+    color:#8a6d2c;
+    background:#fbf1da;
+    padding:2px 10px;
+    border-radius:20px;
+    margin-left:6px;
+  }
+
+  /* flow */
+  .flow{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:18px;
+    counter-reset:flow;
+  }
+  .flow-step{
+    background:#fff;
+    border:1px solid var(--line);
+    border-radius:18px;
+    padding:26px 20px;
+    position:relative;
+  }
+  .flow-step::before{
+    counter-increment:flow;
+    content:counter(flow);
+    font-family:"Manrope",sans-serif;
+    font-weight:800;
+    font-size:13px;
+    color:#fff;
+    background:var(--navy);
+    width:28px; height:28px;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    margin-bottom:14px;
+  }
+  .flow-step h3{font-size:14.5px; margin-bottom:8px;}
+  .flow-step p{font-size:12.5px; color:var(--ink-soft); margin:0;}
+
+  /* faq */
+  .faq-item{
+    border-bottom:1px solid var(--line);
+    padding:22px 0;
+  }
+  .faq-q{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:16px;
+    cursor:pointer;
+    font-weight:700;
+    font-size:15px;
+    color:var(--navy-deep);
+  }
+  .faq-q .plus{
+    flex:none;
+    width:24px; height:24px;
+    position:relative;
+  }
+  .faq-q .plus::before,.faq-q .plus::after{
+    content:"";
+    position:absolute;
+    background:var(--navy);
+    transition:0.25s;
+  }
+  .faq-q .plus::before{left:0; top:50%; width:100%; height:2px; transform:translateY(-50%);}
+  .faq-q .plus::after{top:0; left:50%; width:2px; height:100%; transform:translateX(-50%);}
+  .faq-item.open .plus::after{transform:translateX(-50%) rotate(90deg); opacity:0;}
+  .faq-a{
+    max-height:0;
+    overflow:hidden;
+    transition:max-height 0.3s ease;
+    font-size:13.5px;
+    color:var(--ink-soft);
+  }
+  .faq-a p{padding-top:14px; margin:0;}
+  .faq-item.open .faq-a{max-height:260px;}
+
+  /* form */
+  .form-card{
+    background:#fff;
+    border:1px solid var(--line);
+    border-radius:24px;
+    padding:40px;
+    max-width:100%;
+  }
+  .form-row{margin-bottom:20px;}
+  .form-row label{
+    display:block;
+    font-size:13px;
+    font-weight:700;
+    color:var(--navy-deep);
+    margin-bottom:8px;
+  }
+  .form-row input,.form-row textarea,.form-row select{
+    width:100%;
+    max-width:100%;
+    border:1px solid var(--line);
+    border-radius:12px;
+    padding:14px 16px;
+    font-size:16px;
+    font-family:inherit;
+    background:var(--paper-2);
+  }
+  .form-row textarea{resize:vertical; min-height:110px;}
+  .two-col{display:grid; grid-template-columns:1fr 1fr; gap:20px;}
+  .form-note{font-size:12px; color:var(--ink-soft); margin-top:6px;}
+  #thanksMsg{
+    display:none;
+    background:#eaf3ec;
+    color:#22513a;
+    border-radius:14px;
+    padding:16px 20px;
+    font-size:13.5px;
+    margin-bottom:20px;
+  }
+
+  /* footer */
+  footer{
+    background:var(--navy-deep);
+    color:#cfd6e2;
+    padding:70px 0 120px;
+  }
+  footer h3{color:#fff; font-size:15px; margin-bottom:14px;}
+  footer p{font-size:12.5px; line-height:1.9; color:#aab3c2;}
+  .foot-grid{
+    display:grid;
+    grid-template-columns:1.4fr 1fr 1fr;
+    gap:36px;
+    margin-bottom:36px;
+  }
+  .foot-disclaimer{
+    border-top:1px solid rgba(255,255,255,0.15);
+    padding-top:24px;
+    font-size:11.5px;
+    color:#8b93a4;
+  }
+
+  /* sticky mobile cta */
+  .sticky-cta{
+    position:fixed;
+    left:0; right:0; bottom:0;
+    z-index:40;
+    background:#fff;
+    border-top:1px solid var(--line);
+    padding:10px 16px calc(10px + env(safe-area-inset-bottom));
+    display:none;
+    gap:10px;
+  }
+  .sticky-cta a{flex:1;}
+  .sticky-cta .btn{width:100%; padding:14px 10px; font-size:13.5px;}
+
+  @media (max-width:860px){
+    .desk-nav,.head-cta{display:none;}
+    .burger{display:flex;}
+    .msg-grid{grid-template-columns:1fr;}
+    .merit-grid,.stat-band{grid-template-columns:repeat(2,1fr);}
+    .flow{grid-template-columns:repeat(2,1fr);}
+    .two-col{grid-template-columns:1fr;}
+    .foot-grid{grid-template-columns:1fr;}
+    section{padding:64px 0;}
+    .sticky-cta{display:flex;}
+    body{padding-bottom:78px;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="head-inner">
+    <div class="logo">ノビシロクラウド<span>BtoB SaaS運営 / 制作サンプル案件</span></div>
+    <nav class="desk-nav">
+      <a href="#work">お願いしたい業務</a>
+      <a href="#merit">働き方</a>
+      <a href="#req">募集要項</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+    <div class="head-cta">
+      <a class="btn btn-ghost" href="tel:0480000000">048-000-0000</a>
+      <a class="btn btn-primary" href="#form">応募する</a>
+    </div>
+    <button class="burger" id="burgerBtn" aria-label="メニュー"><span></span></button>
+  </div>
+</header>
+
+<div id="scrim"></div>
+<nav id="navDrawer">
+  <a href="#work">お願いしたい業務</a>
+  <a href="#merit">働き方</a>
+  <a href="#req">募集要項</a>
+  <a href="#flow">応募の流れ</a>
+  <a href="#faq">FAQ</a>
+  <a class="btn btn-primary" href="#form">応募する</a>
+</nav>
+
+<section class="hero">
+  <div class="wrap">
+    <div class="hero-tag">完全リモート ／ 業務委託 ／ 週数時間からOK</div>
+    <h1>戦略はある。足りないのは、つくる手だけ。
+      <small>代表のマーケティング意図を、LP・Webサイトという「かたち」にしてくれるパートナーを探しています。</small>
+    </h1>
+    <p class="lead">BtoB SaaSを運営する当社では、訴求の方向性は代表の頭の中に既にあります。あとはそれを構成・デザイン・実装まで一気通貫で形にし、「なぜCVが伸びないか」まで一緒に考えてくれる方を長期でお迎えしたいと思っています。</p>
+    <div class="hero-ctas">
+      <a class="btn btn-primary" href="#form">今すぐ応募する</a>
+      <a class="btn btn-ghost" style="background:transparent;color:#fff;border-color:rgba(255,255,255,0.6);" href="#work">お願いしたい業務を見る</a>
+    </div>
+    <div class="stat-band">
+      <div><div class="stat-num en-num">100%</div><div class="stat-lbl">完全リモート</div></div>
+      <div><div class="stat-num en-num">週5h〜</div><div class="stat-lbl">稼働目安(応相談)<span class="note-tag">仮</span></div></div>
+      <div><div class="stat-num en-num">隔週</div><div class="stat-lbl">定例MTG頻度(仮)</div></div>
+      <div><div class="stat-num en-num">長期</div><div class="stat-lbl">継続前提の業務委託</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="reveal">
+  <div class="wrap msg-grid">
+    <div class="msg-photo">
+      <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=1200&q=70" alt="代表イメージ写真(※イメージです)">
+    </div>
+    <div>
+      <span class="eyebrow">代表より</span>
+      <p class="msg-quote">「考える人」は社内にいます。足りないのは「かたちにする人」です。</p>
+      <div class="msg-body">
+        <p>広告の訴求案も、サイト改善のアイデアも、正直言えば私の頭の中にはたくさんあります。ただ、それをLPやページとして実際に組み立てる担当者が社内にいないというのが、今のいちばんの課題です。</p>
+        <p>だからこそ、単なる「作業者」ではなく、「このLP構成のほうがCVが伸びるのでは」「この導線は分かりにくいのでは」と、こちらが気づいていない視点を持ち込んでくれる方を求めています。稼働時間よりも、アウトプットの質と、率直なコミュニケーションを大切にしたいと考えています。</p>
+      </div>
+      <p class="msg-sign">※写真はイメージです。実制作ではご提供写真や日本人モデルの素材に差し替えます。</p>
+    </div>
+  </div>
+</section>
+
+<section id="problem" style="background:var(--paper-2);" class="reveal">
+  <div class="wrap">
+    <span class="eyebrow">CHECK</span>
+    <h2 class="sec-title">こんな課題、感じたことはありませんか。</h2>
+    <p class="sec-lead">Web制作の実務経験があるフリーランスの方から、こんな声をよくいただきます。ひとつでも当てはまれば、ぜひ話を聞かせてください。</p>
+    <ul class="check-list">
+      <li><span class="check-ic"></span>クライアントワークで「言われた通りに作るだけ」の仕事が続き、提案が活かせていない</li>
+      <li><span class="check-ic"></span>構成からコーディングまで一気通貫で任せてもらえる案件が少ない</li>
+      <li><span class="check-ic"></span>育児・地方在住・副業などの事情で、フルタイム常駐の仕事は選びづらい</li>
+      <li><span class="check-ic"></span>単発の受託よりも、同じサービスに継続的に関わって成果を積み上げたい</li>
+    </ul>
+  </div>
+</section>
+
+<section id="work" class="reveal">
+  <div class="wrap">
+    <span class="eyebrow">SCOPE OF WORK</span>
+    <h2 class="sec-title">お願いしたい業務</h2>
+    <p class="sec-lead">マーケティング戦略をゼロから考えていただくのではなく、社内にある戦略やアイデアをWeb上で「形」にしていただくことを主な役割としています。</p>
+    <div class="work-grid">
+      <div class="work-card"><div class="work-ic"></div><h3>既存LPの改善</h3><p>広告訴求ごとのLPを企画・構成し、既存ページのブラッシュアップを担当していただきます。</p></div>
+      <div class="work-card"><div class="work-ic"></div><h3>Webサイトのページ追加・改修</h3><p>コーポレートサイト・サービスサイトのページ追加や情報設計の見直しを行います。</p></div>
+      <div class="work-card"><div class="work-ic"></div><h3>CTA・導線改善</h3><p>離脱ポイントの仮説立てから、ボタン配置やフォーム導線の改善提案・実装まで。</p></div>
+      <div class="work-card"><div class="work-ic"></div><h3>Webクリエイティブ制作</h3><p>広告バナーやOGP画像など、施策に合わせたクリエイティブ制作をお願いします。</p></div>
+      <div class="work-card"><div class="work-ic"></div><h3>CVR改善・LPO</h3><p>数値を見ながら仮説検証を回し、必要に応じたLPOの企画・実行までご対応いただきます。</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="ideal" style="background:var(--paper-2);" class="reveal">
+  <div class="wrap">
+    <span class="eyebrow">WHO WE ARE LOOKING FOR</span>
+    <h2 class="sec-title">求める方</h2>
+    <p class="sec-lead">経験年数よりも、「構成から実装まで自分の手を動かした経験」があるかどうかを重視しています。</p>
+    <ul class="check-list">
+      <li><span class="check-ic"></span>LP制作の実務経験があり、構成からご自身で考えられる方</li>
+      <li><span class="check-ic"></span>Figma等でWebデザインができる方</li>
+      <li><span class="check-ic"></span>WordPress等を使って実装まで対応でき、HTML/CSSの基本理解がある方</li>
+      <li><span class="check-ic"></span>Webマーケティングの基本を理解している方</li>
+      <li><span class="check-ic"></span>指示待ちではなく、改善提案を自ら出せる方</li>
+    </ul>
+    <p style="font-size:13px;color:var(--ink-soft);margin-top:24px;">特に、Web制作会社・事業会社・広告代理店などでの実務経験を経て、現在フリーランスとして活動されている方を歓迎します。居住地・年齢・稼働時間帯は問いません。</p>
+  </div>
+</section>
+
+<section id="merit" class="merit-sec reveal">
+  <div class="wrap">
+    <span class="eyebrow">WORK STYLE</span>
+    <h2 class="sec-title">働き方の魅力</h2>
+    <p class="sec-lead">勤務時間よりも、実務能力・アウトプット・コミュニケーションを重視しています。</p>
+    <div class="merit-grid">
+      <div class="merit-card"><span class="en-num">01</span><h3>完全リモート・時間自由</h3><p>居住地や働く時間帯は問いません。育児中の方、地方在住の方、副業の方も歓迎です。</p></div>
+      <div class="merit-card"><span class="en-num">02</span><h3>裁量権のある提案が通る</h3><p>「言われたものを作るだけ」ではなく、構成やLPO案がそのまま採用される環境です。</p></div>
+      <div class="merit-card"><span class="en-num">03</span><h3>空き時間から始められる</h3><p>週あたりの稼働時間はご相談の上で決定。まずは小さくご一緒することも可能です。</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="req" class="reveal">
+  <div class="wrap">
+    <span class="eyebrow">REQUIREMENTS</span>
+    <h2 class="sec-title">募集要項</h2>
+    <table class="req">
+      <tr><th>職種</th><td>Webディレクター／Web制作者(LP・Webサイト改善パートナー)</td></tr>
+      <tr><th>契約形態</th><td>業務委託(フリーランス想定)</td></tr>
+      <tr><th>業務内容</th><td>既存LPの改善企画・構成、Webサイトのページ追加/改修、CTA・導線改善、Webクリエイティブ制作、CVR改善・LPO</td></tr>
+      <tr><th>稼働時間</th><td>週5〜10時間目安、応相談<span class="note-tag">仮の内容です</span></td></tr>
+      <tr><th>勤務形態</th><td>完全リモート(居住地・年齢・時間帯不問)</td></tr>
+      <tr><th>報酬</th><td>スキル・実績・稼働時間に応じて応相談</td></tr>
+      <tr><th>その他</th><td>ママさん・育児中・地方在住・副業の方の応募を歓迎</td></tr>
+    </table>
+  </div>
+</section>
+
+<section id="flow" style="background:var(--paper-2);" class="reveal">
+  <div class="wrap">
+    <span class="eyebrow">FLOW</span>
+    <h2 class="sec-title">応募の流れ</h2>
+    <div class="flow">
+      <div class="flow-step"><h3>応募フォーム送信</h3><p>経歴と制作実績URLをフォームよりお送りください。</p></div>
+      <div class="flow-step"><h3>書類確認</h3><p>担当範囲(構成/デザイン/コーディング等)を中心に拝見します。</p></div>
+      <div class="flow-step"><h3>オンライン面談</h3><p>ビデオ通話で業務内容・稼働条件をすり合わせます。</p></div>
+      <div class="flow-step"><h3>契約・稼働開始</h3><p>条件合意後、業務委託契約を締結し稼働を開始します。</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="faq" class="reveal">
+  <div class="wrap">
+    <span class="eyebrow">FAQ</span>
+    <h2 class="sec-title">よくあるご質問</h2>
+    <div class="faq-list">
+      <div class="faq-item">
+        <div class="faq-q"><span>稼働時間はどのくらい融通が利きますか?</span><span class="plus"></span></div>
+        <div class="faq-a"><p>週5時間程度からご相談可能です。育児や本業との両立を前提に、無理のない時間配分を一緒に決めていきます。</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q"><span>常駐や来社は必要ですか?</span><span class="plus"></span></div>
+        <div class="faq-a"><p>完全リモートで完結します。定例の打ち合わせもすべてオンラインで実施します。</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q"><span>マーケティング戦略から考える必要がありますか?</span><span class="plus"></span></div>
+        <div class="faq-a"><p>戦略はすでに社内にあります。それを理解した上でLP・Webサイトとして形にしていただくことがメインの役割です。</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q"><span>WordPress以外の実装経験でも応募できますか?</span><span class="plus"></span></div>
+        <div class="faq-a"><p>HTML/CSSの基本理解と、構成から実装までの一気通貫の経験があれば歓迎します。使用可能なツールは応募時にお知らせください。</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q"><span>単発ではなく長期でお願いすることは可能ですか?</span><span class="plus"></span></div>
+        <div class="faq-a"><p>むしろ長期的にWebマーケティングを一緒に改善いただける方を探しています。継続を前提にご相談ください。</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="form" style="background:var(--paper-2);" class="reveal">
+  <div class="wrap">
+    <span class="eyebrow">ENTRY</span>
+    <h2 class="sec-title">応募フォーム</h2>
+    <p class="sec-lead">下記はわかる範囲でご記入ください。ご自身で構成から実装まで担当されたLPがあれば、優先して拝見します。※本フォームはデモのため送信されません。</p>
+    <div class="form-card">
+      <div id="thanksMsg">ご入力ありがとうございます。※本ページはデモのため、実際の送信は行われません。</div>
+      <form id="entryForm">
+        <div class="two-col">
+          <div class="form-row"><label>お名前</label><input type="text" placeholder="山田 花子" required></div>
+          <div class="form-row"><label>メールアドレス</label><input type="email" placeholder="you@example.com" required></div>
+        </div>
+        <div class="form-row"><label>簡単な経歴</label><textarea placeholder="制作会社/事業会社/代理店での実務経験、フリーランス歴など"></textarea></div>
+        <div class="form-row"><label>制作実績URL</label><input type="url" placeholder="https://"></div>
+        <div class="form-row"><label>それぞれの制作物で担当した範囲</label><textarea placeholder="構成 / デザイン / コピー / コーディング / WordPress実装 / LPO など"></textarea></div>
+        <div class="two-col">
+          <div class="form-row"><label>使用可能なツール・技術</label><input type="text" placeholder="Figma / WordPress / HTML・CSS など"></div>
+          <div class="form-row"><label>週あたりの稼働可能時間</label><input type="text" placeholder="例:週5〜8時間"></div>
+        </div>
+        <button type="submit" class="btn btn-primary" style="width:100%;">この内容で応募する</button>
+        <p class="form-note">送信いただいた内容は選考目的以外には使用しません(※本ページはサンプルのため実際の保存・送信は行われません)。</p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <h3>ノビシロクラウド</h3>
+        <p>BtoB向けSaaSを運営する企業の、LP・Webサイト改善パートナー募集ページ(制作サンプル)です。完全リモート・業務委託にて長期で一緒に取り組んでいただける方を募集しています。</p>
+      </div>
+      <div>
+        <h3>連絡先(仮)</h3>
+        <p>採用担当直通(ダミー)<br><a href="tel:0480000000" style="color:#fff;">048-000-0000</a><br>受付時間:平日10:00-18:00(仮)</p>
+      </div>
+      <div>
+        <h3>メニュー</h3>
+        <p><a href="#work" style="color:#cfd6e2;">お願いしたい業務</a><br><a href="#req" style="color:#cfd6e2;">募集要項</a><br><a href="#form" style="color:#cfd6e2;">応募フォーム</a></p>
+      </div>
+    </div>
+    <div class="foot-disclaimer">
+      <p>※本ページは制作サンプル(デモ)です。掲載の内容・数値は仮のもので、写真はイメージです。会社名・サービス名は架空のものであり、実在の団体・企業とは一切関係ありません。</p>
+    </div>
+  </div>
+</footer>
+
+<div class="sticky-cta">
+  <a class="btn btn-ghost" href="tel:0480000000">電話で相談</a>
+  <a class="btn btn-primary" href="#form">応募する</a>
+</div>
+
+<script>
+  var burgerBtn = document.getElementById('burgerBtn');
+  var navDrawer = document.getElementById('navDrawer');
+  var scrim = document.getElementById('scrim');
+  function closeNav(){
+    burgerBtn.classList.remove('open');
+    navDrawer.classList.remove('open');
+    scrim.classList.remove('open');
+  }
+  burgerBtn.addEventListener('click', function(){
+    burgerBtn.classList.toggle('open');
+    navDrawer.classList.toggle('open');
+    scrim.classList.toggle('open');
+  });
+  scrim.addEventListener('click', closeNav);
+  document.querySelectorAll('#navDrawer a').forEach(function(a){
+    a.addEventListener('click', closeNav);
+  });
+
+  document.querySelectorAll('.faq-q').forEach(function(q){
+    q.addEventListener('click', function(){
+      var item = q.closest('.faq-item');
+      var isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item.open').forEach(function(el){ el.classList.remove('open'); });
+      if(!isOpen){ item.classList.add('open'); }
+    });
+  });
+
+  var form = document.getElementById('entryForm');
+  var thanksMsg = document.getElementById('thanksMsg');
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    thanksMsg.style.display = 'block';
+    thanksMsg.scrollIntoView({behavior:'smooth', block:'center'});
+    form.reset();
+  });
+
+  if(!window.matchMedia('(prefers-reduced-motion: reduce)').matches && 'IntersectionObserver' in window){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if(entry.isIntersecting){
+          entry.target.classList.add('in');
+          io.unobserve(entry.target);
+        }
+      });
+    }, {threshold:0.12});
+    document.querySelectorAll('.reveal').forEach(function(el){ io.observe(el); });
+  } else {
+    document.querySelectorAll('.reveal').forEach(function(el){ el.classList.add('in'); });
+  }
+</script>
+</body>
+</html>

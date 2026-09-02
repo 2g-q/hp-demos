@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>デザトレ｜作りながら身につくデザイナー育成ツール</title>
+<meta name="description" content="実践課題×プロのフィードバックで、未経験からでも「作れる」デザイナーへ。デザイナー育成ツール「デザトレ」の無料トライアル受付中。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@500;700;900&family=Noto+Sans+JP:wght@400;500;700&family=Manrope:wght@600;800&display=swap" rel="stylesheet">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "デザトレ",
+  "serviceType": "デザイナー育成ツール（オンライン学習サービス）",
+  "provider": {
+    "@type": "Organization",
+    "name": "デザトレ運営事務局",
+    "areaServed": "JP"
+  },
+  "description": "実践課題とプロのフィードバックでWebデザインを実践形式で学べる育成ツール。未経験からLP・バナー制作の経験を積める。"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "デザイン未経験でも大丈夫ですか？",
+      "acceptedAnswer": { "@type": "Answer", "text": "はい。基礎の確認から実践課題まで段階的に構成されているため、初めての方でも無理なく進められます。" }
+    },
+    {
+      "@type": "Question",
+      "name": "どのくらいの期間で学べますか？",
+      "acceptedAnswer": { "@type": "Answer", "text": "目安として3〜6ヶ月で、実案件レベルの提出物を1本仕上げるカリキュラムです。学習ペースには個人差があります。" }
+    },
+    {
+      "@type": "Question",
+      "name": "フィードバックは誰がくれますか？",
+      "acceptedAnswer": { "@type": "Answer", "text": "現役でLP・Web制作に携わるメンターが、提出物ごとに個別フィードバックを行います。" }
+    },
+    {
+      "@type": "Question",
+      "name": "料金はいくらですか？",
+      "acceptedAnswer": { "@type": "Answer", "text": "プランによって異なります。まずは無料トライアルで内容をご確認いただけます。" }
+    }
+  ]
+}
+</script>
+<style>
+:root{
+  --bg:#FBF8F4;
+  --bg-card:#FFFFFF;
+  --ink:#2A241E;
+  --ink-sub:#655C50;
+  --accent:#FF6B3D;
+  --accent-dark:#E4531F;
+  --accent-tint:#FFEFE5;
+  --line:#ECE3D8;
+  --radius:20px;
+  --maxw:1120px;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{
+  font-family:'Noto Sans JP',sans-serif;
+  color:var(--ink);
+  background:var(--bg);
+  line-height:1.8;
+  -webkit-font-smoothing:antialiased;
+  font-feature-settings:"palt";
+  letter-spacing:.02em;
+  overflow-x:hidden;
+  width:100%;
+  max-width:100%;
+}
+img{max-width:100%;display:block;}
+a{color:inherit;text-decoration:none;}
+h1,h2,h3,h4{font-family:'Zen Kaku Gothic New',sans-serif;letter-spacing:.03em;}
+.num{font-family:'Manrope',sans-serif;}
+.wrap{width:100%;max-width:var(--maxw);margin:0 auto;padding:0 24px;}
+section{padding:96px 0;}
+@media(max-width:640px){section{padding:64px 0;}}
+
+/* header */
+header{
+  position:fixed;top:0;left:0;width:100%;max-width:100%;z-index:200;
+  background:rgba(251,248,244,.92);
+  border-bottom:1px solid var(--line);
+}
+.headbar{
+  width:100%;max-width:var(--maxw);margin:0 auto;padding:14px 24px;
+  display:flex;align-items:center;justify-content:space-between;
+}
+.logo{font-family:'Zen Kaku Gothic New',sans-serif;font-weight:900;font-size:22px;color:var(--ink);}
+.logo span{color:var(--accent);}
+.nav-links{display:flex;gap:28px;align-items:center;}
+.nav-links a{font-size:14px;font-weight:500;white-space:nowrap;}
+.head-cta{
+  background:var(--accent);color:#fff;padding:10px 22px;border-radius:100px;
+  font-size:14px;font-weight:700;box-shadow:0 6px 16px rgba(255,107,61,.35);
+  white-space:nowrap;
+}
+.burger{display:none;flex-direction:column;gap:5px;width:28px;cursor:pointer;background:none;border:none;padding:4px;}
+.burger span{display:block;width:100%;height:2px;background:var(--ink);border-radius:2px;transition:.25s;}
+.burger.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+.burger.open span:nth-child(2){opacity:0;}
+.burger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+
+#mobileNav{
+  position:fixed;top:60px;left:0;width:100%;max-width:100%;background:#fff;
+  z-index:190;border-bottom:1px solid var(--line);
+  display:flex;flex-direction:column;padding:8px 24px 20px;
+  transform:translateY(-140%);transition:transform .3s ease;
+}
+#mobileNav.open{transform:translateY(0);}
+#mobileNav a{padding:14px 0;font-size:15px;font-weight:500;border-bottom:1px solid var(--line);}
+#mobileNav a:last-child{border-bottom:none;}
+
+@media(max-width:820px){
+  .nav-links{display:none;}
+  .burger{display:flex;}
+}
+
+/* hero */
+.hero{
+  padding:150px 0 80px;position:relative;overflow:hidden;
+}
+.hero .wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:48px;align-items:center;}
+@media(max-width:900px){.hero .wrap{grid-template-columns:1fr;}}
+.eyebrow{
+  display:inline-flex;align-items:center;gap:8px;background:var(--accent-tint);color:var(--accent-dark);
+  padding:7px 16px;border-radius:100px;font-size:12.5px;font-weight:700;margin-bottom:20px;
+}
+.hero h1{
+  font-size:clamp(30px,5.4vw,52px);font-weight:900;line-height:1.35;margin-bottom:22px;
+}
+.hero h1 .hl{color:var(--accent);}
+.hero p.lead{font-size:16px;color:var(--ink-sub);max-width:46ch;margin-bottom:32px;}
+.cta-row{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:36px;}
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  padding:16px 30px;border-radius:100px;font-weight:700;font-size:15px;
+  box-shadow:0 10px 24px rgba(255,107,61,.28);white-space:nowrap;
+}
+.btn-primary{background:var(--accent);color:#fff;}
+.btn-primary:hover{background:var(--accent-dark);}
+.btn-ghost{background:#fff;color:var(--ink);border:1.5px solid var(--line);box-shadow:none;}
+
+.stat-bar{display:flex;gap:32px;flex-wrap:wrap;}
+.stat{min-width:120px;}
+.stat .num{font-size:28px;font-weight:800;color:var(--accent-dark);}
+.stat .label{font-size:12.5px;color:var(--ink-sub);}
+.sample-note{font-size:11.5px;color:#9a8f80;margin-top:10px;}
+
+/* hero mock */
+.mockcard{
+  background:var(--bg-card);border-radius:24px;border:1px solid var(--line);
+  box-shadow:0 30px 60px -20px rgba(42,36,30,.18);padding:20px;
+  transform:rotate(2deg);
+}
+.mock-topbar{display:flex;gap:6px;margin-bottom:16px;}
+.mock-topbar span{width:10px;height:10px;border-radius:50%;background:var(--line);}
+.mock-canvas{
+  background:linear-gradient(135deg,var(--accent-tint),#fff);
+  border-radius:14px;padding:22px;display:flex;flex-direction:column;gap:12px;margin-bottom:14px;
+}
+.mock-row{display:flex;gap:10px;align-items:center;}
+.mock-swatch{width:22px;height:22px;border-radius:7px;flex-shrink:0;}
+.mock-bar{height:10px;border-radius:6px;background:#fff;flex:1;}
+.mock-bar.short{max-width:60%;}
+.mock-feedback{
+  display:flex;gap:10px;align-items:flex-start;background:#fff;border:1px solid var(--line);
+  border-radius:14px;padding:12px 14px;
+}
+.mock-avatar{
+  width:32px;height:32px;border-radius:50%;background:var(--accent);color:#fff;
+  display:flex;align-items:center;justify-content:center;font-weight:800;font-size:13px;flex-shrink:0;
+}
+.mock-feedback p{font-size:12.5px;color:var(--ink-sub);}
+.mock-feedback strong{display:block;font-size:12.5px;color:var(--ink);margin-bottom:2px;}
+.badge-float{
+  position:absolute;background:#fff;border:1px solid var(--line);border-radius:14px;
+  padding:10px 14px;font-size:12px;font-weight:700;box-shadow:0 12px 24px rgba(42,36,30,.14);
+  display:flex;align-items:center;gap:8px;
+}
+.badge-float .dot{width:8px;height:8px;border-radius:50%;background:#33B36B;}
+.badge1{top:-18px;right:-10px;}
+.badge2{bottom:10px;left:-24px;}
+@media(max-width:900px){.badge1,.badge2{display:none;}}
+
+/* section heading */
+.sec-head{max-width:640px;margin:0 auto 56px;text-align:center;}
+.sec-head .kicker{color:var(--accent-dark);font-weight:700;font-size:13px;letter-spacing:.1em;margin-bottom:10px;display:block;}
+.sec-head h2{font-size:clamp(24px,3.6vw,34px);font-weight:900;margin-bottom:14px;}
+.sec-head p{color:var(--ink-sub);font-size:15px;}
+
+/* about */
+.about-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
+@media(max-width:760px){.about-grid{grid-template-columns:1fr;}}
+.about-card{
+  background:var(--bg-card);border:1px solid var(--line);border-radius:var(--radius);
+  padding:30px 26px;
+}
+.icon-circle{
+  width:52px;height:52px;border-radius:50%;background:var(--accent-tint);
+  display:flex;align-items:center;justify-content:center;margin-bottom:18px;
+}
+.about-card h3{font-size:17px;font-weight:700;margin-bottom:10px;}
+.about-card p{font-size:14px;color:var(--ink-sub);}
+
+/* who-for */
+.forwho{background:var(--bg-card);}
+.forwho .wrap{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center;}
+@media(max-width:820px){.forwho .wrap{grid-template-columns:1fr;}}
+.check-list{list-style:none;display:flex;flex-direction:column;gap:16px;}
+.check-list li{display:flex;gap:14px;align-items:flex-start;font-size:15.5px;font-weight:500;}
+.check-mark{
+  flex-shrink:0;width:26px;height:26px;border-radius:50%;background:var(--accent);color:#fff;
+  display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:900;margin-top:1px;
+}
+.forwho-copy h2{font-size:clamp(22px,3.2vw,30px);font-weight:900;margin-bottom:16px;line-height:1.5;}
+.forwho-copy p{color:var(--ink-sub);font-size:14.5px;}
+
+/* features */
+.feat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:22px;}
+@media(max-width:980px){.feat-grid{grid-template-columns:repeat(2,1fr);}}
+@media(max-width:560px){.feat-grid{grid-template-columns:1fr;}}
+.feat-card{
+  background:var(--bg-card);border:1px solid var(--line);border-radius:var(--radius);
+  padding:28px 22px;text-align:left;
+}
+.feat-num{font-family:'Manrope',sans-serif;font-weight:800;font-size:13px;color:var(--accent-dark);margin-bottom:14px;}
+.feat-card h3{font-size:16.5px;font-weight:700;margin-bottom:10px;}
+.feat-card p{font-size:13.5px;color:var(--ink-sub);}
+
+/* usage image (illustrated mock, no photos) */
+.usage{background:linear-gradient(180deg,#fff,var(--bg));}
+.usage-shot{
+  background:#20211F;border-radius:26px;padding:26px;box-shadow:0 40px 80px -30px rgba(0,0,0,.35);
+}
+.usage-shot .mock-topbar span{background:#41443f;}
+.usage-panels{display:grid;grid-template-columns:1.3fr .7fr;gap:16px;margin-top:14px;}
+@media(max-width:640px){.usage-panels{grid-template-columns:1fr;}}
+.panel{background:#2B2C29;border-radius:14px;padding:16px;}
+.panel-title{color:#F4EFE8;font-size:12px;font-weight:700;margin-bottom:12px;}
+.progress-track{height:8px;border-radius:6px;background:#41443f;overflow:hidden;margin-bottom:10px;}
+.progress-fill{height:100%;background:var(--accent);border-radius:6px;}
+.pill-row{display:flex;gap:8px;flex-wrap:wrap;}
+.pill{background:#41443f;color:#F4EFE8;font-size:11px;padding:5px 10px;border-radius:100px;}
+.mentor-note{
+  margin-top:36px;display:flex;gap:16px;align-items:flex-start;background:var(--bg-card);
+  border:1px solid var(--line);border-radius:var(--radius);padding:24px;
+}
+.mentor-note p{font-size:14px;color:var(--ink-sub);}
+.mentor-note strong{display:block;font-size:14px;margin-bottom:4px;}
+
+/* flow */
+.flow-list{display:flex;flex-direction:column;gap:0;max-width:720px;margin:0 auto;}
+.flow-item{display:flex;gap:22px;padding:26px 0;border-bottom:1px solid var(--line);}
+.flow-item:last-child{border-bottom:none;}
+.flow-step{
+  font-family:'Manrope',sans-serif;font-weight:800;font-size:20px;color:var(--accent);
+  width:44px;flex-shrink:0;
+}
+.flow-item h3{font-size:16px;font-weight:700;margin-bottom:6px;}
+.flow-item p{font-size:13.5px;color:var(--ink-sub);}
+.flow-note{
+  text-align:center;font-size:13px;color:var(--ink-sub);margin-top:26px;
+}
+
+/* faq */
+.faq-wrap{max-width:760px;margin:0 auto;}
+details{
+  background:var(--bg-card);border:1px solid var(--line);border-radius:16px;
+  margin-bottom:12px;padding:18px 22px;
+}
+summary{
+  list-style:none;cursor:pointer;font-weight:700;font-size:15px;
+  display:flex;justify-content:space-between;align-items:center;gap:12px;
+}
+summary::-webkit-details-marker{display:none;}
+summary::after{
+  content:"+";font-family:'Manrope',sans-serif;font-size:20px;color:var(--accent);flex-shrink:0;
+}
+details[open] summary::after{content:"−";}
+details p{font-size:14px;color:var(--ink-sub);margin-top:14px;}
+
+/* apply */
+.apply{background:var(--bg-card);}
+.apply .wrap{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:flex-start;}
+@media(max-width:900px){.apply .wrap{grid-template-columns:1fr;}}
+.apply-copy h2{font-size:clamp(22px,3.4vw,30px);font-weight:900;margin-bottom:16px;line-height:1.5;}
+.apply-copy p{color:var(--ink-sub);font-size:14.5px;margin-bottom:20px;}
+.apply-list{list-style:none;display:flex;flex-direction:column;gap:10px;font-size:13.5px;color:var(--ink-sub);}
+.apply-list li:before{content:"・";color:var(--accent);font-weight:900;}
+form{
+  background:var(--bg);border:1px solid var(--line);border-radius:var(--radius);padding:28px;
+  display:flex;flex-direction:column;gap:16px;
+}
+.field label{display:block;font-size:13px;font-weight:700;margin-bottom:8px;}
+.field input,.field select,.field textarea{
+  width:100%;max-width:100%;font-size:16px;padding:13px 14px;border-radius:10px;
+  border:1.5px solid var(--line);background:#fff;font-family:inherit;color:var(--ink);
+}
+.field textarea{resize:vertical;min-height:90px;}
+form .btn{width:100%;border:none;font-size:15px;}
+.form-note{font-size:11.5px;color:#9a8f80;}
+
+/* footer */
+footer{background:#221E19;color:#EDE7DE;padding:64px 0 100px;}
+.foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:36px;margin-bottom:36px;}
+@media(max-width:720px){.foot-grid{grid-template-columns:1fr;}}
+footer .logo{color:#fff;}
+footer .logo span{color:var(--accent);}
+footer p{font-size:13px;color:#B7ACA0;margin-top:10px;line-height:1.9;}
+footer h4{font-size:13px;margin-bottom:14px;color:#EDE7DE;}
+footer ul{list-style:none;display:flex;flex-direction:column;gap:10px;}
+footer a{font-size:13px;color:#B7ACA0;}
+.disclaimer{
+  border-top:1px solid #3A342C;padding-top:24px;font-size:12px;color:#8F8477;line-height:1.9;
+}
+
+/* mobile sticky cta */
+.sticky-cta{
+  position:fixed;bottom:0;left:0;width:100%;max-width:100%;background:#fff;
+  border-top:1px solid var(--line);padding:12px 20px;display:none;
+  z-index:150;box-shadow:0 -8px 24px rgba(0,0,0,.08);
+}
+.sticky-cta .btn{width:100%;}
+@media(max-width:820px){.sticky-cta{display:block;}body{padding-bottom:74px;}}
+
+/* reveal */
+.reveal{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s ease;}
+.reveal.show{opacity:1;transform:translateY(0);}
+@media(prefers-reduced-motion:reduce){
+  .reveal{opacity:1;transform:none;transition:none;}
+  html{scroll-behavior:auto;}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="headbar">
+    <a href="#top" class="logo">デザ<span>トレ</span></a>
+    <nav class="nav-links">
+      <a href="#about">サービスについて</a>
+      <a href="#feature">特徴</a>
+      <a href="#flow">流れ</a>
+      <a href="#faq">よくある質問</a>
+    </nav>
+    <div style="display:flex;align-items:center;gap:14px;">
+      <a href="#apply" class="head-cta">無料で始める</a>
+      <button class="burger" id="burger" aria-label="メニュー"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+<nav id="mobileNav">
+  <a href="#about">サービスについて</a>
+  <a href="#forwho">こんな方におすすめ</a>
+  <a href="#feature">サービスの特徴</a>
+  <a href="#usage">利用イメージ</a>
+  <a href="#flow">学習の流れ</a>
+  <a href="#faq">よくある質問</a>
+  <a href="#apply">申し込み</a>
+</nav>
+
+<main id="top">
+
+  <section class="hero">
+    <div class="wrap">
+      <div>
+        <span class="eyebrow">2026年秋クール　受講生募集中</span>
+        <h1>学ぶを、<span class="hl">つくる</span>に変える。</h1>
+        <p class="lead">実践課題×プロのフィードバックで、未経験からでも「作れる」デザイナーへ。動画を見るだけの学習から卒業する、実践型デザイナー育成ツールです。</p>
+        <div class="cta-row">
+          <a href="#apply" class="btn btn-primary">無料トライアルを始める</a>
+          <a href="#about" class="btn btn-ghost">サービス内容を見る</a>
+        </div>
+        <div class="stat-bar">
+          <div class="stat"><div class="num">1,200<span style="font-size:16px;">名</span></div><div class="label">累計受講者数</div></div>
+          <div class="stat"><div class="num">87<span style="font-size:16px;">%</span></div><div class="label">学習継続率</div></div>
+          <div class="stat"><div class="num">中2<span style="font-size:16px;">日</span></div><div class="label">平均フィードバック返却</div></div>
+        </div>
+        <p class="sample-note">※上記の数値はサービス紹介用のサンプルです</p>
+      </div>
+      <div style="position:relative;">
+        <div class="badge-float badge1"><span class="dot"></span>フィードバック受信</div>
+        <div class="mockcard">
+          <div class="mock-topbar"><span></span><span></span><span></span></div>
+          <div class="mock-canvas">
+            <div class="mock-row"><div class="mock-swatch" style="background:var(--accent);"></div><div class="mock-bar"></div></div>
+            <div class="mock-row"><div class="mock-swatch" style="background:#F4C77A;"></div><div class="mock-bar short"></div></div>
+            <div class="mock-row"><div class="mock-swatch" style="background:#8FBF9F;"></div><div class="mock-bar"></div></div>
+          </div>
+          <div class="mock-feedback">
+            <div class="mock-avatar">M</div>
+            <p><strong>メンターより</strong>余白の使い方が良くなりました。CTAボタンの色をもう少し目立たせてみましょう。</p>
+          </div>
+        </div>
+        <div class="badge-float badge2"><span class="dot"></span>課題 3/10 完了</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="about">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span class="kicker">ABOUT</span>
+        <h2>「見て学ぶ」から「作って学ぶ」へ</h2>
+        <p>デザトレは、実践課題の提出とプロからのフィードバックを繰り返しながらWebデザインを身につける育成ツールです。動画講座だけでは得られない「作りきる力」を鍛えます。</p>
+      </div>
+      <div class="about-grid">
+        <div class="about-card reveal">
+          <div class="icon-circle">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="14" rx="2" stroke="#FF6B3D" stroke-width="2"/><path d="M3 9h18" stroke="#FF6B3D" stroke-width="2"/></svg>
+          </div>
+          <h3>実践課題で手を動かす</h3>
+          <p>LP・バナーなど、実案件を想定した課題に取り組みながら学べます。インプットだけで終わりません。</p>
+        </div>
+        <div class="about-card reveal">
+          <div class="icon-circle">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="3.4" stroke="#FF6B3D" stroke-width="2"/><path d="M5 20c1.5-4 5-5 7-5s5.5 1 7 5" stroke="#FF6B3D" stroke-width="2" stroke-linecap="round"/></svg>
+          </div>
+          <h3>現役デザイナーが伴走</h3>
+          <p>提出のたびに、現役でWeb制作に携わるメンターから個別フィードバックが届きます。</p>
+        </div>
+        <div class="about-card reveal">
+          <div class="icon-circle">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M12 3v18M4 8h16" stroke="#FF6B3D" stroke-width="2" stroke-linecap="round"/></svg>
+          </div>
+          <h3>そのままポートフォリオに</h3>
+          <p>完成した提出物は、応募や案件獲得に使えるポートフォリオとして蓄積されていきます。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="forwho" class="forwho">
+    <div class="wrap">
+      <div class="forwho-copy reveal">
+        <span class="kicker" style="display:block;margin-bottom:10px;">FOR WHO</span>
+        <h2>こんな方に<br>おすすめです</h2>
+        <p>デザインを学び始めたばかりの方から、次のステップに進みたい方まで。「自分にもできそう」と思えたら、始めどきです。</p>
+      </div>
+      <ul class="check-list reveal">
+        <li><span class="check-mark">✓</span>デザインを学んでいるが、実践経験がまだ少ない方</li>
+        <li><span class="check-mark">✓</span>バナー制作だけでなく、LP制作の経験も増やしたい方</li>
+        <li><span class="check-mark">✓</span>独学で進めていて、伸び悩みを感じている方</li>
+        <li><span class="check-mark">✓</span>新しいことに挑戦してみたい方</li>
+        <li><span class="check-mark">✓</span>実案件レベルの提出物をポートフォリオにしたい方</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="feature">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span class="kicker">FEATURE</span>
+        <h2>サービスの特徴</h2>
+        <p>「一人で抱え込まない」学習環境を大切にしています。</p>
+      </div>
+      <div class="feat-grid">
+        <div class="feat-card reveal">
+          <div class="feat-num">01</div>
+          <h3>実践課題</h3>
+          <p>実案件を想定したLP・バナー課題に取り組み、作りながらスキルを定着させます。</p>
+        </div>
+        <div class="feat-card reveal">
+          <div class="feat-num">02</div>
+          <h3>個別フィードバック</h3>
+          <p>提出物ごとに、現役デザイナーから具体的な改善点と良かった点が届きます。</p>
+        </div>
+        <div class="feat-card reveal">
+          <div class="feat-num">03</div>
+          <h3>学び合うコミュニティ</h3>
+          <p>毎週月曜21:00〜のオンライン相互レビュー会など、仲間と学べる場を用意しています。（※仮の運用内容です）</p>
+        </div>
+        <div class="feat-card reveal">
+          <div class="feat-num">04</div>
+          <h3>ポートフォリオ化</h3>
+          <p>完成した課題はそのまま蓄積され、応募・案件獲得に使える実績として残ります。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="usage" class="usage">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span class="kicker">USAGE</span>
+        <h2>利用イメージ</h2>
+        <p>ログインすると、自分の進捗と受け取ったフィードバックが一目でわかります。</p>
+      </div>
+      <div class="usage-shot reveal">
+        <div class="mock-topbar"><span></span><span></span><span></span></div>
+        <div class="usage-panels">
+          <div class="panel">
+            <div class="panel-title">課題の進捗</div>
+            <div class="progress-track"><div class="progress-fill" style="width:68%;"></div></div>
+            <div class="pill-row">
+              <span class="pill">LP構成 完了</span>
+              <span class="pill">配色案 レビュー中</span>
+              <span class="pill">最終提出 未着手</span>
+            </div>
+          </div>
+          <div class="panel">
+            <div class="panel-title">今週のタスク</div>
+            <div class="pill-row" style="flex-direction:column;align-items:flex-start;">
+              <span class="pill">課題を提出する</span>
+              <span class="pill">相互レビュー会に参加</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="mentor-note reveal">
+        <div class="mock-avatar" style="width:44px;height:44px;font-size:16px;">運</div>
+        <div>
+          <strong>運営チームより</strong>
+          <p>「うまく作れるか不安」という声をよくいただきますが、最初から上手に作れる人はいません。小さな課題を一つずつ提出することが、いちばんの近道です。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="flow">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span class="kicker">FLOW</span>
+        <h2>学習／利用の流れ</h2>
+        <p>登録から提出物の完成まで、迷わず進められる5ステップです。</p>
+      </div>
+      <div class="flow-list">
+        <div class="flow-item reveal">
+          <div class="flow-step num">01</div>
+          <div><h3>無料登録</h3><p>メールアドレスのみで、最短1分で登録が完了します。</p></div>
+        </div>
+        <div class="flow-item reveal">
+          <div class="flow-step num">02</div>
+          <div><h3>スキルチェック</h3><p>現在地を簡単に確認し、あなたに合った課題からスタートします。</p></div>
+        </div>
+        <div class="flow-item reveal">
+          <div class="flow-step num">03</div>
+          <div><h3>実践課題に取り組む</h3><p>LP・バナーなど、実案件を想定した課題を制作します。</p></div>
+        </div>
+        <div class="flow-item reveal">
+          <div class="flow-step num">04</div>
+          <div><h3>プロからフィードバック</h3><p>提出するたびに、現役デザイナーから具体的な講評が届きます。</p></div>
+        </div>
+        <div class="flow-item reveal">
+          <div class="flow-step num">05</div>
+          <div><h3>ポートフォリオ完成</h3><p>完成した提出物を蓄積し、次の一歩に使える実績にします。</p></div>
+        </div>
+      </div>
+      <p class="flow-note">※学習ペースは個人により異なります。目安として3〜6ヶ月のカリキュラムです（仮の目安です）。</p>
+    </div>
+  </section>
+
+  <section id="faq">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span class="kicker">FAQ</span>
+        <h2>よくある質問</h2>
+      </div>
+      <div class="faq-wrap reveal">
+        <details>
+          <summary>デザイン未経験でも大丈夫ですか？</summary>
+          <p>はい。基礎の確認から実践課題まで段階的に構成されているため、初めての方でも無理なく進められます。</p>
+        </details>
+        <details>
+          <summary>どのくらいの期間で学べますか？</summary>
+          <p>目安として3〜6ヶ月で、実案件レベルの提出物を1本仕上げるカリキュラムです。学習ペースには個人差があります（仮の目安です）。</p>
+        </details>
+        <details>
+          <summary>使用するツールは指定されますか？</summary>
+          <p>代表的なデザインツールを想定していますが、普段お使いのツールをご共有いただければ個別に調整も可能です。</p>
+        </details>
+        <details>
+          <summary>フィードバックは誰がくれますか？</summary>
+          <p>現役でLP・Web制作に携わるメンターが、提出物ごとに個別フィードバックを行います（※仮の運用体制です）。</p>
+        </details>
+        <details>
+          <summary>料金はいくらですか？</summary>
+          <p>プランによって異なります。まずは無料トライアルで内容をご確認いただけます（※価格は仮の想定です）。</p>
+        </details>
+        <details>
+          <summary>途中で挫折しないか不安です</summary>
+          <p>週次の課題と進捗確認、仲間と共有できる相互レビュー会を用意しているので、一人で抱え込まずに進められます。</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <section id="apply" class="apply">
+    <div class="wrap">
+      <div class="apply-copy reveal">
+        <span class="kicker" style="display:block;margin-bottom:10px;">ENTRY</span>
+        <h2>まずは無料トライアルから、<br>始めてみませんか。</h2>
+        <p>登録は1分で完了します。合わなければいつでも解約できるので、まずは気軽にお試しください。</p>
+        <ul class="apply-list">
+          <li>無料トライアル期間中はいつでも解約可能（仮の条件です）</li>
+          <li>初回の課題フィードバックまで無料で体験できます</li>
+          <li>ツールの使用感を確認してからプランを選べます</li>
+        </ul>
+      </div>
+      <form onsubmit="event.preventDefault();alert('※本ページはデモのため送信は行われません。');" class="reveal">
+        <div class="field">
+          <label for="name">お名前</label>
+          <input type="text" id="name" placeholder="山田 花子" required>
+        </div>
+        <div class="field">
+          <label for="email">メールアドレス</label>
+          <input type="email" id="email" placeholder="example@mail.com" required>
+        </div>
+        <div class="field">
+          <label for="level">現在の経験レベル</label>
+          <select id="level">
+            <option>未経験・独学中</option>
+            <option>スクール受講中</option>
+            <option>実務経験あり（1年未満）</option>
+            <option>実務経験あり（1年以上）</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="msg">挑戦してみたいこと（任意）</label>
+          <textarea id="msg" placeholder="例：LP制作の経験を増やしたい"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">無料トライアルに申し込む</button>
+        <p class="form-note">※これはデモページのため、送信されたデータは保存されません。</p>
+      </form>
+    </div>
+  </section>
+
+</main>
+
+<div class="sticky-cta">
+  <a href="#apply" class="btn btn-primary">無料トライアルを始める</a>
+</div>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <a href="#top" class="logo">デザ<span>トレ</span></a>
+        <p>実践課題×プロのフィードバックで、未経験からでも「作れる」デザイナーへ。作りながら学ぶ、デザイナー育成ツールです。</p>
+      </div>
+      <div>
+        <h4>コンテンツ</h4>
+        <ul>
+          <li><a href="#about">サービスについて</a></li>
+          <li><a href="#feature">サービスの特徴</a></li>
+          <li><a href="#flow">学習の流れ</a></li>
+          <li><a href="#faq">よくある質問</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>お問い合わせ</h4>
+        <ul>
+          <li>デザトレ運営事務局（仮）</li>
+          <li>受付時間 平日10:00〜18:00（仮）</li>
+          <li>TEL 048-000-0000（仮）</li>
+          <li>info@example-designtore.jp（仮）</li>
+        </ul>
+      </div>
+    </div>
+    <div class="disclaimer">
+      ※本ページは制作サンプル（デモ）です。掲載の内容・数値は仮のもので、写真はイメージです。<br>
+      © 2026 デザトレ運営事務局（架空のサービス名です）
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var burger = document.getElementById('burger');
+  var mnav = document.getElementById('mobileNav');
+  burger.addEventListener('click', function(){
+    burger.classList.toggle('open');
+    mnav.classList.toggle('open');
+  });
+  mnav.querySelectorAll('a').forEach(function(a){
+    a.addEventListener('click', function(){
+      burger.classList.remove('open');
+      mnav.classList.remove('open');
+    });
+  });
+
+  if ('IntersectionObserver' in window){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if(e.isIntersecting){
+          e.target.classList.add('show');
+          io.unobserve(e.target);
+        }
+      });
+    },{threshold:.14});
+    document.querySelectorAll('.reveal').forEach(function(el){ io.observe(el); });
+  } else {
+    document.querySelectorAll('.reveal').forEach(function(el){ el.classList.add('show'); });
+  }
+})();
+</script>
+
+</body>
+</html>

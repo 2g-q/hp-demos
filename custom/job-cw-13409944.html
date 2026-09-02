@@ -1,0 +1,1628 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fishlle!（フィシュル）SNSマーケター採用デモ</title>
+  <meta name="description" content="お魚サブスクFishlle!（フィシュル）のInstagram・LINE運用を担うSNSマーケター募集ページの制作サンプルです。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+JP:wght@400;500;700;900&family=Zen+Kaku+Gothic+New:wght@500;700;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --base: #fbfaf6;
+      --paper: #ffffff;
+      --ink: #16202a;
+      --muted: #5f6974;
+      --line: #e6e0d5;
+      --soft: #f2eee6;
+      --accent: #0d5c63;
+      --accent-dark: #08464b;
+      --shadow: 0 18px 45px rgba(13, 92, 99, 0.14);
+      --radius: 8px;
+      --round: 100px;
+      --section: clamp(88px, 9vw, 110px);
+      --inner: min(1120px, calc(100% - 40px));
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      overflow-x: hidden;
+    }
+
+    body {
+      margin: 0;
+      min-width: 0;
+      overflow-x: hidden;
+      background: var(--base);
+      color: var(--ink);
+      font-family: "Noto Sans JP", system-ui, sans-serif;
+      font-feature-settings: "palt" 1;
+      line-height: 1.8;
+    }
+
+    img,
+    svg,
+    iframe {
+      max-width: 100%;
+      height: auto;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button,
+    input,
+    textarea,
+    select {
+      font: inherit;
+    }
+
+    input,
+    textarea,
+    select {
+      font-size: 16px;
+    }
+
+    .header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 50;
+      background: rgba(251, 250, 246, 0.86);
+      border-bottom: 1px solid rgba(230, 224, 213, 0.7);
+      backdrop-filter: blur(18px);
+    }
+
+    .header__inner {
+      width: var(--inner);
+      margin: 0 auto;
+      min-height: 74px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+      min-width: 0;
+    }
+
+    .brand__name {
+      font-family: "Manrope", sans-serif;
+      font-weight: 800;
+      font-size: clamp(22px, 2.4vw, 30px);
+      letter-spacing: 0;
+      color: var(--accent);
+      white-space: nowrap;
+    }
+
+    .brand__sub {
+      font-size: 12px;
+      color: var(--muted);
+      white-space: nowrap;
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      gap: 22px;
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--muted);
+    }
+
+    .nav a:hover {
+      color: var(--accent);
+    }
+
+    .header__actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .menuButton {
+      display: none;
+      width: 44px;
+      height: 44px;
+      border: 1px solid var(--line);
+      border-radius: 50%;
+      background: var(--paper);
+      color: var(--ink);
+      place-items: center;
+      cursor: pointer;
+    }
+
+    .menuButton span {
+      width: 18px;
+      height: 2px;
+      display: block;
+      background: currentColor;
+      position: relative;
+    }
+
+    .menuButton span::before,
+    .menuButton span::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      width: 18px;
+      height: 2px;
+      background: currentColor;
+    }
+
+    .menuButton span::before {
+      top: -6px;
+    }
+
+    .menuButton span::after {
+      top: 6px;
+    }
+
+    .mobileNav {
+      position: fixed;
+      top: 74px;
+      left: 16px;
+      right: 16px;
+      z-index: 60;
+      display: none;
+      padding: 18px;
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    .mobileNav.is-open {
+      display: block;
+    }
+
+    .mobileNav a {
+      display: block;
+      padding: 12px 4px;
+      border-bottom: 1px solid var(--soft);
+      font-weight: 700;
+      color: var(--ink);
+    }
+
+    .mobileNav a:last-child {
+      border-bottom: 0;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      min-height: 50px;
+      padding: 0 24px;
+      border: 0;
+      border-radius: var(--round);
+      background: var(--accent);
+      color: #ffffff;
+      font-weight: 900;
+      line-height: 1.2;
+      box-shadow: 0 14px 30px rgba(13, 92, 99, 0.22);
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+      max-width: 100%;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      background: var(--accent-dark);
+      box-shadow: 0 18px 36px rgba(13, 92, 99, 0.26);
+    }
+
+    .btn--ghost {
+      background: var(--paper);
+      color: var(--accent);
+      border: 1px solid rgba(13, 92, 99, 0.28);
+      box-shadow: none;
+    }
+
+    .btn--ghost:hover {
+      background: var(--soft);
+      color: var(--accent);
+      box-shadow: none;
+    }
+
+    .btn svg {
+      width: 18px;
+      height: 18px;
+      flex: 0 0 auto;
+    }
+
+    main {
+      padding-top: 74px;
+    }
+
+    .section {
+      padding: var(--section) 0;
+    }
+
+    .section--tight {
+      padding: clamp(72px, 8vw, 92px) 0;
+    }
+
+    .inner {
+      width: var(--inner);
+      margin: 0 auto;
+      max-width: 100%;
+    }
+
+    .hero {
+      min-height: calc(100svh - 74px);
+      display: grid;
+      align-items: center;
+      padding: 54px 0 44px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(90deg, rgba(251, 250, 246, 0.98) 0%, rgba(251, 250, 246, 0.88) 48%, rgba(251, 250, 246, 0.42) 100%),
+        url("https://images.unsplash.com/photo-1490645935967-10de6ba17061?auto=format&fit=crop&w=1200&q=70") center right / cover no-repeat;
+      z-index: -2;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 130px;
+      background: linear-gradient(0deg, var(--base), rgba(251, 250, 246, 0));
+      z-index: -1;
+    }
+
+    .hero__grid {
+      width: var(--inner);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: minmax(0, 0.98fr) minmax(280px, 0.72fr);
+      gap: clamp(32px, 5vw, 64px);
+      align-items: end;
+      max-width: 100%;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin: 0 0 18px;
+      color: var(--accent);
+      font-weight: 900;
+      letter-spacing: 0;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 38px;
+      height: 2px;
+      background: currentColor;
+      flex: 0 0 auto;
+    }
+
+    .hero h1 {
+      margin: 0;
+      max-width: 720px;
+      font-family: "Zen Kaku Gothic New", "Noto Sans JP", sans-serif;
+      font-size: clamp(40px, 7.2vw, 84px);
+      line-height: 1.04;
+      letter-spacing: 0;
+      font-weight: 900;
+    }
+
+    .copyMark {
+      display: block;
+      color: var(--accent);
+    }
+
+    .hero__lead {
+      max-width: 650px;
+      margin: 24px 0 0;
+      font-size: clamp(16px, 2vw, 19px);
+      color: var(--ink);
+      line-height: 2;
+    }
+
+    .hero__actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin: 34px 0 0;
+    }
+
+    .hero__note {
+      margin-top: 16px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .heroPanel {
+      background: rgba(255, 255, 255, 0.84);
+      border: 1px solid rgba(230, 224, 213, 0.88);
+      border-radius: var(--radius);
+      padding: clamp(22px, 3vw, 30px);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(12px);
+      max-width: 100%;
+    }
+
+    .heroPanel__title {
+      margin: 0 0 18px;
+      font-weight: 900;
+      color: var(--accent);
+    }
+
+    .heroPanel__list {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      display: grid;
+      gap: 14px;
+    }
+
+    .heroPanel__list li {
+      display: grid;
+      grid-template-columns: 22px minmax(0, 1fr);
+      gap: 10px;
+      align-items: start;
+      font-size: 14px;
+      line-height: 1.7;
+    }
+
+    .dotIcon {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      border: 2px solid var(--accent);
+      position: relative;
+      margin-top: 2px;
+      flex: 0 0 auto;
+    }
+
+    .dotIcon::after {
+      content: "";
+      position: absolute;
+      left: 6px;
+      top: 4px;
+      width: 6px;
+      height: 10px;
+      border-right: 2px solid var(--accent);
+      border-bottom: 2px solid var(--accent);
+      transform: rotate(45deg);
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 1px;
+      margin-top: 50px;
+      background: var(--line);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      overflow: hidden;
+      max-width: 100%;
+    }
+
+    .stat {
+      background: rgba(255, 255, 255, 0.88);
+      padding: 24px 22px;
+    }
+
+    .stat__num {
+      display: block;
+      font-family: "Manrope", sans-serif;
+      font-weight: 800;
+      color: var(--accent);
+      font-size: clamp(25px, 4vw, 42px);
+      line-height: 1;
+    }
+
+    .stat__label {
+      display: block;
+      margin-top: 10px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .sectionHead {
+      display: grid;
+      grid-template-columns: minmax(0, 0.8fr) minmax(260px, 0.55fr);
+      gap: clamp(24px, 5vw, 70px);
+      align-items: end;
+      margin-bottom: 44px;
+    }
+
+    .sectionHead h2 {
+      margin: 0;
+      font-family: "Zen Kaku Gothic New", "Noto Sans JP", sans-serif;
+      font-size: clamp(30px, 4.5vw, 52px);
+      line-height: 1.18;
+      letter-spacing: 0;
+      font-weight: 900;
+    }
+
+    .sectionHead p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 2;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+      max-width: 100%;
+    }
+
+    .card {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: clamp(24px, 3vw, 30px);
+      box-shadow: 0 8px 30px rgba(22, 32, 42, 0.04);
+      min-width: 0;
+    }
+
+    .card__kicker {
+      display: block;
+      margin-bottom: 18px;
+      font-family: "Manrope", sans-serif;
+      color: var(--accent);
+      font-weight: 800;
+      font-size: 13px;
+    }
+
+    .card h3 {
+      margin: 0 0 14px;
+      font-size: clamp(19px, 2vw, 23px);
+      line-height: 1.45;
+      letter-spacing: 0;
+    }
+
+    .card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    .split {
+      display: grid;
+      grid-template-columns: minmax(0, 0.92fr) minmax(280px, 0.8fr);
+      gap: clamp(32px, 6vw, 76px);
+      align-items: center;
+      max-width: 100%;
+    }
+
+    .imageFrame {
+      position: relative;
+      overflow: hidden;
+      border-radius: var(--radius);
+      border: 1px solid var(--line);
+      background: var(--soft);
+      aspect-ratio: 4 / 3;
+      max-width: 100%;
+    }
+
+    .imageFrame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .imageFrame__caption {
+      position: absolute;
+      left: 16px;
+      right: 16px;
+      bottom: 16px;
+      padding: 10px 14px;
+      background: rgba(255, 255, 255, 0.88);
+      color: var(--muted);
+      border-radius: var(--radius);
+      font-size: 12px;
+      line-height: 1.5;
+    }
+
+    .checkList {
+      margin: 24px 0 0;
+      padding: 0;
+      list-style: none;
+      display: grid;
+      gap: 12px;
+    }
+
+    .checkList li {
+      display: grid;
+      grid-template-columns: 26px minmax(0, 1fr);
+      gap: 12px;
+      align-items: start;
+      color: var(--ink);
+    }
+
+    .checkList .dotIcon {
+      width: 24px;
+      height: 24px;
+      margin-top: 3px;
+    }
+
+    .process {
+      display: grid;
+      gap: 14px;
+      counter-reset: process;
+    }
+
+    .processItem {
+      counter-increment: process;
+      display: grid;
+      grid-template-columns: 68px minmax(0, 1fr);
+      gap: 18px;
+      padding: 24px;
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      max-width: 100%;
+    }
+
+    .processItem::before {
+      content: counter(process, decimal-leading-zero);
+      width: 58px;
+      height: 58px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: var(--accent);
+      color: #ffffff;
+      font-family: "Manrope", sans-serif;
+      font-weight: 800;
+    }
+
+    .processItem h3 {
+      margin: 0 0 8px;
+      font-size: 20px;
+      line-height: 1.4;
+    }
+
+    .processItem p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    .timeline {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+      max-width: 100%;
+    }
+
+    .timelineItem {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 24px;
+      min-width: 0;
+    }
+
+    .timelineItem__time {
+      display: block;
+      margin-bottom: 10px;
+      font-family: "Manrope", sans-serif;
+      font-weight: 800;
+      color: var(--accent);
+    }
+
+    .timelineItem h3 {
+      margin: 0 0 8px;
+      font-size: 18px;
+      line-height: 1.45;
+    }
+
+    .timelineItem p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .tableWrap {
+      overflow-x: auto;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--paper);
+      max-width: 100%;
+    }
+
+    table {
+      width: 100%;
+      min-width: 0;
+      border-collapse: collapse;
+    }
+
+    th,
+    td {
+      padding: 18px 20px;
+      border-bottom: 1px solid var(--line);
+      text-align: left;
+      vertical-align: top;
+      font-size: 15px;
+    }
+
+    th {
+      width: 28%;
+      color: var(--accent);
+      background: #f7f4ed;
+      font-weight: 900;
+    }
+
+    tr:last-child th,
+    tr:last-child td {
+      border-bottom: 0;
+    }
+
+    .voiceGrid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .voice {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: clamp(24px, 3vw, 32px);
+    }
+
+    .voice blockquote {
+      margin: 0;
+      font-size: clamp(18px, 2vw, 22px);
+      line-height: 1.8;
+      font-weight: 700;
+    }
+
+    .voice p {
+      margin: 18px 0 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .requirements {
+      display: grid;
+      grid-template-columns: minmax(0, 0.68fr) minmax(280px, 1fr);
+      gap: 24px;
+      align-items: start;
+    }
+
+    .sideNote {
+      position: sticky;
+      top: 96px;
+      background: var(--accent);
+      color: #ffffff;
+      border-radius: var(--radius);
+      padding: 30px;
+      max-width: 100%;
+    }
+
+    .sideNote h3 {
+      margin: 0 0 12px;
+      font-size: 24px;
+      line-height: 1.35;
+    }
+
+    .sideNote p {
+      margin: 0;
+      opacity: 0.9;
+    }
+
+    .faq {
+      display: grid;
+      gap: 12px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .faqItem {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+
+    .faqItem button {
+      width: 100%;
+      min-height: 62px;
+      padding: 18px 22px;
+      border: 0;
+      background: transparent;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      text-align: left;
+      cursor: pointer;
+      font-weight: 900;
+      color: var(--ink);
+    }
+
+    .faqIcon {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      border: 1px solid var(--accent);
+      position: relative;
+      flex: 0 0 auto;
+    }
+
+    .faqIcon::before,
+    .faqIcon::after {
+      content: "";
+      position: absolute;
+      left: 5px;
+      right: 5px;
+      top: 10px;
+      height: 2px;
+      background: var(--accent);
+    }
+
+    .faqIcon::after {
+      transform: rotate(90deg);
+      transition: transform 0.2s ease;
+    }
+
+    .faqItem.is-open .faqIcon::after {
+      transform: rotate(0deg);
+    }
+
+    .faqItem__body {
+      display: none;
+      padding: 0 22px 20px;
+      color: var(--muted);
+    }
+
+    .faqItem.is-open .faqItem__body {
+      display: block;
+    }
+
+    .formArea {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: clamp(24px, 4vw, 40px);
+      box-shadow: var(--shadow);
+      max-width: 920px;
+      margin: 0 auto;
+    }
+
+    .formGrid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .field {
+      display: grid;
+      gap: 8px;
+    }
+
+    .field--full {
+      grid-column: 1 / -1;
+    }
+
+    .field label {
+      font-weight: 900;
+      font-size: 14px;
+    }
+
+    .field input,
+    .field textarea,
+    .field select {
+      width: 100%;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 13px 14px;
+      background: #fffdfa;
+      color: var(--ink);
+      outline: none;
+      max-width: 100%;
+    }
+
+    .field textarea {
+      min-height: 140px;
+      resize: vertical;
+    }
+
+    .field input:focus,
+    .field textarea:focus,
+    .field select:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 4px rgba(13, 92, 99, 0.12);
+    }
+
+    .formFoot {
+      margin-top: 24px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .formFoot p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .footer {
+      padding: 48px 0 112px;
+      background: var(--ink);
+      color: #ffffff;
+    }
+
+    .footer__inner {
+      width: var(--inner);
+      margin: 0 auto;
+      display: grid;
+      gap: 18px;
+      max-width: 100%;
+    }
+
+    .footer__brand {
+      font-family: "Manrope", sans-serif;
+      font-size: 28px;
+      font-weight: 800;
+      color: #ffffff;
+    }
+
+    .footer p {
+      margin: 0;
+      color: rgba(255, 255, 255, 0.74);
+      font-size: 13px;
+      line-height: 1.8;
+    }
+
+    .stickyCta {
+      position: fixed;
+      left: 50%;
+      bottom: 18px;
+      transform: translateX(-50%);
+      z-index: 70;
+      width: min(720px, calc(100% - 28px));
+      display: flex;
+      gap: 10px;
+      padding: 10px;
+      border: 1px solid rgba(230, 224, 213, 0.9);
+      border-radius: var(--round);
+      background: rgba(255, 255, 255, 0.92);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(18px);
+      max-width: 100%;
+    }
+
+    .stickyCta .btn {
+      flex: 1 1 0;
+      min-width: 0;
+      min-height: 48px;
+      padding: 0 14px;
+      font-size: 14px;
+      box-shadow: none;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity 0.55s ease, transform 0.55s ease;
+    }
+
+    .reveal.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (max-width: 900px) {
+      :root {
+        --inner: min(100% - 32px, 1120px);
+      }
+
+      .nav,
+      .header__actions .btn {
+        display: none;
+      }
+
+      .menuButton {
+        display: grid;
+      }
+
+      .hero {
+        min-height: auto;
+        padding: 50px 0 34px;
+      }
+
+      .hero::before {
+        background:
+          linear-gradient(180deg, rgba(251, 250, 246, 0.98) 0%, rgba(251, 250, 246, 0.9) 58%, rgba(251, 250, 246, 0.7) 100%),
+          url("https://images.unsplash.com/photo-1490645935967-10de6ba17061?auto=format&fit=crop&w=1200&q=70") center / cover no-repeat;
+      }
+
+      .hero__grid,
+      .sectionHead,
+      .split,
+      .requirements {
+        grid-template-columns: 1fr;
+      }
+
+      .heroPanel {
+        margin-top: 8px;
+      }
+
+      .stats {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .cards,
+      .timeline,
+      .voiceGrid {
+        grid-template-columns: 1fr;
+      }
+
+      .sideNote {
+        position: static;
+      }
+    }
+
+    @media (max-width: 560px) {
+      :root {
+        --inner: min(100% - 28px, 1120px);
+      }
+
+      .header__inner {
+        min-height: 66px;
+      }
+
+      main {
+        padding-top: 66px;
+      }
+
+      .mobileNav {
+        top: 66px;
+      }
+
+      .brand__sub {
+        display: none;
+      }
+
+      .hero h1 {
+        font-size: clamp(38px, 11.8vw, 48px);
+      }
+
+      .hero__lead {
+        font-size: 16px;
+      }
+
+      .hero__actions {
+        display: grid;
+        grid-template-columns: 1fr;
+      }
+
+      .stats {
+        grid-template-columns: 1fr;
+      }
+
+      .stat {
+        padding: 20px;
+      }
+
+      .processItem {
+        grid-template-columns: 1fr;
+      }
+
+      th,
+      td {
+        display: block;
+        width: 100%;
+        padding: 14px 16px;
+      }
+
+      th {
+        border-bottom: 0;
+      }
+
+      td {
+        padding-top: 0;
+      }
+
+      .formGrid {
+        grid-template-columns: 1fr;
+      }
+
+      .stickyCta {
+        bottom: 10px;
+        width: calc(100% - 20px);
+        border-radius: 24px;
+      }
+
+      .stickyCta .btn {
+        font-size: 13px;
+        padding: 0 10px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        scroll-behavior: auto !important;
+        transition: none !important;
+        animation: none !important;
+      }
+
+      .reveal {
+        opacity: 1;
+        transform: none;
+      }
+    }
+  </style>
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "JobPosting",
+      "title": "Instagram・LINE運用 SNSマーケター",
+      "description": "未利用魚を活用したお魚のサブスクリプションサービスFishlle!（フィシュル）のファン獲得、EC誘導、CVR・LTV向上を担うSNSマーケター募集の制作サンプルです。",
+      "hiringOrganization": {
+        "@type": "Organization",
+        "name": "Fishlle!（フィシュル）"
+      },
+      "employmentType": "CONTRACTOR",
+      "baseSalary": {
+        "@type": "MonetaryAmount",
+        "currency": "JPY",
+        "value": {
+          "@type": "QuantitativeValue",
+          "minValue": 150000,
+          "maxValue": 200000,
+          "unitText": "PROJECT"
+        }
+      },
+      "jobLocationType": "TELECOMMUTE",
+      "applicantLocationRequirements": {
+        "@type": "Country",
+        "name": "Japan"
+      }
+    }
+  </script>
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "食品ジャンルの実績は必須ですか？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "歓迎条件です。必須条件はD2C・ECブランドでのInstagramおよびLINE公式アカウントの実務運用経験です。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "応募前に相談できますか？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "可能です。制作サンプル上では問い合わせフォームとダミー電話番号を設置しています。"
+          }
+        }
+      ]
+    }
+  </script>
+</head>
+<body>
+  <header class="header">
+    <div class="header__inner">
+      <a href="#top" class="brand" aria-label="Fishlle!トップへ">
+        <span class="brand__name">Fishlle!</span>
+        <span class="brand__sub">SNS Marketer Recruiting</span>
+      </a>
+      <nav class="nav" aria-label="主要ナビゲーション">
+        <a href="#mission">役割</a>
+        <a href="#work">業務内容</a>
+        <a href="#requirements">募集要項</a>
+        <a href="#faq">FAQ</a>
+      </nav>
+      <div class="header__actions">
+        <a class="btn btn--ghost" href="tel:048-000-0000">048-000-0000</a>
+        <a class="btn" href="#entry">
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          応募する
+        </a>
+      </div>
+      <button class="menuButton" type="button" aria-label="メニューを開く" aria-expanded="false">
+        <span></span>
+      </button>
+    </div>
+  </header>
+
+  <nav class="mobileNav" aria-label="スマートフォン用ナビゲーション">
+    <a href="#mission">役割</a>
+    <a href="#work">業務内容</a>
+    <a href="#requirements">募集要項</a>
+    <a href="#faq">FAQ</a>
+    <a href="#entry">応募フォーム</a>
+  </nav>
+
+  <main id="top">
+    <section class="hero">
+      <div class="hero__grid">
+        <div class="hero__content reveal">
+          <p class="eyebrow">Instagram・LINE運用パートナー募集</p>
+          <h1>
+            投稿で終わらせない。
+            <span class="copyMark">食卓まで届ける。</span>
+          </h1>
+          <p class="hero__lead">
+            未利用魚を活用したお魚のサブスクリプションサービス「Fishlle!（フィシュル）」で、世界観づくり、レシピ提案、LINE配信設計、ECへの導線改善まで担うSNSマーケターを募集します。
+          </p>
+          <div class="hero__actions">
+            <a class="btn" href="#entry">
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M4 5h16v14H4z" stroke="currentColor" stroke-width="2"/>
+                <path d="M4 7l8 6 8-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              この案件に応募する
+            </a>
+            <a class="btn btn--ghost" href="#requirements">条件を見る</a>
+          </div>
+          <p class="hero__note">契約金額の目安：15〜20万円（税抜） ※募集文記載内容</p>
+        </div>
+
+        <aside class="heroPanel reveal" aria-label="募集の要点">
+          <p class="heroPanel__title">今回お願いしたいこと</p>
+          <ul class="heroPanel__list">
+            <li>
+              <span class="dotIcon" aria-hidden="true"></span>
+              <span>Instagramの企画、投稿制作、フィード、ストーリーズ、リール運用</span>
+            </li>
+            <li>
+              <span class="dotIcon" aria-hidden="true"></span>
+              <span>LINE公式アカウントのステップ配信、リッチメニュー、セグメント配信</span>
+            </li>
+            <li>
+              <span class="dotIcon" aria-hidden="true"></span>
+              <span>ECサイトへの誘導設計、キャンペーン企画、CVR・LTV改善</span>
+            </li>
+          </ul>
+        </aside>
+      </div>
+
+      <div class="inner">
+        <div class="stats reveal" aria-label="案件サマリー">
+          <div class="stat">
+            <span class="stat__num">2</span>
+            <span class="stat__label">Instagram・LINEの両面運用</span>
+          </div>
+          <div class="stat">
+            <span class="stat__num">15-20</span>
+            <span class="stat__label">万円程度で見積もり希望</span>
+          </div>
+          <div class="stat">
+            <span class="stat__num">EC</span>
+            <span class="stat__label">定期購入・継続率を重視</span>
+          </div>
+          <div class="stat">
+            <span class="stat__num">LTV</span>
+            <span class="stat__label">売上につながる改善提案</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="mission">
+      <div class="inner">
+        <div class="sectionHead reveal">
+          <div>
+            <p class="eyebrow">Mission</p>
+            <h2>「おいしそう」を、定期購入の理由に変える仕事。</h2>
+          </div>
+          <p>
+            Fishlle!（フィシュル）が求めているのは、投稿作業の代行ではありません。未利用魚という社会性、手軽なお魚料理という日常価値、サブスクとして続けたくなる体験を、SNS上で一貫して育てる役割です。
+          </p>
+        </div>
+
+        <div class="cards">
+          <article class="card reveal">
+            <span class="card__kicker">01 / Brand</span>
+            <h3>世界観を整え、選ばれる理由を見える化</h3>
+            <p>レシピ、食卓、フードロス削減の文脈を分断せず、Instagram上で「フィシュルらしい」記憶を積み上げます。</p>
+          </article>
+          <article class="card reveal">
+            <span class="card__kicker">02 / Conversion</span>
+            <h3>ECへの導線を、投稿単位で設計</h3>
+            <p>保存、クリック、購入、継続までの距離を短くするため、投稿テーマとLP・キャンペーンを連動させます。</p>
+          </article>
+          <article class="card reveal">
+            <span class="card__kicker">03 / Retention</span>
+            <h3>LINEで継続購入の理由を届ける</h3>
+            <p>初回購入後の不安、調理の迷い、次回到着前の期待を、ステップ配信とセグメント配信で支えます。</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--tight" style="background: var(--soft);">
+      <div class="inner">
+        <div class="split">
+          <div class="reveal">
+            <p class="eyebrow">Current Challenge</p>
+            <h2 style="margin:0;font-family:'Zen Kaku Gothic New','Noto Sans JP',sans-serif;font-size:clamp(30px,4vw,48px);line-height:1.2;">いま欲しいのは、運用と分析を往復できる人です。</h2>
+            <ul class="checkList">
+              <li>
+                <span class="dotIcon" aria-hidden="true"></span>
+                <span>ただ投稿を増やすのではなく、ファン化と購買につながる企画にしたい</span>
+              </li>
+              <li>
+                <span class="dotIcon" aria-hidden="true"></span>
+                <span>レシピ提案、ショート動画、ストーリーズをブランド資産として運用したい</span>
+              </li>
+              <li>
+                <span class="dotIcon" aria-hidden="true"></span>
+                <span>LINE配信を一斉送信で終わらせず、購買状況に合わせて最適化したい</span>
+              </li>
+              <li>
+                <span class="dotIcon" aria-hidden="true"></span>
+                <span>数値を見ながら、ECサイトやLPへの誘導導線まで改善したい</span>
+              </li>
+            </ul>
+          </div>
+          <figure class="imageFrame reveal">
+            <img src="https://images.unsplash.com/photo-1664596350962-603b0a41524a?auto=format&fit=crop&w=1200&q=70" alt="日本のオフィス街を歩く人々の後ろ姿">
+            <figcaption class="imageFrame__caption">※写真はイメージです。実制作ではご提供写真や日本人モデルの素材に差し替えます。</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="work">
+      <div class="inner">
+        <div class="sectionHead reveal">
+          <div>
+            <p class="eyebrow">Work Scope</p>
+            <h2>運用範囲は、投稿制作からCV改善まで。</h2>
+          </div>
+          <p>
+            InstagramとLINEを別々の作業として扱わず、認知、理解、初回購入、継続購入をつなぐ一連の顧客体験として設計します。
+          </p>
+        </div>
+
+        <div class="process">
+          <article class="processItem reveal">
+            <div>
+              <h3>Instagram運用全般</h3>
+              <p>企画、投稿作成、フィード、ストーリーズ、リール運用、数値分析、改善提案まで。CanvaやPhotoshop等でのクリエイティブ制作を想定しています。</p>
+            </div>
+          </article>
+          <article class="processItem reveal">
+            <div>
+              <h3>LINE公式アカウント運用</h3>
+              <p>配信コンテンツ企画、ステップ配信設計、リッチメニュー改修、セグメント配信。Lステップ、エルメ等の経験がある方は歓迎です。</p>
+            </div>
+          </article>
+          <article class="processItem reveal">
+            <div>
+              <h3>SNS経由のCVR・LTV向上施策</h3>
+              <p>ECサイトやLPへの誘導導線設計、キャンペーン企画、定期購入継続につながる配信改善を行います。</p>
+            </div>
+          </article>
+          <article class="processItem reveal">
+            <div>
+              <h3>分析と改善提案</h3>
+              <p>投稿別の反応、LINE配信のクリック、EC導線の成果を確認し、次月の施策へ落とし込みます。仮説を出して終わらせず、検証まで回せる方を求めています。</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--tight" style="background: var(--paper);">
+      <div class="inner">
+        <div class="sectionHead reveal">
+          <div>
+            <p class="eyebrow">Monthly Rhythm</p>
+            <h2>月次運用のイメージ</h2>
+          </div>
+          <p>
+            下記は制作サンプル上の仮の進行例です。実際の稼働量や投稿本数は、契約前のすり合わせで決定します。
+          </p>
+        </div>
+
+        <div class="timeline">
+          <article class="timelineItem reveal">
+            <span class="timelineItem__time">Week 1</span>
+            <h3>企画設計</h3>
+            <p>季節、商品訴求、購買導線を整理し、InstagramとLINEの月間テーマを決めます。</p>
+          </article>
+          <article class="timelineItem reveal">
+            <span class="timelineItem__time">Week 2</span>
+            <h3>制作・設定</h3>
+            <p>投稿クリエイティブ、リール台本、配信文、リッチメニュー改善案を制作します。</p>
+          </article>
+          <article class="timelineItem reveal">
+            <span class="timelineItem__time">Week 3</span>
+            <h3>配信・誘導</h3>
+            <p>ECサイトやLPへのリンク、キャンペーン導線、ステップ配信の出し分けを実装します。</p>
+          </article>
+          <article class="timelineItem reveal">
+            <span class="timelineItem__time">Week 4</span>
+            <h3>分析・改善</h3>
+            <p>保存率、クリック、CVR、継続購入に関わる反応を確認し、次の打ち手を提案します。</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="requirements">
+      <div class="inner">
+        <div class="requirements">
+          <aside class="sideNote reveal">
+            <h3>募集要項</h3>
+            <p>
+              Fishlle!（フィシュル）のSNS運用を、ブランドづくりと売上改善の両面から支える業務委託パートナーを想定しています。
+            </p>
+          </aside>
+
+          <div class="tableWrap reveal">
+            <table>
+              <tbody>
+                <tr>
+                  <th>募集職種</th>
+                  <td>Instagram・LINE公式アカウント運用を担うSNSマーケター</td>
+                </tr>
+                <tr>
+                  <th>対象サービス</th>
+                  <td>未利用魚を活用したお魚のサブスクリプションサービス「Fishlle!（フィシュル）」</td>
+                </tr>
+                <tr>
+                  <th>必須経験</th>
+                  <td>D2C・ECブランドにおけるInstagramおよびLINE公式アカウントの実務運用経験</td>
+                </tr>
+                <tr>
+                  <th>必須スキル</th>
+                  <td>CanvaやPhotoshop等を用いた画像・クリエイティブ制作、アナリティクス分析に基づく改善提案</td>
+                </tr>
+                <tr>
+                  <th>歓迎経験</th>
+                  <td>食品・サブスク系ジャンルでのSNS運用実績、LINE拡張ツールの設定・運用、Reels / TikTokの企画・編集</td>
+                </tr>
+                <tr>
+                  <th>契約金額</th>
+                  <td>15〜20万円くらいで見積もり希望（税抜） ※募集文記載内容</td>
+                </tr>
+                <tr>
+                  <th>勤務地</th>
+                  <td>リモート想定 ※仮の内容です</td>
+                </tr>
+                <tr>
+                  <th>応募前相談</th>
+                  <td>可能です。質問がある場合は、フォームまたはダミー電話番号からお問い合わせください。</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--tight" style="background: var(--soft);">
+      <div class="inner">
+        <div class="sectionHead reveal">
+          <div>
+            <p class="eyebrow">What We Value</p>
+            <h2>フィシュルらしさを、数字で育てる。</h2>
+          </div>
+          <p>
+            食品D2CのSNSでは、きれいな投稿だけでは不十分です。保存されるレシピ、読みたくなる配信、購入前の迷いをほどく導線まで、細部が成果を左右します。
+          </p>
+        </div>
+
+        <div class="voiceGrid">
+          <article class="voice reveal">
+            <blockquote>「未利用魚」を、説明で終わらせず、おいしい選択肢として見せる。</blockquote>
+            <p>社会性のあるテーマほど、押しつけにならない表現設計が重要です。食卓の具体性を通して、共感と購入理由を同時につくります。</p>
+          </article>
+          <article class="voice reveal">
+            <blockquote>初回購入より先に、続けたくなる未来を届ける。</blockquote>
+            <p>サブスクでは継続の不安を減らすことが成果に直結します。LINEのステップ配信で、調理の迷いと次回到着前の期待を支えます。</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="faq">
+      <div class="inner">
+        <div class="sectionHead reveal" style="grid-template-columns:1fr;max-width:900px;margin-left:auto;margin-right:auto;">
+          <div>
+            <p class="eyebrow">FAQ</p>
+            <h2>応募前の確認事項</h2>
+          </div>
+        </div>
+
+        <div class="faq">
+          <div class="faqItem reveal is-open">
+            <button type="button" aria-expanded="true">
+              <span>食品・サブスク系の実績は必須ですか？</span>
+              <span class="faqIcon" aria-hidden="true"></span>
+            </button>
+            <div class="faqItem__body">
+              必須ではなく歓迎条件です。必須条件は、D2C・ECブランドにおけるInstagramおよびLINE公式アカウントの実務運用経験です。
+            </div>
+          </div>
+
+          <div class="faqItem reveal">
+            <button type="button" aria-expanded="false">
+              <span>投稿制作だけの依頼ですか？</span>
+              <span class="faqIcon" aria-hidden="true"></span>
+            </button>
+            <div class="faqItem__body">
+              いいえ。投稿作成に加えて、数値分析、改善提案、ECサイトやLPへの誘導導線、LINE配信設計まで含めた戦略的な運用を想定しています。
+            </div>
+          </div>
+
+          <div class="faqItem reveal">
+            <button type="button" aria-expanded="false">
+              <span>契約金額は決まっていますか？</span>
+              <span class="faqIcon" aria-hidden="true"></span>
+            </button>
+            <div class="faqItem__body">
+              募集文では税抜15〜20万円くらいでの見積もり希望とされています。実際の業務範囲や稼働量により調整する想定です。
+            </div>
+          </div>
+
+          <div class="faqItem reveal">
+            <button type="button" aria-expanded="false">
+              <span>LINE拡張ツールの経験は必要ですか？</span>
+              <span class="faqIcon" aria-hidden="true"></span>
+            </button>
+            <div class="faqItem__body">
+              Lステップ、エルメ等の設定・運用経験は歓迎条件です。ステップ配信やセグメント配信の設計経験がある方は特に相性がよい案件です。
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--tight" id="entry">
+      <div class="inner">
+        <div class="sectionHead reveal" style="grid-template-columns:1fr;max-width:920px;margin-left:auto;margin-right:auto;">
+          <div>
+            <p class="eyebrow">Entry</p>
+            <h2>応募・相談フォーム</h2>
+          </div>
+          <p>
+            このフォームは制作サンプル用のダミーです。実制作では応募管理ツール、Googleフォーム、採用管理システム等に接続できます。
+          </p>
+        </div>
+
+        <form class="formArea reveal">
+          <div class="formGrid">
+            <div class="field">
+              <label for="name">お名前</label>
+              <input id="name" name="name" type="text" placeholder="山田 太郎">
+            </div>
+            <div class="field">
+              <label for="email">メールアドレス</label>
+              <input id="email" name="email" type="email" placeholder="sample@example.com">
+            </div>
+            <div class="field">
+              <label for="experience">近いご経験</label>
+              <select id="experience" name="experience">
+                <option>D2C・ECのSNS運用経験あり</option>
+                <option>食品・サブスク系の運用経験あり</option>
+                <option>LINE拡張ツールの運用経験あり</option>
+                <option>相談しながら確認したい</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="budget">希望条件</label>
+              <input id="budget" name="budget" type="text" placeholder="例：月額18万円程度">
+            </div>
+            <div class="field field--full">
+              <label for="message">実績・提案の概要</label>
+              <textarea id="message" name="message" placeholder="Instagram・LINE運用実績、得意な改善領域、食品D2Cで活かせる経験などをご記入ください。"></textarea>
+            </div>
+          </div>
+          <div class="formFoot">
+            <p>送信機能はデモです。実制作時にフォーム連携を行います。</p>
+            <button class="btn" type="button">
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M22 2L11 13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M22 2l-7 20-4-9-9-4 20-7z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              内容を送る
+            </button>
+          </div>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <div class="stickyCta" aria-label="固定応募導線">
+    <a class="btn btn--ghost" href="tel:048-000-0000">電話で相談</a>
+    <a class="btn" href="#entry">応募フォームへ</a>
+  </div>
+
+  <footer class="footer">
+    <div class="footer__inner">
+      <div class="footer__brand">Fishlle!</div>
+      <p>電話番号：048-000-0000（ダミー）</p>
+      <p>※写真はイメージです。実制作ではご提供写真や日本人モデルの素材に差し替えます。</p>
+      <p>※本ページは制作サンプル(デモ)です。掲載の内容・数値は仮のもので、写真はイメージです。</p>
+    </div>
+  </footer>
+
+  <script>
+    const menuButton = document.querySelector(".menuButton");
+    const mobileNav = document.querySelector(".mobileNav");
+    const mobileLinks = document.querySelectorAll(".mobileNav a");
+
+    menuButton.addEventListener("click", () => {
+      const isOpen = mobileNav.classList.toggle("is-open");
+      menuButton.setAttribute("aria-expanded", String(isOpen));
+    });
+
+    mobileLinks.forEach((link) => {
+      link.addEventListener("click", () => {
+        mobileNav.classList.remove("is-open");
+        menuButton.setAttribute("aria-expanded", "false");
+      });
+    });
+
+    const faqItems = document.querySelectorAll(".faqItem");
+
+    faqItems.forEach((item) => {
+      const button = item.querySelector("button");
+      button.addEventListener("click", () => {
+        const isOpen = item.classList.toggle("is-open");
+        button.setAttribute("aria-expanded", String(isOpen));
+      });
+    });
+
+    const revealItems = document.querySelectorAll(".reveal");
+
+    if ("IntersectionObserver" in window) {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-visible");
+            observer.unobserve(entry.target);
+          }
+        });
+      }, {
+        threshold: 0.14
+      });
+
+      revealItems.forEach((item) => observer.observe(item));
+    } else {
+      revealItems.forEach((item) => item.classList.add("is-visible"));
+    }
+  </script>
+</body>
+</html>

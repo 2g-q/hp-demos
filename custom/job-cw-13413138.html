@@ -1,0 +1,1910 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>トレカECサンプル | Shopifyトレーディングカード専門店デモ</title>
+  <meta name="description" content="Shopifyで構築するトレーディングカード自社ECサイトの制作サンプル。予約販売、シングルカード検索、買取案内、配送品質まで伝わる単一HTMLデモです。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+JP:wght@400;500;700;900&family=Zen+Kaku+Gothic+New:wght@500;700;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --accent: #0f3764;
+      --ink: #17202a;
+      --muted: #667085;
+      --line: #dce3ea;
+      --paper: #ffffff;
+      --soft: #f6f8fb;
+      --soft-2: #edf2f7;
+      --shadow: 0 18px 48px rgba(15, 55, 100, 0.14);
+      --radius: 8px;
+      --max: 1120px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      overflow-x: hidden;
+    }
+
+    body {
+      margin: 0;
+      min-width: 0;
+      overflow-x: hidden;
+      color: var(--ink);
+      background: var(--paper);
+      font-family: "Noto Sans JP", sans-serif;
+      font-feature-settings: "palt";
+      line-height: 1.75;
+    }
+
+    img,
+    svg,
+    iframe {
+      max-width: 100%;
+      height: auto;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button,
+    input,
+    textarea,
+    select {
+      font: inherit;
+    }
+
+    input,
+    textarea,
+    select {
+      font-size: 16px;
+    }
+
+    .num {
+      font-family: "Manrope", sans-serif;
+      font-weight: 800;
+      letter-spacing: 0;
+    }
+
+    .section {
+      padding: 104px 20px;
+    }
+
+    .section--soft {
+      background: var(--soft);
+    }
+
+    .inner {
+      width: 100%;
+      max-width: var(--max);
+      margin: 0 auto;
+    }
+
+    .header {
+      position: sticky;
+      top: 0;
+      z-index: 30;
+      background: rgba(255, 255, 255, 0.92);
+      border-bottom: 1px solid rgba(220, 227, 234, 0.9);
+      backdrop-filter: blur(14px);
+    }
+
+    .header__inner {
+      width: 100%;
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 14px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      min-width: 0;
+      font-family: "Zen Kaku Gothic New", sans-serif;
+      font-weight: 900;
+      letter-spacing: 0;
+    }
+
+    .brand__mark {
+      width: 34px;
+      height: 34px;
+      border-radius: 8px;
+      border: 2px solid var(--accent);
+      position: relative;
+      flex: 0 0 auto;
+      background: #fff;
+    }
+
+    .brand__mark::before,
+    .brand__mark::after {
+      content: "";
+      position: absolute;
+      border: 2px solid var(--accent);
+      border-radius: 6px;
+      background: #fff;
+    }
+
+    .brand__mark::before {
+      width: 20px;
+      height: 26px;
+      left: 4px;
+      top: 2px;
+      transform: rotate(-8deg);
+    }
+
+    .brand__mark::after {
+      width: 20px;
+      height: 26px;
+      right: 4px;
+      bottom: 2px;
+      transform: rotate(8deg);
+    }
+
+    .brand__text {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      gap: 22px;
+      color: var(--muted);
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .nav a:hover {
+      color: var(--accent);
+    }
+
+    .header__actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .menu-toggle {
+      display: none;
+      width: 44px;
+      height: 44px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fff;
+      color: var(--accent);
+      place-items: center;
+      cursor: pointer;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      min-height: 48px;
+      padding: 13px 22px;
+      border-radius: 100px;
+      border: 1px solid transparent;
+      font-weight: 900;
+      line-height: 1.1;
+      cursor: pointer;
+      transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+      max-width: 100%;
+    }
+
+    .btn svg {
+      width: 18px;
+      height: 18px;
+      flex: 0 0 auto;
+    }
+
+    .btn--primary {
+      color: #fff;
+      background: var(--accent);
+      box-shadow: var(--shadow);
+    }
+
+    .btn--primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 22px 54px rgba(15, 55, 100, 0.2);
+    }
+
+    .btn--ghost {
+      color: var(--accent);
+      border-color: var(--line);
+      background: #fff;
+    }
+
+    .btn--ghost:hover {
+      border-color: var(--accent);
+      transform: translateY(-2px);
+    }
+
+    .mobile-nav {
+      display: none;
+      position: fixed;
+      left: 12px;
+      right: 12px;
+      top: 72px;
+      z-index: 40;
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      box-shadow: var(--shadow);
+      padding: 10px;
+    }
+
+    .mobile-nav.is-open {
+      display: block;
+    }
+
+    .mobile-nav a {
+      display: block;
+      padding: 14px 12px;
+      border-radius: 6px;
+      font-weight: 800;
+      color: var(--ink);
+    }
+
+    .mobile-nav a:hover {
+      background: var(--soft);
+      color: var(--accent);
+    }
+
+    .hero {
+      padding: 78px 20px 92px;
+      background:
+        linear-gradient(180deg, #ffffff 0%, #f7f9fc 100%);
+      overflow: hidden;
+    }
+
+    .hero__inner {
+      width: 100%;
+      max-width: var(--max);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: minmax(0, 1.02fr) minmax(0, 0.98fr);
+      gap: 54px;
+      align-items: center;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--accent);
+      font-weight: 900;
+      font-size: 14px;
+      line-height: 1.3;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 38px;
+      height: 2px;
+      background: var(--accent);
+      border-radius: 100px;
+      flex: 0 0 auto;
+    }
+
+    h1,
+    h2,
+    h3 {
+      margin: 0;
+      font-family: "Zen Kaku Gothic New", sans-serif;
+      letter-spacing: 0;
+      line-height: 1.18;
+      color: var(--ink);
+    }
+
+    h1 {
+      margin-top: 20px;
+      font-size: clamp(40px, 7vw, 72px);
+      font-weight: 900;
+      max-width: 9.5em;
+    }
+
+    .hero__lead {
+      margin: 24px 0 0;
+      color: var(--muted);
+      font-size: 17px;
+      max-width: 38em;
+      line-height: 2;
+    }
+
+    .hero__actions {
+      margin-top: 34px;
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .hero__note {
+      margin-top: 18px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .hero-card {
+      position: relative;
+      width: 100%;
+      max-width: 100%;
+      padding: 24px;
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    .shop-window {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      overflow: hidden;
+      background: var(--paper);
+    }
+
+    .shop-window__bar {
+      min-height: 54px;
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--line);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      background: var(--soft);
+    }
+
+    .dots {
+      display: flex;
+      gap: 6px;
+      flex: 0 0 auto;
+    }
+
+    .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: var(--accent);
+      opacity: 0.34;
+    }
+
+    .search-pill {
+      min-width: 0;
+      width: 58%;
+      height: 28px;
+      border-radius: 999px;
+      background: #fff;
+      border: 1px solid var(--line);
+    }
+
+    .shop-window__body {
+      padding: 18px;
+    }
+
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .card-thumb {
+      aspect-ratio: 4 / 5.4;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background:
+        linear-gradient(135deg, rgba(15, 55, 100, 0.08), rgba(15, 55, 100, 0)),
+        #fff;
+      padding: 10px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card-thumb::before {
+      content: "";
+      display: block;
+      width: 100%;
+      height: 46%;
+      border-radius: 6px;
+      background: var(--soft-2);
+      border: 1px solid rgba(15, 55, 100, 0.16);
+    }
+
+    .card-thumb::after {
+      content: "";
+      position: absolute;
+      left: 12px;
+      right: 12px;
+      bottom: 14px;
+      height: 36%;
+      border-top: 2px solid rgba(15, 55, 100, 0.18);
+      border-bottom: 2px solid rgba(15, 55, 100, 0.18);
+    }
+
+    .side-panel {
+      margin-top: 16px;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: 12px;
+    }
+
+    .mini-panel {
+      padding: 14px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fff;
+      min-width: 0;
+    }
+
+    .mini-panel b {
+      display: block;
+      font-family: "Manrope", sans-serif;
+      font-size: 22px;
+      line-height: 1.2;
+      color: var(--accent);
+    }
+
+    .mini-panel span {
+      display: block;
+      margin-top: 4px;
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .trust {
+      margin-top: 38px;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      border: 1px solid var(--line);
+      background: #fff;
+    }
+
+    .trust__item {
+      padding: 20px;
+      border-right: 1px solid var(--line);
+      min-width: 0;
+    }
+
+    .trust__item:last-child {
+      border-right: 0;
+    }
+
+    .trust__num {
+      display: block;
+      color: var(--accent);
+      font-size: 28px;
+      line-height: 1.2;
+    }
+
+    .trust__label {
+      margin-top: 4px;
+      display: block;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .section-head {
+      margin-bottom: 42px;
+      display: grid;
+      grid-template-columns: minmax(0, 0.72fr) minmax(0, 1fr);
+      gap: 32px;
+      align-items: end;
+    }
+
+    .section-head h2 {
+      margin-top: 14px;
+      font-size: clamp(30px, 5vw, 48px);
+      font-weight: 900;
+    }
+
+    .section-head p {
+      margin: 0;
+      color: var(--muted);
+      max-width: 42em;
+      line-height: 2;
+    }
+
+    .features {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .feature {
+      padding: 28px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: #fff;
+      min-width: 0;
+      transition: transform 0.18s ease, box-shadow 0.18s ease;
+    }
+
+    .feature:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow);
+    }
+
+    .icon-box {
+      width: 46px;
+      height: 46px;
+      display: grid;
+      place-items: center;
+      border-radius: 8px;
+      color: var(--accent);
+      border: 1px solid rgba(15, 55, 100, 0.22);
+      background: rgba(15, 55, 100, 0.04);
+    }
+
+    .icon-box svg {
+      width: 24px;
+      height: 24px;
+    }
+
+    .feature h3 {
+      margin-top: 22px;
+      font-size: 22px;
+      font-weight: 900;
+    }
+
+    .feature p {
+      margin: 14px 0 0;
+      color: var(--muted);
+    }
+
+    .catalog {
+      display: grid;
+      grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+      gap: 34px;
+      align-items: start;
+    }
+
+    .catalog__visual {
+      padding: 22px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: #fff;
+      box-shadow: var(--shadow);
+      min-width: 0;
+    }
+
+    .filter-row {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 16px;
+    }
+
+    .filter-chip {
+      padding: 8px 12px;
+      border: 1px solid var(--line);
+      border-radius: 100px;
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 800;
+      background: #fff;
+    }
+
+    .filter-chip.is-active {
+      color: #fff;
+      background: var(--accent);
+      border-color: var(--accent);
+    }
+
+    .product-list {
+      display: grid;
+      gap: 10px;
+    }
+
+    .product-row {
+      display: grid;
+      grid-template-columns: 58px minmax(0, 1fr) auto;
+      gap: 12px;
+      align-items: center;
+      padding: 12px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fff;
+      min-width: 0;
+    }
+
+    .product-row__thumb {
+      width: 58px;
+      max-width: 100%;
+      aspect-ratio: 4 / 5;
+      border-radius: 6px;
+      background:
+        linear-gradient(135deg, rgba(15, 55, 100, 0.18), rgba(15, 55, 100, 0)),
+        var(--soft-2);
+      border: 1px solid rgba(15, 55, 100, 0.2);
+    }
+
+    .product-row b {
+      display: block;
+      line-height: 1.4;
+      overflow-wrap: anywhere;
+    }
+
+    .product-row span {
+      display: block;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .price {
+      color: var(--accent);
+      font-size: 18px;
+      white-space: nowrap;
+    }
+
+    .copy-block h2 {
+      font-size: clamp(30px, 5vw, 46px);
+      font-weight: 900;
+    }
+
+    .copy-block p {
+      color: var(--muted);
+      margin: 20px 0 0;
+      line-height: 2;
+    }
+
+    .check-list {
+      margin: 28px 0 0;
+      padding: 0;
+      list-style: none;
+      display: grid;
+      gap: 12px;
+    }
+
+    .check-list li {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      min-width: 0;
+    }
+
+    .check-list li::before {
+      content: "✓";
+      width: 24px;
+      height: 24px;
+      border-radius: 999px;
+      display: inline-grid;
+      place-items: center;
+      flex: 0 0 auto;
+      background: var(--accent);
+      color: #fff;
+      font-size: 13px;
+      font-weight: 900;
+      margin-top: 3px;
+    }
+
+    .flow {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+      counter-reset: flow;
+    }
+
+    .flow__item {
+      padding: 24px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: #fff;
+      min-width: 0;
+      position: relative;
+    }
+
+    .flow__item::before {
+      counter-increment: flow;
+      content: counter(flow, decimal-leading-zero);
+      display: block;
+      font-family: "Manrope", sans-serif;
+      font-size: 28px;
+      color: var(--accent);
+      line-height: 1;
+      font-weight: 800;
+      margin-bottom: 18px;
+    }
+
+    .flow__item h3 {
+      font-size: 19px;
+      font-weight: 900;
+    }
+
+    .flow__item p {
+      margin: 12px 0 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .plans {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+      align-items: stretch;
+    }
+
+    .plan {
+      padding: 28px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: #fff;
+      min-width: 0;
+      position: relative;
+    }
+
+    .plan.is-featured {
+      border-color: var(--accent);
+      box-shadow: var(--shadow);
+    }
+
+    .plan__label {
+      display: inline-block;
+      padding: 5px 10px;
+      border-radius: 999px;
+      background: rgba(15, 55, 100, 0.08);
+      color: var(--accent);
+      font-size: 12px;
+      font-weight: 900;
+    }
+
+    .plan h3 {
+      margin-top: 16px;
+      font-size: 24px;
+      font-weight: 900;
+    }
+
+    .plan__price {
+      margin-top: 18px;
+      color: var(--accent);
+      font-size: 34px;
+      line-height: 1.1;
+    }
+
+    .plan__price small {
+      font-family: "Noto Sans JP", sans-serif;
+      font-size: 13px;
+      color: var(--muted);
+      font-weight: 700;
+    }
+
+    .plan p {
+      margin: 16px 0 0;
+      color: var(--muted);
+    }
+
+    .plan ul {
+      margin: 22px 0 0;
+      padding: 0;
+      list-style: none;
+      display: grid;
+      gap: 10px;
+    }
+
+    .plan li {
+      color: var(--ink);
+      font-size: 14px;
+      padding-left: 18px;
+      position: relative;
+    }
+
+    .plan li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0.75em;
+      width: 7px;
+      height: 2px;
+      background: var(--accent);
+    }
+
+    .compare-wrap {
+      overflow-x: auto;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: #fff;
+      max-width: 100%;
+    }
+
+    .compare {
+      width: 100%;
+      min-width: 0;
+      border-collapse: collapse;
+    }
+
+    .compare th,
+    .compare td {
+      padding: 18px;
+      border-bottom: 1px solid var(--line);
+      text-align: left;
+      vertical-align: top;
+    }
+
+    .compare th {
+      background: var(--soft);
+      font-weight: 900;
+      color: var(--ink);
+      white-space: nowrap;
+    }
+
+    .compare td {
+      color: var(--muted);
+    }
+
+    .compare tr:last-child th,
+    .compare tr:last-child td {
+      border-bottom: 0;
+    }
+
+    .voice-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .voice {
+      padding: 26px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: #fff;
+      min-width: 0;
+    }
+
+    .voice p {
+      margin: 0;
+      color: var(--ink);
+    }
+
+    .voice b {
+      display: block;
+      margin-top: 18px;
+      color: var(--accent);
+    }
+
+    .voice span {
+      display: block;
+      color: var(--muted);
+      font-size: 13px;
+      margin-top: 3px;
+    }
+
+    .faq {
+      display: grid;
+      gap: 12px;
+    }
+
+    .faq details {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: #fff;
+      overflow: hidden;
+    }
+
+    .faq summary {
+      list-style: none;
+      cursor: pointer;
+      padding: 20px 52px 20px 20px;
+      font-weight: 900;
+      position: relative;
+    }
+
+    .faq summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .faq summary::after {
+      content: "+";
+      position: absolute;
+      right: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--accent);
+      font-family: "Manrope", sans-serif;
+      font-size: 24px;
+      line-height: 1;
+    }
+
+    .faq details[open] summary::after {
+      content: "-";
+    }
+
+    .faq__body {
+      padding: 0 20px 22px;
+      color: var(--muted);
+    }
+
+    .contact-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 0.82fr) minmax(0, 1.18fr);
+      gap: 28px;
+      align-items: start;
+    }
+
+    .contact-card {
+      padding: 30px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: #fff;
+      min-width: 0;
+    }
+
+    .contact-card h3 {
+      font-size: 24px;
+      font-weight: 900;
+    }
+
+    .contact-card p {
+      margin: 16px 0 0;
+      color: var(--muted);
+    }
+
+    .info-list {
+      margin: 24px 0 0;
+      padding: 0;
+      list-style: none;
+      display: grid;
+      gap: 12px;
+    }
+
+    .info-list li {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 12px;
+      min-width: 0;
+    }
+
+    .info-list span {
+      color: var(--muted);
+      flex: 0 0 auto;
+    }
+
+    .info-list b {
+      text-align: right;
+      min-width: 0;
+      overflow-wrap: anywhere;
+    }
+
+    .form {
+      padding: 30px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: #fff;
+      min-width: 0;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .field {
+      display: grid;
+      gap: 7px;
+      min-width: 0;
+    }
+
+    .field--full {
+      grid-column: 1 / -1;
+    }
+
+    .field label {
+      font-weight: 900;
+      font-size: 14px;
+    }
+
+    .field input,
+    .field textarea,
+    .field select {
+      width: 100%;
+      max-width: 100%;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 13px 14px;
+      background: #fff;
+      color: var(--ink);
+      outline: none;
+    }
+
+    .field textarea {
+      min-height: 132px;
+      resize: vertical;
+    }
+
+    .field input:focus,
+    .field textarea:focus,
+    .field select:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(15, 55, 100, 0.1);
+    }
+
+    .submit-row {
+      margin-top: 20px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .submit-row small {
+      color: var(--muted);
+    }
+
+    .footer {
+      padding: 46px 20px 106px;
+      background: var(--ink);
+      color: #fff;
+    }
+
+    .footer__inner {
+      width: 100%;
+      max-width: var(--max);
+      margin: 0 auto;
+      display: grid;
+      gap: 22px;
+    }
+
+    .footer .brand__mark,
+    .footer .brand__mark::before,
+    .footer .brand__mark::after {
+      border-color: #fff;
+      background: transparent;
+    }
+
+    .footer p {
+      margin: 0;
+      color: rgba(255, 255, 255, 0.72);
+      font-size: 13px;
+    }
+
+    .sticky-cta {
+      display: none;
+      position: fixed;
+      left: 10px;
+      right: 10px;
+      bottom: 10px;
+      z-index: 50;
+      padding: 10px;
+      border: 1px solid rgba(15, 55, 100, 0.16);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.94);
+      box-shadow: 0 12px 34px rgba(15, 55, 100, 0.22);
+      gap: 8px;
+    }
+
+    .sticky-cta .btn {
+      flex: 1 1 0;
+      min-width: 0;
+      padding-inline: 12px;
+      min-height: 46px;
+      font-size: 14px;
+      white-space: nowrap;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity 0.55s ease, transform 0.55s ease;
+    }
+
+    .reveal.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      *,
+      *::before,
+      *::after {
+        transition: none !important;
+        animation: none !important;
+      }
+
+      .reveal {
+        opacity: 1;
+        transform: none;
+      }
+    }
+
+    @media (max-width: 900px) {
+      .nav,
+      .header__actions {
+        display: none;
+      }
+
+      .menu-toggle {
+        display: grid;
+      }
+
+      .hero__inner,
+      .catalog,
+      .section-head,
+      .contact-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .features,
+      .plans,
+      .voice-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .flow {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .trust {
+        grid-template-columns: 1fr;
+      }
+
+      .trust__item {
+        border-right: 0;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .trust__item:last-child {
+        border-bottom: 0;
+      }
+
+      .sticky-cta {
+        display: flex;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .section {
+        padding: 82px 16px;
+      }
+
+      .hero {
+        padding: 52px 16px 78px;
+      }
+
+      .header__inner {
+        padding-inline: 14px;
+      }
+
+      .brand__text {
+        max-width: 210px;
+      }
+
+      h1 {
+        font-size: 42px;
+      }
+
+      .hero__lead {
+        font-size: 16px;
+      }
+
+      .hero__actions {
+        display: grid;
+      }
+
+      .btn {
+        width: 100%;
+      }
+
+      .hero-card {
+        padding: 14px;
+      }
+
+      .product-grid {
+        gap: 8px;
+      }
+
+      .shop-window__body {
+        padding: 12px;
+      }
+
+      .side-panel {
+        grid-template-columns: 1fr;
+      }
+
+      .flow {
+        grid-template-columns: 1fr;
+      }
+
+      .product-row {
+        grid-template-columns: 48px minmax(0, 1fr);
+      }
+
+      .product-row__thumb {
+        width: 48px;
+      }
+
+      .price {
+        grid-column: 2;
+        justify-self: start;
+      }
+
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .contact-card,
+      .form,
+      .feature,
+      .plan,
+      .voice,
+      .flow__item {
+        padding: 22px;
+      }
+
+      .compare th,
+      .compare td {
+        padding: 14px 12px;
+        font-size: 14px;
+      }
+
+      .sticky-cta .btn {
+        font-size: 13px;
+      }
+    }
+  </style>
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Store",
+      "name": "トレカECサンプル",
+      "url": "https://example.com/",
+      "telephone": "048-000-0000",
+      "address": {
+        "@type": "PostalAddress",
+        "addressRegion": "埼玉県"
+      },
+      "description": "Shopifyで構築するトレーディングカード自社ECサイトの制作サンプルです。掲載内容は仮のものです。"
+    }
+  </script>
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Shopifyでトレーディングカード向けの検索や在庫表示は作れますか？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "カード名、レアリティ、状態、価格帯などの条件を想定した絞り込み導線を設計できます。本ページは制作サンプルです。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "予約販売や抽選販売にも対応できますか？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "商品公開前の告知、予約受付、購入制限、注意事項表示などを想定したデモ構成です。実装範囲は要相談です。"
+          }
+        }
+      ]
+    }
+  </script>
+</head>
+<body>
+  <header class="header">
+    <div class="header__inner">
+      <a class="brand" href="#top" aria-label="トレカECサンプル トップへ">
+        <span class="brand__mark" aria-hidden="true"></span>
+        <span class="brand__text">トレカECサンプル</span>
+      </a>
+      <nav class="nav" aria-label="主要メニュー">
+        <a href="#features">機能設計</a>
+        <a href="#catalog">販売導線</a>
+        <a href="#plans">制作費</a>
+        <a href="#faq">FAQ</a>
+      </nav>
+      <div class="header__actions">
+        <a class="btn btn--ghost" href="tel:048-000-0000">
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M6.6 3.8 9.7 7c.5.5.6 1.3.2 1.9l-1 1.6c1.2 2.2 2.9 3.9 5.1 5.1l1.6-1c.6-.4 1.4-.3 1.9.2l3.2 3.1c.4.4.5 1 .2 1.5-.7 1.3-2 2.1-3.5 2.1C9.1 21.5 2.5 14.9 2.5 6.6c0-1.5.8-2.8 2.1-3.5.5-.3 1.1-.2 1.5.2Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+          </svg>
+          電話相談
+        </a>
+        <a class="btn btn--primary" href="#contact">
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M4 5h16v14H4V5Z" stroke="currentColor" stroke-width="1.8"/>
+            <path d="m4 7 8 6 8-6" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+          </svg>
+          見積もり相談
+        </a>
+      </div>
+      <button class="menu-toggle" type="button" aria-label="メニューを開閉" aria-expanded="false">
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      </button>
+    </div>
+  </header>
+
+  <nav class="mobile-nav" aria-label="スマートフォンメニュー">
+    <a href="#features">機能設計</a>
+    <a href="#catalog">販売導線</a>
+    <a href="#plans">制作費</a>
+    <a href="#faq">FAQ</a>
+    <a href="#contact">見積もり相談</a>
+  </nav>
+
+  <main id="top">
+    <section class="hero">
+      <div class="hero__inner">
+        <div class="hero__copy reveal">
+          <span class="eyebrow">Shopify trading card commerce demo</span>
+          <h1>探せる店は、また買われる。</h1>
+          <p class="hero__lead">
+            トレーディングカードの自社ECに必要な、シングルカード検索、BOX予約、状態ランク表示、購入前の注意喚起までを一枚のトップページに整理したShopify制作デモです。カードの魅力より先に、買いやすさが伝わる設計にしています。
+          </p>
+          <div class="hero__actions">
+            <a class="btn btn--primary" href="#contact">
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              制作相談を送る
+            </a>
+            <a class="btn btn--ghost" href="tel:048-000-0000">
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M6.6 3.8 9.7 7c.5.5.6 1.3.2 1.9l-1 1.6c1.2 2.2 2.9 3.9 5.1 5.1l1.6-1c.6-.4 1.4-.3 1.9.2l3.2 3.1c.4.4.5 1 .2 1.5-.7 1.3-2 2.1-3.5 2.1C9.1 21.5 2.5 14.9 2.5 6.6c0-1.5.8-2.8 2.1-3.5.5-.3 1.1-.2 1.5.2Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+              </svg>
+              048-000-0000
+            </a>
+          </div>
+          <p class="hero__note">※電話番号・掲載商品・数値はデモ用の仮情報です。</p>
+          <div class="trust" aria-label="デモ想定の主要指標">
+            <div class="trust__item">
+              <span class="trust__num num">3</span>
+              <span class="trust__label">カード状態ランクを明示</span>
+            </div>
+            <div class="trust__item">
+              <span class="trust__num num">6</span>
+              <span class="trust__label">検索カテゴリを想定</span>
+            </div>
+            <div class="trust__item">
+              <span class="trust__num num">24h</span>
+              <span class="trust__label">注文受付の導線設計</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-card reveal" aria-label="Shopifyストア画面イメージ">
+          <div class="shop-window">
+            <div class="shop-window__bar">
+              <div class="dots" aria-hidden="true">
+                <span class="dot"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+              </div>
+              <div class="search-pill" aria-hidden="true"></div>
+            </div>
+            <div class="shop-window__body">
+              <div class="product-grid" aria-hidden="true">
+                <div class="card-thumb"></div>
+                <div class="card-thumb"></div>
+                <div class="card-thumb"></div>
+                <div class="card-thumb"></div>
+                <div class="card-thumb"></div>
+                <div class="card-thumb"></div>
+              </div>
+              <div class="side-panel">
+                <div class="mini-panel">
+                  <b class="num">PSA</b>
+                  <span>鑑定品カテゴリ</span>
+                </div>
+                <div class="mini-panel">
+                  <b class="num">NM</b>
+                  <span>状態表記を統一</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="features">
+      <div class="inner">
+        <div class="section-head reveal">
+          <div>
+            <span class="eyebrow">Feature design</span>
+            <h2>トレカ販売に必要な情報を、購入直前で迷わせない。</h2>
+          </div>
+          <p>
+            Shopifyの標準機能を土台にしながら、カードショップ特有の「状態」「レアリティ」「再入荷」「予約販売」を読みやすく整理します。派手さよりも、検索しやすさと不安の少なさを優先したトップページです。
+          </p>
+        </div>
+
+        <div class="features">
+          <article class="feature reveal">
+            <div class="icon-box" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none">
+                <path d="M4 5h16v4H4V5ZM4 15h16v4H4v-4ZM7 9v6M17 9v6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <h3>シングルカード検索</h3>
+            <p>
+              カード名、シリーズ、レアリティ、価格帯、状態ランクで探せる導線を想定。商品数が増えても一覧が散らからない構成にします。
+            </p>
+          </article>
+
+          <article class="feature reveal">
+            <div class="icon-box" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none">
+                <path d="M7 4h10l3 5v11H4V9l3-5Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+                <path d="M8 12h8M8 16h5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <h3>BOX予約と抽選案内</h3>
+            <p>
+              新弾予約、購入制限、抽選販売の注意事項を商品ページ前から見せます。問い合わせ削減と販売時の混乱防止を狙います。
+            </p>
+          </article>
+
+          <article class="feature reveal">
+            <div class="icon-box" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none">
+                <path d="M12 3 4 7v6c0 4.5 3.2 7.2 8 8 4.8-.8 8-3.5 8-8V7l-8-4Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+                <path d="m8.5 12 2.3 2.3 4.9-5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <h3>状態ランクの信頼設計</h3>
+            <p>
+              NM、EX、PLなどの基準を明文化。写真差し替え前提の運用でも、購入前に確認すべき点が伝わる表示にします。
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--soft" id="catalog">
+      <div class="inner">
+        <div class="catalog">
+          <div class="catalog__visual reveal">
+            <div class="filter-row" aria-label="商品フィルター例">
+              <span class="filter-chip is-active">すべて</span>
+              <span class="filter-chip">新着</span>
+              <span class="filter-chip">PSA鑑定</span>
+              <span class="filter-chip">予約BOX</span>
+              <span class="filter-chip">状態A</span>
+            </div>
+            <div class="product-list">
+              <div class="product-row">
+                <div class="product-row__thumb" aria-hidden="true"></div>
+                <div>
+                  <b>拡張パック 第1弾 BOX</b>
+                  <span>予約販売・購入制限あり ※仮の商品です</span>
+                </div>
+                <strong class="price num">¥6,600</strong>
+              </div>
+              <div class="product-row">
+                <div class="product-row__thumb" aria-hidden="true"></div>
+                <div>
+                  <b>シングルカード SR 状態A</b>
+                  <span>表面小傷なし・白欠け軽微 ※仮の商品です</span>
+                </div>
+                <strong class="price num">¥12,800</strong>
+              </div>
+              <div class="product-row">
+                <div class="product-row__thumb" aria-hidden="true"></div>
+                <div>
+                  <b>鑑定済みカード PSA10</b>
+                  <span>ケース状態確認済み ※仮の商品です</span>
+                </div>
+                <strong class="price num">¥39,800</strong>
+              </div>
+              <div class="product-row">
+                <div class="product-row__thumb" aria-hidden="true"></div>
+                <div>
+                  <b>構築済みデッキ パーツセット</b>
+                  <span>プレイ用・返品条件を明記 ※仮の商品です</span>
+                </div>
+                <strong class="price num">¥4,200</strong>
+              </div>
+            </div>
+          </div>
+
+          <div class="copy-block reveal">
+            <span class="eyebrow">Purchase flow</span>
+            <h2>カード名で探して、状態で納得して、迷わず購入へ。</h2>
+            <p>
+              トレカECでは、一般的なアパレルや雑貨よりも商品情報の粒度が重要です。見た目だけのECではなく、検索軸と購入条件を最初から設計することで、運用開始後の商品登録も整理しやすくなります。
+            </p>
+            <ul class="check-list">
+              <li>商品タグとコレクションを活用し、シリーズ別・レアリティ別の棚を作成</li>
+              <li>状態ランク、発送予定、返品条件をカート前に確認できる表示に整理</li>
+              <li>高額カードと予約商品の導線を分け、購入前の注意喚起を強化</li>
+              <li>スマートフォンで片手操作しやすいボタンサイズと一覧間隔を確保</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="inner">
+        <div class="section-head reveal">
+          <div>
+            <span class="eyebrow">Build process</span>
+            <h2>公開後の登録作業まで見据えた制作フロー。</h2>
+          </div>
+          <p>
+            募集内容では契約金額が要相談のため、ここでは一般的なShopify制作の仮フローとして掲載しています。実際の範囲は商品点数、アプリ利用、決済設定、テーマ調整量により変わります。
+          </p>
+        </div>
+
+        <div class="flow">
+          <article class="flow__item reveal">
+            <h3>要件整理</h3>
+            <p>
+              扱うカード種別、予約販売の有無、配送方法、必要な検索条件を確認します。
+            </p>
+          </article>
+          <article class="flow__item reveal">
+            <h3>トップ設計</h3>
+            <p>
+              新着、予約、鑑定品、買取案内など、売上に直結する導線を整理します。
+            </p>
+          </article>
+          <article class="flow__item reveal">
+            <h3>Shopify構築</h3>
+            <p>
+              テーマ調整、商品テンプレート、コレクション、基本ページを作成します。
+            </p>
+          </article>
+          <article class="flow__item reveal">
+            <h3>運用引き渡し</h3>
+            <p>
+              商品登録ルールと更新方法をまとめ、公開後の作業を始めやすくします。
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--soft" id="plans">
+      <div class="inner">
+        <div class="section-head reveal">
+          <div>
+            <span class="eyebrow">Estimate sample</span>
+            <h2>制作費は要相談。まずは範囲が見える見積もりへ。</h2>
+          </div>
+          <p>
+            下記はデモ用の一般的な仮プランです。募集文に金額指定がないため、実際のお見積もりはヒアリング後に提示します。すべて税抜想定で、Shopify月額費用や有料アプリ費用は別途です。
+          </p>
+        </div>
+
+        <div class="plans">
+          <article class="plan reveal">
+            <span class="plan__label">最小構成</span>
+            <h3>スタート</h3>
+            <div class="plan__price num">¥180,000<small>〜 ※仮の内容です</small></div>
+            <p>まずは自社ECを公開し、商品登録を始めたい方向け。</p>
+            <ul>
+              <li>トップページ調整</li>
+              <li>基本ページ作成</li>
+              <li>商品登録サンプル</li>
+              <li>スマートフォン表示調整</li>
+            </ul>
+          </article>
+
+          <article class="plan is-featured reveal">
+            <span class="plan__label">おすすめ想定</span>
+            <h3>トレカ標準</h3>
+            <div class="plan__price num">¥320,000<small>〜 ※仮の内容です</small></div>
+            <p>検索性と予約販売を重視し、カードショップらしい運用に寄せる構成。</p>
+            <ul>
+              <li>カテゴリ設計</li>
+              <li>状態ランク表示</li>
+              <li>予約商品テンプレート</li>
+              <li>FAQと注意事項設計</li>
+              <li>操作説明メモ作成</li>
+            </ul>
+          </article>
+
+          <article class="plan reveal">
+            <span class="plan__label">拡張構成</span>
+            <h3>運用強化</h3>
+            <div class="plan__price num">¥520,000<small>〜 ※仮の内容です</small></div>
+            <p>抽選販売、買取案内、複数スタッフ運用まで見据えたい方向け。</p>
+            <ul>
+              <li>抽選販売導線</li>
+              <li>買取ページ設計</li>
+              <li>アプリ選定補助</li>
+              <li>公開前チェック</li>
+              <li>運用ルール整備</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="inner">
+        <div class="section-head reveal">
+          <div>
+            <span class="eyebrow">Comparison</span>
+            <h2>トレカ向けに作ると、見るべき場所が変わる。</h2>
+          </div>
+          <p>
+            ECサイトの見た目を整えるだけでは、カード販売の不安は残ります。商品状態と販売ルールをきちんと見せる設計が、購入率と問い合わせ削減の両方に効きます。
+          </p>
+        </div>
+
+        <div class="compare-wrap reveal">
+          <table class="compare">
+            <tbody>
+              <tr>
+                <th>比較項目</th>
+                <th>一般的なEC</th>
+                <th>トレカECサンプル</th>
+              </tr>
+              <tr>
+                <th>商品検索</th>
+                <td>カテゴリと価格順が中心。</td>
+                <td>カード名、シリーズ、レアリティ、状態を軸に探せる想定。</td>
+              </tr>
+              <tr>
+                <th>購入前確認</th>
+                <td>説明文の中に注意事項が埋もれやすい。</td>
+                <td>状態ランク、返品条件、発送予定を近い位置に配置。</td>
+              </tr>
+              <tr>
+                <th>予約販売</th>
+                <td>通常商品と同じ見せ方になりがち。</td>
+                <td>購入制限や発送時期を目立たせ、混乱を減らす。</td>
+              </tr>
+              <tr>
+                <th>運用</th>
+                <td>登録担当者ごとに表記がぶれやすい。</td>
+                <td>タグ、商品名、状態表記のルール化を前提に設計。</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--soft">
+      <div class="inner">
+        <div class="section-head reveal">
+          <div>
+            <span class="eyebrow">Voice sample</span>
+            <h2>ポートフォリオ提示時に、発注者が見たい粒度で伝える。</h2>
+          </div>
+          <p>
+            応募時に求められている「自己紹介・実績・ポートフォリオ」に合わせ、Shopify経験が伝わる構成にしています。以下はデモ用の仮テキストです。
+          </p>
+        </div>
+
+        <div class="voice-grid">
+          <article class="voice reveal">
+            <p>
+              「商品点数が増えた時の検索性まで見えて、単なるきれいなサイトではないと感じました。」
+            </p>
+            <b>カードショップ運営者</b>
+            <span>※仮のお客様の声です</span>
+          </article>
+          <article class="voice reveal">
+            <p>
+              「予約BOXとシングルカードを分けて見せる考え方が、自社ECの運用に合っていました。」
+            </p>
+            <b>EC担当者</b>
+            <span>※仮のお客様の声です</span>
+          </article>
+          <article class="voice reveal">
+            <p>
+              「Shopifyの管理画面で更新しやすい前提になっている点が、公開後を想像しやすかったです。」
+            </p>
+            <b>店舗スタッフ</b>
+            <span>※仮のお客様の声です</span>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="faq">
+      <div class="inner">
+        <div class="section-head reveal">
+          <div>
+            <span class="eyebrow">FAQ</span>
+            <h2>制作前に確認されやすいこと。</h2>
+          </div>
+          <p>
+            ShopifyでトレーディングカードECを作る際の代表的な確認事項です。実際の仕様は、販売方法と運用体制に合わせて調整します。
+          </p>
+        </div>
+
+        <div class="faq">
+          <details class="reveal">
+            <summary>Shopifyでカード状態ごとの表記を統一できますか？</summary>
+            <div class="faq__body">
+              商品テンプレートやメタフィールドを使い、NM、EX、PLなどの状態表示をそろえる想定です。状態基準の文言は実制作時に店舗ルールへ合わせます。
+            </div>
+          </details>
+
+          <details class="reveal">
+            <summary>予約販売や購入制限は入れられますか？</summary>
+            <div class="faq__body">
+              予約商品用の表示、注意事項、購入数制限の考え方を整理できます。細かな制御はShopify標準機能とアプリ利用の範囲を確認して判断します。
+            </div>
+          </details>
+
+          <details class="reveal">
+            <summary>買取ページも同じサイト内に作れますか？</summary>
+            <div class="faq__body">
+              作成可能です。買取の流れ、査定条件、本人確認、発送方法などをまとめたページを用意し、販売ページとは別の導線にします。
+            </div>
+          </details>
+
+          <details class="reveal">
+            <summary>写真素材はどうすればよいですか？</summary>
+            <div class="faq__body">
+              本デモは図形中心の構成です。実制作では、ご提供いただくカード写真、店舗写真、ロゴ、バナー素材に差し替えます。※写真はイメージです。実制作ではご提供写真や日本人モデルの素材に差し替えます。
+            </div>
+          </details>
+
+          <details class="reveal">
+            <summary>見積もり前に必要な情報は何ですか？</summary>
+            <div class="faq__body">
+              商品点数、予約販売の有無、利用したい決済方法、配送方法、希望デザイン、参考サイト、必要ページ数があると見積もり精度が上がります。
+            </div>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--soft" id="contact">
+      <div class="inner">
+        <div class="section-head reveal">
+          <div>
+            <span class="eyebrow">Contact</span>
+            <h2>トレカECの要件を、最初にそろえる。</h2>
+          </div>
+          <p>
+            フォームは送信デモです。実制作時はShopifyのお問い合わせフォーム、外部フォーム、メール通知などに接続します。
+          </p>
+        </div>
+
+        <div class="contact-layout">
+          <aside class="contact-card reveal">
+            <h3>相談窓口</h3>
+            <p>
+              募集案件の内容に合わせ、Shopifyでのトレーディングカード自社EC構築を想定したデモです。
+            </p>
+            <ul class="info-list">
+              <li>
+                <span>名称</span>
+                <b>トレカECサンプル</b>
+              </li>
+              <li>
+                <span>電話</span>
+                <b><a href="tel:048-000-0000">048-000-0000</a></b>
+              </li>
+              <li>
+                <span>所在地</span>
+                <b>埼玉県 ※仮の内容です</b>
+              </li>
+              <li>
+                <span>受付</span>
+                <b>平日 10:00-18:00 ※仮の内容です</b>
+              </li>
+            </ul>
+          </aside>
+
+          <form class="form reveal" action="#" method="post">
+            <div class="form-grid">
+              <div class="field">
+                <label for="name">お名前</label>
+                <input id="name" name="name" type="text" placeholder="山田 太郎">
+              </div>
+              <div class="field">
+                <label for="company">店舗名・会社名</label>
+                <input id="company" name="company" type="text" placeholder="カードショップ名">
+              </div>
+              <div class="field">
+                <label for="email">メールアドレス</label>
+                <input id="email" name="email" type="email" placeholder="sample@example.com">
+              </div>
+              <div class="field">
+                <label for="budget">ご予算感</label>
+                <select id="budget" name="budget">
+                  <option>相談して決めたい</option>
+                  <option>30万円未満</option>
+                  <option>30万円〜50万円</option>
+                  <option>50万円以上</option>
+                </select>
+              </div>
+              <div class="field field--full">
+                <label for="message">相談内容</label>
+                <textarea id="message" name="message" placeholder="Shopifyで作りたい内容、商品点数、予約販売の有無などをご記入ください。"></textarea>
+              </div>
+            </div>
+            <div class="submit-row">
+              <button class="btn btn--primary" type="submit">
+                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="M4 5h16v14H4V5Z" stroke="currentColor" stroke-width="1.8"/>
+                  <path d="m4 7 8 6 8-6" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+                </svg>
+                相談内容を送る
+              </button>
+              <small>送信機能はデモです。</small>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div class="sticky-cta" aria-label="固定お問い合わせ">
+    <a class="btn btn--ghost" href="tel:048-000-0000">電話相談</a>
+    <a class="btn btn--primary" href="#contact">見積もり相談</a>
+  </div>
+
+  <footer class="footer">
+    <div class="footer__inner">
+      <a class="brand" href="#top" aria-label="トレカECサンプル トップへ">
+        <span class="brand__mark" aria-hidden="true"></span>
+        <span class="brand__text">トレカECサンプル</span>
+      </a>
+      <p>Shopifyでトレーディングカードの自社ECサイト作成を依頼したい方向けの単一HTMLデモページです。</p>
+      <p>※本ページは制作サンプル(デモ)です。掲載の内容・数値は仮のもので、写真はイメージです。</p>
+    </div>
+  </footer>
+
+  <script>
+    const menuToggle = document.querySelector(".menu-toggle");
+    const mobileNav = document.querySelector(".mobile-nav");
+
+    if (menuToggle && mobileNav) {
+      menuToggle.addEventListener("click", () => {
+        const isOpen = mobileNav.classList.toggle("is-open");
+        menuToggle.setAttribute("aria-expanded", String(isOpen));
+      });
+
+      mobileNav.querySelectorAll("a").forEach((link) => {
+        link.addEventListener("click", () => {
+          mobileNav.classList.remove("is-open");
+          menuToggle.setAttribute("aria-expanded", "false");
+        });
+      });
+    }
+
+    const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    if (!prefersReduced && "IntersectionObserver" in window) {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-visible");
+            observer.unobserve(entry.target);
+          }
+        });
+      }, {
+        threshold: 0.14
+      });
+
+      document.querySelectorAll(".reveal").forEach((element) => {
+        observer.observe(element);
+      });
+    } else {
+      document.querySelectorAll(".reveal").forEach((element) => {
+        element.classList.add("is-visible");
+      });
+    }
+  </script>
+</body>
+</html>

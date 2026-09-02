@@ -1,0 +1,869 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Web制作 実案件パートナー募集｜クリエイターベース(サンプル)</title>
+<meta name="description" content="独学・スクールでWeb制作を学んだ方向け。小規模事業者のコーポレートサイト制作で実案件経験を積めるパートナー募集。1案件60,000円〜、オンライン完結。※本ページは制作サンプルです。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Zen+Kaku+Gothic+New:wght@500;700;900&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "JobPosting",
+  "title": "Web制作パートナー（コーポレートサイト制作）",
+  "description": "小規模事業者向けコーポレートサイトの制作を担当いただける、Web制作の学習経験者向け業務委託パートナーを募集します。1案件60,000円〜、オンライン完結。※本情報は制作サンプルのための仮の内容です。",
+  "datePosted": "2026-08-01",
+  "employmentType": "CONTRACTOR",
+  "hiringOrganization": {
+    "@type": "Organization",
+    "name": "クリエイターベース(サンプル)",
+    "sameAs": "https://example.com"
+  },
+  "jobLocationType": "TELECOMMUTE",
+  "applicantLocationRequirements": {
+    "@type": "Country",
+    "name": "JP"
+  },
+  "baseSalary": {
+    "@type": "MonetaryAmount",
+    "currency": "JPY",
+    "value": {
+      "@type": "QuantitativeValue",
+      "minValue": 60000,
+      "unitText": "案件ごと"
+    }
+  }
+}
+</script>
+<style>
+  :root{
+    --bg:#faf9f6;
+    --bg-soft:#f2f1ec;
+    --ink:#1c1e26;
+    --ink-soft:#5a5e6b;
+    --line:#e3e1d9;
+    --accent:#16305c;
+    --accent-soft:#eef1f7;
+    --white:#ffffff;
+    --radius-lg:24px;
+    --radius-full:100px;
+    --shadow:0 12px 32px rgba(22,48,92,.10);
+  }
+  *,*::before,*::after{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--ink);
+    font-family:"Noto Sans JP",sans-serif;
+    font-feature-settings:"palt";
+    letter-spacing:.02em;
+    line-height:1.8;
+    overflow-x:hidden;
+    width:100%;
+    max-width:100%;
+  }
+  img{max-width:100%;height:auto;display:block;}
+  a{color:inherit;text-decoration:none;}
+  h1,h2,h3,h4{
+    font-family:"Zen Kaku Gothic New",sans-serif;
+    margin:0;
+    line-height:1.5;
+    color:var(--ink);
+  }
+  .num{font-family:"Manrope",sans-serif;}
+  p{margin:0;}
+  .container{
+    width:100%;
+    max-width:1080px;
+    margin:0 auto;
+    padding:0 24px;
+    box-sizing:border-box;
+  }
+  section{padding:96px 0;}
+  @media (max-width:640px){
+    section{padding:64px 0;}
+    .container{padding:0 20px;}
+  }
+  .eyebrow{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    font-size:.78rem;
+    font-weight:700;
+    letter-spacing:.14em;
+    color:var(--accent);
+    background:var(--accent-soft);
+    padding:6px 16px;
+    border-radius:var(--radius-full);
+  }
+  .eyebrow::before{
+    content:"";
+    width:6px;height:6px;border-radius:50%;
+    background:var(--accent);
+    display:inline-block;
+  }
+  .section-head{
+    max-width:640px;
+    margin:0 auto 48px;
+    text-align:center;
+  }
+  .section-head h2{
+    font-size:clamp(1.5rem,4vw,2.1rem);
+    margin-top:14px;
+  }
+  .section-head p{
+    margin-top:16px;
+    color:var(--ink-soft);
+    font-size:.96rem;
+  }
+  .tag{font-size:.68rem;color:var(--ink-soft);background:var(--bg-soft);padding:2px 8px;border-radius:6px;margin-left:6px;font-weight:500;letter-spacing:0;}
+
+  /* ---------- header ---------- */
+  header{
+    position:sticky;top:0;z-index:50;
+    background:rgba(250,249,246,.86);
+    backdrop-filter:blur(10px);
+    -webkit-backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .header-inner{
+    max-width:1080px;margin:0 auto;padding:16px 24px;
+    display:flex;align-items:center;justify-content:space-between;
+  }
+  .logo{
+    display:flex;flex-direction:column;line-height:1.1;
+  }
+  .logo .en{font-family:"Manrope",sans-serif;font-weight:800;font-size:1.05rem;letter-spacing:.05em;color:var(--accent);}
+  .logo .jp{font-size:.62rem;color:var(--ink-soft);letter-spacing:.12em;margin-top:2px;}
+  .header-actions{display:flex;align-items:center;gap:12px;}
+  .nav-links{display:flex;gap:28px;font-size:.86rem;font-weight:500;}
+  .nav-links a{opacity:.82;transition:opacity .2s;}
+  .nav-links a:hover{opacity:1;}
+  .btn{
+    display:inline-flex;align-items:center;justify-content:center;
+    padding:13px 28px;
+    border-radius:var(--radius-full);
+    font-weight:700;font-size:.9rem;
+    white-space:nowrap;
+    transition:transform .2s ease,box-shadow .2s ease;
+    border:1.5px solid transparent;
+  }
+  .btn-primary{background:var(--accent);color:#fff;box-shadow:var(--shadow);}
+  .btn-primary:hover{transform:translateY(-2px);}
+  .btn-outline{background:transparent;color:var(--accent);border-color:var(--accent);}
+  .btn-outline:hover{background:var(--accent-soft);}
+  .btn-sm{padding:10px 20px;font-size:.8rem;}
+  .hamburger{
+    width:44px;height:44px;border-radius:50%;
+    border:1px solid var(--line);background:#fff;
+    display:none;align-items:center;justify-content:center;
+    flex-direction:column;gap:5px;cursor:pointer;
+  }
+  .hamburger span{width:18px;height:2px;background:var(--ink);display:block;transition:.25s;}
+  .hamburger.active span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+  .hamburger.active span:nth-child(2){opacity:0;}
+  .hamburger.active span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+
+  /* mobile nav is OUTSIDE header to avoid fixed-inside-backdrop-filter containment bug */
+  .mobile-nav{
+    position:fixed;inset:0;z-index:80;
+    background:var(--white);
+    display:flex;flex-direction:column;
+    padding:100px 32px 40px;
+    gap:28px;
+    transform:translateX(100%);
+    transition:transform .3s ease;
+  }
+  .mobile-nav.open{transform:translateX(0);}
+  .mobile-nav a{font-size:1.2rem;font-weight:700;font-family:"Zen Kaku Gothic New",sans-serif;}
+  .mobile-nav .btn{margin-top:12px;}
+  .mobile-close{
+    position:absolute;top:20px;right:20px;
+    width:44px;height:44px;border-radius:50%;border:1px solid var(--line);
+    background:#fff;display:flex;align-items:center;justify-content:center;
+  }
+
+  @media (max-width:860px){
+    .nav-links,.header-actions .btn-outline{display:none;}
+    .hamburger{display:flex;}
+  }
+
+  /* ---------- hero ---------- */
+  .hero{
+    position:relative;
+    padding:72px 0 64px;
+    overflow:hidden;
+  }
+  .hero-grid{
+    display:grid;grid-template-columns:1.1fr .9fr;gap:56px;align-items:center;
+  }
+  .hero h1{
+    font-size:clamp(1.9rem,5vw,3rem);
+    letter-spacing:.01em;
+  }
+  .hero h1 .accent{color:var(--accent);}
+  .hero p.lead{margin-top:22px;color:var(--ink-soft);font-size:1rem;max-width:46ch;}
+  .hero-ctas{display:flex;flex-wrap:wrap;gap:14px;margin-top:32px;}
+  .hero-photo{
+    position:relative;border-radius:var(--radius-lg);overflow:hidden;box-shadow:var(--shadow);
+    aspect-ratio:4/5;
+  }
+  .hero-photo img{width:100%;height:100%;object-fit:cover;}
+  .hero-photo::after{
+    content:"";position:absolute;inset:0;
+    background:linear-gradient(180deg,rgba(22,48,92,0) 55%,rgba(22,48,92,.55) 100%);
+  }
+  .hero-photo .cap{
+    position:absolute;left:20px;bottom:18px;color:#fff;font-size:.78rem;z-index:2;line-height:1.6;
+  }
+  .trust-bar{
+    margin-top:56px;
+    display:grid;grid-template-columns:repeat(3,1fr);
+    border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+    padding:28px 0;gap:16px;
+  }
+  .trust-item{text-align:center;}
+  .trust-item .num{font-size:1.7rem;font-weight:800;color:var(--accent);}
+  .trust-item .label{font-size:.76rem;color:var(--ink-soft);margin-top:4px;}
+  @media (max-width:860px){
+    .hero-grid{grid-template-columns:1fr;}
+    .hero-photo{order:-1;aspect-ratio:16/10;}
+    .trust-bar{grid-template-columns:repeat(3,1fr);gap:8px;}
+    .trust-item .num{font-size:1.3rem;}
+  }
+
+  /* ---------- stats (数字で見る) ---------- */
+  .stats-section{background:var(--accent);color:#fff;}
+  .stats-section .section-head h2{color:#fff;}
+  .stats-section .section-head .eyebrow{background:rgba(255,255,255,.14);color:#fff;}
+  .stats-section .section-head .eyebrow::before{background:#fff;}
+  .stats-section .section-head p{color:rgba(255,255,255,.72);}
+  .stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;}
+  .stat-card{
+    background:rgba(255,255,255,.06);
+    border:1px solid rgba(255,255,255,.16);
+    border-radius:20px;padding:28px 20px;text-align:center;
+  }
+  .stat-card .num{font-size:2.1rem;font-weight:800;}
+  .stat-card .label{font-size:.82rem;margin-top:8px;color:rgba(255,255,255,.78);}
+  @media (max-width:860px){
+    .stats-grid{grid-template-columns:repeat(2,1fr);}
+  }
+
+  /* ---------- 想い ---------- */
+  .story{display:grid;grid-template-columns:.9fr 1.1fr;gap:56px;align-items:center;}
+  .story-photo{border-radius:var(--radius-lg);overflow:hidden;box-shadow:var(--shadow);aspect-ratio:4/3;}
+  .story-photo img{width:100%;height:100%;object-fit:cover;}
+  .story-text h2{font-size:clamp(1.4rem,3.6vw,1.9rem);}
+  .story-text p{margin-top:18px;color:var(--ink-soft);font-size:.95rem;}
+  .story-text p + p{margin-top:14px;}
+  @media (max-width:860px){.story{grid-template-columns:1fr;}}
+
+  /* ---------- flow (仕事内容) ---------- */
+  .flow-wrap{
+    display:grid;grid-template-columns:.9fr 1.1fr;gap:48px;align-items:start;
+  }
+  .flow-photo{border-radius:var(--radius-lg);overflow:hidden;box-shadow:var(--shadow);aspect-ratio:1/1;position:sticky;top:100px;}
+  .flow-photo img{width:100%;height:100%;object-fit:cover;}
+  .flow-list{display:flex;flex-direction:column;}
+  .flow-step{display:flex;gap:20px;padding:24px 0;border-bottom:1px solid var(--line);}
+  .flow-step:last-child{border-bottom:none;}
+  .flow-num{
+    flex:none;width:44px;height:44px;border-radius:50%;
+    background:var(--accent-soft);color:var(--accent);
+    display:flex;align-items:center;justify-content:center;
+    font-family:"Manrope",sans-serif;font-weight:800;font-size:1rem;
+  }
+  .flow-step h3{font-size:1.02rem;}
+  .flow-step p{margin-top:6px;color:var(--ink-soft);font-size:.88rem;}
+  @media (max-width:860px){
+    .flow-wrap{grid-template-columns:1fr;}
+    .flow-photo{position:static;aspect-ratio:16/9;}
+  }
+
+  /* ---------- voice ---------- */
+  .voice-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;}
+  .voice-card{
+    background:#fff;border:1px solid var(--line);border-radius:20px;padding:28px;
+  }
+  .voice-top{display:flex;align-items:center;gap:14px;}
+  .voice-avatar{width:56px;height:56px;border-radius:50%;overflow:hidden;flex:none;}
+  .voice-avatar img{width:100%;height:100%;object-fit:cover;}
+  .voice-name{font-weight:700;font-size:.92rem;}
+  .voice-role{font-size:.74rem;color:var(--ink-soft);margin-top:2px;}
+  .voice-card p.quote{margin-top:18px;font-size:.92rem;color:var(--ink-soft);}
+  .quote-mark{font-family:"Manrope",sans-serif;font-size:2.4rem;color:var(--accent-soft);line-height:0;display:block;margin-bottom:-8px;}
+  @media (max-width:860px){.voice-grid{grid-template-columns:1fr;}}
+
+  /* ---------- treatment / requirements ---------- */
+  .treat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+  .treat-card{background:#fff;border:1px solid var(--line);border-radius:20px;padding:28px;}
+  .treat-icon{width:44px;height:44px;border-radius:12px;background:var(--accent-soft);display:flex;align-items:center;justify-content:center;margin-bottom:16px;}
+  .treat-card h3{font-size:1rem;}
+  .treat-card p{margin-top:10px;font-size:.86rem;color:var(--ink-soft);}
+  @media (max-width:860px){.treat-grid{grid-template-columns:1fr;}}
+
+  table.req{
+    width:100%;max-width:100%;border-collapse:collapse;
+    background:#fff;border-radius:16px;overflow:hidden;
+    box-shadow:var(--shadow);
+  }
+  table.req th,table.req td{
+    text-align:left;padding:16px 20px;font-size:.88rem;border-bottom:1px solid var(--line);
+    vertical-align:top;
+  }
+  table.req th{
+    width:34%;background:var(--bg-soft);color:var(--ink-soft);font-weight:700;
+  }
+  table.req tr:last-child th,table.req tr:last-child td{border-bottom:none;}
+  @media (max-width:640px){
+    table.req,table.req tbody,table.req tr,table.req th,table.req td{display:block;width:100%;}
+    table.req th{width:100%;border-bottom:none;padding-bottom:4px;font-size:.76rem;}
+    table.req td{padding-top:0;padding-bottom:20px;}
+  }
+
+  /* ---------- apply flow ---------- */
+  .apply-steps{display:flex;gap:16px;overflow-x:auto;padding-bottom:8px;}
+  .apply-step{
+    flex:1 1 200px;min-width:180px;background:#fff;border:1px solid var(--line);
+    border-radius:18px;padding:24px 20px;position:relative;
+  }
+  .apply-step .flow-num{margin-bottom:14px;}
+  .apply-step h3{font-size:.95rem;}
+  .apply-step p{margin-top:8px;font-size:.82rem;color:var(--ink-soft);}
+  .arrow{align-self:center;color:var(--ink-soft);font-size:1.2rem;flex:none;display:flex;align-items:center;}
+  @media (max-width:640px){.apply-steps{flex-direction:column;}.arrow{display:none;}}
+
+  /* ---------- faq ---------- */
+  .faq-list{max-width:760px;margin:0 auto;display:flex;flex-direction:column;gap:12px;}
+  details{
+    background:#fff;border:1px solid var(--line);border-radius:14px;padding:6px 22px;
+  }
+  summary{
+    list-style:none;cursor:pointer;padding:16px 0;
+    display:flex;justify-content:space-between;align-items:center;
+    font-weight:700;font-size:.94rem;gap:16px;
+  }
+  summary::-webkit-details-marker{display:none;}
+  summary::after{
+    content:"+";font-family:"Manrope",sans-serif;font-size:1.3rem;color:var(--accent);flex:none;
+    transition:transform .2s;
+  }
+  details[open] summary::after{content:"−";}
+  details p{padding:0 0 18px;margin:0;color:var(--ink-soft);font-size:.88rem;}
+
+  /* ---------- form ---------- */
+  .apply-form{
+    max-width:640px;margin:0 auto;background:#fff;border:1px solid var(--line);
+    border-radius:24px;padding:40px;box-shadow:var(--shadow);
+  }
+  .field{margin-bottom:20px;}
+  .field label{display:block;font-size:.82rem;font-weight:700;margin-bottom:8px;}
+  .field input,.field textarea,.field select{
+    width:100%;max-width:100%;padding:14px 16px;border-radius:12px;
+    border:1px solid var(--line);background:var(--bg-soft);
+    font-family:inherit;font-size:16px;color:var(--ink);
+  }
+  .field textarea{resize:vertical;min-height:110px;}
+  .field-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+  @media (max-width:640px){.field-row{grid-template-columns:1fr;}}
+  .form-note{font-size:.76rem;color:var(--ink-soft);margin-top:10px;text-align:center;}
+  .form-msg{display:none;margin-top:18px;padding:14px 16px;border-radius:12px;background:var(--accent-soft);color:var(--accent);font-size:.86rem;font-weight:700;text-align:center;}
+  .form-msg.show{display:block;}
+
+  /* ---------- footer ---------- */
+  footer{background:var(--ink);color:rgba(255,255,255,.72);padding:64px 0 120px;}
+  .footer-grid{display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:40px;}
+  footer h4{color:#fff;font-size:.86rem;margin-bottom:16px;}
+  footer .logo .en{color:#fff;}
+  footer .logo .jp{color:rgba(255,255,255,.6);}
+  footer ul{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:10px;font-size:.84rem;}
+  footer p.desc{margin-top:16px;font-size:.82rem;line-height:1.9;max-width:38ch;}
+  .disclaimer{
+    margin-top:48px;padding-top:24px;border-top:1px solid rgba(255,255,255,.14);
+    font-size:.74rem;color:rgba(255,255,255,.5);line-height:1.9;
+  }
+  @media (max-width:860px){.footer-grid{grid-template-columns:1fr;gap:32px;}}
+
+  /* ---------- sticky mobile cta ---------- */
+  .sticky-cta{
+    position:fixed;left:0;right:0;bottom:0;z-index:60;
+    display:none;gap:10px;padding:12px 16px;
+    background:rgba(255,255,255,.92);backdrop-filter:blur(8px);
+    -webkit-backdrop-filter:blur(8px);
+    border-top:1px solid var(--line);
+    box-shadow:0 -8px 24px rgba(0,0,0,.06);
+  }
+  .sticky-cta a{flex:1;text-align:center;}
+  @media (max-width:768px){.sticky-cta{display:flex;}body{padding-bottom:78px;}}
+
+  /* ---------- reveal ---------- */
+  .reveal{opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s ease;}
+  .reveal.in-view{opacity:1;transform:none;}
+  @media (prefers-reduced-motion:reduce){
+    .reveal{transition:none;opacity:1;transform:none;}
+    html{scroll-behavior:auto;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner container">
+    <div class="logo">
+      <span class="en">CREATOR BASE</span>
+      <span class="jp">クリエイターベース(サンプル)</span>
+    </div>
+    <nav class="nav-links">
+      <a href="#story">想い</a>
+      <a href="#flow">仕事内容</a>
+      <a href="#voice">先輩の声</a>
+      <a href="#requirements">募集要項</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+    <div class="header-actions">
+      <a href="#apply" class="btn btn-outline btn-sm">応募フォームへ</a>
+      <button class="hamburger" id="hamburgerBtn" aria-label="メニューを開く">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<nav class="mobile-nav" id="mobileNav">
+  <button class="mobile-close" id="mobileCloseBtn" aria-label="閉じる">
+    <svg width="16" height="16" viewBox="0 0 16 16"><line x1="1" y1="1" x2="15" y2="15" stroke="#1c1e26" stroke-width="1.6"/><line x1="15" y1="1" x2="1" y2="15" stroke="#1c1e26" stroke-width="1.6"/></svg>
+  </button>
+  <a href="#story">想い</a>
+  <a href="#flow">仕事内容</a>
+  <a href="#voice">先輩の声</a>
+  <a href="#requirements">募集要項</a>
+  <a href="#faq">FAQ</a>
+  <a href="#apply" class="btn btn-primary">応募フォームへ</a>
+</nav>
+
+<main>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-grid">
+        <div>
+          <span class="eyebrow">WEB制作 実案件パートナー募集</span>
+          <h1>机上の練習を、<br><span class="accent">現場の実績</span>に。</h1>
+          <p class="lead">独学やスクールでWeb制作を学んだ方へ。小規模事業者のコーポレートサイト制作を、はじめての実案件として経験できるパートナーを募集しています。1案件60,000円〜、オンライン完結です。</p>
+          <div class="hero-ctas">
+            <a href="#apply" class="btn btn-primary">今すぐ応募する</a>
+            <a href="#requirements" class="btn btn-outline">募集要項を見る</a>
+          </div>
+        </div>
+        <div class="hero-photo reveal">
+          <img src="https://images.unsplash.com/photo-1606336782667-775252a0e5b0?auto=format&fit=crop&w=1200&q=70" alt="ガラス張りの高層ビル群">
+          <p class="cap">小規模事業者のコーポレートサイト制作を、実案件として。</p>
+        </div>
+      </div>
+
+      <div class="trust-bar reveal">
+        <div class="trust-item">
+          <div class="num">¥60,000<span style="font-size:1rem;">〜</span></div>
+          <div class="label">案件単価の目安</div>
+        </div>
+        <div class="trust-item">
+          <div class="num">オンライン</div>
+          <div class="label">完結・全国どこからでも</div>
+        </div>
+        <div class="trust-item">
+          <div class="num">未経験<span style="font-size:1rem;">可</span></div>
+          <div class="label">学習経験があれば応募可</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <section class="stats-section">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="eyebrow">数字で見る</span>
+        <h2>これまでの取り組み</h2>
+        <p>参加者の学びと実績を、案件を通じて後押ししてきました。</p>
+      </div>
+      <div class="stats-grid reveal">
+        <div class="stat-card">
+          <div class="num">120<span style="font-size:1.1rem;">名</span></div>
+          <div class="label">これまでの参加人数<span class="tag">※仮</span></div>
+        </div>
+        <div class="stat-card">
+          <div class="num">68<span style="font-size:1.1rem;">%</span></div>
+          <div class="label">継続案件につながった割合<span class="tag">※仮</span></div>
+        </div>
+        <div class="stat-card">
+          <div class="num">4.6<span style="font-size:1.1rem;">/5</span></div>
+          <div class="label">サポート満足度<span class="tag">※仮</span></div>
+        </div>
+        <div class="stat-card">
+          <div class="num">15<span style="font-size:1.1rem;">日</span></div>
+          <div class="label">納品後のお支払い目安<span class="tag">※仮</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STORY -->
+  <section id="story">
+    <div class="container">
+      <div class="story">
+        <div class="story-photo reveal">
+          <img src="https://images.unsplash.com/photo-1664596350962-603b0a41524a?auto=format&fit=crop&w=1200&q=70" alt="オフィス街を歩く人々の後ろ姿">
+        </div>
+        <div class="story-text reveal">
+          <span class="eyebrow">想い</span>
+          <h2>「学んだのに、実績がない」を<br>なくしたい。</h2>
+          <p>独学やスクールでHTML・CSSを一通り学んでも、実際の案件を経験する場は多くありません。ポートフォリオに載せられる実績がないまま、応募のたびに足踏みしてしまう——そんな声を数多く聞いてきました。</p>
+          <p>クリエイターベースでは、小規模事業者のコーポレートサイト制作という、規模も内容もちょうどいい案件を通じて、学びを実績に変える最初の一歩を用意しています。制作前のヒアリングには運営スタッフも同席し、ひとりで抱え込まない体制で進めます<span class="tag">※仮</span>。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FLOW / 仕事内容 -->
+  <section id="flow" style="background:var(--bg-soft);">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="eyebrow">仕事内容</span>
+        <h2>案件の流れ</h2>
+        <p>コーポレートサイト制作一式を、ステップに分けて進めます。</p>
+      </div>
+      <div class="flow-wrap">
+        <div class="flow-photo reveal">
+          <img src="https://images.unsplash.com/photo-1753164725860-ffcd260b7b32?auto=format&fit=crop&w=1200&q=70" alt="ろくろで器を成形する職人の手元">
+        </div>
+        <div class="flow-list reveal">
+          <div class="flow-step">
+            <div class="flow-num">1</div>
+            <div>
+              <h3>ヒアリング(運営同席)</h3>
+              <p>発注者の要望・事業内容を、運営スタッフと一緒に確認します。ひとりで対応する不安を減らします。</p>
+            </div>
+          </div>
+          <div class="flow-step">
+            <div class="flow-num">2</div>
+            <div>
+              <h3>構成・ワイヤーフレーム</h3>
+              <p>掲載する情報を整理し、ページ構成のたたき台を作成します。</p>
+            </div>
+          </div>
+          <div class="flow-step">
+            <div class="flow-num">3</div>
+            <div>
+              <h3>デザイン・コーディング</h3>
+              <p>レスポンシブ対応を前提に、HTML/CSSでページを制作します。</p>
+            </div>
+          </div>
+          <div class="flow-step">
+            <div class="flow-num">4</div>
+            <div>
+              <h3>検収・修正</h3>
+              <p>発注者確認のうえ、必要な修正を反映して仕上げます。</p>
+            </div>
+          </div>
+          <div class="flow-step">
+            <div class="flow-num">5</div>
+            <div>
+              <h3>納品・お支払い</h3>
+              <p>納品後、既定のサイトでお支払いします<span class="tag">※仮</span>。</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- VOICE -->
+  <section id="voice">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="eyebrow">先輩の声</span>
+        <h2>参加した方の声<span class="tag">※仮の体験談です</span></h2>
+        <p>実案件を経験した参加者から寄せられた声(サンプル)を紹介します。</p>
+      </div>
+      <div class="voice-grid reveal">
+        <div class="voice-card">
+          <div class="voice-top">
+            <div class="voice-avatar"><img src="https://images.unsplash.com/photo-1629875499750-a31b83446598?auto=format&fit=crop&w=300&q=70" alt="参加者の写真"></div>
+            <div>
+              <div class="voice-name">T.Sさん</div>
+              <div class="voice-role">スクール卒業・参加半年</div>
+            </div>
+          </div>
+          <span class="quote-mark">"</span>
+          <p class="quote">スクールの課題とは違い、実際の事業者様とやり取りする緊張感がありました。運営の方がヒアリングに同席してくれたので、初回でも安心して進められました。</p>
+        </div>
+        <div class="voice-card">
+          <div class="voice-top">
+            <div class="voice-avatar"><img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=300&q=70" alt="参加者の写真"></div>
+            <div>
+              <div class="voice-name">R.Kさん</div>
+              <div class="voice-role">独学・参加1年</div>
+            </div>
+          </div>
+          <span class="quote-mark">"</span>
+          <p class="quote">1案件を完走できたことが自信になり、ポートフォリオにも堂々と載せられました。次の案件では継続でお声がけいただけました。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 待遇 -->
+  <section style="background:var(--bg-soft);">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="eyebrow">待遇</span>
+        <h2>報酬とサポート</h2>
+      </div>
+      <div class="treat-grid reveal">
+        <div class="treat-card">
+          <div class="treat-icon"><svg width="20" height="20" viewBox="0 0 20 20"><circle cx="10" cy="10" r="8" fill="none" stroke="#16305c" stroke-width="1.6"/><text x="10" y="14" font-size="9" text-anchor="middle" fill="#16305c" font-family="Manrope">¥</text></svg></div>
+          <h3>案件単価 60,000円〜</h3>
+          <p>制作範囲に応じて単価が変わります。継続案件では単価アップの実績もあります<span class="tag">※仮</span>。</p>
+        </div>
+        <div class="treat-card">
+          <div class="treat-icon"><svg width="20" height="20" viewBox="0 0 20 20"><rect x="2" y="4" width="16" height="12" rx="2" fill="none" stroke="#16305c" stroke-width="1.6"/><line x1="2" y1="8" x2="18" y2="8" stroke="#16305c" stroke-width="1.6"/></svg></div>
+          <h3>業務委託・単発から</h3>
+          <p>まずは1案件から。継続の意向があればご相談のうえ、次の案件をご紹介します。</p>
+        </div>
+        <div class="treat-card">
+          <div class="treat-icon"><svg width="20" height="20" viewBox="0 0 20 20"><path d="M10 2 L17 6 V14 L10 18 L3 14 V6 Z" fill="none" stroke="#16305c" stroke-width="1.6"/></svg></div>
+          <h3>制作ガイド・テンプレート</h3>
+          <p>構成の型やチェックリストを共有し、はじめての方でも迷わず進められます<span class="tag">※仮</span>。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 募集要項 -->
+  <section id="requirements">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="eyebrow">募集要項</span>
+        <h2>Recruitment</h2>
+      </div>
+      <div class="reveal">
+        <table class="req">
+          <tr><th>募集職種</th><td>Web制作パートナー(コーディング中心・デザイン対応可の方歓迎)</td></tr>
+          <tr><th>業務内容</th><td>小規模事業者向けコーポレートサイトの制作一式(構成・コーディング・検収対応)</td></tr>
+          <tr><th>報酬</th><td>1案件 60,000円〜(制作範囲により変動)</td></tr>
+          <tr><th>契約形態</th><td>業務委託(単発〜継続)</td></tr>
+          <tr><th>稼働時間の目安</th><td>1案件あたり20〜40時間<span class="tag">※仮</span></td></tr>
+          <tr><th>必要スキル</th><td>HTML/CSSの基礎、レスポンシブ対応の経験(実務未経験可)<span class="tag">※仮</span></td></tr>
+          <tr><th>応募資格</th><td>独学・スクール等でWeb制作を学習した方(実務経験は不問)</td></tr>
+          <tr><th>募集人数</th><td>若干名<span class="tag">※仮</span></td></tr>
+          <tr><th>応募締切</th><td>随時受付<span class="tag">※仮</span></td></tr>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- 応募の流れ -->
+  <section style="background:var(--bg-soft);">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="eyebrow">応募の流れ</span>
+        <h2>How to apply</h2>
+      </div>
+      <div class="apply-steps reveal">
+        <div class="apply-step">
+          <div class="flow-num">1</div>
+          <h3>応募フォーム送信</h3>
+          <p>ページ下部のフォームよりご応募ください。</p>
+        </div>
+        <div class="arrow">→</div>
+        <div class="apply-step">
+          <div class="flow-num">2</div>
+          <h3>簡単な面談</h3>
+          <p>オンラインで20分ほど、経験や希望をお伺いします<span class="tag">※仮</span>。</p>
+        </div>
+        <div class="arrow">→</div>
+        <div class="apply-step">
+          <div class="flow-num">3</div>
+          <h3>案件のご紹介</h3>
+          <p>条件に合う案件をご案内します。</p>
+        </div>
+        <div class="arrow">→</div>
+        <div class="apply-step">
+          <div class="flow-num">4</div>
+          <h3>制作スタート</h3>
+          <p>運営同席のヒアリングから制作を開始します。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="eyebrow">FAQ</span>
+        <h2>よくあるご質問</h2>
+      </div>
+      <div class="faq-list reveal">
+        <details>
+          <summary>実務未経験でも応募できますか？</summary>
+          <p>はい。独学やスクールでの学習経験があれば応募可能です。ヒアリングには運営スタッフが同席するため、はじめての実案件として取り組みやすい内容です。</p>
+        </details>
+        <details>
+          <summary>案件はどのように紹介されますか？</summary>
+          <p>面談でお伺いした希望やスキルをもとに、小規模事業者のコーポレートサイト制作案件をご案内します。案件内容は事業者ごとに異なります。</p>
+        </details>
+        <details>
+          <summary>報酬の支払いタイミングは？</summary>
+          <p>納品・検収完了後、既定のサイトでお支払いします<span class="tag">※仮</span>。詳細は面談時にご案内します。</p>
+        </details>
+        <details>
+          <summary>地方在住でも参加できますか？</summary>
+          <p>はい。やり取りはすべてオンラインで完結するため、全国どこからでもご参加いただけます。</p>
+        </details>
+        <details>
+          <summary>制作に使うツールの指定はありますか？</summary>
+          <p>特別なツールの指定はありません。普段お使いのエディタや環境で問題ありません<span class="tag">※仮</span>。</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- APPLY FORM -->
+  <section id="apply" style="background:var(--bg-soft);">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="eyebrow">応募フォーム</span>
+        <h2>まずは気軽にご応募ください</h2>
+        <p>60秒ほどで入力が完了します。担当より折り返しご連絡します。</p>
+      </div>
+      <form class="apply-form reveal" id="applyForm">
+        <div class="field-row">
+          <div class="field">
+            <label for="name">お名前</label>
+            <input type="text" id="name" name="name" placeholder="山田 太郎" required>
+          </div>
+          <div class="field">
+            <label for="email">メールアドレス</label>
+            <input type="email" id="email" name="email" placeholder="you@example.com" required>
+          </div>
+        </div>
+        <div class="field">
+          <label for="portfolio">ポートフォリオ・制作物URL(任意)</label>
+          <input type="url" id="portfolio" name="portfolio" placeholder="https://">
+        </div>
+        <div class="field">
+          <label for="experience">学習・制作経験</label>
+          <select id="experience" name="experience">
+            <option>独学(半年未満)</option>
+            <option>独学(半年以上)</option>
+            <option>スクール卒業</option>
+            <option>実務経験あり</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="message">自己紹介・意気込み(任意)</label>
+          <textarea id="message" name="message" placeholder="学習内容や、挑戦したい案件イメージなどご自由にお書きください。"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary" style="width:100%;">この内容で応募する</button>
+        <p class="form-note">※本フォームは制作サンプルのため、送信しても実際には送られません。</p>
+        <p class="form-msg" id="formMsg">ご応募ありがとうございます。(デモのため送信は行われません)</p>
+      </form>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="logo">
+          <span class="en">CREATOR BASE</span>
+          <span class="jp">クリエイターベース(サンプル)</span>
+        </div>
+        <p class="desc">独学・スクール経験者向けに、実案件でのWeb制作経験を提供する募集ページのサンプルです。</p>
+      </div>
+      <div>
+        <h4>ページ内リンク</h4>
+        <ul>
+          <li><a href="#story">想い</a></li>
+          <li><a href="#flow">仕事内容</a></li>
+          <li><a href="#requirements">募集要項</a></li>
+          <li><a href="#apply">応募フォーム</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>お問い合わせ(仮)</h4>
+        <ul>
+          <li>TEL: 048-000-0000</li>
+          <li>Email: info@creator-base-sample.jp</li>
+          <li>オンライン完結・全国対応</li>
+        </ul>
+      </div>
+    </div>
+    <div class="disclaimer">
+      ※本ページは制作サンプル(デモ)です。掲載の内容・数値は仮のもので、写真はイメージです。実制作ではご提供写真や日本人モデルの素材に差し替えます。
+    </div>
+  </div>
+</footer>
+
+<div class="sticky-cta">
+  <a href="tel:048-000-0000" class="btn btn-outline">電話で問い合わせ</a>
+  <a href="#apply" class="btn btn-primary">応募フォームへ</a>
+</div>
+
+<script>
+  (function(){
+    var hamburgerBtn = document.getElementById('hamburgerBtn');
+    var mobileNav = document.getElementById('mobileNav');
+    var mobileCloseBtn = document.getElementById('mobileCloseBtn');
+
+    function openNav(){
+      mobileNav.classList.add('open');
+      hamburgerBtn.classList.add('active');
+    }
+    function closeNav(){
+      mobileNav.classList.remove('open');
+      hamburgerBtn.classList.remove('active');
+    }
+    hamburgerBtn.addEventListener('click', function(){
+      mobileNav.classList.contains('open') ? closeNav() : openNav();
+    });
+    mobileCloseBtn.addEventListener('click', closeNav);
+    mobileNav.querySelectorAll('a').forEach(function(a){
+      a.addEventListener('click', closeNav);
+    });
+
+    var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if(!reduceMotion && 'IntersectionObserver' in window){
+      var observer = new IntersectionObserver(function(entries){
+        entries.forEach(function(entry){
+          if(entry.isIntersecting){
+            entry.target.classList.add('in-view');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, {threshold:.14});
+      document.querySelectorAll('.reveal').forEach(function(el){ observer.observe(el); });
+    } else {
+      document.querySelectorAll('.reveal').forEach(function(el){ el.classList.add('in-view'); });
+    }
+
+    var form = document.getElementById('applyForm');
+    var msg = document.getElementById('formMsg');
+    form.addEventListener('submit', function(e){
+      e.preventDefault();
+      msg.classList.add('show');
+      form.reset();
+    });
+  })();
+</script>
+
+</body>
+</html>

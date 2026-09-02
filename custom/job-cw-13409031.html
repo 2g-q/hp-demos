@@ -1,0 +1,1465 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Transeed WordPress開発パートナー募集 | AI活用でWebサービスを育てる長期案件</title>
+<meta name="description" content="既存Webサービス Transeed のリニューアルとWordPress機能改修を担う開発パートナー募集のデモページです。AI活用、長期継続、提案歓迎。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+JP:wght@400;500;700;900&family=Zen+Kaku+Gothic+New:wght@500;700;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink: #102436;
+  --muted: #526577;
+  --line: #dbe5ea;
+  --paper: #ffffff;
+  --soft: #f4f9fb;
+  --soft-2: #edf7f7;
+  --accent: #0aa39a;
+  --accent-dark: #087f78;
+  --shadow: 0 18px 45px rgba(16, 36, 54, 0.12);
+  --radius: 8px;
+  --container: 1120px;
+}
+* {
+  box-sizing: border-box;
+}
+html {
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+}
+body {
+  margin: 0;
+  font-family: "Noto Sans JP", sans-serif;
+  color: var(--ink);
+  background: var(--paper);
+  line-height: 1.8;
+  font-feature-settings: "palt";
+  overflow-x: hidden;
+}
+body.nav-open {
+  overflow: hidden;
+}
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+a {
+  color: inherit;
+  text-decoration: none;
+}
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+button {
+  border: 0;
+  background: none;
+  cursor: pointer;
+}
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: rgba(255, 255, 255, 0.92);
+  border-bottom: 1px solid rgba(219, 229, 234, 0.72);
+  backdrop-filter: blur(14px);
+}
+.header-inner {
+  width: min(var(--container), calc(100% - 40px));
+  max-width: 100%;
+  margin: 0 auto;
+  min-height: 74px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+}
+.logo-mark {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: var(--accent);
+  position: relative;
+  flex: 0 0 auto;
+  box-shadow: 0 10px 24px rgba(10, 163, 154, 0.22);
+}
+.logo-mark::before,
+.logo-mark::after {
+  content: "";
+  position: absolute;
+  background: #fff;
+  border-radius: 100px;
+}
+.logo-mark::before {
+  width: 19px;
+  height: 5px;
+  top: 12px;
+  left: 10px;
+  transform: rotate(22deg);
+}
+.logo-mark::after {
+  width: 15px;
+  height: 5px;
+  top: 20px;
+  left: 13px;
+  transform: rotate(-22deg);
+}
+.logo-text {
+  display: grid;
+  gap: 0;
+}
+.logo-name {
+  font-family: "Manrope", sans-serif;
+  font-weight: 800;
+  letter-spacing: 0;
+  font-size: 21px;
+  line-height: 1.1;
+}
+.logo-sub {
+  font-size: 11px;
+  color: var(--muted);
+  line-height: 1.3;
+}
+.desktop-nav {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  font-size: 14px;
+  font-weight: 700;
+  color: #314759;
+}
+.desktop-nav a {
+  transition: color 0.2s ease;
+}
+.desktop-nav a:hover {
+  color: var(--accent-dark);
+}
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.tel-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: "Manrope", sans-serif;
+  font-weight: 800;
+  font-size: 14px;
+  color: var(--accent-dark);
+  white-space: nowrap;
+}
+.tel-link svg {
+  width: 16px;
+  height: 16px;
+}
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  min-height: 48px;
+  padding: 0 22px;
+  border-radius: 100px;
+  background: var(--accent);
+  color: #fff;
+  font-weight: 900;
+  box-shadow: 0 14px 28px rgba(10, 163, 154, 0.25);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+  white-space: nowrap;
+}
+.btn:hover {
+  transform: translateY(-2px);
+  background: var(--accent-dark);
+  box-shadow: 0 18px 34px rgba(10, 163, 154, 0.28);
+}
+.btn svg {
+  width: 18px;
+  height: 18px;
+}
+.btn.secondary {
+  background: #fff;
+  color: var(--accent-dark);
+  border: 1px solid rgba(10, 163, 154, 0.28);
+  box-shadow: 0 10px 22px rgba(16, 36, 54, 0.08);
+}
+.menu-button {
+  display: none;
+  width: 44px;
+  height: 44px;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+}
+.menu-lines {
+  width: 18px;
+  height: 12px;
+  position: relative;
+}
+.menu-lines span {
+  position: absolute;
+  left: 0;
+  width: 18px;
+  height: 2px;
+  border-radius: 10px;
+  background: var(--ink);
+}
+.menu-lines span:nth-child(1) {
+  top: 0;
+}
+.menu-lines span:nth-child(2) {
+  top: 5px;
+}
+.menu-lines span:nth-child(3) {
+  top: 10px;
+}
+.mobile-nav {
+  position: fixed;
+  inset: 74px 0 auto 0;
+  z-index: 60;
+  background: rgba(255, 255, 255, 0.98);
+  border-bottom: 1px solid var(--line);
+  transform: translateY(-120%);
+  transition: transform 0.25s ease;
+  padding: 24px 20px 28px;
+  display: grid;
+  gap: 14px;
+}
+.mobile-nav.open {
+  transform: translateY(0);
+}
+.mobile-nav a {
+  padding: 14px 0;
+  border-bottom: 1px solid var(--line);
+  font-weight: 800;
+}
+.hero {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(180deg, #f6fbfb 0%, #ffffff 72%);
+}
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(10, 163, 154, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(10, 163, 154, 0.08) 1px, transparent 1px);
+  background-size: 44px 44px;
+  mask-image: linear-gradient(180deg, black, transparent 78%);
+  pointer-events: none;
+}
+.hero-inner {
+  position: relative;
+  width: min(var(--container), calc(100% - 40px));
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 78px 0 52px;
+  display: grid;
+  grid-template-columns: minmax(0, 1.02fr) minmax(320px, 0.78fr);
+  gap: 54px;
+  align-items: center;
+}
+.kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--accent-dark);
+  font-weight: 900;
+  font-size: 14px;
+  letter-spacing: 0;
+  margin-bottom: 18px;
+}
+.kicker::before {
+  content: "";
+  width: 32px;
+  height: 2px;
+  border-radius: 10px;
+  background: var(--accent);
+}
+h1,
+h2,
+h3 {
+  font-family: "Zen Kaku Gothic New", "Noto Sans JP", sans-serif;
+  letter-spacing: 0;
+  line-height: 1.25;
+  margin: 0;
+}
+.hero-title {
+  font-size: clamp(38px, 5.2vw, 68px);
+  font-weight: 900;
+  max-width: 760px;
+}
+.accent-text {
+  color: var(--accent-dark);
+}
+.hero-copy {
+  margin: 26px 0 0;
+  max-width: 650px;
+  color: #344a5c;
+  font-size: 17px;
+}
+.hero-actions {
+  margin-top: 34px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  align-items: center;
+}
+.hero-note {
+  margin-top: 18px;
+  font-size: 13px;
+  color: var(--muted);
+}
+.hero-panel {
+  background: #fff;
+  border: 1px solid rgba(219, 229, 234, 0.92);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}
+.panel-image {
+  aspect-ratio: 4 / 3;
+  background:
+    linear-gradient(180deg, rgba(16, 36, 54, 0.04), rgba(16, 36, 54, 0.16)),
+    url("https://images.unsplash.com/photo-1664596350962-603b0a41524a?auto=format&fit=crop&w=1200&q=70") center/cover;
+}
+.panel-body {
+  padding: 28px;
+}
+.panel-label {
+  font-family: "Manrope", sans-serif;
+  font-weight: 800;
+  color: var(--accent-dark);
+  font-size: 13px;
+  text-transform: uppercase;
+}
+.panel-title {
+  margin-top: 6px;
+  font-size: 22px;
+  font-weight: 900;
+}
+.panel-list {
+  margin: 18px 0 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 11px;
+}
+.panel-list li {
+  display: flex;
+  gap: 10px;
+  color: #385064;
+  font-weight: 700;
+}
+.check {
+  width: 18px;
+  height: 18px;
+  margin-top: 5px;
+  border-radius: 50%;
+  background: var(--accent);
+  flex: 0 0 auto;
+  position: relative;
+}
+.check::after {
+  content: "";
+  position: absolute;
+  left: 5px;
+  top: 4px;
+  width: 7px;
+  height: 4px;
+  border-left: 2px solid #fff;
+  border-bottom: 2px solid #fff;
+  transform: rotate(-45deg);
+}
+.stats {
+  position: relative;
+  width: min(var(--container), calc(100% - 40px));
+  max-width: 100%;
+  margin: 0 auto;
+  transform: translateY(50%);
+  z-index: 2;
+}
+.stats-grid {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: 0 18px 42px rgba(16, 36, 54, 0.1);
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  overflow: hidden;
+}
+.stat {
+  padding: 24px 26px;
+  border-right: 1px solid var(--line);
+}
+.stat:last-child {
+  border-right: 0;
+}
+.stat-number {
+  font-family: "Manrope", sans-serif;
+  font-weight: 800;
+  font-size: 30px;
+  line-height: 1;
+  color: var(--accent-dark);
+}
+.stat-label {
+  margin-top: 8px;
+  font-size: 13px;
+  color: var(--muted);
+  font-weight: 700;
+}
+.section {
+  padding: 104px 0;
+}
+.section.first {
+  padding-top: 152px;
+}
+.section.soft {
+  background: var(--soft);
+}
+.container {
+  width: min(var(--container), calc(100% - 40px));
+  max-width: 100%;
+  margin: 0 auto;
+}
+.section-head {
+  max-width: 760px;
+  margin-bottom: 42px;
+}
+.section-label {
+  color: var(--accent-dark);
+  font-family: "Manrope", sans-serif;
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+.section-title {
+  font-size: clamp(30px, 3.8vw, 46px);
+  font-weight: 900;
+}
+.section-copy {
+  margin: 18px 0 0;
+  color: var(--muted);
+  max-width: 680px;
+}
+.cards {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 22px;
+}
+.card {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 28px;
+  min-width: 0;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 16px 30px rgba(16, 36, 54, 0.08);
+}
+.card-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--soft-2);
+  display: grid;
+  place-items: center;
+  color: var(--accent-dark);
+  margin-bottom: 20px;
+}
+.card-icon svg {
+  width: 22px;
+  height: 22px;
+  stroke-width: 2.2;
+}
+.card h3 {
+  font-size: 21px;
+  font-weight: 900;
+}
+.card p {
+  margin: 12px 0 0;
+  color: var(--muted);
+  font-size: 15px;
+}
+.split {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  gap: 44px;
+  align-items: start;
+}
+.message-box {
+  background: #fff;
+  border-left: 5px solid var(--accent);
+  padding: 30px;
+  box-shadow: 0 16px 34px rgba(16, 36, 54, 0.08);
+}
+.message-box h3 {
+  font-size: 25px;
+  font-weight: 900;
+}
+.message-box p {
+  margin: 16px 0 0;
+  color: #344a5c;
+}
+.scope-list {
+  display: grid;
+  gap: 14px;
+}
+.scope-item {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 22px 24px;
+  display: grid;
+  grid-template-columns: 52px minmax(0, 1fr);
+  gap: 18px;
+  align-items: start;
+}
+.scope-no {
+  font-family: "Manrope", sans-serif;
+  font-weight: 800;
+  color: var(--accent-dark);
+  font-size: 20px;
+}
+.scope-item h3 {
+  font-size: 20px;
+  font-weight: 900;
+}
+.scope-item p {
+  margin: 8px 0 0;
+  color: var(--muted);
+  font-size: 15px;
+}
+.flow {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+  counter-reset: flow;
+}
+.flow-step {
+  position: relative;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 26px 22px;
+}
+.flow-step::before {
+  counter-increment: flow;
+  content: counter(flow, decimal-leading-zero);
+  display: block;
+  font-family: "Manrope", sans-serif;
+  font-size: 24px;
+  font-weight: 800;
+  color: var(--accent-dark);
+  margin-bottom: 16px;
+}
+.flow-step h3 {
+  font-size: 18px;
+}
+.flow-step p {
+  margin: 10px 0 0;
+  color: var(--muted);
+  font-size: 14px;
+}
+.requirements {
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: #fff;
+}
+.req-row {
+  display: grid;
+  grid-template-columns: 240px minmax(0, 1fr);
+  border-bottom: 1px solid var(--line);
+}
+.req-row:last-child {
+  border-bottom: 0;
+}
+.req-label {
+  background: var(--soft);
+  padding: 20px 24px;
+  font-weight: 900;
+}
+.req-body {
+  padding: 20px 24px;
+  color: #344a5c;
+}
+.req-body ul {
+  margin: 0;
+  padding-left: 1.2em;
+}
+.req-body li + li {
+  margin-top: 6px;
+}
+.compare {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  overflow: hidden;
+  display: table;
+}
+.compare th,
+.compare td {
+  border-bottom: 1px solid var(--line);
+  border-right: 1px solid var(--line);
+  padding: 18px;
+  text-align: left;
+  vertical-align: top;
+  font-size: 14px;
+}
+.compare th:last-child,
+.compare td:last-child {
+  border-right: 0;
+}
+.compare tr:last-child td {
+  border-bottom: 0;
+}
+.compare th {
+  background: var(--soft);
+  font-weight: 900;
+}
+.compare .highlight {
+  background: #f0fbfa;
+  color: var(--accent-dark);
+  font-weight: 900;
+}
+.form-wrap {
+  display: grid;
+  grid-template-columns: minmax(0, 0.86fr) minmax(0, 1.14fr);
+  gap: 38px;
+  align-items: start;
+}
+.contact-card {
+  background: var(--ink);
+  color: #fff;
+  border-radius: var(--radius);
+  padding: 32px;
+}
+.contact-card h3 {
+  font-size: 26px;
+}
+.contact-card p {
+  color: rgba(255, 255, 255, 0.78);
+  margin: 14px 0 0;
+}
+.contact-card .tel-link {
+  color: #fff;
+  margin-top: 22px;
+  font-size: 22px;
+}
+.form {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 30px;
+  box-shadow: 0 18px 42px rgba(16, 36, 54, 0.08);
+}
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+.field {
+  display: grid;
+  gap: 7px;
+}
+.field.full {
+  grid-column: 1 / -1;
+}
+label {
+  font-size: 13px;
+  font-weight: 900;
+  color: #2d4052;
+}
+input,
+textarea,
+select {
+  width: 100%;
+  max-width: 100%;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: #fbfdfe;
+  padding: 13px 14px;
+  font-size: 16px;
+  color: var(--ink);
+}
+textarea {
+  min-height: 130px;
+  resize: vertical;
+}
+.form-note {
+  margin: 14px 0 0;
+  color: var(--muted);
+  font-size: 13px;
+}
+.form .btn {
+  margin-top: 22px;
+  width: 100%;
+}
+.faq {
+  display: grid;
+  gap: 12px;
+}
+.faq-item {
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: #fff;
+  overflow: hidden;
+}
+.faq-q {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  align-items: center;
+  padding: 20px 22px;
+  text-align: left;
+  font-weight: 900;
+  color: var(--ink);
+}
+.faq-q span {
+  min-width: 0;
+}
+.faq-mark {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: 1px solid var(--accent);
+  flex: 0 0 auto;
+  position: relative;
+}
+.faq-mark::before,
+.faq-mark::after {
+  content: "";
+  position: absolute;
+  background: var(--accent);
+  border-radius: 20px;
+}
+.faq-mark::before {
+  width: 10px;
+  height: 2px;
+  left: 5px;
+  top: 9px;
+}
+.faq-mark::after {
+  width: 2px;
+  height: 10px;
+  left: 9px;
+  top: 5px;
+  transition: transform 0.2s ease;
+}
+.faq-item.open .faq-mark::after {
+  transform: rotate(90deg);
+}
+.faq-a {
+  display: none;
+  padding: 0 22px 22px;
+  color: var(--muted);
+}
+.faq-item.open .faq-a {
+  display: block;
+}
+.footer {
+  background: #0f2232;
+  color: #fff;
+  padding: 48px 0 96px;
+}
+.footer-grid {
+  width: min(var(--container), calc(100% - 40px));
+  max-width: 100%;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 28px;
+  align-items: start;
+}
+.footer p {
+  margin: 10px 0 0;
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 13px;
+}
+.footer-nav {
+  display: flex;
+  gap: 18px;
+  flex-wrap: wrap;
+  font-size: 13px;
+  font-weight: 700;
+}
+.sticky-cta {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 70;
+  display: none;
+  padding: 10px 14px calc(10px + env(safe-area-inset-bottom));
+  background: rgba(255, 255, 255, 0.94);
+  border-top: 1px solid var(--line);
+  backdrop-filter: blur(12px);
+}
+.sticky-cta-inner {
+  display: grid;
+  grid-template-columns: 1fr 1.15fr;
+  gap: 10px;
+}
+.reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.65s ease, transform 0.65s ease;
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .reveal,
+  .btn,
+  .card,
+  .mobile-nav {
+    transition: none;
+  }
+}
+@media (max-width: 940px) {
+  .desktop-nav,
+  .header-actions {
+    display: none;
+  }
+  .menu-button {
+    display: inline-flex;
+  }
+  .hero-inner {
+    grid-template-columns: 1fr;
+    padding-top: 50px;
+  }
+  .hero-panel {
+    max-width: 560px;
+  }
+  .stats {
+    transform: none;
+    margin-top: 10px;
+  }
+  .stats-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .stat:nth-child(2) {
+    border-right: 0;
+  }
+  .stat:nth-child(1),
+  .stat:nth-child(2) {
+    border-bottom: 1px solid var(--line);
+  }
+  .section.first {
+    padding-top: 92px;
+  }
+  .cards,
+  .flow,
+  .split,
+  .form-wrap {
+    grid-template-columns: 1fr;
+  }
+  .compare {
+    display: block;
+    overflow-x: auto;
+    max-width: 100%;
+  }
+  .compare table {
+    max-width: 100%;
+  }
+}
+@media (max-width: 640px) {
+  .header-inner,
+  .container,
+  .footer-grid,
+  .hero-inner,
+  .stats {
+    width: min(100% - 28px, var(--container));
+  }
+  .header-inner {
+    min-height: 68px;
+  }
+  .mobile-nav {
+    inset-top: 68px;
+  }
+  .logo-name {
+    font-size: 18px;
+  }
+  .logo-sub {
+    font-size: 10px;
+  }
+  .hero-inner {
+    padding: 36px 0 34px;
+    gap: 30px;
+  }
+  .hero-title {
+    font-size: clamp(34px, 11vw, 44px);
+  }
+  .hero-copy {
+    font-size: 15px;
+  }
+  .hero-actions {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+  .btn {
+    width: 100%;
+    min-height: 50px;
+    padding: 0 18px;
+  }
+  .panel-body,
+  .card,
+  .form,
+  .contact-card,
+  .message-box {
+    padding: 24px;
+  }
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+  .stat {
+    border-right: 0;
+    border-bottom: 1px solid var(--line);
+    padding: 20px 22px;
+  }
+  .stat:last-child {
+    border-bottom: 0;
+  }
+  .section {
+    padding: 82px 0;
+  }
+  .section.first {
+    padding-top: 72px;
+  }
+  .scope-item {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+  .req-row {
+    grid-template-columns: 1fr;
+  }
+  .req-label,
+  .req-body {
+    padding: 16px 18px;
+  }
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+  .footer-grid {
+    grid-template-columns: 1fr;
+  }
+  .sticky-cta {
+    display: block;
+  }
+  body {
+    padding-bottom: 82px;
+  }
+}
+</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "JobPosting",
+  "title": "WordPress開発パートナー",
+  "description": "既存Webサービス Transeed のリニューアルとWordPress機能改修を担う開発パートナー募集。AIを積極的に活用し、リリース後の保守・改善まで長期的に関わる案件です。",
+  "datePosted": "2026-08-28",
+  "employmentType": "CONTRACTOR",
+  "hiringOrganization": {
+    "@type": "Organization",
+    "name": "Transeed",
+    "sameAs": "https://www.transeed.io/web/"
+  },
+  "jobLocationType": "TELECOMMUTE",
+  "applicantLocationRequirements": {
+    "@type": "Country",
+    "name": "Japan"
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Claude Code / Codex / Cursorを使い込んでいなくても応募できますか？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "現在の利用頻度よりも、今後AIを積極的に活用して効率よく開発する姿勢を重視します。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "WooCommerceの経験は必須ですか？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "歓迎条件ですが必須ではありません。WordPress制作、PHPでの機能改修、調査しながら進める力を重視します。"
+      }
+    }
+  ]
+}
+</script>
+</head>
+<body>
+<header class="header">
+  <div class="header-inner">
+    <a class="logo" href="#top" aria-label="Transeed WordPress開発パートナー募集">
+      <span class="logo-mark" aria-hidden="true"></span>
+      <span class="logo-text">
+        <span class="logo-name">Transeed</span>
+        <span class="logo-sub">WordPress Partner Recruiting</span>
+      </span>
+    </a>
+    <nav class="desktop-nav" aria-label="主要ナビゲーション">
+      <a href="#mission">募集背景</a>
+      <a href="#scope">依頼内容</a>
+      <a href="#requirements">求める方</a>
+      <a href="#apply">応募項目</a>
+    </nav>
+    <div class="header-actions">
+      <a class="tel-link" href="tel:048-000-0000">
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6.6 3.8l3 3c.5.5.5 1.3.1 1.9l-1.2 1.6c1.1 2.2 2.9 4 5.2 5.2l1.6-1.2c.6-.4 1.4-.4 1.9.1l3 3c.6.6.6 1.5 0 2.1-1.1 1.1-2.7 1.6-4.2 1.2C9.5 20 4 14.5 2.3 8c-.4-1.5.1-3.1 1.2-4.2.6-.6 1.6-.6 2.1 0z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
+        048-000-0000
+      </a>
+      <a class="btn" href="#apply">
+        応募相談する
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    </div>
+    <button class="menu-button" type="button" aria-label="メニューを開く" aria-expanded="false" data-menu-button>
+      <span class="menu-lines" aria-hidden="true"><span></span><span></span><span></span></span>
+    </button>
+  </div>
+</header>
+<nav class="mobile-nav" aria-label="モバイルナビゲーション" data-mobile-nav>
+  <a href="#mission">募集背景</a>
+  <a href="#scope">依頼内容</a>
+  <a href="#requirements">求める方</a>
+  <a href="#apply">応募項目</a>
+</nav>
+<main id="top">
+  <section class="hero">
+    <div class="hero-inner">
+      <div class="reveal">
+        <div class="kicker">AI活用 × 長期継続</div>
+        <h1 class="hero-title">速く作り、<br><span class="accent-text">長く育てる。</span></h1>
+        <p class="hero-copy">
+          既存Webサービス「Transeed」のリニューアルから、WordPressの機能改修、保守・改善まで。
+          仕様書・原稿・デザイン指示をもとに、AIを実務に組み込みながら一緒にサービスを育てる開発パートナーを募集します。
+        </p>
+        <div class="hero-actions">
+          <a class="btn" href="#apply">
+            応募に進む
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+          <a class="btn secondary" href="tel:048-000-0000">
+            電話で確認
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6.6 3.8l3 3c.5.5.5 1.3.1 1.9l-1.2 1.6c1.1 2.2 2.9 4 5.2 5.2l1.6-1.2c.6-.4 1.4-.4 1.9.1l3 3c.6.6.6 1.5 0 2.1-1.1 1.1-2.7 1.6-4.2 1.2C9.5 20 4 14.5 2.3 8c-.4-1.5.1-3.1 1.2-4.2.6-.6 1.6-.6 2.1 0z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
+          </a>
+        </div>
+        <p class="hero-note">電話番号・受付条件はデモ用の仮情報です。実制作では発注者指定の導線に差し替えます。</p>
+      </div>
+      <aside class="hero-panel reveal" aria-label="案件概要">
+        <div class="panel-image" role="img" aria-label="日本のオフィス街を歩く人々のイメージ"></div>
+        <div class="panel-body">
+          <div class="panel-label">First Project</div>
+          <h2 class="panel-title">Transeed Web リニューアル</h2>
+          <ul class="panel-list">
+            <li><span class="check" aria-hidden="true"></span><span>WordPressサイト制作・カスタマイズ</span></li>
+            <li><span class="check" aria-hidden="true"></span><span>PHP等を用いた機能改修</span></li>
+            <li><span class="check" aria-hidden="true"></span><span>AI開発ツールを前提にした効率化</span></li>
+          </ul>
+        </div>
+      </aside>
+    </div>
+    <div class="stats reveal" aria-label="案件の要点">
+      <div class="stats-grid">
+        <div class="stat">
+          <div class="stat-number">104</div>
+          <div class="stat-label">Transeed Webの多言語対応数</div>
+        </div>
+        <div class="stat">
+          <div class="stat-number">5min</div>
+          <div class="stat-label">既存サービスが掲げる導入スピード</div>
+        </div>
+        <div class="stat">
+          <div class="stat-number">4</div>
+          <div class="stat-label">応募時に確認したい項目</div>
+        </div>
+        <div class="stat">
+          <div class="stat-number">Long</div>
+          <div class="stat-label">単発ではなく継続前提</div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="section first" id="mission">
+    <div class="container">
+      <div class="section-head reveal">
+        <div class="section-label">Mission</div>
+        <h2 class="section-title">リニューアルで終わらない。運用で伸ばすWordPress開発。</h2>
+        <p class="section-copy">
+          Transeedは、自社サイトを多言語化し、訪日外国人や海外ユーザーへ情報を届けるWebサービスです。
+          今回の募集では、見た目の刷新だけでなく、WordPress上の機能改修や運用改善まで見据えた実装力を求めています。
+        </p>
+      </div>
+      <div class="cards">
+        <article class="card reveal">
+          <div class="card-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M4 6h16M4 12h10M4 18h16" stroke="currentColor" stroke-linecap="round"/></svg>
+          </div>
+          <h3>資料ベースで迷わず実装</h3>
+          <p>仕様書、ページ構成、原稿、デザイン指示は発注者側で用意。読み解き、整理し、実装に落とし込む力が活きます。</p>
+        </article>
+        <article class="card reveal">
+          <div class="card-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M12 3v4M12 17v4M5.6 5.6l2.8 2.8M15.6 15.6l2.8 2.8M3 12h4M17 12h4M5.6 18.4l2.8-2.8M15.6 8.4l2.8-2.8" stroke="currentColor" stroke-linecap="round"/></svg>
+          </div>
+          <h3>AIを実務速度に変える</h3>
+          <p>Claude Code、Codex、Cursorなどツールは不問。調査、実装、レビューにAIを組み込み、品質と速度の両立を目指します。</p>
+        </article>
+        <article class="card reveal">
+          <div class="card-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M6 12a6 6 0 0 1 10.2-4.2L18 9M18 9V4M18 9h-5M18 12a6 6 0 0 1-10.2 4.2L6 15M6 15v5M6 15h5" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <h3>改善提案まで歓迎</h3>
+          <p>細かな実装方法の指定に閉じず、保守しやすい構造や早く進む進め方の提案を歓迎します。</p>
+        </article>
+      </div>
+    </div>
+  </section>
+  <section class="section soft" id="scope">
+    <div class="container">
+      <div class="split">
+        <div class="message-box reveal">
+          <h2 class="section-title">最初の一歩は、Transeedの再設計。</h2>
+          <p>
+            現行サイトの強みである「低コスト」「最短5分」「自動更新」という訴求を受け継ぎながら、
+            サービス価値が伝わる構成へリニューアルする想定です。
+          </p>
+          <p>
+            ※具体的なページ構成・原稿・実装範囲は、条件が合いそうな方へ共有される詳細資料をもとに確定します。
+          </p>
+        </div>
+        <div class="scope-list">
+          <article class="scope-item reveal">
+            <div class="scope-no">01</div>
+            <div>
+              <h3>WordPressテーマ制作・改修</h3>
+              <p>既存構成を踏まえたテンプレート調整、固定ページ構築、レスポンシブ最適化、管理しやすい設計。</p>
+            </div>
+          </article>
+          <article class="scope-item reveal">
+            <div class="scope-no">02</div>
+            <div>
+              <h3>PHP等による機能カスタマイズ</h3>
+              <p>サイト制作にとどまらないWordPress機能改修。要件を読み、影響範囲を見ながら実装します。</p>
+            </div>
+          </article>
+          <article class="scope-item reveal">
+            <div class="scope-no">03</div>
+            <div>
+              <h3>リリース後の保守・改善</h3>
+              <p>公開して終わりではなく、問い合わせ対応、改善、今後立ち上げる別サービスの開発まで継続想定。</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="section" id="requirements">
+    <div class="container">
+      <div class="section-head reveal">
+        <div class="section-label">Partner Fit</div>
+        <h2 class="section-title">欲しいのは、調べながら進める実装者。</h2>
+        <p class="section-copy">
+          すべての技術経験が揃っている必要はありません。
+          WordPressを軸に、分からないことを自分で調べ、AIも使い、よりよい実装へ寄せられる方を歓迎します。
+        </p>
+      </div>
+      <div class="requirements reveal">
+        <div class="req-row">
+          <div class="req-label">必須に近い経験</div>
+          <div class="req-body">
+            <ul>
+              <li>WordPressでのサイト制作・カスタマイズ経験</li>
+              <li>PHP等を使ったWordPressの機能改修に対応できること</li>
+              <li>仕様資料やデザイン指示をもとに実装へ落とし込めること</li>
+            </ul>
+          </div>
+        </div>
+        <div class="req-row">
+          <div class="req-label">重視する姿勢</div>
+          <div class="req-body">
+            <ul>
+              <li>AIを積極的に活用して効率よく開発したい</li>
+              <li>不明点を調べ、論点を整理して相談できる</li>
+              <li>単発ではなく長期的に関われる仕事を探している</li>
+            </ul>
+          </div>
+        </div>
+        <div class="req-row">
+          <div class="req-label">歓迎経験</div>
+          <div class="req-body">
+            WooCommerce等の経験。必須ではなく、実装範囲に応じて相談しながら進める想定です。
+          </div>
+        </div>
+        <div class="req-row">
+          <div class="req-label">選考時の確認</div>
+          <div class="req-body">
+            詳細資料の確認後、対応可否、概算費用、着手可能時期、完成までの目安、実装上気になる点をご提案ください。
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="section soft">
+    <div class="container">
+      <div class="section-head reveal">
+        <div class="section-label">Workflow</div>
+        <h2 class="section-title">応募から詳細資料共有までの流れ。</h2>
+      </div>
+      <div class="flow">
+        <article class="flow-step reveal">
+          <h3>応募内容の送付</h3>
+          <p>実績、カスタマイズ経験、AI活用状況、稼働状況を簡潔に共有します。</p>
+        </article>
+        <article class="flow-step reveal">
+          <h3>条件の確認</h3>
+          <p>内容を確認し、条件が合いそうな方へ詳細仕様資料を共有します。</p>
+        </article>
+        <article class="flow-step reveal">
+          <h3>提案の提出</h3>
+          <p>対応可否、費用、スケジュール、気になる実装点を整理して提案します。</p>
+        </article>
+        <article class="flow-step reveal">
+          <h3>次の選考へ</h3>
+          <p>内容・費用・スケジュールが合う方と、具体的な進行へ進みます。</p>
+        </article>
+      </div>
+    </div>
+  </section>
+  <section class="section">
+    <div class="container">
+      <div class="section-head reveal">
+        <div class="section-label">Approach</div>
+        <h2 class="section-title">従来型の受託ではなく、改善型の開発パートナーへ。</h2>
+      </div>
+      <table class="compare reveal" aria-label="開発スタイル比較">
+        <thead>
+          <tr>
+            <th>項目</th>
+            <th>一般的な単発制作</th>
+            <th class="highlight">今回のTranseed案件</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>関わり方</td>
+            <td>納品を区切りに完了</td>
+            <td class="highlight">リニューアルから保守・改善まで継続</td>
+          </tr>
+          <tr>
+            <td>実装判断</td>
+            <td>指示された内容をそのまま作る</td>
+            <td class="highlight">早さと保守性を見て実装方法を提案</td>
+          </tr>
+          <tr>
+            <td>AI活用</td>
+            <td>任意、または限定的</td>
+            <td class="highlight">調査・実装・確認に積極活用</td>
+          </tr>
+          <tr>
+            <td>広がり</td>
+            <td>対象サイトのみ</td>
+            <td class="highlight">今後の別Webサービスも相談可能</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+  <section class="section soft" id="apply">
+    <div class="container">
+      <div class="form-wrap">
+        <div class="contact-card reveal">
+          <h2 class="section-title">応募時は4点だけ、簡潔に。</h2>
+          <p>
+            まずは実績と稼働状況が分かれば十分です。
+            条件が合いそうな方には、詳細資料を共有したうえで費用・スケジュールをご提案いただきます。
+          </p>
+          <a class="tel-link" href="tel:048-000-0000">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6.6 3.8l3 3c.5.5.5 1.3.1 1.9l-1.2 1.6c1.1 2.2 2.9 4 5.2 5.2l1.6-1.2c.6-.4 1.4-.4 1.9.1l3 3c.6.6.6 1.5 0 2.1-1.1 1.1-2.7 1.6-4.2 1.2C9.5 20 4 14.5 2.3 8c-.4-1.5.1-3.1 1.2-4.2.6-.6 1.6-.6 2.1 0z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
+            048-000-0000
+          </a>
+          <p>受付時間は仮の内容です。実制作では正式な連絡手段に差し替えます。</p>
+        </div>
+        <form class="form reveal" action="#" method="post">
+          <div class="form-grid">
+            <div class="field">
+              <label for="name">お名前</label>
+              <input id="name" name="name" type="text" placeholder="山田 太郎">
+            </div>
+            <div class="field">
+              <label for="email">メールアドレス</label>
+              <input id="email" name="email" type="email" placeholder="sample@example.com">
+            </div>
+            <div class="field full">
+              <label for="works">1. WordPressの実績 1〜2件</label>
+              <textarea id="works" name="works" placeholder="URL、担当範囲、制作・改修内容を可能な範囲で記載"></textarea>
+            </div>
+            <div class="field full">
+              <label for="customize">2. WordPress/PHPでのカスタマイズ経験</label>
+              <textarea id="customize" name="customize" placeholder="サイト制作以外の機能改修、プラグイン調整、管理画面改修など"></textarea>
+            </div>
+            <div class="field full">
+              <label for="ai">3. 普段のAI活用状況</label>
+              <select id="ai" name="ai">
+                <option>日常的に開発へ活用している</option>
+                <option>一部の調査・実装で使っている</option>
+                <option>現在は少ないが、今後積極的に活用したい</option>
+              </select>
+            </div>
+            <div class="field full">
+              <label for="availability">4. 現在の稼働状況</label>
+              <textarea id="availability" name="availability" placeholder="着手可能時期、週のおおよその稼働時間、相談可能な進め方"></textarea>
+            </div>
+          </div>
+          <p class="form-note">このフォームはデモです。送信機能は実制作時にWordPressフォーム、外部フォーム、メール通知などの要件に合わせて実装します。</p>
+          <button class="btn" type="button">
+            応募内容を送る
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 12l15-7-4 14-3-6-8-1z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>
+          </button>
+        </form>
+      </div>
+    </div>
+  </section>
+  <section class="section">
+    <div class="container">
+      <div class="section-head reveal">
+        <div class="section-label">FAQ</div>
+        <h2 class="section-title">応募前によくある確認。</h2>
+      </div>
+      <div class="faq">
+        <div class="faq-item reveal open">
+          <button class="faq-q" type="button">
+            <span>AI開発ツールを現在あまり使っていなくても応募できますか？</span>
+            <span class="faq-mark" aria-hidden="true"></span>
+          </button>
+          <div class="faq-a">応募可能です。現在使い込んでいなくても、今後積極的に活用できる方であれば問題ありません。</div>
+        </div>
+        <div class="faq-item reveal">
+          <button class="faq-q" type="button">
+            <span>WooCommerceの経験は必須ですか？</span>
+            <span class="faq-mark" aria-hidden="true"></span>
+          </button>
+          <div class="faq-a">必須ではありません。歓迎経験として扱い、すべての技術経験が揃っている必要はありません。</div>
+        </div>
+        <div class="faq-item reveal">
+          <button class="faq-q" type="button">
+            <span>最初から見積もりを確定する必要がありますか？</span>
+            <span class="faq-mark" aria-hidden="true"></span>
+          </button>
+          <div class="faq-a">まず応募内容を確認し、条件が合いそうな方へ詳細資料を共有します。資料確認後に対応可否・概算費用・スケジュール等をご提案いただく流れです。</div>
+        </div>
+        <div class="faq-item reveal">
+          <button class="faq-q" type="button">
+            <span>長期継続の範囲はどこまで想定されていますか？</span>
+            <span class="faq-mark" aria-hidden="true"></span>
+          </button>
+          <div class="faq-a">Transeedのリリース後の保守・改善・お問い合わせ対応に加え、今後立ち上げる別のWebサービスも継続して相談する想定です。</div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+<footer class="footer">
+  <div class="footer-grid">
+    <div>
+      <a class="logo" href="#top" aria-label="Transeed">
+        <span class="logo-mark" aria-hidden="true"></span>
+        <span class="logo-text">
+          <span class="logo-name">Transeed</span>
+          <span class="logo-sub">WordPress Partner Recruiting</span>
+        </span>
+      </a>
+      <p>※本ページは制作サンプル(デモ)です。掲載の内容・数値は仮のもので、写真はイメージです。</p>
+      <p>※写真はイメージです。実制作ではご提供写真や日本人モデルの素材に差し替えます。</p>
+    </div>
+    <nav class="footer-nav" aria-label="フッターナビゲーション">
+      <a href="#mission">募集背景</a>
+      <a href="#scope">依頼内容</a>
+      <a href="#requirements">求める方</a>
+      <a href="#apply">応募項目</a>
+    </nav>
+  </div>
+</footer>
+<div class="sticky-cta" aria-label="固定応募導線">
+  <div class="sticky-cta-inner">
+    <a class="btn secondary" href="tel:048-000-0000">電話確認</a>
+    <a class="btn" href="#apply">応募相談</a>
+  </div>
+</div>
+<script>
+const menuButton = document.querySelector("[data-menu-button]");
+const mobileNav = document.querySelector("[data-mobile-nav]");
+if (menuButton && mobileNav) {
+  menuButton.addEventListener("click", () => {
+    const open = mobileNav.classList.toggle("open");
+    document.body.classList.toggle("nav-open", open);
+    menuButton.setAttribute("aria-expanded", String(open));
+  });
+  mobileNav.querySelectorAll("a").forEach((link) => {
+    link.addEventListener("click", () => {
+      mobileNav.classList.remove("open");
+      document.body.classList.remove("nav-open");
+      menuButton.setAttribute("aria-expanded", "false");
+    });
+  });
+}
+const revealTargets = document.querySelectorAll(".reveal");
+if ("IntersectionObserver" in window) {
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("visible");
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.14 });
+  revealTargets.forEach((target) => observer.observe(target));
+} else {
+  revealTargets.forEach((target) => target.classList.add("visible"));
+}
+document.querySelectorAll(".faq-q").forEach((button) => {
+  button.addEventListener("click", () => {
+    const item = button.closest(".faq-item");
+    if (item) {
+      item.classList.toggle("open");
+    }
+  });
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,1459 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>佐世保シュークリームサンプル | 長崎県佐世保市のシュークリーム専門店</title>
+<meta name="description" content="長崎県佐世保市のシュークリーム専門店を想定した制作サンプルです。焼きたての香り、手土産に選びやすい可愛さ、スマートフォンで見やすい店舗ホームページのデモ。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+JP:wght@400;500;700;800&family=Zen+Maru+Gothic:wght@500;700;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #fffaf2;
+  --paper: #ffffff;
+  --ink: #2f271f;
+  --muted: #766a5f;
+  --line: #eadfce;
+  --accent: #d99522;
+  --accent-dark: #a96500;
+  --accent-soft: #fff1d7;
+  --shadow: 0 18px 50px rgba(91, 63, 24, 0.13);
+  --radius: 8px;
+  --container: 1120px;
+}
+* {
+  box-sizing: border-box;
+}
+html {
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+}
+body {
+  margin: 0;
+  min-width: 0;
+  overflow-x: hidden;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: "Noto Sans JP", system-ui, sans-serif;
+  font-feature-settings: "palt";
+  letter-spacing: 0;
+  line-height: 1.85;
+}
+body.menu-open {
+  overflow: hidden;
+}
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+a {
+  color: inherit;
+  text-decoration: none;
+}
+button,
+input,
+textarea {
+  font: inherit;
+}
+button {
+  cursor: pointer;
+}
+.container {
+  width: min(var(--container), calc(100% - 40px));
+  margin: 0 auto;
+}
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  background: rgba(255, 250, 242, 0.9);
+  border-bottom: 1px solid rgba(234, 223, 206, 0.8);
+  backdrop-filter: blur(14px);
+}
+.header-inner {
+  height: 76px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+.logo {
+  display: grid;
+  gap: 2px;
+  line-height: 1.2;
+}
+.logo-main {
+  font-family: "Zen Maru Gothic", sans-serif;
+  font-size: 21px;
+  font-weight: 900;
+  letter-spacing: 0;
+}
+.logo-sub {
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 700;
+}
+.desktop-nav {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  color: #5f5145;
+  font-size: 14px;
+  font-weight: 700;
+}
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.tel-link {
+  font-family: "Manrope", sans-serif;
+  font-weight: 800;
+  color: var(--accent-dark);
+  white-space: nowrap;
+}
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  min-height: 48px;
+  padding: 0 22px;
+  border: 0;
+  border-radius: 100px;
+  background: var(--accent);
+  color: #fff;
+  font-weight: 800;
+  box-shadow: 0 12px 24px rgba(217, 149, 34, 0.28);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+.btn:hover {
+  transform: translateY(-2px);
+  background: var(--accent-dark);
+  box-shadow: 0 16px 30px rgba(217, 149, 34, 0.34);
+}
+.btn.secondary {
+  background: #fff;
+  color: var(--accent-dark);
+  border: 1px solid rgba(217, 149, 34, 0.36);
+  box-shadow: none;
+}
+.icon {
+  width: 18px;
+  height: 18px;
+  flex: 0 0 auto;
+}
+.menu-button {
+  display: none;
+  width: 46px;
+  height: 46px;
+  border: 1px solid var(--line);
+  border-radius: 100px;
+  background: #fff;
+  color: var(--ink);
+}
+.menu-button span {
+  display: block;
+  width: 18px;
+  height: 2px;
+  margin: 4px auto;
+  background: currentColor;
+  border-radius: 4px;
+}
+.mobile-nav {
+  position: fixed;
+  inset: 76px 0 auto 0;
+  z-index: 39;
+  display: none;
+  background: rgba(255, 250, 242, 0.98);
+  border-bottom: 1px solid var(--line);
+  box-shadow: var(--shadow);
+}
+.mobile-nav.open {
+  display: block;
+}
+.mobile-nav a {
+  display: block;
+  padding: 18px 24px;
+  border-top: 1px solid var(--line);
+  font-weight: 800;
+}
+.hero {
+  position: relative;
+  padding: 52px 0 78px;
+}
+.hero-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.02fr) minmax(300px, 0.98fr);
+  gap: 44px;
+  align-items: center;
+}
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--accent-dark);
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0;
+}
+.eyebrow::before {
+  content: "";
+  width: 34px;
+  height: 2px;
+  background: var(--accent);
+}
+h1,
+h2,
+h3 {
+  margin: 0;
+  font-family: "Zen Maru Gothic", sans-serif;
+  letter-spacing: 0;
+  line-height: 1.35;
+}
+.hero-title {
+  margin-top: 18px;
+  max-width: 710px;
+  font-size: clamp(42px, 6vw, 76px);
+  font-weight: 900;
+}
+.hero-title .mark {
+  color: var(--accent-dark);
+}
+.hero-copy {
+  max-width: 620px;
+  margin: 24px 0 0;
+  color: #5e5248;
+  font-size: 17px;
+  line-height: 2;
+}
+.hero-cta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 34px;
+}
+.trust-strip {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  max-width: 650px;
+  margin-top: 34px;
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.75);
+}
+.trust-item {
+  padding: 18px 20px;
+  border-right: 1px solid var(--line);
+}
+.trust-item:last-child {
+  border-right: 0;
+}
+.trust-num {
+  display: block;
+  font-family: "Manrope", sans-serif;
+  color: var(--accent-dark);
+  font-size: 22px;
+  font-weight: 800;
+  line-height: 1.1;
+}
+.trust-label {
+  display: block;
+  margin-top: 7px;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 700;
+}
+.hero-visual {
+  position: relative;
+  min-width: 0;
+}
+.hero-photo {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  aspect-ratio: 4 / 5;
+  background: #f4e3c6;
+}
+.hero-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.float-card {
+  position: absolute;
+  left: -26px;
+  bottom: 28px;
+  width: min(310px, calc(100% - 28px));
+  padding: 22px 24px;
+  border: 1px solid rgba(234, 223, 206, 0.9);
+  border-radius: var(--radius);
+  background: rgba(255, 255, 255, 0.93);
+  box-shadow: 0 16px 42px rgba(60, 39, 13, 0.16);
+}
+.float-card strong {
+  display: block;
+  font-family: "Zen Maru Gothic", sans-serif;
+  font-size: 18px;
+  line-height: 1.55;
+}
+.float-card span {
+  display: block;
+  margin-top: 8px;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.7;
+}
+.section {
+  padding: 98px 0;
+}
+.section.white {
+  background: var(--paper);
+}
+.section-head {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 32px;
+  margin-bottom: 42px;
+}
+.section-kicker {
+  color: var(--accent-dark);
+  font-family: "Manrope", sans-serif;
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+.section-title {
+  margin-top: 8px;
+  font-size: clamp(30px, 4vw, 46px);
+  font-weight: 900;
+}
+.section-lead {
+  max-width: 470px;
+  margin: 0;
+  color: var(--muted);
+  font-size: 15px;
+}
+.feature-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+}
+.feature-card {
+  padding: 30px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: #fff;
+}
+.feature-icon {
+  width: 46px;
+  height: 46px;
+  display: grid;
+  place-items: center;
+  margin-bottom: 22px;
+  border-radius: 50%;
+  background: var(--accent-soft);
+  color: var(--accent-dark);
+}
+.feature-card h3 {
+  font-size: 21px;
+}
+.feature-card p {
+  margin: 14px 0 0;
+  color: var(--muted);
+  font-size: 14px;
+}
+.story-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 0.88fr) minmax(0, 1.12fr);
+  gap: 54px;
+  align-items: center;
+}
+.story-photo {
+  overflow: hidden;
+  border-radius: var(--radius);
+  aspect-ratio: 5 / 4;
+  background: #f4e3c6;
+}
+.story-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.story-text p {
+  margin: 18px 0 0;
+  color: #5c5046;
+}
+.process-list {
+  display: grid;
+  gap: 14px;
+  margin-top: 26px;
+}
+.process-item {
+  display: grid;
+  grid-template-columns: 48px 1fr;
+  gap: 16px;
+  padding: 18px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: rgba(255, 255, 255, 0.78);
+}
+.process-num {
+  font-family: "Manrope", sans-serif;
+  color: var(--accent-dark);
+  font-size: 18px;
+  font-weight: 800;
+}
+.process-item strong {
+  display: block;
+  line-height: 1.5;
+}
+.process-item span {
+  display: block;
+  margin-top: 4px;
+  color: var(--muted);
+  font-size: 13px;
+}
+.menu-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+}
+.menu-card {
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: #fff;
+}
+.menu-image {
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  background: #f4e3c6;
+}
+.menu-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.menu-body {
+  padding: 24px;
+}
+.menu-tag {
+  display: inline-flex;
+  margin-bottom: 12px;
+  padding: 5px 11px;
+  border-radius: 100px;
+  background: var(--accent-soft);
+  color: var(--accent-dark);
+  font-size: 12px;
+  font-weight: 800;
+}
+.menu-body h3 {
+  font-size: 21px;
+}
+.menu-body p {
+  margin: 12px 0 0;
+  color: var(--muted);
+  font-size: 14px;
+}
+.price {
+  display: block;
+  margin-top: 16px;
+  font-family: "Manrope", sans-serif;
+  color: var(--ink);
+  font-size: 20px;
+  font-weight: 800;
+}
+.note {
+  margin-top: 18px;
+  color: var(--muted);
+  font-size: 12px;
+}
+.visit-band {
+  padding: 34px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: #fff;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 24px;
+  align-items: center;
+}
+.visit-band h2 {
+  font-size: clamp(26px, 3.6vw, 38px);
+}
+.visit-band p {
+  margin: 10px 0 0;
+  color: var(--muted);
+}
+.news-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+  gap: 24px;
+}
+.instagram-mock {
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: #fff;
+  overflow: hidden;
+}
+.instagram-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 20px;
+  border-bottom: 1px solid var(--line);
+}
+.instagram-user {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-weight: 800;
+}
+.avatar {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: var(--accent-soft);
+  border: 2px solid var(--accent);
+}
+.instagram-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+.instagram-grid img {
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+}
+.news-list {
+  display: grid;
+  gap: 12px;
+}
+.news-item {
+  display: grid;
+  grid-template-columns: 112px 1fr;
+  gap: 18px;
+  padding: 20px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: #fff;
+}
+.news-date {
+  font-family: "Manrope", sans-serif;
+  color: var(--accent-dark);
+  font-size: 14px;
+  font-weight: 800;
+}
+.news-item strong {
+  display: block;
+  line-height: 1.6;
+}
+.news-item span {
+  display: block;
+  margin-top: 5px;
+  color: var(--muted);
+  font-size: 13px;
+}
+.info-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  gap: 30px;
+}
+.info-panel,
+.form-panel,
+.faq-panel {
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: #fff;
+}
+.info-panel {
+  padding: 30px;
+}
+.info-row {
+  display: grid;
+  grid-template-columns: 110px 1fr;
+  gap: 18px;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--line);
+}
+.info-row:last-child {
+  border-bottom: 0;
+}
+.info-row dt {
+  color: var(--muted);
+  font-weight: 800;
+}
+.info-row dd {
+  margin: 0;
+}
+.hours {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 18px;
+  font-size: 14px;
+}
+.hours th,
+.hours td {
+  padding: 11px 9px;
+  border: 1px solid var(--line);
+  text-align: center;
+}
+.hours th {
+  background: var(--accent-soft);
+  color: var(--accent-dark);
+}
+.map-box {
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: #eee5d6;
+  min-height: 100%;
+}
+.map-placeholder {
+  min-height: 420px;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  color: var(--muted);
+  text-align: center;
+}
+.map-placeholder strong {
+  display: block;
+  color: var(--ink);
+  font-family: "Zen Maru Gothic", sans-serif;
+  font-size: 24px;
+}
+.faq-list {
+  display: grid;
+  gap: 12px;
+}
+.faq-panel {
+  padding: 0 24px;
+}
+.faq-item {
+  border-bottom: 1px solid var(--line);
+}
+.faq-item:last-child {
+  border-bottom: 0;
+}
+.faq-question {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 22px 0;
+  border: 0;
+  background: transparent;
+  color: var(--ink);
+  text-align: left;
+  font-weight: 800;
+}
+.faq-mark {
+  position: relative;
+  width: 22px;
+  height: 22px;
+  flex: 0 0 auto;
+}
+.faq-mark::before,
+.faq-mark::after {
+  content: "";
+  position: absolute;
+  inset: 10px 3px auto;
+  height: 2px;
+  background: var(--accent-dark);
+}
+.faq-mark::after {
+  transform: rotate(90deg);
+}
+.faq-item.open .faq-mark::after {
+  transform: rotate(0);
+}
+.faq-answer {
+  display: none;
+  padding: 0 0 22px;
+  color: var(--muted);
+  font-size: 14px;
+}
+.faq-item.open .faq-answer {
+  display: block;
+}
+.form-panel {
+  padding: 30px;
+}
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+.field {
+  display: grid;
+  gap: 8px;
+}
+.field.full {
+  grid-column: 1 / -1;
+}
+label {
+  font-size: 13px;
+  font-weight: 800;
+}
+input,
+textarea,
+select {
+  width: 100%;
+  max-width: 100%;
+  min-height: 48px;
+  padding: 12px 14px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: #fffdf9;
+  color: var(--ink);
+  font-size: 16px;
+}
+textarea {
+  min-height: 130px;
+  resize: vertical;
+}
+.footer {
+  padding: 52px 0 116px;
+  background: #2f271f;
+  color: #fffaf2;
+}
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 30px;
+  align-items: start;
+}
+.footer p {
+  margin: 12px 0 0;
+  color: rgba(255, 250, 242, 0.76);
+  font-size: 13px;
+}
+.footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  color: rgba(255, 250, 242, 0.86);
+  font-size: 13px;
+  font-weight: 800;
+}
+.sticky-cta {
+  position: fixed;
+  right: 18px;
+  bottom: 18px;
+  z-index: 45;
+  display: flex;
+  gap: 10px;
+}
+.reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .reveal,
+  .btn {
+    transition: none;
+  }
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
+}
+@media (max-width: 900px) {
+  .desktop-nav,
+  .header-actions {
+    display: none;
+  }
+  .menu-button {
+    display: block;
+  }
+  .hero-grid,
+  .story-grid,
+  .news-layout,
+  .info-grid {
+    grid-template-columns: 1fr;
+  }
+  .hero {
+    padding-top: 34px;
+  }
+  .float-card {
+    left: 14px;
+    bottom: 14px;
+  }
+  .feature-grid,
+  .menu-grid {
+    grid-template-columns: 1fr;
+  }
+  .section-head,
+  .visit-band,
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+  .visit-band {
+    padding: 26px;
+  }
+}
+@media (max-width: 560px) {
+  .container {
+    width: min(100% - 28px, var(--container));
+  }
+  .header-inner {
+    height: 68px;
+  }
+  .mobile-nav {
+    inset-top: 68px;
+  }
+  .logo-main {
+    font-size: 18px;
+  }
+  .hero-title {
+    font-size: 42px;
+  }
+  .hero-copy {
+    font-size: 15px;
+  }
+  .hero-cta .btn {
+    width: 100%;
+  }
+  .trust-strip {
+    grid-template-columns: 1fr;
+  }
+  .trust-item {
+    border-right: 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .trust-item:last-child {
+    border-bottom: 0;
+  }
+  .section {
+    padding: 78px 0;
+  }
+  .feature-card,
+  .menu-body,
+  .info-panel,
+  .form-panel {
+    padding: 22px;
+  }
+  .process-item {
+    grid-template-columns: 40px 1fr;
+  }
+  .news-item {
+    grid-template-columns: 1fr;
+  }
+  .info-row {
+    grid-template-columns: 1fr;
+    gap: 4px;
+  }
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+  .sticky-cta {
+    left: 12px;
+    right: 12px;
+    bottom: 12px;
+  }
+  .sticky-cta .btn {
+    flex: 1;
+    min-width: 0;
+    padding: 0 12px;
+    font-size: 14px;
+  }
+  .footer {
+    padding-bottom: 108px;
+  }
+}
+</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Bakery",
+  "name": "佐世保シュークリームサンプル",
+  "description": "長崎県佐世保市のシュークリーム専門店を想定した制作デモです。",
+  "telephone": "0956-00-0000",
+  "address": {
+    "@type": "PostalAddress",
+    "addressRegion": "長崎県",
+    "addressLocality": "佐世保市",
+    "addressCountry": "JP"
+  },
+  "servesCuisine": "洋菓子",
+  "priceRange": "¥¥",
+  "url": "https://example.com/"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "取り置き予約はできますか？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "本デモでは電話またはフォームからの取り置き予約導線を想定しています。実制作では店舗様の運用に合わせて受付方法を調整します。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "季節限定メニューは掲載できますか？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "お知らせ更新機能やメニュー更新機能を組み込み、旬の商品をスマートフォンから見やすく掲載する想定です。"
+      }
+    }
+  ]
+}
+</script>
+</head>
+<body>
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="logo" href="#top" aria-label="トップへ">
+      <span class="logo-main">佐世保シュークリームサンプル</span>
+      <span class="logo-sub">Cream Puff Specialty Shop</span>
+    </a>
+    <nav class="desktop-nav" aria-label="メインナビゲーション">
+      <a href="#concept">こだわり</a>
+      <a href="#menu">メニュー</a>
+      <a href="#news">お知らせ</a>
+      <a href="#access">店舗情報</a>
+      <a href="#contact">お問い合わせ</a>
+    </nav>
+    <div class="header-actions">
+      <a class="tel-link" href="tel:0956000000">0956-00-0000</a>
+      <a class="btn" href="#contact">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M4 6.5h16v11H4v-11Z" stroke="currentColor" stroke-width="2"/>
+          <path d="m4.5 7 7.5 6 7.5-6" stroke="currentColor" stroke-width="2"/>
+        </svg>
+        取り置き相談
+      </a>
+    </div>
+    <button class="menu-button" type="button" aria-label="メニューを開く" aria-expanded="false">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </div>
+</header>
+
+<nav class="mobile-nav" aria-label="スマートフォンナビゲーション">
+  <a href="#concept">こだわり</a>
+  <a href="#menu">メニュー</a>
+  <a href="#news">お知らせ</a>
+  <a href="#access">店舗情報</a>
+  <a href="#contact">お問い合わせ</a>
+</nav>
+
+<main id="top">
+  <section class="hero">
+    <div class="container hero-grid">
+      <div class="hero-copybox reveal">
+        <span class="eyebrow">長崎県佐世保市のシュークリーム専門店</span>
+        <h1 class="hero-title">ふくらむ香り、<br><span class="mark">手みやげ日和。</span></h1>
+        <p class="hero-copy">
+          さくっと軽い皮に、なめらかなクリームをたっぷり。女性やファミリー層が「今日寄って帰ろう」と思える、可愛さとおいしさが一目で伝わるホームページを想定したデモです。
+        </p>
+        <div class="hero-cta">
+          <a class="btn" href="tel:0956000000">
+            <svg class="icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M7 4h4l2 5-2.5 1.5a12 12 0 0 0 5 5L17 13l5 2v4c0 1-1 2-2 2C10.6 21 3 13.4 3 4c0-1 1-2 2-2h2Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+            </svg>
+            電話する
+          </a>
+          <a class="btn secondary" href="#menu">メニューを見る</a>
+        </div>
+        <div class="trust-strip" aria-label="店舗の特徴">
+          <div class="trust-item">
+            <span class="trust-num">SASEBO</span>
+            <span class="trust-label">佐世保市エリア想定</span>
+          </div>
+          <div class="trust-item">
+            <span class="trust-num">5</span>
+            <span class="trust-label">想定ページ構成</span>
+          </div>
+          <div class="trust-item">
+            <span class="trust-num">SP</span>
+            <span class="trust-label">スマホ閲覧を重視</span>
+          </div>
+        </div>
+      </div>
+      <div class="hero-visual reveal">
+        <div class="hero-photo">
+          <img src="https://images.unsplash.com/photo-1506459225024-1428097a7e18?auto=format&fit=crop&w=1200&q=70" alt="洋菓子を仕上げる手元のイメージ">
+        </div>
+        <div class="float-card">
+          <strong>駅前の帰り道にも、休日の家族時間にも。</strong>
+          <span>※写真はイメージです。実制作ではご提供写真や日本人モデルの素材に差し替えます。</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="concept" class="section white">
+    <div class="container">
+      <div class="section-head reveal">
+        <div>
+          <span class="section-kicker">Concept</span>
+          <h2 class="section-title">可愛いだけで終わらない、<br>買いに行きたくなる設計。</h2>
+        </div>
+        <p class="section-lead">
+          商品写真を大きく見せ、こだわり・メニュー・アクセス・お知らせへ迷わず進める構成。CMS更新やInstagram連携を見据えた店舗ホームページのトップページです。
+        </p>
+      </div>
+      <div class="feature-grid">
+        <article class="feature-card reveal">
+          <div class="feature-icon" aria-hidden="true">
+            <svg class="icon" viewBox="0 0 24 24" fill="none">
+              <path d="M5 12c0-4 3-7 7-7s7 3 7 7-3 7-7 7-7-3-7-7Z" stroke="currentColor" stroke-width="2"/>
+              <path d="M8 12h8M12 8v8" stroke="currentColor" stroke-width="2"/>
+            </svg>
+          </div>
+          <h3>味の想像ができる写真配置</h3>
+          <p>ファーストビューから商品の質感を見せ、クリームのなめらかさや焼き菓子の香りが伝わる余白に整えます。</p>
+        </article>
+        <article class="feature-card reveal">
+          <div class="feature-icon" aria-hidden="true">
+            <svg class="icon" viewBox="0 0 24 24" fill="none">
+              <path d="M4 7h16v13H4V7Z" stroke="currentColor" stroke-width="2"/>
+              <path d="M7 7V4h10v3" stroke="currentColor" stroke-width="2"/>
+              <path d="M8 12h8" stroke="currentColor" stroke-width="2"/>
+            </svg>
+          </div>
+          <h3>手土産需要に寄せた導線</h3>
+          <p>取り置き相談、箱詰め、季節限定のお知らせを近くに配置。来店前の小さな不安を減らします。</p>
+        </article>
+        <article class="feature-card reveal">
+          <div class="feature-icon" aria-hidden="true">
+            <svg class="icon" viewBox="0 0 24 24" fill="none">
+              <path d="M8 4h8a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2Z" stroke="currentColor" stroke-width="2"/>
+              <path d="M10 17h4" stroke="currentColor" stroke-width="2"/>
+            </svg>
+          </div>
+          <h3>スマホで迷わない店舗情報</h3>
+          <p>営業時間、定休日、地図、電話を下層に埋もれさせず、移動中でも確認しやすい画面設計にしています。</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container story-grid">
+      <div class="story-photo reveal">
+        <img src="https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=1200&q=70" alt="焼き菓子の素材感を伝えるパンの物撮りイメージ">
+      </div>
+      <div class="story-text reveal">
+        <span class="section-kicker">Making</span>
+        <h2 class="section-title">皮は軽く、<br>記憶は濃く。</h2>
+        <p>
+          シュークリーム専門店の魅力は、商品名だけでは伝わりきりません。焼き上がりの香ばしさ、注文してから詰める期待感、家に持ち帰る時間まで含めてブランド体験として見せます。
+        </p>
+        <p>
+          実制作では、支給いただくロゴ・商品写真・基本テキストをもとに、素材紹介、製法紹介、季節限定メニュー、お知らせ更新まで一貫したトーンで構成します。
+        </p>
+        <div class="process-list">
+          <div class="process-item">
+            <span class="process-num">01</span>
+            <div>
+              <strong>素材のこだわりを短く読ませる</strong>
+              <span>卵、ミルク、バターなど、味に直結する要素をカード化します。</span>
+            </div>
+          </div>
+          <div class="process-item">
+            <span class="process-num">02</span>
+            <div>
+              <strong>商品写真をCMSで差し替えやすく</strong>
+              <span>定番と季節限定を分け、更新頻度が高い情報を管理しやすくします。</span>
+            </div>
+          </div>
+          <div class="process-item">
+            <span class="process-num">03</span>
+            <div>
+              <strong>Instagramとお知らせで鮮度を出す</strong>
+              <span>新作、完売案内、営業日の変更をトップページで確認できる想定です。</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="menu" class="section white">
+    <div class="container">
+      <div class="section-head reveal">
+        <div>
+          <span class="section-kicker">Menu</span>
+          <h2 class="section-title">定番も、季節限定も、<br>選ぶ時間から楽しく。</h2>
+        </div>
+        <p class="section-lead">
+          価格や商品名は仮の内容です。実制作では店舗様の商品写真・正式なメニュー・販売状況に合わせて掲載します。
+        </p>
+      </div>
+      <div class="menu-grid">
+        <article class="menu-card reveal">
+          <div class="menu-image">
+            <img src="https://images.unsplash.com/photo-1555507036-ab1f4038808a?auto=format&fit=crop&w=1200&q=70" alt="洋菓子の焼き上がりイメージ">
+          </div>
+          <div class="menu-body">
+            <span class="menu-tag">定番</span>
+            <h3>カスタードシュー</h3>
+            <p>なめらかなクリームを主役にした、初めての方にも選びやすい看板商品。</p>
+            <span class="price">¥280</span>
+          </div>
+        </article>
+        <article class="menu-card reveal">
+          <div class="menu-image">
+            <img src="https://images.unsplash.com/photo-1549931319-a545dcf3bc73?auto=format&fit=crop&w=1200&q=70" alt="焼き菓子の香ばしさを伝える物撮りイメージ">
+          </div>
+          <div class="menu-body">
+            <span class="menu-tag">季節限定</span>
+            <h3>長崎みかんクリーム</h3>
+            <p>佐世保のお土産選びに合わせた、季節感のある爽やかな味わいの想定商品。</p>
+            <span class="price">¥340</span>
+          </div>
+        </article>
+        <article class="menu-card reveal">
+          <div class="menu-image">
+            <img src="https://images.unsplash.com/photo-1568254183919-78a4f43a2877?auto=format&fit=crop&w=1200&q=70" alt="店頭ショーケースに並ぶ焼き菓子のイメージ">
+          </div>
+          <div class="menu-body">
+            <span class="menu-tag">手土産</span>
+            <h3>シュークリームBOX</h3>
+            <p>家族や職場への差し入れに。箱詰めの可愛さまで伝える商品紹介枠です。</p>
+            <span class="price">¥1,680</span>
+          </div>
+        </article>
+      </div>
+      <p class="note">※商品名・価格は仮の内容です。実制作では正式なメニュー情報に差し替えます。</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container visit-band reveal">
+      <div>
+        <span class="section-kicker">Takeout</span>
+        <h2>夕方の手土産、電話で取り置き。</h2>
+        <p>売り切れやすい商品は、来店前に電話で確認できる導線を大きく配置しています。</p>
+      </div>
+      <a class="btn" href="tel:0956000000">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M7 4h4l2 5-2.5 1.5a12 12 0 0 0 5 5L17 13l5 2v4c0 1-1 2-2 2C10.6 21 3 13.4 3 4c0-1 1-2 2-2h2Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+        </svg>
+        0956-00-0000
+      </a>
+    </div>
+  </section>
+
+  <section id="news" class="section white">
+    <div class="container">
+      <div class="section-head reveal">
+        <div>
+          <span class="section-kicker">News & Instagram</span>
+          <h2 class="section-title">新作と営業日を、<br>いつでも新しく。</h2>
+        </div>
+        <p class="section-lead">
+          WordPress、Studio、Wix、ペライチなど、ご希望の制作環境に合わせて更新機能を組み込む想定です。
+        </p>
+      </div>
+      <div class="news-layout">
+        <div class="instagram-mock reveal" aria-label="Instagramフィード表示のサンプル">
+          <div class="instagram-head">
+            <div class="instagram-user">
+              <span class="avatar" aria-hidden="true"></span>
+              <span>sasebo_creampuff_sample</span>
+            </div>
+            <span class="news-date">Feed</span>
+          </div>
+          <div class="instagram-grid">
+            <img src="https://images.unsplash.com/photo-1506459225024-1428097a7e18?auto=format&fit=crop&w=600&q=70" alt="菓子作りの手元イメージ">
+            <img src="https://images.unsplash.com/photo-1568254183919-78a4f43a2877?auto=format&fit=crop&w=600&q=70" alt="ショーケースのイメージ">
+            <img src="https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=600&q=70" alt="焼き菓子の物撮りイメージ">
+            <img src="https://images.unsplash.com/photo-1549931319-a545dcf3bc73?auto=format&fit=crop&w=600&q=70" alt="パンの物撮りイメージ">
+            <img src="https://images.unsplash.com/photo-1555507036-ab1f4038808a?auto=format&fit=crop&w=600&q=70" alt="焼き上がりのイメージ">
+            <img src="https://images.unsplash.com/photo-1470337458703-46ad1756a187?auto=format&fit=crop&w=600&q=70" alt="ドリンクとグラスの手元イメージ">
+          </div>
+        </div>
+        <div class="news-list">
+          <article class="news-item reveal">
+            <time class="news-date" datetime="2026-07-12">2026.07.12</time>
+            <div>
+              <strong>夏限定クリームの販売を開始しました</strong>
+              <span>季節限定商品の写真、販売期間、取り置き可否を投稿できる想定です。</span>
+            </div>
+          </article>
+          <article class="news-item reveal">
+            <time class="news-date" datetime="2026-07-05">2026.07.05</time>
+            <div>
+              <strong>週末の完売時間について</strong>
+              <span>ファミリー層の来店が増える曜日に合わせ、早めの案内を掲載します。</span>
+            </div>
+          </article>
+          <article class="news-item reveal">
+            <time class="news-date" datetime="2026-06-28">2026.06.28</time>
+            <div>
+              <strong>営業時間変更のお知らせ</strong>
+              <span>CMS化により、急な変更もトップページで伝えやすくなります。</span>
+            </div>
+          </article>
+        </div>
+      </div>
+      <p class="note">※投稿日・内容は仮の内容です。Instagram表示は連携イメージです。</p>
+    </div>
+  </section>
+
+  <section id="access" class="section">
+    <div class="container">
+      <div class="section-head reveal">
+        <div>
+          <span class="section-kicker">Shop Info</span>
+          <h2 class="section-title">佐世保市で、<br>寄り道しやすいお店へ。</h2>
+        </div>
+        <p class="section-lead">
+          住所は募集文にある地名までを掲載しています。番地やGoogleマップは実制作時に正式情報へ差し替えます。
+        </p>
+      </div>
+      <div class="info-grid">
+        <div class="info-panel reveal">
+          <dl>
+            <div class="info-row">
+              <dt>店名</dt>
+              <dd>佐世保シュークリームサンプル</dd>
+            </div>
+            <div class="info-row">
+              <dt>所在地</dt>
+              <dd>長崎県佐世保市</dd>
+            </div>
+            <div class="info-row">
+              <dt>電話</dt>
+              <dd><a class="tel-link" href="tel:0956000000">0956-00-0000</a></dd>
+            </div>
+            <div class="info-row">
+              <dt>販売形態</dt>
+              <dd>テイクアウト中心のシュークリーム専門店</dd>
+            </div>
+          </dl>
+          <table class="hours" aria-label="営業時間">
+            <thead>
+              <tr>
+                <th>曜日</th>
+                <th>営業時間</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>月・火・木・金</td>
+                <td>10:00-18:00</td>
+              </tr>
+              <tr>
+                <td>土・日</td>
+                <td>10:00-17:00</td>
+              </tr>
+              <tr>
+                <td>水</td>
+                <td>定休日</td>
+              </tr>
+            </tbody>
+          </table>
+          <p class="note">※営業時間・定休日は仮の内容です。実制作では正式情報に差し替えます。</p>
+        </div>
+        <div class="map-box reveal">
+          <div class="map-placeholder">
+            <div>
+              <strong>Google Map</strong>
+              <p>長崎県佐世保市の店舗位置を埋め込む想定です。<br>スマートフォンでも横幅がはみ出ないよう、地図はレスポンシブ枠で実装します。</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section white">
+    <div class="container">
+      <div class="section-head reveal">
+        <div>
+          <span class="section-kicker">FAQ</span>
+          <h2 class="section-title">来店前の小さな疑問を、<br>先にほどく。</h2>
+        </div>
+        <p class="section-lead">
+          よくある質問を置くことで、電話問い合わせの負担を減らしながら、初回来店の安心感を高めます。
+        </p>
+      </div>
+      <div class="faq-panel reveal">
+        <div class="faq-list">
+          <div class="faq-item open">
+            <button class="faq-question" type="button">
+              <span>取り置き予約はできますか？</span>
+              <span class="faq-mark" aria-hidden="true"></span>
+            </button>
+            <div class="faq-answer">
+              本デモでは電話またはフォームからの取り置き相談を想定しています。正式な受付方法や締切時間は、実際の店舗運用に合わせて調整します。
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question" type="button">
+              <span>季節限定メニューは更新できますか？</span>
+              <span class="faq-mark" aria-hidden="true"></span>
+            </button>
+            <div class="faq-answer">
+              WordPressなどのCMSを使う場合、管理画面から写真・商品名・販売期間を更新できる構成にできます。
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question" type="button">
+              <span>Instagramの投稿を表示できますか？</span>
+              <span class="faq-mark" aria-hidden="true"></span>
+            </button>
+            <div class="faq-answer">
+              可能です。実制作では利用するCMSやInstagram側の仕様に合わせ、表示方法と更新ルールを確認して実装します。
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question" type="button">
+              <span>写真やロゴがまだ揃っていない場合も進められますか？</span>
+              <span class="faq-mark" aria-hidden="true"></span>
+            </button>
+            <div class="faq-answer">
+              初期段階では仮素材で全体設計を進め、支給素材が揃った時点で商品写真やロゴに差し替える進行を想定しています。
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="section">
+    <div class="container">
+      <div class="section-head reveal">
+        <div>
+          <span class="section-kicker">Contact</span>
+          <h2 class="section-title">手土産の相談も、<br>来店前にさっと。</h2>
+        </div>
+        <p class="section-lead">
+          フォームはデモ表示です。実制作では問い合わせ項目、予約受付、スパム対策、送信先メールを店舗運用に合わせます。
+        </p>
+      </div>
+      <div class="form-panel reveal">
+        <form>
+          <div class="form-grid">
+            <div class="field">
+              <label for="name">お名前</label>
+              <input id="name" name="name" type="text" placeholder="例：山田 花子">
+            </div>
+            <div class="field">
+              <label for="tel">電話番号</label>
+              <input id="tel" name="tel" type="tel" placeholder="例：090-0000-0000">
+            </div>
+            <div class="field">
+              <label for="purpose">ご相談内容</label>
+              <select id="purpose" name="purpose">
+                <option>取り置きについて</option>
+                <option>手土産・箱詰めについて</option>
+                <option>営業時間について</option>
+                <option>その他</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="date">ご来店予定日</label>
+              <input id="date" name="date" type="text" placeholder="例：7月20日 夕方">
+            </div>
+            <div class="field full">
+              <label for="message">メッセージ</label>
+              <textarea id="message" name="message" placeholder="ご希望の商品数や受け取り時間などをご記入ください。"></textarea>
+            </div>
+            <div class="field full">
+              <button class="btn" type="button">
+                <svg class="icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="M4 6.5h16v11H4v-11Z" stroke="currentColor" stroke-width="2"/>
+                  <path d="m4.5 7 7.5 6 7.5-6" stroke="currentColor" stroke-width="2"/>
+                </svg>
+                送信内容を確認する
+              </button>
+            </div>
+          </div>
+        </form>
+        <p class="note">※このフォームは送信されないデモです。掲載内容は仮の内容です。</p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<div class="sticky-cta" aria-label="固定お問い合わせ導線">
+  <a class="btn secondary" href="tel:0956000000">電話</a>
+  <a class="btn" href="#contact">相談</a>
+</div>
+
+<footer class="footer">
+  <div class="container footer-grid">
+    <div>
+      <a class="logo" href="#top">
+        <span class="logo-main">佐世保シュークリームサンプル</span>
+        <span class="logo-sub">Cream Puff Specialty Shop</span>
+      </a>
+      <p>長崎県佐世保市 / シュークリーム専門店ホームページ制作デモ</p>
+      <p>※本ページは制作サンプル(デモ)です。掲載の内容・数値は仮のもので、写真はイメージです。</p>
+      <p>※写真はイメージです。実制作ではご提供写真や日本人モデルの素材に差し替えます。</p>
+    </div>
+    <div class="footer-links">
+      <a href="#concept">こだわり</a>
+      <a href="#menu">メニュー</a>
+      <a href="#news">お知らせ</a>
+      <a href="#access">店舗情報</a>
+      <a href="#contact">お問い合わせ</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+const menuButton = document.querySelector(".menu-button");
+const mobileNav = document.querySelector(".mobile-nav");
+menuButton.addEventListener("click", () => {
+  const isOpen = mobileNav.classList.toggle("open");
+  document.body.classList.toggle("menu-open", isOpen);
+  menuButton.setAttribute("aria-expanded", String(isOpen));
+});
+mobileNav.querySelectorAll("a").forEach((link) => {
+  link.addEventListener("click", () => {
+    mobileNav.classList.remove("open");
+    document.body.classList.remove("menu-open");
+    menuButton.setAttribute("aria-expanded", "false");
+  });
+});
+document.querySelectorAll(".faq-question").forEach((button) => {
+  button.addEventListener("click", () => {
+    button.closest(".faq-item").classList.toggle("open");
+  });
+});
+const revealTargets = document.querySelectorAll(".reveal");
+if ("IntersectionObserver" in window) {
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("visible");
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.14 });
+  revealTargets.forEach((target) => observer.observe(target));
+} else {
+  revealTargets.forEach((target) => target.classList.add("visible"));
+}
+</script>
+</body>
+</html>

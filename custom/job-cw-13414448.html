@@ -1,0 +1,1469 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>税務調査サポートサンプル | 税務署から通知が届いた事業者へ</title>
+<meta name="description" content="税務署から税務調査の通知が届いた事業者向けの税務調査対応LPデモです。初回相談、事前整理、当日立会い、修正申告まで落ち着いて伴走します。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Noto+Sans+JP:wght@400;500;700;900&family=Zen+Kaku+Gothic+New:wght@500;700;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --base:#fbfaf7;
+  --paper:#ffffff;
+  --ink:#1b2430;
+  --muted:#67707d;
+  --line:#e7e1d8;
+  --accent:#b2232f;
+  --accent-dark:#8f1722;
+  --accent-soft:#fff1f2;
+  --navy:#17243a;
+  --shadow:0 18px 45px rgba(27,36,48,.12);
+  --radius:8px;
+}
+*{
+  box-sizing:border-box;
+}
+html{
+  scroll-behavior:smooth;
+  overflow-x:hidden;
+}
+body{
+  margin:0;
+  min-width:0;
+  overflow-x:hidden;
+  color:var(--ink);
+  background:var(--base);
+  font-family:"Noto Sans JP",system-ui,-apple-system,BlinkMacSystemFont,sans-serif;
+  font-feature-settings:"palt" 1;
+  line-height:1.8;
+  letter-spacing:0;
+}
+img,svg,iframe{
+  max-width:100%;
+}
+a{
+  color:inherit;
+  text-decoration:none;
+}
+button,input,select,textarea{
+  font:inherit;
+}
+.header{
+  position:sticky;
+  top:0;
+  z-index:40;
+  background:rgba(255,255,255,.92);
+  border-bottom:1px solid rgba(231,225,216,.9);
+}
+.header-inner{
+  width:min(1120px,calc(100% - 40px));
+  margin:0 auto;
+  min-height:74px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:24px;
+}
+.logo{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  min-width:0;
+}
+.logo-mark{
+  width:38px;
+  height:38px;
+  border-radius:50%;
+  background:var(--accent);
+  display:grid;
+  place-items:center;
+  color:#fff;
+  font-family:"Manrope",sans-serif;
+  font-weight:800;
+  box-shadow:0 10px 22px rgba(178,35,47,.24);
+}
+.logo-text{
+  display:flex;
+  flex-direction:column;
+  line-height:1.25;
+}
+.logo-text strong{
+  font-size:15px;
+  font-weight:900;
+}
+.logo-text span{
+  font-size:11px;
+  color:var(--muted);
+}
+.header-actions{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+.nav-links{
+  display:flex;
+  align-items:center;
+  gap:22px;
+  font-size:13px;
+  font-weight:700;
+  color:#344052;
+}
+.nav-links a{
+  position:relative;
+}
+.nav-links a:after{
+  content:"";
+  position:absolute;
+  left:0;
+  bottom:-8px;
+  width:0;
+  height:2px;
+  background:var(--accent);
+  transition:width .2s ease;
+}
+.nav-links a:hover:after{
+  width:100%;
+}
+.tel-mini{
+  font-family:"Manrope","Noto Sans JP",sans-serif;
+  font-weight:800;
+  color:var(--accent);
+  white-space:nowrap;
+}
+.btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:9px;
+  min-height:48px;
+  padding:0 22px;
+  border-radius:100px;
+  border:1px solid transparent;
+  font-weight:800;
+  line-height:1;
+  cursor:pointer;
+  transition:transform .2s ease,box-shadow .2s ease,background .2s ease;
+}
+.btn svg{
+  width:18px;
+  height:18px;
+  flex:none;
+}
+.btn-primary{
+  color:#fff;
+  background:var(--accent);
+  box-shadow:0 14px 28px rgba(178,35,47,.25);
+}
+.btn-primary:hover{
+  transform:translateY(-2px);
+  background:var(--accent-dark);
+  box-shadow:0 18px 36px rgba(178,35,47,.3);
+}
+.btn-secondary{
+  color:var(--accent);
+  background:#fff;
+  border-color:#e8c1c5;
+}
+.btn-secondary:hover{
+  transform:translateY(-2px);
+  box-shadow:0 12px 26px rgba(27,36,48,.09);
+}
+.menu-button{
+  display:none;
+  width:46px;
+  height:46px;
+  border:1px solid var(--line);
+  border-radius:50%;
+  background:#fff;
+}
+.menu-button span{
+  display:block;
+  width:18px;
+  height:2px;
+  margin:4px auto;
+  background:var(--ink);
+}
+.mobile-nav{
+  position:fixed;
+  inset:74px 16px auto 16px;
+  z-index:60;
+  display:none;
+  padding:18px;
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:8px;
+  box-shadow:var(--shadow);
+}
+.mobile-nav.is-open{
+  display:block;
+}
+.mobile-nav a{
+  display:block;
+  padding:12px 4px;
+  font-weight:800;
+  border-bottom:1px solid var(--line);
+}
+.hero{
+  position:relative;
+  padding:78px 0 52px;
+  background:
+    linear-gradient(90deg,rgba(251,250,247,.98) 0%,rgba(251,250,247,.92) 48%,rgba(251,250,247,.68) 100%),
+    url("https://images.unsplash.com/photo-1664596350962-603b0a41524a?auto=format&fit=crop&w=1200&q=70") center/cover;
+}
+.hero:after{
+  content:"";
+  position:absolute;
+  left:0;
+  right:0;
+  bottom:0;
+  height:1px;
+  background:var(--line);
+}
+.container{
+  width:min(1120px,calc(100% - 40px));
+  margin:0 auto;
+}
+.hero-grid{
+  display:grid;
+  grid-template-columns:minmax(0,1.05fr) minmax(320px,.72fr);
+  gap:54px;
+  align-items:center;
+}
+.kicker{
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  padding:7px 14px;
+  border:1px solid #e8c1c5;
+  border-radius:100px;
+  background:rgba(255,255,255,.72);
+  color:var(--accent);
+  font-size:13px;
+  font-weight:900;
+}
+.kicker:before{
+  content:"";
+  width:8px;
+  height:8px;
+  border-radius:50%;
+  background:var(--accent);
+}
+h1,h2,h3{
+  margin:0;
+  font-family:"Zen Kaku Gothic New","Noto Sans JP",sans-serif;
+  letter-spacing:0;
+  line-height:1.25;
+}
+.hero h1{
+  margin-top:22px;
+  max-width:760px;
+  font-size:clamp(38px,7vw,72px);
+  font-weight:900;
+}
+.copy-line{
+  color:var(--accent);
+}
+.hero-lead{
+  max-width:650px;
+  margin:22px 0 0;
+  font-size:18px;
+  font-weight:500;
+  color:#3b4656;
+}
+.hero-cta{
+  display:flex;
+  flex-wrap:wrap;
+  gap:14px;
+  margin-top:32px;
+}
+.hero-note{
+  margin-top:16px;
+  color:var(--muted);
+  font-size:13px;
+}
+.hero-panel{
+  background:rgba(255,255,255,.92);
+  border:1px solid var(--line);
+  border-radius:8px;
+  box-shadow:var(--shadow);
+  overflow:hidden;
+}
+.panel-head{
+  padding:24px 26px;
+  background:var(--navy);
+  color:#fff;
+}
+.panel-head span{
+  display:block;
+  font-size:13px;
+  color:#dbe2ee;
+}
+.panel-head strong{
+  display:block;
+  margin-top:6px;
+  font-family:"Manrope","Noto Sans JP",sans-serif;
+  font-size:32px;
+  line-height:1.1;
+}
+.panel-body{
+  padding:26px;
+}
+.urgent-list{
+  display:grid;
+  gap:14px;
+  margin:0;
+  padding:0;
+  list-style:none;
+}
+.urgent-list li{
+  display:grid;
+  grid-template-columns:24px 1fr;
+  gap:12px;
+  align-items:start;
+  font-weight:700;
+}
+.check{
+  width:22px;
+  height:22px;
+  border-radius:50%;
+  background:var(--accent-soft);
+  border:1px solid #edc9cd;
+  position:relative;
+  margin-top:4px;
+}
+.check:after{
+  content:"";
+  position:absolute;
+  left:6px;
+  top:4px;
+  width:7px;
+  height:11px;
+  border-right:2px solid var(--accent);
+  border-bottom:2px solid var(--accent);
+  transform:rotate(42deg);
+}
+.trust-band{
+  margin-top:44px;
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:8px;
+  overflow:hidden;
+}
+.trust-item{
+  padding:20px 18px;
+  border-right:1px solid var(--line);
+}
+.trust-item:last-child{
+  border-right:0;
+}
+.trust-item strong{
+  display:block;
+  color:var(--accent);
+  font-family:"Manrope","Noto Sans JP",sans-serif;
+  font-size:28px;
+  line-height:1.15;
+}
+.trust-item span{
+  display:block;
+  margin-top:4px;
+  font-size:13px;
+  color:var(--muted);
+  font-weight:700;
+}
+.section{
+  padding:104px 0;
+}
+.section-tight{
+  padding:86px 0;
+}
+.section-white{
+  background:#fff;
+}
+.section-head{
+  display:flex;
+  align-items:end;
+  justify-content:space-between;
+  gap:32px;
+  margin-bottom:36px;
+}
+.section-label{
+  color:var(--accent);
+  font-family:"Manrope","Noto Sans JP",sans-serif;
+  font-size:13px;
+  font-weight:800;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+}
+.section h2{
+  margin-top:8px;
+  max-width:760px;
+  font-size:clamp(30px,4.6vw,48px);
+  font-weight:900;
+}
+.section-copy{
+  max-width:410px;
+  margin:0;
+  color:var(--muted);
+  font-weight:500;
+}
+.problem-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:22px;
+}
+.problem-card{
+  padding:28px;
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:8px;
+}
+.problem-card strong{
+  display:block;
+  margin-bottom:10px;
+  font-size:18px;
+}
+.problem-card p{
+  margin:0;
+  color:var(--muted);
+}
+.reason-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:22px;
+}
+.reason-card{
+  position:relative;
+  padding:30px;
+  min-height:260px;
+  background:var(--paper);
+  border:1px solid var(--line);
+  border-radius:8px;
+  overflow:hidden;
+}
+.reason-number{
+  color:var(--accent);
+  font-family:"Manrope",sans-serif;
+  font-size:14px;
+  font-weight:800;
+}
+.reason-card h3{
+  margin-top:18px;
+  font-size:23px;
+}
+.reason-card p{
+  margin:16px 0 0;
+  color:var(--muted);
+}
+.reason-card:after{
+  content:"";
+  position:absolute;
+  right:24px;
+  bottom:24px;
+  width:54px;
+  height:54px;
+  border:12px solid var(--accent-soft);
+  border-radius:50%;
+}
+.flow{
+  display:grid;
+  grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);
+  gap:38px;
+}
+.flow-side{
+  padding:34px;
+  color:#fff;
+  background:var(--navy);
+  border-radius:8px;
+}
+.flow-side h2{
+  font-size:36px;
+}
+.flow-side p{
+  margin:18px 0 0;
+  color:#d7deea;
+}
+.flow-list{
+  display:grid;
+  gap:16px;
+}
+.flow-item{
+  display:grid;
+  grid-template-columns:70px 1fr;
+  gap:20px;
+  padding:24px;
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:8px;
+}
+.flow-num{
+  font-family:"Manrope",sans-serif;
+  color:var(--accent);
+  font-size:25px;
+  font-weight:800;
+}
+.flow-item h3{
+  font-size:21px;
+}
+.flow-item p{
+  margin:8px 0 0;
+  color:var(--muted);
+}
+.price-wrap{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:20px;
+}
+.price-card{
+  padding:28px;
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:8px;
+}
+.price-card.featured{
+  border-color:#d9969d;
+  box-shadow:var(--shadow);
+}
+.price-card h3{
+  font-size:22px;
+}
+.price{
+  margin-top:18px;
+  color:var(--accent);
+  font-family:"Manrope","Noto Sans JP",sans-serif;
+  font-size:32px;
+  font-weight:800;
+  line-height:1.2;
+}
+.price small{
+  font-size:14px;
+  color:var(--muted);
+}
+.price-card ul{
+  margin:20px 0 0;
+  padding:0;
+  list-style:none;
+  display:grid;
+  gap:10px;
+  color:#3b4656;
+}
+.price-card li{
+  display:grid;
+  grid-template-columns:18px 1fr;
+  gap:9px;
+}
+.price-card li:before{
+  content:"";
+  width:8px;
+  height:8px;
+  margin-top:12px;
+  border-radius:50%;
+  background:var(--accent);
+}
+.disclaimer{
+  margin-top:18px;
+  padding:14px 18px;
+  background:var(--accent-soft);
+  border:1px solid #edc9cd;
+  border-radius:8px;
+  color:#7b2430;
+  font-size:13px;
+  font-weight:700;
+}
+.compare-table{
+  width:100%;
+  border-collapse:collapse;
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:8px;
+  overflow:hidden;
+}
+.compare-table th,
+.compare-table td{
+  padding:18px;
+  border-bottom:1px solid var(--line);
+  text-align:left;
+  vertical-align:top;
+}
+.compare-table th{
+  background:#f5f1eb;
+  font-size:14px;
+}
+.compare-table tr:last-child th,
+.compare-table tr:last-child td{
+  border-bottom:0;
+}
+.compare-table .strong{
+  color:var(--accent);
+  font-weight:900;
+}
+.voice-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:22px;
+}
+.voice-card{
+  padding:28px;
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:8px;
+}
+.voice-card p{
+  margin:0;
+  color:#3b4656;
+}
+.voice-card strong{
+  display:block;
+  margin-top:18px;
+  font-size:14px;
+}
+.profile{
+  display:grid;
+  grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);
+  gap:36px;
+  align-items:center;
+}
+.profile-visual{
+  min-height:360px;
+  border-radius:8px;
+  background:
+    linear-gradient(rgba(23,36,58,.08),rgba(23,36,58,.08)),
+    url("https://images.unsplash.com/photo-1629875499750-a31b83446598?auto=format&fit=crop&w=1200&q=70") center/cover;
+}
+.profile-text{
+  padding:14px 0;
+}
+.profile-text h2{
+  font-size:42px;
+}
+.profile-text p{
+  color:var(--muted);
+}
+.profile-name{
+  margin-top:22px;
+  padding-left:18px;
+  border-left:4px solid var(--accent);
+  font-weight:900;
+}
+.faq-list{
+  display:grid;
+  gap:14px;
+}
+.faq-item{
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:8px;
+  overflow:hidden;
+}
+.faq-question{
+  width:100%;
+  padding:22px 24px;
+  border:0;
+  background:#fff;
+  text-align:left;
+  display:flex;
+  justify-content:space-between;
+  gap:18px;
+  font-weight:900;
+  cursor:pointer;
+}
+.faq-question span{
+  min-width:0;
+}
+.faq-mark{
+  width:24px;
+  height:24px;
+  flex:none;
+  position:relative;
+}
+.faq-mark:before,
+.faq-mark:after{
+  content:"";
+  position:absolute;
+  left:5px;
+  right:5px;
+  top:11px;
+  height:2px;
+  background:var(--accent);
+}
+.faq-mark:after{
+  transform:rotate(90deg);
+  transition:transform .2s ease;
+}
+.faq-item.is-open .faq-mark:after{
+  transform:rotate(0);
+}
+.faq-answer{
+  display:none;
+  padding:0 24px 24px;
+  color:var(--muted);
+}
+.faq-item.is-open .faq-answer{
+  display:block;
+}
+.form-area{
+  display:grid;
+  grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);
+  gap:36px;
+  align-items:start;
+}
+.contact-card{
+  padding:32px;
+  color:#fff;
+  background:var(--navy);
+  border-radius:8px;
+}
+.contact-card h2{
+  font-size:34px;
+}
+.contact-card p{
+  color:#d9e0ec;
+}
+.contact-phone{
+  display:block;
+  margin-top:18px;
+  color:#fff;
+  font-family:"Manrope","Noto Sans JP",sans-serif;
+  font-size:34px;
+  font-weight:800;
+}
+.business-hours{
+  margin-top:24px;
+  width:100%;
+  border-collapse:collapse;
+  color:#fff;
+  font-size:14px;
+}
+.business-hours th,
+.business-hours td{
+  padding:10px 0;
+  border-bottom:1px solid rgba(255,255,255,.18);
+  text-align:left;
+}
+.form{
+  padding:32px;
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:8px;
+}
+.form-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:16px;
+}
+.field{
+  display:grid;
+  gap:7px;
+}
+.field.full{
+  grid-column:1 / -1;
+}
+.field label{
+  font-size:13px;
+  font-weight:900;
+}
+.field input,
+.field select,
+.field textarea{
+  width:100%;
+  max-width:100%;
+  min-height:48px;
+  padding:12px 14px;
+  border:1px solid #d9d2c8;
+  border-radius:8px;
+  background:#fff;
+  font-size:16px;
+}
+.field textarea{
+  min-height:128px;
+  resize:vertical;
+}
+.footer{
+  padding:46px 0 112px;
+  background:#111827;
+  color:#cfd6e2;
+}
+.footer-grid{
+  display:flex;
+  justify-content:space-between;
+  gap:28px;
+}
+.footer strong{
+  color:#fff;
+}
+.footer p{
+  margin:10px 0 0;
+  max-width:720px;
+  font-size:13px;
+}
+.sticky-cta{
+  position:fixed;
+  left:0;
+  right:0;
+  bottom:0;
+  z-index:70;
+  display:none;
+  padding:10px 14px calc(10px + env(safe-area-inset-bottom));
+  background:rgba(255,255,255,.95);
+  border-top:1px solid var(--line);
+}
+.sticky-cta-inner{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+}
+.reveal{
+  opacity:0;
+  transform:translateY(18px);
+  transition:opacity .55s ease,transform .55s ease;
+}
+.reveal.is-visible{
+  opacity:1;
+  transform:none;
+}
+@media (prefers-reduced-motion:reduce){
+  html{
+    scroll-behavior:auto;
+  }
+  .reveal,
+  .btn,
+  .nav-links a:after,
+  .faq-mark:after{
+    transition:none;
+  }
+}
+@media (max-width:980px){
+  .nav-links,
+  .tel-mini,
+  .header-actions .btn{
+    display:none;
+  }
+  .menu-button{
+    display:block;
+  }
+  .hero-grid,
+  .flow,
+  .profile,
+  .form-area{
+    grid-template-columns:1fr;
+  }
+  .trust-band,
+  .reason-grid,
+  .price-wrap,
+  .voice-grid{
+    grid-template-columns:1fr 1fr;
+  }
+}
+@media (max-width:640px){
+  .container,
+  .header-inner{
+    width:min(100% - 28px,1120px);
+  }
+  .header-inner{
+    min-height:68px;
+  }
+  .mobile-nav{
+    inset:68px 14px auto 14px;
+  }
+  .logo-text span{
+    display:none;
+  }
+  .hero{
+    padding:54px 0 34px;
+  }
+  .hero h1{
+    font-size:39px;
+  }
+  .hero-lead{
+    font-size:16px;
+  }
+  .hero-cta{
+    display:grid;
+    grid-template-columns:1fr;
+  }
+  .section{
+    padding:82px 0;
+  }
+  .section-tight{
+    padding:70px 0;
+  }
+  .section-head{
+    display:block;
+  }
+  .section-copy{
+    margin-top:16px;
+  }
+  .trust-band,
+  .problem-grid,
+  .reason-grid,
+  .price-wrap,
+  .voice-grid,
+  .form-grid{
+    grid-template-columns:1fr;
+  }
+  .trust-item{
+    border-right:0;
+    border-bottom:1px solid var(--line);
+  }
+  .trust-item:last-child{
+    border-bottom:0;
+  }
+  .flow-item{
+    grid-template-columns:1fr;
+    gap:8px;
+  }
+  .compare-scroll{
+    overflow-x:auto;
+    max-width:100%;
+  }
+  .compare-table{
+    min-width:560px;
+  }
+  .profile-visual{
+    min-height:260px;
+  }
+  .contact-phone{
+    font-size:28px;
+  }
+  .footer-grid{
+    display:block;
+  }
+  .sticky-cta{
+    display:block;
+  }
+  .btn{
+    min-height:50px;
+    padding:0 16px;
+    font-size:14px;
+  }
+}
+</style>
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"LocalBusiness",
+  "name":"税務調査サポートサンプル",
+  "description":"税務署から税務調査の通知が届いた事業者向けの税務調査対応サンプルLPです。",
+  "telephone":"048-000-0000",
+  "address":{
+    "@type":"PostalAddress",
+    "addressCountry":"JP"
+  },
+  "openingHoursSpecification":[
+    {
+      "@type":"OpeningHoursSpecification",
+      "dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday"],
+      "opens":"09:00",
+      "closes":"18:00"
+    }
+  ],
+  "areaServed":"全国"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"FAQPage",
+  "mainEntity":[
+    {
+      "@type":"Question",
+      "name":"税務署から通知が届いた当日でも相談できますか？",
+      "acceptedAnswer":{
+        "@type":"Answer",
+        "text":"はい。調査日時、税目、対象年度、担当部署を確認し、初回相談で優先順位を整理する想定です。"
+      }
+    },
+    {
+      "@type":"Question",
+      "name":"顧問税理士がいても依頼できますか？",
+      "acceptedAnswer":{
+        "@type":"Answer",
+        "text":"可能です。既存の顧問税理士との役割分担を確認し、必要な範囲だけ税務調査対応を支援する想定です。"
+      }
+    }
+  ]
+}
+</script>
+</head>
+<body>
+<header class="header">
+  <div class="header-inner">
+    <a class="logo" href="#top" aria-label="税務調査サポートサンプル">
+      <span class="logo-mark">T</span>
+      <span class="logo-text">
+        <strong>税務調査サポートサンプル</strong>
+        <span>Tax Audit Response LP Demo</span>
+      </span>
+    </a>
+    <nav class="nav-links" aria-label="ページ内ナビゲーション">
+      <a href="#problem">状況整理</a>
+      <a href="#reason">選ばれる理由</a>
+      <a href="#flow">対応の流れ</a>
+      <a href="#price">料金</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+    <div class="header-actions">
+      <a class="tel-mini" href="tel:0480000000">048-000-0000</a>
+      <a class="btn btn-primary" href="#contact">
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 6.5h14v11H5v-11Z" stroke="currentColor" stroke-width="2"/><path d="m6 8 6 5 6-5" stroke="currentColor" stroke-width="2"/></svg>
+        無料相談
+      </a>
+    </div>
+    <button class="menu-button" type="button" aria-label="メニューを開閉" aria-controls="mobileNav" aria-expanded="false">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </div>
+</header>
+<nav class="mobile-nav" id="mobileNav" aria-label="スマートフォン用ナビゲーション">
+  <a href="#problem">状況整理</a>
+  <a href="#reason">選ばれる理由</a>
+  <a href="#flow">対応の流れ</a>
+  <a href="#price">料金</a>
+  <a href="#contact">相談する</a>
+</nav>
+<main id="top">
+  <section class="hero">
+    <div class="container">
+      <div class="hero-grid">
+        <div class="hero-copy reveal">
+          <span class="kicker">税務署から通知が届いた事業者へ</span>
+          <h1>慌てる前に、<br><span class="copy-line">整える。</span></h1>
+          <p class="hero-lead">調査日時が決まった段階から、帳簿・請求書・現金管理・役員取引までを短時間で棚卸し。切羽詰まった経営者が「何から話せばよいか」を明確にする税務調査特化の相談導線です。</p>
+          <div class="hero-cta">
+            <a class="btn btn-primary" href="tel:0480000000">
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7.4 4.5 9.7 4c.7-.1 1.4.3 1.6 1l.7 2.4c.2.6 0 1.2-.5 1.6l-1.2.9c.8 1.6 2.1 2.9 3.7 3.7l.9-1.2c.4-.5 1-.7 1.6-.5l2.4.7c.7.2 1.1.9 1 1.6l-.5 2.3c-.2.8-.9 1.4-1.8 1.4C10.7 17.9 6.1 13.3 6.1 6.4c0-.9.6-1.7 1.3-1.9Z" stroke="currentColor" stroke-width="2"/></svg>
+              電話で急ぎ相談
+            </a>
+            <a class="btn btn-secondary" href="#contact">
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 5h16v14H4V5Z" stroke="currentColor" stroke-width="2"/><path d="M8 9h8M8 13h5" stroke="currentColor" stroke-width="2"/></svg>
+              メールで相談予約
+            </a>
+          </div>
+          <p class="hero-note">受付時間 9:00〜18:00 / 全国オンライン対応 / 電話番号はデモ用ダミーです。</p>
+        </div>
+        <aside class="hero-panel reveal" aria-label="緊急チェック">
+          <div class="panel-head">
+            <span>FIRST CHECK</span>
+            <strong>通知後48時間で確認</strong>
+          </div>
+          <div class="panel-body">
+            <ul class="urgent-list">
+              <li><span class="check"></span><span>調査対象の税目・年度・日時を把握している</span></li>
+              <li><span class="check"></span><span>帳簿と通帳、請求書の説明順を決めている</span></li>
+              <li><span class="check"></span><span>税務署へ不用意な回答をする前に専門家へ確認したい</span></li>
+              <li><span class="check"></span><span>立会いの可否と想定追徴額を早めに知りたい</span></li>
+            </ul>
+          </div>
+        </aside>
+      </div>
+      <div class="trust-band reveal" aria-label="対応概要">
+        <div class="trust-item">
+          <strong>9:00</strong>
+          <span>平日受付開始 ※仮</span>
+        </div>
+        <div class="trust-item">
+          <strong>全国</strong>
+          <span>オンライン相談対応</span>
+        </div>
+        <div class="trust-item">
+          <strong>4段階</strong>
+          <span>整理・準備・立会い・申告</span>
+        </div>
+        <div class="trust-item">
+          <strong>048</strong>
+          <span>ダミー番号で表示</span>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="section" id="problem">
+    <div class="container">
+      <div class="section-head reveal">
+        <div>
+          <span class="section-label">Situation</span>
+          <h2>税務調査の不安は、情報の散らかりから大きくなる。</h2>
+        </div>
+        <p class="section-copy">通知を受けた直後は、何を隠すかではなく、何を順番に説明できる状態へ戻すかが重要です。</p>
+      </div>
+      <div class="problem-grid">
+        <article class="problem-card reveal">
+          <strong>税務署からの電話で、日程だけ先に決まった</strong>
+          <p>調査官の質問範囲、対象年度、必要資料を曖昧なまま進めると、準備の優先順位が見えなくなります。</p>
+        </article>
+        <article class="problem-card reveal">
+          <strong>現金売上・外注費・役員貸付金の説明が不安</strong>
+          <p>指摘されやすい論点を先に洗い出し、資料の所在と説明メモを整えることで当日の混乱を抑えます。</p>
+        </article>
+        <article class="problem-card reveal">
+          <strong>顧問税理士に相談しづらい事情がある</strong>
+          <p>セカンドオピニオンとして、既存の顧問契約を尊重しながら調査対応部分のみを支援する設計にできます。</p>
+        </article>
+        <article class="problem-card reveal">
+          <strong>追徴税額がどの程度になるか見通せない</strong>
+          <p>資料確認とヒアリングをもとに、修正申告の可能性、重加算税リスク、納付方法の論点を整理します。</p>
+        </article>
+      </div>
+    </div>
+  </section>
+  <section class="section section-white" id="reason">
+    <div class="container">
+      <div class="section-head reveal">
+        <div>
+          <span class="section-label">Strength</span>
+          <h2>問い合わせ前から、安心の材料が見えるLPへ。</h2>
+        </div>
+        <p class="section-copy">参考サイトのように料金と対応範囲を明示し、切迫した事業者が迷わず連絡できる構成にしています。</p>
+      </div>
+      <div class="reason-grid">
+        <article class="reason-card reveal">
+          <span class="reason-number">01</span>
+          <h3>初回相談で論点を分解</h3>
+          <p>通知書、帳簿、通帳、請求書、契約書の有無を確認し、調査当日までに必要な作業を一枚で整理します。</p>
+        </article>
+        <article class="reason-card reveal">
+          <span class="reason-number">02</span>
+          <h3>当日の受け答えを準備</h3>
+          <p>事実確認、推測、記憶違いを切り分け、調査官へ過不足なく説明するための回答方針を整えます。</p>
+        </article>
+        <article class="reason-card reveal">
+          <span class="reason-number">03</span>
+          <h3>料金を先に提示</h3>
+          <p>相談料、事前整理、立会い、書類作成を分けて表示し、依頼範囲ごとの費用感を把握しやすくします。</p>
+        </article>
+      </div>
+    </div>
+  </section>
+  <section class="section" id="flow">
+    <div class="container">
+      <div class="flow">
+        <div class="flow-side reveal">
+          <span class="section-label">Process</span>
+          <h2>調査対応は、順番が9割。</h2>
+          <p>不安なまま資料を集めるのではなく、税務署が確認したい点から逆算して準備します。短い納期でも、相談から当日立会いまでの道筋が見える構成です。</p>
+        </div>
+        <div class="flow-list">
+          <article class="flow-item reveal">
+            <div class="flow-num">01</div>
+            <div>
+              <h3>通知内容の確認</h3>
+              <p>調査日時、税目、対象年度、調査官名、必要資料を確認。税務署への折り返し前でも相談できる導線にします。</p>
+            </div>
+          </article>
+          <article class="flow-item reveal">
+            <div class="flow-num">02</div>
+            <div>
+              <h3>資料と論点の棚卸し</h3>
+              <p>売上計上、経費性、在庫、現金、役員取引など、指摘されやすい箇所を事前に見える化します。</p>
+            </div>
+          </article>
+          <article class="flow-item reveal">
+            <div class="flow-num">03</div>
+            <div>
+              <h3>調査当日の立会い</h3>
+              <p>質問の意図を確認し、事実に基づく説明を支援。回答の範囲を整理しながら進行します。</p>
+            </div>
+          </article>
+          <article class="flow-item reveal">
+            <div class="flow-num">04</div>
+            <div>
+              <h3>指摘後の対応</h3>
+              <p>修正申告、納税資金、再発防止の記帳ルールまで、調査後に必要な実務を整理します。</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="section section-white" id="price">
+    <div class="container">
+      <div class="section-head reveal">
+        <div>
+          <span class="section-label">Price</span>
+          <h2>費用の見通しを、相談前に。</h2>
+        </div>
+        <p class="section-copy">料金は参考サイトの公開方針に寄せ、透明性を重視した見せ方にしています。実制作では貴所の料金表に差し替えます。</p>
+      </div>
+      <div class="price-wrap">
+        <article class="price-card reveal">
+          <h3>初回相談</h3>
+          <div class="price">22,000円<small> / 時間</small></div>
+          <ul>
+            <li>通知内容の確認</li>
+            <li>必要資料の整理</li>
+            <li>当日までの優先順位作成</li>
+          </ul>
+        </article>
+        <article class="price-card featured reveal">
+          <h3>事前準備パック</h3>
+          <div class="price">330,000円<small> 〜</small></div>
+          <ul>
+            <li>事前打合せ</li>
+            <li>帳簿・資料確認</li>
+            <li>調査の流れ確認</li>
+            <li>税務署との調整</li>
+          </ul>
+        </article>
+        <article class="price-card reveal">
+          <h3>調査立会い</h3>
+          <div class="price">88,000円<small> / 日</small></div>
+          <ul>
+            <li>調査当日の同席</li>
+            <li>質問内容の整理</li>
+            <li>指摘事項の記録</li>
+          </ul>
+        </article>
+      </div>
+      <p class="disclaimer">※料金は参考サイトに掲載されている税務調査料金をもとにした仮の内容です。実制作では貴所の正式料金、対応範囲、税込・税抜表記に合わせて調整します。</p>
+    </div>
+  </section>
+  <section class="section-tight">
+    <div class="container">
+      <div class="section-head reveal">
+        <div>
+          <span class="section-label">Compare</span>
+          <h2>「とりあえず相談」と「調査特化LP」の違い。</h2>
+        </div>
+      </div>
+      <div class="compare-scroll reveal">
+        <table class="compare-table">
+          <tr>
+            <th>比較項目</th>
+            <th>一般的な税理士サイト</th>
+            <th>本デモLP</th>
+          </tr>
+          <tr>
+            <th>ファーストビュー</th>
+            <td>業務一覧の一部として税務調査を掲載</td>
+            <td class="strong">通知を受けた事業者の不安に直結</td>
+          </tr>
+          <tr>
+            <th>問い合わせ導線</th>
+            <td>通常のお問い合わせフォームへ誘導</td>
+            <td class="strong">電話・相談予約を大きく固定表示</td>
+          </tr>
+          <tr>
+            <th>料金</th>
+            <td>個別見積りのみで判断しづらい</td>
+            <td class="strong">初回相談・準備・立会いを分けて提示</td>
+          </tr>
+          <tr>
+            <th>コピー</th>
+            <td>安心、信頼、実績など抽象語が中心</td>
+            <td class="strong">通知後の行動に落とし込む具体コピー</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </section>
+  <section class="section section-white">
+    <div class="container">
+      <div class="profile">
+        <div class="profile-visual reveal" role="img" aria-label="東京都心のオフィス街イメージ"></div>
+        <div class="profile-text reveal">
+          <span class="section-label">Message</span>
+          <h2>責められる場ではなく、説明する場へ。</h2>
+          <p>税務調査は、事実を整え、資料で説明し、必要な修正を冷静に判断する手続きです。このLPでは、切迫した事業者が「怒られるかもしれない」という心理から一歩抜け出し、専門家へ相談する理由を自然に作ります。</p>
+          <p>文章は発注者様の既存サイトからコピーせず、募集文の意図に合わせて新規に作成しています。</p>
+          <div class="profile-name">担当税理士プロフィール枠 ※仮の内容です</div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="section">
+    <div class="container">
+      <div class="section-head reveal">
+        <div>
+          <span class="section-label">Voice</span>
+          <h2>相談者の声を、数字より先に置きすぎない。</h2>
+        </div>
+        <p class="section-copy">信頼感は出しつつ、実績の捏造に見えないよう仮表示を明記します。</p>
+      </div>
+      <div class="voice-grid">
+        <article class="voice-card reveal">
+          <p>「通知書の読み方から整理してもらい、何を準備すべきかが見えました。調査日までの不安がかなり減りました。」</p>
+          <strong>飲食業 経営者 ※仮の声です</strong>
+        </article>
+        <article class="voice-card reveal">
+          <p>「売上と現金管理の説明が不安でしたが、資料の並べ方を決めたことで当日の受け答えが落ち着きました。」</p>
+          <strong>小売業 代表 ※仮の声です</strong>
+        </article>
+        <article class="voice-card reveal">
+          <p>「顧問税理士とは別に、調査対応だけ相談できる見せ方があると問い合わせしやすいと感じました。」</p>
+          <strong>制作サンプル用コメント ※仮の声です</strong>
+        </article>
+      </div>
+    </div>
+  </section>
+  <section class="section section-white" id="faq">
+    <div class="container">
+      <div class="section-head reveal">
+        <div>
+          <span class="section-label">FAQ</span>
+          <h2>問い合わせ前の迷いを、先に減らす。</h2>
+        </div>
+      </div>
+      <div class="faq-list">
+        <div class="faq-item is-open reveal">
+          <button class="faq-question" type="button">
+            <span>税務署から通知が届いた当日でも相談できますか？</span>
+            <span class="faq-mark" aria-hidden="true"></span>
+          </button>
+          <div class="faq-answer">はい。調査日時、対象年度、税目、担当部署を確認し、初回相談で優先順位を整理する想定です。</div>
+        </div>
+        <div class="faq-item reveal">
+          <button class="faq-question" type="button">
+            <span>顧問税理士がいても依頼できますか？</span>
+            <span class="faq-mark" aria-hidden="true"></span>
+          </button>
+          <div class="faq-answer">可能です。既存の顧問税理士との関係を尊重し、税務調査対応の範囲だけを切り分ける見せ方にしています。</div>
+        </div>
+        <div class="faq-item reveal">
+          <button class="faq-question" type="button">
+            <span>料金は正式なものですか？</span>
+            <span class="faq-mark" aria-hidden="true"></span>
+          </button>
+          <div class="faq-answer">本デモの料金は仮の内容です。実制作では貴所の正式な料金体系、税込表記、対象範囲に合わせて作り替えます。</div>
+        </div>
+        <div class="faq-item reveal">
+          <button class="faq-question" type="button">
+            <span>写真は実際の事務所ですか？</span>
+            <span class="faq-mark" aria-hidden="true"></span>
+          </button>
+          <div class="faq-answer">写真はイメージです。実制作ではご提供写真や日本人モデルの素材に差し替えます。</div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="section" id="contact">
+    <div class="container">
+      <div class="form-area">
+        <aside class="contact-card reveal">
+          <span class="section-label">Contact</span>
+          <h2>調査日が近い方は、電話が早いです。</h2>
+          <p>通知書を手元に置いて、対象年度と調査日程をお伝えください。フォームは相談予約のデモとして表示しています。</p>
+          <a class="contact-phone" href="tel:0480000000">048-000-0000</a>
+          <table class="business-hours">
+            <tr>
+              <th>受付</th>
+              <td>平日 9:00〜18:00 ※仮</td>
+            </tr>
+            <tr>
+              <th>対応</th>
+              <td>全国オンライン相談 ※仮</td>
+            </tr>
+            <tr>
+              <th>所在地</th>
+              <td>募集文に地名記載なし ※仮</td>
+            </tr>
+          </table>
+        </aside>
+        <form class="form reveal" action="#" method="post">
+          <div class="form-grid">
+            <div class="field">
+              <label for="name">お名前</label>
+              <input id="name" name="name" type="text" autocomplete="name" placeholder="山田 太郎">
+            </div>
+            <div class="field">
+              <label for="company">会社名</label>
+              <input id="company" name="company" type="text" placeholder="株式会社サンプル">
+            </div>
+            <div class="field">
+              <label for="tel">電話番号</label>
+              <input id="tel" name="tel" type="tel" autocomplete="tel" placeholder="048-000-0000">
+            </div>
+            <div class="field">
+              <label for="date">調査予定日</label>
+              <input id="date" name="date" type="text" placeholder="例：9月10日">
+            </div>
+            <div class="field full">
+              <label for="status">現在の状況</label>
+              <select id="status" name="status">
+                <option>税務署から電話があった</option>
+                <option>通知書が届いた</option>
+                <option>調査日が決まっている</option>
+                <option>指摘後の対応を相談したい</option>
+              </select>
+            </div>
+            <div class="field full">
+              <label for="message">相談内容</label>
+              <textarea id="message" name="message" placeholder="対象年度、税目、調査日、特に不安な論点をご記入ください。"></textarea>
+            </div>
+            <div class="field full">
+              <button class="btn btn-primary" type="submit">
+                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h13M13 7l5 5-5 5" stroke="currentColor" stroke-width="2"/></svg>
+                相談予約を送信する
+              </button>
+            </div>
+          </div>
+          <p class="hero-note">このフォームはデモ用です。入力内容は送信されません。</p>
+        </form>
+      </div>
+    </div>
+  </section>
+</main>
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <strong>税務調査サポートサンプル</strong>
+        <p>税務調査に特化した問い合わせ向上LPの制作サンプルです。明るく清潔な基調に、企業系士業サイトとして信頼感のある紺と、1点豪華の赤を差し色として設計しています。</p>
+      </div>
+      <div>
+        <strong>Demo Notice</strong>
+        <p>※本ページは制作サンプル(デモ)です。掲載の内容・数値は仮のもので、写真はイメージです。</p>
+        <p>※写真はイメージです。実制作ではご提供写真や日本人モデルの素材に差し替えます。</p>
+      </div>
+    </div>
+  </div>
+</footer>
+<div class="sticky-cta" aria-label="固定問い合わせ">
+  <div class="sticky-cta-inner">
+    <a class="btn btn-secondary" href="tel:0480000000">電話相談</a>
+    <a class="btn btn-primary" href="#contact">相談予約</a>
+  </div>
+</div>
+<script>
+(function(){
+  const menuButton=document.querySelector(".menu-button");
+  const mobileNav=document.querySelector("#mobileNav");
+  if(menuButton&&mobileNav){
+    menuButton.addEventListener("click",function(){
+      const open=mobileNav.classList.toggle("is-open");
+      menuButton.setAttribute("aria-expanded",String(open));
+    });
+    mobileNav.querySelectorAll("a").forEach(function(link){
+      link.addEventListener("click",function(){
+        mobileNav.classList.remove("is-open");
+        menuButton.setAttribute("aria-expanded","false");
+      });
+    });
+  }
+  document.querySelectorAll(".faq-question").forEach(function(button){
+    button.addEventListener("click",function(){
+      const item=button.closest(".faq-item");
+      if(item){item.classList.toggle("is-open");}
+    });
+  });
+  const targets=document.querySelectorAll(".reveal");
+  if(!("IntersectionObserver" in window)){
+    targets.forEach(function(el){el.classList.add("is-visible");});
+    return;
+  }
+  const observer=new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      if(entry.isIntersecting){
+        entry.target.classList.add("is-visible");
+        observer.unobserve(entry.target);
+      }
+    });
+  },{threshold:.14});
+  targets.forEach(function(el){observer.observe(el);});
+})();
+</script>
+</body>
+</html>
