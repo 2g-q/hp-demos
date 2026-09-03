@@ -6,41 +6,46 @@
 <title>料金｜自動化のミナト</title>
 <meta name="description" content="AI顧問（月額）はライト33,000円・スタンダード55,000円・フル110,000円（すべて税込・月額）。単発のご依頼は内容に応じてお見積りします。">
 <style>
-:root{--black:#0D0D0D;--white:#FFFFFF;--charcoal:#343541;--gray:#8E8EA0;--blue:#2563EB}
+:root{--black:#0D0D0D;--white:#FFFFFF;--charcoal:#343541;--gray:#8E8EA0;--blue:#2563EB;
+--fs-h4:clamp(1.25rem,calc(1.25rem + .125*((100vw - 23.4375rem)/66.5625)),1.375rem);
+--lh-h4:clamp(1.5rem,calc(1.5rem + .2325*((100vw - 23.4375rem)/66.5625)),1.7325rem);
+--fs-h3:clamp(1.5rem,calc(1.5rem + .375*((100vw - 23.4375rem)/66.5625)),1.875rem);
+--lh-h3:clamp(1.98rem,calc(1.98rem + .495*((100vw - 23.4375rem)/66.5625)),2.475rem)}
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
-body{background:var(--black);color:var(--white);font-family:"Noto Sans JP","Hiragino Sans","Hiragino Kaku Gothic ProN","YuGothic","Yu Gothic",Meiryo,sans-serif;word-break:auto-phrase;-webkit-font-smoothing:antialiased}
+body{background:var(--black);color:var(--white);font-family:system-ui,-apple-system,"Helvetica Neue","Hiragino Sans","Hiragino Kaku Gothic ProN","Noto Sans JP","Yu Gothic",Meiryo,sans-serif;word-break:auto-phrase;-webkit-font-smoothing:antialiased}
 h1,h2,h3,p,li{text-wrap:pretty}
+h1,h2{text-wrap:balance}
 img{display:block;max-width:100%}
 ul,ol{list-style:none}
 [hidden]{display:none!important}
 section[id]{scroll-margin-top:80px}
 a:focus-visible,button:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
-.container{max-width:1440px;margin-inline:auto;padding-inline:32px}
+.container{max-width:1128px;margin-inline:auto;padding-inline:20px}
 .nw{white-space:nowrap;display:inline-block}
-h1{font-size:64px;line-height:68px;letter-spacing:-.03em;font-weight:600}
-h2{font-size:48px;line-height:56px;letter-spacing:-.03em;font-weight:600}
-h3{font-size:30px;line-height:40px;letter-spacing:-.01em;font-weight:600}
-p,li{font-size:17px;line-height:28px;letter-spacing:-.01em}
-.lead{font-size:17px;line-height:28px;letter-spacing:-.01em}
-.caption{font-size:14px;line-height:23px;letter-spacing:0}
+h1{font-size:clamp(2rem,calc(2rem + 2*((100vw - 23.4375rem)/66.5625)),4rem);line-height:clamp(2.28rem,calc(2.28rem + 1.72*((100vw - 23.4375rem)/66.5625)),4rem);letter-spacing:-.03em;font-weight:500}
+h2{font-size:clamp(2rem,calc(2rem + 1*((100vw - 23.4375rem)/66.5625)),3rem);line-height:clamp(2.28rem,calc(2.28rem + 1.2*((100vw - 23.4375rem)/66.5625)),3.48rem);letter-spacing:clamp(-.03em,calc(-.03em + .02*((90rem - 100vw)/66.5625)),-.01em);font-weight:500}
+h3{font-size:var(--fs-h3);line-height:var(--lh-h3);letter-spacing:-.01em;font-weight:500}
+p,li{font-size:1.0625rem;line-height:1.75rem;letter-spacing:-.01em}
+.lead{font-size:1.0625rem;line-height:1.75rem;letter-spacing:-.01em}
+.caption{font-size:.875rem;line-height:1.435rem;letter-spacing:0}
 .on-dark-caption{color:var(--gray)}
-.price-num{font-size:48px;line-height:56px;letter-spacing:-.03em;font-weight:600;font-variant-numeric:tabular-nums;white-space:nowrap}
+.price-num{font-size:clamp(2rem,calc(2rem + 1*((100vw - 23.4375rem)/66.5625)),3rem);line-height:clamp(2.28rem,calc(2.28rem + 1.2*((100vw - 23.4375rem)/66.5625)),3.48rem);letter-spacing:-.02em;font-weight:500;font-variant-numeric:tabular-nums;white-space:nowrap}
 .header{position:sticky;top:0;z-index:10;background:var(--white);border-bottom:1px solid var(--black)}
-.header-in{max-width:1440px;margin-inline:auto;padding-inline:32px;height:80px;display:flex;align-items:center;justify-content:space-between;gap:24px}
-.brand{color:var(--black);font-size:16px;line-height:20px;font-weight:700;text-decoration:none;padding:12px 0}
+.header-in{margin-inline:auto;padding-inline:32px;height:64px;display:flex;align-items:center;justify-content:space-between;gap:24px}
+.brand{color:var(--black);font-size:1rem;line-height:1.25rem;font-weight:600;text-decoration:none;padding:12px 0}
 .nav{display:flex;align-items:center;gap:28px}
-.nav a{color:var(--black);font-size:14px;line-height:20px;font-weight:600;text-decoration:none;padding:12px 0;transition:color .2s}
+.nav a{color:var(--black);font-size:.8125rem;line-height:1.23rem;font-weight:500;text-decoration:none;padding:12px 0;transition:color .2s}
 .nav a:hover{color:var(--blue)}
 .nav a[aria-current="page"]{text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:8px}
-.menu-btn{display:none;align-items:center;justify-content:center;min-height:44px;padding:0 16px;background:var(--white);color:var(--black);border:1px solid var(--black);border-radius:999px;font-family:inherit;font-size:14px;line-height:20px;font-weight:600;cursor:pointer}
+.menu-btn{display:none;align-items:center;justify-content:center;height:36px;padding:0 20px;background:var(--white);color:var(--black);border:1px solid var(--black);border-radius:2.5rem;font-family:inherit;font-size:.8125rem;line-height:1;font-weight:500;cursor:pointer}
 .mnav{display:none}
 .hero{background:var(--white);color:var(--black);text-align:center;padding:120px 0}
 .hero .lead{max-width:760px;margin:24px auto 0}
 .hero-cta{margin-top:32px;display:flex;justify-content:center}
-.hero-links{margin-top:8px;display:flex;justify-content:center;gap:32px;flex-wrap:wrap}
-.hero-links a{display:inline-flex;align-items:center;min-height:44px;color:var(--blue);font-size:14px;line-height:20px;font-weight:600;text-decoration:underline;text-underline-offset:4px}
-.btn{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:0 28px;border-radius:999px;font-size:14px;line-height:20px;font-weight:600;text-decoration:none;transition:background-color .2s,color .2s}
+.hero-links{margin-top:12px;display:flex;justify-content:center;gap:32px;flex-wrap:wrap}
+.hero-links a{display:inline-flex;align-items:center;min-height:44px;color:var(--blue);font-size:.875rem;line-height:1.25rem;font-weight:500;text-decoration:underline;text-underline-offset:4px}
+.btn{display:inline-flex;align-items:center;justify-content:center;height:40px;padding:0 20px;border-radius:2.5rem;font-size:.875rem;line-height:1;font-weight:500;text-decoration:none;transition:background-color .2s,color .2s}
 .btn-blue{background:var(--blue);color:var(--white);border:1px solid var(--blue)}
 .btn-blue:hover{background:var(--white);color:var(--blue)}
 .btn-white{background:var(--white);color:var(--black);border:1px solid var(--white)}
@@ -50,17 +55,17 @@ p,li{font-size:17px;line-height:28px;letter-spacing:-.01em}
 .sec-head{text-align:center;max-width:760px;margin-inline:auto}
 .sec-head .lead{margin-top:24px}
 .sec-body{margin-top:64px}
-.card{background:var(--charcoal);border:1px solid var(--white);border-radius:12px;padding:32px}
-.card h3{font-size:22px;line-height:30px}
+.card{background:var(--charcoal);border:1px solid var(--white);border-radius:8px;padding:32px}
+.card h3{font-size:var(--fs-h4);line-height:var(--lh-h4)}
 .card .body{margin-top:18px}
-.card-link{display:inline-flex;align-items:center;min-height:44px;margin-top:14px;color:var(--white);font-size:14px;line-height:20px;font-weight:600;text-decoration:underline;text-underline-offset:4px}
+.card-link{display:inline-flex;align-items:center;min-height:44px;margin-top:14px;color:var(--white);font-size:.875rem;line-height:1.25rem;font-weight:500;text-decoration:underline;text-underline-offset:4px}
 a.card{display:block;color:inherit;text-decoration:none;transition:border-color .2s}
 a.card:hover{border-color:var(--blue)}
 .grid2{display:grid;grid-template-columns:1fr 1fr;gap:32px}
 .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
 .grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
-.num{color:var(--blue);font-size:22px;line-height:28px;font-weight:600;font-variant-numeric:tabular-nums}
-.reason h3,.flow-item h3{margin-top:12px;font-size:22px;line-height:30px}
+.num{color:var(--blue);font-size:1.375rem;line-height:1.75rem;font-weight:500;font-variant-numeric:tabular-nums}
+.reason h3,.flow-item h3{margin-top:12px;font-size:var(--fs-h4);line-height:var(--lh-h4)}
 .reason p,.flow-item p{margin-top:18px}
 .contact{background:var(--blue);color:var(--white);text-align:center;padding:120px 0}
 .contact .lead{max-width:620px;margin:24px auto 0}
@@ -69,26 +74,17 @@ a.card:hover{border-color:var(--blue)}
 .contact-sub a{color:var(--white)}
 .footer{background:var(--black);color:var(--white);padding:48px 0}
 .footer-in{display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap}
-.footer-brand{font-size:16px;line-height:20px;font-weight:700}
+.footer-brand{font-size:1rem;line-height:1.25rem;font-weight:600}
 .footer-nav{display:flex;gap:24px}
-.footer-nav a{display:inline-flex;align-items:center;min-height:44px;color:var(--white);font-size:14px;line-height:20px;font-weight:600;text-decoration:none}
+.footer-nav a{display:inline-flex;align-items:center;min-height:44px;color:var(--white);font-size:.875rem;line-height:1.25rem;font-weight:500;text-decoration:none}
 .footer-nav a:hover{text-decoration:underline;text-underline-offset:4px}
 @media (max-width:1023px){
-.container,.header-in{padding-inline:24px}
 .grid3,.grid4{grid-template-columns:repeat(2,1fr)}
+.header-in{padding-inline:24px}
 }
 @media (max-width:767px){
-.container,.header-in{padding-inline:20px}
-.header-in{height:64px}
-h1{font-size:40px;line-height:46px}
-h2{font-size:32px;line-height:40px}
-h3{font-size:24px;line-height:32px}
-p,li,.lead{font-size:16px;line-height:26px}
-.caption{font-size:13px;line-height:21px}
-.price-num{font-size:40px;line-height:48px}
+.header-in{padding-inline:20px;height:54px}
 .card{padding:24px}
-.card h3{font-size:20px;line-height:28px}
-.reason h3,.flow-item h3{font-size:20px;line-height:28px}
 .grid2,.grid3,.grid4{grid-template-columns:1fr;gap:24px}
 .dark{padding-bottom:80px}
 .dark section{padding-top:80px}
@@ -99,34 +95,30 @@ p,li,.lead{font-size:16px;line-height:26px}
 .nav a.nav-contact{display:inline-flex;align-items:center}
 .menu-btn{display:inline-flex}
 .mnav:not([hidden]){display:block;background:var(--white);border-bottom:1px solid var(--black)}
-.mnav a{display:block;padding:14px 20px;border-top:1px solid var(--black);color:var(--black);font-size:14px;line-height:20px;font-weight:600;text-decoration:none}
+.mnav a{display:block;padding:14px 20px;border-top:1px solid var(--black);color:var(--black);font-size:1rem;line-height:1.25rem;font-weight:500;text-decoration:none}
 }
 @media (prefers-reduced-motion:reduce){
 html{scroll-behavior:auto}
 *{transition:none!important;animation:none!important}
 }
-
 .plan{position:relative;display:flex;flex-direction:column}
-.plan-name{font-size:14px;line-height:20px;font-weight:600}
+.plan-name{font-size:.875rem;line-height:1.25rem;font-weight:500}
 .plan .price-num{margin-top:14px}
 .price-cap{display:block;margin-top:6px}
 .plan .desc{margin-top:18px}
 .plan .meet{margin-top:18px;padding-top:14px;border-top:1px solid var(--gray)}
 .plan-reco{border:2px solid var(--blue)}
-.reco-badge{position:absolute;top:16px;right:16px;background:var(--blue);color:var(--white);border-radius:999px;padding:4px 12px;font-size:14px;line-height:20px;font-weight:600}
+.reco-badge{position:absolute;top:16px;right:16px;background:var(--blue);color:var(--white);border-radius:2.5rem;padding:4px 12px;font-size:.875rem;line-height:1.25rem;font-weight:500}
 @media (min-width:1024px){.plan-reco{transform:translateY(-16px)}}
-.scale-row{margin-top:24px;border:1px solid var(--white);border-radius:12px;padding:32px;display:flex;align-items:baseline;justify-content:space-between;gap:24px;flex-wrap:wrap}
-.scale-row h3{font-size:22px;line-height:30px}
+.scale-row{margin-top:24px;border:1px solid var(--white);border-radius:8px;padding:32px;display:flex;align-items:baseline;justify-content:space-between;gap:24px;flex-wrap:wrap}
+.scale-row h3{font-size:var(--fs-h4);line-height:var(--lh-h4)}
 .scale-row p{max-width:620px}
-.single-price{font-size:30px;line-height:40px;font-weight:600;text-align:center}
+.single-price{font-size:var(--fs-h3);line-height:var(--lh-h3);font-weight:500;text-align:center}
 .single-link{display:flex;justify-content:center}
-.choose h3{font-size:22px;line-height:30px}
+.choose h3{font-size:var(--fs-h4);line-height:var(--lh-h4)}
 .choose p{margin-top:18px}
 @media (max-width:767px){
-.hero h1{font-size:min(40px,calc((100vw - 40px)/9.2));line-height:1.15}
 .scale-row{padding:24px}
-.single-price{font-size:24px;line-height:32px}
-.choose h3{font-size:20px;line-height:28px}
 }
 </style>
 </head>
