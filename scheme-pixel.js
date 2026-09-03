@@ -2,7 +2,11 @@
  * 斜め見下ろしのRPG風オフィス。木目の床(茶系3段階)の上に、向きの違う机の島、
  * フロアを見渡すCIOの大型デスク、職種ごとに小物で描き分けた働く人物を置く。
  * 全ての家具と人物は足元のY座標で毎フレーム並べ替えてから描く(depth sort)。
- * 文字は描かず、床と木製家具以外は指定5色とその混色だけを使う。
+ * ドットは全て内部座標(640x400)の整数格子に乗せ、fillRectの横帯だけで塗る
+ * (arc/ellipse/lineToは使わない=アンチエイリアスの中間色が出ない)。
+ * 例外は各AI社員の頭上の役割ラベルだけ: SCALE倍(1280x800)の座標系でfillTextし、
+ * ドットは粗いまま文字だけ鮮明に読めるようにする。
+ * 色は床と木製家具の茶3段のほかは指定5色とその混色だけを使う。
  */
 (function () {
   "use strict";
@@ -30,21 +34,47 @@
   };
 
   function painter(context) {
+    // 内部座標の整数格子に乗せた fillRect だけで描く。パスAPIは一切使わない。
+    function band(x, y, w, h, color) {
+      context.fillStyle = color;
+      context.fillRect(x * SCALE, y * SCALE, w * SCALE, h * SCALE);
+    }
     return {
       rect: function (x, y, w, h, color) {
-        context.fillStyle = color;
-        context.fillRect(Math.round(x) * SCALE, Math.round(y) * SCALE, Math.round(w) * SCALE, Math.round(h) * SCALE);
+        band(Math.round(x), Math.round(y), Math.round(w), Math.round(h), color);
       },
+      // 多角形も走査線方式: 1行(内部1px)ごとに辺との交点を整数へ丸め、
+      // fillRectの横帯を積む。斜めの辺は自然に階段状になる。
       poly: function (points, color) {
-        context.fillStyle = color; context.beginPath();
-        context.moveTo(Math.round(points[0][0]) * SCALE, Math.round(points[0][1]) * SCALE);
-        for (var i = 1; i < points.length; i += 1) context.lineTo(Math.round(points[i][0]) * SCALE, Math.round(points[i][1]) * SCALE);
-        context.closePath(); context.fill();
+        var n = points.length, minY = Infinity, maxY = -Infinity, i;
+        for (i = 0; i < n; i += 1) {
+          if (points[i][1] < minY) minY = points[i][1];
+          if (points[i][1] > maxY) maxY = points[i][1];
+        }
+        for (var y = Math.round(minY); y < Math.round(maxY); y += 1) {
+          var sy = y + 0.5, xs = [];
+          for (i = 0; i < n; i += 1) {
+            var a = points[i], b = points[(i + 1) % n];
+            if ((a[1] <= sy && b[1] > sy) || (b[1] <= sy && a[1] > sy)) {
+              xs.push(a[0] + (sy - a[1]) / (b[1] - a[1]) * (b[0] - a[0]));
+            }
+          }
+          xs.sort(function (p, q) { return p - q; });
+          for (i = 0; i + 1 < xs.length; i += 2) {
+            var x0 = Math.round(xs[i]), x1 = Math.round(xs[i + 1]);
+            if (x1 > x0) band(x0, y, x1 - x0, 1, color);
+          }
+        }
       },
-      ellipse: function (x, y, rx, ry, color) {
-        context.fillStyle = color; context.beginPath();
-        context.ellipse(Math.round(x) * SCALE, Math.round(y) * SCALE, Math.round(rx) * SCALE, Math.round(ry) * SCALE, 0, 0, Math.PI * 2);
-        context.fill();
+      // だ円も走査線方式: 行ごとに半幅 round(rx*sqrt(1-t^2)) を整数で求めて横帯を塗る。
+      // 行の標本を ry+0.5 で割ることで最上段・最下段が1pxの尖りにならず平らに納まる。
+      ellipse: function (cx, cy, rx, ry, color) {
+        cx = Math.round(cx); cy = Math.round(cy); rx = Math.round(rx); ry = Math.round(ry);
+        for (var dy = -ry; dy <= ry; dy += 1) {
+          var t = dy / (ry + 0.5);
+          var hw = Math.round(rx * Math.sqrt(Math.max(0, 1 - t * t)));
+          band(cx - hw, cy + dy, hw * 2 + 1, 1, color);
+        }
       }
     };
   }
@@ -78,6 +108,9 @@
   var ST_MEET1 = { shape: 2, hairC: C.charcoal, shirtC: mix(C.gray, C.white, 0.30) };
   var ST_MEET2 = { shape: 1, hairC: mix(C.black, C.charcoal, 0.6), shirtC: mix(C.charcoal, C.white, 0.26) };
   var ST_SOFA = { shape: 0, hairC: C.charcoal, shirtC: mix(C.gray, C.white, 0.32) };
+  // 役割ラベル(頭上に出す短い日本語)。数値・件数・時刻は書かない=役割名だけ。
+  var ROLE_LABELS = { audit: "監査", keiri: "経理", eng4: "エンジニア", eng2: "エンジニア" };
+  var WALKER_ROLES = ["営業", "開発", "企画", "秘書"];
 
   window.mountSchemePixel = function mountSchemePixel(canvas) {
     if (!canvas || typeof canvas.getContext !== "function") throw new TypeError("mountSchemePixel には canvas 要素を渡してください");
@@ -91,6 +124,23 @@
     var s = painter(staticCtx);
     var stopped = false, visible = false, rafId = 0, startedAt = 0, observer = null;
     var reduceQuery = window.matchMedia("(prefers-reduced-motion: reduce)"), reduced = reduceQuery.matches;
+
+    // 役割ラベル: ドットは内部座標で粗いまま、文字だけSCALE倍(1280x800)の座標系で
+    // fillTextして鮮明に描く。フォントはOS標準ゴシックのみ(外部フォントなし)。
+    // 帯は単色(半透明にしない)・角丸なしの矩形。描画は毎フレーム最後にまとめて行う。
+    var labels = [];
+    function label(text, cx, top) { labels.push({ t: text, x: cx, y: top }); }
+    function drawLabels() {
+      ctx.font = "bold 13px 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', 'Yu Gothic', 'Meiryo', sans-serif";
+      ctx.textAlign = "center"; ctx.textBaseline = "middle";
+      for (var i = 0; i < labels.length; i += 1) {
+        var la = labels[i], cx = Math.round(la.x * SCALE), top = Math.round(la.y * SCALE);
+        var w = Math.ceil(ctx.measureText(la.t).width) + 10, h = 18;
+        ctx.fillStyle = C.charcoal; ctx.fillRect(cx - Math.round(w / 2), top, w, h);
+        ctx.fillStyle = C.white; ctx.fillText(la.t, cx, top + 10);
+      }
+      labels.length = 0;
+    }
 
     function windowPane(x, width) {
       s.rect(x - 3, 15, width + 6, 51, P.dark); s.rect(x, 18, width, 43, P.sky);
@@ -145,7 +195,7 @@
     function person(x, y, dir, frame, st, seated) {
       var bob = seated ? frame % 2 : (frame === 1 || frame === 3 ? 1 : 0);
       var side = dir === "left" || dir === "right", back = dir === "up";
-      ellipse(x + 12, y + 30, 11, 4, P.woodD);
+      if (!seated) ellipse(x + 12, y + 30, 11, 4, P.woodD); // 床の影(座る人は椅子・ソファが接地を示す)
       rect(x + 5, y + 2 + bob, 15, 5, st.hairC);
       if (st.shape === 0) rect(x + 2, y + 6 + bob, 5, 9, st.hairC);
       if (st.shape === 1) rect(x + 18, y + 5 + bob, 5, 8, st.hairC);
@@ -184,8 +234,16 @@
     function chairTop(x, y) { // 手前向きに座る人の後ろへ見える背もたれ
       rect(x + 2, y - 4, 21, 9, P.dark); rect(x + 4, y - 2, 17, 6, C.charcoal);
     }
-    function chairLow(x, y) { // 奥向きに座る人の腰の後ろへ見える低い背もたれ
-      rect(x + 2, y + 23, 21, 7, P.dark); rect(x + 4, y + 24, 17, 5, C.charcoal);
+    // 手前のPCデスク(deskAway)の椅子。高さ関係(内部座標・deskY基準):
+    //   机の天板前縁 = deskY+15 / 座面 = deskY+26 / キャラの腰(胴の下端) = deskY+32(座面に重なる)
+    //   頭頂 = deskY+6 = 天板より9px上 → 上半身が天板の上に出てモニタを見る姿勢になる。
+    function chairSeat(x, py) { // 座面と脚。人より先に描き、その上に人を乗せる
+      rect(x - 1, py + 22, 27, 7, C.charcoal);
+      rect(x + 10, py + 29, 5, 8, P.dark);
+      rect(x + 5, py + 36, 15, 2, P.dark);
+    }
+    function chairBack(x, py) { // 手前側の低い背もたれ。人の後に重ねる
+      rect(x + 1, py + 25, 23, 9, P.dark); rect(x + 3, py + 26, 19, 7, C.charcoal);
     }
 
     // ---- モニタ ----
@@ -243,6 +301,7 @@
       var f1 = Math.floor(ms / 950) % 2, f2 = Math.floor((ms + 430) / 1250) % 2;
       chairTop(x + 16, y - 26); person(x + 16, y - 26, "down", f1, st[0], true);
       chairTop(x + 68, y - 26); person(x + 68, y - 26, "down", f2, st[1], true);
+      label(ROLE_LABELS[role], x + 28, y - 36); label(ROLE_LABELS[role], x + 80, y - 36);
       deskBody(x, y);
       monitorBack(x + 16, y - 6, phase % 4 !== 0);
       monitorBack(x + 68, y - 6, phase % 5 !== 0);
@@ -264,8 +323,12 @@
         monitorFront(x + 77, y - 12, phase % 5 !== 0, true);
         tower(x + 104, y - 6, phase);
       }
-      person(x + 16, y + 30, "up", f1, st[0], true); chairLow(x + 16, y + 30);
-      person(x + 68, y + 30, "up", f2, st[1], true); chairLow(x + 68, y + 30);
+      // 座面(y+26)に腰を乗せ、頭頂(y+6)が天板前縁(y+15)より上に出る高さ。
+      // 旧実装は py = y+30 で頭頂が天板より17px下=床に座って見えた。
+      var py = y + 4;
+      chairSeat(x + 16, py); person(x + 16, py, "up", f1, st[0], true); chairBack(x + 16, py);
+      chairSeat(x + 68, py); person(x + 68, py, "up", f2, st[1], true); chairBack(x + 68, py);
+      label(ROLE_LABELS[role], x + 28, py - 10); label(ROLE_LABELS[role], x + 80, py - 10);
     }
 
     // CIOの席: 奥の中央。大きな机とワイドモニタ3枚でフロア全体を見渡す。
@@ -273,6 +336,7 @@
       var x = 250, y = 98, f = Math.floor(ms / 1350) % 2;
       rect(303, 60, 32, 32, P.dark); rect(306, 63, 26, 27, C.charcoal); // ハイバックチェア
       person(307, 74, "down", f, ST_CIO, true);
+      label("CIO", 319, 62);
       rect(x + 9, y + 9, 138, 48, P.woodD);
       poly([[x, y + 4], [x + 130, y + 4], [x + 142, y + 16], [x + 12, y + 16]], P.woodL);
       rect(x + 12, y + 16, 130, 28, P.woodM); rect(x + 12, y + 16, 130, 2, P.woodL);
@@ -344,25 +408,32 @@
     }
 
     function meetingTable(x, y) {
-      ellipse(x + 3, y + 7, 52, 26, P.woodD);
-      ellipse(x, y, 51, 25, P.woodM);
-      rect(x - 48, y + 2, 96, 13, P.woodM);
-      ellipse(x, y, 48, 19, P.woodL);
-      rect(x - 4, y + 19, 9, 20, P.woodD); rect(x - 18, y + 38, 37, 5, P.woodD);
+      // 丸テーブル: 影→支柱・台座→厚み→縁→天板の順。全て走査線だ円=行ごとの
+      // 整数幅の横帯なので、上面のだ円は階段状の自然な円形になる。
+      ellipse(x + 2, y + 9, 52, 23, P.woodD);
+      rect(x - 4, y + 16, 9, 22, P.woodD); rect(x - 17, y + 36, 35, 5, P.woodD);
+      ellipse(x, y + 5, 50, 22, P.woodD);
+      ellipse(x, y, 50, 22, P.woodM);
+      ellipse(x, y - 1, 46, 19, P.woodL);
       rect(x - 16, y - 6, 20, 4, C.white); rect(x - 20, y - 2, 20, 1, P.pale);
       rect(x + 12, y + 2, 14, 9, P.pale); rect(x + 13, y + 3, 12, 5, P.screen);
     }
 
     function meetingUnit(ms) {
       var f1 = Math.floor(ms / 1100) % 2, f2 = Math.floor((ms + 470) / 1300) % 2;
+      rect(424, 286, 19, 7, P.dark); // 奥側の丸椅子(座面。人を上に重ねる)
       person(420, 262, "right", f1, ST_MEET1, true);
+      label("営業", 432, 252);
       meetingTable(447, 296);
+      rect(463, 340, 19, 7, P.dark); // 手前側の丸椅子
       person(460, 316, "left", f2, ST_MEET2, true);
+      label("企画", 472, 306);
     }
 
     function sofaUnit(ms) {
       sofa(506, 290);
       person(524, 282, "down", Math.floor(ms / 1450) % 2, ST_SOFA, true);
+      label("人事", 536, 272);
     }
 
     function bubble(x, y, kind) {
@@ -440,8 +511,13 @@
       add(349, function () { plant(596, 306); });
       add(364, function () { deskAway(48, 306, ms + 300, phase + 1, "eng4"); });
       add(364, function () { deskAway(200, 306, ms + 1200, phase + 3, "eng2"); });
-      function addWalker(w, st) { add(w.y + 34, function () { person(w.x, w.y, w.direction, w.frame, st, false); }); }
-      for (i = 0; i < walkers.length; i += 1) addWalker(walkers[i], WALKER_STYLES[i]);
+      function addWalker(w, st, roleText) {
+        add(w.y + 34, function () {
+          person(w.x, w.y, w.direction, w.frame, st, false);
+          label(roleText, w.x + 12, w.y - 10); // キャラ座標に追従=歩くと文字も一緒に動く
+        });
+      }
+      for (i = 0; i < walkers.length; i += 1) addWalker(walkers[i], WALKER_STYLES[i], WALKER_ROLES[i]);
       ents.sort(function (a, b) { return a.y - b.y; });
       for (i = 0; i < ents.length; i += 1) ents[i].f();
       // 吹き出しは同時に一つまで。記号以外は描かない。
@@ -449,6 +525,7 @@
       if (bc > 2800 && bc < 5200) bubble(60, 138, 1);
       else if (bc > 8200 && bc < 10400) bubble(424, 230, 0);
       else if (bc > 12500 && bc < 14300) bubble(222, 304, 2);
+      drawLabels(); // 役割ラベルは最前面。ここだけSCALE座標系のfillText
     }
 
     function frame(now) {
