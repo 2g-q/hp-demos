@@ -3,246 +3,172 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>継続でご一緒する形｜技術面を月ぎめで見る、という選び方</title>
-<meta name="description" content="毎月いくらで何を見るのか。定例の頻度、緊急時の対応、始め方と辞め方まで、継続契約の中身を具体的に書いています。">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
+<title>AI顧問（月額）｜自動化のミナト</title>
+<meta name="description" content="AI顧問（月額・伴走型）の料金プランと、毎月ご一緒している会社の実施例。ご相談・改修・運用まで続けて見ます。金額はすべて税込です。">
 <style>
-:root{--ink:#1f2733;--sub:#66707d;--line:#e8ebef;--accent:#2b5ce6;--bg:#f7f8fa;--warn:#8a5100;--warnbg:#fdf6e9}
-*{margin:0;padding:0;box-sizing:border-box}
-body{font-family:"Noto Sans JP",sans-serif;color:var(--ink);background:var(--bg);line-height:1.95;-webkit-font-smoothing:antialiased}
-.wrap{max-width:840px;margin:0 auto;padding:0 24px}
-header{padding:64px 0 36px;background:#fff;border-bottom:1px solid var(--line)}
-.eyebrow{font-family:Manrope;font-weight:700;font-size:.72rem;letter-spacing:.22em;color:var(--accent);text-transform:uppercase}
-h1{font-weight:900;font-size:clamp(1.6rem,4.2vw,2.15rem);line-height:1.45;margin:10px 0 14px}
-.lead{color:var(--sub);font-size:.95rem}
-.lead b{color:var(--ink)}
-main{padding:44px 0 72px}
-section{background:#fff;border:1px solid var(--line);border-radius:16px;padding:26px 28px;margin-bottom:18px}
-h2{font-size:1.06rem;font-weight:700;display:flex;align-items:center;gap:10px;margin-bottom:12px}
-h2::before{content:"";width:22px;height:3px;border-radius:3px;background:var(--accent);flex:none}
-h3{font-size:.94rem;font-weight:700;margin:18px 0 6px;color:var(--ink)}
-p{font-size:.9rem;color:var(--sub);margin-bottom:10px}
-p b,li b{color:var(--ink);font-weight:700}
-ul,ol{margin:0 0 12px 1.2em}
-li{font-size:.9rem;color:var(--sub);margin-bottom:6px}
-table{width:100%;border-collapse:collapse;margin:12px 0;font-size:.86rem}
-th,td{border:1px solid var(--line);padding:9px 12px;text-align:left;vertical-align:top}
-th{background:var(--bg);font-weight:700;font-size:.82rem;white-space:nowrap}
-td{color:var(--sub)}
-td b{color:var(--ink)}
-.honest{background:var(--warnbg);border:1px solid #eedcb6;border-radius:12px;padding:18px 20px;margin:14px 0}
-.honest b{color:var(--warn)}
-.honest p{color:#6b5a3e;margin-bottom:6px}
-.honest p:last-child{margin-bottom:0}
-.stats{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
-.stat{background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:10px 16px;min-width:100px}
-.stat b{display:block;font-family:Manrope;font-weight:800;font-size:1.3rem;line-height:1.2;color:var(--ink)}
-.stat span{font-size:.72rem;color:var(--sub)}
-.cta{display:flex;gap:10px;flex-wrap:wrap;margin-top:20px}
-.btn{display:inline-block;text-decoration:none;border-radius:10px;padding:11px 20px;font-size:.85rem;font-weight:700;transition:.2s}
-.btn-p{background:var(--accent);color:#fff}
-.btn-p:hover{background:#1f49c4}
-.btn-s{background:#fff;color:var(--accent);border:1px solid #c9d4f5}
-.btn-s:hover{background:#f2f5ff}
-footer{border-top:1px solid var(--line);background:#fff;padding:26px 0;font-size:.75rem;color:var(--sub)}
-footer a{color:var(--accent)}
-@media(max-width:520px){header{padding:40px 0 26px}section{padding:20px 18px}.btn{flex:1 1 100%;text-align:center}.stat{flex:1 1 calc(50% - 5px);min-width:0}}
-</style>
+:root{
+--black:#0D0D0D;--white:#FFFFFF;--charcoal:#343541;--gray:#8E8EA0;--blue:#2563EB;
+--line:color-mix(in srgb,var(--gray) 26%,transparent);
+--surface:color-mix(in srgb,var(--gray) 9%,var(--white));
+--ink2:var(--charcoal);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--white);color:var(--black);font-family:"Hiragino Sans","Hiragino Kaku Gothic ProN","Yu Gothic",Meiryo,sans-serif;font-size:16px;line-height:1.8;letter-spacing:0;word-break:auto-phrase;-webkit-font-smoothing:antialiased}
+a{color:var(--blue)}
+img{display:block;max-width:100%}
+h1,h2,h3,p,li{text-wrap:pretty}
+h1,h2{text-wrap:balance}
+.nb{display:inline-block}.nw{white-space:nowrap}
+.container{width:min(1120px,calc(100% - 48px));margin-inline:auto}
+.mono{font-family:"SF Mono",Menlo,Consolas,monospace;font-variant-numeric:tabular-nums}
+h1{margin:0;font-size:clamp(1.75rem,calc(1.75rem + 1.125*((100vw - 23.4375rem)/66.5625)),2.875rem);line-height:1.35;letter-spacing:-.02em;font-weight:600}
+h2{margin:0;font-size:clamp(1.375rem,calc(1.375rem + .625*((100vw - 23.4375rem)/66.5625)),2rem);line-height:1.4;letter-spacing:-.015em;font-weight:600}
+h3{margin:0;font-size:clamp(1.0625rem,calc(1.0625rem + .1875*((100vw - 23.4375rem)/66.5625)),1.25rem);line-height:1.5;letter-spacing:-.01em;font-weight:600}
+.lead{margin:0;color:var(--ink2);font-size:clamp(1rem,calc(1rem + .0625vw),1.0625rem);line-height:1.85}
+.site-header{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--white) 92%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.nav{min-height:60px;display:flex;align-items:center;justify-content:space-between;gap:24px}
+.brand{font-weight:700;font-size:.9375rem;letter-spacing:.01em;color:var(--black);text-decoration:none;white-space:nowrap}
+.nav-links{display:flex;align-items:center;gap:22px}
+.nav-links a{color:var(--black);font-size:.8125rem;font-weight:500;text-decoration:none;transition:color .2s ease}
+.nav-links a:hover,.nav-links a:focus-visible{color:var(--blue)}
+.actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:32px}
+.button{display:inline-flex;min-height:46px;align-items:center;justify-content:center;padding:10px 24px;border:1px solid var(--black);border-radius:999px;background:var(--black);color:var(--white);font-size:.9375rem;font-weight:600;text-decoration:none;transition:background .2s ease,border-color .2s ease}
+.button:hover,.button:focus-visible{background:var(--charcoal);border-color:var(--charcoal)}
+.button-outline{background:transparent;border:1px solid color-mix(in srgb,var(--gray) 55%,transparent);color:var(--black)}
+.button-outline:hover,.button-outline:focus-visible{background:var(--surface);border-color:var(--gray)}
+a:focus-visible,.button:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+section{padding:clamp(64px,8vw,112px) 0}
+.section-head{max-width:720px;margin-bottom:clamp(36px,5vw,56px)}
+.section-head .lead{margin-top:18px}
+.section-more{margin:28px 0 0}
+.section-more a{font-size:.9375rem;font-weight:600;text-decoration:none}
+.section-more a:hover{text-decoration:underline;text-underline-offset:4px}
+.hero{padding:clamp(72px,9vw,120px) 0 clamp(56px,7vw,88px)}
+.hero h1{max-width:800px}
+.hero .lead{max-width:640px;margin-top:24px}
+.pricing-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;align-items:stretch}
+.plan{position:relative;display:flex;flex-direction:column;padding:32px 28px;border:1px solid var(--line);border-radius:18px;background:var(--white)}
+.plan.recommended{border-color:var(--blue)}
+.recommend-label{position:absolute;right:16px;top:16px;padding:4px 12px;border-radius:999px;background:var(--blue);color:var(--white);font-size:.75rem;font-weight:600}
+.plan-name{margin:0;color:var(--ink2);font-size:.875rem;font-weight:600}
+.price{display:flex;align-items:baseline;margin-top:14px;white-space:nowrap}
+.price strong{font-size:clamp(1.75rem,3vw,2.125rem);line-height:1;font-weight:600;letter-spacing:-.02em}
+.price span{margin-left:6px;color:var(--gray);font-family:"Hiragino Sans","Hiragino Kaku Gothic ProN","Yu Gothic",Meiryo,sans-serif;font-size:.8125rem}
+.plan-copy{margin:18px 0;color:var(--black);font-size:.9375rem;font-weight:600}
+.plan ul{margin:0;padding:0;list-style:none}
+.plan li{position:relative;padding:9px 0 9px 20px;border-top:1px solid var(--line);font-size:.875rem}
+.plan li::before{content:"—";position:absolute;left:0;color:var(--gray)}
+.case-origin{margin:auto 0 0;padding-top:18px;color:var(--gray);font-size:.8125rem}
+.scale-note{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:20px;margin-top:24px;padding:24px 28px;border:1px solid var(--line);border-radius:18px}
+.scale-note p{max-width:760px;margin:0;color:var(--ink2);font-size:.9375rem}
+.process{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.step{padding:26px 28px;border:1px solid var(--line);border-radius:18px}
+.step-num{color:var(--gray);font-size:.8125rem;font-weight:600}
+.step p{margin:14px 0 0;color:var(--ink2);font-size:.875rem}
+.step .price{margin-top:10px}
+.legal-note{max-width:720px;margin:28px 0 0;padding:22px 26px;border:1px solid var(--line);border-radius:14px;background:var(--surface);font-size:.9375rem;color:var(--ink2)}
+.contact{text-align:center;border-top:1px solid var(--line)}
+.contact h2{max-width:720px;margin-inline:auto}
+.contact>.container>p{max-width:640px;margin:20px auto 0;color:var(--ink2)}
+.contact .actions{justify-content:center}
+.contact-sub{margin:24px auto 0;max-width:680px;color:var(--gray);font-size:.875rem;line-height:1.9}
+.contact-sub a{color:var(--ink2);text-decoration:underline;text-underline-offset:3px}
+.contact-sub a:hover{color:var(--blue)}
+.contact-note{margin:18px auto 0;max-width:640px;color:var(--gray);font-size:.875rem}
+.site-footer{padding:28px 0;border-top:1px solid var(--line);color:var(--gray);font-size:.8125rem}
+.footer-inner{display:flex;justify-content:space-between;gap:20px}
+.footer-brand{color:var(--black);font-weight:700}
+@media(max-width:860px){.pricing-grid,.process{grid-template-columns:1fr}}
+@media(max-width:620px){
+.container{width:min(100% - 32px,1120px)}
+.nav{min-height:0;padding:12px 0;align-items:flex-start;flex-direction:column;gap:8px}
+.nav-links{width:100%;gap:0;justify-content:space-between}
+.nav-links a{font-size:.75rem}
+.actions{display:grid;grid-template-columns:1fr}
+.footer-inner{flex-direction:column}
+}
+@media(max-width:520px){
+.hero h1{font-size:min(1.75rem,calc((100vw - 40px)/15))}
+h2{font-size:min(1.375rem,calc((100vw - 40px)/15))}
+}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
+section[id]{scroll-margin-top:80px}</style>
 </head>
 <body>
-<!-- pfnav:start 全ページ共通ナビ(自動挿入・手で編集しない) -->
-<style>
-#pfnav{position:sticky;top:0;z-index:99999;background:#0f2438;color:#cfe0f0;font-family:"Noto Sans JP",-apple-system,BlinkMacSystemFont,"Segoe UI","Hiragino Kaku Gothic ProN","Yu Gothic",Meiryo,sans-serif;font-size:13px;line-height:1;border-bottom:1px solid rgba(255,255,255,.12)}
-#pfnav .in{max-width:1180px;margin:0 auto;padding:0 16px;display:flex;align-items:center;gap:4px;overflow-x:auto;scrollbar-width:none}
-#pfnav .in::-webkit-scrollbar{display:none}
-#pfnav a{color:#cfe0f0;text-decoration:none;padding:11px 10px;white-space:nowrap;border-bottom:2px solid transparent;transition:.15s}
-#pfnav a:hover{color:#fff;background:rgba(255,255,255,.07)}
-#pfnav a.home{font-weight:700;color:#fff;padding-left:0;padding-right:14px;margin-right:4px;border-right:1px solid rgba(255,255,255,.15)}
-#pfnav a.on{color:#fff;border-bottom-color:#6fd3ff;font-weight:700}
-#pfnav .sp{margin-left:auto}
-#pfnav .me{color:#8fa8bf;padding:11px 0 11px 10px;white-space:nowrap}
-@media(max-width:640px){#pfnav .me{display:none}#pfnav a{padding:10px 8px}}
-@media print{#pfnav{display:none}}
-</style>
-<nav id="pfnav"><div class="in">
-<a class="home" href="./index.html">&#8592; 制作サンプル集</a>
-<a href="./gyomu-system.html" data-k="gyomu-system">業務システム</a>
-<a href="./automation.html" data-k="automation">自動化</a>
-<a href="./dashboard.html" data-k="dashboard">ダッシュボード</a>
-<a href="./cases.html" data-k="cases">導入事例</a>
-<a href="./advisor.html" data-k="advisor">継続でご一緒する形</a>
-<a href="./skillsheet.html" data-k="skillsheet">スキルシート</a>
-<span class="sp"></span><span class="me">自動化のミナト</span>
+<header class="site-header"><div class="container nav"><a class="brand" href="./index.html">自動化のミナト</a><nav class="nav-links" aria-label="メインナビゲーション"><a href="./advisor.html">AI顧問（月額）</a><a href="./works.html">制作例</a><a href="#plans">料金</a><a href="#contact">お問い合わせ</a></nav></div></header>
+<main id="top">
+
+<div class="container hero">
+<h1 data-parallax="6"><span class="nb">AI顧問（月額）。</span><span class="nb">毎月ご一緒する、</span><span class="nb">伴走型です。</span></h1>
+<p class="lead" data-parallax="3"><span class="nb">社内にIT担当がいない会社の技術窓口として、</span><span class="nb">ご相談・改修・運用まで続けて見ます。</span><span class="nb">「作って終わり」にしない形です。</span><span class="nb">1回だけの制作をご希望の場合は、</span><span class="nb"><a href="./works.html">単発（納品型）</a>もあります。</span></p>
+<div class="actions"><a class="button" href="#contact">まず相談する（無料）</a><a class="button button-outline" href="#cases">毎月の実施例を見る</a></div>
 </div>
-<script>(function(){var f=(location.pathname.split("/").pop()||"index.html").replace(".html","");
-document.querySelectorAll("#pfnav a[data-k]").forEach(function(a){if(a.getAttribute("data-k")===f)a.className="on";});})();</script>
-</nav>
-<script>/* pfnav-offset:start ナビと本体の固定ヘッダーが重なるのを防ぐ(2026-08-11)。
-   #pfnav は sticky/top:0/z-index:99999 なので、本体側の position:fixed; top:0 の
-   ヘッダーはナビの下に潜って隠れる(実測=lp-gym/lp-recruit で店名・グローバルナビ・
-   CTAボタンが全部読めなくなっていた)。ナビの実高さを測って上端固定の要素だけ下げる。
-   高さはSPで折り返すと変わるので resize でも測り直す。手で編集しない。 */
+
+<section id="plans"><div class="container">
+<div class="section-head"><h2><span class="nb">必要な分だけ、</span><span class="nb">伴走してお手伝いします。</span></h2><p class="lead">単発の修正から定常運用、新しい仕組みの開発まで。依頼内容と作業量に合わせて、3つの月額プランから選べます。</p></div>
+<div class="pricing-grid">
+<article class="plan"><p class="plan-name">ライト</p><div class="price mono"><strong>33,000</strong><span>円／月（税込）</span></div><p class="plan-copy">AIの導入と、困ったときの駆け込み先に。</p><ul><li>不具合の修正（Excelマクロ・スプレッドシート・既存システムなど）</li><li>小さな改修・調整</li><li>AI導入のご相談（どのツールをどこに使うか）</li><li>チャットでのご相談（回数無制限）</li><li>作業量の目安：月5時間相当</li></ul></article>
+<article class="plan recommended"><div class="recommend-label">おすすめ</div><p class="plan-name">スタンダード</p><div class="price mono"><strong>55,000</strong><span>円／月（税込）</span></div><p class="plan-copy">社内の「AI担当」をまるごと任せる。</p><ul><li>ライトの内容すべて</li><li>定常運用の代行（ECショップ運用、月次のデータ集計など）</li><li>新しい自動化の作成（小規模）</li><li>AIツールの初期設定と、社内で使えるようにする支援</li><li>作業量の目安：月10時間相当</li></ul></article>
+<article class="plan"><p class="plan-name">フル</p><div class="price mono"><strong>110,000</strong><span>円／月（税込）</span></div><p class="plan-copy">開発ごと引き受けます。</p><ul><li>スタンダードの内容すべて</li><li>新機能・新ツールの開発を並行で</li><li>複数の依頼を同時に進行</li><li>週次の進捗報告</li><li>作業量の目安：月20時間相当</li></ul></article>
+</div>
+<div class="scale-note"><p>これ以上の規模（新規システムの構築、常時対応が必要な業務など）は、内容に応じてお見積りします。まずはご相談ください。</p><a href="#contact" style="font-weight:600;text-decoration:none;white-space:nowrap">相談する →</a></div>
+<div class="legal-note">法人のお客様へ：業務委託契約書および秘密保持契約（NDA）の締結が可能です。お支払いは請求書払いに対応しております。社内のご検討にあたって必要な書類やご説明がございましたら、お申し付けください。</div>
+</div></section>
+
+<section id="cases"><div class="container">
+<div class="section-head"><h2><span class="nb">毎月、</span><span class="nb">こんなことを頼まれています。</span></h2><p class="lead">毎月ご一緒している会社が、実際に何を頼んでいるかをまとめました。3件とも、いま続いているご契約です。会社名は伏せ、業種だけを載せています。金額はすべて税込です。</p></div>
+<div class="pricing-grid">
+<article class="plan"><p class="plan-name">実施例1｜建設業の会社</p><div class="price mono"><strong>55,000</strong><span>円／月（税込）</span></div><p class="plan-copy">情報システム代行</p><ul><li>社内で使っているExcelの集計表の作り直しと、不具合の修正</li><li>社内のITの困りごとの相談窓口</li><li>画面共有での遠隔サポート</li><li>想定の作業量：月10時間</li></ul><p class="case-origin">依頼のきっかけ：社内にシステム担当がおらず、その都度困っていた。</p></article>
+<article class="plan"><p class="plan-name">実施例2｜食品・飲料メーカー</p><div class="price mono"><strong>55,000</strong><span>円／月（税込）</span></div><p class="plan-copy">通販サイトの構築と運用</p><ul><li>通販サイトの立ち上げ</li><li>商品46件の登録と公開</li><li>注文から出荷までの流れの整備</li><li>表示や規約まわりの点検</li><li>予約販売の準備</li></ul><p class="case-origin">依頼のきっかけ：通販を始めたいが、社内に作れる人も運用できる人もいなかった。</p></article>
+<article class="plan"><p class="plan-name">実施例3｜自社でWebサービスを運営する会社</p><div class="price mono"><strong>33,000</strong><span>円／月（税込）</span></div><p class="plan-copy">AIパートナー</p><ul><li>利用者ごとの上限設定や、権限まわりの機能追加</li><li>不具合の原因調査と修正</li><li>AIの利用状況が管理画面で見えるようにする</li><li>本番に反映する前の動作確認</li></ul><p class="case-origin">依頼のきっかけ：サービスにAIを組み込んだが、直せる人が社内にいなかった。</p></article>
+</div>
+</div></section>
+
+<section id="meetings"><div class="container">
+<div class="section-head"><h2><span class="nb">打ち合わせは、</span><span class="nb">必要なときだけ。</span></h2><p class="lead">やり取りは、基本はチャットで進めます。打ち合わせの頻度は、プランごとに目安があります。</p></div>
+<div class="process">
+<article class="step"><span class="step-num">ライト</span><div class="price mono"><strong>33,000</strong><span>円／月（税込）</span></div><p>必要であれば、月1回のオンライン打ち合わせを行います。</p></article>
+<article class="step"><span class="step-num">スタンダード</span><div class="price mono"><strong>55,000</strong><span>円／月（税込）</span></div><p>打ち合わせは月2回です。</p></article>
+<article class="step"><span class="step-num">フル</span><div class="price mono"><strong>110,000</strong><span>円／月（税込）</span></div><p>必要であれば、週1回行います。</p></article>
+</div>
+</div></section>
+
+<section class="contact" id="contact"><div class="container">
+<h2><span class="nb">何を頼めるか分からない段階でも、</span><span class="nb">ご相談いただけます。</span></h2>
+<p>いま手間がかかっている作業を、そのままお知らせください。ご連絡をいただいたところから、状況の整理を始めます。</p>
+<div class="actions"><a class="button" href="https://page.line.me/091usyfe" target="_blank" rel="noopener">LINEで相談する</a><a class="button button-outline" href="mailto:r2g128@gmail.com?subject=%E3%81%94%E7%9B%B8%E8%AB%87">メールで相談する</a></div>
+<p class="contact-sub"><span class="nb">メールは <a href="mailto:r2g128@gmail.com">r2g128@gmail.com</a> 宛です。</span><span class="nb">クラウドソーシング経由をご希望の場合は、</span><span class="nb"><a href="https://crowdworks.jp/public/employees/7039234" target="_blank" rel="noopener">こちらの窓口</a>と<a href="https://www.lancers.jp/profile/minato_auto" target="_blank" rel="noopener">こちらの窓口</a>からもご連絡いただけます。</span></p>
+<p class="contact-note">ご相談とお見積りに費用はかかりません。内容を拝見して、できることとできないことをお返しします。</p>
+</div></section>
+
+</main>
+<footer class="site-footer"><div class="container footer-inner"><span class="footer-brand">自動化のミナト</span><span>掲載の実施例は、実在の継続契約にもとづきます。会社名・サービス名は記載していません。</span></div></footer>
+<script>
 (function(){
-  var nav = document.getElementById('pfnav');
-  if (!nav) return;
-  var basePad = null;
-  function fit(){
-    var h = nav.offsetHeight || 0;
-    if (basePad === null) {
-      basePad = parseFloat(getComputedStyle(document.documentElement).scrollPaddingTop) || 0;
-    }
-    document.documentElement.style.scrollPaddingTop = (basePad + h) + 'px';
-    var all = document.body.getElementsByTagName('*');
-    for (var i = 0; i < all.length; i++) {
-      var el = all[i];
-      if (el === nav || nav.contains(el)) continue;
-      if (el.getAttribute('data-pfnav-shift') === '1') { el.style.top = h + 'px'; continue; }
-      var cs = getComputedStyle(el);
-      if (cs.position !== 'fixed' || parseFloat(cs.top) !== 0) continue;  /* 上端固定だけ触る */
-      el.setAttribute('data-pfnav-shift', '1');
-      el.style.top = h + 'px';
-    }
-  }
-  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', fit);
-  else fit();
-  window.addEventListener('load', fit);
-  window.addEventListener('resize', fit);
+var fine = matchMedia('(hover: hover) and (pointer: fine)');
+var rm = matchMedia('(prefers-reduced-motion: reduce)');
+var els = [].slice.call(document.querySelectorAll('[data-parallax]'));
+if(!els.length) return;
+var tx=0, ty=0, cx=0, cy=0, raf=null;
+function tick(){
+  cx += (tx-cx)*.08; cy += (ty-cy)*.08;
+  els.forEach(function(el){
+    var s = parseFloat(el.getAttribute('data-parallax'))||4;
+    el.style.transform = 'translate('+(cx*s).toFixed(2)+'px,'+(cy*s).toFixed(2)+'px)';
+  });
+  if(Math.abs(tx-cx)>.002 || Math.abs(ty-cy)>.002){ raf=requestAnimationFrame(tick); } else { raf=null; }
+}
+function onMove(e){
+  if(rm.matches || !fine.matches) return;
+  tx = e.clientX/innerWidth - .5;
+  ty = e.clientY/innerHeight - .5;
+  if(!raf) raf=requestAnimationFrame(tick);
+}
+function reset(){ els.forEach(function(el){ el.style.transform=''; }); tx=ty=cx=cy=0; if(raf){cancelAnimationFrame(raf);raf=null;} }
+addEventListener('mousemove', onMove, {passive:true});
+rm.addEventListener && rm.addEventListener('change', function(){ if(rm.matches) reset(); });
 })();
 </script>
-<!-- pfnav:end -->
-
-<header>
-  <div class="wrap">
-    <div class="eyebrow">Continuous Engagement</div>
-    <h1>技術面を、月ぎめで見る。</h1>
-    <p class="lead">「作って終わり」ではなく、<b>毎月いくらで、何を、どのくらいの頻度で見るのか</b>を先に決めてからご一緒する形です。専任のエンジニアを置くほどではないが、相談先が無いと止まってしまう——という会社に向いています。</p>
-    <div class="stats">
-      <div class="stat"><b>4.9</b><span>評価(22件)</span></div>
-      <div class="stat"><b>30件</b><span>受注実績</span></div>
-      <div class="stat"><b>96%</b><span>完了率</span></div>
-      <div class="stat"><b>17件</b><span>同一クライアントとの契約</span></div>
-    </div>
-    <div class="cta">
-      <a class="btn btn-p" href="./gyomu-system.html">作ったものを触ってみる</a>
-      <a class="btn btn-s" href="./index.html">他のサンプルを見る</a>
-    </div>
-  </div>
-</header>
-
-<main>
-  <div class="wrap">
-
-    <section>
-      <h2>毎月、具体的に何をするか</h2>
-      <p>抽象的に「相談に乗ります」ではなく、次の4つを回します。どれをどの比重でやるかは、最初の月に決めます。</p>
-      <table>
-        <tr><th>①手を動かす</th><td>その月に決めた開発・改修・自動化を実装します。<b>継続の中心はここ</b>で、相談だけで終わらせません。</td></tr>
-        <tr><th>②判断する</th><td>「内製か外注か」「今その機能を作るべきか」「このツールを買う価値があるか」を、費用と手間の見積もりつきでお答えします。<b>作らない方がよい時は、作らないと申し上げます。</b></td></tr>
-        <tr><th>③直す・守る</th><td>動いている仕組みが止まったときの復旧と、止まらないための手当て。データの定期バックアップもここに含みます。</td></tr>
-        <tr><th>④引き継げる形にする</th><td>手順書とソースコードを都度お渡しします。<b>私がいなくなっても回る状態</b>を、契約の途中でも常に保ちます。</td></tr>
-      </table>
-    </section>
-
-    <section>
-      <h2>頻度と、連絡の取り方</h2>
-      <ul>
-        <li><b>定例</b>：月1回のオンライン打ち合わせ（30〜60分）。その月にやったことと、翌月にやることを決めます。</li>
-        <li><b>随時</b>：チャットでいつでもご相談ください。<b>ご連絡は、その日のうちにお返しします</b>。</li>
-        <li><b>止まったとき</b>：稼働中の仕組みが動かなくなった場合を最優先で扱います。まず暫定復旧、その後に原因を潰す順序です。</li>
-      </ul>
-      <h3>お伝えしておくこと</h3>
-      <p>私は個人で、本業を持ちながらお請けしています。<b>常時待機の当番制ではありません。</b>そのうえで、返信が翌日以降になったことは今のところありません。オンラインの打ち合わせは平日夜・土日を軸に、ご調整のうえ平日日中も対応できます。この前提が合わないご依頼（常駐・専任・分単位の即応が要るもの）は、正直にお断りしています。</p>
-    </section>
-
-    <section>
-      <h2>費用の決まり方</h2>
-      <p><b>月額 20,000円(税込)〜</b>。金額は業務の内容と量に合わせてお見積りします。実際にご契約いただいている例は、ECサイトの運用代行で月額20,000円、社内の情報システム業務の代行で月額55,000円(月10時間が目安)です。</p>
-
-      <h3>月額に含む作業</h3>
-      <ul>
-        <li>軽微な修正(文言・数値・体裁の直し)</li>
-        <li>画面の調整</li>
-        <li>帳票(Excelや書類の書式)の調整</li>
-        <li>不具合の調査</li>
-        <li>月1回の改善相談</li>
-      </ul>
-
-      <h3>月額に含まない作業(別途お見積り)</h3>
-      <ul>
-        <li>新しい機能の追加</li>
-        <li>大きな構成変更</li>
-        <li>外部サービスとの新規連携</li>
-        <li>新規ツールの制作</li>
-      </ul>
-
-      <p>目安はシンプルです。<b>今ある物を直す＝月額内／新しく作る＝別途お見積り。</b>どちらに当たるか迷う場合は、着手前に必ずお伝えします。</p>
-
-      <p>そのうえで、金額は次の3つで変わります。</p>
-      <ul>
-        <li><b>手を動かす量</b>：毎月の開発・改修がどのくらいあるか。ここが一番大きく効きます。</li>
-        <li><b>対象の広さ</b>：1つの仕組みだけを見るのか、社内の複数の業務にまたがるのか。</li>
-        <li><b>止められない度合い</b>：業務が止まると即座に困るものか、翌営業日で足りるものか。</li>
-      </ul>
-      <p>まとまった初期開発が必要な場合は、<b>先に開発を単発でお請けし、そのあと継続に移る</b>形が多いです。いきなり月額から始める必要はありません。</p>
-    </section>
-
-    <section>
-      <h2>法人のお客様へ</h2>
-      <p>業務委託契約書および秘密保持契約(NDA)の締結が可能です。お支払いは請求書払いに対応しております。社内のご検討にあたって必要な書類やご説明がございましたら、お申し付けください。</p>
-    </section>
-
-    <section>
-      <h2>始め方と、やめ方</h2>
-      <ol>
-        <li><b>まず1つの業務から。</b>いちばん手間がかかっている作業を1つ選んでいただき、そこだけを実際に作ります。ここで進め方と品質を見ていただきます。</li>
-        <li><b>合いそうなら範囲を広げます。</b>合わなければ、その1件で終わりにしていただいて構いません。</li>
-        <li><b>やめるときは、渡して終わります。</b>ソースコード・手順書・データを全てお渡しします。特定の業者でないと直せない状態にはしません。<b>辞めにくくすることで継続してもらうつもりはありません。</b></li>
-      </ol>
-    </section>
-
-    <section>
-      <h2>正直に申し上げておくこと</h2>
-      <div class="honest">
-        <p><b>月ぎめでのご契約は、2026年8月に始めたところです。</b></p>
-        <p>現在1社と月額でご契約し、ECサイトの構築と、公開後の受注・出荷・お問い合わせ対応までを継続してお請けしています。それ以前は案件ごとの契約を重ねる形でご一緒しており、<b>同じお客様から17件</b>のご契約をいただいた例があります。実態としては継続に近い形で伴走してきました。</p>
-        <p>年単位で積み上げた月額の本数を並べる段階ではありません。かわりに、<b>公開しているデモを実際に触っていただき、進め方と品質でご判断いただければ</b>と思います。上のボタンから、実際に入力・計算・印刷ができる業務システムをご覧いただけます。</p>
-      </div>
-      <p>できないことも先に申し上げます。<b>常駐・出社・分単位の即応</b>は対応できません。<b>物流や現物を扱う作業</b>（撮影・採寸・発送・在庫の保有）もお請けしていません。この線引きは、お引き受けしてから「できませんでした」と申し上げないためのものです。</p>
-    </section>
-
-    <section>
-      <h2>これまでにお請けした仕事</h2>
-      <p>お客様名は伏せ、作業の内容と量だけを記載しています。</p>
-      <ul>
-        <li><b>ECモールの商品登録(アパレル・雑貨)</b>：商品データ1,233点の公開作業を代行しました。公開後に全2,517件を取り直して誤った表記が0件であることを確かめ、商品名516点の修正も行いました。</li>
-        <li><b>建設業の実行予算書(Excel)の修復</b>：壊れて計算できなくなった数式21セルを修復し、ブック内の全数式3,936件と照合して、工事全体の金額が1円も変わっていないことを確認しました。</li>
-        <li><b>問い合わせメールの整理</b>：たまっていたメール446行(重複を除き244件)を、キャンセル・領収書・お届け先・欠品などの種類ごとに分類しました。</li>
-        <li><b>アンケート業務の集計</b>：回答243件の集計と突き合わせを代行しました。</li>
-      </ul>
-    </section>
-
-    <section>
-      <h2>品質について</h2>
-      <p>AIを使って速く組みますが、<b>AI任せにはしません</b>。納品前に全件、件数・型・欠損・重複を自分の目で確認し、元データと突合してからお渡しします。速さだけを売りにすると、後で直す時間の方が長くなります。</p>
-      <p>作ったものには手順書を付けます。コードが読めない方でもそのまま使え、別の方に引き継ぐこともできます。</p>
-      <div class="cta">
-        <a class="btn btn-p" href="./gyomu-system.html">業務システムを触ってみる</a>
-        <a class="btn btn-s" href="./automation.html">自動化の実測値を見る</a>
-        <a class="btn btn-s" href="./skillsheet.html">スキルシートを見る</a>
-      </div>
-    </section>
-
-  </div>
-</main>
-
-<footer>
-  <p style="margin-top:8px"><a href="https://crowdworks.jp/public/employees/7039234" target="_blank" rel="noopener">クラウドワークスのプロフィールへ</a>　<span>ご依頼・ご相談はクラウドワークスのメッセージからお願いします。</span></p>
-  <div class="wrap">
-    ※本ページの各サンプルに登場する会社名・店舗名・人物・数値はすべて架空です。評価・受注件数・完了率はクラウドソーシングでの実測値です。<br>
-    自動化のミナト（クラウドワークス）／<a href="./index.html">サンプル一覧へ戻る</a>
-  </div>
-</footer>
 </body>
 </html>
