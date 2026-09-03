@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>自動化のミナト｜AIを、現場で使える仕組みに。</title>
-<meta name="description" content="業務の整理から、AIの導入、使い続けるための改善まで。社内にIT担当がいない会社の外の相談先として、小さく始めて現場に残る形へ整えます。">
+<title>料金｜自動化のミナト</title>
+<meta name="description" content="AI顧問（月額）はライト33,000円・スタンダード55,000円・フル110,000円（すべて税込・月額）。単発のご依頼は内容に応じてお見積りします。">
 <style>
 :root{--black:#0D0D0D;--white:#FFFFFF;--charcoal:#343541;--gray:#8E8EA0;--blue:#2563EB}
 *{box-sizing:border-box;margin:0;padding:0}
@@ -106,11 +106,27 @@ html{scroll-behavior:auto}
 *{transition:none!important;animation:none!important}
 }
 
-#office{display:block;width:min(1280px,calc(100vw - 64px));aspect-ratio:1280/800;margin:192px auto 0;image-rendering:pixelated;border:1px solid var(--black);border-radius:12px;background:var(--black)}
-.pixel-note{margin:16px auto 0;max-width:760px;color:var(--charcoal);text-align:center}
+.plan{position:relative;display:flex;flex-direction:column}
+.plan-name{font-size:14px;line-height:20px;font-weight:600}
+.plan .price-num{margin-top:14px}
+.price-cap{display:block;margin-top:6px}
+.plan .desc{margin-top:18px}
+.plan .meet{margin-top:18px;padding-top:14px;border-top:1px solid var(--gray)}
+.plan-reco{border:2px solid var(--blue)}
+.reco-badge{position:absolute;top:16px;right:16px;background:var(--blue);color:var(--white);border-radius:999px;padding:4px 12px;font-size:14px;line-height:20px;font-weight:600}
+@media (min-width:1024px){.plan-reco{transform:translateY(-16px)}}
+.scale-row{margin-top:24px;border:1px solid var(--white);border-radius:12px;padding:32px;display:flex;align-items:baseline;justify-content:space-between;gap:24px;flex-wrap:wrap}
+.scale-row h3{font-size:22px;line-height:30px}
+.scale-row p{max-width:620px}
+.single-price{font-size:30px;line-height:40px;font-weight:600;text-align:center}
+.single-link{display:flex;justify-content:center}
+.choose h3{font-size:22px;line-height:30px}
+.choose p{margin-top:18px}
 @media (max-width:767px){
-#office{margin-top:80px}
 .hero h1{font-size:min(40px,calc((100vw - 40px)/9.2));line-height:1.15}
+.scale-row{padding:24px}
+.single-price{font-size:24px;line-height:32px}
+.choose h3{font-size:20px;line-height:28px}
 }
 </style>
 </head>
@@ -119,131 +135,99 @@ html{scroll-behavior:auto}
 <div class="header-in">
 <a class="brand" href="./index.html">自動化のミナト</a>
 <nav class="nav" aria-label="メインナビゲーション">
-<a href="./index.html" aria-current="page">サービス</a>
-<a href="./pricing.html">料金</a>
+<a href="./index.html">サービス</a>
+<a href="./pricing.html" aria-current="page">料金</a>
 <a href="./cases.html">事例</a>
 <a class="nav-contact" href="#contact">お問い合わせ</a>
 <button class="menu-btn" type="button" aria-expanded="false" aria-controls="mnav">メニュー</button>
 </nav>
 </div>
 <nav class="mnav" id="mnav" hidden aria-label="メニュー">
-<a href="./index.html" aria-current="page">サービス</a>
-<a href="./pricing.html">料金</a>
+<a href="./index.html">サービス</a>
+<a href="./pricing.html" aria-current="page">料金</a>
 <a href="./cases.html">事例</a>
 </nav>
 </header>
 <main>
 <section class="hero" id="top">
 <div class="container">
-<h1><span class="nw">AIを、現場で使える</span> <span class="nw">仕組みに。</span></h1>
-<p class="lead">業務の整理から、AIの導入、使い続けるための改善まで。小さく始め、現場に残る形へ整えます。</p>
+<h1><span class="nw">必要な伴走の深さで</span> <span class="nw">選べます</span></h1>
+<p class="lead">AI顧問（月額）が主で、単発のご依頼も受けています。表示の金額はすべて税込・月額です。単発は内容に応じてお見積りします。</p>
 <div class="hero-cta"><a class="btn btn-blue" href="https://page.line.me/091usyfe" target="_blank" rel="noopener">相談内容を送る</a></div>
-<div class="hero-links"><a href="./pricing.html">料金を見る</a><a href="./cases.html">事例を見る</a></div>
-<canvas id="office" role="img" aria-label="仕組みの説明用のドット絵。オフィスでAIの担当者が並んで机に向かい、実作業を進め、人が全体を見て検品と判断をしている様子"></canvas>
-<p class="pixel-note caption">この図は体制の説明用のイメージです。実際の稼働状況を映したものではありません。</p>
+<div class="hero-links"><a href="./cases.html">事例を見る</a></div>
 </div>
 </section>
-<script src="./scheme-pixel.js"></script>
-<script>window.mountSchemePixel(document.getElementById('office'));</script>
 <div class="dark">
-<section id="ways">
+<section id="plans">
 <div class="container">
 <div class="sec-head">
-<h2><span class="nw">頼み方は、</span><span class="nw">伴走と納品の2つ</span></h2>
-<p class="lead">社内にIT担当がいない会社の、外の相談先になります。続けて任せる月額と、1回で完結する単発の2つです。</p>
-</div>
-<div class="grid2 sec-body">
-<article class="card">
-<h3>月額の伴走</h3>
-<p class="body">相談先を決めておきたい方向けです。課題の整理、試作、運用後の改善を、毎月の優先順位に沿って進めます。</p>
-<a class="card-link" href="./pricing.html">料金を見る</a>
-</article>
-<article class="card">
-<h3>単発の納品</h3>
-<p class="body">作りたいものが決まっている方向けです。範囲と完成条件を先にそろえ、必要なものを納品します。</p>
-<a class="card-link" href="./cases.html#single">制作例を見る</a>
-</article>
-</div>
-</div>
-</section>
-<section id="why">
-<div class="container">
-<div class="sec-head">
-<h2><span class="nw">小さな体制で、</span><span class="nw">必要なところに</span><span class="nw">集中する</span></h2>
-<p class="lead">費用を抑えられるのは、品質を下げているからではなく、工程の組み方によるものです。</p>
+<h2><span class="nw">AI顧問の</span><span class="nw">月額プラン</span></h2>
+<p class="lead">プランの違いは、伴走の深さと打ち合わせの頻度です。やり取りは、どのプランも基本はチャットで進めます。</p>
 </div>
 <div class="grid3 sec-body">
-<div class="reason">
-<span class="num">01</span>
-<h3>相談と制作を分けない</h3>
-<p>相談を受けた者が、そのまま設計と制作まで行います。引き継ぎの往復が発生しません。</p>
+<article class="card plan">
+<p class="plan-name">ライト</p>
+<p class="price-num">33,000円</p>
+<span class="caption on-dark-caption price-cap">税込・月額</span>
+<p class="desc">相談先を決めておき、小さな改修や困りごとの解消を続けたい方向けです。</p>
+<p class="meet caption on-dark-caption">打ち合わせ：必要であれば月1回</p>
+</article>
+<article class="card plan plan-reco">
+<span class="reco-badge">おすすめ</span>
+<p class="plan-name">スタンダード</p>
+<p class="price-num">55,000円</p>
+<span class="caption on-dark-caption price-cap">税込・月額</span>
+<p class="desc">複数の課題を整理しながら、試作と改善を進めたい方向けです。</p>
+<p class="meet caption on-dark-caption">打ち合わせ：月2回</p>
+</article>
+<article class="card plan">
+<p class="plan-name">フル</p>
+<p class="price-num">110,000円</p>
+<span class="caption on-dark-caption price-cap">税込・月額</span>
+<p class="desc">優先度の高い業務の設計と実装を、継続して進めたい方向けです。</p>
+<p class="meet caption on-dark-caption">打ち合わせ：必要であれば週1回</p>
+</article>
 </div>
-<div class="reason">
-<span class="num">02</span>
-<h3>小さく試してから広げる</h3>
-<p>初めから大きな仕組みを作りません。小さく動かして確かめてから広げるので、無駄な作り込みが出ません。</p>
+<div class="scale-row">
+<h3><span class="nw">これ以上の規模は</span><span class="nw">ご相談ください</span></h3>
+<p>3つのプランを超える内容は、規模に応じて個別にご提案します。</p>
 </div>
-<div class="reason">
-<span class="num">03</span>
-<h3>AIを使い、人が確かめる</h3>
-<p>人を増やす代わりに、AIのエージェントを並べて実作業を圧縮します。人の手は検品と判断に絞ります。</p>
 </div>
+</section>
+<section id="single">
+<div class="container">
+<div class="sec-head">
+<h2><span class="nw">単発のご依頼</span></h2>
+<p class="lead">作りたいものが決まっている場合は、単発でお受けします。範囲と完成条件を先にそろえ、納品して完結します。</p>
+</div>
+<div class="sec-body">
+<p class="single-price">内容に応じてお見積り</p>
+<div class="single-link"><a class="card-link" href="./cases.html#single">制作例を見る</a></div>
 </div>
 </div>
 </section>
-<section id="flow">
+<section id="choose">
 <div class="container">
 <div class="sec-head">
-<h2><span class="nw">相談から始め、</span><span class="nw">確かめながら進める</span></h2>
-</div>
-<ol class="grid4 sec-body">
-<li class="flow-item">
-<span class="num">01</span>
-<h3>相談</h3>
-<p>困っていることと、今のやり方を伺います。</p>
-</li>
-<li class="flow-item">
-<span class="num">02</span>
-<h3>整理</h3>
-<p>先に扱う範囲と、完成条件をそろえます。</p>
-</li>
-<li class="flow-item">
-<span class="num">03</span>
-<h3>試作・制作</h3>
-<p>小さく動かし、途中で見ていただきます。</p>
-</li>
-<li class="flow-item">
-<span class="num">04</span>
-<h3>納品・改善</h3>
-<p>単発は納品して完結。月額は次の改善へつなぎます。</p>
-</li>
-</ol>
-</div>
-</section>
-<section id="more">
-<div class="container">
-<div class="sec-head">
-<h2><span class="nw">料金と事例を、</span><span class="nw">先に確認できます</span></h2>
+<h2><span class="nw">迷ったら、</span><span class="nw">続けて改善するかで</span><span class="nw">選ぶ</span></h2>
 </div>
 <div class="grid2 sec-body">
-<a class="card" href="./pricing.html">
-<h3>料金</h3>
-<p class="body">月額3プランと、単発の考え方をまとめています。</p>
-<span class="card-link">料金を見る</span>
-</a>
-<a class="card" href="./cases.html">
-<h3>事例</h3>
-<p class="body">月額顧問の実施例と、単発の制作例を1ページで読めます。</p>
-<span class="card-link">事例を見る</span>
-</a>
+<div class="choose">
+<h3>続けて改善していきたいなら、月額</h3>
+<p>相談・試作・改善を毎月回します。相談先を決めておきたい方に向いています。</p>
+</div>
+<div class="choose">
+<h3>完成物が決まっているなら、単発</h3>
+<p>範囲と完成条件をそろえ、納品して完結します。まず1回試したい方にも向いています。</p>
+</div>
 </div>
 </div>
 </section>
 </div>
 <section class="contact" id="contact">
 <div class="container">
-<h2>まだ整理できていなくても、<span class="nw">ご相談ください</span></h2>
-<p class="lead">いま手間がかかっている作業や、困っていることをそのままお知らせください。状況の整理からご一緒します。</p>
+<h2><span class="nw">合うプランから</span><span class="nw">一緒に整理します</span></h2>
+<p class="lead">どのプランが合うか分からないままで構いません。ご状況を伺い、合う形からご提案します。</p>
 <div class="contact-cta"><a class="btn btn-white" href="https://page.line.me/091usyfe" target="_blank" rel="noopener">相談内容を送る</a></div>
 <p class="contact-sub caption">ボタンからLINEのトーク画面が開きます。メールをご希望の場合は <a href="mailto:r2g128@gmail.com">r2g128@gmail.com</a> へお送りください。<br>クラウドソーシング経由のご連絡は、<a href="https://crowdworks.jp/public/employees/7039234" target="_blank" rel="noopener">こちらの窓口</a>または<a href="https://www.lancers.jp/profile/minato_auto" target="_blank" rel="noopener">こちらの窓口</a>からも受け付けています。</p>
 </div>

@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>自動化のミナト｜AIを、現場で使える仕組みに。</title>
-<meta name="description" content="業務の整理から、AIの導入、使い続けるための改善まで。社内にIT担当がいない会社の外の相談先として、小さく始めて現場に残る形へ整えます。">
+<title>事例｜自動化のミナト</title>
+<meta name="description" content="月額顧問で毎月進めている実施例（業種のみ記載）と、単発で納品する制作例。実際に触れて動かせるデモを掲載しています。">
 <style>
 :root{--black:#0D0D0D;--white:#FFFFFF;--charcoal:#343541;--gray:#8E8EA0;--blue:#2563EB}
 *{box-sizing:border-box;margin:0;padding:0}
@@ -106,11 +106,29 @@ html{scroll-behavior:auto}
 *{transition:none!important;animation:none!important}
 }
 
-#office{display:block;width:min(1280px,calc(100vw - 64px));aspect-ratio:1280/800;margin:192px auto 0;image-rendering:pixelated;border:1px solid var(--black);border-radius:12px;background:var(--black)}
-.pixel-note{margin:16px auto 0;max-width:760px;color:var(--charcoal);text-align:center}
+.cases-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.case-main{grid-row:1/3}
+.case-tag{color:var(--gray)}
+.case-title{margin-top:8px}
+.case-fee{margin-top:12px;font-weight:600;white-space:nowrap}
+.case-kick{margin-top:14px}
+.case-list{margin-top:14px}
+.case-list li{padding:9px 0;border-top:1px solid var(--gray);font-size:15px;line-height:24px}
+.case-note{margin-top:14px}
+.work-card{padding:0;overflow:hidden;display:flex;flex-direction:column}
+.work-img{aspect-ratio:16/10;overflow:hidden;border-bottom:1px solid var(--white)}
+.work-img img{width:100%;height:100%;object-fit:cover}
+.work-body{padding:24px;display:flex;flex-direction:column;flex:1}
+.work-meta{display:flex;justify-content:space-between;gap:12px;margin-bottom:10px}
+.work-body p.desc{margin-top:10px}
+.work-body .card-link{margin-top:auto;padding-top:14px}
+@media (max-width:1023px){
+.cases-grid{grid-template-columns:1fr 1fr}
+}
 @media (max-width:767px){
-#office{margin-top:80px}
-.hero h1{font-size:min(40px,calc((100vw - 40px)/9.2));line-height:1.15}
+.cases-grid{grid-template-columns:1fr}
+.case-main{grid-row:auto}
+.work-body{padding:20px}
 }
 </style>
 </head>
@@ -119,122 +137,144 @@ html{scroll-behavior:auto}
 <div class="header-in">
 <a class="brand" href="./index.html">自動化のミナト</a>
 <nav class="nav" aria-label="メインナビゲーション">
-<a href="./index.html" aria-current="page">サービス</a>
+<a href="./index.html">サービス</a>
 <a href="./pricing.html">料金</a>
-<a href="./cases.html">事例</a>
+<a href="./cases.html" aria-current="page">事例</a>
 <a class="nav-contact" href="#contact">お問い合わせ</a>
 <button class="menu-btn" type="button" aria-expanded="false" aria-controls="mnav">メニュー</button>
 </nav>
 </div>
 <nav class="mnav" id="mnav" hidden aria-label="メニュー">
-<a href="./index.html" aria-current="page">サービス</a>
+<a href="./index.html">サービス</a>
 <a href="./pricing.html">料金</a>
-<a href="./cases.html">事例</a>
+<a href="./cases.html" aria-current="page">事例</a>
 </nav>
 </header>
 <main>
 <section class="hero" id="top">
 <div class="container">
-<h1><span class="nw">AIを、現場で使える</span> <span class="nw">仕組みに。</span></h1>
-<p class="lead">業務の整理から、AIの導入、使い続けるための改善まで。小さく始め、現場に残る形へ整えます。</p>
+<h1><span class="nw">伴走も、</span><span class="nw">単発の制作も。</span></h1>
+<p class="lead">月額顧問で毎月進めている実施例と、単発で納品する制作例を、1ページにまとめました。会社名は伏せ、業種のみ記載しています。</p>
 <div class="hero-cta"><a class="btn btn-blue" href="https://page.line.me/091usyfe" target="_blank" rel="noopener">相談内容を送る</a></div>
-<div class="hero-links"><a href="./pricing.html">料金を見る</a><a href="./cases.html">事例を見る</a></div>
-<canvas id="office" role="img" aria-label="仕組みの説明用のドット絵。オフィスでAIの担当者が並んで机に向かい、実作業を進め、人が全体を見て検品と判断をしている様子"></canvas>
-<p class="pixel-note caption">この図は体制の説明用のイメージです。実際の稼働状況を映したものではありません。</p>
+<div class="hero-links"><a href="./pricing.html">料金を見る</a></div>
 </div>
 </section>
-<script src="./scheme-pixel.js"></script>
-<script>window.mountSchemePixel(document.getElementById('office'));</script>
 <div class="dark">
-<section id="ways">
+<section id="advisor">
 <div class="container">
 <div class="sec-head">
-<h2><span class="nw">頼み方は、</span><span class="nw">伴走と納品の2つ</span></h2>
-<p class="lead">社内にIT担当がいない会社の、外の相談先になります。続けて任せる月額と、1回で完結する単発の2つです。</p>
+<h2><span class="nw">月額顧問では、</span><span class="nw">課題を順番に</span><span class="nw">解きます</span></h2>
+<p class="lead">毎月ご一緒している会社で、実際に進めている内容です。いずれも現在続いているご契約です。</p>
 </div>
-<div class="grid2 sec-body">
-<article class="card">
-<h3>月額の伴走</h3>
-<p class="body">相談先を決めておきたい方向けです。課題の整理、試作、運用後の改善を、毎月の優先順位に沿って進めます。</p>
-<a class="card-link" href="./pricing.html">料金を見る</a>
+<div class="cases-grid sec-body">
+<article class="card case-main">
+<p class="case-tag caption">建設業の会社</p>
+<h3 class="case-title">情報システム代行</h3>
+<p class="case-fee">月額 55,000円（税込）</p>
+<p class="case-kick">きっかけ：社内にシステム担当がおらず、その都度困っていた。</p>
+<ul class="case-list">
+<li>社内で使っているExcelの集計表の作り直しと、不具合の修正</li>
+<li>社内のITの困りごとの相談窓口</li>
+<li>画面共有での遠隔サポート</li>
+</ul>
+<p class="case-note caption on-dark-caption">想定の作業量：月10時間</p>
 </article>
-<article class="card">
-<h3>単発の納品</h3>
-<p class="body">作りたいものが決まっている方向けです。範囲と完成条件を先にそろえ、必要なものを納品します。</p>
-<a class="card-link" href="./cases.html#single">制作例を見る</a>
+<article class="card ">
+<p class="case-tag caption">食品・飲料メーカー</p>
+<h3 class="case-title">通販サイトの構築と運用</h3>
+<p class="case-fee">月額 55,000円（税込）</p>
+<p class="case-kick">きっかけ：通販を始めたいが、社内に作れる人も運用できる人もいなかった。</p>
+<ul class="case-list">
+<li>通販サイトの立ち上げ</li>
+<li>商品46件の登録と公開</li>
+<li>注文から出荷までの流れの整備</li>
+<li>表示や規約まわりの点検</li>
+<li>予約販売の準備</li>
+</ul>
+</article>
+<article class="card ">
+<p class="case-tag caption">自社でWebサービスを運営する会社</p>
+<h3 class="case-title">AIパートナー</h3>
+<p class="case-fee">月額 33,000円（税込）</p>
+<p class="case-kick">きっかけ：サービスにAIを組み込んだが、直せる人が社内にいなかった。</p>
+<ul class="case-list">
+<li>利用者ごとの上限設定や、権限まわりの機能追加</li>
+<li>不具合の原因調査と修正</li>
+<li>AIの利用状況が管理画面で見えるようにする</li>
+<li>本番に反映する前の動作確認</li>
+</ul>
 </article>
 </div>
 </div>
 </section>
-<section id="why">
+<section id="bridge">
 <div class="container">
 <div class="sec-head">
-<h2><span class="nw">小さな体制で、</span><span class="nw">必要なところに</span><span class="nw">集中する</span></h2>
-<p class="lead">費用を抑えられるのは、品質を下げているからではなく、工程の組み方によるものです。</p>
+<h2><span class="nw">完成物が</span><span class="nw">決まっているなら、</span><span class="nw">単発で</span></h2>
+<p class="lead">作りたいものが決まっている場合は、範囲と完成条件をそろえて納品します。</p>
+</div>
+</div>
+</section>
+<section id="single">
+<div class="container">
+<div class="sec-head">
+<h2><span class="nw">単発では、</span><span class="nw">完成条件を決めて</span><span class="nw">納品します</span></h2>
+<p class="lead">実際に触れて動かせるデモです。デモ内の会社名・店舗名・人物・数値はすべて架空です。</p>
 </div>
 <div class="grid3 sec-body">
-<div class="reason">
-<span class="num">01</span>
-<h3>相談と制作を分けない</h3>
-<p>相談を受けた者が、そのまま設計と制作まで行います。引き継ぎの往復が発生しません。</p>
+<a class="card work-card" href="./gyomu-system.html">
+<div class="work-img"><img src="./pf/gyomu-system.jpg" alt="販売・購買・債権管理システムの実画面"></div>
+<div class="work-body">
+<p class="work-meta caption on-dark-caption"><span>業務システム</span><span>操作可能</span></p>
+<h3>販売・購買・債権管理</h3>
+<p class="desc">見積から請求、入金消込までを一つの画面で管理。</p>
+<span class="card-link">デモを見る</span>
 </div>
-<div class="reason">
-<span class="num">02</span>
-<h3>小さく試してから広げる</h3>
-<p>初めから大きな仕組みを作りません。小さく動かして確かめてから広げるので、無駄な作り込みが出ません。</p>
-</div>
-<div class="reason">
-<span class="num">03</span>
-<h3>AIを使い、人が確かめる</h3>
-<p>人を増やす代わりに、AIのエージェントを並べて実作業を圧縮します。人の手は検品と判断に絞ります。</p>
-</div>
-</div>
-</div>
-</section>
-<section id="flow">
-<div class="container">
-<div class="sec-head">
-<h2><span class="nw">相談から始め、</span><span class="nw">確かめながら進める</span></h2>
-</div>
-<ol class="grid4 sec-body">
-<li class="flow-item">
-<span class="num">01</span>
-<h3>相談</h3>
-<p>困っていることと、今のやり方を伺います。</p>
-</li>
-<li class="flow-item">
-<span class="num">02</span>
-<h3>整理</h3>
-<p>先に扱う範囲と、完成条件をそろえます。</p>
-</li>
-<li class="flow-item">
-<span class="num">03</span>
-<h3>試作・制作</h3>
-<p>小さく動かし、途中で見ていただきます。</p>
-</li>
-<li class="flow-item">
-<span class="num">04</span>
-<h3>納品・改善</h3>
-<p>単発は納品して完結。月額は次の改善へつなぎます。</p>
-</li>
-</ol>
-</div>
-</section>
-<section id="more">
-<div class="container">
-<div class="sec-head">
-<h2><span class="nw">料金と事例を、</span><span class="nw">先に確認できます</span></h2>
-</div>
-<div class="grid2 sec-body">
-<a class="card" href="./pricing.html">
-<h3>料金</h3>
-<p class="body">月額3プランと、単発の考え方をまとめています。</p>
-<span class="card-link">料金を見る</span>
 </a>
-<a class="card" href="./cases.html">
-<h3>事例</h3>
-<p class="body">月額顧問の実施例と、単発の制作例を1ページで読めます。</p>
-<span class="card-link">事例を見る</span>
+<a class="card work-card" href="./automation.html">
+<div class="work-img"><img src="./pf/automation.jpg" alt="自動化・データ処理作品集の実画面"></div>
+<div class="work-body">
+<p class="work-meta caption on-dark-caption"><span>業務自動化</span><span>実測あり</span></p>
+<h3>自動化・データ処理</h3>
+<p class="desc">収集、転記、集計、PDF変換など7種類の自動化。</p>
+<span class="card-link">デモを見る</span>
+</div>
+</a>
+<a class="card work-card" href="./dashboard.html">
+<div class="work-img"><img src="./pf/dashboard.jpg" alt="EC売上ダッシュボードの実画面"></div>
+<div class="work-body">
+<p class="work-meta caption on-dark-caption"><span>データ集計</span><span>操作可能</span></p>
+<h3>EC売上ダッシュボード</h3>
+<p class="desc">毎月のCSVから売上、客単価、商品別実績を自動集計。</p>
+<span class="card-link">デモを見る</span>
+</div>
+</a>
+<a class="card work-card" href="./custom/vintage-archive-inbound.html">
+<div class="work-img"><img src="./pf/vintage-archive-inbound.jpg" alt="多言語インバウンドサイトの実画面"></div>
+<div class="work-body">
+<p class="work-meta caption on-dark-caption"><span>ホームページ</span><span>9言語</span></p>
+<h3>多言語インバウンドサイト</h3>
+<p class="desc">訪日客の来店につなげる、写真に頼らない店舗サイト。</p>
+<span class="card-link">デモを見る</span>
+</div>
+</a>
+<a class="card work-card" href="./design.html">
+<div class="work-img"><img src="./pf/design.jpg" alt="バナー制作サンプル集の実画面"></div>
+<div class="work-body">
+<p class="work-meta caption on-dark-caption"><span>EC運用</span><span>量産対応</span></p>
+<h3>バナー・画像制作</h3>
+<p class="desc">訴求違いのバナーや販促画像をまとめて制作。</p>
+<span class="card-link">デモを見る</span>
+</div>
+</a>
+<a class="card work-card" href="./line.html">
+<div class="work-img"><img src="./pf/line.jpg" alt="LINE公式アカウント構築デモの実画面"></div>
+<div class="work-body">
+<p class="work-meta caption on-dark-caption"><span>運用設計</span><span>動線設計</span></p>
+<h3>LINE公式アカウント構築</h3>
+<p class="desc">自動応答、配信、予約までの導線を設計。</p>
+<span class="card-link">デモを見る</span>
+</div>
 </a>
 </div>
 </div>
@@ -242,8 +282,8 @@ html{scroll-behavior:auto}
 </div>
 <section class="contact" id="contact">
 <div class="container">
-<h2>まだ整理できていなくても、<span class="nw">ご相談ください</span></h2>
-<p class="lead">いま手間がかかっている作業や、困っていることをそのままお知らせください。状況の整理からご一緒します。</p>
+<h2><span class="nw">近い例がなくても、</span><span class="nw">ご相談ください</span></h2>
+<p class="lead">掲載の例と違う内容でも構いません。困っていることから整理してお返しします。</p>
 <div class="contact-cta"><a class="btn btn-white" href="https://page.line.me/091usyfe" target="_blank" rel="noopener">相談内容を送る</a></div>
 <p class="contact-sub caption">ボタンからLINEのトーク画面が開きます。メールをご希望の場合は <a href="mailto:r2g128@gmail.com">r2g128@gmail.com</a> へお送りください。<br>クラウドソーシング経由のご連絡は、<a href="https://crowdworks.jp/public/employees/7039234" target="_blank" rel="noopener">こちらの窓口</a>または<a href="https://www.lancers.jp/profile/minato_auto" target="_blank" rel="noopener">こちらの窓口</a>からも受け付けています。</p>
 </div>
