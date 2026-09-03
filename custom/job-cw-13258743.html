@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ECデザインラボサンプル|楽天・Amazon・Yahoo バナー/LPデザイナー募集</title>
+<meta name="description" content="楽天市場・Amazon・Yahoo!ショッピング向けのバナー/LP制作を担うECデザイナーを募集。1スライド2,000円〜4,000円、平日10-19時稼働、リモートの業務委託。長期でご活躍いただける方を歓迎します。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Zen+Kaku+Gothic+New:wght@500;700;900&family=Manrope:wght@500;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#1f2b4d;
+  --navy-dark:#131b32;
+  --navy-tint:#eef0f7;
+  --bg:#faf9f5;
+  --white:#ffffff;
+  --text:#25272c;
+  --text-light:#63666f;
+  --line:#e5e3dd;
+  --radius:18px;
+  --shadow:0 10px 28px rgba(19,27,50,0.12);
+  --maxw:1120px;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{
+  font-family:"Noto Sans JP",sans-serif;
+  color:var(--text);
+  background:var(--bg);
+  line-height:1.85;
+  letter-spacing:0.02em;
+  font-feature-settings:"palt";
+  overflow-x:hidden;
+  width:100%;
+}
+img{max-width:100%;width:100%;display:block;}
+a{color:inherit;text-decoration:none;}
+h1,h2,h3,h4{font-family:"Zen Kaku Gothic New",sans-serif;line-height:1.5;letter-spacing:0.01em;}
+.num{font-family:"Manrope",sans-serif;}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px;width:100%;}
+section{padding:96px 0;}
+@media(max-width:680px){section{padding:64px 0;}}
+.eyebrow{
+  display:inline-block;
+  font-size:12.5px;
+  font-weight:700;
+  letter-spacing:0.18em;
+  color:var(--navy);
+  border:1px solid var(--navy);
+  padding:5px 14px;
+  border-radius:100px;
+  margin-bottom:18px;
+}
+.sec-title{
+  font-size:clamp(24px,4.2vw,36px);
+  font-weight:900;
+  margin-bottom:16px;
+}
+.sec-lead{
+  color:var(--text-light);
+  font-size:15.5px;
+  max-width:640px;
+  margin-bottom:48px;
+}
+.btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  padding:16px 34px;
+  border-radius:100px;
+  font-weight:700;
+  font-size:15.5px;
+  box-shadow:var(--shadow);
+  transition:transform .2s ease, box-shadow .2s ease;
+  border:none;
+  cursor:pointer;
+}
+.btn:hover{transform:translateY(-2px);box-shadow:0 14px 30px rgba(19,27,50,0.18);}
+.btn-primary{background:var(--navy);color:#fff;}
+.btn-ghost{background:#fff;color:var(--navy);border:1.5px solid var(--navy);}
+
+/* ---------- header ---------- */
+.site-header{
+  position:fixed;top:0;left:0;right:0;
+  z-index:60;
+  background:rgba(250,249,245,0.86);
+  backdrop-filter:blur(10px);
+  -webkit-backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line);
+}
+.header-inner{
+  max-width:var(--maxw);margin:0 auto;padding:0 24px;
+  height:68px;display:flex;align-items:center;justify-content:space-between;
+}
+.logo{
+  font-family:"Zen Kaku Gothic New",sans-serif;
+  font-weight:900;font-size:17px;color:var(--navy);
+}
+.logo span{color:var(--text-light);font-weight:500;font-size:11px;display:block;letter-spacing:0.1em;}
+.desktop-nav{display:flex;gap:32px;font-size:14px;font-weight:500;}
+.desktop-nav a{position:relative;padding:4px 0;}
+.desktop-nav a:hover{color:var(--navy);}
+.header-cta{display:flex;align-items:center;gap:14px;}
+.header-cta .btn{padding:11px 24px;font-size:14px;}
+.hamburger{
+  width:42px;height:42px;border-radius:50%;
+  border:1px solid var(--line);background:#fff;
+  display:none;flex-direction:column;align-items:center;justify-content:center;gap:5px;
+  cursor:pointer;
+}
+.hamburger span{width:18px;height:2px;background:var(--navy);display:block;transition:.25s;}
+.hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+.hamburger.open span:nth-child(2){opacity:0;}
+.hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+@media(max-width:900px){
+  .desktop-nav{display:none;}
+  .header-cta .btn-ghost{display:none;}
+  .hamburger{display:flex;}
+}
+
+/* mobile nav is a SIBLING of header, not nested, so fixed positioning is never trapped */
+.mobile-nav{
+  position:fixed;top:0;right:0;
+  width:min(78vw,320px);height:100vh;
+  background:var(--navy-dark);
+  z-index:70;
+  transform:translateX(100%);
+  transition:transform .32s ease;
+  padding:100px 32px 40px;
+  display:flex;flex-direction:column;gap:26px;
+}
+.mobile-nav.open{transform:translateX(0);}
+.mobile-nav a{color:#fff;font-size:16px;font-weight:700;}
+.mobile-nav .btn{margin-top:12px;}
+.nav-scrim{
+  position:fixed;inset:0;background:rgba(19,27,50,0.5);
+  z-index:65;opacity:0;pointer-events:none;transition:opacity .3s ease;
+}
+.nav-scrim.open{opacity:1;pointer-events:auto;}
+
+/* ---------- hero ---------- */
+.hero{
+  position:relative;
+  margin-top:68px;
+  padding:120px 0 90px;
+  color:#fff;
+  overflow:hidden;
+}
+.hero::before{
+  content:"";position:absolute;inset:0;
+  background:
+    linear-gradient(120deg,rgba(19,27,50,0.92) 20%,rgba(31,43,77,0.72) 60%,rgba(19,27,50,0.9)),
+    url('https://images.unsplash.com/photo-1606336782667-775252a0e5b0?auto=format&fit=crop&w=1200&q=70') center/cover;
+  z-index:0;
+}
+.hero-inner{position:relative;z-index:1;max-width:var(--maxw);margin:0 auto;padding:0 24px;}
+.hero .eyebrow{border-color:rgba(255,255,255,0.5);color:#fff;}
+.hero h1{
+  font-size:clamp(30px,5.6vw,52px);
+  font-weight:900;
+  margin-bottom:20px;
+}
+.hero h1 em{font-style:normal;color:#ffd27a;}
+.hero p{
+  font-size:15.5px;
+  max-width:520px;
+  color:rgba(255,255,255,0.86);
+  margin-bottom:36px;
+}
+.hero-actions{display:flex;flex-wrap:wrap;gap:14px;margin-bottom:56px;}
+.hero .btn-ghost{background:transparent;color:#fff;border-color:rgba(255,255,255,0.6);}
+.hero-stats{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  gap:16px;
+  border-top:1px solid rgba(255,255,255,0.2);
+  padding-top:28px;
+}
+.hero-stats div{}
+.hero-stats .num{font-size:clamp(20px,3vw,28px);font-weight:800;color:#ffd27a;}
+.hero-stats small{display:block;font-size:11.5px;color:rgba(255,255,255,0.75);margin-top:4px;line-height:1.5;}
+@media(max-width:680px){.hero-stats{grid-template-columns:repeat(2,1fr);row-gap:24px;}}
+
+/* ---------- reveal ---------- */
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .7s ease, transform .7s ease;}
+.reveal.visible{opacity:1;transform:translateY(0);}
+@media(prefers-reduced-motion:reduce){
+  .reveal{opacity:1;transform:none;transition:none;}
+  html{scroll-behavior:auto;}
+}
+
+/* ---------- why ---------- */
+.why{background:var(--white);}
+.why-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:56px;align-items:center;}
+.why-img{border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);aspect-ratio:4/3;object-fit:cover;}
+.why-list{list-style:none;margin-top:24px;display:flex;flex-direction:column;gap:16px;}
+.why-list li{display:flex;gap:12px;font-size:14.5px;}
+.why-list li::before{content:"✓";color:var(--navy);font-weight:900;flex:none;}
+@media(max-width:860px){.why-grid{grid-template-columns:1fr;}.why-img{order:-1;}}
+
+/* ---------- work flow ---------- */
+.flow-steps{
+  display:grid;grid-template-columns:repeat(5,1fr);gap:18px;counter-reset:step;
+}
+.flow-step{
+  background:var(--white);border-radius:var(--radius);padding:26px 20px;
+  border:1px solid var(--line);position:relative;
+}
+.flow-step .step-num{
+  font-family:"Manrope",sans-serif;font-weight:800;font-size:26px;color:var(--navy);
+  opacity:0.85;margin-bottom:14px;
+}
+.flow-step h4{font-size:14.5px;margin-bottom:8px;}
+.flow-step p{font-size:12.8px;color:var(--text-light);}
+@media(max-width:900px){.flow-steps{grid-template-columns:repeat(2,1fr);}}
+@media(max-width:520px){.flow-steps{grid-template-columns:1fr;}}
+.flow-arrow{display:none;}
+
+/* ---------- requirements ---------- */
+.req{background:var(--navy-tint);}
+.req-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;}
+.req-card{
+  background:#fff;border-radius:var(--radius);padding:28px;
+  box-shadow:var(--shadow);display:flex;gap:16px;
+}
+.req-card .mark{
+  flex:none;width:38px;height:38px;border-radius:50%;
+  background:var(--navy);color:#fff;display:flex;align-items:center;justify-content:center;
+  font-weight:800;font-family:"Manrope",sans-serif;
+}
+.req-card p{font-size:14px;}
+@media(max-width:680px){.req-grid{grid-template-columns:1fr;}}
+
+/* ---------- voice ---------- */
+.voice-card{
+  display:grid;grid-template-columns:220px 1fr;gap:32px;
+  background:var(--white);border-radius:var(--radius);
+  box-shadow:var(--shadow);overflow:hidden;
+}
+.voice-photo{aspect-ratio:1/1;object-fit:cover;}
+.voice-body{padding:32px 32px 32px 0;}
+.voice-body .quote{font-size:16px;font-weight:700;margin-bottom:14px;}
+.voice-body p{font-size:14px;color:var(--text-light);}
+.voice-name{margin-top:18px;font-size:12.5px;font-weight:700;color:var(--navy);}
+@media(max-width:680px){
+  .voice-card{grid-template-columns:1fr;}
+  .voice-photo{aspect-ratio:16/9;}
+  .voice-body{padding:0 24px 28px;}
+}
+
+/* ---------- pay table ---------- */
+.pay-table{
+  width:100%;border-collapse:collapse;background:#fff;border-radius:var(--radius);
+  overflow:hidden;box-shadow:var(--shadow);
+}
+.pay-table th,.pay-table td{
+  padding:20px 22px;text-align:left;font-size:14px;border-bottom:1px solid var(--line);
+}
+.pay-table th{background:var(--navy);color:#fff;width:36%;font-weight:700;}
+.pay-table tr:last-child td{border-bottom:none;}
+.pay-table .price{font-family:"Manrope",sans-serif;font-weight:800;color:var(--navy);font-size:17px;}
+
+/* ---------- overview table ---------- */
+.overview-table{width:100%;border-collapse:collapse;}
+.overview-table tr{border-bottom:1px solid var(--line);}
+.overview-table tr:last-child{border-bottom:none;}
+.overview-table th,.overview-table td{
+  padding:18px 8px;text-align:left;font-size:14px;vertical-align:top;
+}
+.overview-table th{width:130px;color:var(--navy);font-weight:700;white-space:nowrap;}
+@media(max-width:560px){
+  .overview-table th,.overview-table td{display:block;width:100%;padding:4px 0;}
+  .overview-table tr{padding:16px 0;display:block;}
+  .overview-table th{padding-top:16px;}
+}
+
+/* ---------- apply flow ---------- */
+.apply-flow{display:flex;flex-direction:column;gap:0;max-width:640px;}
+.apply-flow-item{display:flex;gap:20px;padding:22px 0;border-bottom:1px dashed var(--line);}
+.apply-flow-item:last-child{border-bottom:none;}
+.apply-flow-item .n{
+  flex:none;width:34px;height:34px;border-radius:50%;border:1.5px solid var(--navy);
+  color:var(--navy);display:flex;align-items:center;justify-content:center;font-family:"Manrope",sans-serif;font-weight:800;font-size:14px;
+}
+.apply-flow-item h4{font-size:14.5px;margin-bottom:4px;}
+.apply-flow-item p{font-size:13px;color:var(--text-light);}
+
+/* ---------- faq ---------- */
+.faq-item{border-bottom:1px solid var(--line);}
+.faq-q{
+  width:100%;text-align:left;background:none;border:none;cursor:pointer;
+  padding:22px 0;font-size:15px;font-weight:700;display:flex;justify-content:space-between;gap:16px;
+  font-family:"Noto Sans JP",sans-serif;color:var(--text);
+}
+.faq-q .icon{flex:none;font-family:"Manrope",sans-serif;font-weight:700;color:var(--navy);font-size:18px;}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .3s ease;}
+.faq-a p{font-size:13.8px;color:var(--text-light);padding-bottom:22px;max-width:640px;}
+.faq-item.open .faq-a{max-height:200px;}
+.faq-note{font-size:12.5px;color:var(--text-light);margin-top:20px;}
+
+/* ---------- form ---------- */
+.apply-section{background:var(--navy-tint);}
+.form-card{
+  background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);
+  padding:40px;max-width:720px;margin:0 auto;
+}
+.form-row{margin-bottom:20px;}
+.form-row label{display:block;font-size:13.5px;font-weight:700;margin-bottom:8px;}
+.form-row input,.form-row textarea,.form-row select{
+  width:100%;max-width:100%;padding:14px 16px;border:1.5px solid var(--line);border-radius:10px;
+  font-size:16px;font-family:inherit;background:#fdfdfb;
+}
+.form-row textarea{min-height:110px;resize:vertical;}
+.check-row{display:flex;flex-wrap:wrap;gap:14px;font-size:13.5px;}
+.check-row label{display:flex;align-items:center;gap:6px;font-weight:500;}
+.form-submit{width:100%;justify-content:center;}
+.form-note{font-size:12px;color:var(--text-light);margin-top:14px;text-align:center;}
+
+/* ---------- footer ---------- */
+footer{background:var(--navy-dark);color:rgba(255,255,255,0.82);padding:64px 0 120px;}
+.footer-grid{display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:40px;margin-bottom:40px;}
+.footer-logo{font-family:"Zen Kaku Gothic New",sans-serif;font-weight:900;color:#fff;font-size:17px;margin-bottom:12px;}
+footer h5{color:#fff;font-size:13px;margin-bottom:14px;letter-spacing:0.08em;}
+footer ul{list-style:none;display:flex;flex-direction:column;gap:10px;font-size:13px;}
+.footer-tel{font-family:"Manrope",sans-serif;font-weight:700;color:#ffd27a;font-size:18px;}
+.footer-disclaimer{
+  border-top:1px solid rgba(255,255,255,0.15);padding-top:28px;
+  font-size:11.8px;color:rgba(255,255,255,0.55);line-height:1.9;
+}
+@media(max-width:760px){.footer-grid{grid-template-columns:1fr;}}
+
+/* ---------- sticky mobile cta ---------- */
+.sticky-cta{
+  position:fixed;left:0;right:0;bottom:0;z-index:55;
+  background:rgba(250,249,245,0.94);backdrop-filter:blur(8px);
+  border-top:1px solid var(--line);
+  padding:12px 20px;
+  display:none;
+  align-items:center;gap:12px;
+}
+.sticky-cta .btn{flex:1;}
+@media(max-width:900px){.sticky-cta{display:flex;}}
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <a href="#top" class="logo">ECデザインラボ<span>SAMPLE CREATIVE STUDIO</span></a>
+    <nav class="desktop-nav">
+      <a href="#work">仕事内容</a>
+      <a href="#pay">報酬</a>
+      <a href="#overview">募集要項</a>
+      <a href="#faq">よくある質問</a>
+    </nav>
+    <div class="header-cta">
+      <a href="#apply" class="btn btn-ghost">応募要項を見る</a>
+      <a href="#apply" class="btn btn-primary">応募する</a>
+    </div>
+    <button class="hamburger" id="hamburgerBtn" aria-label="メニューを開く">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<div class="nav-scrim" id="navScrim"></div>
+<nav class="mobile-nav" id="mobileNav">
+  <a href="#work">仕事内容</a>
+  <a href="#requirements">求める人物像</a>
+  <a href="#pay">報酬</a>
+  <a href="#overview">募集要項</a>
+  <a href="#faq">よくある質問</a>
+  <a href="#apply" class="btn btn-primary">応募する</a>
+</nav>
+
+<div id="top"></div>
+<section class="hero">
+  <div class="hero-inner">
+    <span class="eyebrow">DESIGNER RECRUIT / 長期募集</span>
+    <h1>売れるバナーを、<br><em>稼げる仕事</em>に。</h1>
+    <p>楽天市場・Amazon・Yahoo!ショッピング向けのバナー制作とLP制作。あなたのデザイン力を、成果に直結する現場で活かしませんか。チャットでのやり取りが中心の、業務委託・リモートワークです。</p>
+    <div class="hero-actions">
+      <a href="#apply" class="btn btn-primary">今すぐ応募する</a>
+      <a href="#overview" class="btn btn-ghost">募集要項を確認する</a>
+    </div>
+    <div class="hero-stats">
+      <div><div class="num">3</div><small>対応ECモール<br>楽天市場/Amazon/Yahoo!</small></div>
+      <div><div class="num">2,000〜4,000<span style="font-size:13px;">円</span></div><small>1スライドあたりの制作単価<br>(税抜)</small></div>
+      <div><div class="num">10-19</div><small>稼働時間帯の目安<br>平日</small></div>
+      <div><div class="num">6</div><small>最低契約期間<br>ヶ月〜・長期歓迎</small></div>
+    </div>
+  </div>
+</section>
+
+<section class="why">
+  <div class="wrap">
+    <div class="why-grid">
+      <div class="reveal">
+        <span class="eyebrow">WHY WE'RE HIRING</span>
+        <h2 class="sec-title">ECの現場は、<br>デザインの手が足りません。</h2>
+        <p style="color:var(--text-light);font-size:14.5px;">複数のプロジェクトが同時に動く中で、楽天市場・Amazon・Yahoo!ショッピングそれぞれの規定やクリック導線を理解した上で、スピーディーに形にできるデザイナーを求めています。単発ではなく、長期でチームの一員として関わっていただける方を歓迎します。</p>
+        <ul class="why-list">
+          <li>プロジェクトに応じて複数案件を継続的にお任せ</li>
+          <li>やり取りはチャット中心で場所を選ばず対応可能</li>
+          <li>実務経験を活かして、そのまま長期の収入源に</li>
+        </ul>
+      </div>
+      <img class="why-img reveal" src="https://images.unsplash.com/photo-1629875499750-a31b83446598?auto=format&fit=crop&w=1200&q=70" alt="都心のオフィス街を見上げるビル群">
+    </div>
+  </div>
+</section>
+
+<section id="work" style="background:var(--navy-tint);">
+  <div class="wrap">
+    <span class="eyebrow reveal">FLOW</span>
+    <h2 class="sec-title reveal">お仕事の流れ</h2>
+    <p class="sec-lead reveal">ご依頼から納品まで、すべてチャットベースで完結します。初回のヒアリングさえ済めば、あとは制作物のやり取りが中心です。</p>
+    <div class="flow-steps">
+      <div class="flow-step reveal"><div class="step-num">01</div><h4>ご依頼・ヒアリング</h4><p>チャットで案件概要とモール、納期を共有します。</p></div>
+      <div class="flow-step reveal"><div class="step-num">02</div><h4>構成案の共有</h4><p>ラフや構成案をすり合わせ、方向性を確定します。</p></div>
+      <div class="flow-step reveal"><div class="step-num">03</div><h4>デザイン制作</h4><p>バナー・LPを各モールの仕様に沿って制作します。</p></div>
+      <div class="flow-step reveal"><div class="step-num">04</div><h4>フィードバック対応</h4><p>修正依頼にチャットで柔軟にご対応いただきます。</p></div>
+      <div class="flow-step reveal"><div class="step-num">05</div><h4>納品</h4><p>完成データを納品し、次の案件へ継続します。</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="requirements" class="req">
+  <div class="wrap">
+    <span class="eyebrow reveal">WHO WE'RE LOOKING FOR</span>
+    <h2 class="sec-title reveal">こんな方を歓迎します</h2>
+    <p class="sec-lead reveal">募集要項で重視しているポイントです。すべてに当てはまらなくても、まずはお気軽にご応募ください。</p>
+    <div class="req-grid">
+      <div class="req-card reveal"><div class="mark">01</div><p>楽天市場・Amazon・Yahoo!ショッピングなどでのデザイン制作のご経験がある方</p></div>
+      <div class="req-card reveal"><div class="mark">02</div><p>ご依頼からすぐに対応できるリソースがある方</p></div>
+      <div class="req-card reveal"><div class="mark">03</div><p>チャットでのコミュニケーションが柔軟に取れる方</p></div>
+      <div class="req-card reveal"><div class="mark">04</div><p>最低6ヶ月以上、長期でご対応いただける方</p></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <span class="eyebrow reveal">VOICE ※仮のお声です</span>
+    <h2 class="sec-title reveal">登録デザイナーの声</h2>
+    <p class="sec-lead reveal">制作サンプルのため、下記のお声は一般的な内容を想定した仮のものです。</p>
+    <div class="voice-card reveal">
+      <img class="voice-photo" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=1200&q=70" alt="登録デザイナーのポートレート(イメージ)">
+      <div class="voice-body">
+        <p class="quote">「モールごとの違いを理解した上で任せてもらえるので、スキルがそのまま単価に反映される実感があります。」</p>
+        <p>フリーランスとして複数のクライアント案件を掛け持ちしていますが、チャットでのやり取りが中心なので、隙間時間にも対応しやすいです。継続的に依頼をいただけるので、収入の見通しも立てやすくなりました。</p>
+        <p class="voice-name">登録デザイナー K さん・フリーランス3年目(※仮のプロフィールです)</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="pay" style="background:var(--navy-tint);">
+  <div class="wrap">
+    <span class="eyebrow reveal">COMPENSATION</span>
+    <h2 class="sec-title reveal">報酬について</h2>
+    <p class="sec-lead reveal">募集要項に記載の契約金額です。プロジェクトやスライド内容により変動する場合があります。</p>
+    <table class="pay-table reveal">
+      <tr><th>制作単価</th><td class="price">1スライド 2,000円 〜 4,000円(税抜)</td></tr>
+      <tr><th>お支払いについて</th><td>契約金額(税込)からシステム利用料を差し引いた金額が、受取金額となります。</td></tr>
+      <tr><th>主な制作物</th><td>楽天市場・Amazon・Yahoo!ショッピング向けのバナー、LP(ランディングページ)</td></tr>
+      <tr><th>契約期間</th><td>最低6ヶ月〜(長期でご対応いただける方を歓迎します)</td></tr>
+    </table>
+  </div>
+</section>
+
+<section id="overview">
+  <div class="wrap">
+    <span class="eyebrow reveal">JOB OVERVIEW</span>
+    <h2 class="sec-title reveal">募集要項</h2>
+    <table class="overview-table reveal">
+      <tr><th>職種</th><td>ECデザイナー(バナー・LP制作)</td></tr>
+      <tr><th>業務内容</th><td>楽天市場・Amazon・Yahoo!ショッピングなどECモール向けのデザイン制作</td></tr>
+      <tr><th>稼働時間</th><td>平日10:00〜19:00で稼働ができる方(チャットコミュニケーション必須)</td></tr>
+      <tr><th>契約期間</th><td>最低6ヶ月〜・長期でご対応いただける方を歓迎</td></tr>
+      <tr><th>契約金額</th><td>1スライド2,000円〜4,000円(税抜) ※システム利用料が差し引かれます</td></tr>
+      <tr><th>勤務形態</th><td>業務委託・リモートワーク</td></tr>
+      <tr><th>応募方法</th><td>自己紹介・実績・ポートフォリオのご提示と、条件提示(お見積り金額)の入力</td></tr>
+    </table>
+  </div>
+</section>
+
+<section style="background:var(--navy-tint);">
+  <div class="wrap">
+    <div class="why-grid">
+      <img class="why-img reveal" src="https://images.unsplash.com/photo-1664596350962-603b0a41524a?auto=format&fit=crop&w=1200&q=70" alt="日比谷のオフィス街を歩く人々(遠景)">
+      <div class="reveal">
+        <span class="eyebrow">FLOW OF APPLICATION</span>
+        <h2 class="sec-title">応募の流れ</h2>
+        <div class="apply-flow">
+          <div class="apply-flow-item"><div class="n">1</div><div><h4>エントリー</h4><p>自己紹介・実績・ポートフォリオをご提示ください。</p></div></div>
+          <div class="apply-flow-item"><div class="n">2</div><div><h4>条件提示</h4><p>ご希望のお見積もり金額を入力してください。</p></div></div>
+          <div class="apply-flow-item"><div class="n">3</div><div><h4>確認・ご連絡</h4><p>内容を確認のうえ、チャットにてご連絡いたします。</p></div></div>
+          <div class="apply-flow-item"><div class="n">4</div><div><h4>契約・稼働開始</h4><p>契約手続きの後、案件のご依頼を開始します。</p></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="faq">
+  <div class="wrap">
+    <span class="eyebrow reveal">FAQ</span>
+    <h2 class="sec-title reveal">よくあるご質問</h2>
+    <div class="reveal" style="max-width:680px;">
+      <div class="faq-item">
+        <button class="faq-q"><span>未経験でも応募できますか?</span><span class="icon">+</span></button>
+        <div class="faq-a"><p>楽天市場・Amazon・Yahoo!ショッピングのいずれかでのデザイン制作経験がある方を対象としています。詳しくはご応募時にポートフォリオをご確認させてください。</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q"><span>稼働時間は必ず10:00〜19:00固定ですか?</span><span class="icon">+</span></button>
+        <div class="faq-a"><p>平日10:00〜19:00の間でチャット連絡がスムーズに取れる体制であれば、時間の使い方はご相談可能です。(※仮の回答です)</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q"><span>契約期間中に案件が無い月はありますか?</span><span class="icon">+</span></button>
+        <div class="faq-a"><p>プロジェクトの状況により依頼量は変動しますが、複数プロジェクトを掛け合わせて継続的にご依頼できるよう調整いたします。(※仮の回答です)</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q"><span>報酬の支払いタイミングは?</span><span class="icon">+</span></button>
+        <div class="faq-a"><p>ご契約内容に基づき、案件の納品ごとにお支払いいたします。詳細はご契約時にご案内します。(※仮の回答です)</p></div>
+      </div>
+      <p class="faq-note">※上記のうち一部は制作サンプルのため、一般的な内容を想定した仮の回答です。実際の条件は募集要項および契約時のご案内が優先されます。</p>
+    </div>
+  </div>
+</section>
+
+<section id="apply" class="apply-section">
+  <div class="wrap">
+    <span class="eyebrow reveal">APPLY NOW</span>
+    <h2 class="sec-title reveal" style="text-align:center;">ご応募はこちらから</h2>
+    <p class="sec-lead reveal" style="text-align:center;margin-left:auto;margin-right:auto;">自己紹介・実績・ポートフォリオと、ご希望のお見積もり金額をご入力ください。内容を確認のうえ、担当よりチャットでご連絡いたします。</p>
+    <form class="form-card reveal" id="applyForm">
+      <div class="form-row">
+        <label for="name">お名前</label>
+        <input type="text" id="name" placeholder="山田 花子">
+      </div>
+      <div class="form-row">
+        <label for="mail">メールアドレス</label>
+        <input type="email" id="mail" placeholder="example@mail.com">
+      </div>
+      <div class="form-row">
+        <label for="portfolio">ポートフォリオURL</label>
+        <input type="text" id="portfolio" placeholder="https://...">
+      </div>
+      <div class="form-row">
+        <label>対応可能なECモール</label>
+        <div class="check-row">
+          <label><input type="checkbox">楽天市場</label>
+          <label><input type="checkbox">Amazon</label>
+          <label><input type="checkbox">Yahoo!ショッピング</label>
+        </div>
+      </div>
+      <div class="form-row">
+        <label for="price">ご希望のお見積もり金額(1スライドあたり)</label>
+        <input type="text" id="price" placeholder="例:3,000円">
+      </div>
+      <div class="form-row">
+        <label for="intro">自己紹介・実績</label>
+        <textarea id="intro" placeholder="ご経験のあるモールや制作実績、稼働可能な時間帯などをご記入ください"></textarea>
+      </div>
+      <button type="submit" class="btn btn-primary form-submit">応募内容を送信する(デモ)</button>
+      <p class="form-note">※本フォームはデモのため送信されません。実際の応募は本番ページより受け付けます。</p>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-logo">ECデザインラボサンプル</div>
+        <p style="font-size:13px;color:rgba(255,255,255,0.6);max-width:280px;">楽天市場・Amazon・Yahoo!ショッピング向けのバナー・LP制作を行う制作パートナー募集ページ(制作サンプル)です。</p>
+      </div>
+      <div>
+        <h5>ページ内リンク</h5>
+        <ul>
+          <li><a href="#work">仕事内容</a></li>
+          <li><a href="#overview">募集要項</a></li>
+          <li><a href="#faq">よくある質問</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>お問い合わせ(ダミー)</h5>
+        <div class="footer-tel">048-000-0000</div>
+        <p style="font-size:12px;color:rgba(255,255,255,0.55);margin-top:8px;">受付時間:平日10:00〜19:00</p>
+      </div>
+    </div>
+    <div class="footer-disclaimer">
+      ※本ページは制作サンプル(デモ)です。掲載の内容・数値は仮のもので、写真はイメージです。実制作ではご提供いただいた素材や日本人モデルの写真に差し替えます。電話番号・お問い合わせフォームもダミーであり、実際の連絡先ではありません。
+    </div>
+  </div>
+</footer>
+
+<div class="sticky-cta">
+  <a href="#apply" class="btn btn-primary">今すぐ応募する</a>
+</div>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "JobPosting",
+  "title": "ECデザイナー(楽天・Amazon・Yahoo バナー/LP制作)",
+  "description": "楽天市場・Amazon・Yahoo!ショッピング向けのバナー制作・LP制作をお願いする業務委託デザイナーの長期募集です。",
+  "hiringOrganization": {
+    "@type": "Organization",
+    "name": "ECデザインラボサンプル"
+  },
+  "employmentType": "CONTRACTOR",
+  "jobLocationType": "TELECOMMUTE",
+  "datePosted": "2026-09-03",
+  "validThrough": "2026-12-31",
+  "baseSalary": {
+    "@type": "MonetaryAmount",
+    "currency": "JPY",
+    "value": {
+      "@type": "QuantitativeValue",
+      "minValue": 2000,
+      "maxValue": 4000,
+      "unitText": "1スライドあたり"
+    }
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "未経験でも応募できますか?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "楽天市場・Amazon・Yahoo!ショッピングのいずれかでのデザイン制作経験がある方を対象としています。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "稼働時間は必ず10:00〜19:00固定ですか?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "平日10:00〜19:00の間でチャット連絡がスムーズに取れる体制であれば、時間の使い方はご相談可能です。"
+      }
+    }
+  ]
+}
+</script>
+
+<script>
+(function(){
+  var hamburger = document.getElementById('hamburgerBtn');
+  var mobileNav = document.getElementById('mobileNav');
+  var scrim = document.getElementById('navScrim');
+  function closeNav(){
+    hamburger.classList.remove('open');
+    mobileNav.classList.remove('open');
+    scrim.classList.remove('open');
+  }
+  hamburger.addEventListener('click', function(){
+    var isOpen = mobileNav.classList.toggle('open');
+    hamburger.classList.toggle('open', isOpen);
+    scrim.classList.toggle('open', isOpen);
+  });
+  scrim.addEventListener('click', closeNav);
+  mobileNav.querySelectorAll('a').forEach(function(a){ a.addEventListener('click', closeNav); });
+
+  document.querySelectorAll('.faq-q').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var item = btn.parentElement;
+      var wasOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(function(i){ i.classList.remove('open'); i.querySelector('.icon').textContent = '+'; });
+      if(!wasOpen){
+        item.classList.add('open');
+        btn.querySelector('.icon').textContent = '−';
+      }
+    });
+  });
+
+  var form = document.getElementById('applyForm');
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    alert('これはデモページです。実際の応募はこのフォームでは送信されません。');
+  });
+
+  if(!window.matchMedia('(prefers-reduced-motion: reduce)').matches && 'IntersectionObserver' in window){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if(entry.isIntersecting){
+          entry.target.classList.add('visible');
+          io.unobserve(entry.target);
+        }
+      });
+    }, {threshold:0.15});
+    document.querySelectorAll('.reveal').forEach(function(el){ io.observe(el); });
+  } else {
+    document.querySelectorAll('.reveal').forEach(function(el){ el.classList.add('visible'); });
+  }
+})();
+</script>
+</body>
+</html>
