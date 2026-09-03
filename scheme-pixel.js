@@ -1,6 +1,6 @@
 /*
  * 斜め見下ろしのRPG風オフィス。木目の床(茶系3段階)の上に、向きの違う机の島6つ、
- * フロアを見渡すCIOの大型デスク、職種ごとに小物で描き分けた働く人物24人を置く。
+ * フロアを見渡すCIOの大型デスク、職種ごとに小物で描き分けた人物と休憩中の人物を置く。
  * 空間は密に: ロッカー・書類棚・キャビネット・パーティション・床置きホワイトボード・
  * ゴミ箱・観葉植物で壁ぎわと通路の空きを埋める(歩行経路には家具を重ねない)。
  * エンジニア席のモニタは端末風/エディタ風の抽象画面(記号と横線だけで文字・数字・
@@ -15,8 +15,6 @@
  * ドットは全て内部座標(640x400)の整数格子に乗せ、fillRectの横帯だけで塗る
  * (arc/ellipse/lineToは使わない=アンチエイリアスの中間色が出ない)。時計の針も
  * 回転した細い四角形を走査線polyで塗る。
- * 例外は各AI社員の頭上の役割ラベルだけ: SCALE倍(1280x800)の座標系でfillTextし、
- * ドットは粗いまま文字だけ鮮明に読めるようにする。
  * 色は床と木製家具の茶3段のほかは指定5色とその混色だけを使う。
  * 朝焼け・夕焼けの暖色も新しい色相は作らず茶3段(woodL/woodM)をそのまま使う。
  */
@@ -73,6 +71,8 @@
   var PART_H = Math.round(UNIT * 1.0);        // 34 パーティション
   var BIN_H = Math.round(UNIT * 0.35);        // 12 ゴミ箱
   var WB_H = Math.round(UNIT * 1.15);         // 39 床置きホワイトボード(脚込み全高)
+  var CAFE_W = Math.round(UNIT * 1.35);       // 46 カフェカウンター幅
+  var CAFE_SHELF_W = Math.round(UNIT * 1.05); // 36 カップ棚幅
 
   // ---- 時刻: 窓と時計は hourOfDay(ms) の1変数だけから計算する(2箇所に時刻を持たない) ----
   var DAY_MS = 180000, START_HOUR = 8;        // 3分で24時間が1回り。開始は朝8時
@@ -147,46 +147,48 @@
   var ROLE_STYLES = {
     audit: [
       { shape: 0, hairC: mix(C.black, C.charcoal, 0.65), shirtC: mix(C.gray, C.white, 0.24), paper: true },
-      { shape: 2, hairC: C.charcoal, shirtC: mix(C.charcoal, C.white, 0.30) }
+      { shape: 2, hairC: C.charcoal, shirtC: mix(C.charcoal, C.white, 0.30), female: true }
     ],
     keiri: [
-      { shape: 1, hairC: mix(C.black, C.charcoal, 0.5), shirtC: mix(C.gray, C.white, 0.36) },
+      { shape: 1, hairC: mix(C.black, C.charcoal, 0.5), shirtC: mix(C.gray, C.white, 0.36), female: true },
       { shape: 2, hairC: C.gray, shirtC: mix(C.charcoal, C.white, 0.22) }
     ],
     eng4: [
       { shape: 3, hairC: C.charcoal, shirtC: C.charcoal, hoodie: true },
-      { shape: 0, hairC: mix(C.black, C.charcoal, 0.65), shirtC: mix(C.charcoal, C.blue, 0.35), hoodie: true }
+      { shape: 0, hairC: mix(C.black, C.charcoal, 0.65), shirtC: mix(C.charcoal, C.blue, 0.35), hoodie: true, female: true }
     ],
     eng2: [
       { shape: 1, hairC: C.black, shirtC: mix(C.charcoal, C.white, 0.14), hoodie: true },
-      { shape: 3, hairC: C.gray, shirtC: C.gray }
+      { shape: 3, hairC: C.gray, shirtC: C.gray, female: true }
     ],
     eigyo: [
       { shape: 0, hairC: C.black, shirtC: mix(C.white, C.gray, 0.22), tie: true },
-      { shape: 1, hairC: mix(C.black, C.charcoal, 0.55), shirtC: mix(C.gray, C.white, 0.30) }
+      { shape: 1, hairC: mix(C.black, C.charcoal, 0.55), shirtC: mix(C.gray, C.white, 0.30), female: true }
     ],
     kikaku: [
       { shape: 2, hairC: mix(C.black, C.charcoal, 0.45), shirtC: mix(C.blue, C.white, 0.75) },
-      { shape: 0, hairC: C.charcoal, shirtC: mix(C.gray, C.white, 0.40), paper: true }
+      { shape: 0, hairC: C.charcoal, shirtC: mix(C.gray, C.white, 0.40), paper: true, female: true }
     ]
   };
   var ST_CIO = { shape: 3, hairC: mix(C.gray, C.white, 0.45), shirtC: C.white, tie: true };
   var WALKER_STYLES = [
     { shape: 1, hairC: C.charcoal, shirtC: mix(C.charcoal, C.white, 0.26) },
-    { shape: 3, hairC: mix(C.black, C.charcoal, 0.65), shirtC: C.charcoal, hoodie: true },
+    { shape: 3, hairC: mix(C.black, C.charcoal, 0.65), shirtC: C.charcoal, hoodie: true, female: true },
     { shape: 0, hairC: C.gray, shirtC: mix(C.gray, C.white, 0.20) },
-    { shape: 2, hairC: C.black, shirtC: mix(C.white, C.gray, 0.16), papers: true },
+    { shape: 2, hairC: C.black, shirtC: mix(C.white, C.gray, 0.16), papers: true, female: true },
     { shape: 2, hairC: mix(C.black, C.charcoal, 0.5), shirtC: mix(C.gray, C.white, 0.24) }
   ];
-  var ST_MEET1 = { shape: 2, hairC: C.charcoal, shirtC: mix(C.gray, C.white, 0.30) };
+  var ST_MEET1 = { shape: 2, hairC: C.charcoal, shirtC: mix(C.gray, C.white, 0.30), female: true };
   var ST_MEET2 = { shape: 1, hairC: mix(C.black, C.charcoal, 0.6), shirtC: mix(C.charcoal, C.white, 0.26) };
-  var ST_SOFA = { shape: 0, hairC: C.charcoal, shirtC: mix(C.gray, C.white, 0.32) };
+  var ST_SOFA = { shape: 0, hairC: C.charcoal, shirtC: mix(C.gray, C.white, 0.32), female: true };
   var ST_SOFA2 = { shape: 2, hairC: mix(C.black, C.charcoal, 0.5), shirtC: mix(C.white, C.gray, 0.20), papers: true };
   var ST_TALK1 = { shape: 1, hairC: C.charcoal, shirtC: mix(C.charcoal, C.white, 0.20), hoodie: true };
-  var ST_TALK2 = { shape: 0, hairC: mix(C.black, C.charcoal, 0.6), shirtC: mix(C.gray, C.white, 0.28), paper: true };
-  // 役割ラベル(頭上に出す短い日本語)。数値・件数・時刻は書かない=役割名だけ。
-  var ROLE_LABELS = { audit: "監査", keiri: "経理", eng4: "エンジニア", eng2: "エンジニア", eigyo: "営業", kikaku: "企画" };
-  var WALKER_ROLES = ["営業", "開発", "企画", "秘書", "総務"];
+  var ST_TALK2 = { shape: 0, hairC: mix(C.black, C.charcoal, 0.6), shirtC: mix(C.gray, C.white, 0.28), paper: true, female: true };
+  var CAFE_STYLES = [
+    { shape: 1, hairC: C.charcoal, shirtC: mix(C.gray, C.white, 0.28), female: true },
+    { shape: 3, hairC: mix(C.black, C.charcoal, 0.55), shirtC: mix(C.charcoal, C.white, 0.24) },
+    { shape: 2, hairC: C.black, shirtC: mix(C.blue, C.white, 0.72), female: true }
+  ];
 
   window.mountSchemePixel = function mountSchemePixel(canvas) {
     if (!canvas || typeof canvas.getContext !== "function") throw new TypeError("mountSchemePixel には canvas 要素を渡してください");
@@ -201,23 +203,6 @@
     var stopped = false, visible = false, rafId = 0, startedAt = 0, observer = null;
     var reduceQuery = window.matchMedia("(prefers-reduced-motion: reduce)"), reduced = reduceQuery.matches;
 
-    // 役割ラベル: ドットは内部座標で粗いまま、文字だけSCALE倍(1280x800)の座標系で
-    // fillTextして鮮明に描く。フォントはOS標準ゴシックのみ(外部フォントなし)。
-    // 帯は単色(半透明にしない)・角丸なしの矩形。描画は毎フレーム最後にまとめて行う。
-    var labels = [];
-    function label(text, cx, top) { labels.push({ t: text, x: cx, y: top }); }
-    function drawLabels() {
-      ctx.font = "bold 13px 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', 'Yu Gothic', 'Meiryo', sans-serif";
-      ctx.textAlign = "center"; ctx.textBaseline = "middle";
-      for (var i = 0; i < labels.length; i += 1) {
-        var la = labels[i], cx = Math.round(la.x * SCALE), top = Math.round(la.y * SCALE);
-        var w = Math.ceil(ctx.measureText(la.t).width) + 10, h = 18;
-        ctx.fillStyle = C.charcoal; ctx.fillRect(cx - Math.round(w / 2), top, w, h);
-        ctx.fillStyle = C.white; ctx.fillText(la.t, cx, top + 10);
-      }
-      labels.length = 0;
-    }
-
     // 窓は「枠とカーテン」だけ静的レイヤに置き、空(時刻で変わる)は毎フレーム描き直す。
     function windowPane(x, width) {
       s.rect(x - 3, 15, width + 6, 51, P.dark);
@@ -229,26 +214,30 @@
     // 暖色(朝焼け/夕焼け)は茶3段のwoodL/woodMをそのまま使い、新しい色相を作らない。
     function windowSky(x, width, h) {
       var t = daylight(h), g = horizonGlow(h), i, sx, k;
+      // 建物は昼夜で分岐させない。同じ算式で形を決め、空に対する明るさだけを変える。
+      var buildingColor = mix(P.nightBldg, P.wallShade, t * 0.72);
       rect(x, 18, width, 43, mix(P.night, P.sky, t));
       rect(x + 3, 21, width - 6, 12, mix(P.night, P.skyLight, t));
       if (g > 0.25) { // 地平線の暖色帯(茶3段の範囲内のみ)
         rect(x + 2, 52, width - 4, 9, P.woodM);
         rect(x + 2, 56, width - 4, 5, P.woodL);
       }
-      if (t < 0.5) { // 夜: 星と街のシルエット+窓明かり
+      if (t < 0.5) { // 夜: 星
         for (i = 0; i < 7; i += 1) {
           sx = x + 6 + (i * 17 + (i * i * 5) % 9) % (width - 12);
           rect(sx, 20 + (i * 7) % 16, 1, 1, C.white);
         }
-        for (i = 0; i < 5; i += 1) {
-          sx = x + 4 + i * Math.floor((width - 10) / 5);
-          k = (i * 3 + 4) % 7;
-          rect(sx, 49 - k, 13, 12 + k, P.nightBldg);
-          rect(sx + 3, 52, 2, 2, P.screen); rect(sx + 8, 55, 2, 2, mix(C.white, C.gray, 0.2));
-        }
       } else { // 昼: 雲
         rect(x + 10, 26, 22, 4, C.white); rect(x + 16, 23, 12, 3, C.white);
         rect(x + width - 34, 36, 18, 3, C.white);
+      }
+      for (i = 0; i < 5; i += 1) {
+        sx = x + 4 + i * Math.floor((width - 10) / 5);
+        k = (i * 3 + 4) % 7;
+        rect(sx, 49 - k, 13, 12 + k, buildingColor);
+        if (t < 0.5) {
+          rect(sx + 3, 52, 2, 2, P.screen); rect(sx + 8, 55, 2, 2, mix(C.white, C.gray, 0.2));
+        }
       }
       rect(x + Math.floor(width / 2) - 1, 18, 3, 43, P.dark); // 桟は空の上に描き直す
       rect(x, 42, width, 3, P.dark);
@@ -328,6 +317,11 @@
       else if (side) rect(x + (dir === "left" ? 5 : 18), y + 11 + bob, 2, 2, C.black);
       else { rect(x + 8, y + 11 + bob, 2, 2, C.black); rect(x + 15, y + 11 + bob, 2, 2, C.black); }
       rect(x + 4, y + 17 + bob, 17, 11, st.shirtC);
+      if (st.female) {
+        // 配色を増やさず、肩までの後ろ髪と細めの胴の輪郭だけで差を付ける。
+        rect(x + 2, y + 8 + bob, 4, 14, st.hairC); rect(x + 19, y + 8 + bob, 4, 14, st.hairC);
+        rect(x + 6, y + 25 + bob, 13, 4, st.shirtC);
+      }
       if (st.hoodie) {
         var hood = mix(st.shirtC, C.white, 0.30);
         if (back) { rect(x + 6, y + 15 + bob, 13, 7, hood); rect(x + 8, y + 17 + bob, 9, 4, st.shirtC); }
@@ -458,7 +452,6 @@
       monitorBack(x + 2, yd - 33, phase % 4 !== 0);
       monitorBack(x + 34, yd - 33, phase % 5 !== 0);
       roleProps(role, x, yd);
-      label(ROLE_LABELS[role], x + 31, py - 12); // 頭上。モニタ(上端yd-33)とは重ならない
     }
 
     // 奥向きの机(手前列): 人は机の手前に座り背中が見える。椅子は支柱・台座で床に接地。
@@ -470,12 +463,12 @@
       deskBlock(x, yd, DESK_W);
       // 島ごとに端末風とエディタ風を混ぜる。seedはxから決めて島ごとに行の長さを変える。
       var kinds = role === "eng4" ? ["term", "edit"] : ["edit", "term"];
-      monitorFront(x + 2, yd - 37, phase % 4 !== 0, ms, kinds[0], (x + 3) % 7);
-      monitorFront(x + 33, yd - 37, phase % 5 !== 0, ms, kinds[1], (x + 5) % 7);
+      // エンジニア画面は消灯判定を渡さず、端末/エディタと行追加演出を常時保つ。
+      monitorFront(x + 2, yd - 37, true, ms, kinds[0], (x + 3) % 7);
+      monitorFront(x + 33, yd - 37, true, ms, kinds[1], (x + 5) % 7);
       if (role === "eng4") tower(x + DESK_W + 3, yd, phase);
       chairFront(x + 3, yc); person(x + 3, py, "up", f1, st[0], true); chairBack(x + 3, yc);
       chairFront(x + 34, yc); person(x + 34, py, "up", f2, st[1], true); chairBack(x + 34, yc);
-      label(ROLE_LABELS[role], x + 31, yd - 48); // モニタ上端(yd-37)より上に逃がす
     }
 
     // CIOの席: 奥の中央。机の幅だけ広く(76px)、高さ・奥行きの比は共通。
@@ -484,7 +477,6 @@
       var py = yd - 47;
       rect(305, py - 4, 31, 30, P.dark); rect(307, py - 2, 27, 26, C.charcoal); // ハイバックチェア
       person(308, py, "down", f, ST_CIO, true);
-      label("CIO", 320, py - 16);
       deskBlock(x, yd, 76);
       monitorBack(x + 1, yd - 33, phase % 4 !== 0);
       monitorBack(x + 50, yd - 33, (phase + 1) % 4 !== 0);
@@ -583,6 +575,42 @@
       rect(x + 26, ya - COUNTER_H - 7, 4, 3, P.screen);    // カップ
     }
 
+    function cafeCounter(x, ya) {
+      // 右下の行き止まりへ寄せ、既存の歩行経路と交差させない。寸法はUNIT比の定数から算出する。
+      rect(x, ya - COUNTER_H - 4, CAFE_W, 4, P.woodL);
+      rect(x, ya - COUNTER_H, CAFE_W, COUNTER_H, P.woodM);
+      rect(x + 2, ya - COUNTER_H + 2, CAFE_W - 4, 1, P.woodD);
+      rect(x + 4, ya - COUNTER_H - 15, Math.round(UNIT * 0.42), 11, C.charcoal);
+      rect(x + 6, ya - COUNTER_H - 13, Math.round(UNIT * 0.29), 5, P.wallShade);
+      rect(x + 8, ya - COUNTER_H - 7, Math.round(UNIT * 0.18), 3, P.dark);
+    }
+
+    function cafeShelf(x, ya) {
+      rect(x, ya - SHELF_H, CAFE_SHELF_W, 4, P.woodD);
+      rect(x, ya - Math.round(UNIT * 0.62), CAFE_SHELF_W, 3, P.woodL);
+      rect(x, ya - Math.round(UNIT * 0.28), CAFE_SHELF_W, 3, P.woodL);
+      for (var i = 0; i < 3; i += 1) {
+        rect(x + 4 + i * Math.round(UNIT * 0.29), ya - Math.round(UNIT * 0.56), 6, 5, C.white);
+        rect(x + 9 + i * Math.round(UNIT * 0.29), ya - Math.round(UNIT * 0.53), 2, 3, C.white);
+      }
+    }
+
+    function coffeeCup(x, y) {
+      rect(x, y, 7, 5, C.white); rect(x + 7, y + 1, 2, 3, C.white);
+      rect(x + 2, y - 2, 1, 2, P.wallShade);
+    }
+
+    function cafeTable(cx, cy) {
+      meetingTable(cx, cy);
+      coffeeCup(cx - 8, cy - DESK_H - 5); coffeeCup(cx + 4, cy - DESK_H - 3);
+    }
+
+    function cafePerson(x, y, dir, frame, st, seated) {
+      person(x, y, dir, frame, st, seated);
+      // 手元のカップで休憩中と分かるようにし、既存の職種小物は変更しない。
+      coffeeCup(x + (dir === "left" ? 1 : 17), y + 18);
+    }
+
     function copier(x, ya) { // 高さ=0.6H
       rect(x + 2, ya - 1, 26, 1, P.dark);
       rect(x, ya - COPIER_H - 5, 30, 5, P.pale);
@@ -640,10 +668,8 @@
       var f1 = Math.floor(ms / 1100) % 2, f2 = Math.floor((ms + 470) / 1300) % 2;
       stool(cx - 12, cy - 14);                             // 奥の空き席
       stool(cx - 41, cy + 4); person(cx - 41, cy + 4 - SIT_RISE, "right", f1, ST_MEET1, true);
-      label("営業", cx - 29, cy + 4 - SIT_RISE - 12);
       meetingTable(cx, cy);
       stool(cx + 17, cy + 6); person(cx + 17, cy + 6 - SIT_RISE, "left", f2, ST_MEET2, true);
-      label("企画", cx + 29, cy + 6 - SIT_RISE - 12);
       stool(cx - 12, cy + 18);                             // 手前の空き席
     }
 
@@ -656,8 +682,6 @@
       person(x + 37, py, "left", f2, ST_SOFA2, true);
       rect(x + 12, py + 28, 5, 8, P.dark); rect(x + 20, py + 28, 5, 8, P.dark); // 座面から垂れる足
       rect(x + 43, py + 28, 5, 8, P.dark); rect(x + 51, py + 28, 5, 8, P.dark);
-      label("人事", x + 18, py - 12);
-      label("秘書", x + 49, py - 12);
     }
 
     // 会話ペア(立ち話): 通路(会議コーナーとソファの間の床)で向かい合う開発×監査。
@@ -667,8 +691,6 @@
       var f1 = Math.floor(ms / 1200) % 2, f2 = Math.floor((ms + 600) / 1300) % 2;
       person(ax, ty, "right", f1, ST_TALK1, false);
       person(bx, ty, "left", f2, ST_TALK2, false);
-      label("開発", ax + 12, ty - 12);
-      label("監査", bx + 12, ty - 12);
     }
 
     function bubble(x, y, kind) {
@@ -759,24 +781,27 @@
       add(251, function () { plant(350, 250); });
       add(251, function () { cabinet(378, 250); }); // 植物の隣の備品置き
       add(290, function () { meetingUnit(ms); });
-      add(319, function () { plant(600, 318); }); // 右の壁沿い
+      add(319, function () { cafeShelf(578, 318); });
       add(334, function () { talkPair(ms); }); // 立ち話ペアも足元Yで並べ替えに参加
       add(337, function () { floorBoard(140, 336); }); // エンジニア2島の間
-      add(353, function () { plant(594, 352); });
       add(355, function () { lowTable(388, 354); });
       add(357, function () { sofaUnit(ms); });
       add(364, function () { deskAway(60, 348, ms + 300, phase + 1, "eng4"); });
       add(364, function () { deskAway(190, 348, ms + 1200, phase + 3, "eng2"); });
-      add(379, function () { plant(430, 378); }); // ラグ下の空き
+      // カフェ家具と休憩中の3人も、ひとまとめにせず各自の足元Yで並べる。
+      add(348, function () { stool(458, 347); cafePerson(458, 347 - SIT_RISE, "right", Math.floor(ms / 1150) % 2, CAFE_STYLES[0], true); });
+      add(350, function () { cafePerson(535, 316, "left", Math.floor((ms + 500) / 1250) % 2, CAFE_STYLES[2], false); });
+      add(369, function () { cafeTable(500, 368); });
+      add(373, function () { stool(518, 372); cafePerson(518, 372 - SIT_RISE, "left", Math.floor((ms + 800) / 1350) % 2, CAFE_STYLES[1], true); });
+      add(383, function () { cafeCounter(568, 382); });
       add(381, function () { trashBin(20, 380); }); // 左下の隅
       add(385, function () { plant(282, 384); }); // ソファ左手前の空き
-      function addWalker(w, st, roleText) {
+      function addWalker(w, st) {
         add(w.y + 34, function () {
           person(w.x, w.y, w.direction, w.frame, st, false);
-          label(roleText, w.x + 12, w.y - 10); // キャラ座標に追従=歩くと文字も一緒に動く
         });
       }
-      for (i = 0; i < walkers.length; i += 1) addWalker(walkers[i], WALKER_STYLES[i], WALKER_ROLES[i]);
+      for (i = 0; i < walkers.length; i += 1) addWalker(walkers[i], WALKER_STYLES[i]);
       ents.sort(function (a, b) { return a.y - b.y; });
       for (i = 0; i < ents.length; i += 1) ents[i].f();
       // 会話2組の吹き出し: 8秒で左右1往復(交互)+間。中身は記号だけ(数字は入れない)。
@@ -787,7 +812,6 @@
       var bc = ms % 15000;
       if (bc > 2800 && bc < 5200) bubble(110, 180, 1);
       else if (bc > 8200 && bc < 10400) bubble(432, 200, 0);
-      drawLabels(); // 役割ラベルは最前面。ここだけSCALE座標系のfillText
     }
 
     function frame(now) {
