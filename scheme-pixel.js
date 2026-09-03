@@ -1,16 +1,13 @@
 /*
- * RPGの見下ろしマップで「困っている人の相談→整理→試作→人が確認→改善／納品」を描く。
- * 0〜2秒: 相談、2〜6秒: 整理へ移動、6〜10秒: 試作、10〜14秒: 人が確認、
- * 14〜17秒: 2経路を表示、17〜21秒: 改善または納品へ移動、21〜24秒: 完了。
- * 24秒ごとに月額と単発を交互に通し、月額線だけは相談へ戻る循環線として常に閉じる。
+ * AI社員が静かに働く、RPG風の見下ろしオフィスマップを一枚絵として描く。
+ * 図解に見える文字・矢印・接続線は置かず、家具、通路、人物の動きだけで仕事場の気配を出す。
  */
 (function () {
   "use strict";
 
-  var W = 220;
-  var H = 140;
-  var SCALE = 5;
-  var LOOP_MS = 24000;
+  var W = 550;
+  var H = 350;
+  var SCALE = 2;
   var C = {
     black: "#0D0D0D",
     white: "#FFFFFF",
@@ -18,10 +15,6 @@
     gray: "#8E8EA0",
     blue: "#2563EB"
   };
-
-  function clamp(value, min, max) {
-    return Math.max(min, Math.min(max, value));
-  }
 
   function mix(a, b, amount) {
     function channel(offset) {
@@ -32,18 +25,21 @@
     return "#" + channel(1) + channel(3) + channel(5);
   }
 
+  var floorA = mix(C.charcoal, C.white, 0.16);
+  var floorB = mix(C.charcoal, C.gray, 0.38);
+  var wall = mix(C.white, C.gray, 0.48);
+  var wood = mix(C.charcoal, C.gray, 0.55);
+  var shadow = mix(C.black, C.charcoal, 0.55);
+  var skin = mix(C.white, C.gray, 0.28);
+
   window.mountSchemePixel = function mountSchemePixel(canvas) {
     if (!canvas || typeof canvas.getContext !== "function") {
       throw new TypeError("mountSchemePixel には canvas 要素を渡してください");
     }
 
     var ctx = canvas.getContext("2d");
-    if (!ctx) {
-      return { stop: function () {} };
-    }
+    if (!ctx) return { stop: function () {} };
 
-    // 低解像度のcanvasへ日本語を描くと、CSS拡大時に文字まで潰れる。
-    // 描画バッファは表示サイズに合わせ、図形だけを5倍のドットとして描く。
     canvas.width = W * SCALE;
     canvas.height = H * SCALE;
     ctx.imageSmoothingEnabled = false;
@@ -51,7 +47,6 @@
     var stopped = false;
     var visible = false;
     var rafId = 0;
-    var elapsed = 0;
     var startedAt = 0;
     var reduceQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
     var reduced = reduceQuery.matches;
@@ -60,295 +55,269 @@
     function rect(x, y, width, height, color) {
       ctx.fillStyle = color;
       ctx.fillRect(
-        Math.round(x * SCALE),
-        Math.round(y * SCALE),
-        Math.round(width * SCALE),
-        Math.round(height * SCALE)
+        Math.round(x) * SCALE,
+        Math.round(y) * SCALE,
+        Math.round(width) * SCALE,
+        Math.round(height) * SCALE
       );
     }
 
-    function text(value, x, y, color, align) {
-      // 文字までドット座標で描くと判読できないため、実バッファへ直接描画する。
-      ctx.fillStyle = color;
-      ctx.font = "bold 20px system-ui, sans-serif";
-      ctx.textAlign = align || "center";
-      ctx.textBaseline = "top";
-      ctx.fillText(value, Math.round(x * SCALE), Math.round(y * SCALE));
+    function pixelCircle(cx, cy, radius, color) {
+      for (var y = -radius; y <= radius; y += 2) {
+        var half = Math.floor(Math.sqrt(radius * radius - y * y));
+        rect(cx - half, cy + y, half * 2 + 1, 2, color);
+      }
     }
 
-    function line(points, color, reveal) {
-      var lengths = [];
-      var total = 0;
-      var i;
-      for (i = 1; i < points.length; i += 1) {
-        var dx = points[i][0] - points[i - 1][0];
-        var dy = points[i][1] - points[i - 1][1];
-        lengths.push(Math.sqrt(dx * dx + dy * dy));
-        total += lengths[lengths.length - 1];
-      }
-      var remaining = total * clamp(reveal === undefined ? 1 : reveal, 0, 1);
-      ctx.strokeStyle = color;
-      ctx.lineWidth = 2 * SCALE;
-      ctx.setLineDash([]);
-      ctx.beginPath();
-      ctx.moveTo(points[0][0] * SCALE, points[0][1] * SCALE);
-      for (i = 1; i < points.length && remaining > 0; i += 1) {
-        var ratio = Math.min(1, remaining / lengths[i - 1]);
-        ctx.lineTo(
-          Math.round((points[i - 1][0] + (points[i][0] - points[i - 1][0]) * ratio) * SCALE),
-          Math.round((points[i - 1][1] + (points[i][1] - points[i - 1][1]) * ratio) * SCALE)
-        );
-        remaining -= lengths[i - 1];
-      }
-      ctx.stroke();
+    function windowPane(x, y, width) {
+      rect(x - 3, y - 3, width + 6, 37, C.charcoal);
+      rect(x, y, width, 31, mix(C.white, C.blue, 0.22));
+      rect(x + Math.floor(width / 2) - 1, y, 3, 31, C.charcoal);
+      rect(x, y + 14, width, 3, C.charcoal);
+      rect(x + 5, y + 4, 18, 2, C.white);
     }
 
-    function pointOnPath(points, progress) {
-      var lengths = [];
-      var total = 0;
-      var i;
-      for (i = 1; i < points.length; i += 1) {
-        var dx = points[i][0] - points[i - 1][0];
-        var dy = points[i][1] - points[i - 1][1];
-        lengths.push(Math.sqrt(dx * dx + dy * dy));
-        total += lengths[lengths.length - 1];
-      }
-      var distance = total * clamp(progress, 0, 1);
-      for (i = 1; i < points.length; i += 1) {
-        if (distance <= lengths[i - 1]) {
-          var ratio = distance / lengths[i - 1];
-          return [
-            Math.round(points[i - 1][0] + (points[i][0] - points[i - 1][0]) * ratio),
-            Math.round(points[i - 1][1] + (points[i][1] - points[i - 1][1]) * ratio)
-          ];
+    function drawRoom() {
+      rect(0, 0, W, H, C.black);
+      rect(10, 10, 530, 330, floorA);
+
+      // 床を大粒のドットで塗ると再び粗い図に見えるため、10px格子を薄い市松にした。
+      for (var y = 66; y < 340; y += 10) {
+        for (var x = 10; x < 540; x += 10) {
+          rect(x, y, 10, 10, ((x + y) / 10) % 2 ? floorA : floorB);
         }
-        distance -= lengths[i - 1];
       }
-      return points[points.length - 1];
+
+      rect(10, 10, 530, 54, wall);
+      rect(10, 58, 530, 8, C.charcoal);
+      rect(10, 64, 530, 3, shadow);
+      rect(10, 10, 6, 330, C.charcoal);
+      rect(534, 10, 6, 330, C.charcoal);
+      rect(10, 334, 530, 6, C.charcoal);
+
+      windowPane(31, 19, 78);
+      windowPane(128, 19, 78);
+      windowPane(438, 19, 72);
+
+      rect(241, 15, 108, 40, C.charcoal);
+      rect(244, 18, 102, 34, C.white);
+      // 文字に見える情報は置かず、消し残し程度の短い画素だけに留める。
+      rect(256, 29, 27, 2, C.gray);
+      rect(256, 36, 18, 2, C.gray);
+      rect(294, 30, 32, 2, mix(C.white, C.gray, 0.6));
+      rect(287, 52, 18, 3, C.gray);
+
+      pixelCircle(395, 34, 14, C.charcoal);
+      pixelCircle(395, 34, 10, C.white);
+      rect(394, 27, 2, 8, C.black);
+      rect(395, 34, 6, 2, C.black);
     }
 
-    function arrow(x, y, direction, color) {
-      var sx = direction === "left" ? -1 : 1;
-      rect(x, y, 3 * sx, 2, color);
-      rect(x + 2 * sx, y - 2, 2 * sx, 6, color);
+    function monitor(x, y, phase) {
+      rect(x, y, 24, 14, C.black);
+      rect(x + 3, y + 2, 18, 9, phase % 4 === 0 ? C.blue : C.gray);
+      rect(x + 10, y + 14, 4, 4, C.charcoal);
+      rect(x + 6, y + 18, 12, 2, C.charcoal);
     }
 
-    function person(x, y, shirt, frame, worried) {
-      // 全キャラを同じ12px高に固定し、家具との縮尺が崩れないようにする。
-      var leg = frame % 2;
-      rect(x + 3, y, 6, 2, C.charcoal);
-      rect(x + 2, y + 2, 8, 4, C.white);
-      rect(x + 3, y + 3, 1, 1, C.black);
-      rect(x + 8, y + 3, 1, 1, C.black);
-      rect(x + 2, y + 6, 8, 4, shirt);
-      rect(x, y + 7, 2, 3, C.white);
-      rect(x + 10, y + 7, 2, 3, C.white);
-      rect(x + 2 + leg, y + 10, 3, 2, C.gray);
-      rect(x + 7 - leg, y + 10, 3, 2, C.gray);
-      if (worried) {
-        text("?", x + 14, y - 5, C.blue, "left");
-        rect(x + 13, y + 4, 1, 3, C.white);
-        rect(x + 13, y + 8, 1, 1, C.white);
+    function deskIsland(x, y, phase) {
+      rect(x + 4, y + 5, 102, 33, shadow);
+      rect(x, y, 110, 31, wood);
+      rect(x, y, 110, 4, C.white);
+      rect(x + 53, y + 4, 4, 27, C.charcoal);
+      monitor(x + 16, y + 5, phase);
+      monitor(x + 72, y + 5, phase + 1);
+      rect(x + 8, y + 27, 7, 13, C.charcoal);
+      rect(x + 95, y + 27, 7, 13, C.charcoal);
+    }
+
+    function chair(x, y, offset) {
+      rect(x + 3, y + offset, 16, 7, C.charcoal);
+      rect(x, y + 6 + offset, 22, 13, shadow);
+      rect(x + 3, y + 7 + offset, 16, 9, C.gray);
+      rect(x + 9, y + 19 + offset, 4, 5, C.charcoal);
+      rect(x + 3, y + 23 + offset, 16, 3, C.charcoal);
+    }
+
+    function person(x, y, direction, frame, shirt, seated) {
+      var bob = frame % 2;
+      var side = direction === "left" || direction === "right";
+      var step = seated ? 0 : frame % 2;
+      rect(x + 5, y + bob, 12, 5, C.charcoal);
+      rect(x + 3, y + 5 + bob, 16, 9, skin);
+      if (side) {
+        rect(x + (direction === "left" ? 3 : 17), y + 8 + bob, 2, 2, C.black);
+      } else {
+        rect(x + 7, y + 8 + bob, 2, 2, C.black);
+        rect(x + 13, y + 8 + bob, 2, 2, C.black);
+      }
+      rect(x + 4, y + 14 + bob, 14, 9, shirt);
+      rect(x + 1, y + 15 + bob, 4, 7, skin);
+      rect(x + 17, y + 15 + bob, 4, 7, skin);
+      if (!seated) {
+        rect(x + 4 + step * 2, y + 23 + bob, 5, 5, C.charcoal);
+        rect(x + 13 - step * 2, y + 23 + bob, 5, 5, C.charcoal);
       }
     }
 
-    function reviewer(x, y) {
-      // 全身を白にすると頭・胴・腕の境界が消えて白い塊に見える。
-      // 他キャラと同じ骨格を使い、青い服と虫めがねで確認役を示す。
-      person(x, y, C.blue, 0, false);
-      rect(x + 10, y + 5, 3, 3, C.white);
-      rect(x + 11, y + 6, 1, 1, C.black);
-      rect(x + 13, y + 8, 1, 3, C.blue);
+    function seatedWorker(x, y, ms, seed, special) {
+      var frame = Math.floor((ms + seed * 173) / (900 + seed * 37)) % 2;
+      var shift = frame && seed % 3 === 0 ? 1 : 0;
+      chair(x, y + 16, shift);
+      person(x, y, "up", frame, special ? C.blue : C.charcoal, true);
+      // 打鍵は腕先の1pxだけ。全身を大きく振ると落ち着かないため動きを絞る。
+      rect(x + 2, y + 20 + frame, 4, 2, skin);
+      rect(x + 16, y + 21 - frame, 4, 2, skin);
     }
 
-    function desk(x, y, active) {
-      rect(x, y, 20, 8, C.charcoal);
-      rect(x + 2, y + 2, 7, 4, active ? C.blue : C.gray);
-      rect(x + 3, y + 3, 5, 2, C.black);
-      rect(x + 2, y + 8, 3, 4, C.gray);
-      rect(x + 15, y + 8, 3, 4, C.gray);
-      rect(x + 7, y + 13, 6, 4, C.charcoal);
+    function bookshelf(x, y) {
+      rect(x, y, 45, 66, C.charcoal);
+      rect(x + 4, y + 5, 37, 55, shadow);
+      for (var sy = y + 9; sy < y + 56; sy += 16) {
+        rect(x + 5, sy + 10, 35, 3, wood);
+        for (var bx = x + 7; bx < x + 38; bx += 7) {
+          rect(bx, sy, 4, 10, (bx / 7) % 2 ? C.gray : C.white);
+        }
+      }
+      rect(x + 5, y + 61, 35, 3, C.black);
     }
 
     function plant(x, y) {
-      rect(x + 3, y + 6, 6, 5, C.gray);
-      rect(x + 5, y + 2, 2, 5, C.white);
-      rect(x + 1, y + 1, 4, 3, C.gray);
-      rect(x + 7, y, 4, 4, C.gray);
+      rect(x + 9, y + 16, 10, 14, C.charcoal);
+      rect(x + 7, y + 15, 14, 5, C.gray);
+      rect(x + 12, y + 4, 4, 13, C.charcoal);
+      rect(x + 2, y + 5, 11, 8, C.gray);
+      rect(x + 15, y, 11, 10, C.white);
+      rect(x + 10, y + 8, 10, 8, mix(C.gray, C.white, 0.45));
     }
 
-    function sign(label, x, y, active) {
-      var width = label.length * 6 + 6;
-      rect(x - width / 2, y, width, 10, active ? C.blue : C.charcoal);
-      text(label, x, y + 2, C.white);
+    function kitchen(x, y) {
+      rect(x, y, 67, 47, C.charcoal);
+      rect(x + 4, y + 5, 59, 37, wall);
+      rect(x + 4, y + 27, 59, 4, C.charcoal);
+      rect(x + 30, y + 31, 3, 11, C.charcoal);
+      rect(x + 45, y + 8, 12, 15, C.black);
+      rect(x + 48, y + 11, 6, 7, C.blue);
+      rect(x + 10, y + 11, 20, 10, C.gray);
+      rect(x + 14, y + 14, 12, 4, C.white);
     }
 
-    function mapBase() {
-      rect(0, 0, W, H, C.black);
-
-      // 床は8px単位のタイル。道具もキャラ基準で収まる小さな室内にまとめる。
-      rect(52, 12, 124, 82, mix(C.black, C.charcoal, 0.72));
-      for (var x = 54; x < 176; x += 8) {
-        for (var y = 14; y < 94; y += 8) {
-          rect(x, y, 6, 6, (x + y) % 16 ? C.charcoal : mix(C.charcoal, C.gray, 0.3));
-        }
-      }
-      rect(52, 12, 124, 2, C.white);
-      rect(52, 92, 124, 2, C.white);
-      rect(52, 12, 2, 82, C.white);
-      rect(174, 12, 2, 82, C.white);
-      rect(52, 57, 2, 18, C.black);
-      rect(49, 57, 3, 18, C.gray);
-
-      // 相談者から入口へ続く石畳。港や建物で相談者を代用しない。
-      for (var px = 8; px < 50; px += 8) {
-        rect(px, 62, 6, 8, px % 16 ? C.charcoal : C.gray);
-      }
-      plant(58, 18);
-      plant(160, 18);
-      desk(76, 36, false);
-      desk(119, 36, false);
-      rect(99, 65, 18, 6, C.charcoal);
-      rect(101, 71, 4, 5, C.gray);
-      rect(111, 71, 4, 5, C.gray);
-      text("自動化のミナト", 114, 17, C.white);
+    function copier(x, y) {
+      rect(x + 3, y + 3, 38, 43, shadow);
+      rect(x, y, 38, 42, C.gray);
+      rect(x + 5, y + 4, 28, 11, C.white);
+      rect(x + 8, y + 17, 22, 6, C.charcoal);
+      rect(x + 5, y + 28, 28, 10, wall);
+      rect(x + 28, y + 19, 3, 3, C.blue);
     }
 
-    function draw(ms, forcedComplete) {
-      var cycle = Math.floor(ms / LOOP_MS);
-      var t = forcedComplete ? 22 : (ms % LOOP_MS) / 1000;
-      var monthly = forcedComplete || cycle % 2 === 0;
-      var walkFrame = Math.floor(ms / 320) % 4;
-      var inPath = [[31, 66], [52, 66], [72, 66], [86, 51]];
-      var checkPath = [[137, 51], [143, 62], [133, 72]];
-      var monthlyPath = [[133, 72], [168, 72], [194, 65]];
-      var oncePath = [[133, 72], [150, 91], [174, 111]];
-      var returnPath = [[194, 65], [207, 65], [207, 126], [18, 126], [18, 77]];
-      var grayLine = mix(C.black, C.gray, 0.62);
+    function meetingTable(cx, cy) {
+      chair(cx - 10, cy - 50, 0);
+      chair(cx - 10, cy + 31, 0);
+      chair(cx - 52, cy - 9, 0);
+      chair(cx + 31, cy - 9, 0);
+      pixelCircle(cx, cy, 31, shadow);
+      pixelCircle(cx - 3, cy - 3, 30, wood);
+      rect(cx - 4, cy + 25, 8, 13, C.charcoal);
+    }
 
-      mapBase();
-      line(inPath, grayLine, 1);
-      line(checkPath, grayLine, 1);
-      line(monthlyPath, grayLine, 1);
-      line(returnPath, grayLine, 1);
-      line(oncePath, grayLine, 1);
-      arrow(202, 124, "left", C.gray);
-      arrow(16, 82, "left", C.gray);
+    function walkState(ms, route, duration, pause, offset) {
+      var cycle = duration + pause;
+      var local = (ms + offset) % cycle;
+      var moving = local < duration;
+      var progress = moving ? local / duration : 1;
+      var index = Math.min(route.length - 2, Math.floor(progress * (route.length - 1)));
+      var part = progress * (route.length - 1) - index;
+      var forward = Math.floor((ms + offset) / cycle) % 2 === 0;
+      var from = forward ? route[index] : route[route.length - 1 - index];
+      var to = forward ? route[index + 1] : route[route.length - 2 - index];
+      var dx = to[0] - from[0];
+      var dy = to[1] - from[1];
+      return {
+        x: Math.round(from[0] + dx * part),
+        y: Math.round(from[1] + dy * part),
+        direction: Math.abs(dx) > Math.abs(dy) ? (dx < 0 ? "left" : "right") : (dy < 0 ? "up" : "down"),
+        frame: moving ? Math.floor((ms + offset) / 650) % 2 : 0
+      };
+    }
 
-      var consultActive = t < 2;
-      var sortActive = t >= 2 && t < 6;
-      var prototypeActive = t >= 6 && t < 10;
-      var checkActive = t >= 10 && t < 14;
-      var destinationActive = t >= 17;
+    function draw(ms) {
+      drawRoom();
+      var phase = Math.floor(ms / 2400);
+      deskIsland(75, 101, phase);
+      deskIsland(215, 101, phase + 2);
+      deskIsland(75, 213, phase + 1);
+      deskIsland(215, 213, phase + 3);
+      bookshelf(24, 76);
+      kitchen(457, 78);
+      copier(469, 145);
+      meetingTable(455, 264);
+      plant(27, 174);
+      plant(337, 73);
+      plant(505, 298);
 
-      sign("相談", 24, 43, consultActive);
-      sign("整理", 86, 26, sortActive);
-      sign("試作", 129, 26, prototypeActive);
-      sign("人が確認", 108, 79, checkActive);
-      sign("改善", 194, 43, destinationActive && monthly);
-      sign("納品", 177, 99, destinationActive && !monthly);
-
-      person(18, 59, consultActive ? C.blue : C.charcoal, walkFrame, true);
-      reviewer(102, 61);
-      desk(76, 36, sortActive);
-      desk(119, 36, prototypeActive);
-
-      if (t < 2) {
-        var bubbleWidth = Math.round(18 * clamp(t, 0, 1));
-        rect(8, 28, bubbleWidth, 9, C.white);
-        if (bubbleWidth > 12) text("…", 17, 29, C.black);
+      // 机より人物を後に描き、着席中でも頭と手元が読める重なり順にする。
+      var seats = [[91, 124], [145, 124], [231, 124], [285, 124],
+        [91, 236], [145, 236], [231, 236], [285, 236], [390, 244]];
+      for (var i = 0; i < seats.length; i += 1) {
+        seatedWorker(seats[i][0], seats[i][1], ms, i + 1, i === 3);
       }
 
-      if (t >= 2 && t < 6) {
-        var inPoint = pointOnPath(inPath, (t - 2) / 4);
-        rect(inPoint[0] - 2, inPoint[1] - 2, 4, 4, C.blue);
+      var walkers = [
+        walkState(ms, [[367, 92], [411, 92], [411, 181], [359, 181]], 36000, 3000, 0),
+        walkState(ms, [[55, 301], [188, 301], [188, 181], [60, 181]], 42000, 4000, 5200),
+        walkState(ms, [[342, 307], [342, 196], [424, 196], [424, 132]], 30000, 2500, 8300)
+      ];
+      for (i = 0; i < walkers.length; i += 1) {
+        person(walkers[i].x, walkers[i].y, walkers[i].direction, walkers[i].frame, C.charcoal, false);
       }
-
-      if (t >= 6 && t < 10) {
-        var glow = clamp((t - 6) / 2, 0, 1);
-        rect(121, 38, Math.round(6 * glow), 2, C.blue);
-      }
-
-      if (t >= 10 && t < 14) {
-        // 自動処理の直後に確認者を置く。両ルートがここを共有するのが主題。
-        var cursorProgress = (t - 10) / 4;
-        var cursorX = 102 + Math.round(12 * (cursorProgress < 0.5 ? cursorProgress * 2 : (1 - cursorProgress) * 2));
-        rect(cursorX, 58, 2, 4, C.blue);
-        rect(cursorX + 2, 60, 2, 2, C.blue);
-      }
-
-      if (t >= 14) {
-        var branchReveal = clamp((t - 14) / 3, 0, 1);
-        line(monthlyPath, monthly && t < 21 ? C.blue : C.white, branchReveal);
-        line(returnPath, C.white, branchReveal);
-        line(oncePath, !monthly && t < 21 ? C.blue : C.white, clamp(branchReveal * 2 - 1, 0, 1));
-      }
-
-      if (t >= 17 && t < 21) {
-        var destination = pointOnPath(monthly ? monthlyPath : oncePath, (t - 17) / 4);
-        rect(destination[0] - 2, destination[1] - 2, 4, 4, C.blue);
-      }
-
-      if (destinationActive) {
-        person(monthly ? 188 : 171, monthly ? 58 : 105, C.blue, 0, false);
-      }
-
-      text("月額・循環", 58, 119, C.gray);
-      text("単発・納品", 176, 119, C.gray);
-      rect(69, 133, 3, 3, C.blue);
-      text("処理中", 75, 131, C.gray, "left");
-      rect(106, 133, 3, 3, C.white);
-      text("人が確認", 112, 131, C.gray, "left");
-      rect(158, 133, 3, 3, C.gray);
-      text("待機", 164, 131, C.gray, "left");
     }
 
     function frame(now) {
-      if (stopped || reduced || !visible) return;
-      elapsed += now - startedAt;
-      startedAt = now;
-      draw(elapsed, false);
-      rafId = window.requestAnimationFrame(frame);
-    }
-
-    function play() {
-      if (stopped || reduced || !visible || rafId) return;
-      startedAt = performance.now();
+      if (stopped || !visible || reduced) return;
+      if (!startedAt) startedAt = now;
+      draw(now - startedAt);
       rafId = window.requestAnimationFrame(frame);
     }
 
     function pause() {
       if (rafId) window.cancelAnimationFrame(rafId);
       rafId = 0;
+      startedAt = 0;
     }
 
-    function motionChanged(event) {
+    function start() {
+      if (stopped || !visible) return;
+      if (reduced) {
+        draw(0);
+      } else if (!rafId) {
+        rafId = window.requestAnimationFrame(frame);
+      }
+    }
+
+    function onMotionChange(event) {
       reduced = event.matches;
       pause();
-      if (reduced && visible) draw(22000, true);
-      else play();
+      if (visible) start();
     }
 
     if (typeof IntersectionObserver === "function") {
       observer = new IntersectionObserver(function (entries) {
         visible = entries[0].isIntersecting && entries[0].intersectionRatio >= 0.5;
-        if (visible && reduced) draw(22000, true);
-        else if (visible) play();
+        if (visible) start();
         else pause();
-      }, { threshold: [0, 0.5, 1] });
+      }, { threshold: [0, 0.5] });
       observer.observe(canvas);
     } else {
       visible = true;
+      start();
     }
 
     if (typeof reduceQuery.addEventListener === "function") {
-      reduceQuery.addEventListener("change", motionChanged);
+      reduceQuery.addEventListener("change", onMotionChange);
     } else if (typeof reduceQuery.addListener === "function") {
-      reduceQuery.addListener(motionChanged);
+      reduceQuery.addListener(onMotionChange);
     }
-
-    if (reduced && visible) draw(22000, true);
-    else if (visible) play();
 
     return {
       stop: function stop() {
@@ -357,9 +326,9 @@
         pause();
         if (observer) observer.disconnect();
         if (typeof reduceQuery.removeEventListener === "function") {
-          reduceQuery.removeEventListener("change", motionChanged);
+          reduceQuery.removeEventListener("change", onMotionChange);
         } else if (typeof reduceQuery.removeListener === "function") {
-          reduceQuery.removeListener(motionChanged);
+          reduceQuery.removeListener(onMotionChange);
         }
       }
     };
