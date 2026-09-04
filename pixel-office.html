@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>事例｜自動化のミナト</title>
-<meta name="description" content="月額で毎月進めている実施例（業種のみ記載）と、単発で納品する制作例。実際に触って動かせるデモを掲載しています。">
+<title>ドット絵オフィス｜自動化のミナト</title>
+<meta name="description" content="会社の1日の動きをドット絵のアニメーションにしてお渡しします。色・社員・文言・時間を会社に合わせて作り分けます。">
 <style>
 :root{--black:#0D0D0D;--white:#FFFFFF;--charcoal:#343541;--gray:#8E8EA0;--blue:#2563EB;
 --ink-60:rgba(13,13,13,.6);--tint-4:rgba(13,13,13,.04);--tint-8:rgba(13,13,13,.08);--tint-12:rgba(13,13,13,.12);--hairline:rgba(13,13,13,.14);
@@ -123,6 +123,12 @@ html{scroll-behavior:auto}
 .case-main{grid-row:auto}
 .work-body{padding:16px 12px 8px}
 }
+#office{display:block;width:min(640px,calc(100vw - 40px));aspect-ratio:1280/800;margin:48px auto 0;image-rendering:pixelated;border:0;border-radius:24px;background:#111827}
+.note{max-width:640px;margin:16px auto 0;text-align:center;color:var(--ink-60)}
+.spec{display:grid;grid-template-columns:120px 1fr;gap:14px 20px;margin-top:28px}
+.spec dt{font-weight:500}
+.spec dd{margin:0;color:var(--ink-60)}
+@media (max-width:640px){.spec{grid-template-columns:1fr;gap:4px 0}.spec dd{margin-bottom:16px}}
 </style>
 </head>
 <body>
@@ -133,7 +139,7 @@ html{scroll-behavior:auto}
 <nav class="nav" aria-label="メインナビゲーション">
 <a href="./index.html">サービス</a>
 <a href="./pricing.html">料金</a>
-<a href="./cases.html" aria-current="page">事例</a>
+<a href="./cases.html">事例</a>
 <a class="nav-contact" href="#contact">お問い合わせ</a>
 <button class="menu-btn" type="button" aria-expanded="false" aria-controls="mnav">メニュー</button>
 </nav>
@@ -141,143 +147,55 @@ html{scroll-behavior:auto}
 <nav class="mnav" id="mnav" hidden aria-label="メニュー">
 <a href="./index.html">サービス</a>
 <a href="./pricing.html">料金</a>
-<a href="./cases.html" aria-current="page">事例</a>
+<a href="./cases.html">事例</a>
 </nav>
 </header>
 <main>
 <section class="hero" id="top">
 <div class="container">
-<h1><span class="nw">いま進めている</span><span class="nw">仕事と、</span><span class="nw">作れるもの。</span></h1>
-<p class="lead">上は月額で毎月進めている実施例、下は単発の制作例です。会社名は伏せ、業種のみ記載しています。</p>
-<div class="hero-cta"><a class="btn btn-primary" href="https://page.line.me/091usyfe" target="_blank" rel="noopener">相談内容を送る</a><a class="btn btn-ghost" href="./pricing.html">料金を見る</a></div>
+<h1><span class="nw">会社の様子を、</span><span class="nw">動くドット絵に。</span></h1>
+<p class="lead">社員が席で作業し、資料を運び、休憩に立つ。その1日をドット絵で動かします。採用ページや会社紹介に置くと、文章より早く伝わります。</p>
+<canvas id="office" role="img" aria-label="ドット絵のオフィス。社員が机に向かい、資料を運び、休憩スペースで話している様子が動いている"></canvas>
+<p class="note caption">見本です。実在の会社ではありません。人にカーソルを合わせると、いま何をしているかが出ます。時計は3分で24時間ぶんが回ります。夜になると何人かは帰ります。</p>
 </div>
 </section>
-<section class="sec" id="advisor">
+
+<section class="sec">
 <div class="container">
 <div class="sec-head">
-<h2><span class="nw">月額では、</span><span class="nw">こんな仕事を</span><span class="nw">任されています</span></h2>
-<p class="lead">いずれも現在続いているご契約です。きっかけと、実際に進めている内容を載せています。</p>
+<h2><span class="nw">色も社員も、</span><span class="nw">その会社に</span><span class="nw">合わせます</span></h2>
 </div>
-<div class="cases-grid sec-body">
-<article class="card case-main">
-<p class="case-tag caption">建設業の会社</p>
-<h3 class="case-title">情報システム代行</h3>
-<p class="case-fee">月額 55,000円（税込）</p>
-<p class="case-kick">きっかけ：社内にシステム担当がおらず、その都度困っていた。</p>
-<ul class="case-list">
-<li>社内で使っているExcelの集計表の作り直しと、不具合の修正</li>
-<li>社内のITの困りごとの相談窓口</li>
-<li>画面共有での遠隔サポート</li>
-</ul>
-<p class="case-note caption muted-caption">想定の作業量：月10時間</p>
-</article>
-<article class="card">
-<p class="case-tag caption">食品・飲料メーカー</p>
-<h3 class="case-title">通販サイトの構築と運用</h3>
-<p class="case-fee">月額 55,000円（税込）</p>
-<p class="case-kick">きっかけ：通販を始めたいが、社内に作れる人も運用できる人もいなかった。</p>
-<ul class="case-list">
-<li>通販サイトの立ち上げ</li>
-<li>商品46件の登録と公開</li>
-<li>注文から出荷までの流れの整備</li>
-<li>表示や規約まわりの点検</li>
-<li>予約販売の準備</li>
-</ul>
-</article>
-<article class="card">
-<p class="case-tag caption">自社でWebサービスを運営する会社</p>
-<h3 class="case-title">AIパートナー</h3>
-<p class="case-fee">月額 33,000円（税込）</p>
-<p class="case-kick">きっかけ：サービスにAIを組み込んだが、直せる人が社内にいなかった。</p>
-<ul class="case-list">
-<li>利用者ごとの上限設定や、権限まわりの機能追加</li>
-<li>不具合の原因調査と修正</li>
-<li>AIの利用状況を管理画面で見えるようにする</li>
-<li>本番に反映する前の動作確認</li>
-</ul>
-</article>
-</div>
+<dl class="spec">
+<dt>色</dt><dd>会社の色に合わせます。使うのは5色とその混ぜ色だけです。絞ってあるので画面が散らかりません。</dd>
+<dt>社員</dt><dd>14人ぶんの役割と見た目を決められます。人数は減らせます。</dd>
+<dt>文言</dt><dd>カーソルを合わせたときに出る「いま何をしているか」を、その会社の仕事に合わせて書き換えます。</dd>
+<dt>時間</dt><dd>出社と退社の時刻を指定できます。</dd>
+</dl>
 </div>
 </section>
-<section class="sec" id="single">
+
+<section class="sec">
 <div class="container">
 <div class="sec-head">
-<h2><span class="nw">単発の制作例。</span><span class="nw">触って動かせます</span></h2>
-<p class="lead">いずれも架空の会社・数値で作ったデモです。完成条件を決めて、この形で納品します。</p>
-</div>
-<div class="grid3 sec-body">
-<a class="card work-card" href="./gyomu-system.html">
-<div class="work-img"><img src="./pf/gyomu-system.jpg" alt="販売・購買・債権管理システムの実画面"></div>
-<div class="work-body">
-<p class="work-meta caption muted-caption"><span>業務システム</span><span>操作可能</span></p>
-<h3>販売・購買・債権管理</h3>
-<p class="desc">見積から請求、入金消込までを一つの画面で管理。</p>
-<span class="card-link">デモを見る</span>
-</div>
-</a>
-<a class="card work-card" href="./automation.html">
-<div class="work-img"><img src="./pf/automation.jpg" alt="自動化・データ処理作品集の実画面"></div>
-<div class="work-body">
-<p class="work-meta caption muted-caption"><span>業務自動化</span><span>実測あり</span></p>
-<h3>自動化・データ処理</h3>
-<p class="desc">収集、転記、集計、PDF変換など7種類の自動化。</p>
-<span class="card-link">デモを見る</span>
-</div>
-</a>
-<a class="card work-card" href="./dashboard.html">
-<div class="work-img"><img src="./pf/dashboard.jpg" alt="EC売上ダッシュボードの実画面"></div>
-<div class="work-body">
-<p class="work-meta caption muted-caption"><span>データ集計</span><span>操作可能</span></p>
-<h3>EC売上ダッシュボード</h3>
-<p class="desc">毎月のCSVから売上、客単価、商品別実績を自動集計。</p>
-<span class="card-link">デモを見る</span>
-</div>
-</a>
-<a class="card work-card" href="./custom/vintage-archive-inbound.html">
-<div class="work-img"><img src="./pf/vintage-archive-inbound.jpg" alt="多言語インバウンドサイトの実画面"></div>
-<div class="work-body">
-<p class="work-meta caption muted-caption"><span>ホームページ</span><span>9言語</span></p>
-<h3>多言語インバウンドサイト</h3>
-<p class="desc">訪日客の来店につなげる、写真に頼らない店舗サイト。</p>
-<span class="card-link">デモを見る</span>
-</div>
-</a>
-<a class="card work-card" href="./design.html">
-<div class="work-img"><img src="./pf/design.jpg" alt="バナー制作サンプル集の実画面"></div>
-<div class="work-body">
-<p class="work-meta caption muted-caption"><span>EC運用</span><span>量産対応</span></p>
-<h3>バナー・画像制作</h3>
-<p class="desc">訴求違いのバナーや販促画像をまとめて制作。</p>
-<span class="card-link">デモを見る</span>
-</div>
-</a>
-<a class="card work-card" href="./pixel-office.html">
-<div class="work-img"><img src="./pf/pixel-office.png" alt="ドット絵で作ったオフィスのアニメーション"></div>
-<div class="work-body">
-<p class="work-meta caption muted-caption"><span>アニメーション</span><span>採用・会社紹介</span></p>
-<h3>動くドット絵のオフィス</h3>
-<p class="desc">会社の1日の動きを、色と社員を合わせて作ります。</p>
-<span class="card-link">デモを見る</span>
-</div>
-</a>
-<a class="card work-card" href="./line.html">
-<div class="work-img"><img src="./pf/line.jpg" alt="LINE公式アカウント構築デモの実画面"></div>
-<div class="work-body">
-<p class="work-meta caption muted-caption"><span>運用設計</span><span>動線設計</span></p>
-<h3>LINE公式アカウント構築</h3>
-<p class="desc">自動応答、配信、予約までの導線を設計。</p>
-<span class="card-link">デモを見る</span>
-</div>
-</a>
+<h2><span class="nw">画像を1枚も</span><span class="nw">使っていません</span></h2>
+<p class="lead">線と四角をその場で描いているだけです。だから拡大しても粗くならず、読み込みも速い。外部のサーバーにはつながらないので、ファイル2つで完結します。</p>
 </div>
 </div>
 </section>
+
+<section class="sec">
+<div class="container">
+<div class="sec-head">
+<h2><span class="nw">置き場所</span></h2>
+<p class="lead">採用ページ、会社やサービスの紹介、社内で見せる画面。</p>
+</div>
+</div>
+</section>
+
 <section class="contact" id="contact">
 <div class="container">
-<h2><span class="nw">近い例がなくても、</span><span class="nw">ご相談ください</span></h2>
-<p class="lead">掲載の例と違う内容で構いません。困っていることの整理から、ご一緒します。</p>
-<div class="contact-cta"><a class="btn btn-primary" href="https://page.line.me/091usyfe" target="_blank" rel="noopener">相談内容を送る</a></div>
-<p class="contact-sub caption">ボタンからLINEのトーク画面が開きます。メールをご希望の場合は <a href="mailto:r2g128@gmail.com">r2g128@gmail.com</a> へお送りください。<br>クラウドソーシング経由のご連絡は、<a href="https://crowdworks.jp/public/employees/7039234" target="_blank" rel="noopener">こちらの窓口</a>または<a href="https://www.lancers.jp/profile/minato_auto" target="_blank" rel="noopener">こちらの窓口</a>からも受け付けています。</p>
+<h2><span class="nw">こんな絵が</span><span class="nw">作れないか、</span><span class="nw">から相談できます</span></h2>
+<div class="contact-cta"><a class="btn btn-primary" href="https://page.line.me/091usyfe" target="_blank" rel="noopener">相談内容を送る</a><a class="btn btn-ghost" href="./cases.html">ほかの制作例を見る</a></div>
 </div>
 </section>
 </main>
@@ -301,5 +219,7 @@ else{m.setAttribute("hidden","");b.setAttribute("aria-expanded","false");}
 });
 })();
 </script>
+<script src="./pixel-office/pixel-office.js"></script>
+<script>if(window.mountSchemePixel)window.mountSchemePixel(document.getElementById("office"));</script>
 </body>
 </html>
