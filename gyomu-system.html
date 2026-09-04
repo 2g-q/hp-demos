@@ -403,44 +403,60 @@ footer{padding:var(--sp-5) var(--sp-4) var(--sp-6); color:var(--faint); font-siz
 </style>
 </head>
 <body>
-<!-- pfnav:start 全ページ共通ナビ(自動挿入・手で編集しない) -->
+<!-- pfnav:start 全ページ共通ナビ(automation/hp_demos_inject_bar.py が生成・手で編集しない) -->
 <style>
-#pfnav{position:sticky;top:0;z-index:99999;background:#0f2438;color:#cfe0f0;font-family:"Noto Sans JP",-apple-system,BlinkMacSystemFont,"Segoe UI","Hiragino Kaku Gothic ProN","Yu Gothic",Meiryo,sans-serif;font-size:13px;line-height:1;border-bottom:1px solid rgba(255,255,255,.12)}
-#pfnav .in{max-width:1180px;margin:0 auto;padding:0 16px;display:flex;align-items:center;gap:4px;overflow-x:auto;scrollbar-width:none}
-#pfnav .in::-webkit-scrollbar{display:none}
-#pfnav a{color:#cfe0f0;text-decoration:none;padding:11px 10px;white-space:nowrap;border-bottom:2px solid transparent;transition:.15s}
-#pfnav a:hover{color:#fff;background:rgba(255,255,255,.07)}
-#pfnav a.home{font-weight:700;color:#fff;padding-left:0;padding-right:14px;margin-right:4px;border-right:1px solid rgba(255,255,255,.15)}
-#pfnav a.on{color:#fff;border-bottom-color:#6fd3ff;font-weight:700}
-#pfnav .sp{margin-left:auto}
-#pfnav .me{color:#8fa8bf;padding:11px 0 11px 10px;white-space:nowrap}
-@media(max-width:640px){#pfnav .me{display:none}#pfnav a{padding:10px 8px}}
+/* デザインの正= cases.html のヘッダー(白地+ヘアライン+aria-currentで現在地)。 */
+#pfnav{position:sticky;top:0;z-index:99999;background:rgba(255,255,255,.72);
+  -webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);
+  border-bottom:1px solid rgba(13,13,13,.14);color:#0D0D0D;
+  font-family:system-ui,-apple-system,"Helvetica Neue","Hiragino Sans","Hiragino Kaku Gothic ProN","Noto Sans JP","Yu Gothic",Meiryo,sans-serif;line-height:1.25rem;-webkit-font-smoothing:antialiased}
+#pfnav *{box-sizing:border-box}
+#pfnav .in{max-width:1128px;margin:0 auto;padding:0 32px;height:64px;
+  display:flex;align-items:center;justify-content:space-between;gap:24px}
+#pfnav a{text-decoration:none;transition:color .2s,background-color .2s}
+#pfnav a:focus-visible{outline:2px solid #2563EB;outline-offset:2px}
+#pfnav .brand{color:#0D0D0D;font-size:1rem;font-weight:600;white-space:nowrap;padding:12px 0}
+#pfnav .links{display:flex;align-items:center;gap:24px}
+#pfnav .links a{color:rgba(13,13,13,.6);font-size:.8125rem;line-height:1.23rem;font-weight:500;
+  padding:12px 0;white-space:nowrap}
+#pfnav .links a:hover{color:#0D0D0D}
+#pfnav .links a[aria-current="page"]{color:#0D0D0D}
+#pfnav a.back{display:inline-flex;align-items:center;justify-content:center;height:36px;
+  padding:0 16px;background:#0D0D0D;color:#FFFFFF;font-size:.8125rem;line-height:1;
+  font-weight:500;border-radius:2.5rem;white-space:nowrap}
+#pfnav a.back:hover{background:rgba(13,13,13,.8)}
+@media(max-width:767px){#pfnav .brand{display:none}
+  #pfnav .in{padding:0 20px;height:54px;justify-content:flex-start;gap:14px}
+  #pfnav .links{gap:14px;width:100%}
+  #pfnav a.back{margin-left:auto}}
 @media print{#pfnav{display:none}}
+
 </style>
 <nav id="pfnav"><div class="in">
-<a class="home" href="./cases.html">&#8592; 事例・サンプル一覧</a>
-<a href="./gyomu-system.html" data-k="gyomu-system">業務システム</a>
-<a href="./automation.html" data-k="automation">自動化</a>
-<a href="./dashboard.html" data-k="dashboard">ダッシュボード</a>
-<a href="./cases.html" data-k="cases">導入事例</a>
-<a href="./pricing.html" data-k="advisor">継続でご一緒する形</a>
-<a href="./skillsheet.html" data-k="skillsheet">スキルシート</a>
-<span class="sp"></span><span class="me">自動化のミナト</span>
+<a class="brand" href="./index.html">自動化のミナト</a>
+<div class="links">
+<a href="./index.html" data-k="index">サービス</a>
+<a href="./pricing.html" data-k="pricing">料金</a>
+<a href="./cases.html" data-k="cases">事例</a>
+<a class="back" href="./cases.html">← 事例一覧へ</a>
+</div>
 </div>
 <script>(function(){var f=(location.pathname.split("/").pop()||"index.html").replace(".html","");
-document.querySelectorAll("#pfnav a[data-k]").forEach(function(a){if(a.getAttribute("data-k")===f)a.className="on";});})();</script>
+document.querySelectorAll("#pfnav a[data-k]").forEach(function(a){if(a.getAttribute("data-k")===f)a.setAttribute("aria-current","page");});})();</script>
 </nav>
 <script>/* pfnav-offset:start ナビと本体の固定ヘッダーが重なるのを防ぐ(2026-08-11)。
-   #pfnav は sticky/top:0/z-index:99999 なので、本体側の position:fixed; top:0 の
-   ヘッダーはナビの下に潜って隠れる(実測=lp-gym/lp-recruit で店名・グローバルナビ・
-   CTAボタンが全部読めなくなっていた)。ナビの実高さを測って上端固定の要素だけ下げる。
+   #pfnav は sticky/top:0/z-index:99999、#demo-fict(架空サンプル明示帯)はその直後の
+   通常フロー。本体側の position:fixed; top:0 のヘッダーは両方の下に潜って隠れる
+   (実測2026-09-04=corp/dental/salon でロゴ上半分が欠けた。旧実装は #pfnav の高さしか
+   見ていなかった)。→ **両方の実高さを足して**上端固定の要素だけ下げる。
    高さはSPで折り返すと変わるので resize でも測り直す。手で編集しない。 */
 (function(){
   var nav = document.getElementById('pfnav');
   if (!nav) return;
   var basePad = null;
   function fit(){
-    var h = nav.offsetHeight || 0;
+    var fict = document.getElementById('demo-fict');
+    var h = (nav.offsetHeight || 0) + (fict ? (fict.offsetHeight || 0) : 0);
     if (basePad === null) {
       basePad = parseFloat(getComputedStyle(document.documentElement).scrollPaddingTop) || 0;
     }
@@ -449,6 +465,7 @@ document.querySelectorAll("#pfnav a[data-k]").forEach(function(a){if(a.getAttrib
     for (var i = 0; i < all.length; i++) {
       var el = all[i];
       if (el === nav || nav.contains(el)) continue;
+      if (fict && (el === fict || fict.contains(el))) continue;
       if (el.getAttribute('data-pfnav-shift') === '1') { el.style.top = h + 'px'; continue; }
       var cs = getComputedStyle(el);
       if (cs.position !== 'fixed' || parseFloat(cs.top) !== 0) continue;  /* 上端固定だけ触る */

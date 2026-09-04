@@ -151,44 +151,60 @@ footer{background:#0d1526;color:#8592ab;padding:56px 0 28px;font-size:.82rem}
 </style>
 </head>
 <body>
-<!-- pfnav:start 全ページ共通ナビ(自動挿入・手で編集しない) -->
+<!-- pfnav:start 全ページ共通ナビ(automation/hp_demos_inject_bar.py が生成・手で編集しない) -->
 <style>
-#pfnav{position:sticky;top:0;z-index:99999;background:#0f2438;color:#cfe0f0;font-family:"Noto Sans JP",-apple-system,BlinkMacSystemFont,"Segoe UI","Hiragino Kaku Gothic ProN","Yu Gothic",Meiryo,sans-serif;font-size:13px;line-height:1;border-bottom:1px solid rgba(255,255,255,.12)}
-#pfnav .in{max-width:1180px;margin:0 auto;padding:0 16px;display:flex;align-items:center;gap:4px;overflow-x:auto;scrollbar-width:none}
-#pfnav .in::-webkit-scrollbar{display:none}
-#pfnav a{color:#cfe0f0;text-decoration:none;padding:11px 10px;white-space:nowrap;border-bottom:2px solid transparent;transition:.15s}
-#pfnav a:hover{color:#fff;background:rgba(255,255,255,.07)}
-#pfnav a.home{font-weight:700;color:#fff;padding-left:0;padding-right:14px;margin-right:4px;border-right:1px solid rgba(255,255,255,.15)}
-#pfnav a.on{color:#fff;border-bottom-color:#6fd3ff;font-weight:700}
-#pfnav .sp{margin-left:auto}
-#pfnav .me{color:#8fa8bf;padding:11px 0 11px 10px;white-space:nowrap}
-@media(max-width:640px){#pfnav .me{display:none}#pfnav a{padding:10px 8px}}
+/* デザインの正= cases.html のヘッダー(白地+ヘアライン+aria-currentで現在地)。 */
+#pfnav{position:sticky;top:0;z-index:99999;background:rgba(255,255,255,.72);
+  -webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);
+  border-bottom:1px solid rgba(13,13,13,.14);color:#0D0D0D;
+  font-family:system-ui,-apple-system,"Helvetica Neue","Hiragino Sans","Hiragino Kaku Gothic ProN","Noto Sans JP","Yu Gothic",Meiryo,sans-serif;line-height:1.25rem;-webkit-font-smoothing:antialiased}
+#pfnav *{box-sizing:border-box}
+#pfnav .in{max-width:1128px;margin:0 auto;padding:0 32px;height:64px;
+  display:flex;align-items:center;justify-content:space-between;gap:24px}
+#pfnav a{text-decoration:none;transition:color .2s,background-color .2s}
+#pfnav a:focus-visible{outline:2px solid #2563EB;outline-offset:2px}
+#pfnav .brand{color:#0D0D0D;font-size:1rem;font-weight:600;white-space:nowrap;padding:12px 0}
+#pfnav .links{display:flex;align-items:center;gap:24px}
+#pfnav .links a{color:rgba(13,13,13,.6);font-size:.8125rem;line-height:1.23rem;font-weight:500;
+  padding:12px 0;white-space:nowrap}
+#pfnav .links a:hover{color:#0D0D0D}
+#pfnav .links a[aria-current="page"]{color:#0D0D0D}
+#pfnav a.back{display:inline-flex;align-items:center;justify-content:center;height:36px;
+  padding:0 16px;background:#0D0D0D;color:#FFFFFF;font-size:.8125rem;line-height:1;
+  font-weight:500;border-radius:2.5rem;white-space:nowrap}
+#pfnav a.back:hover{background:rgba(13,13,13,.8)}
+@media(max-width:767px){#pfnav .brand{display:none}
+  #pfnav .in{padding:0 20px;height:54px;justify-content:flex-start;gap:14px}
+  #pfnav .links{gap:14px;width:100%}
+  #pfnav a.back{margin-left:auto}}
 @media print{#pfnav{display:none}}
+
 </style>
 <nav id="pfnav"><div class="in">
-<a class="home" href="./cases.html">&#8592; 事例・サンプル一覧</a>
-<a href="./gyomu-system.html" data-k="gyomu-system">業務システム</a>
-<a href="./automation.html" data-k="automation">自動化</a>
-<a href="./dashboard.html" data-k="dashboard">ダッシュボード</a>
-<a href="./cases.html" data-k="cases">導入事例</a>
-<a href="./pricing.html" data-k="advisor">継続でご一緒する形</a>
-<a href="./skillsheet.html" data-k="skillsheet">スキルシート</a>
-<span class="sp"></span><span class="me">自動化のミナト</span>
+<a class="brand" href="./index.html">自動化のミナト</a>
+<div class="links">
+<a href="./index.html" data-k="index">サービス</a>
+<a href="./pricing.html" data-k="pricing">料金</a>
+<a href="./cases.html" data-k="cases">事例</a>
+<a class="back" href="./cases.html">← 事例一覧へ</a>
+</div>
 </div>
 <script>(function(){var f=(location.pathname.split("/").pop()||"index.html").replace(".html","");
-document.querySelectorAll("#pfnav a[data-k]").forEach(function(a){if(a.getAttribute("data-k")===f)a.className="on";});})();</script>
+document.querySelectorAll("#pfnav a[data-k]").forEach(function(a){if(a.getAttribute("data-k")===f)a.setAttribute("aria-current","page");});})();</script>
 </nav>
 <script>/* pfnav-offset:start ナビと本体の固定ヘッダーが重なるのを防ぐ(2026-08-11)。
-   #pfnav は sticky/top:0/z-index:99999 なので、本体側の position:fixed; top:0 の
-   ヘッダーはナビの下に潜って隠れる(実測=lp-gym/lp-recruit で店名・グローバルナビ・
-   CTAボタンが全部読めなくなっていた)。ナビの実高さを測って上端固定の要素だけ下げる。
+   #pfnav は sticky/top:0/z-index:99999、#demo-fict(架空サンプル明示帯)はその直後の
+   通常フロー。本体側の position:fixed; top:0 のヘッダーは両方の下に潜って隠れる
+   (実測2026-09-04=corp/dental/salon でロゴ上半分が欠けた。旧実装は #pfnav の高さしか
+   見ていなかった)。→ **両方の実高さを足して**上端固定の要素だけ下げる。
    高さはSPで折り返すと変わるので resize でも測り直す。手で編集しない。 */
 (function(){
   var nav = document.getElementById('pfnav');
   if (!nav) return;
   var basePad = null;
   function fit(){
-    var h = nav.offsetHeight || 0;
+    var fict = document.getElementById('demo-fict');
+    var h = (nav.offsetHeight || 0) + (fict ? (fict.offsetHeight || 0) : 0);
     if (basePad === null) {
       basePad = parseFloat(getComputedStyle(document.documentElement).scrollPaddingTop) || 0;
     }
@@ -197,6 +213,7 @@ document.querySelectorAll("#pfnav a[data-k]").forEach(function(a){if(a.getAttrib
     for (var i = 0; i < all.length; i++) {
       var el = all[i];
       if (el === nav || nav.contains(el)) continue;
+      if (fict && (el === fict || fict.contains(el))) continue;
       if (el.getAttribute('data-pfnav-shift') === '1') { el.style.top = h + 'px'; continue; }
       var cs = getComputedStyle(el);
       if (cs.position !== 'fixed' || parseFloat(cs.top) !== 0) continue;  /* 上端固定だけ触る */
@@ -334,31 +351,44 @@ document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 </script>
 <!-- mnt-portfolio-bar:begin (automation/hp_demos_inject_bar.py が生成・手で編集しない) -->
 <style>
-/* 制作者(自動化のミナト)の作品集への導線帯。各ページの既存CSSと衝突しないよう mnt- 接頭辞。 */
-.mnt-bar{all:initial;display:block;font-family:'Hiragino Kaku Gothic ProN','Noto Sans JP','Yu Gothic',sans-serif;
-  background:#1e2a44;color:#fff;padding:34px 0 30px;line-height:1.7;-webkit-font-smoothing:antialiased}
+/* 作品集への導線帯。デザインの正= cases.html(白地・--tint-4カード・.btn radius 2.5rem)。
+   各ページの既存CSSと衝突しないよう mnt- 接頭辞+all:initial。 */
+.mnt-bar{all:initial;display:block;font-family:system-ui,-apple-system,"Helvetica Neue","Hiragino Sans","Hiragino Kaku Gothic ProN","Noto Sans JP","Yu Gothic",Meiryo,sans-serif;
+  background:#FFFFFF;color:#0D0D0D;border-top:1px solid rgba(13,13,13,.14);
+  padding:64px 0 56px;-webkit-font-smoothing:antialiased}
 .mnt-bar *{box-sizing:border-box}
-.mnt-in{max-width:1080px;margin:0 auto;padding:0 20px}
-.mnt-note{font-size:12px;color:#9fabc9;margin:0 0 4px;letter-spacing:.02em}
-.mnt-h{font-size:17px;font-weight:700;color:#fff;margin:0 0 6px;letter-spacing:.01em}
-.mnt-lead{font-size:13px;color:#c7d1e8;margin:0 0 18px;max-width:720px}
-.mnt-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:0 0 18px}
-a.mnt-card{display:block;text-decoration:none;color:inherit;border-radius:10px;overflow:hidden;
-  background:#26375a;border:1px solid rgba(255,255,255,.12);transition:.18s}
-a.mnt-card:hover{transform:translateY(-3px);border-color:rgba(255,255,255,.42)}
-a.mnt-card img{display:block;width:100%;height:auto;aspect-ratio:1000/672;object-fit:cover;background:#26375a}
-.mnt-meta{padding:9px 11px 11px}
-.mnt-tag{display:inline-block;font-size:10px;font-weight:700;letter-spacing:.06em;color:#bcd0ff;
-  background:rgba(120,160,255,.16);border-radius:100px;padding:2px 8px;margin:0 0 4px}
-.mnt-name{display:block;font-size:12.5px;font-weight:700;color:#fff;line-height:1.5}
-a.mnt-all{display:inline-flex;align-items:center;gap:8px;background:#fff;color:#1e2a44;text-decoration:none;
-  border-radius:9px;padding:11px 20px;font-size:13.5px;font-weight:700;transition:.15s}
-a.mnt-all:hover{background:#e8edf8}
-.mnt-fine{font-size:11px;color:#8b98b8;margin:14px 0 0;line-height:1.7}
+.mnt-in{max-width:1128px;margin:0 auto;padding:0 20px}
+.mnt-note{font-size:.875rem;line-height:1.435rem;letter-spacing:0;color:rgba(13,13,13,.6);margin:0 0 10px}
+.mnt-h{font-size:clamp(1.5rem,calc(1.5rem + .375*((100vw - 23.4375rem)/66.5625)),1.875rem);
+  line-height:clamp(1.98rem,calc(1.98rem + .495*((100vw - 23.4375rem)/66.5625)),2.475rem);
+  letter-spacing:-.01em;font-weight:500;color:#0D0D0D;margin:0 0 14px;text-wrap:balance}
+.mnt-lead{font-size:1.0625rem;line-height:1.75rem;letter-spacing:-.01em;color:rgba(13,13,13,.6);
+  margin:0 0 32px;max-width:720px;text-wrap:pretty}
+.mnt-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;margin:0 0 32px}
+a.mnt-card{display:block;text-decoration:none;color:inherit;border-radius:8px;overflow:hidden;
+  background:rgba(13,13,13,.04);padding:8px;transition:background-color .2s}
+a.mnt-card:hover{background:rgba(13,13,13,.12)}
+a.mnt-card:focus-visible{outline:2px solid #2563EB;outline-offset:2px}
+a.mnt-card img{display:block;width:100%;height:auto;aspect-ratio:1000/672;object-fit:cover;
+  border-radius:6px;background:rgba(13,13,13,.04)}
+.mnt-meta{padding:12px 8px 8px}
+.mnt-tag{display:block;font-size:.75rem;line-height:1.2rem;font-weight:500;color:rgba(13,13,13,.6);margin:0 0 2px}
+.mnt-name{display:block;font-size:.875rem;line-height:1.435rem;font-weight:500;color:#0D0D0D}
+.mnt-actions{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+a.mnt-btn{display:inline-flex;align-items:center;justify-content:center;height:40px;padding:0 20px;
+  border-radius:2.5rem;font-size:.875rem;line-height:1;font-weight:500;text-decoration:none;
+  transition:background-color .2s,color .2s}
+a.mnt-btn:focus-visible{outline:2px solid #2563EB;outline-offset:2px}
+a.mnt-btn-primary{background:#0D0D0D;color:#FFFFFF}
+a.mnt-btn-primary:hover{background:rgba(13,13,13,.8)}
+a.mnt-btn-ghost{background:rgba(13,13,13,.08);color:#0D0D0D}
+a.mnt-btn-ghost:hover{background:rgba(13,13,13,.12)}
+.mnt-fine{font-size:.875rem;line-height:1.435rem;color:rgba(13,13,13,.6);margin:24px 0 0}
 /* 自前の position:fixed 下部CTAバーを持つページ用。最下部まで送っても帯の末尾が隠れないよう余白を積む。 */
-.mnt-bar.mnt-cta{padding-bottom:110px}
-@media(max-width:860px){.mnt-grid{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:420px){.mnt-grid{grid-template-columns:1fr}.mnt-bar{padding:28px 0 26px}.mnt-bar.mnt-cta{padding-bottom:120px}}
+.mnt-bar.mnt-cta{padding-bottom:130px}
+@media(max-width:860px){.mnt-grid{grid-template-columns:repeat(2,1fr);gap:16px}}
+@media(max-width:480px){.mnt-grid{grid-template-columns:1fr}
+  .mnt-bar{padding:48px 0 44px}.mnt-bar.mnt-cta{padding-bottom:130px}}
 </style>
 <div class="mnt-bar">
   <div class="mnt-in">
@@ -366,25 +396,28 @@ a.mnt-all:hover{background:#e8edf8}
     <p class="mnt-h">ホームページ・LP・デザイン・自動化まで、実際に動くサンプルをご用意しています</p>
     <p class="mnt-lead">制作＝自動化のミナト。AIで速く作り、品質は全件人の目で検品します。ご依頼の業種・目的に合わせて、この品質でお作りします。</p>
     <div class="mnt-grid">
-      <a class="mnt-card" href="gyomu-system.html">
-        <img src="pf/gyomu-system.jpg" alt="見積〜請求の業務管理システムの制作サンプル" loading="lazy">
-        <div class="mnt-meta"><span class="mnt-tag">業務システム</span><span class="mnt-name">見積〜請求の業務管理システム</span></div>
+      <a class="mnt-card" href="lp-gym.html">
+        <img src="pf/lp-gym.jpg" alt="パーソナルジム 体験予約LPの制作サンプル" loading="lazy">
+        <div class="mnt-meta"><span class="mnt-tag">集客LP</span><span class="mnt-name">パーソナルジム 体験予約LP</span></div>
       </a>
-      <a class="mnt-card" href="automation.html">
-        <img src="pf/automation.jpg" alt="事務作業の自動化サンプルの制作サンプル" loading="lazy">
-        <div class="mnt-meta"><span class="mnt-tag">自動化</span><span class="mnt-name">事務作業の自動化サンプル</span></div>
+      <a class="mnt-card" href="dental-sakura.html">
+        <img src="pf/dental-sakura.jpg" alt="歯科医院(訪問歯科)の制作サンプル" loading="lazy">
+        <div class="mnt-meta"><span class="mnt-tag">ホームページ</span><span class="mnt-name">歯科医院(訪問歯科)</span></div>
       </a>
-      <a class="mnt-card" href="dashboard.html">
-        <img src="pf/dashboard.jpg" alt="売上ダッシュボード(操作できます)の制作サンプル" loading="lazy">
-        <div class="mnt-meta"><span class="mnt-tag">ダッシュボード</span><span class="mnt-name">売上ダッシュボード(操作できます)</span></div>
+      <a class="mnt-card" href="salon.html">
+        <img src="pf/salon.jpg" alt="ヘアサロンの制作サンプル" loading="lazy">
+        <div class="mnt-meta"><span class="mnt-tag">ホームページ</span><span class="mnt-name">ヘアサロン</span></div>
       </a>
-      <a class="mnt-card" href="line.html">
-        <img src="pf/line.jpg" alt="LINE公式アカウント構築の制作サンプル" loading="lazy">
-        <div class="mnt-meta"><span class="mnt-tag">LINE構築</span><span class="mnt-name">LINE公式アカウント構築</span></div>
+      <a class="mnt-card" href="lp-recruit.html">
+        <img src="pf/lp-recruit.jpg" alt="介護スタッフ 採用LPの制作サンプル" loading="lazy">
+        <div class="mnt-meta"><span class="mnt-tag">採用LP</span><span class="mnt-name">介護スタッフ 採用LP</span></div>
       </a>
     </div>
-    <a class="mnt-all" href="cases.html">事例・サンプル一覧を見る →</a>
-    <p class="mnt-fine">※各サンプルの店舗名・法人名・人物・数値はすべて架空です。図版はイメージです。</p>
+    <div class="mnt-actions">
+      <a class="mnt-btn mnt-btn-primary" href="./cases.html">事例・サンプル一覧を見る</a>
+      <a class="mnt-btn mnt-btn-ghost" href="./pricing.html">料金を見る</a>
+    </div>
+    <p class="mnt-fine">※各サンプルの店舗名・法人名・人物・数値はすべて架空です。写真はイメージです。</p>
   </div>
 </div>
 <!-- mnt-portfolio-bar:end -->
