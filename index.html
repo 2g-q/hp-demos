@@ -3,17 +3,18 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>自動化のミナト｜AIを、現場で使える仕組みに。</title>
-<meta name="description" content="業務の整理から、AIの導入、使い続けるための改善まで。社内にIT担当がいない会社の外の相談先として、小さく始めて現場に残る形へ整えます。">
+<title>自動化のミナト｜IT担当がいない会社の、外の相談先</title>
+<meta name="description" content="Excelの集計、通販サイト、AIの導入。社内にIT担当がいない会社の外の相談先として、業務の整理から実装、その後の手直しまで引き受けます。">
 <style>
 :root{--black:#0D0D0D;--white:#FFFFFF;--charcoal:#343541;--gray:#8E8EA0;--blue:#2563EB;
+--ink-72:rgba(255,255,255,.72);--tint-6:rgba(255,255,255,.06);--tint-8:rgba(255,255,255,.08);--tint-12:rgba(255,255,255,.12);--hairline:rgba(255,255,255,.14);
 --fs-h4:clamp(1.25rem,calc(1.25rem + .125*((100vw - 23.4375rem)/66.5625)),1.375rem);
 --lh-h4:clamp(1.5rem,calc(1.5rem + .2325*((100vw - 23.4375rem)/66.5625)),1.7325rem);
 --fs-h3:clamp(1.5rem,calc(1.5rem + .375*((100vw - 23.4375rem)/66.5625)),1.875rem);
 --lh-h3:clamp(1.98rem,calc(1.98rem + .495*((100vw - 23.4375rem)/66.5625)),2.475rem)}
 *{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
-body{background:var(--black);color:var(--white);font-family:system-ui,-apple-system,"Helvetica Neue","Hiragino Sans","Hiragino Kaku Gothic ProN","Noto Sans JP","Yu Gothic",Meiryo,sans-serif;word-break:auto-phrase;-webkit-font-smoothing:antialiased}
+html{scroll-behavior:smooth;background:var(--black)}
+body{position:relative;background:var(--black);color:var(--white);font-family:system-ui,-apple-system,"Helvetica Neue","Hiragino Sans","Hiragino Kaku Gothic ProN","Noto Sans JP","Yu Gothic",Meiryo,sans-serif;word-break:auto-phrase;-webkit-font-smoothing:antialiased}
 h1,h2,h3,p,li{text-wrap:pretty}
 h1,h2{text-wrap:balance}
 img{display:block;max-width:100%}
@@ -30,54 +31,57 @@ p,li{font-size:1.0625rem;line-height:1.75rem;letter-spacing:-.01em}
 .lead{font-size:1.0625rem;line-height:1.75rem;letter-spacing:-.01em}
 .caption{font-size:.875rem;line-height:1.435rem;letter-spacing:0}
 .on-dark-caption{color:var(--gray)}
-.price-num{font-size:clamp(2rem,calc(2rem + 1*((100vw - 23.4375rem)/66.5625)),3rem);line-height:clamp(2.28rem,calc(2.28rem + 1.2*((100vw - 23.4375rem)/66.5625)),3.48rem);letter-spacing:-.02em;font-weight:500;font-variant-numeric:tabular-nums;white-space:nowrap}
-.header{position:sticky;top:0;z-index:10;background:var(--white);border-bottom:1px solid var(--black)}
+.glow-top{position:absolute;left:0;right:0;top:0;height:1100px;pointer-events:none;z-index:-1;background:linear-gradient(to bottom,rgba(37,99,235,.16) 0,rgba(37,99,235,.15) 420px,rgba(37,99,235,0) 1100px)}
+.header{position:sticky;top:0;z-index:10;background:rgba(13,13,13,.72);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px)}
 .header-in{margin-inline:auto;padding-inline:32px;height:64px;display:flex;align-items:center;justify-content:space-between;gap:24px}
-.brand{color:var(--black);font-size:1rem;line-height:1.25rem;font-weight:600;text-decoration:none;padding:12px 0}
+.brand{color:var(--white);font-size:1rem;line-height:1.25rem;font-weight:600;text-decoration:none;padding:12px 0}
 .nav{display:flex;align-items:center;gap:28px}
-.nav a{color:var(--black);font-size:.8125rem;line-height:1.23rem;font-weight:500;text-decoration:none;padding:12px 0;transition:color .2s}
-.nav a:hover{color:var(--blue)}
-.nav a[aria-current="page"]{text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:8px}
-.menu-btn{display:none;align-items:center;justify-content:center;height:36px;padding:0 20px;background:var(--white);color:var(--black);border:1px solid var(--black);border-radius:2.5rem;font-family:inherit;font-size:.8125rem;line-height:1;font-weight:500;cursor:pointer}
+.nav a{color:var(--ink-72);font-size:.8125rem;line-height:1.23rem;font-weight:500;text-decoration:none;padding:12px 0;transition:color .2s}
+.nav a:hover{color:var(--white)}
+.nav a[aria-current="page"]{color:var(--white)}
+.nav a.nav-contact{display:inline-flex;align-items:center;justify-content:center;height:36px;padding:0 16px;background:var(--white);color:var(--black);border-radius:2.5rem;transition:background-color .2s}
+.nav a.nav-contact:hover{background:rgba(255,255,255,.8);color:var(--black)}
+.menu-btn{display:none;align-items:center;justify-content:center;height:36px;padding:0 16px;background:var(--tint-8);color:var(--white);border:0;border-radius:2.5rem;font-family:inherit;font-size:.8125rem;line-height:1;font-weight:500;cursor:pointer;transition:background-color .2s}
+.menu-btn:hover{background:var(--tint-12)}
 .mnav{display:none}
-.hero{background:var(--white);color:var(--black);text-align:center;padding:120px 0}
-.hero .lead{max-width:760px;margin:24px auto 0}
-.hero-cta{margin-top:32px;display:flex;justify-content:center}
-.hero-links{margin-top:12px;display:flex;justify-content:center;gap:32px;flex-wrap:wrap}
-.hero-links a{display:inline-flex;align-items:center;min-height:44px;color:var(--blue);font-size:.875rem;line-height:1.25rem;font-weight:500;text-decoration:underline;text-underline-offset:4px}
+.hero{text-align:center;padding:96px 0 0}
+.hero .lead{max-width:680px;margin:24px auto 0}
+.hero-cta{margin-top:32px;display:flex;justify-content:center;gap:12px;flex-wrap:wrap}
 .btn{display:inline-flex;align-items:center;justify-content:center;height:40px;padding:0 20px;border-radius:2.5rem;font-size:.875rem;line-height:1;font-weight:500;text-decoration:none;transition:background-color .2s,color .2s}
-.btn-blue{background:var(--blue);color:var(--white);border:1px solid var(--blue)}
-.btn-blue:hover{background:var(--white);color:var(--blue)}
-.btn-white{background:var(--white);color:var(--black);border:1px solid var(--white)}
-.btn-white:hover{background:var(--blue);color:var(--white)}
-.dark{background:var(--black);color:var(--white);padding-bottom:120px}
-.dark section{padding-top:120px}
+.btn-primary{background:var(--white);color:var(--black)}
+.btn-primary:hover{background:rgba(255,255,255,.8)}
+.btn-ghost{background:var(--tint-8);color:var(--white)}
+.btn-ghost:hover{background:var(--tint-12)}
+.sec{margin-top:120px}
 .sec-head{text-align:center;max-width:760px;margin-inline:auto}
 .sec-head .lead{margin-top:24px}
 .sec-body{margin-top:64px}
-.card{background:var(--charcoal);border:1px solid var(--white);border-radius:8px;padding:32px}
+.card{background:var(--tint-6);border-radius:8px;padding:32px}
 .card h3{font-size:var(--fs-h4);line-height:var(--lh-h4)}
 .card .body{margin-top:18px}
-.card-link{display:inline-flex;align-items:center;min-height:44px;margin-top:14px;color:var(--white);font-size:.875rem;line-height:1.25rem;font-weight:500;text-decoration:underline;text-underline-offset:4px}
-a.card{display:block;color:inherit;text-decoration:none;transition:border-color .2s}
-a.card:hover{border-color:var(--blue)}
+.card-link{display:inline-flex;align-items:center;min-height:44px;margin-top:14px;color:var(--white);font-size:.875rem;line-height:1.25rem;font-weight:500;text-decoration:none;transition:color .2s}
+.card-link::after{content:"→";margin-left:.4em}
+.card-link:hover{color:var(--ink-72)}
+a.card{display:block;color:inherit;text-decoration:none;transition:background-color .2s}
+a.card:hover{background:var(--tint-12)}
 .grid2{display:grid;grid-template-columns:1fr 1fr;gap:32px}
 .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
 .grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
-.num{color:var(--blue);font-size:1.375rem;line-height:1.75rem;font-weight:500;font-variant-numeric:tabular-nums}
+.num{color:var(--gray);font-size:.875rem;line-height:1.435rem;font-weight:500;font-variant-numeric:tabular-nums}
 .reason h3,.flow-item h3{margin-top:12px;font-size:var(--fs-h4);line-height:var(--lh-h4)}
 .reason p,.flow-item p{margin-top:18px}
-.contact{background:var(--blue);color:var(--white);text-align:center;padding:120px 0}
+.contact{position:relative;text-align:center;margin-top:120px;padding:140px 0 160px;overflow:hidden}
+.contact::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(to top,rgba(37,99,235,.20),rgba(37,99,235,0) 85%)}
 .contact .lead{max-width:620px;margin:24px auto 0}
-.contact-cta{margin-top:32px}
-.contact-sub{margin:32px auto 0;max-width:620px;color:var(--white)}
+.contact-cta{margin-top:32px;display:flex;justify-content:center}
+.contact-sub{margin:32px auto 0;max-width:620px;color:var(--ink-72)}
 .contact-sub a{color:var(--white)}
-.footer{background:var(--black);color:var(--white);padding:48px 0}
+.footer{padding:40px 0 48px}
 .footer-in{display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap}
 .footer-brand{font-size:1rem;line-height:1.25rem;font-weight:600}
 .footer-nav{display:flex;gap:24px}
-.footer-nav a{display:inline-flex;align-items:center;min-height:44px;color:var(--white);font-size:.875rem;line-height:1.25rem;font-weight:500;text-decoration:none}
-.footer-nav a:hover{text-decoration:underline;text-underline-offset:4px}
+.footer-nav a{display:inline-flex;align-items:center;min-height:44px;color:var(--ink-72);font-size:.875rem;line-height:1.25rem;font-weight:500;text-decoration:none;transition:color .2s}
+.footer-nav a:hover{color:var(--white)}
 @media (max-width:1023px){
 .grid3,.grid4{grid-template-columns:repeat(2,1fr)}
 .header-in{padding-inline:24px}
@@ -86,29 +90,28 @@ a.card:hover{border-color:var(--blue)}
 .header-in{padding-inline:20px;height:54px}
 .card{padding:24px}
 .grid2,.grid3,.grid4{grid-template-columns:1fr;gap:24px}
-.dark{padding-bottom:80px}
-.dark section{padding-top:80px}
-.hero{padding:80px 0}
-.contact{padding:80px 0}
+.sec{margin-top:80px}
+.hero{padding:72px 0 0}
+.contact{margin-top:80px;padding:96px 0 112px}
 .nav{gap:12px}
 .nav a{display:none}
-.nav a.nav-contact{display:inline-flex;align-items:center}
+.nav a.nav-contact{display:inline-flex}
 .menu-btn{display:inline-flex}
-.mnav:not([hidden]){display:block;background:var(--white);border-bottom:1px solid var(--black)}
-.mnav a{display:block;padding:14px 20px;border-top:1px solid var(--black);color:var(--black);font-size:1rem;line-height:1.25rem;font-weight:500;text-decoration:none}
+.mnav:not([hidden]){display:block;background:rgba(13,13,13,.92);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px)}
+.mnav a{display:block;padding:14px 20px;border-top:1px solid var(--hairline);color:var(--white);font-size:1rem;line-height:1.25rem;font-weight:500;text-decoration:none}
 }
 @media (prefers-reduced-motion:reduce){
 html{scroll-behavior:auto}
 *{transition:none!important;animation:none!important}
 }
-#office{display:block;width:min(1088px,calc(100vw - 40px));aspect-ratio:1280/800;margin:192px auto 0;image-rendering:pixelated;border:1px solid var(--black);border-radius:8px;background:var(--black)}
-.pixel-note{width:min(1088px,calc(100vw - 40px));max-width:100%;margin:16px auto 0;color:var(--charcoal);text-align:center}
+#office{display:block;width:min(1088px,calc(100vw - 40px));aspect-ratio:1280/800;margin:64px auto 0;image-rendering:pixelated;border:0;border-radius:24px;background:var(--black)}
 @media (max-width:767px){
-#office{margin-top:80px}
+#office{margin-top:48px;border-radius:16px}
 }
 </style>
 </head>
 <body>
+<div class="glow-top" aria-hidden="true"></div>
 <header class="header">
 <div class="header-in">
 <a class="brand" href="./index.html">自動化のミナト</a>
@@ -129,116 +132,113 @@ html{scroll-behavior:auto}
 <main>
 <section class="hero" id="top">
 <div class="container">
-<h1><span class="nw">AIを、現場で使える</span> <span class="nw">仕組みに。</span></h1>
-<p class="lead">業務の整理から、AIの導入、使い続けるための改善まで。小さく始め、現場に残る形へ整えます。</p>
-<div class="hero-cta"><a class="btn btn-blue" href="https://page.line.me/091usyfe" target="_blank" rel="noopener">相談内容を送る</a></div>
-<div class="hero-links"><a href="./pricing.html">料金を見る</a><a href="./cases.html">事例を見る</a></div>
+<h1><span class="nw">IT担当がいない</span><span class="nw">会社の、</span><span class="nw">外の相談先に。</span></h1>
+<p class="lead">Excelの集計が壊れたまま。通販を始めたいが、作れる人がいない。そんな相談を、業務の整理からAIの導入、その後の手直しまで引き受けます。</p>
+<div class="hero-cta"><a class="btn btn-primary" href="https://page.line.me/091usyfe" target="_blank" rel="noopener">相談内容を送る</a><a class="btn btn-ghost" href="./pricing.html">料金を見る</a><a class="btn btn-ghost" href="./cases.html">事例を見る</a></div>
 <canvas id="office" role="img" aria-label="仕組みの説明用のドット絵。オフィスでAIの担当者が並んで机に向かい、実作業を進め、人が全体を見て検品と判断をしている様子"></canvas>
-<p class="pixel-note caption">この図は体制の説明用のイメージです。実際の稼働状況を映したものではありません。</p>
 </div>
 </section>
 <script src="./scheme-pixel.js"></script>
 <script>window.mountSchemePixel(document.getElementById('office'));</script>
-<div class="dark">
-<section id="ways">
+<section class="sec" id="ways">
 <div class="container">
 <div class="sec-head">
-<h2><span class="nw">頼み方は、</span><span class="nw">伴走と納品の2つ</span></h2>
-<p class="lead">社内にIT担当がいない会社の、外の相談先になります。続けて任せる月額と、1回で完結する単発の2つです。</p>
+<h2><span class="nw">頼み方は、</span><span class="nw">月額と単発の2つ</span></h2>
+<p class="lead">続けて任せるなら月額、作りたいものが決まっているなら単発。どちらも窓口は同じです。</p>
 </div>
 <div class="grid2 sec-body">
 <article class="card">
 <h3>月額の伴走</h3>
-<p class="body">相談先を決めておきたい方向けです。課題の整理、試作、運用後の改善を、毎月の優先順位に沿って進めます。</p>
+<p class="body">毎月の優先順位を決めて、相談・試作・改善を回します。ITの困りごとの相談窓口としても使えます。</p>
 <a class="card-link" href="./pricing.html">料金を見る</a>
 </article>
 <article class="card">
 <h3>単発の納品</h3>
-<p class="body">作りたいものが決まっている方向けです。範囲と完成条件を先にそろえ、必要なものを納品します。</p>
+<p class="body">範囲と完成条件を先に決めて、作って納めます。まず1回試したい方は、こちらが向いています。</p>
 <a class="card-link" href="./cases.html#single">制作例を見る</a>
 </article>
 </div>
 </div>
 </section>
-<section id="why">
+<section class="sec" id="why">
 <div class="container">
 <div class="sec-head">
-<h2><span class="nw">小さな体制で、</span><span class="nw">必要なところに</span><span class="nw">集中する</span></h2>
-<p class="lead">費用を抑えられるのは、品質を下げているからではなく、工程の組み方によるものです。</p>
+<h2><span class="nw">小さな体制でも、</span><span class="nw">品質を落とさない</span><span class="nw">組み方</span></h2>
+<p class="lead">費用を抑えられるのは、値引きではなく工程の組み方によるものです。</p>
 </div>
 <div class="grid3 sec-body">
 <div class="reason">
 <span class="num">01</span>
 <h3>相談と制作を分けない</h3>
-<p>相談を受けた者が、そのまま設計と制作まで行います。引き継ぎの往復が発生しません。</p>
+<p>相談を受けた者が、設計も制作もそのまま担当します。伝言の往復がありません。</p>
 </div>
 <div class="reason">
 <span class="num">02</span>
 <h3>小さく試してから広げる</h3>
-<p>初めから大きな仕組みを作りません。小さく動かして確かめてから広げるので、無駄な作り込みが出ません。</p>
+<p>最初から大きく作りません。小さく動かして確かめ、効果が見えた分だけ広げます。</p>
 </div>
 <div class="reason">
 <span class="num">03</span>
-<h3>AIを使い、人が確かめる</h3>
-<p>人を増やす代わりに、AIのエージェントを並べて実作業を圧縮します。人の手は検品と判断に絞ります。</p>
+<h3>AIが作業し、人が確かめる</h3>
+<p>実作業はAIのエージェントに任せて圧縮します。人の目は検品と判断に使います。</p>
 </div>
 </div>
 </div>
 </section>
-<section id="flow">
+<section class="sec" id="flow">
 <div class="container">
 <div class="sec-head">
-<h2><span class="nw">相談から始め、</span><span class="nw">確かめながら進める</span></h2>
+<h2><span class="nw">相談は、</span><span class="nw">困りごとを話す</span><span class="nw">ところから</span></h2>
+<p class="lead">資料がそろっていなくても構いません。いまのやり方を伺うところから始めます。</p>
 </div>
 <ol class="grid4 sec-body">
 <li class="flow-item">
 <span class="num">01</span>
 <h3>相談</h3>
-<p>困っていることと、今のやり方を伺います。</p>
+<p>困っていることと、いまのやり方を伺います。</p>
 </li>
 <li class="flow-item">
 <span class="num">02</span>
 <h3>整理</h3>
-<p>先に扱う範囲と、完成条件をそろえます。</p>
+<p>先に手を付ける範囲と、完成の条件を決めます。</p>
 </li>
 <li class="flow-item">
 <span class="num">03</span>
 <h3>試作・制作</h3>
-<p>小さく動かし、途中で見ていただきます。</p>
+<p>小さく動くものを作り、途中で見ていただきます。</p>
 </li>
 <li class="flow-item">
 <span class="num">04</span>
 <h3>納品・改善</h3>
-<p>単発は納品して完結。月額は次の改善へつなぎます。</p>
+<p>単発はここで完結。月額は次の改善へ進みます。</p>
 </li>
 </ol>
 </div>
 </section>
-<section id="more">
+<section class="sec" id="more">
 <div class="container">
 <div class="sec-head">
-<h2><span class="nw">料金と事例を、</span><span class="nw">先に確認できます</span></h2>
+<h2><span class="nw">料金と事例は、</span><span class="nw">先に見られます</span></h2>
 </div>
 <div class="grid2 sec-body">
 <a class="card" href="./pricing.html">
 <h3>料金</h3>
-<p class="body">月額3プランと、単発の考え方をまとめています。</p>
+<p class="body">月額3プランの金額と、単発の考え方をまとめています。</p>
 <span class="card-link">料金を見る</span>
 </a>
 <a class="card" href="./cases.html">
 <h3>事例</h3>
-<p class="body">月額顧問の実施例と、単発の制作例を1ページで読めます。</p>
+<p class="body">月額で毎月進めている実施例と、単発の制作例です。</p>
 <span class="card-link">事例を見る</span>
 </a>
 </div>
 </div>
 </section>
-</div>
 <section class="contact" id="contact">
 <div class="container">
 <h2>まだ整理できていなくても、<span class="nw">ご相談ください</span></h2>
-<p class="lead">いま手間がかかっている作業や、困っていることをそのままお知らせください。状況の整理からご一緒します。</p>
-<div class="contact-cta"><a class="btn btn-white" href="https://page.line.me/091usyfe" target="_blank" rel="noopener">相談内容を送る</a></div>
+<p class="lead">困っていることを、そのままの言葉でお知らせください。整理はこちらで引き受けます。</p>
+<div class="contact-cta"><a class="btn btn-primary" href="https://page.line.me/091usyfe" target="_blank" rel="noopener">相談内容を送る</a></div>
 <p class="contact-sub caption">ボタンからLINEのトーク画面が開きます。メールをご希望の場合は <a href="mailto:r2g128@gmail.com">r2g128@gmail.com</a> へお送りください。<br>クラウドソーシング経由のご連絡は、<a href="https://crowdworks.jp/public/employees/7039234" target="_blank" rel="noopener">こちらの窓口</a>または<a href="https://www.lancers.jp/profile/minato_auto" target="_blank" rel="noopener">こちらの窓口</a>からも受け付けています。</p>
 </div>
 </section>

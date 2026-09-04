@@ -3,14 +3,16 @@
  * 配色は指定5色(#0D0D0D/#FFFFFF/#343541/#8E8EA0/#2563EB)とその混色だけ
  * (茶系3段は廃止=依頼主「最初の色味に戻す」対応)。床は暗めのスレート調の板張りで、
  * 継ぎ目と木目状の筋の質感は保ち、色だけ寒色の濃淡に置き換えた。青は差し色のみ。
- * スマホ対応: 内部座標(640x400)は変えず、UNIT=51(旧34の1.5倍)で描くものを大きくし、
- * キャラを10体に絞った(表示幅350pxでキャラ全高が約28px相当=動きが読める)。
- * 仕事のギミックは「動き」で見せる(同時に動くのは最大3体=全体の1/3以下):
- *  - 書類運搬(30秒周期): 業務島⇄CIOデスクを往復し、卓上の紙の山が1段ずつ増減する
- *  - コーヒー(32秒周期): 右上からカフェカウンターへ歩き、カップを持って戻る
- *  - ディスカッション(60秒周期): 開発席の1体が席を立ち、ホワイトボード前で
+ * スマホ対応: 内部座標(640x400)は変えず、UNIT=51(旧34の1.5倍)で描くものを大きくする。
+ * キャラは14体(エンジニア島を向かい合わせの4人に増設+右側でコーヒーブレイク中の2人)。
+ * 仕事のギミックは「動き」で見せる。同時に動くのは歩行3体+立ち話2体+ボード書き手の
+ * 最大6体。歩行の1区間は8〜14秒のまま(速度は上げない=人数と頻度で「回っている感」):
+ *  - 書類運搬(22秒周期): 業務島⇄CIOデスクを往復し、卓上の紙の山が1段ずつ増減する
+ *  - コーヒー(26秒周期): 右上からカフェカウンターへ歩き、カップを持って戻る
+ *  - ディスカッション(44秒周期): 開発席の1体が席を立ち、ホワイトボード前で
  *    書き手と合流して吹き出しを交互に出し、席へ戻る(離席中は椅子が空になる)
- *  - ボードの線は書き手の腕の動きに合わせ15秒ごとに1本ずつ増える(45秒で戻る)
+ *  - ボードの線は書き手の腕の動きに合わせ10秒ごとに1本ずつ増える(30秒で戻る)
+ *  - コーヒーブレイクの2人はカップを上げ下げしながら8秒周期で交互に吹き出しを出す
  * 歩行キャラと家具は足元の占有矩形(フットプリント)を持つ。経路は占有と重ならないよう
  * 設計したうえで、毎フレーム衝突判定し、重なるなら経路上で手前に止まる(resolveActor)。
  * ホバー/タップのギミック: キャラに乗せると「今〜〜中」をドット文字で頭上に出す。
@@ -145,18 +147,22 @@
     };
   }
 
-  // 職種の描き分けは色でなく、髪型(shape)・フード・ネクタイ・持ち物で行う。女性5/10。
+  // 職種の描き分けは色でなく、髪型(shape)・フード・ネクタイ・持ち物で行う。女性7/14。
   var ST_CIO = { shape: 3, hairC: mix(C.gray, C.white, 0.45), shirtC: C.white, tie: true };
   var ST_AUDIT = { shape: 0, hairC: mix(C.black, C.charcoal, 0.65), shirtC: mix(C.gray, C.white, 0.24), paper: true };
   var ST_KEIRI = { shape: 1, hairC: mix(C.black, C.charcoal, 0.5), shirtC: mix(C.gray, C.white, 0.36), female: true };
   var ST_ENG = { shape: 3, hairC: C.charcoal, shirtC: C.charcoal, hoodie: true };
   var ST_ENG2 = { shape: 0, hairC: mix(C.black, C.charcoal, 0.65), shirtC: mix(C.charcoal, C.blue, 0.35), hoodie: true, female: true };
+  var ST_ENG3 = { shape: 1, hairC: mix(C.black, C.charcoal, 0.4), shirtC: mix(C.charcoal, C.gray, 0.25), hoodie: true };
+  var ST_ENG4 = { shape: 2, hairC: mix(C.black, C.charcoal, 0.7), shirtC: mix(C.charcoal, C.blue, 0.2), hoodie: true, female: true };
   var ST_WRITER = { shape: 2, hairC: mix(C.black, C.charcoal, 0.45), shirtC: mix(C.blue, C.white, 0.75), female: true };
   var ST_CARRY = { shape: 2, hairC: C.black, shirtC: mix(C.white, C.gray, 0.16), female: true };
   var ST_CARRY_LOADED = { shape: 2, hairC: C.black, shirtC: mix(C.white, C.gray, 0.16), female: true, papers: true };
   var ST_COFFEE = { shape: 0, hairC: C.black, shirtC: mix(C.white, C.gray, 0.22), tie: true };
   var ST_SOFA = { shape: 1, hairC: C.charcoal, shirtC: mix(C.gray, C.white, 0.32), female: true };
   var ST_SOFA2 = { shape: 2, hairC: mix(C.black, C.charcoal, 0.5), shirtC: mix(C.white, C.gray, 0.20), papers: true };
+  var ST_BREAK1 = { shape: 1, hairC: mix(C.black, C.charcoal, 0.55), shirtC: mix(C.gray, C.white, 0.4), female: true };
+  var ST_BREAK2 = { shape: 0, hairC: mix(C.black, C.charcoal, 0.7), shirtC: mix(C.white, C.gray, 0.26), tie: true };
 
   // ---- フットプリント(足元の占有矩形 [x,y,w,h])と衝突判定 ----
   function footOf(px, py) { return [px + 6, py + 42, 26, 10]; }
@@ -173,6 +179,8 @@
     [588, 138, 36, 14],  // 観葉植物(右上)
     [96, 158, 92, 48],   // 業務島(机+奥の椅子)
     [272, 158, 114, 48], // CIOデスク
+    [64, 232, 92, 33],   // エンジニアの向かい机(北側の増設島)
+    [464, 348, 76, 14],  // コーヒーブレイクの2人(カフェ寄りの立ち話)
     [230, 306, 69, 25],  // 床置きホワイトボード
     [330, 290, 102, 33], // ソファ
     [350, 342, 42, 15],  // ローテーブル
@@ -185,7 +193,8 @@
   var OBST_MAIN = FURNITURE_RECTS.concat([ENG_RECT, WRITER_RECT]);
   var OBST_NO_ENG = FURNITURE_RECTS.concat([WRITER_RECT]);
 
-  // ---- 動くキャラ3体。状態は全て経過時間だけから決める(常に最大3体=10体の1/3以下) ----
+  // ---- 歩行キャラ3体。状態は全て経過時間だけから決める(立ち話2体・ボード書き手と
+  //      合わせて同時に動くのは最大6体。歩行の1区間は8〜14秒のまま=速度は上げない) ----
   function pathMeta(path) {
     var lens = [], total = 0;
     for (var i = 0; i + 1 < path.length; i += 1) {
@@ -206,38 +215,40 @@
     return dir === "left" ? "right" : dir === "right" ? "left" : dir === "up" ? "down" : "up";
   }
 
-  var CARRY_META = pathMeta([[100, 178], [330, 178]]);   // 業務島の脇 → CIOデスクの前
+  // 運搬の起点は業務島の右端(x=188)。向かい机の増設で島のx帯(64-156)を通れないため、
+  // 経路全体を増設島の右側に置く(書類の山x=166も立ち姿で隠さない)。
+  var CARRY_META = pathMeta([[188, 178], [330, 178]]);   // 業務島の脇 → CIOデスクの前
   var COFFEE_META = pathMeta([[560, 152], [560, 296]]);  // 右上 → カフェカウンターの前
   var TALK_META = pathMeta([[115, 267], [115, 310], [272, 310], [272, 296]]); // 自席→ボード前
-  var CARRY_CYCLE = 30000, COFFEE_CYCLE = 32000, TALK_CYCLE = 60000;
+  var CARRY_CYCLE = 22000, COFFEE_CYCLE = 26000, TALK_CYCLE = 44000;
 
-  // 書類運搬(30秒周期): 立ち止まり3秒・歩行12秒。行きは書類を抱える。
+  // 書類運搬(22秒周期): 立ち止まり2秒・歩行9秒。行きは書類を抱える。
   function carrierState(ms) {
     var t = ms % CARRY_CYCLE, p;
-    if (t < 3000) p = { x: 100, y: 178, dir: "down", moving: false };
-    else if (t < 15000) { p = pathPoint(CARRY_META, (t - 3000) / 12000); p.moving = true; }
-    else if (t < 18000) p = { x: 330, y: 178, dir: "down", moving: false };
-    else { p = pathPoint(CARRY_META, 1 - (t - 18000) / 12000); p.dir = flipDir(p.dir); p.moving = true; }
-    p.loaded = t >= 1500 && t < 16500;
+    if (t < 2000) p = { x: 188, y: 178, dir: "down", moving: false };
+    else if (t < 11000) { p = pathPoint(CARRY_META, (t - 2000) / 9000); p.moving = true; }
+    else if (t < 13000) p = { x: 330, y: 178, dir: "down", moving: false };
+    else { p = pathPoint(CARRY_META, 1 - (t - 13000) / 9000); p.dir = flipDir(p.dir); p.moving = true; }
+    p.loaded = t >= 1000 && t < 12000;
     return p;
   }
-  // コーヒー(32秒周期): 立ち止まり4秒・歩行12秒。帰りはカップを持つ。
+  // コーヒー(26秒周期): 立ち止まり3秒・歩行10秒。帰りはカップを持つ。
   function coffeeState(ms) {
-    var t = (ms + 11000) % COFFEE_CYCLE, p;
-    if (t < 4000) p = { x: 560, y: 152, dir: "down", moving: false };
-    else if (t < 16000) { p = pathPoint(COFFEE_META, (t - 4000) / 12000); p.moving = true; }
-    else if (t < 20000) p = { x: 560, y: 296, dir: "down", moving: false };
-    else { p = pathPoint(COFFEE_META, 1 - (t - 20000) / 12000); p.dir = flipDir(p.dir); p.moving = true; }
-    p.cup = t >= 18000; p.atCounter = t >= 16000 && t < 20000; p.home = t < 4000;
+    var t = (ms + 9000) % COFFEE_CYCLE, p;
+    if (t < 3000) p = { x: 560, y: 152, dir: "down", moving: false };
+    else if (t < 13000) { p = pathPoint(COFFEE_META, (t - 3000) / 10000); p.moving = true; }
+    else if (t < 16000) p = { x: 560, y: 296, dir: "down", moving: false };
+    else { p = pathPoint(COFFEE_META, 1 - (t - 16000) / 10000); p.dir = flipDir(p.dir); p.moving = true; }
+    p.cup = t >= 14500; p.atCounter = t >= 13000 && t < 16000; p.home = t < 3000;
     return p;
   }
-  // ディスカッション(60秒周期): 着席28秒→歩行10秒→ボード前で12秒会話→歩行10秒で帰席。
+  // ディスカッション(44秒周期): 着席13秒→歩行9秒→ボード前で12秒会話→歩行10秒で帰席。
   function discussState(ms) {
-    var t = (ms + 37000) % TALK_CYCLE, p;
-    if (t < 28000) return { mode: "seat", t: t };
-    if (t < 38000) { p = pathPoint(TALK_META, (t - 28000) / 10000); p.mode = "out"; p.moving = true; return p; }
-    if (t < 50000) return { mode: "talk", x: 272, y: 296, dir: "left", moving: false, t: t - 38000 };
-    p = pathPoint(TALK_META, 1 - (t - 50000) / 10000); p.dir = flipDir(p.dir);
+    var t = (ms + 27000) % TALK_CYCLE, p;
+    if (t < 13000) return { mode: "seat", t: t };
+    if (t < 22000) { p = pathPoint(TALK_META, (t - 13000) / 9000); p.mode = "out"; p.moving = true; return p; }
+    if (t < 34000) return { mode: "talk", x: 272, y: 296, dir: "left", moving: false, t: t - 22000 };
+    p = pathPoint(TALK_META, 1 - (t - 34000) / 10000); p.dir = flipDir(p.dir);
     p.mode = "back"; p.moving = true; return p;
   }
   // 衝突したら経路上で手前に止まる(時間を最大4秒巻き戻す=位置は経路沿いに連続)。
@@ -394,7 +405,8 @@
 
     // ---- 人物(全高UNIT=51px・幅38px。旧スプライトの各寸法を1.5倍) ----
     function person(x, y, dir, frame, st, seated) {
-      var bob = (seated ? frame % 2 : (frame === 1 || frame === 3 ? 1 : 0)) * 2;
+      // 着席時の振り幅は3px(歩行時は2pxのまま)=「せかせか働いている」動きを読みやすく。
+      var bob = seated ? (frame % 2) * 3 : (frame === 1 || frame === 3 ? 1 : 0) * 2;
       var side = dir === "left" || dir === "right", back = dir === "up";
       if (!seated) ellipse(x + 19, y + 46, 16, 6, P.slateD); // 床の影
       rect(x + 8, y + 3 + bob, 22, 8, st.hairC);
@@ -421,7 +433,8 @@
         }
       }
       if (st.tie && !back) { rect(x + 15, y + 26 + bob, 8, 3, C.white); rect(x + 17, y + 28 + bob, 5, 10, C.blue); }
-      rect(x + 2, y + 27 + bob, 6, 12, P.skin); rect(x + 32, y + 27 + bob, 6, 12, P.skin);
+      var armY = y + 27 + bob + (seated && frame % 2 ? 2 : 0); // 腕は体より大きく上下する
+      rect(x + 2, armY, 6, 12, P.skin); rect(x + 32, armY, 6, 12, P.skin);
       if (st.papers && !back) { // 抱えた書類の束
         rect(x + 6, y + 30 + bob, 20, 10, C.white); rect(x + 6, y + 30 + bob, 20, 3, P.pale);
         rect(x + 6, y + 39 + bob, 20, 2, C.gray);
@@ -543,6 +556,30 @@
       chairBack(x + 51, yc);
     }
 
+    // エンジニアの向かい机(北側の増設島): 既存の島(deskAway)と天板を背中合わせに接し、
+    // 4人が向かい合って座る形にする。こちら側の2人は机の奥で手前向き=顔が見える。
+    // モニタは2人へ向く=背面(monitorBack)が見え、既存側のモニタと背中合わせに並ぶ。
+    function deskFacing(x, yd, ms) {
+      var f1 = Math.floor(ms / 900) % 2, f2 = Math.floor((ms + 460) / 1150) % 2;
+      var py = yd - 70;
+      chairTop(x + 5, py); person(x + 5, py, "down", f1, ST_ENG3, true);
+      chairTop(x + 51, py); person(x + 51, py, "down", f2, ST_ENG4, true);
+      deskBlock(x, yd, DESK_W);
+      monitorBack(x + 4, yd - 49, true);   // 開発席なので消灯させない
+      monitorBack(x + 51, yd - 49, true);
+    }
+
+    // コーヒーブレイクの2人(カフェカウンター寄りの立ち話)。向かい合って立ち、
+    // カップを持つ手が交互に上下する(吹き出しはdraw側で8秒周期の交互)。
+    function breakDuo(ms) {
+      var y = 308;
+      var gA = Math.floor(ms / 1150) % 2, gB = Math.floor((ms + 600) / 1300) % 2;
+      person(458, y, "right", 0, ST_BREAK1, false);
+      person(508, y, "left", 0, ST_BREAK2, false);
+      coffeeCup(487, y + 25 - gA * 2);
+      coffeeCup(503, y + 25 - gB * 2);
+    }
+
     // CIOの席: 上壁の中央。机の幅だけ広く(114px)、高さ・奥行きの比は共通。
     function cioUnit(ms, phase) {
       var x = 272, yd = 205, f = Math.floor(ms / 1350) % 2;
@@ -578,7 +615,7 @@
       rect(x + 4, ya - 11, 2, 6, P.wallShade); rect(x + 9, ya - 11, 2, 6, P.wallShade);
     }
 
-    // 床置きホワイトボード: 全高=1.15H。図形だけの面。線は15秒ごとに1本増える(45秒で戻る)。
+    // 床置きホワイトボード: 全高=1.15H。図形だけの面。線は10秒ごとに1本増える(30秒で戻る)。
     function floorBoard(x, ya, ms) {
       rect(x + 6, ya - 2, 9, 2, P.dark); rect(x + 54, ya - 2, 9, 2, P.dark);
       rect(x + 7, ya - 7, 6, 5, C.charcoal); rect(x + 55, ya - 7, 6, 5, C.charcoal);
@@ -588,7 +625,7 @@
       rect(x + 8, ya - WB_H + 8, 18, 3, C.blue);
       rect(x + 8, ya - WB_H + 14, 24, 3, C.gray);
       rect(x + 39, ya - WB_H + 8, 18, 13, P.codeB);
-      var n = Math.floor((ms % 45000) / 15000) + 1;
+      var n = Math.floor((ms % 30000) / 10000) + 1;
       for (var wi = 0; wi < n; wi += 1) {
         rect(x + 8, ya - WB_H + 24 + wi * 5, 14 + (wi * 10) % 16, 3,
           wi % 2 ? P.wallShade : mix(C.blue, C.white, 0.55));
@@ -717,7 +754,7 @@
       clockFace(hour);
       var phase = Math.floor(ms / 2400);
 
-      // 動くキャラ3体の状態(先に置いた者から順に衝突を解決する)。
+      // 歩行キャラ3体の状態(先に置いた者から順に衝突を解決する)。
       var carrier = resolveActor(carrierState, ms, OBST_MAIN);
       var feet = [footOf(carrier.x, carrier.y)];
       var coffee = resolveActor(coffeeState, ms, OBST_MAIN.concat(feet));
@@ -733,16 +770,16 @@
       // オフライン検証用フック(通常運転では未定義=何もしない)
       if (typeof window.__SPX_CAPTURE === "function") {
         window.__SPX_CAPTURE(ms, [
-          { foot: footOf(carrier.x, carrier.y), obst: OBST_MAIN },
-          { foot: footOf(coffee.x, coffee.y), obst: OBST_MAIN },
-          talkOut ? { foot: footOf(talk.x, talk.y), obst: OBST_NO_ENG } : null
+          { foot: footOf(carrier.x, carrier.y), obst: OBST_MAIN, moving: !!carrier.moving },
+          { foot: footOf(coffee.x, coffee.y), obst: OBST_MAIN, moving: !!coffee.moving },
+          talkOut ? { foot: footOf(talk.x, talk.y), obst: OBST_NO_ENG, moving: !!talk.moving } : null
         ]);
       }
 
       // 書類の山: 運搬(持ち出し/届け)と処理(新着/消化)で1段ずつ増減する。
       var ct = ms % CARRY_CYCLE;
-      var stackA = 3 - (ct >= 1500 ? 1 : 0) + (ct >= 8000 ? 1 : 0);
-      var stackB = 2 + (ct >= 16500 ? 1 : 0) - (ct >= 24000 ? 1 : 0);
+      var stackA = 3 - (ct >= 1000 ? 1 : 0) + (ct >= 6000 ? 1 : 0);
+      var stackB = 2 + (ct >= 12000 ? 1 : 0) - (ct >= 17000 ? 1 : 0);
 
       // 全ての描画対象を足元のYで昇順に並べてから描く(奥→手前)。
       var ents = [], i;
@@ -759,7 +796,9 @@
       });
       add(331, function () { floorBoard(230, 330, ms); });
       add(343, function () { boardWriter(ms, talk.mode === "talk"); });
+      add(265, function () { deskFacing(64, 264, ms + 150); });
       add(319, function () { deskAway(64, 300, ms + 300, phase + 1, talkOut); });
+      add(359, function () { breakDuo(ms); });
       add(323, function () { sofaUnit(ms); });
       add(357, function () { lowTable(350, 356); });
       add(383, function () { cafeCounter(548, 382); });
@@ -789,6 +828,9 @@
         var turn = Math.floor(talk.t / 4000) % 2;
         bubble(turn === 0 ? 232 : 280, turn === 0 ? 260 : 264, (Math.floor(talk.t / 4000) + 1) % 3);
       }
+      // コーヒーブレイクの2人: 既存と同じ8秒周期で交互に出す(位相だけずらす)。
+      var td = convTurn(ms, 6100);
+      if (td >= 0) bubble(td === 0 ? 452 : 506, 276, (Math.floor((ms + 6100) / CONV_MS) * 2 + td) % 3);
 
       // ---- 当たり判定(体の見た目に合わせる)と「今〜〜中」の文言。動作で出し分ける ----
       hitboxes = [];
@@ -796,6 +838,10 @@
       addHit("audit", 101, 135, 46, 206, "今 見直しています");
       addHit("keiri", 147, 135, 46, 206, "今 数字を合わせています");
       addHit("eng", 69, 263, 48, 319, ms % 42000 < 21000 ? "今 コードを書いています" : "今 テスト中");
+      addHit("eng3", 69, 194, 46, 265, ms % 36000 < 18000 ? "今 実装中" : "今 デバッグ中");
+      addHit("eng4", 115, 194, 46, 265, ms % 38000 < 19000 ? "今 レビュー中" : "今 コードを書いています");
+      addHit("break1", 458, 308, UNIT, 359, "今 コーヒーブレイク中");
+      addHit("break2", 508, 308, UNIT, 359, "今 アイデアを出し合っています");
       if (talkOut) {
         addHit("eng2", talk.x, talk.y, UNIT, talk.y + UNIT,
           talk.mode === "talk" ? "今 打ち合わせ中"

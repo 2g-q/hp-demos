@@ -4,16 +4,17 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>事例｜自動化のミナト</title>
-<meta name="description" content="月額顧問で毎月進めている実施例（業種のみ記載）と、単発で納品する制作例。実際に触れて動かせるデモを掲載しています。">
+<meta name="description" content="月額で毎月進めている実施例（業種のみ記載）と、単発で納品する制作例。実際に触って動かせるデモを掲載しています。">
 <style>
 :root{--black:#0D0D0D;--white:#FFFFFF;--charcoal:#343541;--gray:#8E8EA0;--blue:#2563EB;
+--ink-72:rgba(255,255,255,.72);--tint-6:rgba(255,255,255,.06);--tint-8:rgba(255,255,255,.08);--tint-12:rgba(255,255,255,.12);--hairline:rgba(255,255,255,.14);
 --fs-h4:clamp(1.25rem,calc(1.25rem + .125*((100vw - 23.4375rem)/66.5625)),1.375rem);
 --lh-h4:clamp(1.5rem,calc(1.5rem + .2325*((100vw - 23.4375rem)/66.5625)),1.7325rem);
 --fs-h3:clamp(1.5rem,calc(1.5rem + .375*((100vw - 23.4375rem)/66.5625)),1.875rem);
 --lh-h3:clamp(1.98rem,calc(1.98rem + .495*((100vw - 23.4375rem)/66.5625)),2.475rem)}
 *{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
-body{background:var(--black);color:var(--white);font-family:system-ui,-apple-system,"Helvetica Neue","Hiragino Sans","Hiragino Kaku Gothic ProN","Noto Sans JP","Yu Gothic",Meiryo,sans-serif;word-break:auto-phrase;-webkit-font-smoothing:antialiased}
+html{scroll-behavior:smooth;background:var(--black)}
+body{position:relative;background:var(--black);color:var(--white);font-family:system-ui,-apple-system,"Helvetica Neue","Hiragino Sans","Hiragino Kaku Gothic ProN","Noto Sans JP","Yu Gothic",Meiryo,sans-serif;word-break:auto-phrase;-webkit-font-smoothing:antialiased}
 h1,h2,h3,p,li{text-wrap:pretty}
 h1,h2{text-wrap:balance}
 img{display:block;max-width:100%}
@@ -30,72 +31,69 @@ p,li{font-size:1.0625rem;line-height:1.75rem;letter-spacing:-.01em}
 .lead{font-size:1.0625rem;line-height:1.75rem;letter-spacing:-.01em}
 .caption{font-size:.875rem;line-height:1.435rem;letter-spacing:0}
 .on-dark-caption{color:var(--gray)}
-.price-num{font-size:clamp(2rem,calc(2rem + 1*((100vw - 23.4375rem)/66.5625)),3rem);line-height:clamp(2.28rem,calc(2.28rem + 1.2*((100vw - 23.4375rem)/66.5625)),3.48rem);letter-spacing:-.02em;font-weight:500;font-variant-numeric:tabular-nums;white-space:nowrap}
-.header{position:sticky;top:0;z-index:10;background:var(--white);border-bottom:1px solid var(--black)}
+.glow-top{position:absolute;left:0;right:0;top:0;height:1100px;pointer-events:none;z-index:-1;background:linear-gradient(to bottom,rgba(37,99,235,.16) 0,rgba(37,99,235,.15) 420px,rgba(37,99,235,0) 1100px)}
+.header{position:sticky;top:0;z-index:10;background:rgba(13,13,13,.72);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px)}
 .header-in{margin-inline:auto;padding-inline:32px;height:64px;display:flex;align-items:center;justify-content:space-between;gap:24px}
-.brand{color:var(--black);font-size:1rem;line-height:1.25rem;font-weight:600;text-decoration:none;padding:12px 0}
+.brand{color:var(--white);font-size:1rem;line-height:1.25rem;font-weight:600;text-decoration:none;padding:12px 0}
 .nav{display:flex;align-items:center;gap:28px}
-.nav a{color:var(--black);font-size:.8125rem;line-height:1.23rem;font-weight:500;text-decoration:none;padding:12px 0;transition:color .2s}
-.nav a:hover{color:var(--blue)}
-.nav a[aria-current="page"]{text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:8px}
-.menu-btn{display:none;align-items:center;justify-content:center;height:36px;padding:0 20px;background:var(--white);color:var(--black);border:1px solid var(--black);border-radius:2.5rem;font-family:inherit;font-size:.8125rem;line-height:1;font-weight:500;cursor:pointer}
+.nav a{color:var(--ink-72);font-size:.8125rem;line-height:1.23rem;font-weight:500;text-decoration:none;padding:12px 0;transition:color .2s}
+.nav a:hover{color:var(--white)}
+.nav a[aria-current="page"]{color:var(--white)}
+.nav a.nav-contact{display:inline-flex;align-items:center;justify-content:center;height:36px;padding:0 16px;background:var(--white);color:var(--black);border-radius:2.5rem;transition:background-color .2s}
+.nav a.nav-contact:hover{background:rgba(255,255,255,.8);color:var(--black)}
+.menu-btn{display:none;align-items:center;justify-content:center;height:36px;padding:0 16px;background:var(--tint-8);color:var(--white);border:0;border-radius:2.5rem;font-family:inherit;font-size:.8125rem;line-height:1;font-weight:500;cursor:pointer;transition:background-color .2s}
+.menu-btn:hover{background:var(--tint-12)}
 .mnav{display:none}
-.hero{background:var(--white);color:var(--black);text-align:center;padding:120px 0}
-.hero .lead{max-width:760px;margin:24px auto 0}
-.hero-cta{margin-top:32px;display:flex;justify-content:center}
-.hero-links{margin-top:12px;display:flex;justify-content:center;gap:32px;flex-wrap:wrap}
-.hero-links a{display:inline-flex;align-items:center;min-height:44px;color:var(--blue);font-size:.875rem;line-height:1.25rem;font-weight:500;text-decoration:underline;text-underline-offset:4px}
+.hero{text-align:center;padding:96px 0 0}
+.hero .lead{max-width:680px;margin:24px auto 0}
+.hero-cta{margin-top:32px;display:flex;justify-content:center;gap:12px;flex-wrap:wrap}
 .btn{display:inline-flex;align-items:center;justify-content:center;height:40px;padding:0 20px;border-radius:2.5rem;font-size:.875rem;line-height:1;font-weight:500;text-decoration:none;transition:background-color .2s,color .2s}
-.btn-blue{background:var(--blue);color:var(--white);border:1px solid var(--blue)}
-.btn-blue:hover{background:var(--white);color:var(--blue)}
-.btn-white{background:var(--white);color:var(--black);border:1px solid var(--white)}
-.btn-white:hover{background:var(--blue);color:var(--white)}
-.dark{background:var(--black);color:var(--white);padding-bottom:120px}
-.dark section{padding-top:120px}
+.btn-primary{background:var(--white);color:var(--black)}
+.btn-primary:hover{background:rgba(255,255,255,.8)}
+.btn-ghost{background:var(--tint-8);color:var(--white)}
+.btn-ghost:hover{background:var(--tint-12)}
+.sec{margin-top:120px}
 .sec-head{text-align:center;max-width:760px;margin-inline:auto}
 .sec-head .lead{margin-top:24px}
 .sec-body{margin-top:64px}
-.card{background:var(--charcoal);border:1px solid var(--white);border-radius:8px;padding:32px}
+.card{background:var(--tint-6);border-radius:8px;padding:32px}
 .card h3{font-size:var(--fs-h4);line-height:var(--lh-h4)}
 .card .body{margin-top:18px}
-.card-link{display:inline-flex;align-items:center;min-height:44px;margin-top:14px;color:var(--white);font-size:.875rem;line-height:1.25rem;font-weight:500;text-decoration:underline;text-underline-offset:4px}
-a.card{display:block;color:inherit;text-decoration:none;transition:border-color .2s}
-a.card:hover{border-color:var(--blue)}
-.grid2{display:grid;grid-template-columns:1fr 1fr;gap:32px}
+.card-link{display:inline-flex;align-items:center;min-height:44px;margin-top:14px;color:var(--white);font-size:.875rem;line-height:1.25rem;font-weight:500;text-decoration:none;transition:color .2s}
+.card-link::after{content:"→";margin-left:.4em}
+.card-link:hover{color:var(--ink-72)}
+a.card{display:block;color:inherit;text-decoration:none;transition:background-color .2s}
+a.card:hover{background:var(--tint-12)}
 .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
-.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
-.num{color:var(--blue);font-size:1.375rem;line-height:1.75rem;font-weight:500;font-variant-numeric:tabular-nums}
-.reason h3,.flow-item h3{margin-top:12px;font-size:var(--fs-h4);line-height:var(--lh-h4)}
-.reason p,.flow-item p{margin-top:18px}
-.contact{background:var(--blue);color:var(--white);text-align:center;padding:120px 0}
+.contact{position:relative;text-align:center;margin-top:120px;padding:140px 0 160px;overflow:hidden}
+.contact::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(to top,rgba(37,99,235,.20),rgba(37,99,235,0) 85%)}
 .contact .lead{max-width:620px;margin:24px auto 0}
-.contact-cta{margin-top:32px}
-.contact-sub{margin:32px auto 0;max-width:620px;color:var(--white)}
+.contact-cta{margin-top:32px;display:flex;justify-content:center}
+.contact-sub{margin:32px auto 0;max-width:620px;color:var(--ink-72)}
 .contact-sub a{color:var(--white)}
-.footer{background:var(--black);color:var(--white);padding:48px 0}
+.footer{padding:40px 0 48px}
 .footer-in{display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap}
 .footer-brand{font-size:1rem;line-height:1.25rem;font-weight:600}
 .footer-nav{display:flex;gap:24px}
-.footer-nav a{display:inline-flex;align-items:center;min-height:44px;color:var(--white);font-size:.875rem;line-height:1.25rem;font-weight:500;text-decoration:none}
-.footer-nav a:hover{text-decoration:underline;text-underline-offset:4px}
+.footer-nav a{display:inline-flex;align-items:center;min-height:44px;color:var(--ink-72);font-size:.875rem;line-height:1.25rem;font-weight:500;text-decoration:none;transition:color .2s}
+.footer-nav a:hover{color:var(--white)}
 @media (max-width:1023px){
-.grid3,.grid4{grid-template-columns:repeat(2,1fr)}
+.grid3{grid-template-columns:repeat(2,1fr)}
 .header-in{padding-inline:24px}
 }
 @media (max-width:767px){
 .header-in{padding-inline:20px;height:54px}
 .card{padding:24px}
-.grid2,.grid3,.grid4{grid-template-columns:1fr;gap:24px}
-.dark{padding-bottom:80px}
-.dark section{padding-top:80px}
-.hero{padding:80px 0}
-.contact{padding:80px 0}
+.grid3{grid-template-columns:1fr;gap:24px}
+.sec{margin-top:80px}
+.hero{padding:72px 0 0}
+.contact{margin-top:80px;padding:96px 0 112px}
 .nav{gap:12px}
 .nav a{display:none}
-.nav a.nav-contact{display:inline-flex;align-items:center}
+.nav a.nav-contact{display:inline-flex}
 .menu-btn{display:inline-flex}
-.mnav:not([hidden]){display:block;background:var(--white);border-bottom:1px solid var(--black)}
-.mnav a{display:block;padding:14px 20px;border-top:1px solid var(--black);color:var(--black);font-size:1rem;line-height:1.25rem;font-weight:500;text-decoration:none}
+.mnav:not([hidden]){display:block;background:rgba(13,13,13,.92);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px)}
+.mnav a{display:block;padding:14px 20px;border-top:1px solid var(--hairline);color:var(--white);font-size:1rem;line-height:1.25rem;font-weight:500;text-decoration:none}
 }
 @media (prefers-reduced-motion:reduce){
 html{scroll-behavior:auto}
@@ -108,12 +106,12 @@ html{scroll-behavior:auto}
 .case-fee{margin-top:12px;font-weight:500;white-space:nowrap}
 .case-kick{margin-top:14px}
 .case-list{margin-top:14px}
-.case-list li{padding:9px 0;border-top:1px solid var(--gray);font-size:.875rem;line-height:1.435rem;letter-spacing:-.01em}
+.case-list li{padding:9px 0;border-top:1px solid var(--hairline);font-size:.875rem;line-height:1.435rem;letter-spacing:-.01em}
 .case-note{margin-top:14px}
-.work-card{padding:0;overflow:hidden;display:flex;flex-direction:column}
-.work-img{aspect-ratio:16/10;overflow:hidden;border-bottom:1px solid var(--white)}
+.work-card{padding:8px;overflow:hidden;display:flex;flex-direction:column}
+.work-img{aspect-ratio:16/10;overflow:hidden;border-radius:6px}
 .work-img img{width:100%;height:100%;object-fit:cover}
-.work-body{padding:24px;display:flex;flex-direction:column;flex:1}
+.work-body{padding:20px 16px 12px;display:flex;flex-direction:column;flex:1}
 .work-meta{display:flex;justify-content:space-between;gap:12px;margin-bottom:10px}
 .work-body p.desc{margin-top:10px}
 .work-body .card-link{margin-top:auto;padding-top:14px}
@@ -123,11 +121,12 @@ html{scroll-behavior:auto}
 @media (max-width:767px){
 .cases-grid{grid-template-columns:1fr}
 .case-main{grid-row:auto}
-.work-body{padding:20px}
+.work-body{padding:16px 12px 8px}
 }
 </style>
 </head>
 <body>
+<div class="glow-top" aria-hidden="true"></div>
 <header class="header">
 <div class="header-in">
 <a class="brand" href="./index.html">自動化のミナト</a>
@@ -148,18 +147,16 @@ html{scroll-behavior:auto}
 <main>
 <section class="hero" id="top">
 <div class="container">
-<h1><span class="nw">伴走も、</span><span class="nw">単発の制作も。</span></h1>
-<p class="lead">月額顧問で毎月進めている実施例と、単発で納品する制作例を、1ページにまとめました。会社名は伏せ、業種のみ記載しています。</p>
-<div class="hero-cta"><a class="btn btn-blue" href="https://page.line.me/091usyfe" target="_blank" rel="noopener">相談内容を送る</a></div>
-<div class="hero-links"><a href="./pricing.html">料金を見る</a></div>
+<h1><span class="nw">いま進めている</span><span class="nw">仕事と、</span><span class="nw">作れるもの。</span></h1>
+<p class="lead">上は月額で毎月進めている実施例、下は単発の制作例です。会社名は伏せ、業種のみ記載しています。</p>
+<div class="hero-cta"><a class="btn btn-primary" href="https://page.line.me/091usyfe" target="_blank" rel="noopener">相談内容を送る</a><a class="btn btn-ghost" href="./pricing.html">料金を見る</a></div>
 </div>
 </section>
-<div class="dark">
-<section id="advisor">
+<section class="sec" id="advisor">
 <div class="container">
 <div class="sec-head">
-<h2><span class="nw">月額顧問では、</span><span class="nw">課題を順番に</span><span class="nw">解きます</span></h2>
-<p class="lead">毎月ご一緒している会社で、実際に進めている内容です。いずれも現在続いているご契約です。</p>
+<h2><span class="nw">月額では、</span><span class="nw">こんな仕事を</span><span class="nw">任されています</span></h2>
+<p class="lead">いずれも現在続いているご契約です。きっかけと、実際に進めている内容を載せています。</p>
 </div>
 <div class="cases-grid sec-body">
 <article class="card case-main">
@@ -174,7 +171,7 @@ html{scroll-behavior:auto}
 </ul>
 <p class="case-note caption on-dark-caption">想定の作業量：月10時間</p>
 </article>
-<article class="card ">
+<article class="card">
 <p class="case-tag caption">食品・飲料メーカー</p>
 <h3 class="case-title">通販サイトの構築と運用</h3>
 <p class="case-fee">月額 55,000円（税込）</p>
@@ -187,7 +184,7 @@ html{scroll-behavior:auto}
 <li>予約販売の準備</li>
 </ul>
 </article>
-<article class="card ">
+<article class="card">
 <p class="case-tag caption">自社でWebサービスを運営する会社</p>
 <h3 class="case-title">AIパートナー</h3>
 <p class="case-fee">月額 33,000円（税込）</p>
@@ -195,26 +192,18 @@ html{scroll-behavior:auto}
 <ul class="case-list">
 <li>利用者ごとの上限設定や、権限まわりの機能追加</li>
 <li>不具合の原因調査と修正</li>
-<li>AIの利用状況が管理画面で見えるようにする</li>
+<li>AIの利用状況を管理画面で見えるようにする</li>
 <li>本番に反映する前の動作確認</li>
 </ul>
 </article>
 </div>
 </div>
 </section>
-<section id="bridge">
+<section class="sec" id="single">
 <div class="container">
 <div class="sec-head">
-<h2><span class="nw">完成物が</span><span class="nw">決まっているなら、</span><span class="nw">単発で</span></h2>
-<p class="lead">作りたいものが決まっている場合は、範囲と完成条件をそろえて納品します。</p>
-</div>
-</div>
-</section>
-<section id="single">
-<div class="container">
-<div class="sec-head">
-<h2><span class="nw">単発では、</span><span class="nw">完成条件を決めて</span><span class="nw">納品します</span></h2>
-<p class="lead">実際に触れて動かせるデモです。デモ内の会社名・店舗名・人物・数値はすべて架空です。</p>
+<h2><span class="nw">単発の制作例。</span><span class="nw">触って動かせます</span></h2>
+<p class="lead">いずれも架空の会社・数値で作ったデモです。完成条件を決めて、この形で納品します。</p>
 </div>
 <div class="grid3 sec-body">
 <a class="card work-card" href="./gyomu-system.html">
@@ -274,12 +263,11 @@ html{scroll-behavior:auto}
 </div>
 </div>
 </section>
-</div>
 <section class="contact" id="contact">
 <div class="container">
 <h2><span class="nw">近い例がなくても、</span><span class="nw">ご相談ください</span></h2>
-<p class="lead">掲載の例と違う内容でも構いません。困っていることから整理してお返しします。</p>
-<div class="contact-cta"><a class="btn btn-white" href="https://page.line.me/091usyfe" target="_blank" rel="noopener">相談内容を送る</a></div>
+<p class="lead">掲載の例と違う内容で構いません。困っていることの整理から、ご一緒します。</p>
+<div class="contact-cta"><a class="btn btn-primary" href="https://page.line.me/091usyfe" target="_blank" rel="noopener">相談内容を送る</a></div>
 <p class="contact-sub caption">ボタンからLINEのトーク画面が開きます。メールをご希望の場合は <a href="mailto:r2g128@gmail.com">r2g128@gmail.com</a> へお送りください。<br>クラウドソーシング経由のご連絡は、<a href="https://crowdworks.jp/public/employees/7039234" target="_blank" rel="noopener">こちらの窓口</a>または<a href="https://www.lancers.jp/profile/minato_auto" target="_blank" rel="noopener">こちらの窓口</a>からも受け付けています。</p>
 </div>
 </section>
