@@ -5,13 +5,14 @@
  * 継ぎ目と木目状の筋の質感は保ち、色だけ寒色の濃淡に置き換えた。青は差し色のみ。
  * スマホ対応: 内部座標(640x400)は変えず、UNIT=51(旧34の1.5倍)で描くものを大きくする。
  * キャラは14体(エンジニア島を向かい合わせの4人に増設+右側でコーヒーブレイク中の2人)。
- * 仕事のギミックは「動き」で見せる。歩行の速度は従来のまま(約14px/s)で、経路は
- * 部屋を大きく回る(右の通路x=429/470・下の通路y=318/330・左の通路x=188。走者ごとに
+ * 仕事のギミックは「動き」で見せる。歩行は約22px/s(旧14px/sの1.6倍=依頼主指示で増速。
+ * 深夜の歩きだけ約15px/sのゆっくりのまま)。経路は部屋を大きく回る(右の通路x=429/470・
+ * 下の通路y=318/330・左の通路x=188。走者ごとに
  * レーンを分け、向かい合って詰まる形が構造的に起きないようにしてある):
  *  - 書類運搬(62秒周期): 業務島→CIOデスクへ届け、帰りは部屋を大回りして戻る。
  *    卓上の紙の山は運搬と処理で1段ずつ増減する
- *  - コーヒー(52秒周期): 朝は2往復・昼夕はカップを持ってソファ脇を配って回る・
- *    深夜はまっすぐ戻って一服
+ *  - コーヒー(52秒周期): 朝は2往復・昼はカップを持ってソファ脇を配って回る・
+ *    夕方21時半に画面右端へ歩いて退勤し、朝6時半に歩いて戻る
  *  - ディスカッション(64秒周期): 開発席の1体が下の通路経由でボード前へ行き
  *    書き手と吹き出しを交互に出して帰席(夕・深夜の周期は席で作業=立たない)
  *  - 席の会話(100秒の予定表で同時に1組だけ): 監査⇄経理が横を向いて話す/
@@ -20,9 +21,12 @@
  *  - ボードの線は書き手の腕の動きに合わせ10秒ごとに1本ずつ増える(30秒で戻る)
  *  - コーヒーブレイクの2人はカップを上げ下げしながら8秒周期で交互に吹き出しを出す
  * 24時間: 時間帯(朝6-10/昼10-18/夕18-22/深夜22-6)は hourOfDay だけから決める。
- * 深夜も全員が残って働く(人数は減らさない)。天井の照明を落とし(黒の半透明を重ねる。
- * 窓の外には重ねない=星を沈めない)、モニタの画面とクリップ式デスクライトだけを
- * 明るいまま描き直す=暗い室内に画面の明かりが浮かぶ。所作は1.5倍ゆっくり(止まらない)。
+ * 深夜はCIO・コーヒー係・休憩の2人が帰宅する(依頼主指示 2稿目。21時台に歩いて
+ * 画面端へ出て消え、朝6時前後に歩いて戻って着席する=いきなり消えない/現れない。
+ * 空いた席は椅子だけが残る)。エンジニア・業務島・運搬・書き手・ソファの2人は残って
+ * 働き続ける=「夜も動いている」は維持。天井の照明の暗幕はα最大0.28(旧0.45=
+ * 「もう少し明るく」対応。窓の外には重ねない=星を沈めない)。モニタの画面と
+ * クリップ式デスクライトだけを明るいまま描き直す。所作は1.5倍ゆっくり(止まらない)。
  * 歩行キャラと家具は足元の占有矩形(フットプリント)を持つ。経路は占有と重ならないよう
  * 設計したうえで、毎フレーム衝突判定し、重なるなら経路上で手前に止まる(resolveActor)。
  * ホバー/タップのギミック: キャラに乗せると「今〜〜中」をドット文字で頭上に出す。
@@ -80,7 +84,10 @@
   var DESK_W = SLOT_W * 2;                    // 92 2人がけの机
   var SEAT_H = Math.round(UNIT * 0.25);       // 13 椅子の座面の高さ
   var BACK_H = Math.round(UNIT * 0.55);       // 28 背もたれ上端
-  var SIT_RISE = SEAT_H + 42;                 // 55 着席時の頭頂は床アンカーの55px上(腰=座面)
+  // 着席の持ち上げ量2種(着席時に隠れるバグの修正で+7px)。肩(スプライトのy+26)が
+  // 背もたれ上端(BACK_H=28)やモニタ上端より上に出る高さにする。
+  var SIT_RISE = SEAT_H + 49;                 // 62 前列(奥向き)の床アンカーからの持ち上げ
+  var SIT_FRONT = 77;                         // 机の奥(手前向き)の床アンカーからの持ち上げ(旧70)
   var SHELF_H = Math.round(UNIT * 1.1);       // 56 本棚
   var COUNTER_H = Math.round(UNIT * 0.5);     // 26 カフェカウンター
   var SOFA_BACK = Math.round(UNIT * 0.6);     // 31 ソファ背もたれ
@@ -207,13 +214,17 @@
     return false;
   }
   // 家具の接地矩形。歩行経路はここへ入らないよう設計し、毎フレームの判定は保険。
+  // CIOデスクと休憩の2人の矩形は名前を持つ=帰宅の歩き出し/帰着で「自分の席の矩形」
+  // だけを衝突対象から除くため(席の中から歩き出す以上、自席との重なりは構造上必然)。
+  var CIO_DESK_RECT = [272, 158, 114, 48]; // CIOデスク
+  var BREAK_RECT = [464, 348, 76, 14];     // コーヒーブレイクの2人(カフェ寄りの立ち話)
   var FURNITURE_RECTS = [
     [20, 136, 72, 14],   // 本棚
     [588, 138, 36, 14],  // 観葉植物(右上)
     [96, 158, 92, 48],   // 業務島(机+奥の椅子)
-    [272, 158, 114, 48], // CIOデスク
+    CIO_DESK_RECT,
     [64, 232, 92, 33],   // エンジニアの向かい机(北側の増設島)
-    [464, 348, 76, 14],  // コーヒーブレイクの2人(カフェ寄りの立ち話)
+    BREAK_RECT,
     [230, 306, 69, 25],  // 床置きホワイトボード
     [330, 290, 102, 33], // ソファ
     [350, 342, 42, 15],  // ローテーブル
@@ -225,9 +236,19 @@
   var WRITER_RECT = [240, 334, 26, 10]; // ボード書き手(定位置)
   var OBST_MAIN = FURNITURE_RECTS.concat([ENG_RECT, WRITER_RECT]);
   var OBST_NO_ENG = FURNITURE_RECTS.concat([WRITER_RECT]);
+  function exceptRect(skip) {
+    var out = [], i;
+    for (i = 0; i < FURNITURE_RECTS.length; i += 1) {
+      if (FURNITURE_RECTS[i] !== skip) out.push(FURNITURE_RECTS[i]);
+    }
+    return out.concat([ENG_RECT, WRITER_RECT]);
+  }
+  var OBST_CIO_AWAY = exceptRect(CIO_DESK_RECT); // CIOの退勤/出社路(自席の矩形だけ除く)
+  var OBST_DUO_AWAY = exceptRect(BREAK_RECT);    // 休憩の2人の退勤/出社路(自分達の立ち位置だけ除く)
 
-  // ---- 歩行キャラ3体。状態は全て経過時間だけから決める(立ち話2体・ボード書き手と
-  //      合わせて同時に動くのは最大6体。歩行の1区間は8〜14秒のまま=速度は上げない) ----
+  // ---- 歩行キャラ。状態は全て経過時間だけから決める。歩行速度は約22px/s
+  //      (旧14px/sの1.6倍=依頼主指示で増速。1区間の所要時間はその分短い。
+  //      深夜の直帰だけ約15px/s=ゆっくりのまま) ----
   function pathMeta(path) {
     var lens = [], total = 0;
     for (var i = 0; i + 1 < path.length; i += 1) {
@@ -261,6 +282,44 @@
   var TALK_META = pathMeta([[115, 267], [115, 318], [188, 318], [272, 318], [272, 296]]);   // 自席→下の通路→ボード前 230px
   var CARRY_CYCLE = 62000, COFFEE_CYCLE = 52000, TALK_CYCLE = 64000;
 
+  // ---- 帰宅する4人(CIO・コーヒー係・休憩の2人)の退勤/出社ルート ----
+  // いずれも既存の誰も使わない足元帯を通り、画面端(x=700=右枠の外)で消える。
+  //   CIO=壁ぎわy=135(足元177-187。運搬の最北y=178の足元220-230と交わらない)
+  //   コーヒー係=自分の定位置の行y=152(足元194-204。他の誰も来ない)
+  //   休憩の2人=y=296の横帯(足元338-348。ローテーブル342-357はx<392で通らない・
+  //     カフェ348-383とは1px差で接しない)。2人は同時に出て50px差の縦列=衝突しない
+  // dep/retはmsOfDay(0=8:00)の定数。21:00=97500 21:12=99000 21:30=101250 /
+  // 5:36=162000 6:12=166500 6:30=168750 6:36=169500。durは経路長÷22.4px/s。
+  var CIO_AWAY = { home: { x: 306, y: 135, dir: "down" }, dep: 97500, ret: 162000, dur: 17600,
+    route: pathMeta([[306, 135], [700, 135]]) };   // 394px
+  var COFFEE_AWAY = { home: { x: 560, y: 152, dir: "down" }, dep: 101250, ret: 168750, dur: 6250,
+    route: pathMeta([[560, 152], [700, 152]]) };   // 140px
+  var DUOA_AWAY = { home: { x: 458, y: 308, dir: "right" }, dep: 99000, ret: 166500, dur: 11300,
+    route: pathMeta([[458, 308], [458, 296], [700, 296]]) }; // 254px
+  var DUOB_AWAY = { home: { x: 508, y: 308, dir: "left" }, dep: 99000, ret: 169500, dur: 9100,
+    route: pathMeta([[508, 308], [508, 296], [700, 296]]) }; // 204px
+
+  function msOfDayC(ms) { return ((ms % DAY_MS) + DAY_MS) % DAY_MS; }
+  // 帰宅の局面: present(定位置)→out(歩いて退勤)→away(不在)→in(歩いて出社)。
+  // 位置は連続(経路の補間)なので、いきなり消えたり現れたりしない。
+  function awayMode(cfg, ms) {
+    var md = msOfDayC(ms);
+    if (md >= cfg.dep && md < cfg.dep + cfg.dur) return { mode: "out", k: (md - cfg.dep) / cfg.dur };
+    if (md >= cfg.dep + cfg.dur && md < cfg.ret) return { mode: "away" };
+    if (md >= cfg.ret && md < cfg.ret + cfg.dur) return { mode: "in", k: (md - cfg.ret) / cfg.dur };
+    return { mode: "present" };
+  }
+  function awayActor(cfg, ms) {
+    var ph = awayMode(cfg, ms), p;
+    if (ph.mode === "out") { p = pathPoint(cfg.route, ph.k); p.moving = true; p.mode = "out"; return p; }
+    if (ph.mode === "in") {
+      p = pathPoint(cfg.route, 1 - ph.k); p.dir = flipDir(p.dir); p.moving = true; p.mode = "in"; return p;
+    }
+    var end = cfg.route.path[cfg.route.path.length - 1];
+    if (ph.mode === "away") return { mode: "away", x: end[0], y: end[1], dir: "down", moving: false };
+    return { mode: "present", x: cfg.home.x, y: cfg.home.y, dir: cfg.home.dir, moving: false };
+  }
+
   // その周期の振る舞いは「周期の開始時刻の時間帯」で決める。周期の境界では全員が
   // 定位置に戻っているので、時間帯が切り替わっても位置が飛ばない(ワープしない)。
   function cycleStartBand(ms, offset, cycle) {
@@ -268,55 +327,73 @@
     return bandOf(hourOfDay(ms - t));
   }
 
-  // 書類運搬(62秒周期): 拾う2秒→届ける10秒(142px/10s)→渡す4秒→帰りは右→下→左と
-  // 部屋を大回り46秒(644px/46s=14px/s=速度は従来のまま)。深夜の周期だけ直帰し、
-  // 残り時間は自席脇で資料整理(歩き回らない=静かな夜)。
+  // 書類運搬(62秒周期): 拾う2秒→届ける6.3秒(142px/6.3s=22.5px/s)→渡す4秒→帰りは
+  // 右→下→左と部屋を大回り28.7秒(644px/28.7s=22.4px/s)→残りは自席脇で資料整理。
+  // 深夜の周期だけ直帰(142px/9.4s=15px/s=夜はゆっくりのまま)し、残りは資料整理。
   function carrierState(ms) {
     var band = cycleStartBand(ms, 0, CARRY_CYCLE);
     var t = ((ms % CARRY_CYCLE) + CARRY_CYCLE) % CARRY_CYCLE, p;
     if (t < 2000) p = { x: 188, y: 178, dir: "down", moving: false };
-    else if (t < 12000) { p = pathPoint(CARRY_OUT, (t - 2000) / 10000); p.moving = true; }
-    else if (t < 16000) p = { x: 330, y: 178, dir: "down", moving: false };
+    else if (t < 8300) { p = pathPoint(CARRY_OUT, (t - 2000) / 6300); p.moving = true; }
+    else if (t < 12300) p = { x: 330, y: 178, dir: "down", moving: false };
     else if (band === 3) {
-      if (t < 26000) { p = pathPoint(CARRY_BACK, (t - 16000) / 10000); p.moving = true; }
+      if (t < 21700) { p = pathPoint(CARRY_BACK, (t - 12300) / 9400); p.moving = true; }
       else p = { x: 188, y: 178, dir: "down", moving: false, sorting: true };
-    } else { p = pathPoint(CARRY_LOOP, (t - 16000) / 46000); p.moving = true; p.patrol = true; }
+    } else if (t < 41000) { p = pathPoint(CARRY_LOOP, (t - 12300) / 28700); p.moving = true; p.patrol = true; }
+    else p = { x: 188, y: 178, dir: "down", moving: false, sorting: true };
     p.loaded = t >= 1000 && t < 12000;
     return p;
   }
   // コーヒー(52秒周期): 朝はまっすぐの往復を2回(コーヒーを取りにいく人が増える朝)。
-  // 昼・夕はカップを持ってソファ脇(x=470の縦通路)を配って回る(324px/29s=11px/s)。
-  // 深夜はまっすぐ戻って自分の席で一服(歩き回らない)。
+  // 昼はカップを持ってソファ脇(x=470の縦通路)を配って回る(324px/18.1s=17.9px/s)。
+  // 21時半で退勤するため、退勤までに終わらない周期は自席で待つ(coffeeFull側で制御)。
   function coffeeState(ms) {
     var band = cycleStartBand(ms, 9000, COFFEE_CYCLE);
     var t = (((ms + 9000) % COFFEE_CYCLE) + COFFEE_CYCLE) % COFFEE_CYCLE, p, u;
     if (band === 0) {
       u = t % 26000;
       if (u < 3000) p = { x: 560, y: 152, dir: "down", moving: false, home: true };
-      else if (u < 13000) { p = pathPoint(COFFEE_DOWN, (u - 3000) / 10000); p.moving = true; }
-      else if (u < 16000) p = { x: 560, y: 296, dir: "down", moving: false, atCounter: true };
-      else { p = pathPoint(COFFEE_DOWN, 1 - (u - 16000) / 10000); p.dir = flipDir(p.dir); p.moving = true; p.cup = true; }
+      else if (u < 9400) { p = pathPoint(COFFEE_DOWN, (u - 3000) / 6400); p.moving = true; }
+      else if (u < 19600) p = { x: 560, y: 296, dir: "down", moving: false, atCounter: true };
+      else { p = pathPoint(COFFEE_DOWN, 1 - (u - 19600) / 6400); p.dir = flipDir(p.dir); p.moving = true; p.cup = true; }
       return p;
     }
     if (t < 5000) p = { x: 560, y: 152, dir: "down", moving: false, home: true };
-    else if (t < 15000) { p = pathPoint(COFFEE_DOWN, (t - 5000) / 10000); p.moving = true; }
+    else if (t < 11400) { p = pathPoint(COFFEE_DOWN, (t - 5000) / 6400); p.moving = true; }
     else if (t < 19000) p = { x: 560, y: 296, dir: "down", moving: false, atCounter: true };
     else if (band === 3) {
-      if (t < 29000) { p = pathPoint(COFFEE_DOWN, 1 - (t - 19000) / 10000); p.dir = flipDir(p.dir); p.moving = true; p.cup = true; }
+      if (t < 28600) { p = pathPoint(COFFEE_DOWN, 1 - (t - 19000) / 9600); p.dir = flipDir(p.dir); p.moving = true; p.cup = true; }
       else p = { x: 560, y: 152, dir: "down", moving: false, cup: true, home: true };
-    } else if (t < 48000) { p = pathPoint(COFFEE_LOOP, (t - 19000) / 29000); p.moving = true; p.cup = true; p.serving = true; }
+    } else if (t < 37100) { p = pathPoint(COFFEE_LOOP, (t - 19000) / 18100); p.moving = true; p.cup = true; p.serving = true; }
     else p = { x: 560, y: 152, dir: "down", moving: false, cup: true, home: true };
     return p;
   }
-  // ディスカッション(64秒周期): 着席10秒→下の通路(y=318)経由で16秒歩き(230px/16s)→
-  // ボード前で12秒会話→同じ道を16秒で帰席→10秒着席。夕・深夜の周期は席を立たない。
+  // コーヒー係の全体状態: 帰宅の局面(out/away/in)を先に見て、在席中だけ周期で働く。
+  // 出社直後・退勤直前の「途中までしか回れない周期」は自席で待つ=周期の途中へ
+  // ワープ出社しない・持ち場を離れたまま退勤時刻を迎えない。
+  function coffeeFull(ms) {
+    var ph = awayMode(COFFEE_AWAY, ms), p;
+    if (ph.mode === "out") { p = pathPoint(COFFEE_AWAY.route, ph.k); p.moving = true; p.leaving = true; return p; }
+    if (ph.mode === "in") {
+      p = pathPoint(COFFEE_AWAY.route, 1 - ph.k); p.dir = flipDir(p.dir); p.moving = true; p.arriving = true;
+      return p;
+    }
+    if (ph.mode === "away") return { x: 700, y: 152, dir: "down", moving: false, gone: true };
+    var t = (((ms + 9000) % COFFEE_CYCLE) + COFFEE_CYCLE) % COFFEE_CYCLE;
+    var q = (msOfDayC(ms - t) - (COFFEE_AWAY.ret + COFFEE_AWAY.dur) + DAY_MS * 2) % DAY_MS;
+    var span = (COFFEE_AWAY.dep - COFFEE_AWAY.ret - COFFEE_AWAY.dur + DAY_MS) % DAY_MS;
+    if (q + COFFEE_CYCLE > span) return { x: 560, y: 152, dir: "down", moving: false, home: true };
+    return coffeeState(ms);
+  }
+  // ディスカッション(64秒周期): 着席10秒→下の通路(y=318)経由で10秒歩き(230px/10s=23px/s)→
+  // ボード前で12秒会話→同じ道を10秒で帰席→残り22秒着席。夕・深夜の周期は席を立たない。
   function discussState(ms) {
     var band = cycleStartBand(ms, 27000, TALK_CYCLE);
     var t = (((ms + 27000) % TALK_CYCLE) + TALK_CYCLE) % TALK_CYCLE, p;
-    if (band >= 2 || t < 10000) return { mode: "seat", t: t };
-    if (t < 26000) { p = pathPoint(TALK_META, (t - 10000) / 16000); p.mode = "out"; p.moving = true; return p; }
-    if (t < 38000) return { mode: "talk", x: 272, y: 296, dir: "left", moving: false, t: t - 26000 };
-    p = pathPoint(TALK_META, 1 - (t - 38000) / 16000); p.dir = flipDir(p.dir);
+    if (band >= 2 || t < 10000 || t >= 42000) return { mode: "seat", t: t };
+    if (t < 20000) { p = pathPoint(TALK_META, (t - 10000) / 10000); p.mode = "out"; p.moving = true; return p; }
+    if (t < 32000) return { mode: "talk", x: 272, y: 296, dir: "left", moving: false, t: t - 20000 };
+    p = pathPoint(TALK_META, 1 - (t - 32000) / 10000); p.dir = flipDir(p.dir);
     p.mode = "back"; p.moving = true; return p;
   }
   // 衝突したら経路上で手前に止まる(時間を最大4秒巻き戻す=位置は経路沿いに連続)。
@@ -539,13 +616,15 @@
     }
 
     // ---- モニタ ----
-    function monitorBack(x, y, lit) { // 背面(画面が奥を向く)。y=画面上端
-      rect(x, y, 37, 18, C.charcoal);
-      rect(x + 3, y + 3, 31, 3, P.wallShade); rect(x + 3, y + 9, 31, 3, P.wallShade);
+    // 背面(画面が奥を向く)。y=画面上端。本体は高さ14(旧18)=着席者の肩・胸元が
+    // モニタの上に出る低さにする(「着席時に隠れる」バグ修正の一部)。
+    function monitorBack(x, y, lit) {
+      rect(x, y, 37, 14, C.charcoal);
+      rect(x + 3, y + 3, 31, 3, P.wallShade); rect(x + 3, y + 8, 31, 3, P.wallShade);
       rect(x + 26, y - 4, 9, 3, P.dark);       // クリップ式デスクライトの笠(常設)
       rect(x + 29, y - 1, 3, 1, C.charcoal);   // 留め具
       if (lit) rect(x + 2, y - 1, 24, 1, P.screen);
-      rect(x + 15, y + 18, 7, 4, P.dark); rect(x + 9, y + 22, 19, 3, P.dark);
+      rect(x + 15, y + 14, 7, 4, P.dark); rect(x + 9, y + 18, 19, 3, P.dark);
       if (nightT > 0.3) glows.push(function () { // 深夜: デスクライトと画面の縁明かり
         rect(x + 27, y - 3, 7, 1, P.glowL);
         ctx.globalAlpha = 0.45 * nightT;
@@ -614,16 +693,17 @@
       if (phase % 2 === 0) rect(x + 12, ya - 9, 3, 3, C.blue);
     }
 
-    // 手前向きの机: 人は机の奥。腰(py+42)が天板の帯(yd-36〜yd-21)に隠れ、上半身が出る。
+    // 手前向きの机: 人は机の奥。裾(py+42)が天板の帯(yd-36〜yd-21)に重なり、
+    // 頭と肩・胸元はモニタ上端(yd-42)より上に出る(py=yd-77)。
     function deskTowards(x, yd, ms, phase) {
       var f1 = Math.floor(ms / (950 * SLOW)) % 2, f2 = Math.floor((ms + 430) / (1250 * SLOW)) % 2;
-      var py = yd - 70;
+      var py = yd - SIT_FRONT;
       var chat = chatNow.pair === "audit"; // 相談タイム: 隣同士が横を向いて話す
       chairTop(x + 5, py); person(x + 5, py, chat ? "right" : "down", f1, ST_AUDIT, true);
       chairTop(x + 51, py); person(x + 51, py, chat ? "left" : "down", f2, ST_KEIRI, true);
       deskBlock(x, yd, DESK_W);
-      monitorBack(x + 4, yd - 49, phase % 4 !== 0);
-      monitorBack(x + 51, yd - 49, phase % 5 !== 0);
+      monitorBack(x + 4, yd - 42, phase % 4 !== 0);
+      monitorBack(x + 51, yd - 42, phase % 5 !== 0);
       if (nightT > 0.3) glows.push(function () { // 深夜: 画面の明かりが顔に当たる
         ctx.globalAlpha = 0.14 * nightT;
         if (phase % 4 !== 0) rect(x + 11, py + 9, 26, 17, P.screen);
@@ -642,8 +722,9 @@
       var yc = yd + 18, py = yc - SIT_RISE;
       deskBlock(x, yd, DESK_W);
       // 開発席は端末風とエディタ風。seedはxから決めて行の長さを変える。消灯させない。
-      monitorFront(x + 3, yd - 55, true, ms, "term", (x + 3) % 7);
-      monitorFront(x + 49, yd - 55, true, ms, "edit", (x + 5) % 7);
+      // モニタはyd-60(旧-55)=引き上げた着席者の頭(py+3)と画面の中身が重ならない高さ。
+      monitorFront(x + 3, yd - 60, true, ms, "term", (x + 3) % 7);
+      monitorFront(x + 49, yd - 60, true, ms, "edit", (x + 5) % 7);
       tower(x + DESK_W + 5, yd, phase);
       chairFront(x + 5, yc); person(x + 5, py, "up", f1, ST_ENG, true); chairBack(x + 5, yc);
       chairFront(x + 51, yc);
@@ -656,12 +737,12 @@
     // モニタは2人へ向く=背面(monitorBack)が見え、既存側のモニタと背中合わせに並ぶ。
     function deskFacing(x, yd, ms) {
       var f1 = Math.floor(ms / (900 * SLOW)) % 2, f2 = Math.floor((ms + 460) / (1150 * SLOW)) % 2;
-      var py = yd - 70;
+      var py = yd - SIT_FRONT;
       chairTop(x + 5, py); person(x + 5, py, "down", f1, ST_ENG3, true);
       chairTop(x + 51, py); person(x + 51, py, "down", f2, ST_ENG4, true);
       deskBlock(x, yd, DESK_W);
-      monitorBack(x + 4, yd - 49, true);   // 開発席なので消灯させない
-      monitorBack(x + 51, yd - 49, true);
+      monitorBack(x + 4, yd - 42, true);   // 開発席なので消灯させない
+      monitorBack(x + 51, yd - 42, true);
       if (nightT > 0.3) glows.push(function () { // 深夜: 画面の明かりが顔に当たる
         ctx.globalAlpha = 0.14 * nightT;
         rect(x + 11, py + 9, 26, 17, P.screen); rect(x + 57, py + 9, 26, 17, P.screen);
@@ -671,28 +752,28 @@
 
     // コーヒーブレイクの2人(カフェカウンター寄りの立ち話)。向かい合って立ち、
     // カップを持つ手が交互に上下する(吹き出しはdraw側で8秒周期の交互)。
-    function breakDuo(ms) {
+    // 21時台に2人とも退勤する=在席している側だけ描く(立ち姿なので椅子は残らない)。
+    function breakDuo(ms, aHere, bHere) {
       var y = 308;
       var gA = Math.floor(ms / (1150 * SLOW)) % 2, gB = Math.floor((ms + 600) / (1300 * SLOW)) % 2;
-      person(458, y, "right", 0, ST_BREAK1, false);
-      person(508, y, "left", 0, ST_BREAK2, false);
-      coffeeCup(487, y + 25 - gA * 2);
-      coffeeCup(503, y + 25 - gB * 2);
+      if (aHere) { person(458, y, "right", 0, ST_BREAK1, false); coffeeCup(487, y + 25 - gA * 2); }
+      if (bHere) { person(508, y, "left", 0, ST_BREAK2, false); coffeeCup(503, y + 25 - gB * 2); }
     }
 
     // CIOの席: 上壁の中央。机の幅だけ広く(114px)、高さ・奥行きの比は共通。
-    function cioUnit(ms, phase) {
+    // present=false(帰宅中〜出社前)は人を描かない=ハイバックの椅子だけが残る。
+    function cioUnit(ms, phase, present) {
       var x = 272, yd = 205, f = Math.floor(ms / (1350 * SLOW)) % 2;
-      var py = yd - 70;
+      var py = yd - SIT_FRONT;
       // CIOの見渡しタイム: 左→正面(考え中)→右→正面(ひらめき)と顔の向きを変える
       var lookDir = "down";
       if (chatNow.pair === "cio") lookDir = chatNow.t < 3000 ? "left" : chatNow.t < 6000 ? "down" : chatNow.t < 9000 ? "right" : "down";
       rect(302, py - 6, 46, 44, P.dark); rect(305, py - 3, 40, 38, C.charcoal); // ハイバック
-      person(306, py, lookDir, f, ST_CIO, true);
+      if (present) person(306, py, lookDir, f, ST_CIO, true);
       deskBlock(x, yd, 114);
-      monitorBack(x + 4, yd - 49, phase % 4 !== 0);
-      monitorBack(x + 73, yd - 49, (phase + 1) % 4 !== 0);
-      if (nightT > 0.3) glows.push(function () { // 深夜: 画面の明かりが顔に当たる
+      monitorBack(x + 4, yd - 42, present && phase % 4 !== 0);
+      monitorBack(x + 73, yd - 42, present && (phase + 1) % 4 !== 0);
+      if (present && nightT > 0.3) glows.push(function () { // 深夜: 画面の明かりが顔に当たる
         ctx.globalAlpha = 0.14 * nightT; rect(312, py + 9, 26, 17, P.screen);
         ctx.globalAlpha = 1;
       });
@@ -880,11 +961,16 @@
       clockFace(hour);
       var phase = Math.floor(ms / 2400);
 
-      // 歩行キャラ3体の状態(先に置いた者から順に衝突を解決する)。
+      // 歩行キャラの状態(先に置いた者から順に衝突を解決する)。帰宅組は最後=全員に譲る。
+      var caps = [];
       var carrier = resolveActor(carrierState, ms, OBST_MAIN);
       var feet = [footOf(carrier.x, carrier.y)];
-      var coffee = resolveActor(coffeeState, ms, OBST_MAIN.concat(feet));
-      feet.push(footOf(coffee.x, coffee.y));
+      caps.push({ foot: feet[0], obst: OBST_MAIN, moving: !!carrier.moving });
+      var coffee = resolveActor(coffeeFull, ms, OBST_MAIN.concat(feet));
+      if (!coffee.gone) {
+        feet.push(footOf(coffee.x, coffee.y));
+        caps.push({ foot: footOf(coffee.x, coffee.y), obst: OBST_MAIN, moving: !!coffee.moving });
+      }
       var talk = discussState(ms), talkOut = talk.mode !== "seat";
       if (talkOut) {
         talk = resolveActor(function (m) {
@@ -892,19 +978,39 @@
           return st.mode === "seat" ? { x: 115, y: 267, dir: "down", mode: "out", moving: false } : st;
         }, ms, OBST_NO_ENG.concat(feet));
         feet.push(footOf(talk.x, talk.y));
+        caps.push({ foot: footOf(talk.x, talk.y), obst: OBST_NO_ENG, moving: !!talk.moving });
       }
+      // 帰宅する3組(CIO・休憩の2人)。モードは巻き戻し前の値で確定し、位置だけ
+      // resolveActorで譲らせる(巻き戻しても経路沿いに連続=ワープしない)。
+      var cioMode = awayMode(CIO_AWAY, ms).mode;
+      var cio = awayActor(CIO_AWAY, ms);
+      if (cioMode === "out" || cioMode === "in") {
+        cio = resolveActor(function (m) { return awayActor(CIO_AWAY, m); }, ms, OBST_CIO_AWAY.concat(feet));
+        feet.push(footOf(cio.x, cio.y));
+        caps.push({ foot: footOf(cio.x, cio.y), obst: OBST_CIO_AWAY, moving: !!cio.moving });
+      }
+      var duoAMode = awayMode(DUOA_AWAY, ms).mode;
+      var duoA = awayActor(DUOA_AWAY, ms);
+      if (duoAMode === "out" || duoAMode === "in") {
+        duoA = resolveActor(function (m) { return awayActor(DUOA_AWAY, m); }, ms, OBST_DUO_AWAY.concat(feet));
+        feet.push(footOf(duoA.x, duoA.y));
+        caps.push({ foot: footOf(duoA.x, duoA.y), obst: OBST_DUO_AWAY, moving: !!duoA.moving });
+      }
+      var duoBMode = awayMode(DUOB_AWAY, ms).mode;
+      var duoB = awayActor(DUOB_AWAY, ms);
+      if (duoBMode === "out" || duoBMode === "in") {
+        duoB = resolveActor(function (m) { return awayActor(DUOB_AWAY, m); }, ms, OBST_DUO_AWAY.concat(feet));
+        feet.push(footOf(duoB.x, duoB.y));
+        caps.push({ foot: footOf(duoB.x, duoB.y), obst: OBST_DUO_AWAY, moving: !!duoB.moving });
+      }
+      var cioHere = cioMode === "present";
+      var duoAHere = duoAMode === "present", duoBHere = duoBMode === "present";
       // オフライン検証用フック(通常運転では未定義=何もしない)
-      if (typeof window.__SPX_CAPTURE === "function") {
-        window.__SPX_CAPTURE(ms, [
-          { foot: footOf(carrier.x, carrier.y), obst: OBST_MAIN, moving: !!carrier.moving },
-          { foot: footOf(coffee.x, coffee.y), obst: OBST_MAIN, moving: !!coffee.moving },
-          talkOut ? { foot: footOf(talk.x, talk.y), obst: OBST_NO_ENG, moving: !!talk.moving } : null
-        ]);
-      }
+      if (typeof window.__SPX_CAPTURE === "function") window.__SPX_CAPTURE(ms, caps);
 
       // 書類の山: 運搬(持ち出し/届け)と処理(新着/消化)で1段ずつ増減する。
       var ct = ms % CARRY_CYCLE;
-      var stackA = 3 - (ct >= 1000 ? 1 : 0) + (ct >= 40000 ? 1 : 0);
+      var stackA = 3 - (ct >= 1000 ? 1 : 0) + (ct >= 41000 ? 1 : 0);
       var stackB = 2 + (ct >= 12000 ? 1 : 0) - (ct >= 30000 ? 1 : 0);
 
       // 全ての描画対象を足元のYで昇順に並べてから描く(奥→手前)。
@@ -917,14 +1023,14 @@
         paperStack(166, 183, stackA); // 業務島の書類の山
       });
       add(206, function () {
-        cioUnit(ms + 700, phase + 1);
+        cioUnit(ms + 700, phase + 1, cioHere);
         paperStack(322, 183, stackB); // CIOデスクの決裁待ちの山
       });
       add(331, function () { floorBoard(230, 330, ms); });
       add(343, function () { boardWriter(ms, talk.mode === "talk"); });
       add(265, function () { deskFacing(64, 264, ms + 150); });
       add(319, function () { deskAway(64, 300, ms + 300, phase + 1, talkOut); });
-      add(359, function () { breakDuo(ms); });
+      add(359, function () { breakDuo(ms, duoAHere, duoBHere); });
       add(323, function () { sofaUnit(ms); });
       add(357, function () { lowTable(350, 356); });
       add(383, function () { cafeCounter(548, 382); });
@@ -934,10 +1040,22 @@
         person(carrier.x, carrier.y, carrier.dir, carrier.moving ? walkFrame : 0,
           carrier.loaded ? ST_CARRY_LOADED : ST_CARRY, false);
       });
-      add(coffee.y + UNIT, function () {
-        person(coffee.x, coffee.y, coffee.dir, coffee.moving ? walkFrame : 0, ST_COFFEE, false);
-        if (coffee.cup) coffeeCup(coffee.x + 28, coffee.y + 27);
-      });
+      if (!coffee.gone) {
+        add(coffee.y + UNIT, function () {
+          person(coffee.x, coffee.y, coffee.dir, coffee.moving ? walkFrame : 0, ST_COFFEE, false);
+          if (coffee.cup) coffeeCup(coffee.x + 28, coffee.y + 27);
+        });
+      }
+      // 帰宅組の退勤/出社の歩き(不在=away中は描かない。位置は経路の連続補間)。
+      if (cioMode === "out" || cioMode === "in") {
+        add(cio.y + UNIT, function () { person(cio.x, cio.y, cio.dir, walkFrame, ST_CIO, false); });
+      }
+      if (duoAMode === "out" || duoAMode === "in") {
+        add(duoA.y + UNIT, function () { person(duoA.x, duoA.y, duoA.dir, walkFrame, ST_BREAK1, false); });
+      }
+      if (duoBMode === "out" || duoBMode === "in") {
+        add(duoB.y + UNIT, function () { person(duoB.x, duoB.y, duoB.dir, walkFrame, ST_BREAK2, false); });
+      }
       if (talkOut) {
         add(talk.y + UNIT, function () {
           person(talk.x, talk.y, talk.dir,
@@ -958,9 +1076,9 @@
         var turn = Math.floor(talk.t / 4000) % 2;
         bubble(turn === 0 ? 232 : 280, turn === 0 ? 260 : 264, (Math.floor(talk.t / 4000) + 1) % 3);
       }
-      // コーヒーブレイクの2人: 既存と同じ8秒周期で交互に出す(位相だけずらす)。
+      // コーヒーブレイクの2人: 既存と同じ8秒周期で交互に出す(2人が揃っているときだけ)。
       var td = convTurn(ms, 6100);
-      if (td >= 0 && (!quiet || Math.floor((ms + 6100) / CONV_MS) % 3 === 1)) {
+      if (duoAHere && duoBHere && td >= 0 && (!quiet || Math.floor((ms + 6100) / CONV_MS) % 3 === 1)) {
         bubble(td === 0 ? 452 : 506, 276, (Math.floor((ms + 6100) / CONV_MS) * 2 + td) % 3);
       }
       // 席の会話(予定表=chatStateで同時に1組だけ)と考え中の吹き出し。
@@ -970,16 +1088,17 @@
       } else if (chatNow.pair === "engv") { // 向かい合わせのエンジニア(上下の席)
         var ce = Math.floor(chatNow.t / 3500) % 2;
         bubble(66, ce === 0 ? 166 : 236, (Math.floor(chatNow.t / 3500) + ce) % 3);
-      } else if (chatNow.pair === "cio" && ((chatNow.t >= 3000 && chatNow.t < 6000) || chatNow.t >= 9000)) {
+      } else if (chatNow.pair === "cio" && cioHere && ((chatNow.t >= 3000 && chatNow.t < 6000) || chatNow.t >= 9000)) {
         thinkBubble(348, 104, chatNow.t >= 9000, ms); // 見渡しの合間に考え中→最後にひらめき
       } else if (chatNow.pair === "think") { // 書き手→エンジニアの順に考え中
         if (chatNow.t < 3500) thinkBubble(238, 258, false, ms);
         else thinkBubble(112, 166, chatNow.t >= 5500, ms);
       }
       // 深夜: 天井の照明を落とす(窓の外には重ねない=星と夜空はそのまま)。
+      // 暗幕はα最大0.28(旧0.45=依頼主「もう少し明るく」対応。何が起きているか見える)。
       // そのあとでモニタの画面・デスクライトなどglowsに積んだものだけを明るく描き直す。
       if (nightT > 0.02) {
-        ctx.globalAlpha = 0.45 * nightT;
+        ctx.globalAlpha = 0.28 * nightT;
         rect(8, 8, 624, 14, C.black);
         rect(8, 22, 48, 62, C.black); rect(206, 22, 228, 62, C.black); rect(584, 22, 48, 62, C.black);
         rect(8, 84, 624, 308, C.black);
@@ -991,35 +1110,47 @@
       //      出し分ける(深夜は「夜通し」の言い回しに変わる=24時間回っている口ぶり) ----
       hitboxes = [];
       var late = bandOf(hour) === 3;
-      addHit("cio", 306, 135, 46, 206,
-        chatNow.pair === "cio"
-          ? (chatNow.t >= 9000 ? "今 ひらめきました"
-            : chatNow.t >= 3000 && chatNow.t < 6000 ? "今 考えています" : "今 フロアを見渡しています")
-          : late ? "今 夜も全体を見ています" : "今 全体を見ています");
-      addHit("audit", 101, 135, 46, 206,
+      // 帰宅組: 在席=通常の文言/退勤・出社の歩き=歩いている位置に「帰宅中/出社中」/
+      // 不在=ホバーの対象から外す(hitbox自体を作らない)。
+      if (cioHere) {
+        addHit("cio", 306, 128, 46, 206,
+          chatNow.pair === "cio"
+            ? (chatNow.t >= 9000 ? "今 ひらめきました"
+              : chatNow.t >= 3000 && chatNow.t < 6000 ? "今 考えています" : "今 フロアを見渡しています")
+            : "今 全体を見ています");
+      } else if (cioMode === "out" || cioMode === "in") {
+        addHit("cio", cio.x, cio.y, UNIT, cio.y + UNIT, cioMode === "out" ? "今 帰宅中" : "今 出社中");
+      }
+      addHit("audit", 101, 128, 46, 206,
         chatNow.pair === "audit" ? "今 隣と相談しています"
           : late ? "今 夜通し見直しています" : "今 見直しています");
-      addHit("keiri", 147, 135, 46, 206,
+      addHit("keiri", 147, 128, 46, 206,
         chatNow.pair === "audit" ? "今 隣と相談しています"
           : late ? "今 夜通し数字を合わせています" : "今 数字を合わせています");
-      addHit("eng", 69, 263, 48, 319,
+      addHit("eng", 69, 256, 48, 319,
         chatNow.pair === "engv" ? "今 向かいと認識合わせ中"
           : late ? "今 夜通しコードを書いています"
             : (ms % 42000 < 21000 ? "今 コードを書いています" : "今 テスト中"));
-      addHit("eng3", 69, 194, 46, 265,
+      addHit("eng3", 69, 187, 46, 265,
         chatNow.pair === "engv" ? "今 向かいと認識合わせ中"
           : late ? "今 夜通し実装中" : (ms % 36000 < 18000 ? "今 実装中" : "今 デバッグ中"));
-      addHit("eng4", 115, 194, 46, 265,
+      addHit("eng4", 115, 187, 46, 265,
         chatNow.pair === "think" && chatNow.t >= 3500 ? "今 考えています"
           : ms % 38000 < 19000 ? "今 レビュー中" : "今 コードを書いています");
-      addHit("break1", 458, 308, UNIT, 359, late ? "今 夜中のコーヒー休憩中" : "今 コーヒーブレイク中");
-      addHit("break2", 508, 308, UNIT, 359, "今 アイデアを出し合っています");
+      if (duoAHere) addHit("break1", 458, 308, UNIT, 359, "今 コーヒーブレイク中");
+      else if (duoAMode === "out" || duoAMode === "in") {
+        addHit("break1", duoA.x, duoA.y, UNIT, duoA.y + UNIT, duoAMode === "out" ? "今 帰宅中" : "今 出社中");
+      }
+      if (duoBHere) addHit("break2", 508, 308, UNIT, 359, "今 アイデアを出し合っています");
+      else if (duoBMode === "out" || duoBMode === "in") {
+        addHit("break2", duoB.x, duoB.y, UNIT, duoB.y + UNIT, duoBMode === "out" ? "今 帰宅中" : "今 出社中");
+      }
       if (talkOut) {
         addHit("eng2", talk.x, talk.y, UNIT, talk.y + UNIT,
           talk.mode === "talk" ? "今 打ち合わせ中"
             : talk.mode === "out" ? "今 相談しにいきます" : "今 席に戻ります");
       } else {
-        addHit("eng2", 115, 263, 48, 319, late ? "今 夜通し設計中" : "今 設計中");
+        addHit("eng2", 115, 256, 48, 319, late ? "今 夜通し設計中" : "今 設計中");
       }
       addHit("writer", 234, 292, UNIT, 343,
         talk.mode === "talk" ? "今 打ち合わせ中"
@@ -1028,11 +1159,15 @@
         carrier.sorting ? "今 資料を整理しています"
           : carrier.loaded ? "今 資料を届けています"
             : carrier.patrol ? "今 フロアを一回りしています" : "今 次の資料を取りにいきます");
-      addHit("coffee", coffee.x, coffee.y, UNIT, coffee.y + UNIT,
-        coffee.serving ? "今 コーヒーを配っています"
-          : coffee.home ? "今 商談の作戦を練っています"
-            : coffee.atCounter ? "今 コーヒーを淹れています"
-              : coffee.cup ? "今 コーヒーを運んでいます" : "今 コーヒーを淹れにいきます");
+      if (!coffee.gone) {
+        addHit("coffee", coffee.x, coffee.y, UNIT, coffee.y + UNIT,
+          coffee.leaving ? "今 帰宅中"
+            : coffee.arriving ? "今 出社中"
+              : coffee.serving ? "今 コーヒーを配っています"
+                : coffee.home ? "今 商談の作戦を練っています"
+                  : coffee.atCounter ? "今 コーヒーを淹れています"
+                    : coffee.cup ? "今 コーヒーを運んでいます" : "今 コーヒーを淹れにいきます");
+      }
       addHit("sofa1", 339, 260, 44, 324, "今 採用の相談中");
       addHit("sofa2", 386, 260, 44, 324, "今 打ち合わせ中");
       drawTips(ms);
