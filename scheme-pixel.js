@@ -517,8 +517,8 @@
 
   // ---- ホバー/タップの「今〜〜中」ドット文字 ----
   // オフスクリーンに10pxでfillTextし、アルファ>=110で二値化した1/0格子をキャッシュする。
-  // 本編には2x2の整数ドット(fillRect)だけで描く=本編のcanvasには文字APIを使わない。
-  var TIP_FONT = 10, TIP_ALPHA_MIN = 110, TIP_DOT = 2;
+  // 本編には整数ドット(fillRect)だけで描く=本編のcanvasには文字APIを使わない。
+  var TIP_FONT = 12, TIP_ALPHA_MIN = 110, TIP_DOT = 1;
   var glyphCache = {};
   function rasterText(text) {
     if (glyphCache[text]) return glyphCache[text];
@@ -1098,7 +1098,7 @@
     function drawTip(hb, alpha) {
       var g = rasterText(hb.label);
       if (!g.w) return;
-      var bw = g.w * TIP_DOT + 12, bh = g.h * TIP_DOT + 10;
+      var bw = g.w * TIP_DOT + 8, bh = g.h * TIP_DOT + 6;
       var bx = Math.round(Math.min(Math.max(hb.x + hb.w / 2 - bw / 2, 12), W - 12 - bw)); // 端で切らない
       var by = Math.round(hb.y - bh - 8);
       if (by < 12) by = Math.round(hb.y + hb.h + 8);
@@ -1106,9 +1106,9 @@
       rect(bx - 1, by - 1, bw + 2, bh + 2, P.dark);
       rect(bx, by, bw, bh, P.tipBg);
       rect(bx, by, bw, 1, C.gray);
-      rect(bx + Math.round(bw / 2) - 3, by + bh + 1, 6, 3, P.dark); // しっぽ
+      rect(bx + Math.round(bw / 2) - 2, by + bh + 1, 4, 2, P.dark); // しっぽ
       for (var i = 0; i < g.dots.length; i += 1) {
-        rect(bx + 6 + g.dots[i][0] * TIP_DOT, by + 5 + g.dots[i][1] * TIP_DOT, TIP_DOT, TIP_DOT, C.white);
+        rect(bx + 4 + g.dots[i][0] * TIP_DOT, by + 3 + g.dots[i][1] * TIP_DOT, TIP_DOT, TIP_DOT, C.white);
       }
       ctx.globalAlpha = 1;
     }
@@ -1333,70 +1333,70 @@
       if (cioHere) {
         addHit("cio", 306, 128, 46, 206,
           chatNow.pair === "cio"
-            ? (chatNow.t >= 9000 ? "今 ひらめきました"
-              : chatNow.t >= 3000 && chatNow.t < 6000 ? "今 考えています" : "今 フロアを見渡しています")
-            : "今 全体を見ています");
+            ? (chatNow.t >= 9000 ? "ひらめきました"
+              : chatNow.t >= 3000 && chatNow.t < 6000 ? "考えています" : "フロアを見渡しています")
+            : "全体を見ています");
       } else if (cioMode === "out" || cioMode === "in") {
-        addHit("cio", cio.x, cio.y, UNIT, cio.y + UNIT, cioMode === "out" ? "今 帰宅中" : "今 出社中");
+        addHit("cio", cio.x, cio.y, UNIT, cio.y + UNIT, cioMode === "out" ? "帰宅中" : "出社中");
       }
       addHit("audit", 101, 128, 46, 206,
-        chatNow.pair === "audit" ? "今 隣と相談しています"
-          : late ? "今 夜通し見直しています" : "今 見直しています");
+        chatNow.pair === "audit" ? "隣と相談しています"
+          : late ? "夜通し見直しています" : "見直しています");
       addHit("keiri", 147, 128, 46, 206,
-        chatNow.pair === "audit" ? "今 隣と相談しています"
-          : late ? "今 夜通し数字を合わせています" : "今 数字を合わせています");
+        chatNow.pair === "audit" ? "隣と相談しています"
+          : late ? "夜通し数字を合わせています" : "数字を合わせています");
       addHit("eng", 69, 256, 48, 319,
-        chatNow.pair === "engv" ? "今 向かいと認識合わせ中"
-          : late ? "今 夜通しコードを書いています"
-            : (ms % 42000 < 21000 ? "今 コードを書いています" : "今 テスト中"));
+        chatNow.pair === "engv" ? "向かいと認識合わせ中"
+          : late ? "夜通しコードを書いています"
+            : (ms % 42000 < 21000 ? "コードを書いています" : "テスト中"));
       addHit("eng3", 69, 187, 46, 265,
-        chatNow.pair === "engv" ? "今 向かいと認識合わせ中"
-          : late ? "今 夜通し実装中" : (ms % 36000 < 18000 ? "今 実装中" : "今 デバッグ中"));
+        chatNow.pair === "engv" ? "向かいと認識合わせ中"
+          : late ? "夜通し実装中" : (ms % 36000 < 18000 ? "実装中" : "デバッグ中"));
       addHit("eng4", 115, 187, 46, 265,
-        chatNow.pair === "think" && chatNow.t >= 3500 ? "今 考えています"
-          : ms % 38000 < 19000 ? "今 レビュー中" : "今 コードを書いています");
-      if (duoAHere) addHit("break1", 458, 308, UNIT, 359, "今 コーヒーブレイク中");
+        chatNow.pair === "think" && chatNow.t >= 3500 ? "考えています"
+          : ms % 38000 < 19000 ? "レビュー中" : "コードを書いています");
+      if (duoAHere) addHit("break1", 458, 308, UNIT, 359, "コーヒーブレイク中");
       else if (duoAMode === "out" || duoAMode === "in") {
-        addHit("break1", duoA.x, duoA.y, UNIT, duoA.y + UNIT, duoAMode === "out" ? "今 帰宅中" : "今 出社中");
+        addHit("break1", duoA.x, duoA.y, UNIT, duoA.y + UNIT, duoAMode === "out" ? "帰宅中" : "出社中");
       }
-      if (duoBHere) addHit("break2", 508, 308, UNIT, 359, "今 アイデアを出し合っています");
+      if (duoBHere) addHit("break2", 508, 308, UNIT, 359, "アイデアを出し合っています");
       else if (duoBMode === "out" || duoBMode === "in") {
-        addHit("break2", duoB.x, duoB.y, UNIT, duoB.y + UNIT, duoBMode === "out" ? "今 帰宅中" : "今 出社中");
+        addHit("break2", duoB.x, duoB.y, UNIT, duoB.y + UNIT, duoBMode === "out" ? "帰宅中" : "出社中");
       }
       if (talkOut) {
         addHit("eng2", talk.x, talk.y, UNIT, talk.y + UNIT,
-          talk.mode === "talk" ? "今 打ち合わせ中"
-            : talk.mode === "out" ? "今 PCを持って相談にいきます" : "今 席に戻ります");
+          talk.mode === "talk" ? "打ち合わせ中"
+            : talk.mode === "out" ? "PCを持って相談にいきます" : "席に戻ります");
       } else {
-        addHit("eng2", 115, 256, 48, 319, late ? "今 夜通し設計中" : "今 設計中");
+        addHit("eng2", 115, 256, 48, 319, late ? "夜通し設計中" : "設計中");
       }
       addHit("writer", 234, 292, UNIT, 343,
-        talk.mode === "talk" ? "今 打ち合わせ中"
-          : chatNow.pair === "think" && chatNow.t < 3500 ? "今 考えています" : "今 構想を練っています");
+        talk.mode === "talk" ? "打ち合わせ中"
+          : chatNow.pair === "think" && chatNow.t < 3500 ? "考えています" : "構想を練っています");
       addHit("carrier", carrier.x, carrier.y, UNIT, carrier.y + UNIT,
-        carrier.sorting ? "今 資料を整理しています"
-          : carrier.carry === "folder" ? "今 承認済みの資料を持ち帰っています"
-            : carrier.carry === "papers" ? (carrier.fetch ? "今 受け取った資料を運んでいます" : "今 資料を届けています")
-              : carrier.fetch ? "今 資料を受け取りにいきます" : "今 次の資料を取りにいきます");
+        carrier.sorting ? "資料を整理しています"
+          : carrier.carry === "folder" ? "承認済みの資料を持ち帰っています"
+            : carrier.carry === "papers" ? (carrier.fetch ? "受け取った資料を運んでいます" : "資料を届けています")
+              : carrier.fetch ? "資料を受け取りにいきます" : "次の資料を取りにいきます");
       if (!coffee.gone) {
         addHit("coffee", coffee.x, coffee.y, UNIT, coffee.y + UNIT,
-          coffee.leaving ? "今 帰宅中"
-            : coffee.arriving ? "今 出社中"
-              : coffee.serving ? "今 コーヒーを配っています"
-                : coffee.home ? "今 商談の作戦を練っています"
-                  : coffee.atCounter ? "今 コーヒーを淹れています"
-                    : coffee.cup ? "今 コーヒーを運んでいます" : "今 コーヒーを淹れにいきます");
+          coffee.leaving ? "帰宅中"
+            : coffee.arriving ? "出社中"
+              : coffee.serving ? "コーヒーを配っています"
+                : coffee.home ? "商談の作戦を練っています"
+                  : coffee.atCounter ? "コーヒーを淹れています"
+                    : coffee.cup ? "コーヒーを運んでいます" : "コーヒーを淹れにいきます");
       }
       addHit("sofa1", 339, 260, 44, 324,
-        sofaSc.talking ? "今 採用の相談中"
-          : sofaSc.aTablet ? "今 資料に目を通しています" : "今 ひと息ついています");
+        sofaSc.talking ? "採用の相談中"
+          : sofaSc.aTablet ? "資料に目を通しています" : "ひと息ついています");
       if (sofaSc.away) {
         addHit("sofa2", sofaWalk.x, sofaWalk.y, UNIT, sofaWalk.y + UNIT,
-          sofaWalk.mode === "board" ? "今 ボードを確認しています"
-            : sofaWalk.mode === "back" ? "今 ソファに戻ります" : "今 ボードを確認しにいきます");
+          sofaWalk.mode === "board" ? "ボードを確認しています"
+            : sofaWalk.mode === "back" ? "ソファに戻ります" : "ボードを確認しにいきます");
       } else {
         addHit("sofa2", 386, 260, 44, 324,
-          sofaSc.talking ? "今 打ち合わせ中" : "今 資料を確認しています");
+          sofaSc.talking ? "打ち合わせ中" : "資料を確認しています");
       }
       drawTips(ms);
     }
