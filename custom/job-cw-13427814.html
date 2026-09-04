@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>ミライブリッジ株式会社 | DX推進を現場からともに進めるコンサルティング</title>
+<meta name="description" content="ミライブリッジ株式会社は、中小企業のDX推進・業務改善を現場に入り込んで支援するコンサルティング会社です。戦略づくりで終わらせず、定着まで伴走します。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Zen+Kaku+Gothic+New:wght@500;700;900&family=Manrope:wght@600;800&display=swap" rel="stylesheet">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "ミライブリッジ株式会社",
+  "url": "https://example.com/",
+  "telephone": "03-0000-0000",
+  "address": {
+    "@type": "PostalAddress",
+    "addressRegion": "東京都",
+    "addressLocality": "千代田区",
+    "addressCountry": "JP"
+  },
+  "description": "中小企業のDX推進・業務改善を現場に入り込んで支援するコンサルティング会社(制作サンプルのため架空の情報です)"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "契約期間はどれくらいですか?",
+      "acceptedAnswer": { "@type": "Answer", "text": "最短3か月からご相談いただけます。多くのお客様は半年〜1年単位でご契約し、成果を見ながら継続いただいています。" }
+    },
+    {
+      "@type": "Question",
+      "name": "小規模企業でも依頼できますか?",
+      "acceptedAnswer": { "@type": "Answer", "text": "従業員数10名前後の企業様からのご依頼が全体の半数以上を占めています。規模に応じた支援プランをご提案します。" }
+    },
+    {
+      "@type": "Question",
+      "name": "オンラインでの支援は可能ですか?",
+      "acceptedAnswer": { "@type": "Answer", "text": "月1〜2回の訪問と、オンライン定例を組み合わせた伴走が基本形です。全面オンラインでのご支援も可能です。" }
+    }
+  ]
+}
+</script>
+<style>
+:root{
+  --navy:#16305a;
+  --navy-deep:#0d1f3d;
+  --navy-soft:#eef1f6;
+  --ink:#20242c;
+  --ink-sub:#5a6270;
+  --bg:#fbfaf7;
+  --line:#e3e2dd;
+  --radius-card:18px;
+  --radius-btn:100px;
+}
+*,*::before,*::after{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  margin:0;
+  width:100%;
+  max-width:100%;
+  overflow-x:hidden;
+  background:var(--bg);
+  color:var(--ink);
+  font-family:"Noto Sans JP",sans-serif;
+  font-feature-settings:"palt";
+  letter-spacing:.02em;
+  line-height:1.85;
+  -webkit-font-smoothing:antialiased;
+}
+img{max-width:100%;height:auto;display:block;}
+h1,h2,h3,h4{
+  font-family:"Zen Kaku Gothic New","Noto Sans JP",sans-serif;
+  font-weight:900;
+  line-height:1.5;
+  margin:0;
+  color:var(--navy-deep);
+}
+.num{font-family:"Manrope",sans-serif;font-weight:800;}
+a{color:inherit;text-decoration:none;}
+ul{margin:0;padding:0;list-style:none;}
+.wrap{width:100%;max-width:1080px;margin:0 auto;padding:0 24px;}
+section{padding:96px 0;}
+@media (max-width:780px){
+  section{padding:64px 0;}
+  .wrap{padding:0 20px;}
+}
+.eyebrow{
+  display:inline-block;
+  font-family:"Manrope",sans-serif;
+  font-weight:800;
+  font-size:.78rem;
+  letter-spacing:.18em;
+  color:var(--navy);
+  border-bottom:2px solid var(--navy);
+  padding-bottom:6px;
+  margin-bottom:18px;
+}
+.sec-title{font-size:clamp(1.5rem,4vw,2.15rem);margin-bottom:14px;}
+.sec-lead{color:var(--ink-sub);font-size:.98rem;max-width:640px;margin-bottom:48px;}
+.btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  padding:16px 34px;
+  border-radius:var(--radius-btn);
+  font-weight:700;
+  font-size:.98rem;
+  border:none;
+  cursor:pointer;
+  transition:transform .2s ease, box-shadow .2s ease;
+}
+.btn-primary{background:var(--navy);color:#fff;box-shadow:0 10px 26px rgba(22,48,90,.32);}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 14px 30px rgba(22,48,90,.4);}
+.btn-outline{background:#fff;color:var(--navy);border:1.5px solid var(--navy);}
+.btn-outline:hover{background:var(--navy-soft);}
+
+/* header */
+header{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:16px 24px;
+  background:rgba(251,250,247,.86);
+  backdrop-filter:blur(10px);
+  -webkit-backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line);
+}
+.logo{font-family:"Zen Kaku Gothic New",sans-serif;font-weight:900;font-size:1.05rem;color:var(--navy-deep);}
+.logo span{color:var(--navy);}
+.desktop-nav{display:flex;gap:32px;font-size:.9rem;font-weight:500;}
+.hamburger{
+  display:none;flex-direction:column;justify-content:center;gap:5px;
+  width:40px;height:40px;border:none;background:none;cursor:pointer;z-index:210;
+}
+.hamburger span{width:22px;height:2px;background:var(--navy-deep);transition:transform .25s ease, opacity .25s ease;}
+.hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+.hamburger.open span:nth-child(2){opacity:0;}
+.hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+
+/* mobile nav: sibling of header, not nested, avoids backdrop-filter clipping */
+#mobileNav{
+  position:fixed;inset:0;z-index:190;
+  background:var(--navy-deep);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:28px;
+  transform:translateY(-100%);
+  transition:transform .35s ease;
+}
+#mobileNav.open{transform:translateY(0);}
+#mobileNav a{color:#fff;font-size:1.15rem;font-weight:700;}
+#mobileNav .mn-tel{margin-top:12px;color:#9fb3d6;font-size:.9rem;}
+
+@media (max-width:900px){
+  .desktop-nav{display:none;}
+  .hamburger{display:flex;}
+}
+
+/* hero */
+.hero{
+  position:relative;
+  padding:168px 0 90px;
+  color:#fff;
+  overflow:hidden;
+}
+.hero-bg{
+  position:absolute;inset:0;
+  background:linear-gradient(180deg,rgba(13,31,61,.82),rgba(13,31,61,.92)),
+    url('https://images.unsplash.com/photo-1629875499750-a31b83446598?auto=format&fit=crop&w=1200&q=70') center/cover no-repeat;
+  z-index:-1;
+}
+.hero-copy{max-width:680px;}
+.hero-copy .eyebrow{color:#bcd0f0;border-color:#bcd0f0;}
+.hero h1{
+  font-size:clamp(2rem,6vw,3.1rem);
+  color:#fff;
+  margin-bottom:20px;
+}
+.hero h1 small{display:block;font-size:.42em;font-weight:700;color:#a9bfe4;margin-top:10px;letter-spacing:.08em;}
+.hero p.lead{font-size:1rem;color:#dbe4f4;max-width:520px;margin-bottom:36px;}
+.hero-ctas{display:flex;flex-wrap:wrap;gap:14px;margin-bottom:56px;}
+.hero .btn-outline{background:transparent;color:#fff;border-color:#fff;}
+.hero .btn-outline:hover{background:rgba(255,255,255,.12);}
+
+.trust-band{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:1px;
+  background:rgba(255,255,255,.18);
+  border:1px solid rgba(255,255,255,.18);
+  border-radius:16px;
+  overflow:hidden;
+}
+.trust-band div{background:rgba(13,31,61,.55);padding:22px 16px;text-align:center;}
+.trust-band .num{display:block;font-size:clamp(1.5rem,4vw,2rem);color:#fff;}
+.trust-band .label{font-size:.74rem;color:#a9bfe4;margin-top:4px;}
+.hero-note{font-size:.72rem;color:#8aa1c9;margin-top:10px;text-align:center;}
+
+/* strengths */
+.strength-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:28px;}
+@media (max-width:780px){.strength-grid{grid-template-columns:1fr;}}
+.s-card{
+  background:#fff;border:1px solid var(--line);border-radius:var(--radius-card);
+  padding:32px 26px;
+}
+.s-card .icon{width:52px;height:52px;margin-bottom:20px;}
+.s-card .num-badge{
+  font-family:"Manrope",sans-serif;font-weight:800;font-size:.8rem;color:var(--navy);
+  border:1.5px solid var(--navy);border-radius:100px;width:30px;height:30px;
+  display:flex;align-items:center;justify-content:center;margin-bottom:16px;
+}
+.s-card h3{font-size:1.1rem;margin-bottom:10px;}
+.s-card p{color:var(--ink-sub);font-size:.9rem;margin:0;}
+
+/* services */
+.services-sec{background:var(--navy-soft);}
+.service-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px;}
+@media (max-width:780px){.service-grid{grid-template-columns:1fr;}}
+.sv-card{background:#fff;border-radius:var(--radius-card);padding:30px 28px;border:1px solid var(--line);}
+.sv-card h3{font-size:1.05rem;margin-bottom:10px;display:flex;align-items:center;gap:10px;}
+.sv-card h3 .dot{width:9px;height:9px;border-radius:50%;background:var(--navy);flex:none;}
+.sv-card p{color:var(--ink-sub);font-size:.88rem;margin:0;}
+
+/* kpi */
+.kpi-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:16px;overflow:hidden;}
+@media (max-width:780px){.kpi-grid{grid-template-columns:repeat(2,1fr);}}
+.kpi-grid div{background:#fff;padding:30px 16px;text-align:center;}
+.kpi-grid .num{display:block;font-size:clamp(1.7rem,4vw,2.3rem);color:var(--navy);}
+.kpi-grid .label{font-size:.78rem;color:var(--ink-sub);margin-top:6px;}
+.kpi-note{font-size:.75rem;color:var(--ink-sub);margin-top:16px;}
+
+/* president */
+.pres-sec .wrap{display:grid;grid-template-columns:280px 1fr;gap:48px;align-items:center;}
+@media (max-width:780px){.pres-sec .wrap{grid-template-columns:1fr;}}
+.pres-photo{border-radius:var(--radius-card);overflow:hidden;}
+.pres-photo img{width:100%;aspect-ratio:4/5;object-fit:cover;}
+.pres-name{margin-top:16px;font-size:.92rem;color:var(--ink-sub);}
+.pres-name strong{display:block;color:var(--ink);font-size:1.05rem;font-family:"Zen Kaku Gothic New",sans-serif;font-weight:700;}
+.pres-quote{font-family:"Zen Kaku Gothic New",sans-serif;font-weight:700;font-size:1.25rem;color:var(--navy-deep);margin-bottom:20px;line-height:1.7;}
+.pres-body p{color:var(--ink-sub);font-size:.92rem;margin:0 0 14px;}
+
+/* company info */
+.info-sec{background:var(--navy-soft);}
+.info-table{width:100%;border-collapse:collapse;background:#fff;border-radius:var(--radius-card);overflow:hidden;border:1px solid var(--line);}
+.info-table tr{border-bottom:1px solid var(--line);}
+.info-table tr:last-child{border-bottom:none;}
+.info-table th,.info-table td{text-align:left;padding:18px 22px;font-size:.9rem;vertical-align:top;}
+.info-table th{width:34%;color:var(--ink-sub);font-weight:500;background:#fcfbf9;}
+@media (max-width:600px){
+  .info-table,.info-table tbody,.info-table tr,.info-table th,.info-table td{display:block;width:100%;}
+  .info-table th{background:#fcfbf9;border-bottom:none;padding-bottom:4px;}
+  .info-table td{padding-top:4px;padding-bottom:18px;}
+}
+
+/* office photo strip */
+.office-strip{display:grid;grid-template-columns:1.2fr .8fr;gap:20px;margin-top:40px;}
+@media (max-width:780px){.office-strip{grid-template-columns:1fr;}}
+.office-strip img{border-radius:var(--radius-card);width:100%;height:100%;object-fit:cover;min-height:200px;}
+.office-cap{background:var(--navy-deep);color:#fff;border-radius:var(--radius-card);padding:28px;display:flex;flex-direction:column;justify-content:center;}
+.office-cap h4{color:#fff;font-size:1rem;margin-bottom:10px;}
+.office-cap p{color:#c3d0e6;font-size:.85rem;margin:0;}
+
+/* voice */
+.voice-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;}
+@media (max-width:780px){.voice-grid{grid-template-columns:1fr;}}
+.v-card{background:#fff;border:1px solid var(--line);border-radius:var(--radius-card);padding:28px;}
+.v-card .stars{color:var(--navy);letter-spacing:2px;margin-bottom:14px;font-size:.9rem;}
+.v-card p{font-size:.88rem;color:var(--ink-sub);margin:0 0 16px;}
+.v-card .who{font-size:.8rem;font-weight:700;color:var(--ink);}
+.voice-note{font-size:.75rem;color:var(--ink-sub);margin-top:20px;}
+
+/* faq */
+.faq-list details{
+  background:#fff;border:1px solid var(--line);border-radius:14px;padding:20px 24px;margin-bottom:14px;
+}
+.faq-list summary{
+  cursor:pointer;font-weight:700;font-size:.96rem;list-style:none;
+  display:flex;justify-content:space-between;align-items:center;gap:16px;
+}
+.faq-list summary::-webkit-details-marker{display:none;}
+.faq-list summary::after{content:"＋";color:var(--navy);font-size:1.2rem;font-weight:700;flex:none;transition:transform .2s ease;}
+.faq-list details[open] summary::after{content:"－";}
+.faq-list p{font-size:.88rem;color:var(--ink-sub);margin:14px 0 0;}
+
+/* contact */
+.contact-sec{background:var(--navy-deep);color:#fff;}
+.contact-sec .eyebrow{color:#9fb3d6;border-color:#9fb3d6;}
+.contact-sec .sec-title{color:#fff;}
+.contact-sec .sec-lead{color:#c3d0e6;}
+.form-wrap{background:#fff;border-radius:24px;padding:40px;color:var(--ink);}
+@media (max-width:600px){.form-wrap{padding:28px 22px;}}
+.form-row{margin-bottom:22px;}
+.form-row label{display:block;font-size:.85rem;font-weight:700;margin-bottom:8px;}
+.form-row .req{color:#c0392b;font-size:.72rem;font-weight:700;margin-left:6px;}
+.form-row input,.form-row select,.form-row textarea{
+  width:100%;max-width:100%;padding:14px 16px;border:1px solid var(--line);border-radius:10px;
+  font-size:16px;font-family:inherit;background:#fbfaf7;
+}
+.form-row textarea{min-height:120px;resize:vertical;}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
+@media (max-width:600px){.two-col{grid-template-columns:1fr;}}
+.form-note{font-size:.78rem;color:var(--ink-sub);margin-top:8px;}
+.form-wrap .btn-primary{width:100%;padding:17px;font-size:1rem;}
+
+/* footer */
+footer{background:var(--navy-deep);color:#9fb3d6;padding:56px 0 120px;font-size:.82rem;}
+.footer-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:32px;margin-bottom:36px;}
+@media (max-width:700px){.footer-grid{grid-template-columns:1fr;}}
+.footer-grid h4{color:#fff;font-size:.85rem;margin-bottom:14px;}
+.footer-grid ul li{margin-bottom:10px;}
+.footer-grid ul a:hover{color:#fff;}
+.footer-disclaimer{border-top:1px solid rgba(255,255,255,.14);padding-top:24px;line-height:1.9;color:#7d92b8;}
+.footer-bottom{margin-top:18px;color:#5f759c;font-size:.75rem;}
+
+/* sticky mobile cta */
+.mobile-cta{
+  display:none;position:fixed;left:0;right:0;bottom:0;z-index:150;
+  background:#fff;border-top:1px solid var(--line);
+  padding:12px 16px;gap:10px;
+  box-shadow:0 -6px 20px rgba(0,0,0,.08);
+}
+.mobile-cta a{flex:1;text-align:center;padding:14px 10px;border-radius:100px;font-weight:700;font-size:.88rem;}
+.mobile-cta .tel{background:var(--navy-soft);color:var(--navy);}
+.mobile-cta .cta{background:var(--navy);color:#fff;}
+@media (max-width:780px){
+  .mobile-cta{display:flex;}
+  body{padding-bottom:78px;}
+}
+
+/* reveal */
+.reveal{opacity:0;transform:translateY(18px);transition:opacity .7s ease, transform .7s ease;}
+.reveal.is-visible{opacity:1;transform:translateY(0);}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto;}
+  .reveal{opacity:1;transform:none;transition:none;}
+  #mobileNav{transition:none;}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <a href="#top" class="logo">MIRAI<span>BRIDGE</span></a>
+  <nav class="desktop-nav">
+    <a href="#strength">選ばれる理由</a>
+    <a href="#service">事業内容</a>
+    <a href="#president">代表挨拶</a>
+    <a href="#company">会社概要</a>
+    <a href="#faq">よくある質問</a>
+    <a href="#contact">お問い合わせ</a>
+  </nav>
+  <button class="hamburger" id="hamburgerBtn" aria-label="メニューを開く" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+</header>
+
+<nav id="mobileNav">
+  <a href="#strength">選ばれる理由</a>
+  <a href="#service">事業内容</a>
+  <a href="#president">代表挨拶</a>
+  <a href="#company">会社概要</a>
+  <a href="#faq">よくある質問</a>
+  <a href="#contact">お問い合わせ</a>
+  <span class="mn-tel">お電話 03-0000-0000（平日10:00-18:00）</span>
+</nav>
+
+<main id="top">
+
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="wrap">
+      <div class="hero-copy">
+        <span class="eyebrow">DX CONSULTING</span>
+        <h1>決めた翌日から、動く。<small>戦略で終わらせない、現場伴走型のDX推進支援</small></h1>
+        <p class="lead">ミライブリッジは、絵に描いた戦略ではなく「現場で回る仕組み」をつくるコンサルティング会社です。中小企業の業務改善・ITツール導入・人材育成を、導入後の定着まで並走して支援します。</p>
+        <div class="hero-ctas">
+          <a href="tel:0300000000" class="btn btn-primary">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.5 21 3 13.5 3 4c0-.6.4-1 1-1h3.4c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.4 0 .8-.2 1L6.6 10.8z" fill="#fff"/></svg>
+            電話で相談する
+          </a>
+          <a href="#contact" class="btn btn-outline">資料・お問い合わせ</a>
+        </div>
+      </div>
+      <div class="trust-band reveal">
+        <div><span class="num">128<span style="font-size:.6em;">社</span></span><span class="label">支援実績</span></div>
+        <div><span class="num">3.6<span style="font-size:.6em;">年</span></span><span class="label">平均伴走期間</span></div>
+        <div><span class="num">96<span style="font-size:.6em;">%</span></span><span class="label">プロジェクト完了率</span></div>
+      </div>
+      <p class="hero-note">※上記の数値は制作サンプルのための仮の内容です</p>
+    </div>
+  </section>
+
+  <section id="strength">
+    <div class="wrap">
+      <span class="eyebrow">WHY MIRAIBRIDGE</span>
+      <h2 class="sec-title">選ばれる、3つの理由</h2>
+      <p class="sec-lead">戦略を「絵」で終わらせないために、私たちが大切にしていることです。</p>
+      <div class="strength-grid">
+        <div class="s-card reveal">
+          <div class="num-badge">01</div>
+          <svg class="icon" viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="20" stroke="#16305a" stroke-width="2"/><circle cx="24" cy="24" r="12" stroke="#16305a" stroke-width="2"/><circle cx="24" cy="24" r="4" fill="#16305a"/></svg>
+          <h3>現場に入り込む伴走支援</h3>
+          <p>会議室での提案だけでなく、月2回の現地訪問で現場の声を直接拾い上げながら計画を練り直します。</p>
+        </div>
+        <div class="s-card reveal">
+          <div class="num-badge">02</div>
+          <svg class="icon" viewBox="0 0 48 48" fill="none"><path d="M8 40L28 8" stroke="#16305a" stroke-width="2"/><path d="M20 8h12v12" stroke="#16305a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <h3>業種特化のノウハウ</h3>
+          <p>製造・小売・サービス業を中心に積み上げた支援知見を持ち、業種特有の業務構造を踏まえて設計します。</p>
+        </div>
+        <div class="s-card reveal">
+          <div class="num-badge">03</div>
+          <svg class="icon" viewBox="0 0 48 48" fill="none"><circle cx="17" cy="20" r="7" stroke="#16305a" stroke-width="2"/><circle cx="31" cy="20" r="7" stroke="#16305a" stroke-width="2"/><path d="M6 40c1.5-6 5.5-9 11-9s9.5 3 11 9" stroke="#16305a" stroke-width="2" stroke-linecap="round"/><path d="M20 40c1.5-6 5.5-9 11-9s9.5 3 11 9" stroke="#16305a" stroke-width="2" stroke-linecap="round"/></svg>
+          <h3>導入後も伴走を継続</h3>
+          <p>ツール導入や仕組みづくりで契約を終わらせず、定着状況を確認しながら次の課題を一緒に見つけます。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="service" class="services-sec">
+    <div class="wrap">
+      <span class="eyebrow">SERVICE</span>
+      <h2 class="sec-title">事業内容</h2>
+      <p class="sec-lead">企業の成長段階や課題に合わせて、4つの領域から必要な支援を組み合わせてご提案します。</p>
+      <div class="service-grid">
+        <div class="sv-card reveal">
+          <h3><span class="dot"></span>DX戦略設計</h3>
+          <p>現状分析から着手し、経営目標に紐づく中期ロードマップを策定。優先順位をつけた実行計画に落とし込みます。</p>
+        </div>
+        <div class="sv-card reveal">
+          <h3><span class="dot"></span>業務プロセス改善</h3>
+          <p>属人化した業務を可視化し、ムリ・ムダを洗い出したうえで標準化。誰が担当しても回る仕組みに作り替えます。</p>
+        </div>
+        <div class="sv-card reveal">
+          <h3><span class="dot"></span>ITツール導入支援</h3>
+          <p>目的に応じたツール選定から導入設計、初期運用のフォローまで一貫して伴走し、現場に定着させます。</p>
+        </div>
+        <div class="sv-card reveal">
+          <h3><span class="dot"></span>社内研修・人材育成</h3>
+          <p>DX推進を社内で担える人材を育てる研修プログラムを設計。外部依存から脱却する体制づくりを支援します。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="kpi">
+    <div class="wrap">
+      <span class="eyebrow">TRACK RECORD</span>
+      <h2 class="sec-title">数字で見るミライブリッジ</h2>
+      <div class="kpi-grid reveal">
+        <div><span class="num">128</span><span class="label">支援企業数</span></div>
+        <div><span class="num">42</span><span class="label">在籍コンサルタント</span></div>
+        <div><span class="num">4.6</span><span class="label">顧客満足度(5点満点)</span></div>
+        <div><span class="num">89</span><span class="label">継続契約率(%)</span></div>
+      </div>
+      <p class="kpi-note">※本ページはサンプルのため、上記の数値はすべて仮のものです。</p>
+    </div>
+  </section>
+
+  <section id="president">
+    <div class="wrap">
+      <span class="eyebrow">MESSAGE</span>
+      <h2 class="sec-title" style="margin-bottom:48px;">代表挨拶</h2>
+      <div style="display:grid;grid-template-columns:280px 1fr;gap:48px;align-items:center;" class="pres-grid">
+        <div class="reveal">
+          <div class="pres-photo">
+            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=1200&q=70" alt="ミライブリッジ株式会社 代表取締役 佐藤宏樹" loading="lazy">
+          </div>
+          <p class="pres-name"><strong>佐藤 宏樹</strong>代表取締役(※仮名です)</p>
+        </div>
+        <div class="reveal">
+          <p class="pres-quote">「変わりたい」を、絵に描いた餅で終わらせない。</p>
+          <div class="pres-body">
+            <p>多くの企業が「DXを進めたい」と考えながらも、日々の業務に追われて手が回らないのが実情だと感じています。私たちの役割は、立派な戦略書をつくることではなく、現場が実際に回せる仕組みまで一緒につくり切ることだと考えています。</p>
+            <p>創業から10年近く、製造業や小売業を中心に現場へ足を運び続けてきました。今後も「決めた翌日から動く」を合言葉に、皆さまの事業に伴走してまいります。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="company" class="info-sec">
+    <div class="wrap">
+      <span class="eyebrow">COMPANY</span>
+      <h2 class="sec-title">会社概要</h2>
+      <p class="sec-lead">創業以来、東京を拠点に全国の企業様のDX推進を支援しています。</p>
+      <table class="info-table reveal">
+        <tbody>
+          <tr><th>商号</th><td>ミライブリッジ株式会社(制作サンプルの架空企業です)</td></tr>
+          <tr><th>設立</th><td>2016年4月(※仮の内容です)</td></tr>
+          <tr><th>資本金</th><td>3,000万円(※仮の内容です)</td></tr>
+          <tr><th>代表者</th><td>代表取締役 佐藤 宏樹(※仮名です)</td></tr>
+          <tr><th>所在地</th><td>東京都千代田区(番地・建物名は架空のため記載していません)</td></tr>
+          <tr><th>電話番号</th><td>03-0000-0000(ダミー番号です)</td></tr>
+          <tr><th>事業内容</th><td>DXコンサルティング、業務改善支援、ITツール導入支援、人材育成研修</td></tr>
+        </tbody>
+      </table>
+
+      <div class="office-strip reveal">
+        <img src="https://images.unsplash.com/photo-1606336782667-775252a0e5b0?auto=format&fit=crop&w=1200&q=70" alt="ミライブリッジ株式会社が入居するオフィスビルのイメージ" loading="lazy">
+        <div class="office-cap">
+          <h4>都心のオフィスを拠点に</h4>
+          <p>東京都心のオフィスを拠点としながら、全国のお客様先へ伺う訪問型の支援を大切にしています。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="voice">
+    <div class="wrap">
+      <span class="eyebrow">VOICE</span>
+      <h2 class="sec-title">お客様の声</h2>
+      <p class="sec-lead">支援先の企業様からいただいた声の一部をご紹介します。</p>
+      <div class="voice-grid">
+        <div class="v-card reveal">
+          <div class="stars">★★★★★</div>
+          <p>「現場の反発が強かった業務改善も、担当者が実際に現場に張り付いて一緒に汗をかいてくれたことで、半年で定着しました。」</p>
+          <div class="who">製造業 / 総務部長</div>
+        </div>
+        <div class="v-card reveal">
+          <div class="stars">★★★★★</div>
+          <p>「提案だけで終わらず、導入後のフォローまでしっかり付き合ってもらえたので、社内にツールが根付きました。」</p>
+          <div class="who">小売業 / 経営企画室</div>
+        </div>
+        <div class="v-card reveal">
+          <div class="stars">★★★★☆</div>
+          <p>「業界特有の事情を理解した上で提案してくれるので、的外れな話にならず打ち合わせが早く進みました。」</p>
+          <div class="who">サービス業 / 代表取締役</div>
+        </div>
+      </div>
+      <p class="voice-note">※お客様の声は制作サンプルのため、仮の内容です。</p>
+    </div>
+  </section>
+
+  <section id="faq">
+    <div class="wrap">
+      <span class="eyebrow">FAQ</span>
+      <h2 class="sec-title">よくあるご質問</h2>
+      <div class="faq-list">
+        <details class="reveal">
+          <summary>契約期間はどれくらいですか?</summary>
+          <p>最短3か月からご相談いただけます。多くのお客様は半年〜1年単位でご契約いただき、成果を確認しながら継続されています。</p>
+        </details>
+        <details class="reveal">
+          <summary>小規模企業でも依頼できますか?</summary>
+          <p>従業員数10名前後の企業様からのご依頼が全体の半数以上を占めています。企業規模に応じた支援プランをご提案します。</p>
+        </details>
+        <details class="reveal">
+          <summary>オンラインでの支援は可能ですか?</summary>
+          <p>月1〜2回の訪問とオンライン定例を組み合わせた伴走が基本形です。ご要望に応じて全面オンラインでのご支援も可能です。</p>
+        </details>
+        <details class="reveal">
+          <summary>費用感を教えてください</summary>
+          <p>支援範囲や期間により異なりますが、月額顧問契約でご相談いただくケースが多くなっています。初回のご相談は無料です。</p>
+        </details>
+        <details class="reveal">
+          <summary>導入するツールは指定されますか?</summary>
+          <p>特定のツールに限定せず、企業様の状況や予算に合わせて最適なものを比較検討のうえご提案します。</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="contact-sec">
+    <div class="wrap">
+      <span class="eyebrow">CONTACT</span>
+      <h2 class="sec-title">お問い合わせ</h2>
+      <p class="sec-lead">まずは無料相談から。ご状況をお伺いしたうえで、最適な進め方をご提案します。</p>
+      <div class="form-wrap reveal">
+        <form onsubmit="return false;">
+          <div class="two-col">
+            <div class="form-row">
+              <label>会社名<span class="req">必須</span></label>
+              <input type="text" placeholder="株式会社サンプル" required>
+            </div>
+            <div class="form-row">
+              <label>ご担当者名<span class="req">必須</span></label>
+              <input type="text" placeholder="山田 太郎" required>
+            </div>
+          </div>
+          <div class="two-col">
+            <div class="form-row">
+              <label>メールアドレス<span class="req">必須</span></label>
+              <input type="email" placeholder="example@company.co.jp" required>
+            </div>
+            <div class="form-row">
+              <label>電話番号</label>
+              <input type="tel" placeholder="03-0000-0000">
+            </div>
+          </div>
+          <div class="form-row">
+            <label>ご相談内容</label>
+            <select>
+              <option>DX戦略設計について</option>
+              <option>業務プロセス改善について</option>
+              <option>ITツール導入について</option>
+              <option>社内研修・人材育成について</option>
+              <option>その他</option>
+            </select>
+          </div>
+          <div class="form-row">
+            <label>お問い合わせ内容</label>
+            <textarea placeholder="現在の課題やご相談内容をご記入ください"></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary">この内容で送信する</button>
+          <p class="form-note">※本フォームは制作サンプルのため、実際には送信されません。</p>
+        </form>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<div class="mobile-cta">
+  <a href="tel:0300000000" class="tel">電話で相談</a>
+  <a href="#contact" class="cta">お問い合わせ</a>
+</div>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <h4>MIRAIBRIDGE</h4>
+        <p style="color:#7d92b8;">現場に入り込み、決めた翌日から動くDX推進支援。ミライブリッジ株式会社。</p>
+      </div>
+      <div>
+        <h4>サイトマップ</h4>
+        <ul>
+          <li><a href="#strength">選ばれる理由</a></li>
+          <li><a href="#service">事業内容</a></li>
+          <li><a href="#company">会社概要</a></li>
+          <li><a href="#faq">よくある質問</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>お問い合わせ</h4>
+        <ul>
+          <li>03-0000-0000(ダミー番号)</li>
+          <li>平日 10:00-18:00</li>
+          <li><a href="#contact">お問い合わせフォーム</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-disclaimer">
+      ※本ページは制作サンプル(デモ)です。掲載の内容・数値は仮のもので、写真はイメージです。会社名・人物名・実績はすべて架空のものであり、実在の企業・団体とは関係ありません。
+    </div>
+    <div class="footer-bottom">© 2026 ミライブリッジ株式会社(制作サンプル)</div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var btn = document.getElementById('hamburgerBtn');
+  var nav = document.getElementById('mobileNav');
+  btn.addEventListener('click', function(){
+    var isOpen = nav.classList.toggle('open');
+    btn.classList.toggle('open', isOpen);
+    btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+  });
+  Array.prototype.forEach.call(nav.querySelectorAll('a'), function(a){
+    a.addEventListener('click', function(){
+      nav.classList.remove('open');
+      btn.classList.remove('open');
+      btn.setAttribute('aria-expanded', 'false');
+    });
+  });
+
+  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var targets = document.querySelectorAll('.reveal');
+  if (reduceMotion || !('IntersectionObserver' in window)) {
+    targets.forEach(function(el){ el.classList.add('is-visible'); });
+  } else {
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+    targets.forEach(function(el){ io.observe(el); });
+  }
+})();
+</script>
+
+</body>
+</html>
