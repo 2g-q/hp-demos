@@ -175,6 +175,28 @@
     return p;
   }
 
+  // ---- だ円の輪郭表: 半径(rx,ry)ごとに各行の半幅を整数で1度だけ決めて共有する ----
+  // 幅は round(rx*sqrt(1-t^2)) を基準に、rxとの差を2の倍数へ丸める=輪郭の段差を
+  // 2px以上にまとめ、1px刻みの不定な階段を消す(粒の見かけを他の物に揃える)。
+  // 同じ半径は中心がどこでも常に同じ輪郭=同じ物が動いても形が変わらない。
+  // ryかrxが小さい潰れただ円(接地影・ゴミ箱の口など)は2px段が物理的に組めないので
+  // 素の丸めのまま(1px刻みを許す)。
+  var ellipseRowsCache = {};
+  function ellipseRows(rx, ry) {
+    var key = rx + "x" + ry;
+    if (!ellipseRowsCache[key]) {
+      var rows = [];
+      for (var dy = -ry; dy <= ry; dy += 1) {
+        var t = dy / (ry + 0.5);
+        var hw = Math.round(rx * Math.sqrt(Math.max(0, 1 - t * t)));
+        if (rx >= 6 && ry >= 6) hw = Math.max(0, rx - 2 * Math.round((rx - hw) / 2));
+        rows.push(hw);
+      }
+      ellipseRowsCache[key] = rows;
+    }
+    return ellipseRowsCache[key];
+  }
+
   function painter(context) {
     // 内部座標の整数格子に乗せた fillRect だけで描く。パスAPIは一切使わない。
     function band(x, y, w, h, color) {
@@ -208,12 +230,13 @@
           }
         }
       },
-      // だ円も走査線方式: 行ごとに半幅 round(rx*sqrt(1-t^2)) を整数で求めて横帯を塗る。
+      // だ円も走査線方式。各行の半幅は半径ごとの表(ellipseRows)から引く=
+      // 同じ半径なら中心がどこでも常に同じ輪郭(位置で階段の割れ方が変わらない)。
       ellipse: function (cx, cy, rx, ry, color) {
         cx = Math.round(cx); cy = Math.round(cy); rx = Math.round(rx); ry = Math.round(ry);
+        var rows = ellipseRows(rx, ry);
         for (var dy = -ry; dy <= ry; dy += 1) {
-          var t = dy / (ry + 0.5);
-          var hw = Math.round(rx * Math.sqrt(Math.max(0, 1 - t * t)));
+          var hw = rows[dy + ry];
           band(cx - hw, cy + dy, hw * 2 + 1, 1, color);
         }
       }
@@ -594,7 +617,9 @@
     }
     function clockFace(h) { // 短針=(h%12)/12周・長針=h%1周。hはwindowSkyと同じ変数
       // 針・縁・目盛りは灰系の細い描画で控えめに(目立たせない)。
-      ellipse(320, 54, 24, 24, P.wallShade); ellipse(320, 54, 20, 20, C.white);
+      // 縁は3px(枠の太さの統一=ベゼル・額縁は3px)。輪郭はellipseRowsの表で
+      // 格子に乗る=壁の遠景なのに一番細かい、を解消。針だけは動きが要るので不変。
+      ellipse(320, 54, 24, 24, P.wallShade); ellipse(320, 54, 21, 21, C.white);
       rect(318, 38, 5, 3, P.tick); rect(318, 68, 5, 3, P.tick);
       rect(303, 52, 3, 5, P.tick); rect(335, 52, 3, 5, P.tick);
       clockHand(320, 54, (h % 12) / 12, 10, 1, P.handH);
@@ -620,10 +645,16 @@
       s.rect(8, 8, W - 16, 92, P.wall); s.rect(8, 100, W - 16, 6, P.wallShade);
       s.rect(8, 106, W - 16, 3, P.slateD);
       windowPane(56, 150); windowPane(434, 150);
-      // 折れ線のポスター(文字は描かない)
-      s.rect(228, 26, 42, 52, P.dark); s.rect(232, 30, 34, 44, C.white);
-      s.poly([[235, 66], [245, 46], [252, 58], [262, 38], [262, 70], [235, 70]], mix(C.blue, C.white, 0.48));
-      s.rect(370, 30, 40, 44, P.dark); s.rect(374, 34, 32, 36, C.white);
+      // 横棒グラフのポスター(文字は描かない)。旧・折れ線polyは斜めの1px階段が
+      // 壁で一番細かく見えたのでやめ、横棒の帯だけにする(遠景は簡素に)。
+      // 額は3px(枠の太さの統一)。
+      s.rect(228, 26, 42, 52, P.dark); s.rect(231, 29, 36, 46, C.white);
+      s.rect(235, 34, 1, 36, C.gray); // 軸(縦1px=面の境目の線は1px)
+      s.rect(237, 35, 20, 5, mix(C.blue, C.white, 0.48));
+      s.rect(237, 44, 26, 5, mix(C.blue, C.white, 0.48));
+      s.rect(237, 53, 11, 5, mix(C.blue, C.white, 0.48));
+      s.rect(237, 62, 23, 5, mix(C.blue, C.white, 0.48));
+      s.rect(370, 30, 40, 44, P.dark); s.rect(373, 33, 34, 38, C.white);
       s.rect(378, 40, 14, 10, mix(C.blue, C.white, 0.62)); s.rect(378, 56, 24, 3, C.gray);
       s.rect(378, 62, 18, 3, P.wallShade);
       // ソファコーナーのラグ(床の一部なので静的側。点描はまばらに=うるささを抑える)
@@ -1377,8 +1408,8 @@
       var py = ya - 62; // 腰(py+42)=座クッション上面
       var lean = sc.talking ? 2 : 0; // 会話中は互いに2px乗り出す
       person(x + 9 + lean, py, sc.aDir, f1, ST_SOFA, true);
-      if (sc.aTablet) { // 手元のタブレットに目を落とす(ベゼル2px=粒を2px以上に統一)
-        rect(x + 14 + lean, py + 31, 12, 8, C.charcoal);
+      if (sc.aTablet) { // 手元のタブレットに目を落とす(ベゼル3px=枠の太さの統一)
+        rect(x + 13 + lean, py + 30, 14, 10, C.charcoal);
         rect(x + 16 + lean, py + 33, 8, 4, P.screen);
       }
       rect(x + 18 + lean, py + 42, 7, 12, P.dark); rect(x + 30 + lean, py + 42, 7, 12, P.dark); // 垂れる足
@@ -1447,4 +1478,7 @@
       else if (typeof reduceQuery.removeListener === "function") reduceQuery.removeListener(onMotionChange);
     } };
   };
+  // オフライン検証用(__SPX_CAPTUREと同じ流儀。描画経路では使わない):
+  // 「同じ半径のだ円が位置によらず同じ輪郭になる」ことをNode側で機械照合する。
+  window.mountSchemePixel.__testPainter = painter;
 }());
