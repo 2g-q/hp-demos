@@ -363,7 +363,7 @@ footer{background:#332b23;color:#d9d0c5;padding:56px 0 110px;font-size:13px}
 document.querySelectorAll("#pfnav a[data-k]").forEach(function(a){if(a.getAttribute("data-k")===f)a.setAttribute("aria-current","page");});})();</script>
 </nav>
 <script>/* pfnav-offset:start ナビと本体の固定ヘッダーが重なるのを防ぐ(2026-08-11)。
-   #pfnav は sticky/top:0/z-index:99999、#demo-fict(架空サンプル明示帯)はその直後の
+   #pfnav は sticky/top:0/z-index:99999。#demo-fict は下部にあるので数えない。旧コメント:
    通常フロー。本体側の position:fixed; top:0 のヘッダーは両方の下に潜って隠れる
    (実測2026-09-04=corp/dental/salon でロゴ上半分が欠けた。旧実装は #pfnav の高さしか
    見ていなかった)。→ **両方の実高さを足して**上端固定の要素だけ下げる。
@@ -373,8 +373,8 @@ document.querySelectorAll("#pfnav a[data-k]").forEach(function(a){if(a.getAttrib
   if (!nav) return;
   var basePad = null;
   function fit(){
-    var fict = null;
-    var h = (nav.offsetHeight || 0) + (fict ? (fict.offsetHeight || 0) : 0);
+    var fict = null; // 架空サンプルの帯は下部へ移したので高さに含めない
+    var h = (nav.offsetHeight || 0);
     if (basePad === null) {
       basePad = parseFloat(getComputedStyle(document.documentElement).scrollPaddingTop) || 0;
     }

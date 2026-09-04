@@ -5,9 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="index, follow">
 <title>業務管理システム 画面デモ｜見積・発注・納品・請求・入金消込まで動くリファレンス</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
 :root{
   --nav:#0f2438;
@@ -55,7 +52,7 @@
 *{box-sizing:border-box}
 html,body{margin:0;padding:0}
 body{
-  font-family:"Noto Sans JP",-apple-system,BlinkMacSystemFont,"Segoe UI","Hiragino Kaku Gothic ProN","Yu Gothic",Meiryo,sans-serif;
+  font-family:system-ui,-apple-system,"Helvetica Neue","Hiragino Sans","Hiragino Kaku Gothic ProN","Noto Sans JP","Yu Gothic",Meiryo,sans-serif;
   background:var(--bg); color:var(--ink); font-size:var(--fs-base); line-height:1.6;
   -webkit-font-smoothing:antialiased; font-feature-settings:"palt" 1;
   overflow-x:hidden;
@@ -67,13 +64,23 @@ a{color:var(--brand)}
 svg{display:block; flex:none}
 :focus-visible{outline:2px solid var(--brand); outline-offset:2px; border-radius:2px}
 
-/* ═══ デモ帯 ═══ */
-.democall{
-  background:#0b1a29; color:#fff; padding:var(--sp-2) var(--sp-4); font-size:var(--fs-sm);
-  line-height:1.55; display:flex; gap:var(--sp-2); align-items:baseline; flex-wrap:wrap;
+/* ═══ ページ上部の説明(サイト共通の新デザイン。cases.htmlと同じトークン) ═══ */
+.sec.sec-intro{
+  background:#FFFFFF; color:#0D0D0D; border-bottom:1px solid rgba(13,13,13,.14);
+  margin:0; padding:64px 0;
+  font-family:system-ui,-apple-system,"Helvetica Neue","Hiragino Sans","Hiragino Kaku Gothic ProN","Noto Sans JP","Yu Gothic",Meiryo,sans-serif;
 }
-.democall b{color:#ffcf8a; font-weight:700}
-.democall span{color:#a9bccd}
+.sec-intro .container{max-width:1128px;margin-inline:auto;padding-inline:20px}
+.sec-intro .sec-head{text-align:center;max-width:760px;margin-inline:auto}
+.sec-intro .sec-head h2{
+  margin:0;font-weight:500;text-wrap:balance;
+  font-size:clamp(2rem,calc(2rem + 1*((100vw - 23.4375rem)/66.5625)),3rem);
+  line-height:clamp(2.28rem,calc(2.28rem + 1.2*((100vw - 23.4375rem)/66.5625)),3.48rem);
+  letter-spacing:clamp(-.03em,calc(-.03em + .02*((90rem - 100vw)/66.5625)),-.01em);
+}
+.sec-intro .lead{margin:24px 0 0;font-size:1.0625rem;line-height:1.75rem;letter-spacing:-.01em;text-wrap:pretty}
+.sec-intro .nw{white-space:nowrap;display:inline-block}
+@media (max-width:767px){.sec.sec-intro{padding:48px 0}}
 
 /* ═══ アプリシェル ═══ */
 .app{display:grid; grid-template-columns:216px minmax(0,1fr); min-height:100vh}
@@ -186,6 +193,7 @@ tbody tr.clickable{cursor:pointer}
 tbody tr.clickable:hover{background:var(--brand-w)}
 tbody tr.sel{background:var(--brand-w); box-shadow:inset 3px 0 0 var(--brand)}
 .tablewrap{overflow-x:auto; -webkit-overflow-scrolling:touch; min-width:0; max-width:100%}
+.tablewrap table{min-width:640px}
 .empty{padding:var(--sp-6) var(--sp-4); text-align:center; color:var(--faint); font-size:var(--fs-sm)}
 
 .toolbar{display:flex; gap:var(--sp-2); align-items:center; flex-wrap:wrap; padding:var(--sp-2) var(--sp-4); border-bottom:1px solid var(--line-2); background:var(--panel-2)}
@@ -341,7 +349,8 @@ kbd{font-family:inherit; background:#fff; border:1px solid var(--line-strong); b
 .opt h4{margin:0; padding:var(--sp-2) var(--sp-3); background:var(--panel-2); border-bottom:1px solid var(--line); font-size:var(--fs-base); color:var(--ink)}
 .opt .ob{padding:var(--sp-3); font-size:var(--fs-sm); line-height:1.8}
 
-footer{padding:var(--sp-5) var(--sp-4) var(--sp-6); color:var(--faint); font-size:var(--fs-xs); line-height:1.8; max-width:1320px}
+footer{padding:var(--sp-5) var(--sp-4) var(--sp-6); color:rgba(13,13,13,.6); font-size:.875rem; line-height:1.7; letter-spacing:0; max-width:1320px}
+footer b{color:#0D0D0D; font-weight:600}
 
 /* ═══ レスポンシブ ═══ */
 @media (max-width:1100px){
@@ -377,7 +386,7 @@ footer{padding:var(--sp-5) var(--sp-4) var(--sp-6); color:var(--faint); font-siz
 #printRoot{display:none}
 @media print{
   body{background:#fff}
-  .democall,.app,footer,.toast,.ov{display:none !important}
+  .sec-intro,.app,footer,.toast,.ov{display:none !important}
   #printRoot{display:block}
   @page{size:A4; margin:14mm}
 }
@@ -433,19 +442,19 @@ footer{padding:var(--sp-5) var(--sp-4) var(--sp-6); color:var(--faint); font-siz
 
 </style>
 <nav id="pfnav"><div class="in">
-<a class="brand" href="./index.html">自動化のミナト</a>
+<a class="brand" href="./index.html" target="_blank" rel="noopener">自動化のミナト</a>
 <div class="links">
-<a href="./index.html" data-k="index">サービス</a>
-<a href="./pricing.html" data-k="pricing">料金</a>
-<a href="./cases.html" data-k="cases">事例</a>
-<a class="back" href="./cases.html">← 事例一覧へ</a>
+<a href="./index.html" data-k="index" target="_blank" rel="noopener">サービス</a>
+<a href="./pricing.html" data-k="pricing" target="_blank" rel="noopener">料金</a>
+<a href="./cases.html" data-k="cases" target="_blank" rel="noopener">事例</a>
+<a class="back" href="./cases.html" target="_blank" rel="noopener">← 事例一覧へ</a>
 </div>
 </div>
 <script>(function(){var f=(location.pathname.split("/").pop()||"index.html").replace(".html","");
 document.querySelectorAll("#pfnav a[data-k]").forEach(function(a){if(a.getAttribute("data-k")===f)a.setAttribute("aria-current","page");});})();</script>
 </nav>
 <script>/* pfnav-offset:start ナビと本体の固定ヘッダーが重なるのを防ぐ(2026-08-11)。
-   #pfnav は sticky/top:0/z-index:99999、#demo-fict(架空サンプル明示帯)はその直後の
+   #pfnav は sticky/top:0/z-index:99999。#demo-fict は下部にあるので数えない。旧コメント:
    通常フロー。本体側の position:fixed; top:0 のヘッダーは両方の下に潜って隠れる
    (実測2026-09-04=corp/dental/salon でロゴ上半分が欠けた。旧実装は #pfnav の高さしか
    見ていなかった)。→ **両方の実高さを足して**上端固定の要素だけ下げる。
@@ -455,8 +464,8 @@ document.querySelectorAll("#pfnav a[data-k]").forEach(function(a){if(a.getAttrib
   if (!nav) return;
   var basePad = null;
   function fit(){
-    var fict = document.getElementById('demo-fict');
-    var h = (nav.offsetHeight || 0) + (fict ? (fict.offsetHeight || 0) : 0);
+    var fict = null; // 架空サンプルの帯は下部へ移したので高さに含めない
+    var h = (nav.offsetHeight || 0);
     if (basePad === null) {
       basePad = parseFloat(getComputedStyle(document.documentElement).scrollPaddingTop) || 0;
     }
@@ -480,16 +489,17 @@ document.querySelectorAll("#pfnav a[data-k]").forEach(function(a){if(a.getAttrib
 })();
 </script>
 <!-- pfnav:end -->
-<!-- demo-fict:start 架空サンプル明示帯(2026-09-04) -->
-<style>#demo-fict{background:#fff8e8;color:#6d5518;border-bottom:1px solid #ecdfbc;font-family:"Hiragino Kaku Gothic ProN","Noto Sans JP","Yu Gothic",Meiryo,sans-serif;font-size:12.5px;line-height:1.55;text-align:center;padding:8px 14px}@media print{#demo-fict{display:none}}</style>
-<div id="demo-fict">これは制作サンプル（業務管理システムの画面デモ）です。会社名・取引先・金額はすべて架空です。</div>
-<!-- demo-fict:end -->
 
 
-<div class="democall">
-  <b>業務管理システム リファレンス</b>
-  <span>見積・受注・発注・納品・請求・入金消込・売掛まで、<b>実際に入力・計算・印刷ができます</b>。会社名・取引先・商品・金額はすべて架空のサンプルです。<b>業種は専門商社を一例にしています</b>（ご依頼の業務に置き換えて設計します）。</span>
-</div>
+
+<section class="sec sec-intro">
+  <div class="container">
+    <div class="sec-head">
+      <h2><span class="nw">業務管理システム</span> <span class="nw">リファレンス</span></h2>
+      <p class="lead">見積・受注・発注・納品・請求・入金消込・売掛まで、実際に入力・計算・印刷ができます。会社名・取引先・商品・金額はすべて架空のサンプルです。業種は専門商社を一例にしています（ご依頼の業務に置き換えて設計します）。</p>
+    </div>
+  </div>
+</section>
 
 <div class="app">
 
@@ -1946,5 +1956,9 @@ window.addEventListener("hashchange",function(){show(location.hash.slice(1)||"da
 
 })();
 </script>
+<!-- demo-fict:start 架空サンプルの注記(2026-09-04 上部の帯からフッターへ移設) -->
+<style>#demo-fict{margin:0;padding:20px 20px 28px;background:#fff;color:rgba(13,13,13,.6);border-top:1px solid rgba(13,13,13,.14);font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue","Hiragino Kaku Gothic ProN","Noto Sans JP","Yu Gothic",Meiryo,sans-serif;font-size:13px;line-height:1.7;text-align:center}@media print{#demo-fict{display:none}}</style>
+<div id="demo-fict">これは制作サンプル（業務管理システムの画面デモ）です。会社名・取引先・金額はすべて架空です。</div>
+<!-- demo-fict:end -->
 </body>
 </html>

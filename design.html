@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>バナー・ヘッダー・チラシ制作サンプル | 自動化のミナト</title>
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Montserrat:wght@500;600;700;800&family=Noto+Sans+JP:wght@400;500;700;900&family=Noto+Serif+JP:wght@500;600;700&family=Zen+Maru+Gothic:wght@500;700;900&display=swap');
 
 :root{
   --ink:#1F2933;
@@ -15,45 +14,57 @@
   --navy:#1B3450;
   --ivory:#F7F2E9;
   --green:#2F7D5A;
+  --black:#0D0D0D;
+  --blue:#2563EB;
+  --ink-60:rgba(13,13,13,.6);
+  --hairline:rgba(13,13,13,.14);
 }
 *{margin:0;padding:0;box-sizing:border-box;}
 body{
-  font-family:'Noto Sans JP',sans-serif;
-  background:#FBFAF7;
-  color:var(--ink);
+  font-family:system-ui,-apple-system,"Helvetica Neue","Hiragino Sans","Hiragino Kaku Gothic ProN","Noto Sans JP","Yu Gothic",Meiryo,sans-serif;
+  background:#FFFFFF;
+  color:var(--black);
   -webkit-font-smoothing:antialiased;
   line-height:1.7;
+  word-break:auto-phrase;
 }
+h1,h2{text-wrap:balance}
+.nw{white-space:nowrap;display:inline-block}
 
-/* ===== page chrome ===== */
-.page{max-width:1200px;margin:0 auto;padding:72px 32px 0;}
-.hero{ text-align:center; padding-bottom:64px; border-bottom:1px solid var(--line); }
+/* ===== page chrome(サイト共通の新デザイン) ===== */
+.container{max-width:1128px;margin-inline:auto;padding-inline:20px;}
+.hero{ text-align:center; padding:96px 0 0; }
 .hero .eyebrow{
-  font-family:'Montserrat',sans-serif; font-size:11px; letter-spacing:.35em;
-  color:var(--gold); font-weight:600; margin-bottom:18px;
+  font-size:.875rem; line-height:1.435rem; letter-spacing:.02em;
+  color:var(--ink-60); font-weight:400; margin-bottom:16px;
 }
 .hero h1{
-  font-family:'Noto Serif JP',serif; font-weight:600; font-size:34px;
-  letter-spacing:.08em; margin-bottom:16px;
+  font-family:inherit; font-weight:500;
+  font-size:clamp(2rem,calc(2rem + 1*((100vw - 23.4375rem)/66.5625)),3rem);
+  line-height:clamp(2.28rem,calc(2.28rem + 1.2*((100vw - 23.4375rem)/66.5625)),3.48rem);
+  letter-spacing:clamp(-.03em,calc(-.03em + .02*((90rem - 100vw)/66.5625)),-.01em);
+  color:var(--black);
 }
-.hero p{ font-size:14px; color:var(--sub); max-width:640px; margin:0 auto; }
+.hero p{ font-size:1.0625rem; line-height:1.75rem; letter-spacing:-.01em; color:var(--black); max-width:680px; margin:24px auto 0; }
 
-.group{ padding:72px 0 8px; }
-.group-head{ display:flex; align-items:baseline; gap:18px; margin-bottom:8px; }
-.group-head .num{
-  font-family:'Montserrat',sans-serif; font-size:13px; font-weight:700;
-  color:var(--gold); letter-spacing:.2em;
+.sec{ margin-top:120px; }
+.sec-head{ text-align:center; max-width:760px; margin-inline:auto; }
+.sec-kicker{
+  color:var(--ink-60); font-size:.875rem; line-height:1.435rem; letter-spacing:.02em;
+  margin-bottom:8px;
 }
-.group-head h2{
-  font-family:'Noto Serif JP',serif; font-weight:600; font-size:22px; letter-spacing:.06em;
+.sec-head h2{
+  font-family:inherit; font-weight:500;
+  font-size:clamp(2rem,calc(2rem + 1*((100vw - 23.4375rem)/66.5625)),3rem);
+  line-height:clamp(2.28rem,calc(2.28rem + 1.2*((100vw - 23.4375rem)/66.5625)),3.48rem);
+  letter-spacing:clamp(-.03em,calc(-.03em + .02*((90rem - 100vw)/66.5625)),-.01em);
+  color:var(--black);
 }
-.group-head .spec{
-  font-family:'Montserrat',sans-serif; font-size:11px; color:#98917F; letter-spacing:.08em;
-}
-.group-cap{ font-size:13px; color:var(--sub); max-width:760px; margin-bottom:36px; }
-.group-cap strong{ color:var(--ink); font-weight:700; }
+.sec-body{ margin-top:64px; }
+.group-cap{ font-size:1.0625rem; line-height:1.75rem; letter-spacing:-.01em; color:var(--black); margin:24px auto 0; }
+.group-cap strong{ color:var(--black); font-weight:700; }
 
-.works{ display:flex; flex-wrap:wrap; gap:40px 36px; align-items:flex-start; }
+.works{ display:flex; flex-wrap:wrap; gap:40px 36px; align-items:flex-start; justify-content:center; }
 .work{ display:block; }
 .frame{
   position:relative; overflow:hidden; background:#fff;
@@ -67,18 +78,18 @@ body{
   transform:scale(var(--s)); transform-origin:top left;
 }
 figcaption{ margin-top:14px; }
-.cap-title{ font-size:13px; font-weight:700; letter-spacing:.04em; }
+.cap-title{ font-size:.875rem; line-height:1.435rem; font-weight:500; letter-spacing:0; color:var(--black); }
 .cap-meta{ display:flex; align-items:center; gap:8px; margin-top:6px; }
 .chip{
-  display:inline-block; font-family:'Montserrat',sans-serif; font-size:10px; font-weight:600;
-  letter-spacing:.06em; color:#7C7668; background:#F0EDE5; border-radius:3px; padding:3px 8px;
+  display:inline-block; font-size:.75rem; font-weight:500;
+  letter-spacing:.02em; color:var(--ink-60); background:none; border:1px solid var(--hairline); border-radius:2.5rem; padding:3px 10px;
 }
 
 footer{
-  margin-top:88px; border-top:1px solid var(--line);
-  padding:36px 32px 48px; text-align:center;
+  margin-top:120px; border-top:1px solid var(--hairline); background:#FFFFFF;
+  padding:40px 20px 48px; text-align:center;
 }
-footer p{ font-size:11.5px; color:#8A857A; }
+footer p{ font-size:.875rem; line-height:1.7; color:var(--ink-60); }
 footer p + p{ margin-top:6px; }
 
 /* ===== sizes ===== */
@@ -88,8 +99,10 @@ footer p + p{ margin-top:6px; }
 .yt{ --w:1280px; --h:720px;  --s:.35; }
 
 @media (max-width:700px){
-  .page{ padding:56px 16px 0; }
-  .hero h1{ font-size:26px; }
+  .hero{ padding:72px 0 0; }
+  .sec{ margin-top:80px; }
+  .sec-body{ margin-top:48px; }
+  footer{ margin-top:80px; }
   .mh{ --s:.7; }
 }
 @media (max-width:520px){
@@ -622,19 +635,19 @@ footer p + p{ margin-top:6px; }
 
 </style>
 <nav id="pfnav"><div class="in">
-<a class="brand" href="./index.html">自動化のミナト</a>
+<a class="brand" href="./index.html" target="_blank" rel="noopener">自動化のミナト</a>
 <div class="links">
-<a href="./index.html" data-k="index">サービス</a>
-<a href="./pricing.html" data-k="pricing">料金</a>
-<a href="./cases.html" data-k="cases">事例</a>
-<a class="back" href="./cases.html">← 事例一覧へ</a>
+<a href="./index.html" data-k="index" target="_blank" rel="noopener">サービス</a>
+<a href="./pricing.html" data-k="pricing" target="_blank" rel="noopener">料金</a>
+<a href="./cases.html" data-k="cases" target="_blank" rel="noopener">事例</a>
+<a class="back" href="./cases.html" target="_blank" rel="noopener">← 事例一覧へ</a>
 </div>
 </div>
 <script>(function(){var f=(location.pathname.split("/").pop()||"index.html").replace(".html","");
 document.querySelectorAll("#pfnav a[data-k]").forEach(function(a){if(a.getAttribute("data-k")===f)a.setAttribute("aria-current","page");});})();</script>
 </nav>
 <script>/* pfnav-offset:start ナビと本体の固定ヘッダーが重なるのを防ぐ(2026-08-11)。
-   #pfnav は sticky/top:0/z-index:99999、#demo-fict(架空サンプル明示帯)はその直後の
+   #pfnav は sticky/top:0/z-index:99999。#demo-fict は下部にあるので数えない。旧コメント:
    通常フロー。本体側の position:fixed; top:0 のヘッダーは両方の下に潜って隠れる
    (実測2026-09-04=corp/dental/salon でロゴ上半分が欠けた。旧実装は #pfnav の高さしか
    見ていなかった)。→ **両方の実高さを足して**上端固定の要素だけ下げる。
@@ -644,8 +657,8 @@ document.querySelectorAll("#pfnav a[data-k]").forEach(function(a){if(a.getAttrib
   if (!nav) return;
   var basePad = null;
   function fit(){
-    var fict = document.getElementById('demo-fict');
-    var h = (nav.offsetHeight || 0) + (fict ? (fict.offsetHeight || 0) : 0);
+    var fict = null; // 架空サンプルの帯は下部へ移したので高さに含めない
+    var h = (nav.offsetHeight || 0);
     if (basePad === null) {
       basePad = parseFloat(getComputedStyle(document.documentElement).scrollPaddingTop) || 0;
     }
@@ -669,28 +682,28 @@ document.querySelectorAll("#pfnav a[data-k]").forEach(function(a){if(a.getAttrib
 })();
 </script>
 <!-- pfnav:end -->
-<!-- demo-fict:start 架空サンプル明示帯(2026-09-04) -->
-<style>#demo-fict{background:#fff8e8;color:#6d5518;border-bottom:1px solid #ecdfbc;font-family:"Hiragino Kaku Gothic ProN","Noto Sans JP","Yu Gothic",Meiryo,sans-serif;font-size:12.5px;line-height:1.55;text-align:center;padding:8px 14px}@media print{#demo-fict{display:none}}</style>
-<div id="demo-fict">これは制作サンプルです。掲載のブランド名・商品・レビュー数値はすべて架空です。</div>
-<!-- demo-fict:end -->
+
 
 
 <div class="page">
 
   <header class="hero">
+    <div class="container">
     <div class="eyebrow">DESIGN SAMPLES — BANNER / HEADER / FLYER</div>
     <h1>バナー・ヘッダー・チラシ制作サンプル</h1>
     <p>同一キャンペーンの素材から、トーン違い・訴求違いのデザインを短時間で量産し、全件を人の目で検品して納品する制作フローのサンプル集です。</p>
+    </div>
   </header>
 
   <!-- ============ 01 mail headers ============ -->
-  <section class="group">
-    <div class="group-head">
-      <span class="num">01</span>
-      <h2>メルマガヘッダー — 3トーン展開</h2>
-      <span class="spec">600×200px</span>
+  <section class="sec">
+    <div class="container">
+    <div class="sec-head">
+      <p class="sec-kicker">01 — 600×200px</p>
+      <h2><span class="nw">メルマガヘッダー —</span> <span class="nw">3トーン展開</span></h2>
+      <p class="group-cap">架空コスメブランド「Lueur(リュール)」夏のUVケアキャンペーン。<strong>同じ商品・同じ告知内容から「上品」「ポップ」「シンプル」の3トーンを短時間で量産</strong>し、配信リストやABテストに合わせて出し分けます。全件、人の目で文字組み・配色を検品してから納品します。</p>
     </div>
-    <p class="group-cap">架空コスメブランド「Lueur(リュール)」夏のUVケアキャンペーン。<strong>同じ商品・同じ告知内容から「上品」「ポップ」「シンプル」の3トーンを短時間で量産</strong>し、配信リストやABテストに合わせて出し分けます。全件、人の目で文字組み・配色を検品してから納品します。</p>
+    <div class="sec-body">
     <div class="works">
 
       <figure class="work">
@@ -745,16 +758,19 @@ document.querySelectorAll("#pfnav a[data-k]").forEach(function(a){if(a.getAttrib
       </figure>
 
     </div>
+    </div>
+    </div>
   </section>
 
   <!-- ============ 02 instagram ============ -->
-  <section class="group">
-    <div class="group-head">
-      <span class="num">02</span>
-      <h2>Instagram広告バナー — 4訴求展開</h2>
-      <span class="spec">1080×1080px</span>
+  <section class="sec">
+    <div class="container">
+    <div class="sec-head">
+      <p class="sec-kicker">02 — 1080×1080px</p>
+      <h2><span class="nw">Instagram</span><span class="nw">広告バナー —</span> <span class="nw">4訴求展開</span></h2>
+      <p class="group-cap">同キャンペーンのInstagram広告。<strong>「価格」「ベネフィット」「レビュー」「緊急性」の4訴求を同一トンマナで展開</strong>し、配信結果を見ながら勝ちクリエイティブに寄せていく運用を想定したセットです。ブランドカラー(ネイビー×ゴールド×アイボリー)は全案で統一しています。</p>
     </div>
-    <p class="group-cap">同キャンペーンのInstagram広告。<strong>「価格」「ベネフィット」「レビュー」「緊急性」の4訴求を同一トンマナで展開</strong>し、配信結果を見ながら勝ちクリエイティブに寄せていく運用を想定したセットです。ブランドカラー(ネイビー×ゴールド×アイボリー)は全案で統一しています。</p>
+    <div class="sec-body">
     <div class="works">
 
       <figure class="work">
@@ -851,16 +867,19 @@ document.querySelectorAll("#pfnav a[data-k]").forEach(function(a){if(a.getAttrib
       </figure>
 
     </div>
+    </div>
+    </div>
   </section>
 
   <!-- ============ 03 flyer ============ -->
-  <section class="group">
-    <div class="group-head">
-      <span class="num">03</span>
-      <h2>A4チラシ — 店舗集客(整骨院)</h2>
-      <span class="spec">A4縦 210×297mm</span>
+  <section class="sec">
+    <div class="container">
+    <div class="sec-head">
+      <p class="sec-kicker">03 — A4縦 210×297mm</p>
+      <h2><span class="nw">A4チラシ —</span> <span class="nw">店舗集客(整骨院)</span></h2>
+      <p class="group-cap">架空の「みどり整骨院」新規集客チラシ。<strong>初回オファー・メニュー・地図・予約導線(電話/QR)まで1枚に整理</strong>。同じ雛形から店舗ごとの差し替え量産(内容・色・写真)に対応します。こちらも全件、人の目で誤字・料金・地図表記を検品します。</p>
     </div>
-    <p class="group-cap">架空の「みどり整骨院」新規集客チラシ。<strong>初回オファー・メニュー・地図・予約導線(電話/QR)まで1枚に整理</strong>。同じ雛形から店舗ごとの差し替え量産(内容・色・写真)に対応します。こちらも全件、人の目で誤字・料金・地図表記を検品します。</p>
+    <div class="sec-body">
     <div class="works">
 
       <figure class="work">
@@ -948,16 +967,19 @@ document.querySelectorAll("#pfnav a[data-k]").forEach(function(a){if(a.getAttrib
       </figure>
 
     </div>
+    </div>
+    </div>
   </section>
 
   <!-- ============ 04 youtube ============ -->
-  <section class="group">
-    <div class="group-head">
-      <span class="num">04</span>
-      <h2>YouTubeサムネイル — ABテスト2案</h2>
-      <span class="spec">1280×720px</span>
+  <section class="sec">
+    <div class="container">
+    <div class="sec-head">
+      <p class="sec-kicker">04 — 1280×720px</p>
+      <h2><span class="nw">YouTubeサムネイル —</span> <span class="nw">ABテスト2案</span></h2>
+      <p class="group-cap">架空のオンライン集客セミナー告知。<strong>同じ動画に対して「期待型(得られる未来)」「損失回避型(見ないと損)」の2案</strong>を用意し、クリック率で勝敗を判定するABテスト運用を想定しています。</p>
     </div>
-    <p class="group-cap">架空のオンライン集客セミナー告知。<strong>同じ動画に対して「期待型(得られる未来)」「損失回避型(見ないと損)」の2案</strong>を用意し、クリック率で勝敗を判定するABテスト運用を想定しています。</p>
+    <div class="sec-body">
     <div class="works">
 
       <figure class="work">
@@ -1000,16 +1022,19 @@ document.querySelectorAll("#pfnav a[data-k]").forEach(function(a){if(a.getAttrib
       </figure>
 
     </div>
+    </div>
+    </div>
   </section>
 
   <!-- ============ 05 character banners ============ -->
-  <section class="group">
-    <div class="group-head">
-      <span class="num">05</span>
-      <h2>キャラクター起用バナー — 6業種展開</h2>
-      <span class="spec">1200×628px</span>
+  <section class="sec">
+    <div class="container">
+    <div class="sec-head">
+      <p class="sec-kicker">05 — 1200×628px</p>
+      <h2><span class="nw">キャラクター</span><span class="nw">起用バナー —</span> <span class="nw">6業種展開</span></h2>
+      <p class="group-cap">同じキャラクターを業種・訴求ごとに配置し直した例です。<strong>写実タッチ・アニメタッチ・ゆるキャラの3体を、それぞれ2案ずつ</strong>展開しています。キャラクターをお持ちの場合はご支給のものを、無い場合はご相談のうえ制作します。</p>
     </div>
-    <p class="group-cap">同じキャラクターを業種・訴求ごとに配置し直した例です。<strong>写実タッチ・アニメタッチ・ゆるキャラの3体を、それぞれ2案ずつ</strong>展開しています。キャラクターをお持ちの場合はご支給のものを、無い場合はご相談のうえ制作します。</p>
+    <div class="sec-body">
     <div class="cb-grid">
       <figure class="cb"><img src="char-assets/banner-realestate.jpg" alt="不動産リノベーションのバナー" loading="lazy">
         <figcaption><b>不動産・リノベーション</b><span>写実タッチ／信頼感を軸に、金額の具体性で引く</span></figcaption></figure>
@@ -1024,6 +1049,8 @@ document.querySelectorAll("#pfnav a[data-k]").forEach(function(a){if(a.getAttrib
       <figure class="cb"><img src="char-assets/banner-line.jpg" alt="LINE公式アカウントの友だち追加バナー" loading="lazy">
         <figcaption><b>LINE公式アカウント</b><span>ゆるキャラ／同じマスコットを友だち追加訴求に</span></figcaption></figure>
     </div>
+    </div>
+    </div>
   </section>
 
 
@@ -1034,6 +1061,10 @@ document.querySelectorAll("#pfnav a[data-k]").forEach(function(a){if(a.getAttrib
   <p>本ページのバナー・チラシは画像書き出しではなく、写真素材を除きすべてHTML/CSSで実寸描画しています。</p>
 </footer>
 
+<!-- demo-fict:start 架空サンプルの注記(2026-09-04 上部の帯からフッターへ移設) -->
+<style>#demo-fict{margin:0;padding:20px 20px 28px;background:#fff;color:rgba(13,13,13,.6);border-top:1px solid rgba(13,13,13,.14);font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue","Hiragino Kaku Gothic ProN","Noto Sans JP","Yu Gothic",Meiryo,sans-serif;font-size:13px;line-height:1.7;text-align:center}@media print{#demo-fict{display:none}}</style>
+<div id="demo-fict">これは制作サンプルです。掲載のブランド名・商品・レビュー数値はすべて架空です。</div>
+<!-- demo-fict:end -->
 <!-- mnt-portfolio-bar:begin (automation/hp_demos_inject_bar.py が生成・手で編集しない) -->
 <style>
 /* 作品集への導線帯。デザインの正= cases.html(白地・--tint-4カード・.btn radius 2.5rem)。
@@ -1081,28 +1112,28 @@ a.mnt-btn-ghost:hover{background:rgba(13,13,13,.12)}
     <p class="mnt-h">ホームページ・LP・デザイン・自動化まで、実際に動くサンプルをご用意しています</p>
     <p class="mnt-lead">制作＝自動化のミナト。AIで速く作り、品質は全件人の目で検品します。ご依頼の業種・目的に合わせて、この品質でお作りします。</p>
     <div class="mnt-grid">
-      <a class="mnt-card" href="lp-gym.html">
+      <a class="mnt-card" href="lp-gym.html" target="_blank" rel="noopener">
         <img src="pf/lp-gym.jpg" alt="パーソナルジム 体験予約LPの制作サンプル" loading="lazy">
         <div class="mnt-meta"><span class="mnt-tag">集客LP</span><span class="mnt-name">パーソナルジム 体験予約LP</span></div>
       </a>
-      <a class="mnt-card" href="dental-sakura.html">
+      <a class="mnt-card" href="dental-sakura.html" target="_blank" rel="noopener">
         <img src="pf/dental-sakura.jpg" alt="歯科医院(訪問歯科)の制作サンプル" loading="lazy">
         <div class="mnt-meta"><span class="mnt-tag">ホームページ</span><span class="mnt-name">歯科医院(訪問歯科)</span></div>
       </a>
-      <a class="mnt-card" href="corp.html">
+      <a class="mnt-card" href="corp.html" target="_blank" rel="noopener">
         <img src="pf/corp.jpg" alt="コーポレート(人材会社)の制作サンプル" loading="lazy">
         <div class="mnt-meta"><span class="mnt-tag">ホームページ</span><span class="mnt-name">コーポレート(人材会社)</span></div>
       </a>
-      <a class="mnt-card" href="salon.html">
+      <a class="mnt-card" href="salon.html" target="_blank" rel="noopener">
         <img src="pf/salon.jpg" alt="ヘアサロンの制作サンプル" loading="lazy">
         <div class="mnt-meta"><span class="mnt-tag">ホームページ</span><span class="mnt-name">ヘアサロン</span></div>
       </a>
     </div>
     <div class="mnt-actions">
-      <a class="mnt-btn mnt-btn-primary" href="./cases.html">事例・サンプル一覧を見る</a>
-      <a class="mnt-btn mnt-btn-ghost" href="./pricing.html">料金を見る</a>
+      <a class="mnt-btn mnt-btn-primary" href="./cases.html" target="_blank" rel="noopener">事例・サンプル一覧を見る</a>
+      <a class="mnt-btn mnt-btn-ghost" href="./pricing.html" target="_blank" rel="noopener">料金を見る</a>
     </div>
-    <p class="mnt-fine">※各サンプルの店舗名・法人名・人物・数値はすべて架空です。写真はイメージです。</p>
+    <p class="mnt-fine">※各サンプルの店舗名・法人名・人物・数値はすべて架空です。図版はイラストです。</p>
   </div>
 </div>
 <!-- mnt-portfolio-bar:end -->
