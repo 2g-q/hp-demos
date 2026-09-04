@@ -351,12 +351,12 @@ footer{background:#332b23;color:#d9d0c5;padding:56px 0 110px;font-size:13px}
 
 </style>
 <nav id="pfnav"><div class="in">
-<a class="brand" href="./index.html">自動化のミナト</a>
+<a class="brand" href="./index.html" target="_blank" rel="noopener">自動化のミナト</a>
 <div class="links">
-<a href="./index.html" data-k="index">サービス</a>
-<a href="./pricing.html" data-k="pricing">料金</a>
-<a href="./cases.html" data-k="cases">事例</a>
-<a class="back" href="./cases.html">← 事例一覧へ</a>
+<a href="./index.html" data-k="index" target="_blank" rel="noopener">サービス</a>
+<a href="./pricing.html" data-k="pricing" target="_blank" rel="noopener">料金</a>
+<a href="./cases.html" data-k="cases" target="_blank" rel="noopener">事例</a>
+<a class="back" href="./cases.html" target="_blank" rel="noopener">← 事例一覧へ</a>
 </div>
 </div>
 <script>(function(){var f=(location.pathname.split("/").pop()||"index.html").replace(".html","");
@@ -373,7 +373,7 @@ document.querySelectorAll("#pfnav a[data-k]").forEach(function(a){if(a.getAttrib
   if (!nav) return;
   var basePad = null;
   function fit(){
-    var fict = document.getElementById('demo-fict');
+    var fict = null;
     var h = (nav.offsetHeight || 0) + (fict ? (fict.offsetHeight || 0) : 0);
     if (basePad === null) {
       basePad = parseFloat(getComputedStyle(document.documentElement).scrollPaddingTop) || 0;
@@ -398,10 +398,7 @@ document.querySelectorAll("#pfnav a[data-k]").forEach(function(a){if(a.getAttrib
 })();
 </script>
 <!-- pfnav:end -->
-<!-- demo-fict:start 架空サンプル明示帯(2026-09-04) -->
-<style>#demo-fict{background:#fff8e8;color:#6d5518;border-bottom:1px solid #ecdfbc;font-family:"Hiragino Kaku Gothic ProN","Noto Sans JP","Yu Gothic",Meiryo,sans-serif;font-size:12.5px;line-height:1.55;text-align:center;padding:8px 14px}@media print{#demo-fict{display:none}}</style>
-<div id="demo-fict">これは制作サンプル（架空の介護事業者の採用LP）です。社名・人物・数値はすべて架空です。</div>
-<!-- demo-fict:end -->
+
 
 
 <header id="hd">
@@ -745,7 +742,7 @@ document.querySelectorAll("#pfnav a[data-k]").forEach(function(a){if(a.getAttrib
   <div class="ft-in">
     <p class="ft-logo">ひだまり介護グループ</p>
     <p class="ft-addr">埼玉県さいたま市○○区○○ 1-2-3(架空の所在地)<br>TEL:048-000-0000(ダミー)|運営施設:ひだまりの家 大宮/浦和/与野(いずれも架空)</p>
-    <p class="ft-demo">※本ページは制作サンプル(デモ)です。掲載の法人・人物・数値・スタッフの声はすべて架空です。写真はイメージです。実制作ではご提供写真や日本人モデルの素材に差し替えます。</p>
+    <p class="ft-demo">※本ページは制作サンプル(デモ)です。掲載の法人・人物・数値・スタッフの声はすべて架空です。図版はイラストです。実制作ではご提供の写真に差し替えます。</p>
     <p class="ft-copy">© 2026 Hidamari Care Group (DEMO) — Recruiting Site Sample</p>
   </div>
 </footer>
@@ -782,6 +779,10 @@ form.addEventListener('submit',e=>{
   document.getElementById('formThanks').classList.add('show');
 });
 </script>
+<!-- demo-fict:start 架空サンプルの注記(2026-09-04 上部の帯からフッターへ移設) -->
+<style>#demo-fict{margin:0;padding:20px 20px 28px;background:#fff;color:rgba(13,13,13,.6);border-top:1px solid rgba(13,13,13,.14);font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue","Hiragino Kaku Gothic ProN","Noto Sans JP","Yu Gothic",Meiryo,sans-serif;font-size:13px;line-height:1.7;text-align:center}@media print{#demo-fict{display:none}}</style>
+<div id="demo-fict">これは制作サンプル（架空の介護事業者の採用LP）です。社名・人物・数値はすべて架空です。</div>
+<!-- demo-fict:end -->
 <!-- mnt-portfolio-bar:begin (automation/hp_demos_inject_bar.py が生成・手で編集しない) -->
 <style>
 /* 作品集への導線帯。デザインの正= cases.html(白地・--tint-4カード・.btn radius 2.5rem)。
@@ -829,28 +830,28 @@ a.mnt-btn-ghost:hover{background:rgba(13,13,13,.12)}
     <p class="mnt-h">ホームページ・LP・デザイン・自動化まで、実際に動くサンプルをご用意しています</p>
     <p class="mnt-lead">制作＝自動化のミナト。AIで速く作り、品質は全件人の目で検品します。ご依頼の業種・目的に合わせて、この品質でお作りします。</p>
     <div class="mnt-grid">
-      <a class="mnt-card" href="lp-gym.html">
+      <a class="mnt-card" href="lp-gym.html" target="_blank" rel="noopener">
         <img src="pf/lp-gym.jpg" alt="パーソナルジム 体験予約LPの制作サンプル" loading="lazy">
         <div class="mnt-meta"><span class="mnt-tag">集客LP</span><span class="mnt-name">パーソナルジム 体験予約LP</span></div>
       </a>
-      <a class="mnt-card" href="dental-sakura.html">
+      <a class="mnt-card" href="dental-sakura.html" target="_blank" rel="noopener">
         <img src="pf/dental-sakura.jpg" alt="歯科医院(訪問歯科)の制作サンプル" loading="lazy">
         <div class="mnt-meta"><span class="mnt-tag">ホームページ</span><span class="mnt-name">歯科医院(訪問歯科)</span></div>
       </a>
-      <a class="mnt-card" href="corp.html">
+      <a class="mnt-card" href="corp.html" target="_blank" rel="noopener">
         <img src="pf/corp.jpg" alt="コーポレート(人材会社)の制作サンプル" loading="lazy">
         <div class="mnt-meta"><span class="mnt-tag">ホームページ</span><span class="mnt-name">コーポレート(人材会社)</span></div>
       </a>
-      <a class="mnt-card" href="salon.html">
+      <a class="mnt-card" href="salon.html" target="_blank" rel="noopener">
         <img src="pf/salon.jpg" alt="ヘアサロンの制作サンプル" loading="lazy">
         <div class="mnt-meta"><span class="mnt-tag">ホームページ</span><span class="mnt-name">ヘアサロン</span></div>
       </a>
     </div>
     <div class="mnt-actions">
-      <a class="mnt-btn mnt-btn-primary" href="./cases.html">事例・サンプル一覧を見る</a>
-      <a class="mnt-btn mnt-btn-ghost" href="./pricing.html">料金を見る</a>
+      <a class="mnt-btn mnt-btn-primary" href="./cases.html" target="_blank" rel="noopener">事例・サンプル一覧を見る</a>
+      <a class="mnt-btn mnt-btn-ghost" href="./pricing.html" target="_blank" rel="noopener">料金を見る</a>
     </div>
-    <p class="mnt-fine">※各サンプルの店舗名・法人名・人物・数値はすべて架空です。写真はイメージです。</p>
+    <p class="mnt-fine">※各サンプルの店舗名・法人名・人物・数値はすべて架空です。図版はイラストです。</p>
   </div>
 </div>
 <!-- mnt-portfolio-bar:end -->
