@@ -4,9 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>(株)サンプル商事 オンラインストア｜月次売上ダッシュボード【デモ】</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;700;800&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
   :root{
     --bg:#f5f6f8;
@@ -18,8 +15,8 @@
     --accent-soft:#eaf0fd;
     --up:#128a5a;
     --down:#d23c50;
-    --num:'Manrope','Noto Sans JP',sans-serif;
-    --jp:'Noto Sans JP','Hiragino Kaku Gothic ProN',sans-serif;
+    --num:system-ui,-apple-system,"Helvetica Neue","Hiragino Sans","Hiragino Kaku Gothic ProN","Noto Sans JP",Meiryo,sans-serif;
+    --jp:system-ui,-apple-system,"Helvetica Neue","Hiragino Sans","Hiragino Kaku Gothic ProN","Noto Sans JP",Meiryo,sans-serif;
     --shadow:0 1px 2px rgba(27,35,51,.05),0 4px 16px rgba(27,35,51,.06);
     --radius:14px;
   }
@@ -52,12 +49,6 @@
   }
   .brand h1{font-size:16px;font-weight:700;letter-spacing:.02em;line-height:1.35}
   .brand .sub{font-size:11.5px;color:var(--muted);font-weight:400}
-  .demo-note{
-    margin-left:auto;
-    background:var(--accent-soft);color:var(--accent);
-    border:1px solid #cfdcfa;border-radius:999px;
-    padding:5px 14px;font-size:12px;font-weight:500;white-space:nowrap;
-  }
   .head-meta{
     max-width:1240px;margin:0 auto;padding:0 20px 16px;
     display:flex;flex-wrap:wrap;align-items:center;gap:10px 18px;
@@ -215,11 +206,29 @@
     .card{padding:16px 14px 14px}
     .chart-box{height:250px}
     .chart-box.donut{height:230px}
-    .demo-note{margin-left:0}
     .hm-grid{grid-template-columns:2.2em repeat(12,minmax(0,1fr))}
     .hm-grid .col-lbl{font-size:8px}
     .hm-grid .lbl{font-size:9.5px}
   }
+
+  /* ===== ページ上部の説明(デザインの正= cases.html のトークン) ===== */
+  .dintro{
+    background:linear-gradient(to bottom,rgba(37,99,235,.10),rgba(37,99,235,0) 92%),#FFFFFF;
+    border-bottom:1px solid rgba(13,13,13,.14);
+    text-align:center;padding:72px 0 56px;color:#0D0D0D;
+  }
+  .dintro .in{max-width:1128px;margin:0 auto;padding:0 20px}
+  .dintro h2{
+    font-size:clamp(2rem,calc(2rem + 1*((100vw - 23.4375rem)/66.5625)),3rem);
+    line-height:clamp(2.28rem,calc(2.28rem + 1.2*((100vw - 23.4375rem)/66.5625)),3.48rem);
+    letter-spacing:-.02em;font-weight:500;text-wrap:balance;
+  }
+  .dintro .dlead{
+    max-width:680px;margin:24px auto 0;
+    font-size:1.0625rem;line-height:1.75rem;letter-spacing:-.01em;text-wrap:pretty;
+  }
+  .dintro .dcap{margin-top:16px;font-size:.875rem;line-height:1.435rem;color:rgba(13,13,13,.6)}
+  @media (max-width:560px){.dintro{padding:52px 0 44px}}
 </style>
 </head>
 <body>
@@ -275,7 +284,7 @@ document.querySelectorAll("#pfnav a[data-k]").forEach(function(a){if(a.getAttrib
   if (!nav) return;
   var basePad = null;
   function fit(){
-    var fict = document.getElementById('demo-fict');
+    var fict = null;
     var h = (nav.offsetHeight || 0) + (fict ? (fict.offsetHeight || 0) : 0);
     if (basePad === null) {
       basePad = parseFloat(getComputedStyle(document.documentElement).scrollPaddingTop) || 0;
@@ -300,11 +309,16 @@ document.querySelectorAll("#pfnav a[data-k]").forEach(function(a){if(a.getAttrib
 })();
 </script>
 <!-- pfnav:end -->
-<!-- demo-fict:start 架空サンプル明示帯(2026-09-04) -->
-<style>#demo-fict{background:#fff8e8;color:#6d5518;border-bottom:1px solid #ecdfbc;font-family:"Hiragino Kaku Gothic ProN","Noto Sans JP","Yu Gothic",Meiryo,sans-serif;font-size:12.5px;line-height:1.55;text-align:center;padding:8px 14px}@media print{#demo-fict{display:none}}</style>
-<div id="demo-fict">これは制作サンプル（売上ダッシュボードの画面デモ）です。会社名・数値はすべて架空です。</div>
-<!-- demo-fict:end -->
 
+
+
+<section class="dintro">
+  <div class="in">
+    <h2>売上ダッシュボード</h2>
+    <p class="dlead">売上の記録(CSV)を所定の場所に置くだけで、集計・グラフ・前月比まで毎月自動で更新される仕組みの画面デモです。下の画面は実際に触れます。月を切り替えると、すべてのグラフと表が連動します。</p>
+    <p class="dcap">※会社名・商品・数値はすべて架空です。</p>
+  </div>
+</section>
 
 <header>
   <div class="head-in">
@@ -315,7 +329,6 @@ document.querySelectorAll("#pfnav a[data-k]").forEach(function(a){if(a.getAttrib
         <div class="sub">Monthly Sales Dashboard — 2026年上半期</div>
       </div>
     </div>
-    <div class="demo-note">毎月CSVを置くだけで自動更新される想定のデモです</div>
   </div>
   <div class="head-meta">
     <div class="seg" id="seg" role="tablist" aria-label="対象月の選択"></div>
@@ -543,8 +556,8 @@ function renderKPIs(){
 /* ================ グラフ描画(自前canvas・外部ライブラリ不使用 2026-09-04) ================
    Chart.js CDNをやめ、素のcanvasで棒+折れ線/ドーナツ/横棒を描く。
    CDNが切れて「動くデモ」のグラフが全部止まる事故を構造的に無くすため。 */
-const FONT_NUM = "'Manrope','Noto Sans JP',sans-serif";
-const FONT_JP  = "'Noto Sans JP',sans-serif";
+const FONT_NUM = "system-ui,'Hiragino Sans','Noto Sans JP',sans-serif";
+const FONT_JP  = "system-ui,'Hiragino Sans','Noto Sans JP',sans-serif";
 const gridColor = "#eef0f4";
 const AXIS_C = "#69748c";
 
@@ -877,6 +890,10 @@ if(hashIdx >= 0) cur = hashIdx;
 buildSeg();
 setMonth(cur);
 </script>
+<!-- demo-fict:start 架空サンプルの注記(2026-09-04 上部の帯からフッターへ移設) -->
+<style>#demo-fict{margin:0;padding:20px 20px 28px;background:#fff;color:rgba(13,13,13,.6);border-top:1px solid rgba(13,13,13,.14);font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue","Hiragino Kaku Gothic ProN","Noto Sans JP","Yu Gothic",Meiryo,sans-serif;font-size:13px;line-height:1.7;text-align:center}@media print{#demo-fict{display:none}}</style>
+<div id="demo-fict">これは制作サンプル（売上ダッシュボードの画面デモ）です。会社名・数値はすべて架空です。</div>
+<!-- demo-fict:end -->
 <!-- mnt-portfolio-bar:begin (automation/hp_demos_inject_bar.py が生成・手で編集しない) -->
 <style>
 /* 作品集への導線帯。デザインの正= cases.html(白地・--tint-4カード・.btn radius 2.5rem)。

@@ -29,37 +29,24 @@
   img{max-width:100%;}
   .wrap{max-width:1120px;margin:0 auto;padding:0 24px;}
 
-  /* ===== hero ===== */
-  .hero{
-    background:linear-gradient(135deg,#04b04b 0%,#06C755 55%,#3ddc7f 100%);
-    color:#fff;
-    padding:64px 0 150px;
-    position:relative;
-    overflow:hidden;
+  /* ===== ページ上部の説明(デザインの正= cases.html のトークン) ===== */
+  .mintro{
+    background:linear-gradient(to bottom,rgba(37,99,235,.10),rgba(37,99,235,0) 92%),#FFFFFF;
+    border-bottom:1px solid rgba(13,13,13,.14);
+    font-family:system-ui,-apple-system,"Helvetica Neue","Hiragino Sans","Hiragino Kaku Gothic ProN","Noto Sans JP","Yu Gothic",Meiryo,sans-serif;
+    color:#0D0D0D;text-align:center;padding:72px 0 56px;
   }
-  .hero::after{
-    content:"";
-    position:absolute;left:50%;bottom:-1px;transform:translateX(-50%);
-    width:120%;height:90px;background:#fbfdfc;
-    border-radius:100% 100% 0 0;
+  .mintro .tag{display:block;font-size:.875rem;line-height:1.435rem;font-weight:500;color:#2563EB;margin-bottom:16px;letter-spacing:.02em;}
+  .mintro .nw{white-space:nowrap;display:inline-block;}
+  .mintro h1{
+    font-size:clamp(2rem,calc(2rem + 1.25*((100vw - 23.4375rem)/66.5625)),3.25rem);
+    line-height:1.25;letter-spacing:-.03em;font-weight:500;text-wrap:balance;
   }
-  .hero .wrap{position:relative;z-index:2;}
-  .hero-badge{
-    display:inline-block;background:rgba(255,255,255,.18);
-    border:1px solid rgba(255,255,255,.55);
-    border-radius:999px;padding:4px 18px;font-size:13px;font-weight:700;letter-spacing:.08em;
-    margin-bottom:20px;
+  .mintro p.lead{
+    max-width:680px;margin:24px auto 0;
+    font-size:1.0625rem;line-height:1.75rem;letter-spacing:-.01em;text-wrap:pretty;
   }
-  .hero h1{
-    font-size:38px;line-height:1.45;font-weight:800;letter-spacing:.02em;
-    margin-bottom:16px;
-  }
-  .hero p.lead{font-size:16px;max-width:640px;opacity:.96;}
-  .hero .demo-note{
-    margin-top:22px;display:inline-block;background:#fff;color:var(--green-dark);
-    font-weight:700;font-size:13px;border-radius:10px;padding:8px 16px;
-    box-shadow:0 6px 18px rgba(0,0,0,.12);
-  }
+  .mintro .demo-note{margin-top:16px;font-size:.875rem;line-height:1.435rem;color:rgba(13,13,13,.6);}
 
   /* ===== section common ===== */
   section{padding:72px 0;}
@@ -314,8 +301,7 @@
 
   /* ===== responsive ===== */
   @media (max-width:640px){
-    .hero{padding:48px 0 120px;}
-    .hero h1{font-size:26px;}
+    .mintro{padding:52px 0 44px;}
     h2{font-size:22px;}
     section{padding:52px 0;}
     .wrap{padding:0 16px;}
@@ -385,7 +371,7 @@ document.querySelectorAll("#pfnav a[data-k]").forEach(function(a){if(a.getAttrib
   if (!nav) return;
   var basePad = null;
   function fit(){
-    var fict = document.getElementById('demo-fict');
+    var fict = null;
     var h = (nav.offsetHeight || 0) + (fict ? (fict.offsetHeight || 0) : 0);
     if (basePad === null) {
       basePad = parseFloat(getComputedStyle(document.documentElement).scrollPaddingTop) || 0;
@@ -410,19 +396,16 @@ document.querySelectorAll("#pfnav a[data-k]").forEach(function(a){if(a.getAttrib
 })();
 </script>
 <!-- pfnav:end -->
-<!-- demo-fict:start 架空サンプル明示帯(2026-09-04) -->
-<style>#demo-fict{background:#fff8e8;color:#6d5518;border-bottom:1px solid #ecdfbc;font-family:"Hiragino Kaku Gothic ProN","Noto Sans JP","Yu Gothic",Meiryo,sans-serif;font-size:12.5px;line-height:1.55;text-align:center;padding:8px 14px}@media print{#demo-fict{display:none}}</style>
-<div id="demo-fict">これは制作サンプル（架空の整体院を題材にしたLINE構築デモ）です。店名・数値はすべて架空です。</div>
-<!-- demo-fict:end -->
+
 
 
 <!-- ============ HERO ============ -->
-<div class="hero">
+<div class="mintro">
   <div class="wrap">
-    <span class="hero-badge">LINE公式アカウント 構築サンプル</span>
-    <h1>友だち追加から予約まで、<br>LINEが自動で接客する仕組み。</h1>
+    <span class="tag">LINE公式アカウント 構築デモ</span>
+    <h1><span class="nw">友だち追加から</span><span class="nw">予約まで、</span><br><span class="nw">LINEが自動で</span><span class="nw">接客する仕組み。</span></h1>
     <p class="lead">架空の整体院「からだ整えラボ 大宮院」を題材に、あいさつメッセージ・自動診断・ステップ配信・予約リマインドまでを組み込んだ構築デモです。実際のトーク画面イメージと設計図でご覧いただけます。</p>
-    <span class="demo-note">※ 本ページは提案用の構築サンプル(デモ)です。店舗・数値はすべて架空です。</span>
+    <p class="demo-note">※本ページは提案用の構築サンプル(デモ)です。店舗・数値はすべて架空です。</p>
   </div>
 </div>
 
@@ -667,6 +650,10 @@ document.querySelectorAll("#pfnav a[data-k]").forEach(function(a){if(a.getAttrib
     cell.addEventListener('pointerleave',function(){cell.style.transform='';});
   });
 </script>
+<!-- demo-fict:start 架空サンプルの注記(2026-09-04 上部の帯からフッターへ移設) -->
+<style>#demo-fict{margin:0;padding:20px 20px 28px;background:#fff;color:rgba(13,13,13,.6);border-top:1px solid rgba(13,13,13,.14);font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue","Hiragino Kaku Gothic ProN","Noto Sans JP","Yu Gothic",Meiryo,sans-serif;font-size:13px;line-height:1.7;text-align:center}@media print{#demo-fict{display:none}}</style>
+<div id="demo-fict">これは制作サンプル（架空の整体院を題材にしたLINE構築デモ）です。店名・数値はすべて架空です。</div>
+<!-- demo-fict:end -->
 <!-- mnt-portfolio-bar:begin (automation/hp_demos_inject_bar.py が生成・手で編集しない) -->
 <style>
 /* 作品集への導線帯。デザインの正= cases.html(白地・--tint-4カード・.btn radius 2.5rem)。
