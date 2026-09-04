@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>サービス同士をつなぐ｜自動化のミナト</title>
+<meta name="description" content="通販サイトの注文を配送会社の送り状発行へ。表計算をチャットへ。人が毎日コピーしている受け渡しを機械に任せた実例を載せています。">
+<style>
+:root{--black:#0D0D0D;--white:#FFFFFF;--charcoal:#343541;--gray:#8E8EA0;--blue:#2563EB;
+--ink-60:rgba(13,13,13,.6);--tint-4:rgba(13,13,13,.04);--tint-8:rgba(13,13,13,.08);--tint-12:rgba(13,13,13,.12);--hairline:rgba(13,13,13,.14);
+--fs-h4:clamp(1.25rem,calc(1.25rem + .125*((100vw - 23.4375rem)/66.5625)),1.375rem);
+--lh-h4:clamp(1.5rem,calc(1.5rem + .2325*((100vw - 23.4375rem)/66.5625)),1.7325rem);
+--fs-h3:clamp(1.5rem,calc(1.5rem + .375*((100vw - 23.4375rem)/66.5625)),1.875rem);
+--lh-h3:clamp(1.98rem,calc(1.98rem + .495*((100vw - 23.4375rem)/66.5625)),2.475rem)}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;background:var(--white)}
+body{position:relative;background:var(--white);color:var(--black);font-family:system-ui,-apple-system,"Helvetica Neue","Hiragino Sans","Hiragino Kaku Gothic ProN","Noto Sans JP","Yu Gothic",Meiryo,sans-serif;word-break:auto-phrase;-webkit-font-smoothing:antialiased}
+h1,h2,h3,p,li{text-wrap:pretty}
+h1,h2{text-wrap:balance}
+img{display:block;max-width:100%}
+ul,ol{list-style:none}
+[hidden]{display:none!important}
+section[id]{scroll-margin-top:80px}
+a:focus-visible,button:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+.container{max-width:1128px;margin-inline:auto;padding-inline:20px}
+.nw{white-space:nowrap;display:inline-block}
+h1{font-size:clamp(2rem,calc(2rem + 2*((100vw - 23.4375rem)/66.5625)),4rem);line-height:clamp(2.28rem,calc(2.28rem + 1.72*((100vw - 23.4375rem)/66.5625)),4rem);letter-spacing:-.03em;font-weight:500}
+h2{font-size:clamp(2rem,calc(2rem + 1*((100vw - 23.4375rem)/66.5625)),3rem);line-height:clamp(2.28rem,calc(2.28rem + 1.2*((100vw - 23.4375rem)/66.5625)),3.48rem);letter-spacing:clamp(-.03em,calc(-.03em + .02*((90rem - 100vw)/66.5625)),-.01em);font-weight:500}
+h3{font-size:var(--fs-h3);line-height:var(--lh-h3);letter-spacing:-.01em;font-weight:500}
+p,li{font-size:1.0625rem;line-height:1.75rem;letter-spacing:-.01em}
+.lead{font-size:1.0625rem;line-height:1.75rem;letter-spacing:-.01em}
+.caption{font-size:.875rem;line-height:1.435rem;letter-spacing:0}
+.muted-caption{color:var(--ink-60)}
+.glow-top{position:absolute;left:0;right:0;top:0;height:1100px;pointer-events:none;z-index:-1;background:linear-gradient(to bottom,rgba(37,99,235,.1) 0,rgba(37,99,235,.09) 420px,rgba(37,99,235,0) 1100px)}
+.header{position:sticky;top:0;z-index:10;background:rgba(255,255,255,.72);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px)}
+.header-in{margin-inline:auto;padding-inline:32px;height:64px;display:flex;align-items:center;justify-content:space-between;gap:24px}
+.brand{color:var(--black);font-size:1rem;line-height:1.25rem;font-weight:600;text-decoration:none;padding:12px 0}
+.nav{display:flex;align-items:center;gap:28px}
+.nav a{color:var(--ink-60);font-size:.8125rem;line-height:1.23rem;font-weight:500;text-decoration:none;padding:12px 0;transition:color .2s}
+.nav a:hover{color:var(--black)}
+.nav a[aria-current="page"]{color:var(--black)}
+.nav a.nav-contact{display:inline-flex;align-items:center;justify-content:center;height:36px;padding:0 16px;background:var(--black);color:var(--white);border-radius:2.5rem;transition:background-color .2s}
+.nav a.nav-contact:hover{background:rgba(13,13,13,.8);color:var(--white)}
+.menu-btn{display:none;align-items:center;justify-content:center;height:36px;padding:0 16px;background:var(--tint-8);color:var(--black);border:0;border-radius:2.5rem;font-family:inherit;font-size:.8125rem;line-height:1;font-weight:500;cursor:pointer;transition:background-color .2s}
+.menu-btn:hover{background:var(--tint-12)}
+.mnav{display:none}
+.hero{text-align:center;padding:96px 0 0}
+.hero .lead{max-width:680px;margin:24px auto 0}
+.hero-cta{margin-top:32px;display:flex;justify-content:center;gap:12px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;justify-content:center;height:40px;padding:0 20px;border-radius:2.5rem;font-size:.875rem;line-height:1;font-weight:500;text-decoration:none;transition:background-color .2s,color .2s}
+.btn-primary{background:var(--black);color:var(--white)}
+.btn-primary:hover{background:rgba(13,13,13,.8)}
+.btn-ghost{background:var(--tint-8);color:var(--black)}
+.btn-ghost:hover{background:var(--tint-12)}
+.sec{margin-top:120px}
+.sec-head{text-align:center;max-width:760px;margin-inline:auto}
+.sec-head .lead{margin-top:24px}
+.sec-body{margin-top:64px}
+.card{background:var(--tint-4);border-radius:8px;padding:32px}
+.card h3{font-size:var(--fs-h4);line-height:var(--lh-h4)}
+.card .body{margin-top:18px}
+.card-link{display:inline-flex;align-items:center;min-height:44px;margin-top:14px;color:var(--black);font-size:.875rem;line-height:1.25rem;font-weight:500;text-decoration:none;transition:color .2s}
+.card-link::after{content:"→";margin-left:.4em}
+.card-link:hover{color:var(--ink-60)}
+a.card{display:block;color:inherit;text-decoration:none;transition:background-color .2s}
+a.card:hover{background:var(--tint-12)}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.contact{position:relative;text-align:center;margin-top:120px;padding:140px 0 160px;overflow:hidden}
+.contact::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(to top,rgba(37,99,235,.12),rgba(37,99,235,0) 85%)}
+.contact .lead{max-width:620px;margin:24px auto 0}
+.contact-cta{margin-top:32px;display:flex;justify-content:center}
+.contact-sub{margin:32px auto 0;max-width:620px;color:var(--ink-60)}
+.contact-sub a{color:var(--black)}
+.footer{padding:40px 0 48px}
+.footer-in{display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap}
+.footer-brand{font-size:1rem;line-height:1.25rem;font-weight:600}
+.footer-nav{display:flex;gap:24px}
+.footer-nav a{display:inline-flex;align-items:center;min-height:44px;color:var(--ink-60);font-size:.875rem;line-height:1.25rem;font-weight:500;text-decoration:none;transition:color .2s}
+.footer-nav a:hover{color:var(--black)}
+@media (max-width:1023px){
+.grid3{grid-template-columns:repeat(2,1fr)}
+.header-in{padding-inline:24px}
+}
+@media (max-width:767px){
+.header-in{padding-inline:20px;height:54px}
+.card{padding:24px}
+.grid3{grid-template-columns:1fr;gap:24px}
+.sec{margin-top:80px}
+.hero{padding:72px 0 0}
+.contact{margin-top:80px;padding:96px 0 112px}
+.nav{gap:12px}
+.nav a{display:none}
+.nav a.nav-contact{display:inline-flex}
+.menu-btn{display:inline-flex}
+.mnav:not([hidden]){display:block;background:rgba(255,255,255,.92);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px)}
+.mnav a{display:block;padding:14px 20px;border-top:1px solid var(--hairline);color:var(--black);font-size:1rem;line-height:1.25rem;font-weight:500;text-decoration:none}
+}
+@media (prefers-reduced-motion:reduce){
+html{scroll-behavior:auto}
+*{transition:none!important;animation:none!important}
+}
+.cases-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.case-main{grid-row:1/3}
+.case-tag{color:var(--ink-60)}
+.case-title{margin-top:8px}
+.case-fee{margin-top:12px;font-weight:500;white-space:nowrap}
+.case-kick{margin-top:14px}
+.case-list{margin-top:14px}
+.case-list li{padding:9px 0;border-top:1px solid var(--hairline);font-size:.875rem;line-height:1.435rem;letter-spacing:-.01em}
+.case-note{margin-top:14px}
+.work-card{padding:8px;overflow:hidden;display:flex;flex-direction:column}
+.work-img{aspect-ratio:16/10;overflow:hidden;border-radius:6px}
+.work-img img{width:100%;height:100%;object-fit:cover}
+.work-body{padding:20px 16px 12px;display:flex;flex-direction:column;flex:1}
+.work-meta{display:flex;justify-content:space-between;gap:12px;margin-bottom:10px}
+.work-body p.desc{margin-top:10px}
+.work-body .card-link{margin-top:auto;padding-top:14px}
+@media (max-width:1023px){
+.cases-grid{grid-template-columns:1fr 1fr}
+}
+@media (max-width:767px){
+.cases-grid{grid-template-columns:1fr}
+.case-main{grid-row:auto}
+.work-body{padding:16px 12px 8px}
+}
+.case-step{margin-top:14px}
+.case-step .step-label{display:block;margin-bottom:4px;font-size:.8125rem;line-height:1.23rem;font-weight:500;color:var(--ink-60);letter-spacing:.02em}
+.case-foot{margin-top:28px;text-align:center;color:var(--ink-60)}
+.works-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+@media (max-width:1023px){.works-grid{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:767px){.works-grid{grid-template-columns:1fr;gap:24px}}
+.flow{display:flex;align-items:stretch;gap:0;margin-top:20px;overflow-x:auto;padding-bottom:4px}
+.flow-node{flex:0 0 auto;min-width:132px;padding:14px 16px;border:1px solid var(--hairline);border-radius:12px;background:var(--tint-4);text-align:center}
+.flow-node b{display:block;font-size:.9375rem;line-height:1.4rem;font-weight:500}
+.flow-node span{display:block;margin-top:4px;font-size:.8125rem;line-height:1.23rem;color:var(--ink-60)}
+.flow-arrow{flex:0 0 auto;align-self:center;padding:0 10px;color:var(--ink-60)}
+.ex{margin-top:56px;padding-top:40px;border-top:1px solid var(--hairline)}
+.ex:first-of-type{margin-top:32px;padding-top:0;border-top:0}
+.ex h3{font-size:var(--fs-h3);line-height:var(--lh-h3);letter-spacing:-.01em;font-weight:500}
+.ex-step{margin-top:14px}
+.ex-step .step-label{display:block;margin-bottom:4px;font-size:.8125rem;line-height:1.23rem;font-weight:500;color:var(--ink-60);letter-spacing:.02em}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px}
+.chips span{padding:6px 14px;border:1px solid var(--hairline);border-radius:2.5rem;font-size:.875rem;line-height:1.25rem}
+</style>
+</head>
+<body>
+<div class="glow-top" aria-hidden="true"></div>
+<header class="header">
+<div class="header-in">
+<a class="brand" href="./index.html">自動化のミナト</a>
+<nav class="nav" aria-label="メインナビゲーション">
+<a href="./index.html">サービス</a>
+<a href="./pricing.html">料金</a>
+<a href="./cases.html">事例</a>
+<a class="nav-contact" href="#contact">お問い合わせ</a>
+<button class="menu-btn" type="button" aria-expanded="false" aria-controls="mnav">メニュー</button>
+</nav>
+</div>
+<nav class="mnav" id="mnav" hidden aria-label="メニュー">
+<a href="./index.html">サービス</a>
+<a href="./pricing.html">料金</a>
+<a href="./cases.html">事例</a>
+</nav>
+</header>
+<main>
+<section class="hero" id="top">
+<div class="container">
+<h1><span class="nw">サービス同士を、</span><span class="nw">つなぎます。</span></h1>
+<p class="lead">通販サイトの注文を配送会社へ。社内の表計算をチャットへ。人が毎日コピーして貼り替えている受け渡しを、機械に代わってもらいます。</p>
+<div class="hero-cta"><a class="btn btn-primary" href="https://page.line.me/091usyfe" target="_blank" rel="noopener">相談内容を送る</a><a class="btn btn-ghost" href="./cases.html">ほかの制作例を見る</a></div>
+</div>
+</section>
+
+<section class="sec">
+<div class="container">
+<div class="sec-head">
+<h2><span class="nw">実際につないだ例</span></h2>
+<p class="lead">いずれも実際にお受けした仕事です。会社名は伏せています。</p>
+</div>
+<div class="sec-body">
+<article class="ex">
+<h3>通販の注文を、配送会社の送り状発行まで</h3>
+<div class="flow"><div class="flow-node"><b>通販サイト</b><span>注文データ</span></div><div class="flow-arrow" aria-hidden="true">→</div><div class="flow-node"><b>整形</b><span>配送会社の様式へ</span></div><div class="flow-arrow" aria-hidden="true">→</div><div class="flow-node"><b>送り状発行</b><span>そのまま登録</span></div></div>
+<p class="ex-step"><span class="step-label">困っていたこと</span>注文が入るたびに管理画面から一覧を落とし、配送会社の様式に貼り替えて、送り状を1件ずつ登録していました。年末年始は月500件規模になります。</p>
+<p class="ex-step"><span class="step-label">つないだもの</span>通販サイトから注文を取り出し、配送会社の様式に整えて、送り状発行のシステムへ登録するところまでを1本にしました。ログインもこちらで通します。</p>
+<p class="ex-step"><span class="step-label">どうなったか</span>ログインしていない状態から16.8秒で登録まで終わります。人が画面を操作する工程はありません。同じ注文を二重に登録しないよう、登録済みのものは止める仕組みを入れてあります。</p>
+</article>
+<article class="ex">
+<h3>注文の一覧を、倉庫へのチャット通知まで</h3>
+<div class="flow"><div class="flow-node"><b>通販サイト</b><span>当日の注文</span></div><div class="flow-arrow" aria-hidden="true">→</div><div class="flow-node"><b>表計算</b><span>出荷指示の形へ</span></div><div class="flow-arrow" aria-hidden="true">→</div><div class="flow-node"><b>チャット</b><span>倉庫へ自動送信</span></div></div>
+<p class="ex-step"><span class="step-label">困っていたこと</span>出荷の指示を人が毎日まとめて送っていました。送り忘れるとその日の出荷が止まります。</p>
+<p class="ex-step"><span class="step-label">つないだもの</span>決まった時刻に当日の注文を取り出し、出荷指示の形にまとめて、倉庫のチャットへ送るようにしました。処理はクラウド側で動きます。</p>
+<p class="ex-step"><span class="step-label">どうなったか</span>パソコンを開いていなくても決まった時刻に流れます。注文300件を取り出して送るところまで、人の操作なしで通ることを実測しています。</p>
+</article>
+<article class="ex">
+<h3>サービスの利用状況を、管理画面で見えるように</h3>
+<div class="flow"><div class="flow-node"><b>AIの提供元</b><span>応答の記録</span></div><div class="flow-arrow" aria-hidden="true">→</div><div class="flow-node"><b>データベース</b><span>待ち時間を蓄積</span></div><div class="flow-arrow" aria-hidden="true">→</div><div class="flow-node"><b>管理画面</b><span>数字で表示</span></div></div>
+<p class="ex-step"><span class="step-label">困っていたこと</span>「AIの応答が遅い」という声はあるものの、何が原因なのか分からない状態でした。心当たりで直しても、直ったかどうかも分かりません。</p>
+<p class="ex-step"><span class="step-label">つないだもの</span>呼び出しごとに、待ち時間と使った量と提供元からの上限情報を記録するようにし、管理画面から見えるようにしました。</p>
+<p class="ex-step"><span class="step-label">どうなったか</span>遅くなるのは前の呼び出しから60秒以内に呼んだときだけだと分かりました（60秒以内は中央値21.3秒、それより空けば2.6秒）。原因が数字で見えたので、無駄な重複呼び出しを1回から0回にできました。</p>
+</article>
+</div>
+</div>
+</section>
+
+<section class="sec">
+<div class="container">
+<div class="sec-head">
+<h2><span class="nw">つなげる先</span></h2>
+<p class="lead">つなぎ口が公開されているものはそのまま、公開されていないものはログインして画面から操作する形でつなぎます。</p>
+</div>
+<div class="sec-body">
+<div class="chips"><span>通販サイト</span><span>配送会社</span><span>チャット</span><span>表計算</span><span>データベース</span><span>AI</span><span>SNS</span><span>会計・請求</span><span>メール</span></div>
+</div>
+</div>
+</section>
+
+<section class="contact" id="contact">
+<div class="container">
+<h2><span class="nw">つながるかどうか</span><span class="nw">だけでも</span><span class="nw">お答えします</span></h2>
+<p class="lead">いま使っているサービス名を教えていただければ、つなげるか、どこまでできるかをお返しします。</p>
+<div class="contact-cta"><a class="btn btn-primary" href="https://page.line.me/091usyfe" target="_blank" rel="noopener">相談内容を送る</a></div>
+</div>
+</section>
+</main>
+<footer class="footer">
+<div class="container footer-in">
+<span class="footer-brand">自動化のミナト</span>
+<nav class="footer-nav" aria-label="フッターナビゲーション">
+<a href="./index.html">サービス</a>
+<a href="./pricing.html">料金</a>
+<a href="./cases.html">事例</a>
+</nav>
+</div>
+</footer>
+<script>
+(function(){
+var b=document.querySelector(".menu-btn"),m=document.getElementById("mnav");
+if(!b||!m)return;
+b.addEventListener("click",function(){
+if(m.hasAttribute("hidden")){m.removeAttribute("hidden");b.setAttribute("aria-expanded","true");}
+else{m.setAttribute("hidden","");b.setAttribute("aria-expanded","false");}
+});
+})();
+</script>
+</body>
+</html>

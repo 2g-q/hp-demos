@@ -123,6 +123,12 @@ html{scroll-behavior:auto}
 .case-main{grid-row:auto}
 .work-body{padding:16px 12px 8px}
 }
+.case-step{margin-top:14px}
+.case-step .step-label{display:block;margin-bottom:4px;font-size:.8125rem;line-height:1.23rem;font-weight:500;color:var(--ink-60);letter-spacing:.02em}
+.case-foot{margin-top:28px;text-align:center;color:var(--ink-60)}
+.works-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+@media (max-width:1023px){.works-grid{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:767px){.works-grid{grid-template-columns:1fr;gap:24px}}
 </style>
 </head>
 <body>
@@ -156,101 +162,100 @@ html{scroll-behavior:auto}
 <div class="container">
 <div class="sec-head">
 <h2><span class="nw">月額では、</span><span class="nw">こんな仕事を</span><span class="nw">任されています</span></h2>
-<p class="lead">いずれも現在続いているご契約です。きっかけと、実際に進めている内容を載せています。</p>
+<p class="lead">いずれも現在続いているご契約です。会社名は伏せ、業種のみ記載しています。</p>
 </div>
 <div class="cases-grid sec-body">
 <article class="card case-main">
 <p class="case-tag caption">建設業の会社</p>
 <h3 class="case-title">情報システム代行</h3>
 <p class="case-fee">月額 55,000円（税込）</p>
-<p class="case-kick">きっかけ：社内にシステム担当がおらず、その都度困っていた。</p>
-<ul class="case-list">
-<li>社内で使っているExcelの集計表の作り直しと、不具合の修正</li>
-<li>社内のITの困りごとの相談窓口</li>
-<li>画面共有での遠隔サポート</li>
-</ul>
+<p class="case-step"><span class="step-label">困っていたこと</span>現場の報告書を作るExcelが、Officeの更新をきっかけにまったく動かなくなりました。写真を貼る操作ができず、報告書が作れません。原価の集計表も、手入力とコピペで回していました。</p>
+<p class="case-step"><span class="step-label">作った仕組み</span>画面をつないで原因を調べ、パソコン側の設定3か所が止めていたことを突き止めて直しました。集計表は、費目の名前を打ち込むとその費目の合計が自動で出る形に作り替えました。</p>
+<p class="case-step"><span class="step-label">どうなったか</span>集計表は2,817か所を書き換え、壊れたまま気づかれていなかった計算式22か所も見つけて直しました。いまは社内のITの困りごと全般の相談窓口も兼ねています。</p>
 <p class="case-note caption muted-caption">想定の作業量：月10時間</p>
 </article>
 <article class="card">
 <p class="case-tag caption">食品・飲料メーカー</p>
 <h3 class="case-title">通販サイトの構築と運用</h3>
 <p class="case-fee">月額 55,000円（税込）</p>
-<p class="case-kick">きっかけ：通販を始めたいが、社内に作れる人も運用できる人もいなかった。</p>
-<ul class="case-list">
-<li>通販サイトの立ち上げ</li>
-<li>商品46件の登録と公開</li>
-<li>注文から出荷までの流れの整備</li>
-<li>表示や規約まわりの点検</li>
-<li>予約販売の準備</li>
-</ul>
+<p class="case-step"><span class="step-label">困っていたこと</span>通販を始めたいが、社内に作れる人も運用できる人もいませんでした。以前の外注先が抜けたあと、止まったままでした。</p>
+<p class="case-step"><span class="step-label">作った仕組み</span>通販サイトを立ち上げ、商品を登録して公開しました。注文が入ったら配送会社の送り状発行システムまで自動で流れるようにし、倉庫への出荷指示も自動で送っています。</p>
+<p class="case-step"><span class="step-label">どうなったか</span>商品46件を公開しました。送り状の登録は、ログインしていない状態から16.8秒で終わります。人が画面を操作する工程はありません。通常は月100〜200件、年末年始は月500件規模の注文を扱います。</p>
 </article>
 <article class="card">
 <p class="case-tag caption">自社でWebサービスを運営する会社</p>
 <h3 class="case-title">AIパートナー</h3>
 <p class="case-fee">月額 33,000円（税込）</p>
-<p class="case-kick">きっかけ：サービスにAIを組み込んだが、直せる人が社内にいなかった。</p>
-<ul class="case-list">
-<li>利用者ごとの上限設定や、権限まわりの機能追加</li>
-<li>不具合の原因調査と修正</li>
-<li>AIの利用状況を管理画面で見えるようにする</li>
-<li>本番に反映する前の動作確認</li>
-</ul>
+<p class="case-step"><span class="step-label">困っていたこと</span>自社サービスにAIを組み込んだものの、直せる人が社内にいませんでした。開発者本人のパソコンでしか動かせず、他の人に配れない状態でした。</p>
+<p class="case-step"><span class="step-label">作った仕組み</span>50〜100名が同時に使えるよう、利用者ごとにデータを分け、権限と利用上限を付けました。AIの応答が遅くなる原因も、実際に測って切り分けました。</p>
+<p class="case-step"><span class="step-label">どうなったか</span>遅くなるのは、前の呼び出しから60秒以内に呼んだときだけだと分かりました（60秒以内は中央値21.3秒、それより空けば2.6秒）。無駄な重複呼び出しは1回から0回になりました。</p>
 </article>
 </div>
+<p class="case-foot lead">ここで作った仕組みは、下の制作例にも並べています。</p>
 </div>
 </section>
-<section class="sec" id="single">
+<section class="sec" id="tools">
 <div class="container">
 <div class="sec-head">
-<h2><span class="nw">単発の制作例。</span><span class="nw">触って動かせます</span></h2>
-<p class="lead">いずれも架空の会社・数値で作ったデモです。完成条件を決めて、この形で納品します。</p>
+<h2><span class="nw">ツール群。</span><span class="nw">触って動かせます</span></h2>
+<p class="lead">仕事の手を減らすもの、数字を見える形にするもの、サービス同士をつなぐものです。</p>
 </div>
-<div class="grid3 sec-body">
-<a class="card work-card" href="./gyomu-system.html">
-<div class="work-img"><img src="./pf/gyomu-system.jpg" alt="販売・購買・債権管理システムの実画面"></div>
+<div class="works-grid sec-body">
+<a class="card work-card" href="./api-link.html">
+<div class="work-img"><img src="./pf/sample5-api.jpg" alt="サービス同士をつなぐ仕組みの図"></div>
 <div class="work-body">
-<p class="work-meta caption muted-caption"><span>業務システム</span><span>操作可能</span></p>
+<p class="work-meta caption muted-caption"><span>API連携</span><span>自動処理</span></p>
+<h3>サービス同士をつなぐ</h3>
+<p class="desc">通販サイトの注文を、配送会社の送り状発行まで自動で流します。</p>
+<span class="card-link">仕組みを見る</span>
+</div>
+</a>
+<a class="card work-card" href="./gyomu-system.html">
+<div class="work-img"><img src="./pf/gyomu-system.jpg" alt="販売・購買・債権管理システムのデモ画面"></div>
+<div class="work-body">
+<p class="work-meta caption muted-caption"><span>業務システム</span></p>
 <h3>販売・購買・債権管理</h3>
-<p class="desc">見積から請求、入金消込までを一つの画面で管理。</p>
+<p class="desc">見積から入金まで、1本の流れで追えるようにします。</p>
 <span class="card-link">デモを見る</span>
 </div>
 </a>
 <a class="card work-card" href="./automation.html">
-<div class="work-img"><img src="./pf/automation.jpg" alt="自動化・データ処理作品集の実画面"></div>
+<div class="work-img"><img src="./pf/automation.jpg" alt="自動化・データ処理デモの実画面"></div>
 <div class="work-body">
-<p class="work-meta caption muted-caption"><span>業務自動化</span><span>実測あり</span></p>
+<p class="work-meta caption muted-caption"><span>自動処理</span><span>データ整理</span></p>
 <h3>自動化・データ処理</h3>
-<p class="desc">収集、転記、集計、PDF変換など7種類の自動化。</p>
+<p class="desc">毎日の転記や集計を、人の手から外します。</p>
 <span class="card-link">デモを見る</span>
 </div>
 </a>
 <a class="card work-card" href="./dashboard.html">
 <div class="work-img"><img src="./pf/dashboard.jpg" alt="EC売上ダッシュボードの実画面"></div>
 <div class="work-body">
-<p class="work-meta caption muted-caption"><span>データ集計</span><span>操作可能</span></p>
-<h3>EC売上ダッシュボード</h3>
-<p class="desc">毎月のCSVから売上、客単価、商品別実績を自動集計。</p>
+<p class="work-meta caption muted-caption"><span>集計</span><span>可視化</span></p>
+<h3>売上ダッシュボード</h3>
+<p class="desc">バラバラの数字を1枚にまとめて、毎朝見える形にします。</p>
 <span class="card-link">デモを見る</span>
 </div>
 </a>
-<a class="card work-card" href="./custom/vintage-archive-inbound.html">
-<div class="work-img"><img src="./pf/vintage-archive-inbound.jpg" alt="多言語インバウンドサイトの実画面"></div>
+<a class="card work-card" href="./line.html">
+<div class="work-img"><img src="./pf/line.jpg" alt="LINE公式アカウント構築デモの実画面"></div>
 <div class="work-body">
-<p class="work-meta caption muted-caption"><span>ホームページ</span><span>9言語</span></p>
-<h3>多言語インバウンドサイト</h3>
-<p class="desc">訪日客の来店につなげる、写真に頼らない店舗サイト。</p>
+<p class="work-meta caption muted-caption"><span>運用設計</span><span>動線設計</span></p>
+<h3>LINE公式アカウント構築</h3>
+<p class="desc">自動応答、配信、予約までの導線を設計します。</p>
 <span class="card-link">デモを見る</span>
 </div>
 </a>
-<a class="card work-card" href="./design.html">
-<div class="work-img"><img src="./pf/design.jpg" alt="バナー制作サンプル集の実画面"></div>
-<div class="work-body">
-<p class="work-meta caption muted-caption"><span>EC運用</span><span>量産対応</span></p>
-<h3>バナー・画像制作</h3>
-<p class="desc">訴求違いのバナーや販促画像をまとめて制作。</p>
-<span class="card-link">デモを見る</span>
 </div>
-</a>
+</div>
+</section>
+<section class="sec" id="design">
+<div class="container">
+<div class="sec-head">
+<h2><span class="nw">デザイン群。</span><span class="nw">こちらも動かせます</span></h2>
+<p class="lead">サイト、ランディングページ、バナー、ドット絵のアニメーションです。</p>
+</div>
+<div class="works-grid sec-body">
 <a class="card work-card" href="./pixel-office.html">
 <div class="work-img"><img src="./pf/pixel-office.png" alt="ドット絵で作ったオフィスのアニメーション"></div>
 <div class="work-body">
@@ -260,12 +265,75 @@ html{scroll-behavior:auto}
 <span class="card-link">デモを見る</span>
 </div>
 </a>
-<a class="card work-card" href="./line.html">
-<div class="work-img"><img src="./pf/line.jpg" alt="LINE公式アカウント構築デモの実画面"></div>
+<a class="card work-card" href="./design.html">
+<div class="work-img"><img src="./pf/design.jpg" alt="バナー・画像制作の作例"></div>
 <div class="work-body">
-<p class="work-meta caption muted-caption"><span>運用設計</span><span>動線設計</span></p>
-<h3>LINE公式アカウント構築</h3>
-<p class="desc">自動応答、配信、予約までの導線を設計。</p>
+<p class="work-meta caption muted-caption"><span>デザイン</span><span>画像制作</span></p>
+<h3>バナー・画像制作</h3>
+<p class="desc">広告バナーやチラシを、まとめて量産します。</p>
+<span class="card-link">デモを見る</span>
+</div>
+</a>
+<a class="card work-card" href="./custom/vintage-archive-inbound.html">
+<div class="work-img"><img src="./pf/vintage-archive-inbound.jpg" alt="多言語インバウンドサイトのデモ"></div>
+<div class="work-body">
+<p class="work-meta caption muted-caption"><span>多言語</span><span>インバウンド</span></p>
+<h3>多言語インバウンドサイト</h3>
+<p class="desc">日本語と英語を1枚で切り替えられる構成にします。</p>
+<span class="card-link">デモを見る</span>
+</div>
+</a>
+<a class="card work-card" href="./corp.html">
+<div class="work-img"><img src="./pf/corp.jpg" alt="会社サイトのデモ画面"></div>
+<div class="work-body">
+<p class="work-meta caption muted-caption"><span>会社サイト</span></p>
+<h3>会社サイト</h3>
+<p class="desc">事業内容と信頼感を、1枚で伝える構成にします。</p>
+<span class="card-link">デモを見る</span>
+</div>
+</a>
+<a class="card work-card" href="./lp-gym.html">
+<div class="work-img"><img src="./pf/lp-gym.jpg" alt="ジムのランディングページのデモ"></div>
+<div class="work-body">
+<p class="work-meta caption muted-caption"><span>LP</span><span>集客</span></p>
+<h3>店舗集客のLP</h3>
+<p class="desc">体験予約までの動線を1本にまとめます。</p>
+<span class="card-link">デモを見る</span>
+</div>
+</a>
+<a class="card work-card" href="./lp-recruit.html">
+<div class="work-img"><img src="./pf/lp-recruit.jpg" alt="採用ランディングページのデモ"></div>
+<div class="work-body">
+<p class="work-meta caption muted-caption"><span>LP</span><span>採用</span></p>
+<h3>採用のLP</h3>
+<p class="desc">応募までの不安を先に消す順番で並べます。</p>
+<span class="card-link">デモを見る</span>
+</div>
+</a>
+<a class="card work-card" href="./dental-sakura.html">
+<div class="work-img"><img src="./pf/dental-sakura.jpg" alt="歯科クリニックのサイトのデモ"></div>
+<div class="work-body">
+<p class="work-meta caption muted-caption"><span>クリニック</span></p>
+<h3>クリニックのサイト</h3>
+<p class="desc">診療時間と初診の流れを、迷わせずに置きます。</p>
+<span class="card-link">デモを見る</span>
+</div>
+</a>
+<a class="card work-card" href="./salon.html">
+<div class="work-img"><img src="./pf/salon.jpg" alt="サロンのサイトのデモ"></div>
+<div class="work-body">
+<p class="work-meta caption muted-caption"><span>店舗サイト</span></p>
+<h3>サロンのサイト</h3>
+<p class="desc">雰囲気と予約導線を両立させます。</p>
+<span class="card-link">デモを見る</span>
+</div>
+</a>
+<a class="card work-card" href="./sns.html">
+<div class="work-img"><img src="./pf/sns.jpg" alt="SNS運用の設計例"></div>
+<div class="work-body">
+<p class="work-meta caption muted-caption"><span>SNS運用</span></p>
+<h3>SNS運用の設計</h3>
+<p class="desc">投稿の型と配信の段取りを決めて、続く形にします。</p>
 <span class="card-link">デモを見る</span>
 </div>
 </a>
