@@ -50,7 +50,8 @@ header.scrolled .burger span{background:var(--ink)}
 
 /* hero */
 .hero{position:relative;height:100vh;min-height:620px;display:flex;align-items:center;
-  background:#3a3128 url("https://images.unsplash.com/photo-1560066984-138dadb4c035?auto=format&fit=crop&w=1600&q=80") center/cover no-repeat}
+  background:#3a3128 linear-gradient(115deg,#2b241b 0%,#4a3e2e 55%,#6a5a41 120%)}
+.hero::before{content:"";position:absolute;inset:0;opacity:.5;background:repeating-linear-gradient(115deg,rgba(231,201,154,.10) 0 1px,transparent 1px 64px),repeating-linear-gradient(295deg,rgba(255,255,255,.05) 0 1px,transparent 1px 38px)}
 .hero::after{content:"";position:absolute;inset:0;background:linear-gradient(105deg,rgba(30,24,16,.62),rgba(30,24,16,.18))}
 .hero .wrap{position:relative;z-index:2;color:#fff}
 .hero .en{color:#e7c99a}
@@ -130,9 +131,7 @@ section{padding:110px 0}
 .info .row span:first-child{color:#b7ab99;letter-spacing:.1em;font-size:.78rem}
 .map{aspect-ratio:4/3;border-radius:3px;overflow:hidden;background:#3a3128;filter:grayscale(.2)}
 .map iframe{width:100%;height:100%;border:0}
-.cta-band{text-align:center;padding:86px 0;background:
-  linear-gradient(rgba(30,24,16,.72),rgba(30,24,16,.72)),
-  url("https://images.unsplash.com/photo-1633681926022-84c23e8cb2d6?auto=format&fit=crop&w=1600&q=80") center/cover fixed;color:#fff}
+.cta-band{text-align:center;padding:86px 0;background:linear-gradient(115deg,#241f19 0%,#3a3128 60%,#54462f 120%);color:#fff}
 .cta-band h2{font-family:"Shippori Mincho",serif;font-size:clamp(1.6rem,3.6vw,2.4rem);margin-bottom:14px}
 .cta-band p{opacity:.9;margin-bottom:30px;font-size:.92rem}
 
@@ -179,7 +178,7 @@ footer{background:#241f19;color:#9a8f7e;padding:54px 0 30px;font-size:.8rem}
 @media print{#pfnav{display:none}}
 </style>
 <nav id="pfnav"><div class="in">
-<a class="home" href="./index.html">&#8592; 制作サンプル集</a>
+<a class="home" href="./cases.html">&#8592; 事例・サンプル一覧</a>
 <a href="./gyomu-system.html" data-k="gyomu-system">業務システム</a>
 <a href="./automation.html" data-k="automation">自動化</a>
 <a href="./dashboard.html" data-k="dashboard">ダッシュボード</a>
@@ -224,6 +223,10 @@ document.querySelectorAll("#pfnav a[data-k]").forEach(function(a){if(a.getAttrib
 })();
 </script>
 <!-- pfnav:end -->
+<!-- demo-fict:start 架空サンプル明示帯(2026-09-04) -->
+<style>#demo-fict{background:#fff8e8;color:#6d5518;border-bottom:1px solid #ecdfbc;font-family:"Hiragino Kaku Gothic ProN","Noto Sans JP","Yu Gothic",Meiryo,sans-serif;font-size:12.5px;line-height:1.55;text-align:center;padding:8px 14px}@media print{#demo-fict{display:none}}</style>
+<div id="demo-fict">これは制作サンプル（架空のヘアサロンサイト）です。店名・人物・数値はすべて架空です。地図・駅名のみ実在のものを使用しています。</div>
+<!-- demo-fict:end -->
 
 
 <header id="hd">
@@ -264,7 +267,7 @@ document.querySelectorAll("#pfnav a[data-k]").forEach(function(a){if(a.getAttrib
       <p>だから、次にご来店いただくまでの毎日が、少し楽になる。それが私たちの目指すサロンです。</p>
     </div>
     <div class="photo reveal">
-      <img src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&w=900&q=80" alt="サロンの施術風景">
+      <svg viewBox="0 0 720 900" preserveAspectRatio="xMidYMid slice" role="img" style="width:100%;height:100%;display:block"><rect width="720" height="900" fill="#f7f3ec"/><rect x="0" y="640" width="720" height="260" fill="#efe8db"/><g transform="translate(360,330) scale(3.2)"><ellipse cx="0" cy="-20" rx="52" ry="66" fill="#f7f3ec" stroke="#b08d57" stroke-width="6"/><path d="M-34 -44 q18 -20 44 -12" stroke="#fff" stroke-width="7" fill="none" stroke-linecap="round" opacity=".9"/><path d="M0 46v34M-26 84h52" stroke="#b08d57" stroke-width="7" fill="none" stroke-linecap="round"/></g><rect x="150" y="620" width="420" height="26" rx="13" fill="#b08d57" opacity=".85"/><g fill="#fff" stroke="#cdbfa8" stroke-width="5"><rect x="196" y="560" width="38" height="60" rx="10"/><rect x="248" y="574" width="34" height="46" rx="10"/></g><g transform="translate(500,590) scale(0.9)" stroke="#b08d57" stroke-width="6" fill="none" stroke-linecap="round"><circle cx="-28" cy="34" r="14"/><circle cx="28" cy="34" r="14"/><path d="M-19 23 L30 -46M19 23 L-30 -46"/></g><g transform="translate(120,180) rotate(-15) scale(1.3)" stroke="#8a9a7c" stroke-width="4" fill="none" stroke-linecap="round"><path d="M0 40 V-40"/><path d="M0 20 q-22 -8 -26 -30M0 20 q22 -8 26 -30M0 -6 q-18 -6 -22 -24M0 -6 q18 -6 22 -24"/></g><g transform="translate(614,720) rotate(20) scale(1.5)" stroke="#8a9a7c" stroke-width="4" fill="none" stroke-linecap="round"><path d="M0 40 V-40"/><path d="M0 20 q-22 -8 -26 -30M0 20 q22 -8 26 -30M0 -6 q-18 -6 -22 -24M0 -6 q18 -6 22 -24"/></g></svg>
     </div>
   </div>
 </section>
@@ -290,13 +293,13 @@ document.querySelectorAll("#pfnav a[data-k]").forEach(function(a){if(a.getAttrib
 
 <section id="gallery" class="gallery">
   <div class="wrap">
-    <div class="head reveal"><span class="en">Gallery</span><h2>スタイル集</h2></div>
+    <div class="head reveal"><span class="en">Gallery</span><h2>店内と道具</h2></div>
     <div class="ggrid reveal">
-      <figure class="big"><img src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&w=900&q=80" alt="店内の風景1"></figure>
-      <figure><img src="https://images.unsplash.com/photo-1573455494060-c5595004fb6c?auto=format&fit=crop&w=500&q=80" alt="店内の風景2"></figure>
-      <figure><img src="https://images.unsplash.com/photo-1600948836101-f9ffda59d250?auto=format&fit=crop&w=500&q=80" alt="店内の風景3"></figure>
-      <figure><img src="https://images.unsplash.com/photo-1712232907812-4bd219a99a49?auto=format&fit=crop&w=500&q=80" alt="店内の風景4"></figure>
-      <figure><img src="https://images.unsplash.com/photo-1521590832167-7bcbfaa6381f?auto=format&fit=crop&w=500&q=80" alt="ヘアスタイル5"></figure>
+      <figure class="big"><svg viewBox="0 0 900 640" preserveAspectRatio="xMidYMid slice" role="img" style="width:100%;height:100%;display:block"><rect width="900" height="640" fill="#efe8db"/><circle cx="760" cy="90" r="150" fill="#f7f3ec"/><g transform="translate(300,260) scale(2.4)"><ellipse cx="0" cy="-20" rx="52" ry="66" fill="#f7f3ec" stroke="#b08d57" stroke-width="6"/><path d="M-34 -44 q18 -20 44 -12" stroke="#fff" stroke-width="7" fill="none" stroke-linecap="round" opacity=".9"/><path d="M0 46v34M-26 84h52" stroke="#b08d57" stroke-width="7" fill="none" stroke-linecap="round"/></g><g transform="translate(640,300) scale(1.9)"><ellipse cx="0" cy="-20" rx="52" ry="66" fill="#f7f3ec" stroke="#b08d57" stroke-width="6"/><path d="M-34 -44 q18 -20 44 -12" stroke="#fff" stroke-width="7" fill="none" stroke-linecap="round" opacity=".9"/><path d="M0 46v34M-26 84h52" stroke="#b08d57" stroke-width="7" fill="none" stroke-linecap="round"/></g><rect x="120" y="520" width="660" height="22" rx="11" fill="#b08d57" opacity=".8"/><g transform="translate(820,520) rotate(15) scale(1.4)" stroke="#8a9a7c" stroke-width="4" fill="none" stroke-linecap="round"><path d="M0 40 V-40"/><path d="M0 20 q-22 -8 -26 -30M0 20 q22 -8 26 -30M0 -6 q-18 -6 -22 -24M0 -6 q18 -6 22 -24"/></g></svg></figure>
+      <figure><svg viewBox="0 0 500 400" preserveAspectRatio="xMidYMid slice" role="img" style="width:100%;height:100%;display:block"><rect width="500" height="400" fill="#f7f3ec"/><g transform="translate(250,210) scale(1.5)" stroke="#b08d57" stroke-width="6" fill="none" stroke-linecap="round"><circle cx="-28" cy="34" r="14"/><circle cx="28" cy="34" r="14"/><path d="M-19 23 L30 -46M19 23 L-30 -46"/></g><circle cx="90" cy="80" r="56" fill="#efe8db"/></svg></figure>
+      <figure><svg viewBox="0 0 500 400" preserveAspectRatio="xMidYMid slice" role="img" style="width:100%;height:100%;display:block"><rect width="500" height="400" fill="#efe8db"/><g fill="#fff" stroke="#b08d57" stroke-width="5"><rect x="90" y="140" width="72" height="130" rx="14"/><rect x="214" y="120" width="72" height="150" rx="14"/><rect x="338" y="140" width="72" height="130" rx="14"/></g><g fill="#b08d57" opacity=".55"><rect x="104" y="154" width="44" height="34" rx="8"/></g><g fill="#8a9a7c" opacity=".5"><rect x="228" y="134" width="44" height="34" rx="8"/></g><g fill="#a2836a" opacity=".5"><rect x="352" y="154" width="44" height="34" rx="8"/></g></svg></figure>
+      <figure><svg viewBox="0 0 500 400" preserveAspectRatio="xMidYMid slice" role="img" style="width:100%;height:100%;display:block"><rect width="500" height="400" fill="#f7f3ec"/><g transform="translate(250,140) rotate(-18) scale(1.7)" stroke="#b08d57" stroke-width="5" fill="none" stroke-linecap="round"><path d="M-40 -8 h80 v10 h-80z" fill="#fff"/><path d="M-32 2v22M-20 2v22M-8 2v22M4 2v22M16 2v22M28 2v22"/></g><path d="M120 300 q130 60 260 0" stroke="#b08d57" stroke-width="6" fill="none" stroke-linecap="round"/><g transform="translate(400,110) rotate(25) scale(1.1)" stroke="#8a9a7c" stroke-width="4" fill="none" stroke-linecap="round"><path d="M0 40 V-40"/><path d="M0 20 q-22 -8 -26 -30M0 20 q22 -8 26 -30M0 -6 q-18 -6 -22 -24M0 -6 q18 -6 22 -24"/></g></svg></figure>
+      <figure><svg viewBox="0 0 500 400" preserveAspectRatio="xMidYMid slice" role="img" style="width:100%;height:100%;display:block"><rect width="500" height="400" fill="#efe8db"/><g stroke="#b08d57" stroke-width="6" fill="#f7f3ec"><path d="M150 260 a100 100 0 0 1 200 0z"/></g><g stroke="#8a9a7c" stroke-width="5" fill="none" stroke-linecap="round"><path d="M210 140q-8 -26 12 -40M250 130q0 -30 22 -42M292 140q10 -24 -6 -44"/></g><rect x="130" y="264" width="240" height="16" rx="8" fill="#b08d57" opacity=".8"/></svg></figure>
     </div>
   </div>
 </section>
@@ -305,16 +308,16 @@ document.querySelectorAll("#pfnav a[data-k]").forEach(function(a){if(a.getAttrib
   <div class="wrap">
     <div class="head reveal"><span class="en">Stylist</span><h2>スタイリスト</h2><p>少人数だから、いつも同じ担当があなたの髪を覚えています。</p></div>
     <div class="staff reveal">
-      <div class="card"><div class="ph"><img src="https://images.unsplash.com/photo-1633681926022-84c23e8cb2d6?auto=format&fit=crop&w=500&q=80" alt="スタイリスト1"></div><div class="body"><div class="role">DIRECTOR</div><h4>三浦 遥</h4><p>骨格補正カットが得意。「扱いやすさ」を何より大切に、毎朝のセット時間を短くする提案をします。</p></div></div>
-      <div class="card"><div class="ph"><img src="https://images.unsplash.com/photo-1521590832167-7bcbfaa6381f?auto=format&fit=crop&w=500&q=80" alt="スタイリスト2"></div><div class="body"><div class="role">COLORIST</div><h4>大和 千夏</h4><p>透明感のあるグレージュと白髪ぼかしが人気。髪の負担を抑えた薬剤設計を担当します。</p></div></div>
-      <div class="card"><div class="ph"><img src="https://images.unsplash.com/photo-1560066984-138dadb4c035?auto=format&fit=crop&w=500&q=80" alt="スタイリスト3"></div><div class="body"><div class="role">SPA THERAPIST</div><h4>林 美咲</h4><p>頭皮ケアとヘッドスパのスペシャリスト。首肩のこわばりからほぐし、深いリラックスへ。</p></div></div>
+      <div class="card"><div class="ph"><svg viewBox="0 0 500 500" preserveAspectRatio="xMidYMid slice" role="img" style="width:100%;height:100%;display:block"><rect width="500" height="500" fill="#f7f3ec"/><circle cx="410" cy="90" r="90" fill="#efe8db"/><g transform="translate(250,250) scale(1.8)" stroke="#b08d57" stroke-width="6" fill="none" stroke-linecap="round"><circle cx="-28" cy="34" r="14"/><circle cx="28" cy="34" r="14"/><path d="M-19 23 L30 -46M19 23 L-30 -46"/></g><g transform="translate(250,390) rotate(0) scale(1.3)" stroke="#b08d57" stroke-width="5" fill="none" stroke-linecap="round"><path d="M-40 -8 h80 v10 h-80z" fill="#fff"/><path d="M-32 2v22M-20 2v22M-8 2v22M4 2v22M16 2v22M28 2v22"/></g></svg></div><div class="body"><div class="role">DIRECTOR</div><h4>三浦 遥</h4><p>骨格補正カットが得意。「扱いやすさ」を何より大切に、毎朝のセット時間を短くする提案をします。</p></div></div>
+      <div class="card"><div class="ph"><svg viewBox="0 0 500 500" preserveAspectRatio="xMidYMid slice" role="img" style="width:100%;height:100%;display:block"><rect width="500" height="500" fill="#efe8db"/><circle cx="90" cy="90" r="80" fill="#f7f3ec"/><g stroke="#b08d57" stroke-width="6" fill="#fff"><path d="M140 300 a60 40 0 0 1 120 0z"/><path d="M250 330 a60 40 0 0 1 120 0z"/></g><g stroke="#b08d57" stroke-width="6" fill="none" stroke-linecap="round"><path d="M190 250 l60 -90"/><path d="M250 160 a16 16 0 1 1 0.1 0z"/></g><g fill="#a2836a" opacity=".5"><circle cx="330" cy="150" r="22"/></g><g fill="#8a9a7c" opacity=".5"><circle cx="390" cy="190" r="18"/></g></svg></div><div class="body"><div class="role">COLORIST</div><h4>大和 千夏</h4><p>透明感のあるグレージュと白髪ぼかしが人気。髪の負担を抑えた薬剤設計を担当します。</p></div></div>
+      <div class="card"><div class="ph"><svg viewBox="0 0 500 500" preserveAspectRatio="xMidYMid slice" role="img" style="width:100%;height:100%;display:block"><rect width="500" height="500" fill="#f7f3ec"/><circle cx="400" cy="400" r="100" fill="#efe8db"/><g stroke="#8a9a7c" stroke-width="6" fill="#fff" stroke-linejoin="round"><path d="M250 160 q40 46 0 90 q-40 -44 0 -90z"/><path d="M180 250 q46 -8 70 24 q-42 22 -70 -24z"/><path d="M320 250 q-46 -8 -70 24 q42 22 70 -24z"/></g><path d="M150 380 q100 50 200 0" stroke="#b08d57" stroke-width="6" fill="none" stroke-linecap="round"/><g fill="#c9ddea" opacity=".8"><circle cx="150" cy="140" r="8"/><circle cx="180" cy="110" r="5"/><circle cx="120" cy="110" r="5"/></g></svg></div><div class="body"><div class="role">SPA THERAPIST</div><h4>林 美咲</h4><p>頭皮ケアとヘッドスパのスペシャリスト。首肩のこわばりからほぐし、深いリラックスへ。</p></div></div>
     </div>
   </div>
 </section>
 
 <section class="voice gallery">
   <div class="wrap">
-    <div class="head reveal"><span class="en">Voice</span><h2>お客様の声</h2></div>
+    <div class="head reveal"><span class="en">Voice</span><h2>お客様の声</h2><p style="font-size:.72rem;color:var(--sub)">※お客様の声は架空のサンプルです</p></div>
     <div class="vgrid reveal">
       <div class="v"><div class="stars">★★★★★</div><p>伸びても変にならないカットって本当にあるんだと感動。次の予約まで前髪だけで乗り切れました。</p><div class="who">30代・会社員 / 初回カット</div></div>
       <div class="v"><div class="stars">★★★★★</div><p>白髪染めなのに全然ダメージを感じません。頭皮スパの気持ちよさで毎回寝てしまいます。</p><div class="who">40代・自営業 / カラー＋スパ</div></div>
@@ -337,7 +340,7 @@ document.querySelectorAll("#pfnav a[data-k]").forEach(function(a){if(a.getAttrib
       </div>
     </div>
     <div class="map reveal">
-      <iframe loading="lazy" src="https://www.google.com/maps?q=表参道&output=embed" title="地図"></iframe>
+      <iframe loading="lazy" src="https://www.google.com/maps?q=表参道駅&output=embed" title="地図"></iframe>
     </div>
   </div>
 </section>
@@ -405,25 +408,25 @@ a.mnt-all:hover{background:#e8edf8}
     <p class="mnt-h">ホームページ・LP・デザイン・自動化まで、実際に動くサンプルをご用意しています</p>
     <p class="mnt-lead">制作＝自動化のミナト。AIで速く作り、品質は全件人の目で検品します。ご依頼の業種・目的に合わせて、この品質でお作りします。</p>
     <div class="mnt-grid">
-      <a class="mnt-card" href="lp-gym.html">
-        <img src="pf/lp-gym.jpg" alt="パーソナルジム 体験予約LPの制作サンプル" loading="lazy">
-        <div class="mnt-meta"><span class="mnt-tag">集客LP</span><span class="mnt-name">パーソナルジム 体験予約LP</span></div>
+      <a class="mnt-card" href="gyomu-system.html">
+        <img src="pf/gyomu-system.jpg" alt="見積〜請求の業務管理システムの制作サンプル" loading="lazy">
+        <div class="mnt-meta"><span class="mnt-tag">業務システム</span><span class="mnt-name">見積〜請求の業務管理システム</span></div>
       </a>
-      <a class="mnt-card" href="dental-sakura.html">
-        <img src="pf/dental-sakura.jpg" alt="歯科医院(訪問歯科)の制作サンプル" loading="lazy">
-        <div class="mnt-meta"><span class="mnt-tag">ホームページ</span><span class="mnt-name">歯科医院(訪問歯科)</span></div>
+      <a class="mnt-card" href="automation.html">
+        <img src="pf/automation.jpg" alt="事務作業の自動化サンプルの制作サンプル" loading="lazy">
+        <div class="mnt-meta"><span class="mnt-tag">自動化</span><span class="mnt-name">事務作業の自動化サンプル</span></div>
       </a>
-      <a class="mnt-card" href="corp.html">
-        <img src="pf/corp.jpg" alt="コーポレート(人材会社)の制作サンプル" loading="lazy">
-        <div class="mnt-meta"><span class="mnt-tag">ホームページ</span><span class="mnt-name">コーポレート(人材会社)</span></div>
+      <a class="mnt-card" href="dashboard.html">
+        <img src="pf/dashboard.jpg" alt="売上ダッシュボード(操作できます)の制作サンプル" loading="lazy">
+        <div class="mnt-meta"><span class="mnt-tag">ダッシュボード</span><span class="mnt-name">売上ダッシュボード(操作できます)</span></div>
       </a>
-      <a class="mnt-card" href="lp-recruit.html">
-        <img src="pf/lp-recruit.jpg" alt="介護スタッフ 採用LPの制作サンプル" loading="lazy">
-        <div class="mnt-meta"><span class="mnt-tag">採用LP</span><span class="mnt-name">介護スタッフ 採用LP</span></div>
+      <a class="mnt-card" href="line.html">
+        <img src="pf/line.jpg" alt="LINE公式アカウント構築の制作サンプル" loading="lazy">
+        <div class="mnt-meta"><span class="mnt-tag">LINE構築</span><span class="mnt-name">LINE公式アカウント構築</span></div>
       </a>
     </div>
-    <a class="mnt-all" href="index.html">制作サンプル集をすべて見る →</a>
-    <p class="mnt-fine">※各サンプルの店舗名・法人名・人物・数値はすべて架空です。写真はイメージです。</p>
+    <a class="mnt-all" href="cases.html">事例・サンプル一覧を見る →</a>
+    <p class="mnt-fine">※各サンプルの店舗名・法人名・人物・数値はすべて架空です。図版はイメージです。</p>
   </div>
 </div>
 <!-- mnt-portfolio-bar:end -->

@@ -7,7 +7,6 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;700;800&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
 <style>
   :root{
     --bg:#f5f6f8;
@@ -239,7 +238,7 @@
 @media print{#pfnav{display:none}}
 </style>
 <nav id="pfnav"><div class="in">
-<a class="home" href="./index.html">&#8592; 制作サンプル集</a>
+<a class="home" href="./cases.html">&#8592; 事例・サンプル一覧</a>
 <a href="./gyomu-system.html" data-k="gyomu-system">業務システム</a>
 <a href="./automation.html" data-k="automation">自動化</a>
 <a href="./dashboard.html" data-k="dashboard">ダッシュボード</a>
@@ -284,6 +283,10 @@ document.querySelectorAll("#pfnav a[data-k]").forEach(function(a){if(a.getAttrib
 })();
 </script>
 <!-- pfnav:end -->
+<!-- demo-fict:start 架空サンプル明示帯(2026-09-04) -->
+<style>#demo-fict{background:#fff8e8;color:#6d5518;border-bottom:1px solid #ecdfbc;font-family:"Hiragino Kaku Gothic ProN","Noto Sans JP","Yu Gothic",Meiryo,sans-serif;font-size:12.5px;line-height:1.55;text-align:center;padding:8px 14px}@media print{#demo-fict{display:none}}</style>
+<div id="demo-fict">これは制作サンプル（売上ダッシュボードの画面デモ）です。会社名・数値はすべて架空です。</div>
+<!-- demo-fict:end -->
 
 
 <header>
@@ -520,141 +523,223 @@ function renderKPIs(){
   document.getElementById("kpiRepeatD").innerHTML  = deltaPill(r, pr, {pt:true});
 }
 
-/* ================ Chart.js 共通 ================ */
-Chart.defaults.font.family = "'Manrope','Noto Sans JP',sans-serif";
-Chart.defaults.font.size = 11.5;
-Chart.defaults.color = "#69748c";
+/* ================ グラフ描画(自前canvas・外部ライブラリ不使用 2026-09-04) ================
+   Chart.js CDNをやめ、素のcanvasで棒+折れ線/ドーナツ/横棒を描く。
+   CDNが切れて「動くデモ」のグラフが全部止まる事故を構造的に無くすため。 */
+const FONT_NUM = "'Manrope','Noto Sans JP',sans-serif";
+const FONT_JP  = "'Noto Sans JP',sans-serif";
 const gridColor = "#eef0f4";
+const AXIS_C = "#69748c";
 
-/* ---- 月次推移(棒+折れ線) ---- */
-let trendChart;
-function trendBarColors(){
-  return MONTH_KEYS.map((_,i)=> i===cur ? "#2b5ce6" : "#c9d6f8");
+function setupCanvas(cv){
+  const box = cv.parentElement.getBoundingClientRect();
+  const dpr = window.devicePixelRatio || 1;
+  const w = Math.max(10, box.width), h = Math.max(10, box.height);
+  cv.width = Math.round(w*dpr); cv.height = Math.round(h*dpr);
+  cv.style.width = w+"px"; cv.style.height = h+"px";
+  const ctx = cv.getContext("2d");
+  ctx.setTransform(dpr,0,0,dpr,0,0);
+  return {ctx,w,h};
 }
-function buildTrend(){
-  trendChart = new Chart(document.getElementById("trendChart"),{
-    data:{
-      labels: MONTH_LABELS,
-      datasets:[
-        {
-          type:"bar", label:"売上高",
-          data: MONTHLY.sales,
-          backgroundColor: trendBarColors(),
-          borderRadius: 6, maxBarThickness: 46,
-          yAxisID:"y", order: 2
-        },
-        {
-          type:"line", label:"注文数",
-          data: MONTHLY.orders,
-          borderColor:"#1b2333", backgroundColor:"#1b2333",
-          borderWidth:2, pointRadius:3.5, pointHoverRadius:5,
-          pointBackgroundColor:"#fff", pointBorderWidth:2,
-          tension:.3, yAxisID:"y1", order: 1
-        }
-      ]
-    },
-    options:{
-      responsive:true, maintainAspectRatio:false,
-      interaction:{mode:"index", intersect:false},
-      plugins:{
-        legend:{position:"top", align:"end", labels:{boxWidth:10, boxHeight:10, usePointStyle:true}},
-        tooltip:{
-          callbacks:{
-            label: c => c.dataset.label === "売上高"
-              ? ` 売上高: ${yen(c.parsed.y)}`
-              : ` 注文数: ${c.parsed.y.toLocaleString("ja-JP")}件`
-          }
-        }
-      },
-      scales:{
-        x:{grid:{display:false}},
-        y:{
-          position:"left", grid:{color:gridColor},
-          ticks:{callback:v=>yenMan(v)},
-          suggestedMax: 11500000, beginAtZero:true
-        },
-        y1:{
-          position:"right", grid:{drawOnChartArea:false},
-          ticks:{callback:v=>v.toLocaleString("ja-JP")+"件"},
-          suggestedMax: 1800, beginAtZero:true
-        }
-      }
-    }
+function rrect(ctx,x,y,w,h,r){
+  r = Math.min(r, w/2, h/2);
+  ctx.beginPath();
+  ctx.moveTo(x+r,y);
+  ctx.arcTo(x+w,y,x+w,y+h,r);
+  ctx.arcTo(x+w,y+h,x,y+h,r);
+  ctx.arcTo(x,y+h,x,y,r);
+  ctx.arcTo(x,y,x+w,y,r);
+  ctx.closePath();
+}
+
+/* ---- 月次推移(棒+折れ線・2軸) ---- */
+let trendHover = -1;
+function trendGeom(){
+  const cv = document.getElementById("trendChart");
+  const box = cv.parentElement.getBoundingClientRect();
+  const padL=52,padR=48,padT=30,padB=24;
+  return {padL,padR,padT,padB, iw:box.width-padL-padR, ih:box.height-padT-padB, w:box.width};
+}
+function drawTrend(){
+  const cv = document.getElementById("trendChart");
+  const {ctx,w,h} = setupCanvas(cv);
+  const padL=52,padR=48,padT=30,padB=24;
+  const iw=w-padL-padR, ih=h-padT-padB;
+  const yMax=12000000, y1Max=1800;
+  ctx.clearRect(0,0,w,h);
+  ctx.font = "11.5px "+FONT_NUM;
+  for(let i=0;i<=4;i++){
+    const y = padT+ih-ih*i/4;
+    ctx.strokeStyle=gridColor; ctx.lineWidth=1;
+    ctx.beginPath(); ctx.moveTo(padL,y); ctx.lineTo(w-padR,y); ctx.stroke();
+    ctx.fillStyle=AXIS_C; ctx.textBaseline="middle";
+    ctx.textAlign="right"; ctx.fillText(yenMan(yMax*i/4), padL-7, y);
+    ctx.textAlign="left";  ctx.fillText((y1Max*i/4).toLocaleString("ja-JP")+"件", w-padR+7, y);
+  }
+  const n=MONTH_KEYS.length, slot=iw/n, barW=Math.min(46, slot*0.52);
+  const xs=[];
+  MONTHLY.sales.forEach((v,i)=>{
+    const cx=padL+slot*i+slot/2; xs.push(cx);
+    const bh=ih*v/yMax;
+    ctx.fillStyle = i===cur ? "#2b5ce6" : (i===trendHover ? "#a9bdf4" : "#c9d6f8");
+    rrect(ctx, cx-barW/2, padT+ih-bh, barW, bh, 6); ctx.fill();
+    ctx.fillStyle=AXIS_C; ctx.textAlign="center"; ctx.textBaseline="top";
+    ctx.fillText(MONTH_LABELS[i], cx, padT+ih+7);
   });
+  ctx.strokeStyle="#1b2333"; ctx.lineWidth=2; ctx.lineJoin="round"; ctx.beginPath();
+  MONTHLY.orders.forEach((v,i)=>{
+    const y=padT+ih-ih*v/y1Max;
+    i ? ctx.lineTo(xs[i],y) : ctx.moveTo(xs[i],y);
+  });
+  ctx.stroke();
+  MONTHLY.orders.forEach((v,i)=>{
+    const y=padT+ih-ih*v/y1Max;
+    ctx.beginPath(); ctx.arc(xs[i],y,3.5,0,Math.PI*2);
+    ctx.fillStyle="#fff"; ctx.fill();
+    ctx.lineWidth=2; ctx.strokeStyle="#1b2333"; ctx.stroke();
+  });
+  /* 凡例(右上) */
+  ctx.font="11.5px "+FONT_JP; ctx.textBaseline="middle"; ctx.textAlign="left";
+  const lg=[["売上高","#2b5ce6","sq"],["注文数","#1b2333","ln"]];
+  let lx = w-padR;
+  const widths = lg.map(l=>ctx.measureText(l[0]).width+20);
+  lx -= widths.reduce((a,b)=>a+b,0);
+  lg.forEach((l,i)=>{
+    ctx.fillStyle=l[1];
+    if(l[2]==="sq"){ rrect(ctx,lx,8,10,10,3); ctx.fill(); }
+    else { ctx.strokeStyle=l[1]; ctx.lineWidth=2;
+           ctx.beginPath(); ctx.moveTo(lx,13); ctx.lineTo(lx+10,13); ctx.stroke();
+           ctx.beginPath(); ctx.arc(lx+5,13,2.5,0,Math.PI*2); ctx.fill(); }
+    ctx.fillStyle=AXIS_C; ctx.fillText(l[0], lx+14, 14);
+    lx += widths[i];
+  });
+  /* ホバー時のツールチップ */
+  if(trendHover>=0){
+    const i=trendHover;
+    const lines=[MONTH_LABELS[i],"売上高: "+yen(MONTHLY.sales[i]),"注文数: "+MONTHLY.orders[i].toLocaleString("ja-JP")+"件"];
+    ctx.font="11.5px "+FONT_NUM;
+    const tw=Math.max(...lines.map(t=>ctx.measureText(t).width))+20;
+    const th=lines.length*17+12;
+    let tx=xs[i]+12; if(tx+tw>w-4) tx=xs[i]-tw-12;
+    const ty=padT+6;
+    ctx.fillStyle="rgba(27,35,51,.92)"; rrect(ctx,tx,ty,tw,th,7); ctx.fill();
+    ctx.fillStyle="#fff"; ctx.textAlign="left"; ctx.textBaseline="top";
+    lines.forEach((t,li)=>{
+      ctx.font=(li? "11.5px ":"bold 11.5px ")+FONT_NUM;
+      ctx.fillText(t, tx+10, ty+7+li*17);
+    });
+  }
 }
+(function(){
+  const cv=document.getElementById("trendChart");
+  cv.addEventListener("mousemove",e=>{
+    const g=trendGeom();
+    const x=e.offsetX;
+    let idx=Math.floor((x-g.padL)/(g.iw/MONTH_KEYS.length));
+    if(x<g.padL||idx<0||idx>=MONTH_KEYS.length) idx=-1;
+    if(idx!==trendHover){ trendHover=idx; drawTrend(); }
+  });
+  cv.addEventListener("mouseleave",()=>{ if(trendHover!==-1){trendHover=-1; drawTrend();} });
+  cv.addEventListener("click",()=>{ if(trendHover>=0) setMonth(trendHover); });
+})();
 
 /* ---- カテゴリ別ドーナツ ---- */
 const CAT_COLORS = ["#2b5ce6","#5b83f0","#8da9f5","#bccbfa","#dfe6fd"];
-let catChart;
 function catData(){
   const total = MONTHLY.sales[cur];
   return CAT_SHARE[cur].map(p => Math.round(total*p/100));
 }
-function buildCat(){
-  catChart = new Chart(document.getElementById("catChart"),{
-    type:"doughnut",
-    data:{
-      labels: CATEGORIES,
-      datasets:[{
-        data: catData(),
-        backgroundColor: CAT_COLORS,
-        borderColor:"#ffffff", borderWidth:2, hoverOffset:6
-      }]
-    },
-    options:{
-      responsive:true, maintainAspectRatio:false,
-      cutout:"64%",
-      layout:{padding:{bottom:4}},
-      plugins:{
-        legend:{
-          position:"bottom",
-          labels:{boxWidth:10, boxHeight:10, usePointStyle:true, padding:14,
-            generateLabels(chart){
-              const base = Chart.overrides.doughnut.plugins.legend.labels.generateLabels(chart);
-              const ds = chart.data.datasets[0].data;
-              const sum = ds.reduce((a,b)=>a+b,0);
-              base.forEach((l,i)=>{ l.text = `${l.text}  ${(ds[i]/sum*100).toFixed(0)}%`; });
-              return base;
-            }
-          }
-        },
-        tooltip:{callbacks:{label: c => ` ${c.label}: ${yen(c.parsed)}`}}
-      }
-    }
+function drawCat(){
+  const cv = document.getElementById("catChart");
+  const {ctx,w,h} = setupCanvas(cv);
+  const data = catData(), sum = data.reduce((a,b)=>a+b,0);
+  ctx.clearRect(0,0,w,h);
+  /* 凡例(下・折返しあり)を先に組んで高さを確定 */
+  ctx.font="11px "+FONT_JP;
+  const items = CATEGORIES.map((c,i)=>({t:`${c}  ${(data[i]/sum*100).toFixed(0)}%`, c:CAT_COLORS[i]}));
+  items.forEach(it=>{ it.w = 14 + ctx.measureText(it.t).width + 14; });
+  const rows=[[]]; let rw=0;
+  items.forEach(it=>{
+    if(rw+it.w > w-8 && rows[rows.length-1].length){ rows.push([]); rw=0; }
+    rows[rows.length-1].push(it); rw+=it.w;
+  });
+  const legendH = rows.length*19 + 6;
+  const cx=w/2, cy=(h-legendH)/2;
+  const R=Math.min(w/2, cy)-6, r=R*0.64;
+  let a=-Math.PI/2;
+  data.forEach((v,i)=>{
+    const a2=a+v/sum*Math.PI*2;
+    ctx.beginPath();
+    ctx.arc(cx,cy,R,a,a2);
+    ctx.arc(cx,cy,r,a2,a,true);
+    ctx.closePath();
+    ctx.fillStyle=CAT_COLORS[i]; ctx.fill();
+    ctx.strokeStyle="#fff"; ctx.lineWidth=2; ctx.stroke();
+    a=a2;
+  });
+  /* 中央の合計表示(HTMLオーバーレイ)をドーナツ中心に合わせる */
+  const center=document.querySelector(".donut-center");
+  if(center) center.style.transform=`translateY(${Math.round(cy-h/2)}px)`;
+  /* 凡例描画 */
+  ctx.textBaseline="middle"; ctx.textAlign="left";
+  rows.forEach((row,ri)=>{
+    const rowW=row.reduce((s2,it)=>s2+it.w,0);
+    let x=(w-rowW)/2;
+    const y=h-legendH+10+ri*19;
+    row.forEach(it=>{
+      ctx.fillStyle=it.c; ctx.beginPath(); ctx.arc(x+5,y,5,0,Math.PI*2); ctx.fill();
+      ctx.fillStyle=AXIS_C; ctx.fillText(it.t, x+14, y+0.5);
+      x+=it.w;
+    });
   });
 }
 
 /* ---- チャネル別 横棒 ---- */
-let chChart;
+const CH_COLORS = ["#2b5ce6","#5b83f0","#8da9f5","#bccbfa","#dfe6fd"];
 function chData(){
   const total = MONTHLY.sales[cur];
   return CH_SHARE[cur].map(p => Math.round(total*p/100));
 }
-function buildCh(){
-  chChart = new Chart(document.getElementById("chChart"),{
-    type:"bar",
-    data:{
-      labels: CHANNELS,
-      datasets:[{
-        data: chData(),
-        backgroundColor:["#2b5ce6","#5b83f0","#8da9f5","#bccbfa","#dfe6fd"],
-        borderRadius:5, maxBarThickness:22
-      }]
-    },
-    options:{
-      indexAxis:"y",
-      responsive:true, maintainAspectRatio:false,
-      plugins:{
-        legend:{display:false},
-        tooltip:{callbacks:{label: c => ` ${yen(c.parsed.x)}`}}
-      },
-      scales:{
-        x:{grid:{color:gridColor}, ticks:{callback:v=>yenMan(v)}, beginAtZero:true},
-        y:{grid:{display:false}, ticks:{font:{family:"'Noto Sans JP',sans-serif", size:11.5}}}
-      }
-    }
+function drawCh(){
+  const cv = document.getElementById("chChart");
+  const {ctx,w,h} = setupCanvas(cv);
+  const data = chData();
+  ctx.clearRect(0,0,w,h);
+  ctx.font="11.5px "+FONT_JP;
+  const padL = Math.max(...CHANNELS.map(c=>ctx.measureText(c).width))+14;
+  const padR=14, padT=8, padB=22;
+  const iw=w-padL-padR, ih=h-padT-padB;
+  const xMax = Math.ceil(Math.max(...data)/500000)*500000;
+  const ticks=4;
+  ctx.font="10.5px "+FONT_NUM;
+  for(let i=0;i<=ticks;i++){
+    const x=padL+iw*i/ticks;
+    ctx.strokeStyle=gridColor; ctx.lineWidth=1;
+    ctx.beginPath(); ctx.moveTo(x,padT); ctx.lineTo(x,padT+ih); ctx.stroke();
+    ctx.fillStyle=AXIS_C; ctx.textAlign="center"; ctx.textBaseline="top";
+    ctx.fillText(yenMan(xMax*i/ticks), x, padT+ih+7);
+  }
+  const slot=ih/data.length, barH=Math.min(22, slot*0.6);
+  data.forEach((v,i)=>{
+    const y=padT+slot*i+slot/2;
+    ctx.fillStyle=CH_COLORS[i];
+    rrect(ctx, padL, y-barH/2, iw*v/xMax, barH, 5); ctx.fill();
+    ctx.fillStyle="#3c465e"; ctx.font="11.5px "+FONT_JP;
+    ctx.textAlign="right"; ctx.textBaseline="middle";
+    ctx.fillText(CHANNELS[i], padL-8, y);
+    ctx.font="bold 11px "+FONT_NUM; ctx.textAlign="left"; ctx.fillStyle=AXIS_C;
+    const bx=padL+iw*v/xMax+6;
+    if(bx+ctx.measureText(yen(v)).width < w-2) ctx.fillText(yen(v), bx, y);
   });
 }
+
+/* リサイズで描き直す */
+let rszT=null;
+window.addEventListener("resize",()=>{
+  clearTimeout(rszT);
+  rszT=setTimeout(()=>{ drawTrend(); drawCat(); drawCh(); },120);
+});
+window.addEventListener("load",()=>{ drawTrend(); drawCat(); drawCh(); });
 
 /* ---- ヒートマップ(CSSグリッド) ---- */
 function heatColor(t){ // t: 0..1
@@ -755,14 +840,11 @@ function setMonth(i){
   if(history.replaceState) history.replaceState(null,"","#"+MONTH_KEYS[cur]);
   document.querySelectorAll("#seg button").forEach((b,bi)=>b.classList.toggle("active", bi===cur));
   renderKPIs();
-  trendChart.data.datasets[0].backgroundColor = trendBarColors();
-  trendChart.update();
-  catChart.data.datasets[0].data = catData();
-  catChart.update();
+  drawTrend();
+  drawCat();
   document.getElementById("donutTotal").textContent = yen(MONTHLY.sales[cur]);
   document.getElementById("donutNote").textContent = `${MONTH_LABELS[cur]}実績`;
-  chChart.data.datasets[0].data = chData();
-  chChart.update();
+  drawCh();
   document.getElementById("chNote").textContent = `${MONTH_LABELS[cur]}実績`;
   renderHeatmap();
   renderTable();
@@ -776,9 +858,6 @@ function setMonth(i){
 const hashIdx = MONTH_KEYS.indexOf((location.hash || "").replace("#",""));
 if(hashIdx >= 0) cur = hashIdx;
 buildSeg();
-buildTrend();
-buildCat();
-buildCh();
 setMonth(cur);
 </script>
 <!-- mnt-portfolio-bar:begin (automation/hp_demos_inject_bar.py が生成・手で編集しない) -->
@@ -815,25 +894,25 @@ a.mnt-all:hover{background:#e8edf8}
     <p class="mnt-h">ホームページ・LP・デザイン・自動化まで、実際に動くサンプルをご用意しています</p>
     <p class="mnt-lead">制作＝自動化のミナト。AIで速く作り、品質は全件人の目で検品します。ご依頼の業種・目的に合わせて、この品質でお作りします。</p>
     <div class="mnt-grid">
-      <a class="mnt-card" href="lp-gym.html">
-        <img src="pf/lp-gym.jpg" alt="パーソナルジム 体験予約LPの制作サンプル" loading="lazy">
-        <div class="mnt-meta"><span class="mnt-tag">集客LP</span><span class="mnt-name">パーソナルジム 体験予約LP</span></div>
+      <a class="mnt-card" href="gyomu-system.html">
+        <img src="pf/gyomu-system.jpg" alt="見積〜請求の業務管理システムの制作サンプル" loading="lazy">
+        <div class="mnt-meta"><span class="mnt-tag">業務システム</span><span class="mnt-name">見積〜請求の業務管理システム</span></div>
       </a>
-      <a class="mnt-card" href="dental-sakura.html">
-        <img src="pf/dental-sakura.jpg" alt="歯科医院(訪問歯科)の制作サンプル" loading="lazy">
-        <div class="mnt-meta"><span class="mnt-tag">ホームページ</span><span class="mnt-name">歯科医院(訪問歯科)</span></div>
+      <a class="mnt-card" href="automation.html">
+        <img src="pf/automation.jpg" alt="事務作業の自動化サンプルの制作サンプル" loading="lazy">
+        <div class="mnt-meta"><span class="mnt-tag">自動化</span><span class="mnt-name">事務作業の自動化サンプル</span></div>
       </a>
-      <a class="mnt-card" href="corp.html">
-        <img src="pf/corp.jpg" alt="コーポレート(人材会社)の制作サンプル" loading="lazy">
-        <div class="mnt-meta"><span class="mnt-tag">ホームページ</span><span class="mnt-name">コーポレート(人材会社)</span></div>
+      <a class="mnt-card" href="design.html">
+        <img src="pf/design.jpg" alt="バナー・チラシ制作の制作サンプル" loading="lazy">
+        <div class="mnt-meta"><span class="mnt-tag">デザイン</span><span class="mnt-name">バナー・チラシ制作</span></div>
       </a>
-      <a class="mnt-card" href="salon.html">
-        <img src="pf/salon.jpg" alt="ヘアサロンの制作サンプル" loading="lazy">
-        <div class="mnt-meta"><span class="mnt-tag">ホームページ</span><span class="mnt-name">ヘアサロン</span></div>
+      <a class="mnt-card" href="line.html">
+        <img src="pf/line.jpg" alt="LINE公式アカウント構築の制作サンプル" loading="lazy">
+        <div class="mnt-meta"><span class="mnt-tag">LINE構築</span><span class="mnt-name">LINE公式アカウント構築</span></div>
       </a>
     </div>
-    <a class="mnt-all" href="index.html">制作サンプル集をすべて見る →</a>
-    <p class="mnt-fine">※各サンプルの店舗名・法人名・人物・数値はすべて架空です。写真はイメージです。</p>
+    <a class="mnt-all" href="cases.html">事例・サンプル一覧を見る →</a>
+    <p class="mnt-fine">※各サンプルの店舗名・法人名・人物・数値はすべて架空です。図版はイメージです。</p>
   </div>
 </div>
 <!-- mnt-portfolio-bar:end -->
