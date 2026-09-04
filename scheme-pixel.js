@@ -9,8 +9,9 @@
  * 深夜の歩きだけ約15px/sのゆっくりのまま)。経路は部屋を大きく回る(右の通路x=429/470・
  * 下の通路y=318/330・左の通路x=188。走者ごとに
  * レーンを分け、向かい合って詰まる形が構造的に起きないようにしてある):
- *  - 書類運搬(62秒周期): 業務島→CIOデスクへ届け、帰りは部屋を大回りして戻る。
- *    卓上の紙の山は運搬と処理で1段ずつ増減する
+ *  - 書類運搬(62秒周期を偶奇で交互): 偶数周期=書類を届け、承認済みの綴りを持ち帰る/
+ *    奇数周期=手ぶらで受け取りにいき、帰りに書類を運ぶ。卓上の紙の山は運搬と処理で
+ *    1段ずつ増減し、持ち物が消える瞬間と山が増える瞬間を一致させてある
  *  - コーヒー(52秒周期): 朝は2往復・昼はカップを持ってソファ脇を配って回る・
  *    夕方21時半に画面右端へ歩いて退勤し、朝6時半に歩いて戻る
  *  - ディスカッション(64秒周期): 開発席の1体が下の通路経由でボード前へ行き
@@ -20,6 +21,14 @@
  *    吹き出しは点3つ・ひらめきは電球=記号だけ(文字は入れない)
  *  - ボードの線は書き手の腕の動きに合わせ10秒ごとに1本ずつ増える(30秒で戻る)
  *  - コーヒーブレイクの2人はカップを上げ下げしながら8秒周期で交互に吹き出しを出す
+ *  - ソファの2人(96秒の予定表=sofaScene): 会話⇄正面を向いて資料/タブレットに目を
+ *    落とす⇄片方が資料を持ってボード脇へ歩いて確認し戻る、を織り交ぜる。姿勢の
+ *    変わり目は10〜30秒間隔・吹き出しは会話の時間だけ(話していない時間を作る)。
+ *    離席は帰宅組が歩いている時間帯なら見送る=同時に動く人数を増やさない
+ *  - 歩く人は持ち物を持つ(heldItem: 書類/承認綴り/ノートPC/通勤鞄+コーヒーのカップ)。
+ *    向きに応じて体の手前側へ持ち替え、行き先と一致させる(届け=書類・帰宅=鞄など)
+ * 3D投影は全家具で統一(DEPTH_K): 天面=実奥行き×0.6・前面=実高さ1:1・側面は描かない・
+ * 丸い天板は横半径rx/縦半径dTop(rx)の楕円。壁の物とラグ・薄板(モニタ面)だけは例外。
  * 24時間: 時間帯(朝6-10/昼10-18/夕18-22/深夜22-6)は hourOfDay だけから決める。
  * 深夜はCIO・コーヒー係・休憩の2人が帰宅する(依頼主指示 2稿目。21時台に歩いて
  * 画面端へ出て消え、朝6時前後に歩いて戻って着席する=いきなり消えない/現れない。
@@ -78,8 +87,16 @@
 
   // ---- 基準単位: 全家具の寸法はキャラの立ち姿の全高 UNIT からの比で決める ----
   var UNIT = 51;                              // キャラ立ち姿の全高(旧34の1.5倍)
+  // ---- 投影ルール(依頼主「3D描画は統一してくれ。全部」対応。全家具で共通) ----
+  //   ①天面=実奥行き×DEPTH_K で圧縮して描く ②前面(手前の面)=実高さ1:1
+  //   ③左右の側面は描かない ④接地=下端1pxの濃い線(丸物・人物は楕円影)
+  //   丸い天板・口は横半径rx・縦半径dTop(rx)の楕円(真円にしない)。
+  //   例外=壁の物(窓/時計/ポスター)とラグ(床面そのもの)と薄板の面(モニタ/ボードの
+  //   盤面。厚みが1px未満)。寸法は全てUNIT比→dTop()経由で、ピクセル直打ちしない。
+  var DEPTH_K = 0.6;
+  function dTop(real) { return Math.max(2, Math.round(real * DEPTH_K)); }
   var DESK_H = Math.round(UNIT * 0.42);       // 21 机の天板の高さ(床→天板前縁)
-  var DESK_D = Math.round(UNIT * 0.5 * 0.6);  // 15 天板の奥行き(実0.5Hを俯瞰の圧縮0.6で)
+  var DESK_D = dTop(UNIT * 0.5);              // 15 天板の見かけ奥行き(実0.5H×DEPTH_K)
   var SLOT_W = Math.round(UNIT * 0.9);        // 46 机の幅/人(スプライト幅38が収まる)
   var DESK_W = SLOT_W * 2;                    // 92 2人がけの机
   var SEAT_H = Math.round(UNIT * 0.25);       // 13 椅子の座面の高さ
@@ -94,6 +111,22 @@
   var BIN_H = Math.round(UNIT * 0.35);        // 18 ゴミ箱
   var WB_H = Math.round(UNIT * 1.15);         // 59 床置きホワイトボード(脚込み全高)
   var CAFE_W = Math.round(UNIT * 1.35);       // 69 カフェカウンター幅
+  // 天面の見かけ奥行き(全て 実寸(UNIT比)×DEPTH_K。投影ルール①)
+  var SHELF_D = dTop(UNIT * 0.25);            // 8 本棚(実0.25H)
+  var COUNTER_D = dTop(UNIT * 0.4);           // 12 カフェカウンター(実0.4H)
+  var SEAT_D = dTop(UNIT * 0.35);             // 11 椅子の座面(実0.35H)
+  var SOFA_D = dTop(UNIT * 0.4);              // 12 ソファ座面(実0.4H)
+  var ARM_D = dTop(UNIT * 0.5);               // 15 ソファ肘掛け(実0.5H=奥行きいっぱい)
+  var SOFA_BACK_D = dTop(UNIT * 0.2);         // 6 ソファ背もたれの笠木(実0.2H)
+  var TOWER_D = dTop(UNIT * 0.18);            // 6 サーバ塔(実0.18H)
+  var MAKER_D = dTop(UNIT * 0.12);            // 4 コーヒーメーカー(実0.12H)
+  var PAPER_D = dTop(UNIT * 0.2);             // 6 卓上の紙の山の一番上の紙(実0.2H)
+  var BOARD_T = dTop(UNIT * 0.06);            // 2 ホワイトボードの板厚の天端
+  // 高さ・半径もUNIT比(投影ルール②の1:1で描く実寸)
+  var TABLE_H = Math.round(UNIT * 0.3);       // 15 丸テーブルの高さ
+  var TABLE_R = Math.round(UNIT * 0.41);      // 21 丸テーブルの天板半径
+  var TOWER_H = Math.round(UNIT * 0.65);      // 33 サーバ塔の高さ
+  var MAKER_H = Math.round(UNIT * 0.31);      // 16 コーヒーメーカーの高さ
 
   // ---- 時刻: 窓と時計は hourOfDay(ms) の1変数だけから計算する(2箇所に時刻を持たない) ----
   var DAY_MS = 180000, START_HOUR = 8;        // 3分で24時間が1回り。開始は朝8時
@@ -197,10 +230,11 @@
   var ST_ENG4 = { shape: 2, hairC: mix(C.black, C.charcoal, 0.7), shirtC: mix(C.charcoal, C.blue, 0.2), hoodie: true, female: true };
   var ST_WRITER = { shape: 2, hairC: mix(C.black, C.charcoal, 0.45), shirtC: mix(C.blue, C.white, 0.75), female: true };
   var ST_CARRY = { shape: 2, hairC: C.black, shirtC: mix(C.white, C.gray, 0.16), female: true };
-  var ST_CARRY_LOADED = { shape: 2, hairC: C.black, shirtC: mix(C.white, C.gray, 0.16), female: true, papers: true };
   var ST_COFFEE = { shape: 0, hairC: C.black, shirtC: mix(C.white, C.gray, 0.22), tie: true };
   var ST_SOFA = { shape: 1, hairC: C.charcoal, shirtC: mix(C.gray, C.white, 0.32), female: true };
   var ST_SOFA2 = { shape: 2, hairC: mix(C.black, C.charcoal, 0.5), shirtC: mix(C.white, C.gray, 0.20), papers: true };
+  // ソファ2の離席(歩き)用: 同じ見た目でpapersなし=持ち物はheldItemが向きに応じて描く
+  var ST_SOFA2W = { shape: 2, hairC: mix(C.black, C.charcoal, 0.5), shirtC: mix(C.white, C.gray, 0.20) };
   var ST_BREAK1 = { shape: 1, hairC: mix(C.black, C.charcoal, 0.55), shirtC: mix(C.gray, C.white, 0.4), female: true };
   var ST_BREAK2 = { shape: 0, hairC: mix(C.black, C.charcoal, 0.7), shirtC: mix(C.white, C.gray, 0.26), tie: true };
 
@@ -320,6 +354,52 @@
     return { mode: "present", x: cfg.home.x, y: cfg.home.y, dir: cfg.home.dir, moving: false };
   }
 
+  // ---- ソファの2人の予定表(96秒)。「ずっと横を向き合ったまま」をやめる:
+  //      会話(互いに2px乗り出す)⇄正面を向いて資料/タブレットに目を落とす⇄片方が
+  //      資料を持ってボード脇へ歩いて確認し戻る、を織り交ぜる。姿勢の変わり目は
+  //      14/10/14/10/22/14/12秒=10〜30秒間隔。吹き出しは会話フェーズだけ。
+  //      離席の足元レーンはy=323〜333(ソファ矩形の下端323・ローテーブル342・
+  //      書き手の足元334のどれとも重ならない専用帯)。歩みは86px/3.8s=22.6px/s。
+  //      離席は帰宅組(CIO/コーヒー係/休憩の2人)が歩く時間帯なら見送り、
+  //      その回は着席で資料を読む=同時に動く人数を増やさない。 ----
+  var SOFA_CYCLE = 96000;
+  var SOFA_WALK = pathMeta([[386, 281], [300, 281]]); // ソファ前→ボード脇 86px
+  function sofaAwayBlocked(ws) { // 離席の22秒と帰宅組の歩き(out/in)が重なるか
+    // 2.75秒刻みで両端を含む全点を見る(端点2つだけだと、22秒の内側に完全に
+    // 収まる最短6.25秒の歩きを見逃す)。2.75秒<最短の歩き時間なので取りこぼさない。
+    var cfgs = [CIO_AWAY, COFFEE_AWAY, DUOA_AWAY, DUOB_AWAY];
+    for (var i = 0; i < cfgs.length; i += 1) {
+      for (var q = 0; q <= 22000; q += 2750) {
+        var m = awayMode(cfgs[i], ws + q).mode;
+        if (m === "out" || m === "in") return true;
+      }
+    }
+    return false;
+  }
+  function sofaScene(ms) {
+    var t = ((ms % SOFA_CYCLE) + SOFA_CYCLE) % SOFA_CYCLE;
+    var sc = { aDir: "right", bDir: "left", talking: false, aTablet: false, away: false, walk: null };
+    if (t < 14000) sc.talking = true;              // 0-14s: 向き合って会話
+    else if (t < 24000) { sc.aDir = "down"; sc.bDir = "down"; sc.aTablet = true; } // 14-24s: 資料に目を落とす
+    else if (t < 38000) sc.talking = true;         // 24-38s: 会話
+    else if (t < 48000) { sc.aDir = "down"; sc.bDir = "down"; } // 38-48s: 背もたれに寄りかかる
+    else if (t < 70000) {                          // 48-70s: 片方がボード脇へ(往復)
+      var ws = ms - (t - 48000);                   // この離席セグメントの開始時刻(決定は開始時刻で固定)
+      if (sofaAwayBlocked(ws)) { sc.aDir = "down"; sc.bDir = "down"; sc.aTablet = true; }
+      else {
+        sc.away = true; sc.aDir = "down"; sc.aTablet = true;
+        if (t < 51800) { sc.walk = pathPoint(SOFA_WALK, (t - 48000) / 3800); sc.walk.moving = true; sc.walk.mode = "go"; }
+        else if (t < 66200) sc.walk = { x: 300, y: 281, dir: "left", moving: false, mode: "board" };
+        else {
+          sc.walk = pathPoint(SOFA_WALK, 1 - (t - 66200) / 3800);
+          sc.walk.dir = flipDir(sc.walk.dir); sc.walk.moving = true; sc.walk.mode = "back";
+        }
+      }
+    } else if (t < 84000) sc.talking = true;       // 70-84s: 戻ってきて共有の会話
+    else { sc.aDir = "down"; sc.bDir = "down"; sc.aTablet = true; } // 84-96s: 静かに読む
+    return sc;
+  }
+
   // その周期の振る舞いは「周期の開始時刻の時間帯」で決める。周期の境界では全員が
   // 定位置に戻っているので、時間帯が切り替わっても位置が飛ばない(ワープしない)。
   function cycleStartBand(ms, offset, cycle) {
@@ -341,7 +421,13 @@
       else p = { x: 188, y: 178, dir: "down", moving: false, sorting: true };
     } else if (t < 41000) { p = pathPoint(CARRY_LOOP, (t - 12300) / 28700); p.moving = true; p.patrol = true; }
     else p = { x: 188, y: 178, dir: "down", moving: false, sorting: true };
-    p.loaded = t >= 1000 && t < 12000;
+    // 持ち物(行き先と一致させる): 偶数周期=行きは書類を届け(CIOの山が+1)、帰りは
+    // 承認済みの綴り(消えるt=41000に自席の山stackAが+1=「置いた」が見える)/
+    // 奇数周期=行きは手ぶらで受け取りにいき(CIOの山が-1)、帰りに書類を運んで
+    // 自席で整理して片づける(山は増やさない=モニタ上に紙がはみ出て人を隠さない高さを保つ)。
+    p.fetch = Math.floor(ms / CARRY_CYCLE) % 2 === 1;
+    if (p.fetch) p.carry = (t >= 12000 && t < 41000) ? "papers" : null;
+    else p.carry = (t >= 1000 && t < 12000) ? "papers" : (t >= 12000 && t < 41000) ? "folder" : null;
     return p;
   }
   // コーヒー(52秒周期): 朝はまっすぐの往復を2回(コーヒーを取りにいく人が増える朝)。
@@ -608,7 +694,9 @@
       rect(x + 16, yc - SEAT_H + 3, 6, SEAT_H - 4, P.dark);
       rect(x + 8, yc - 3, 22, 3, P.dark);
       rect(x + 4, yc - 2, 5, 3, C.charcoal); rect(x + 29, yc - 2, 5, 3, C.charcoal);
-      rect(x + 2, yc - SEAT_H, 34, 4, C.charcoal);
+      // 座面の天面(実0.35H×DEPTH_K)。人はこの上に後から描かれて重なる=隠さない
+      rect(x + 2, yc - SEAT_H - SEAT_D, 34, SEAT_D, C.charcoal);
+      rect(x + 2, yc - SEAT_H, 34, 3, P.dark); // 座面の前縁
     }
     function chairBack(x, yc) { // 前列の背もたれ。肩幅より狭く=腕が横に見える
       rect(x + 8, yc - BACK_H, 22, BACK_H - SEAT_H + 2, P.dark);
@@ -680,16 +768,24 @@
     }
 
     // 卓上の書類の山: 高さh段。運搬と処理で時間とともに増減する。
+    // 前面=1段4px(高さ1:1)+一番上の紙の天面=実0.2H×DEPTH_K(投影ルール共通)。
+    // 高さは最大3段に保つ(それ以上はモニタの帯を越えて着席者の胸元を隠す)。
     function paperStack(x, yb, h) {
+      if (h <= 0) return;
+      rect(x, yb - h * 4 - PAPER_D, 18, PAPER_D, C.white);
+      rect(x, yb - h * 4 - PAPER_D, 18, 1, P.pale);
       for (var i = 0; i < h; i += 1) {
         rect(x, yb - (i + 1) * 4, 18, 4, i % 2 ? P.pale : C.white);
         rect(x, yb - i * 4 - 1, 18, 1, P.wallShade);
       }
     }
 
-    function tower(x, ya, phase) { // 床置きの小型サーバ(開発島の目印)
-      rect(x, ya - 33, 18, 33, C.charcoal);
+    function tower(x, ya, phase) { // 床置きの小型サーバ(開発島の目印)。天面=実0.18H×DEPTH_K
+      rect(x, ya - TOWER_H - TOWER_D, 18, TOWER_D, P.slateL);
+      rect(x, ya - TOWER_H - TOWER_D, 18, 1, P.slateD);
+      rect(x, ya - TOWER_H, 18, TOWER_H, C.charcoal);
       rect(x + 3, ya - 28, 12, 2, P.wallShade); rect(x + 3, ya - 23, 12, 2, P.wallShade);
+      rect(x + 1, ya - 1, 16, 1, P.slateD); // 接地
       if (phase % 2 === 0) rect(x + 12, ya - 9, 3, 3, C.blue);
     }
 
@@ -781,9 +877,11 @@
     }
 
     // ---- 壁ぎわ・床置きの家具(高さは全てUNIT比) ----
-    function bookshelf(x, ya) { // 高さ=SHELF_H(1.1H)
-      rect(x, ya - SHELF_H - 7, 72, 7, P.slateL);
+    function bookshelf(x, ya) { // 高さ=SHELF_H(1.1H)・天面=実0.25H×DEPTH_K
+      rect(x, ya - SHELF_H - SHELF_D, 72, SHELF_D, P.slateL);
+      rect(x, ya - SHELF_H - SHELF_D, 72, 1, P.slateD); // 天面の奥縁
       rect(x, ya - SHELF_H, 72, SHELF_H, P.slateD);
+      rect(x + 1, ya - 1, 70, 1, P.slateD); // 接地
       rect(x + 4, ya - SHELF_H + 4, 64, SHELF_H - 8, P.slateM);
       for (var row = 0; row < 2; row += 1) {
         var yy = ya - SHELF_H + 4 + row * 24;
@@ -796,10 +894,11 @@
       }
     }
 
-    function trashBin(x, ya) { // ゴミ箱: 高さ=0.35H
-      rect(x + 1, ya - 1, 13, 1, P.dark);
+    function trashBin(x, ya) { // ゴミ箱: 高さ=0.35H。丸い口=rx7/縦dTop(7)の楕円(投影共通)
+      ellipse(x + 7, ya - 1, 8, 3, P.slateD); // 接地影
       rect(x, ya - BIN_H, 15, BIN_H, C.gray);
-      rect(x + 2, ya - BIN_H + 2, 11, 3, P.wallShade);
+      ellipse(x + 7, ya - BIN_H, 7, dTop(7), P.wallShade); // 口の縁(天面)
+      ellipse(x + 7, ya - BIN_H, 5, dTop(5), P.dark);      // 口の内側
       rect(x + 4, ya - 11, 2, 6, P.wallShade); rect(x + 9, ya - 11, 2, 6, P.wallShade);
     }
 
@@ -808,6 +907,7 @@
       rect(x + 6, ya - 2, 9, 2, P.dark); rect(x + 54, ya - 2, 9, 2, P.dark);
       rect(x + 7, ya - 7, 6, 5, C.charcoal); rect(x + 55, ya - 7, 6, 5, C.charcoal);
       rect(x + 9, ya - 22, 3, 15, C.gray); rect(x + 57, ya - 22, 3, 15, C.gray);
+      rect(x, ya - WB_H - BOARD_T, 69, BOARD_T, P.slateL); // 板厚の天端(垂直板は厚みのみ)
       rect(x, ya - WB_H, 69, WB_H - 19, P.dark);
       rect(x + 3, ya - WB_H + 3, 63, WB_H - 25, C.white);
       rect(x + 8, ya - WB_H + 8, 18, 3, C.blue);
@@ -830,26 +930,36 @@
       rect(x + 30, y + 14 + arm, 4, 6, P.skin); // ボードへ伸ばした腕
     }
 
-    function sofa(x, ya) { // 背もたれ上端=床+SOFA_BACK+奥行き9・座面=床+SEAT_H+7
-      rect(x + 5, ya - 6, 92, 6, P.slateD);
-      rect(x, ya - SOFA_BACK - 9, 102, 18, P.dark);
-      rect(x + 5, ya - SOFA_BACK - 5, 92, 11, mix(C.gray, C.white, 0.16));
-      rect(x, ya - 24, 9, 18, P.dark); rect(x + 93, ya - 24, 9, 18, P.dark);
-      rect(x + 6, ya - 20, 90, 9, P.wallShade);
-      rect(x + 6, ya - 11, 90, 8, C.gray);
+    function sofa(x, ya) { // 投影共通: 座面天面=実0.4H・肘掛け天面=実0.5H・笠木=実0.2H×DEPTH_K
+      var seatY = ya - 11 - SOFA_D;   // 座面天面の上端(ya-23)
+      var backY = ya - SOFA_BACK - 9; // 背もたれ前面の上端(ya-40)
+      rect(x + 5, ya - 2, 92, 2, P.slateD);                           // 接地影
+      rect(x + 9, backY - SOFA_BACK_D, 84, SOFA_BACK_D, P.wallShade); // 背もたれの笠木(天面)
+      rect(x + 9, backY, 84, seatY - backY, P.dark);                  // 背もたれの前面
+      rect(x + 12, backY + 4, 78, 11, mix(C.gray, C.white, 0.16));    // 背クッション
+      rect(x, ya - 24 - ARM_D, 9, ARM_D, P.wallShade);                // 肘掛けの天面(左)
+      rect(x + 93, ya - 24 - ARM_D, 9, ARM_D, P.wallShade);           // 肘掛けの天面(右)
+      rect(x, ya - 24, 9, 18, P.dark); rect(x + 93, ya - 24, 9, 18, P.dark); // 肘掛けの前面
+      rect(x + 9, seatY, 84, SOFA_D, P.wallShade);                    // 座面の天面
+      rect(x + 9, ya - 11, 84, 8, C.gray);                            // 座面の前面
       rect(x + 12, ya - 3, 9, 3, P.slateD); rect(x + 81, ya - 3, 9, 3, P.slateD);
     }
 
-    function lowTable(x, ya) { // ソファ前のローテーブル(高さ≈0.3H)
-      rect(x + 3, ya - 9, 4, 9, P.slateD); rect(x + 35, ya - 9, 4, 9, P.slateD);
-      rect(x, ya - 15, 42, 6, P.slateL); rect(x, ya - 10, 42, 1, P.slateD);
-      rect(x + 12, ya - 18, 14, 4, C.white); // 雑誌
+    function lowTable(x, ya) { // ソファ前の丸テーブル(高さ0.3H)。天板=横TABLE_R/縦dTop(TABLE_R)の楕円
+      var cx = x + TABLE_R, cy = ya - TABLE_H - dTop(TABLE_R); // 天板楕円の中心(前縁=ya-TABLE_H)
+      ellipse(cx, ya - 2, 13, 4, P.slateD);                    // 接地影
+      rect(cx - 3, cy, 6, ya - cy - 2, P.dark);                // 支柱
+      rect(cx - 8, ya - 4, 16, 3, C.charcoal);                 // 台座
+      ellipse(cx, cy + 2, TABLE_R, dTop(TABLE_R), P.slateD);   // 天板の厚み
+      ellipse(cx, cy, TABLE_R, dTop(TABLE_R), P.slateL);       // 天板(真円にしない)
+      rect(cx - 9, cy - 3, 14, 4, C.white);                    // 雑誌
     }
 
-    function plant(x, ya) { // 全高≈1.0H
+    function plant(x, ya) { // 全高≈1.0H。鉢の口=rx11/縦dTop(11)の楕円(投影共通)
       ellipse(x + 18, ya, 13, 4, P.slateD);
       poly([[x + 6, ya - 23], [x + 31, ya - 23], [x + 33, ya - 18], [x + 4, ya - 18]], P.wallShade);
       poly([[x + 7, ya - 18], [x + 30, ya - 18], [x + 25, ya - 2], [x + 12, ya - 2]], C.gray);
+      ellipse(x + 18, ya - 23, 11, dTop(11), P.slateD); // 鉢の口(土の面)
       rect(x + 16, ya - 39, 4, 18, P.dark);
       poly([[x + 18, ya - 33], [x + 3, ya - 42], [x + 9, ya - 50], [x + 21, ya - 36]], P.leaf);
       poly([[x + 18, ya - 38], [x + 26, ya - 51], [x + 33, ya - 45], [x + 23, ya - 33]], P.pale);
@@ -861,11 +971,39 @@
       rect(x + 3, y - 3, 1, 3, P.wallShade);
     }
 
-    function cafeCounter(x, ya) { // 右下の行き止まり。寸法はUNIT比の定数から算出する。
-      rect(x, ya - COUNTER_H - 6, CAFE_W, 6, P.slateL);
+    // 歩行者の持ち物。向き(dir)に応じて体の手前側へ持ち替える=左右で持ち手が入れ替わる。
+    // 上向き(背中)は右脇に少しだけ見せる。種類は行き先と一致させる:
+    // papers=書類を届ける/運ぶ・folder=承認済みの綴りを持ち帰る・laptop=打ち合わせへ・
+    // bag=退勤/出社の通勤鞄。カップだけは既存のcoffeeCupを使う。
+    function heldItem(kind, x, y, dir, frame) {
+      var bob = (frame === 1 || frame === 3 ? 1 : 0) * 2; // personの歩行と同じ上下
+      var ix = dir === "left" ? x - 4 : dir === "right" ? x + 27 : dir === "up" ? x + 28 : x + 10;
+      var iy = y + 28 + bob;
+      if (kind === "papers") {
+        var pw = dir === "down" ? 18 : 15;
+        rect(ix, iy, pw, 9, C.white); rect(ix, iy, pw, 2, P.pale);
+        rect(ix, iy + 8, pw, 1, C.gray);
+      } else if (kind === "folder") { // 綴り(青いラベル)
+        rect(ix, iy, 15, 10, P.pale); rect(ix, iy, 15, 2, C.gray);
+        rect(ix + 3, iy + 4, 8, 3, P.codeB);
+      } else if (kind === "laptop") { // 閉じたノートPCを小脇に抱える
+        rect(ix, iy, 16, 2, P.pale); rect(ix, iy + 2, 16, 7, C.charcoal);
+        rect(ix + 2, iy + 3, 12, 3, P.wallShade);
+      } else if (kind === "bag") { // 通勤鞄(手から提げる)
+        rect(ix + 4, iy + 4, 5, 3, P.dark);
+        rect(ix, iy + 7, 13, 11, C.charcoal); rect(ix + 1, iy + 8, 11, 2, P.dark);
+      }
+    }
+
+    function cafeCounter(x, ya) { // 右下の行き止まり。天面=実0.4H×DEPTH_K(投影共通)
+      rect(x, ya - COUNTER_H - COUNTER_D, CAFE_W, COUNTER_D, P.slateL);
+      rect(x, ya - COUNTER_H - COUNTER_D, CAFE_W, 1, P.slateD); // 天面の奥縁
       rect(x, ya - COUNTER_H, CAFE_W, COUNTER_H, P.slateM);
       rect(x + 3, ya - COUNTER_H + 3, CAFE_W - 6, 1, P.slateD);
-      rect(x + 6, ya - COUNTER_H - 22, 21, 16, C.charcoal);  // コーヒーメーカー
+      rect(x + 1, ya - 1, CAFE_W - 2, 1, P.slateD);             // 接地
+      // コーヒーメーカー(高さMAKER_H・天面=実0.12H×DEPTH_K。天面の帯の中に置く)
+      rect(x + 6, ya - COUNTER_H - 6 - MAKER_H - MAKER_D, 21, MAKER_D, P.wallShade);
+      rect(x + 6, ya - COUNTER_H - 6 - MAKER_H, 21, MAKER_H, C.charcoal);
       rect(x + 9, ya - COUNTER_H - 19, 15, 7, P.wallShade);
       rect(x + 12, ya - COUNTER_H - 10, 9, 4, P.dark);
       coffeeCup(x + 38, ya - COUNTER_H - 13);
@@ -980,6 +1118,16 @@
         feet.push(footOf(talk.x, talk.y));
         caps.push({ foot: footOf(talk.x, talk.y), obst: OBST_NO_ENG, moving: !!talk.moving });
       }
+      // ソファ2の離席(ボード脇の確認)。帰宅組が歩く時間帯は予定表(sofaScene)側で見送る。
+      var sofaSc = sofaScene(ms), sofaWalk = null;
+      if (sofaSc.away) {
+        sofaWalk = resolveActor(function (m) {
+          var sc2 = sofaScene(m);
+          return sc2.away && sc2.walk ? sc2.walk : { x: 386, y: 281, dir: "left", moving: false, mode: "go" };
+        }, ms, OBST_MAIN.concat(feet));
+        feet.push(footOf(sofaWalk.x, sofaWalk.y));
+        caps.push({ foot: footOf(sofaWalk.x, sofaWalk.y), obst: OBST_MAIN, moving: !!sofaWalk.moving });
+      }
       // 帰宅する3組(CIO・休憩の2人)。モードは巻き戻し前の値で確定し、位置だけ
       // resolveActorで譲らせる(巻き戻しても経路沿いに連続=ワープしない)。
       var cioMode = awayMode(CIO_AWAY, ms).mode;
@@ -1008,10 +1156,17 @@
       // オフライン検証用フック(通常運転では未定義=何もしない)
       if (typeof window.__SPX_CAPTURE === "function") window.__SPX_CAPTURE(ms, caps);
 
-      // 書類の山: 運搬(持ち出し/届け)と処理(新着/消化)で1段ずつ増減する。
-      var ct = ms % CARRY_CYCLE;
-      var stackA = 3 - (ct >= 1000 ? 1 : 0) + (ct >= 41000 ? 1 : 0);
-      var stackB = 2 + (ct >= 12000 ? 1 : 0) - (ct >= 30000 ? 1 : 0);
+      // 書類の山: 運搬と処理で1段ずつ増減する。偶数周期=届ける(自席-1→CIO+1→CIOが
+      // 処理-1→持ち帰った綴りで自席+1)/奇数周期=受け取る(CIO-1→新しい決裁が+1)。
+      // どちらも周期末に初期値へ戻る(境界で山が飛ばない)。最大3段(人を隠さない高さ)。
+      var ct = ms % CARRY_CYCLE, stackA, stackB;
+      if (Math.floor(ms / CARRY_CYCLE) % 2 === 1) {
+        stackA = 3;
+        stackB = 2 - (ct >= 12000 ? 1 : 0) + (ct >= 30000 ? 1 : 0);
+      } else {
+        stackA = 3 - (ct >= 1000 ? 1 : 0) + (ct >= 41000 ? 1 : 0);
+        stackB = 2 + (ct >= 12000 ? 1 : 0) - (ct >= 30000 ? 1 : 0);
+      }
 
       // 全ての描画対象を足元のYで昇順に並べてから描く(奥→手前)。
       var ents = [], i;
@@ -1024,52 +1179,74 @@
       });
       add(206, function () {
         cioUnit(ms + 700, phase + 1, cioHere);
-        paperStack(322, 183, stackB); // CIOデスクの決裁待ちの山
+        // 決裁待ちの山: モニタの帯(x276-313)の手前に置く=天面つきでもCIOの胸元を隠さない
+        paperStack(290, 183, stackB);
       });
       add(331, function () { floorBoard(230, 330, ms); });
       add(343, function () { boardWriter(ms, talk.mode === "talk"); });
       add(265, function () { deskFacing(64, 264, ms + 150); });
       add(319, function () { deskAway(64, 300, ms + 300, phase + 1, talkOut); });
       add(359, function () { breakDuo(ms, duoAHere, duoBHere); });
-      add(323, function () { sofaUnit(ms); });
+      add(323, function () { sofaUnit(ms, sofaSc); });
       add(357, function () { lowTable(350, 356); });
       add(383, function () { cafeCounter(548, 382); });
       add(381, function () { trashBin(24, 380); });
       var walkFrame = Math.floor(ms / (520 * SLOW)) % 4;
       add(carrier.y + UNIT, function () {
-        person(carrier.x, carrier.y, carrier.dir, carrier.moving ? walkFrame : 0,
-          carrier.loaded ? ST_CARRY_LOADED : ST_CARRY, false);
+        person(carrier.x, carrier.y, carrier.dir, carrier.moving ? walkFrame : 0, ST_CARRY, false);
+        if (carrier.carry) heldItem(carrier.carry, carrier.x, carrier.y, carrier.dir, carrier.moving ? walkFrame : 0);
       });
       if (!coffee.gone) {
         add(coffee.y + UNIT, function () {
           person(coffee.x, coffee.y, coffee.dir, coffee.moving ? walkFrame : 0, ST_COFFEE, false);
-          if (coffee.cup) coffeeCup(coffee.x + 28, coffee.y + 27);
+          // カップも向きに応じて体の手前側へ持ち替える
+          if (coffee.cup) coffeeCup(coffee.dir === "left" ? coffee.x - 5 : coffee.x + 28, coffee.y + 27);
+          if (coffee.leaving || coffee.arriving) heldItem("bag", coffee.x, coffee.y, coffee.dir, coffee.moving ? walkFrame : 0);
         });
       }
       // 帰宅組の退勤/出社の歩き(不在=away中は描かない。位置は経路の連続補間)。
+      // 行き先=家なので通勤鞄を持つ(持ち物と行き先の一致)。
       if (cioMode === "out" || cioMode === "in") {
-        add(cio.y + UNIT, function () { person(cio.x, cio.y, cio.dir, walkFrame, ST_CIO, false); });
+        add(cio.y + UNIT, function () {
+          person(cio.x, cio.y, cio.dir, walkFrame, ST_CIO, false);
+          heldItem("bag", cio.x, cio.y, cio.dir, walkFrame);
+        });
       }
       if (duoAMode === "out" || duoAMode === "in") {
-        add(duoA.y + UNIT, function () { person(duoA.x, duoA.y, duoA.dir, walkFrame, ST_BREAK1, false); });
+        add(duoA.y + UNIT, function () {
+          person(duoA.x, duoA.y, duoA.dir, walkFrame, ST_BREAK1, false);
+          heldItem("bag", duoA.x, duoA.y, duoA.dir, walkFrame);
+        });
       }
       if (duoBMode === "out" || duoBMode === "in") {
-        add(duoB.y + UNIT, function () { person(duoB.x, duoB.y, duoB.dir, walkFrame, ST_BREAK2, false); });
+        add(duoB.y + UNIT, function () {
+          person(duoB.x, duoB.y, duoB.dir, walkFrame, ST_BREAK2, false);
+          heldItem("bag", duoB.x, duoB.y, duoB.dir, walkFrame);
+        });
       }
       if (talkOut) {
         add(talk.y + UNIT, function () {
           person(talk.x, talk.y, talk.dir,
             talk.moving ? walkFrame : Math.floor(ms / 1300) % 2, ST_ENG2, false);
+          // ノートPCを持って相談へ(行きも帰りも小脇に抱える)
+          heldItem("laptop", talk.x, talk.y, talk.dir, talk.moving ? walkFrame : 0);
+        });
+      }
+      if (sofaSc.away) {
+        add(sofaWalk.y + UNIT, function () {
+          person(sofaWalk.x, sofaWalk.y, sofaWalk.dir,
+            sofaWalk.moving ? walkFrame : Math.floor(ms / 1300) % 2, ST_SOFA2W, false);
+          heldItem("papers", sofaWalk.x, sofaWalk.y, sofaWalk.dir, sofaWalk.moving ? walkFrame : 0);
         });
       }
       ents.sort(function (a, b) { return a.y - b.y; });
       for (i = 0; i < ents.length; i += 1) ents[i].f();
 
-      // ソファの会話: 8秒で左右1往復(交互)+間。ボード前は合流中だけ4秒交代で交互に出す。
-      // 深夜は3周期に1回だけ吹き出す(静かだが止まらない)。
+      // ソファの会話: 予定表の会話フェーズだけ8秒で左右1往復(交互)+間=話していない
+      // 時間を作る。深夜は3周期に1回だけ吹き出す(静かだが止まらない)。
       var quiet = nightT >= 0.6;
       var tb = convTurn(ms, 3700);
-      if (tb >= 0 && (!quiet || Math.floor((ms + 3700) / CONV_MS) % 3 === 0)) {
+      if (sofaSc.talking && tb >= 0 && (!quiet || Math.floor((ms + 3700) / CONV_MS) % 3 === 0)) {
         bubble(tb === 0 ? 344 : 390, 228, (Math.floor((ms + 3700) / CONV_MS) * 2 + tb + 1) % 3);
       }
       if (talk.mode === "talk") {
@@ -1148,7 +1325,7 @@
       if (talkOut) {
         addHit("eng2", talk.x, talk.y, UNIT, talk.y + UNIT,
           talk.mode === "talk" ? "今 打ち合わせ中"
-            : talk.mode === "out" ? "今 相談しにいきます" : "今 席に戻ります");
+            : talk.mode === "out" ? "今 PCを持って相談にいきます" : "今 席に戻ります");
       } else {
         addHit("eng2", 115, 256, 48, 319, late ? "今 夜通し設計中" : "今 設計中");
       }
@@ -1157,8 +1334,9 @@
           : chatNow.pair === "think" && chatNow.t < 3500 ? "今 考えています" : "今 構想を練っています");
       addHit("carrier", carrier.x, carrier.y, UNIT, carrier.y + UNIT,
         carrier.sorting ? "今 資料を整理しています"
-          : carrier.loaded ? "今 資料を届けています"
-            : carrier.patrol ? "今 フロアを一回りしています" : "今 次の資料を取りにいきます");
+          : carrier.carry === "folder" ? "今 承認済みの資料を持ち帰っています"
+            : carrier.carry === "papers" ? (carrier.fetch ? "今 受け取った資料を運んでいます" : "今 資料を届けています")
+              : carrier.fetch ? "今 資料を受け取りにいきます" : "今 次の資料を取りにいきます");
       if (!coffee.gone) {
         addHit("coffee", coffee.x, coffee.y, UNIT, coffee.y + UNIT,
           coffee.leaving ? "今 帰宅中"
@@ -1168,20 +1346,36 @@
                   : coffee.atCounter ? "今 コーヒーを淹れています"
                     : coffee.cup ? "今 コーヒーを運んでいます" : "今 コーヒーを淹れにいきます");
       }
-      addHit("sofa1", 339, 260, 44, 324, "今 採用の相談中");
-      addHit("sofa2", 386, 260, 44, 324, "今 打ち合わせ中");
+      addHit("sofa1", 339, 260, 44, 324,
+        sofaSc.talking ? "今 採用の相談中"
+          : sofaSc.aTablet ? "今 資料に目を通しています" : "今 ひと息ついています");
+      if (sofaSc.away) {
+        addHit("sofa2", sofaWalk.x, sofaWalk.y, UNIT, sofaWalk.y + UNIT,
+          sofaWalk.mode === "board" ? "今 ボードを確認しています"
+            : sofaWalk.mode === "back" ? "今 ソファに戻ります" : "今 ボードを確認しにいきます");
+      } else {
+        addHit("sofa2", 386, 260, 44, 324,
+          sofaSc.talking ? "今 打ち合わせ中" : "今 資料を確認しています");
+      }
       drawTips(ms);
     }
 
-    function sofaUnit(ms) { // 会話ペア(座り): ソファで向かい合う2人
+    function sofaUnit(ms, sc) { // ソファの2人: 姿勢は予定表(sofaScene)から決める
       var x = 330, ya = 322;
       var f1 = Math.floor(ms / (1450 * SLOW)) % 2, f2 = Math.floor((ms + 700) / (1250 * SLOW)) % 2;
       sofa(x, ya);
       var py = ya - 62; // 腰(py+42)=座クッション上面
-      person(x + 9, py, "right", f1, ST_SOFA, true);
-      person(x + 56, py, "left", f2, ST_SOFA2, true);
-      rect(x + 18, py + 42, 7, 12, P.dark); rect(x + 30, py + 42, 7, 12, P.dark); // 垂れる足
-      rect(x + 65, py + 42, 7, 12, P.dark); rect(x + 77, py + 42, 7, 12, P.dark);
+      var lean = sc.talking ? 2 : 0; // 会話中は互いに2px乗り出す
+      person(x + 9 + lean, py, sc.aDir, f1, ST_SOFA, true);
+      if (sc.aTablet) { // 手元のタブレットに目を落とす
+        rect(x + 14 + lean, py + 31, 12, 8, C.charcoal);
+        rect(x + 15 + lean, py + 32, 10, 6, P.screen);
+      }
+      rect(x + 18 + lean, py + 42, 7, 12, P.dark); rect(x + 30 + lean, py + 42, 7, 12, P.dark); // 垂れる足
+      if (!sc.away) { // 離席中は空いた座面だけが残る
+        person(x + 56 - lean, py, sc.bDir, f2, ST_SOFA2, true);
+        rect(x + 65 - lean, py + 42, 7, 12, P.dark); rect(x + 77 - lean, py + 42, 7, 12, P.dark);
+      }
     }
 
     function frame(now) {
