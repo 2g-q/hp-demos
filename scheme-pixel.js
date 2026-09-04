@@ -806,10 +806,11 @@
         if (phase % 5 !== 0) rect(x + 57, py + 9, 26, 17, P.screen);
         ctx.globalAlpha = 1;
       });
-      // 経理の電卓(職種の描き分け)
-      rect(x + 38, yd - 30, 9, 11, P.pale); rect(x + 39, yd - 28, 7, 3, C.charcoal);
-      rect(x + 39, yd - 24, 2, 2, P.dark); rect(x + 43, yd - 24, 2, 2, P.dark);
-      rect(x + 39, yd - 21, 2, 2, P.dark);
+      // 経理の電卓(職種の描き分け)。下端yd-22=天板の帯の中に収める
+      // (旧yd-19は前面へ3pxはみ出し=机の縁に貼りついて見えた。2026-09-04目視監査)
+      rect(x + 38, yd - 33, 9, 11, P.pale); rect(x + 39, yd - 31, 7, 3, C.charcoal);
+      rect(x + 39, yd - 27, 2, 2, P.dark); rect(x + 43, yd - 27, 2, 2, P.dark);
+      rect(x + 39, yd - 24, 2, 2, P.dark);
     }
 
     // 奥向きの机(手前列): 人は机の手前に座り背中が見える。椅子は支柱・台座で床に接地。
@@ -873,7 +874,9 @@
         ctx.globalAlpha = 0.14 * nightT; rect(312, py + 9, 26, 17, P.screen);
         ctx.globalAlpha = 1;
       });
-      rect(x + 46, yd - 30, 18, 4, C.white); rect(x + 48, yd - 33, 18, 4, P.pale); // 決裁書類
+      // 決裁書類(下端1pxの縁=paperStack等の紙物と同じ流儀に揃える)
+      rect(x + 46, yd - 30, 18, 4, C.white); rect(x + 46, yd - 27, 18, 1, C.gray);
+      rect(x + 48, yd - 33, 18, 4, P.pale);
     }
 
     // ---- 壁ぎわ・床置きの家具(高さは全てUNIT比) ----
@@ -961,14 +964,17 @@
       poly([[x + 7, ya - 18], [x + 30, ya - 18], [x + 25, ya - 2], [x + 12, ya - 2]], C.gray);
       ellipse(x + 18, ya - 23, 11, dTop(11), P.slateD); // 鉢の口(土の面)
       rect(x + 16, ya - 39, 4, 18, P.dark);
+      // 葉は葉色(charcoal-gray混色)の3段。旧pale/wallShadeはほぼ白で、
+      // 鉢に紙が刺さっているように見えていた(2026-09-04目視監査で修正)
       poly([[x + 18, ya - 33], [x + 3, ya - 42], [x + 9, ya - 50], [x + 21, ya - 36]], P.leaf);
-      poly([[x + 18, ya - 38], [x + 26, ya - 51], [x + 33, ya - 45], [x + 23, ya - 33]], P.pale);
-      poly([[x + 20, ya - 30], [x + 36, ya - 39], [x + 38, ya - 32], [x + 23, ya - 26]], P.wallShade);
+      poly([[x + 18, ya - 38], [x + 26, ya - 51], [x + 33, ya - 45], [x + 23, ya - 33]], mix(C.charcoal, C.gray, 0.8));
+      poly([[x + 20, ya - 30], [x + 36, ya - 39], [x + 38, ya - 32], [x + 23, ya - 26]], mix(C.charcoal, C.gray, 0.62));
     }
 
     function coffeeCup(x, y) {
+      // 湯気の1px針は削除(小物で唯一の1px粒=粒の大きさを2px以上に統一。
+      // 手持ちのカップでは針が持ち主の顔に重なってもいた。2026-09-04目視監査)
       rect(x, y, 10, 7, C.white); rect(x + 10, y + 1, 3, 4, C.white);
-      rect(x + 3, y - 3, 1, 3, P.wallShade);
     }
 
     // 歩行者の持ち物。向き(dir)に応じて体の手前側へ持ち替える=左右で持ち手が入れ替わる。
@@ -998,8 +1004,12 @@
     function cafeCounter(x, ya) { // 右下の行き止まり。天面=実0.4H×DEPTH_K(投影共通)
       rect(x, ya - COUNTER_H - COUNTER_D, CAFE_W, COUNTER_D, P.slateL);
       rect(x, ya - COUNTER_H - COUNTER_D, CAFE_W, 1, P.slateD); // 天面の奥縁
-      rect(x, ya - COUNTER_H, CAFE_W, COUNTER_H, P.slateM);
-      rect(x + 3, ya - COUNTER_H + 3, CAFE_W - 6, 1, P.slateD);
+      // 前面はcharcoal(旧slateM=床の地色と同色でカウンター全体が床に同化し、
+      // カップとメーカーだけが床に浮いて見えていた。2026-09-04目視監査で修正)
+      rect(x, ya - COUNTER_H, CAFE_W, COUNTER_H, C.charcoal);
+      rect(x, ya - COUNTER_H, CAFE_W, 1, P.slateD);             // 前縁
+      rect(x + 23, ya - COUNTER_H + 3, 1, COUNTER_H - 6, P.dark);
+      rect(x + 46, ya - COUNTER_H + 3, 1, COUNTER_H - 6, P.dark); // 面板の継ぎ目
       rect(x + 1, ya - 1, CAFE_W - 2, 1, P.slateD);             // 接地
       // コーヒーメーカー(高さMAKER_H・天面=実0.12H×DEPTH_K。天面の帯の中に置く)
       rect(x + 6, ya - COUNTER_H - 6 - MAKER_H - MAKER_D, 21, MAKER_D, P.wallShade);
@@ -1367,9 +1377,9 @@
       var py = ya - 62; // 腰(py+42)=座クッション上面
       var lean = sc.talking ? 2 : 0; // 会話中は互いに2px乗り出す
       person(x + 9 + lean, py, sc.aDir, f1, ST_SOFA, true);
-      if (sc.aTablet) { // 手元のタブレットに目を落とす
+      if (sc.aTablet) { // 手元のタブレットに目を落とす(ベゼル2px=粒を2px以上に統一)
         rect(x + 14 + lean, py + 31, 12, 8, C.charcoal);
-        rect(x + 15 + lean, py + 32, 10, 6, P.screen);
+        rect(x + 16 + lean, py + 33, 8, 4, P.screen);
       }
       rect(x + 18 + lean, py + 42, 7, 12, P.dark); rect(x + 30 + lean, py + 42, 7, 12, P.dark); // 垂れる足
       if (!sc.away) { // 離席中は空いた座面だけが残る
