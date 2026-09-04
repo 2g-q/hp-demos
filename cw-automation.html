@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>自動化・データ処理 制作サンプル｜自動化のミナト</title>
+<meta name="description" content="転記・集計・通知といった毎日の手作業を、実行ボタン1つで終わる仕組みに置き換えた制作サンプル集。処理時間はすべて手元で計測した実測値です。">
+<style>
+:root{--black:#0D0D0D;--white:#FFFFFF;--charcoal:#343541;--gray:#8E8EA0;--blue:#2563EB;
+--ink-60:rgba(13,13,13,.6);--tint-4:rgba(13,13,13,.04);--tint-8:rgba(13,13,13,.08);--tint-12:rgba(13,13,13,.12);--hairline:rgba(13,13,13,.14);
+--fs-h4:clamp(1.25rem,calc(1.25rem + .125*((100vw - 23.4375rem)/66.5625)),1.375rem);
+--lh-h4:clamp(1.5rem,calc(1.5rem + .2325*((100vw - 23.4375rem)/66.5625)),1.7325rem);
+--fs-h3:clamp(1.5rem,calc(1.5rem + .375*((100vw - 23.4375rem)/66.5625)),1.875rem);
+--lh-h3:clamp(1.98rem,calc(1.98rem + .495*((100vw - 23.4375rem)/66.5625)),2.475rem)}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;background:var(--white)}
+body{position:relative;background:var(--white);color:var(--black);font-family:system-ui,-apple-system,"Helvetica Neue","Hiragino Sans","Hiragino Kaku Gothic ProN","Noto Sans JP","Yu Gothic",Meiryo,sans-serif;word-break:auto-phrase;-webkit-font-smoothing:antialiased}
+h1,h2,h3,p,li{text-wrap:pretty}
+h1,h2{text-wrap:balance}
+img{display:block;max-width:100%}
+ul,ol{list-style:none}
+[hidden]{display:none!important}
+section[id]{scroll-margin-top:80px}
+a:focus-visible,button:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+.container{max-width:1128px;margin-inline:auto;padding-inline:20px}
+.nw{white-space:nowrap;display:inline-block}
+h1{font-size:clamp(2rem,calc(2rem + 2*((100vw - 23.4375rem)/66.5625)),4rem);line-height:clamp(2.28rem,calc(2.28rem + 1.72*((100vw - 23.4375rem)/66.5625)),4rem);letter-spacing:-.03em;font-weight:500}
+h2{font-size:clamp(2rem,calc(2rem + 1*((100vw - 23.4375rem)/66.5625)),3rem);line-height:clamp(2.28rem,calc(2.28rem + 1.2*((100vw - 23.4375rem)/66.5625)),3.48rem);letter-spacing:clamp(-.03em,calc(-.03em + .02*((90rem - 100vw)/66.5625)),-.01em);font-weight:500}
+h3{font-size:var(--fs-h3);line-height:var(--lh-h3);letter-spacing:-.01em;font-weight:500}
+p,li{font-size:1.0625rem;line-height:1.75rem;letter-spacing:-.01em}
+.lead{font-size:1.0625rem;line-height:1.75rem;letter-spacing:-.01em}
+.caption{font-size:.875rem;line-height:1.435rem;letter-spacing:0}
+.muted-caption{color:var(--ink-60)}
+.glow-top{position:absolute;left:0;right:0;top:0;height:1100px;pointer-events:none;z-index:-1;background:linear-gradient(to bottom,rgba(37,99,235,.1) 0,rgba(37,99,235,.09) 420px,rgba(37,99,235,0) 1100px)}
+.hero{text-align:center;padding:96px 0 0}
+.hero .lead{max-width:680px;margin:24px auto 0}
+.hero-cta{margin-top:32px;display:flex;justify-content:center;gap:12px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;justify-content:center;height:40px;padding:0 20px;border-radius:2.5rem;font-size:.875rem;line-height:1;font-weight:500;text-decoration:none;transition:background-color .2s,color .2s}
+.btn-primary{background:var(--black);color:var(--white)}
+.btn-primary:hover{background:rgba(13,13,13,.8)}
+.btn-ghost{background:var(--tint-8);color:var(--black)}
+.btn-ghost:hover{background:var(--tint-12)}
+.sec{margin-top:120px}
+.sec-head{text-align:center;max-width:760px;margin-inline:auto}
+.sec-head .lead{margin-top:24px}
+.sec-body{margin-top:64px}
+.card{background:var(--tint-4);border-radius:8px;padding:32px}
+.card h3{font-size:var(--fs-h4);line-height:var(--lh-h4)}
+.card .body{margin-top:18px}
+.card-link{display:inline-flex;align-items:center;min-height:44px;margin-top:14px;color:var(--black);font-size:.875rem;line-height:1.25rem;font-weight:500;text-decoration:none;transition:color .2s}
+.card-link::after{content:"→";margin-left:.4em}
+.card-link:hover{color:var(--ink-60)}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.contact{position:relative;text-align:center;margin-top:120px;padding:140px 0 160px;overflow:hidden}
+.contact::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(to top,rgba(37,99,235,.12),rgba(37,99,235,0) 85%)}
+.contact .lead{max-width:620px;margin:24px auto 0}
+.contact-cta{margin-top:32px;display:flex;justify-content:center}
+.footer{padding:40px 0 48px}
+.footer-in{display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap}
+.footer-brand{font-size:1rem;line-height:1.25rem;font-weight:600}
+.footer-nav{display:flex;gap:24px}
+.footer-nav a{display:inline-flex;align-items:center;min-height:44px;color:var(--ink-60);font-size:.875rem;line-height:1.25rem;font-weight:500;text-decoration:none;transition:color .2s}
+.footer-nav a:hover{color:var(--black)}
+.ex{margin-top:56px;padding-top:40px;border-top:1px solid var(--hairline)}
+.ex:first-of-type{margin-top:32px;padding-top:0;border-top:0}
+.ex h3{font-size:var(--fs-h3);line-height:var(--lh-h3);letter-spacing:-.01em;font-weight:500}
+.ex-step{margin-top:14px}
+.ex-step .step-label{display:block;margin-bottom:4px;font-size:.8125rem;line-height:1.23rem;font-weight:500;color:var(--ink-60);letter-spacing:.02em}
+.ex-shot{margin-top:22px;background:var(--tint-4);border-radius:8px;padding:8px}
+.ex-shot img{width:100%;height:auto;border-radius:6px}
+.ex-cap{margin-top:10px}
+@media (max-width:1023px){
+.grid3{grid-template-columns:repeat(2,1fr)}
+}
+@media (max-width:767px){
+.card{padding:24px}
+.grid3{grid-template-columns:1fr;gap:24px}
+.sec{margin-top:80px}
+.hero{padding:72px 0 0}
+.contact{margin-top:80px;padding:96px 0 112px}
+}
+@media (prefers-reduced-motion:reduce){
+html{scroll-behavior:auto}
+*{transition:none!important;animation:none!important}
+}
+</style>
+<meta name="robots" content="noindex">
+</head>
+<body>
+<!-- cw-bar:start クラウドワークス提案用の戻り帯(hp_demos_build_cw.py が生成) -->
+<style>
+#cwbar{position:sticky;top:0;z-index:99999;background:#fff;border-bottom:1px solid rgba(13,13,13,.14);
+font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue","Hiragino Kaku Gothic ProN","Noto Sans JP","Yu Gothic",Meiryo,sans-serif}
+#cwbar .in{max-width:1128px;margin-inline:auto;padding:0 20px;height:56px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+#cwbar .bk{display:inline-flex;align-items:center;height:36px;padding:0 16px;border-radius:2.5rem;
+background:#0D0D0D;color:#fff;font-size:.8125rem;font-weight:500;text-decoration:none}
+#cwbar .nm{color:#0D0D0D;font-size:1rem;font-weight:600}
+@media print{#cwbar{display:none}}
+</style>
+<div id="cwbar"><div class="in"><span class="nm">自動化のミナト</span><a class="bk" href="./cw.html">← 制作例一覧へ</a></div></div>
+<!-- cw-bar:end -->
+
+
+<div class="glow-top" aria-hidden="true"></div>
+<main>
+<section class="hero" id="top">
+<div class="container">
+<h1><span class="nw">毎日の手作業を、</span><span class="nw">自動に。</span></h1>
+<p class="lead">転記・集計・通知といった毎日の決まった作業を、実行ボタン1つで終わる仕組みに置き換えます。下の7つは実際に動くツールの出力で、処理時間はすべて手元で計測した実測値です。</p>
+<div class="hero-cta"><a class="btn btn-ghost" href="./cw.html">ほかの制作例を見る</a></div>
+</div>
+</section>
+
+<section class="sec">
+<div class="container">
+<div class="sec-head">
+<h2><span class="nw">実際に作った仕組み</span></h2>
+<p class="lead">いずれも「手作業なら数十分〜数時間」の作業を、実行ボタン1つに置き換えたものです。</p>
+</div>
+<div class="sec-body">
+<article class="ex">
+<h3>サイトに載っている情報を、決まった時刻に集めてくる</h3>
+<p class="ex-step"><span class="step-label">困っていたこと</span>公開サイトに載っている情報を、1件ずつ開いてはコピーして表に貼っていました。100件で1時間以上かかり、貼り間違いも起きます。</p>
+<p class="ex-step"><span class="step-label">作った仕組み</span>サイトから情報を自動で集めて、色付きの見出しと絞り込み機能を付けた表(Excel)に整えて出すようにしました。</p>
+<p class="ex-step"><span class="step-label">どうなったか</span>書籍100件の収集が約10秒で終わります。人がコピーしないので、貼り間違いは起きません。</p>
+<div class="ex-shot"><img src="pf/sample1-scraping.jpg?v=f67509b6" alt="集めた情報を整えたExcelの画面" loading="lazy"></div>
+<p class="ex-cap caption muted-caption">出力例：集めた情報を整えた表</p>
+</article>
+<article class="ex">
+<h3>申込フォームが届いたら、表に転記して集計し、担当へ通知するまでを自動で</h3>
+<p class="ex-step"><span class="step-label">困っていたこと</span>フォームの回答を毎朝人が確認し、表に貼り替えて、担当者へ連絡していました。毎朝30分かかります。</p>
+<p class="ex-step"><span class="step-label">作った仕組み</span>回答が届いた瞬間に、表への転記、集計表の更新、担当者への内容入りメールまでが自動で流れるようにしました。表計算に元からある仕組みで動くので、サーバー代はかかりません。</p>
+<p class="ex-step"><span class="step-label">どうなったか</span>毎朝の30分が0分になりました。届いたそばから処理されるので、見落としも起きません。</p>
+<div class="ex-shot"><img src="pf/sample2-gas.jpg?v=945e1479" alt="フォームからの転記・集計・通知を自動化した画面" loading="lazy"></div>
+<p class="ex-cap caption muted-caption">導入前後の比較</p>
+</article>
+<article class="ex">
+<h3>請求書のPDFを、表に打ち直さずそのまま取り込む</h3>
+<p class="ex-step"><span class="step-label">困っていたこと</span>取引先から届く請求書のPDFを、1枚ずつ開いて番号・日付・金額を表に打ち直していました。打ち間違いにも気づきにくい作業です。</p>
+<p class="ex-step"><span class="step-label">作った仕組み</span>溜まったPDFをまとめて読み取り、1枚1行の表(Excel)に並べるようにしました。読み取れなかった箇所には赤い印を付け、金額は自動で検算します。</p>
+<p class="ex-step"><span class="step-label">どうなったか</span>10枚の取り込みが0.12秒で終わります。読めなかった箇所が赤で残るので、間違いをそのまま流しません。</p>
+<div class="ex-shot"><img src="pf/sample3-pdf.jpg?v=af606a34" alt="請求書PDFを1枚1行のExcelに変換した画面" loading="lazy"></div>
+<p class="ex-cap caption muted-caption">PDF(左)を1枚1行の表(右)へ</p>
+</article>
+<article class="ex">
+<h3>表記のゆれた顧客名簿を、同じ会社どうしにまとめる</h3>
+<p class="ex-step"><span class="step-label">困っていたこと</span>出どころの違う名簿を合わせると、同じ会社が「(株)」「株式会社」など違う書き方で何行も重複していました。</p>
+<p class="ex-step"><span class="step-label">作った仕組み</span>書き方のゆれを揃えて、同じ会社どうしを1つにまとめるようにしました。</p>
+<p class="ex-step"><span class="step-label">どうなったか</span>3つの名簿・59行が、0.1秒で実体どおりの29社に整理されました(重複30件を除去)。</p>
+<div class="ex-shot"><img src="pf/sample4-cleansing.jpg?v=ae66476c" alt="名簿の表記ゆれ・重複を整理した前後比較の画面" loading="lazy"></div>
+<p class="ex-cap caption muted-caption">表記のゆれ・重複を整理(前後比較)</p>
+</article>
+<article class="ex">
+<h3>別のサービスの更新を見張って、変わったところだけ受け取る</h3>
+<p class="ex-step"><span class="step-label">困っていたこと</span>取引先のシステムにある商品情報が変わっていないか、人が一覧を見比べて確かめていました。</p>
+<p class="ex-step"><span class="step-label">作った仕組み</span>商品情報を自動で取り寄せて前回の控えと突き合わせ、変わった行だけを色分けして出すようにしました(緑=新規／黄=価格／青=在庫／赤=廃番)。</p>
+<p class="ex-step"><span class="step-label">どうなったか</span>33件の突き合わせが0.01秒で終わり、変わった16行だけを見ればよくなりました。</p>
+<div class="ex-shot"><img src="pf/sample5-api.jpg?v=d7558044" alt="変更のあった行だけを色分けして抽出した画面" loading="lazy"></div>
+<p class="ex-cap caption muted-caption">変わった行だけを色分けで抽出</p>
+</article>
+<article class="ex">
+<h3>売上の記録を、そのまま経営の画面に</h3>
+<p class="ex-step"><span class="step-label">困っていたこと</span>売上の記録(CSV)はあるのに、グラフにするのは毎回手作業でした。</p>
+<p class="ex-step"><span class="step-label">作った仕組み</span>記録を読み込むだけで、分類別・月別・店舗別のグラフが自動でできる画面を作りました。期間を切り替えると、すべてのグラフが連動します。</p>
+<p class="ex-step"><span class="step-label">どうなったか</span>毎朝、同じ画面を開くだけで数字が見える状態になります。実際に触って動かせるデモを公開しています。</p>
+<a class="card-link" href="./dashboard.html" target="_blank" rel="noopener">画面デモを触ってみる</a>
+<div class="ex-shot"><img src="pf/sample6-dashboard.jpg?v=3544574e" alt="売上ダッシュボードの画面" loading="lazy"></div>
+<p class="ex-cap caption muted-caption">記録から自動生成／分類別・月別・店舗別</p>
+</article>
+<article class="ex">
+<h3>アンケートの自由記述を、自動で仕分けて集計する</h3>
+<p class="ex-step"><span class="step-label">困っていたこと</span>アンケートの自由記述を、人が1件ずつ読んで分類していました。件数が増えるほど集計が遅れます。</p>
+<p class="ex-step"><span class="step-label">作った仕組み</span>記述を内容ごとに自動で仕分け、良い評価か悪い評価かの傾向も判定するようにしました。機械が迷ったものはAIが補い、最後は全件人の目で確かめます。</p>
+<p class="ex-step"><span class="step-label">どうなったか</span>80件の仕分けが0.031秒で終わり、8割は自動で片付きます。人は残りの2割の確認に集中できます。</p>
+<div class="ex-shot"><img src="pf/sample7-classify.jpg?v=98872e6d" alt="自由記述を分類ごとに自動で仕分けた画面" loading="lazy"></div>
+<p class="ex-cap caption muted-caption">分類ごとの自動仕分け結果</p>
+</article>
+</div>
+</div>
+</section>
+
+<section class="sec">
+<div class="container">
+<div class="sec-head">
+<h2><span class="nw">速さだけでなく、</span><span class="nw">正確さのために</span></h2>
+</div>
+<div class="grid3 sec-body">
+<div class="card">
+<h3>AIで速く、人で確かめる</h3>
+<p class="body">処理はAIと機械で速くし、お渡しする物は全件人の目で確かめます。</p>
+</div>
+<div class="card">
+<h3>間違いに気づける作り</h3>
+<p class="body">読み取れなかった箇所は赤い印、金額は自動で検算。間違いをそのまま流さない仕組みを入れます。</p>
+</div>
+<div class="card">
+<h3>数字はすべて実測</h3>
+<p class="body">掲載の処理時間・件数は誇張なく、手元で計測した実測値のみです。</p>
+</div>
+</div>
+</div>
+</section>
+
+<section class="contact" id="contact">
+<div class="container">
+<h2><span class="nw">その手作業、</span><span class="nw">自動にできるか</span><span class="nw">お答えします</span></h2>
+<p class="lead">いま手でやっている作業の流れを教えていただければ、自動にできるか、どこまで手が減るかをお返しします。</p>
+<div class="contact-cta"></div>
+</div>
+</section>
+</main>
+
+<!-- demo-fict:start 架空サンプルの注記(2026-09-04 上部の帯からフッターへ移設) -->
+<style>#demo-fict{margin:0;padding:20px 20px 28px;background:#fff;color:rgba(13,13,13,.6);border-top:1px solid rgba(13,13,13,.14);font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue","Hiragino Kaku Gothic ProN","Noto Sans JP","Yu Gothic",Meiryo,sans-serif;font-size:13px;line-height:1.7;text-align:center}@media print{#demo-fict{display:none}}</style>
+<div id="demo-fict">これは自動化ツールの制作サンプル集です。画面のデータはサンプル用に用意したもの、処理時間は手元での実測値です。</div>
+<!-- demo-fict:end -->
+</body>
+</html>
