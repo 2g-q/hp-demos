@@ -3,322 +3,17 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>LINE公式アカウント構築デモ｜からだ整えラボ 大宮院(架空)</title>
+<meta name="robots" content="noindex,nofollow">
+<title>LINE予約・自動応答デモ｜ミナト AI・IT ラボ</title>
+<meta name="description" content="予約受付・よくある質問・来店前後の配信を試せるLINE構築サンプル。ミナト AI・IT ラボが、お店の業務に合わせて設計します。">
 <style>
-  :root{
-    --green:#06C755;
-    --green-dark:#049c43;
-    --green-pale:#e8f9ef;
-    --ink:#1c2a24;
-    --gray:#5f6f68;
-    --line-bg:#7f9ec7;
-    --bubble-out:#8de055;
-    --orange:#f08a1d;
-    --orange-pale:#fdf3e4;
-    --card-shadow:0 10px 30px rgba(16,60,38,.08);
-  }
-  *{margin:0;padding:0;box-sizing:border-box;}
-  html{scroll-behavior:smooth;}
-  body{
-    font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Hiragino Kaku Gothic ProN","Noto Sans JP",Meiryo,sans-serif;
-    color:var(--ink);
-    background:#fbfdfc;
-    line-height:1.7;
-    overflow-x:hidden;
-  }
-  img{max-width:100%;}
-  .wrap{max-width:1120px;margin:0 auto;padding:0 24px;}
-
-  /* ===== ページ上部の説明(デザインの正= cases.html のトークン) ===== */
-  .mintro{
-    background:linear-gradient(to bottom,rgba(37,99,235,.10),rgba(37,99,235,0) 92%),#FFFFFF;
-    border-bottom:1px solid rgba(13,13,13,.14);
-    font-family:system-ui,-apple-system,"Helvetica Neue","Hiragino Sans","Hiragino Kaku Gothic ProN","Noto Sans JP","Yu Gothic",Meiryo,sans-serif;
-    color:#0D0D0D;text-align:center;padding:72px 0 56px;
-  }
-  .mintro .tag{display:block;font-size:.875rem;line-height:1.435rem;font-weight:500;color:#2563EB;margin-bottom:16px;letter-spacing:.02em;}
-  .mintro .nw{white-space:nowrap;display:inline-block;}
-  .mintro h1{
-    font-size:clamp(2rem,calc(2rem + 1.25*((100vw - 23.4375rem)/66.5625)),3.25rem);
-    line-height:1.25;letter-spacing:-.03em;font-weight:500;text-wrap:balance;
-  }
-  .mintro p.lead{
-    max-width:680px;margin:24px auto 0;
-    font-size:1.0625rem;line-height:1.75rem;letter-spacing:-.01em;text-wrap:pretty;
-  }
-  .mintro .demo-note{margin-top:16px;font-size:.875rem;line-height:1.435rem;color:rgba(13,13,13,.6);}
-
-  /* ===== section common ===== */
-  section{padding:72px 0;}
-  .sec-label{
-    display:flex;align-items:center;gap:12px;
-    color:var(--green-dark);font-weight:800;font-size:13px;letter-spacing:.22em;
-    margin-bottom:10px;
-  }
-  .sec-label::before{content:"";width:34px;height:3px;background:var(--green);border-radius:2px;}
-  h2{font-size:28px;font-weight:800;margin-bottom:12px;letter-spacing:.02em;}
-  .sec-desc{color:var(--gray);font-size:15px;max-width:760px;margin-bottom:40px;}
-  .term{
-    background:var(--green-pale);border-radius:12px;padding:14px 18px;
-    font-size:13.5px;color:#20583c;margin:-20px 0 40px;max-width:760px;
-  }
-  .term b{color:var(--green-dark);}
-
-  /* ===== phones ===== */
-  .phones{
-    display:flex;gap:56px;justify-content:center;align-items:flex-start;flex-wrap:wrap;
-  }
-  .phone-set{width:320px;display:flex;flex-direction:column;align-items:center;}
-  .phone{
-    width:302px;background:#101216;border-radius:48px;padding:11px;
-    box-shadow:0 30px 60px rgba(10,40,25,.22);
-  }
-  .screen{
-    border-radius:38px;overflow:hidden;height:845px;
-    display:flex;flex-direction:column;position:relative;background:var(--line-bg);
-  }
-  .notch{
-    position:absolute;top:9px;left:50%;transform:translateX(-50%);
-    width:104px;height:24px;background:#101216;border-radius:14px;z-index:9;
-  }
-  .lheader{
-    background:var(--green);color:#fff;
-    padding:38px 14px 10px;display:flex;align-items:center;gap:8px;
-    font-size:14.5px;font-weight:700;flex-shrink:0;
-  }
-  .lheader .back{font-size:19px;font-weight:400;line-height:1;}
-  .lheader .hicons{margin-left:auto;font-size:13px;letter-spacing:6px;opacity:.9;}
-  .chatbody{
-    flex:1;padding:10px 10px 12px;overflow:hidden;
-    display:flex;flex-direction:column;gap:7px;
-  }
-  .datechip,.stepchip{align-self:center;font-size:10px;border-radius:999px;padding:2px 12px;}
-  .datechip{background:rgba(20,40,70,.28);color:#fff;}
-  .stepchip{
-    background:#fff;color:var(--green-dark);font-weight:700;
-    box-shadow:0 1px 4px rgba(0,0,0,.15);
-  }
-  .msg{display:flex;align-items:flex-end;gap:6px;}
-  .msg.in{padding-right:26px;}
-  .msg.out{justify-content:flex-end;padding-left:40px;}
-  .avatar{
-    width:30px;height:30px;border-radius:50%;background:#fff;flex-shrink:0;
-    display:flex;align-items:center;justify-content:center;
-    color:var(--green-dark);font-weight:800;font-size:13px;
-    border:2px solid var(--green);align-self:flex-start;
-  }
-  .bubble{
-    background:#fff;border-radius:16px;padding:9px 12px;
-    font-size:12px;line-height:1.6;max-width:200px;
-    box-shadow:0 1px 2px rgba(0,0,0,.12);
-  }
-  .msg.out .bubble{background:var(--bubble-out);}
-  .time{font-size:9px;color:#eaf1fb;flex-shrink:0;line-height:1.4;}
-  .msg.out .time{text-align:right;}
-
-  /* carousel card in chat */
-  .ccard{
-    background:#fff;border-radius:16px;overflow:hidden;width:206px;
-    box-shadow:0 1px 3px rgba(0,0,0,.15);flex-shrink:0;
-  }
-  .ccard-hd{
-    background:linear-gradient(135deg,#0bb551,#3ddc7f);color:#fff;
-    font-size:12.5px;font-weight:800;padding:9px 12px;
-  }
-  .ccard-bd{font-size:11px;color:var(--gray);padding:7px 12px 4px;}
-  .ccard .cbtn{
-    display:block;width:calc(100% - 20px);margin:6px auto;
-    border:1.5px solid var(--green);color:var(--green-dark);background:#fff;
-    border-radius:9px;padding:6px 4px;font-size:11.5px;font-weight:700;text-align:center;
-    font-family:inherit;
-  }
-  .ccard .cbtn.primary{background:var(--green);color:#fff;margin-bottom:10px;}
-  .ccard .price{
-    padding:2px 12px 4px;font-size:11px;color:var(--ink);
-  }
-  .ccard .price b{font-size:15px;color:var(--green-dark);}
-  .ccard .price s{color:#a0a8a4;font-size:10px;}
-  .peek{
-    width:14px;border-radius:12px 0 0 12px;background:#fff;opacity:.75;flex-shrink:0;
-    align-self:stretch;
-  }
-  .inputbar{
-    background:#f4f5f7;padding:8px 12px 14px;display:flex;align-items:center;gap:8px;
-    flex-shrink:0;color:#9aa3ad;font-size:16px;
-  }
-  .inputbar .field{
-    flex:1;background:#fff;border:1px solid #dfe3e8;border-radius:999px;
-    font-size:11px;padding:5px 12px;color:#aab2ba;
-  }
-
-  /* rich menu */
-  .rm-toggle{
-    background:#f4f5f7;color:#6a7680;font-size:11px;font-weight:700;
-    text-align:center;padding:5px 0;flex-shrink:0;border-bottom:1px solid #e3e7ea;
-  }
-  .richmenu{
-    background:#e9edf1;padding:5px;flex-shrink:0;
-    display:grid;grid-template-columns:repeat(3,1fr);gap:5px;
-  }
-  .rm-cell{
-    background:#fff;border-radius:10px;height:118px;
-    display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;
-    font-size:11px;font-weight:700;color:var(--ink);text-align:center;
-    position:relative;border:1px solid #eef1f4;
-  }
-  .rm-cell .ric{font-size:26px;line-height:1;}
-  .rm-cell small{font-weight:600;color:var(--gray);font-size:9px;display:block;line-height:1.3;}
-  .rm-cell.hot{
-    background:var(--green);color:#fff;border-color:var(--green);
-  }
-  .rm-cell.hot small{color:#dfffe9;}
-  .tapmark{
-    position:absolute;right:6px;bottom:6px;font-size:16px;
-  }
-  .tapring{
-    position:absolute;right:2px;bottom:2px;width:30px;height:30px;border-radius:50%;
-    border:2px solid #fff;opacity:.7;animation:pulse 1.6s infinite;
-  }
-  @keyframes pulse{
-    0%{transform:scale(.6);opacity:.8;}
-    100%{transform:scale(1.25);opacity:0;}
-  }
-  .phone-cap{
-    margin-top:20px;background:#fff;border-radius:14px;padding:16px 18px;
-    box-shadow:var(--card-shadow);font-size:13px;color:var(--gray);width:100%;
-  }
-  .phone-cap b{color:var(--ink);display:block;margin-bottom:4px;font-size:14px;}
-  .phone-cap b span{color:var(--green-dark);}
-
-  /* ===== flow ===== */
-  .flow-box{
-    background:#fff;border-radius:20px;box-shadow:var(--card-shadow);
-    padding:44px 24px 40px;
-  }
-  .flow{display:flex;flex-direction:column;align-items:center;}
-  .fnode{
-    background:#fff;border:2px solid var(--green);border-radius:14px;
-    padding:12px 22px;text-align:center;max-width:460px;
-    font-weight:700;font-size:14.5px;box-shadow:0 4px 12px rgba(6,199,85,.10);
-  }
-  .fnode small{display:block;font-weight:600;color:var(--gray);font-size:12px;margin-top:2px;}
-  .fnode.start{background:var(--green);border-color:var(--green);color:#fff;}
-  .fnode.start small{color:#dfffe9;}
-  .fnode.goal{background:var(--green-pale);border-color:var(--green-dark);}
-  .fconn{
-    width:2px;height:46px;background:#9fb8a8;position:relative;
-  }
-  .fconn::after{
-    content:"";position:absolute;bottom:-2px;left:50%;transform:translateX(-50%);
-    border:6px solid transparent;border-top:8px solid #9fb8a8;
-  }
-  .fconn .flabel{
-    position:absolute;left:12px;top:50%;transform:translateY(-50%);
-    white-space:nowrap;background:var(--green-pale);color:var(--green-dark);
-    font-size:11.5px;font-weight:700;padding:2px 12px;border-radius:999px;
-  }
-  .fbranch{width:100%;max-width:720px;}
-  .fbranch .stub{width:2px;height:26px;background:#9fb8a8;margin:0 auto;}
-  .fbranch .hline{height:2px;background:#9fb8a8;margin:0 25%;}
-  .fcols{display:flex;}
-  .fcol{
-    flex:1;display:flex;flex-direction:column;align-items:center;padding:0 8px;
-  }
-  .fcol .fconn{height:24px;}
-  .fcol .fconn.long{height:40px;}
-  .branch-chip{
-    border-radius:999px;padding:4px 18px;font-size:13px;font-weight:800;margin:2px 0;
-  }
-  .fcol.yes .branch-chip{background:var(--green);color:#fff;}
-  .fcol.no .branch-chip{background:var(--orange);color:#fff;}
-  .fcol.no .fnode{border-color:var(--orange);box-shadow:0 4px 12px rgba(240,138,29,.12);}
-  .fcol.no .fconn{background:#d8b285;}
-  .fcol.no .fconn::after{border-top-color:#d8b285;}
-  .fcol .fnode{font-size:13px;padding:10px 14px;max-width:300px;}
-  .fcol .fnode small{font-size:11px;}
-  .fcol-note{
-    margin-top:14px;font-size:11.5px;color:var(--gray);text-align:center;max-width:280px;
-    background:var(--orange-pale);border-radius:10px;padding:8px 12px;
-  }
-  .flow-note{margin-top:30px;text-align:center;font-size:13px;color:var(--gray);}
-
-  /* ===== table ===== */
-  .table-scroll{overflow-x:auto;border-radius:16px;box-shadow:var(--card-shadow);background:#fff;}
-  table{border-collapse:collapse;width:100%;min-width:760px;font-size:13.5px;}
-  thead th{
-    background:var(--green);color:#fff;font-weight:700;text-align:left;
-    padding:13px 16px;white-space:nowrap;
-  }
-  thead th:first-child{border-radius:0;}
-  tbody td{padding:13px 16px;border-bottom:1px solid #eef3f0;vertical-align:top;}
-  tbody tr:last-child td{border-bottom:none;}
-  tbody tr:nth-child(even){background:#f7fbf8;}
-  td.no{font-weight:800;color:var(--green-dark);white-space:nowrap;}
-  td .tag{
-    display:inline-block;background:var(--green-pale);color:var(--green-dark);
-    border-radius:6px;font-size:11.5px;font-weight:700;padding:1px 8px;white-space:nowrap;
-  }
-  td .tag.or{background:var(--orange-pale);color:#b5690f;}
-  .kpi{white-space:nowrap;font-weight:700;}
-  .kpi span{color:var(--green-dark);}
-  .kpi i{font-style:normal;color:#b0bcb5;margin:0 4px;}
-  .table-note{font-size:12.5px;color:var(--gray);margin-top:14px;}
-  .swipe-hint{display:none;font-size:12px;color:var(--green-dark);font-weight:700;margin-bottom:8px;}
-  @media (max-width:820px){.swipe-hint{display:block;}}
-
-  /* ===== effects ===== */
-  .effects{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
-  .ecard{
-    background:#fff;border-radius:18px;padding:30px 26px;box-shadow:var(--card-shadow);
-    border-top:4px solid var(--green);
-  }
-  .ecard .eicon{
-    width:56px;height:56px;border-radius:16px;background:var(--green-pale);
-    display:flex;align-items:center;justify-content:center;font-size:28px;margin-bottom:16px;
-  }
-  .ecard h3{font-size:17px;margin-bottom:10px;line-height:1.5;}
-  .ecard p{font-size:13.5px;color:var(--gray);}
-  .ecard .foot{
-    margin-top:14px;font-size:11.5px;color:#93a09a;border-top:1px dashed #e0e8e3;padding-top:10px;
-  }
-
-  /* ===== cta / footer ===== */
-  .closing{
-    background:linear-gradient(135deg,#04b04b,#06C755);color:#fff;
-    border-radius:24px;padding:48px 40px;text-align:center;
-  }
-  .closing h2{color:#fff;margin-bottom:10px;}
-  .closing p{font-size:14.5px;opacity:.95;max-width:640px;margin:0 auto;}
-  footer{
-    margin-top:72px;background:#17231d;color:#c3d2c9;padding:40px 0 48px;
-    font-size:13px;text-align:center;
-  }
-  footer .store{margin-bottom:14px;line-height:1.9;}
-  footer .disclaimer{
-    display:inline-block;background:#22332a;border-radius:10px;padding:10px 20px;
-    color:#e6f3ea;font-size:12.5px;
-  }
-
-  /* ===== responsive ===== */
-  @media (max-width:640px){
-    .mintro{padding:52px 0 44px;}
-    h2{font-size:22px;}
-    section{padding:52px 0;}
-    .wrap{padding:0 16px;}
-    .phones{gap:44px;}
-    .effects{grid-template-columns:1fr;}
-    .fcol{padding:0 3px;}
-    .fcol .fnode{font-size:11.5px;padding:8px 8px;}
-    .fcol .fnode small{font-size:10px;}
-    .branch-chip{font-size:11.5px;padding:3px 12px;}
-    .fnode{font-size:13px;padding:10px 14px;}
-    .fconn .flabel{left:8px;font-size:10.5px;padding:2px 8px;}
-    .flow-box{padding:32px 10px 30px;}
-    .closing{padding:36px 20px;}
-  }
+:root{--ink:#172c27;--muted:#60746d;--green:#087b4e;--border:#dce6df;--pale:#eaf4ec}
+*{box-sizing:border-box}body{margin:0;background:#fafcf9;color:var(--ink);font-family:system-ui,-apple-system,"Hiragino Sans",Meiryo,sans-serif;line-height:1.7}button,a{-webkit-tap-highlight-color:transparent}button{font:inherit;cursor:pointer}a{color:inherit}button:focus-visible,a:focus-visible,summary:focus-visible,[tabindex]:focus-visible{outline:3px solid #2563eb;outline-offset:4px}button:disabled{cursor:default;opacity:.45}.wrap{max-width:1100px;padding:0 28px;margin:auto}.hero{padding:44px 28px 20px}.eyebrow{color:var(--green);font-size:12px;font-weight:750;letter-spacing:.12em;margin:0 0 12px}.hero h1{font-size:clamp(30px,3.3vw,44px);line-height:1.35;letter-spacing:-.035em;margin:0 0 16px;font-weight:650}.hero p.lead{font-size:15px;color:var(--muted);margin:0;max-width:740px}.demo-tag{display:inline-block;border:1px solid #b9d2c0;border-radius:99px;font-size:11px;padding:3px 10px;letter-spacing:0;margin-left:10px;vertical-align:middle}.workspace{display:grid;grid-template-columns:minmax(0,1fr) 380px;gap:64px;align-items:center;padding:16px 0 42px}.controls h2{font-size:19px;margin:0 0 4px}.hint{font-size:13px;color:var(--muted);margin:0 0 18px}.scenarios{display:grid;gap:9px}.scenario{display:flex;gap:14px;text-align:left;background:#fff;border:1px solid var(--border);border-radius:12px;padding:13px 16px;color:var(--ink);align-items:center;width:100%;transition:background .15s,border-color .15s}.scenario[aria-pressed="true"]{background:var(--pale);border-color:var(--green);box-shadow:inset 3px 0 var(--green)}.scenario:hover{border-color:var(--green)}.num{color:var(--green);font-size:12px;font-weight:750;flex:none}.scenario strong{display:block;font-size:15px;font-weight:650}.scenario small{display:block;font-size:12px;color:var(--muted);margin-top:2px}.scenario .arrow{margin-left:auto;color:var(--green)}.scenario-copy{padding:18px 2px 0;min-height:112px}.scenario-copy .label{font-size:11px;font-weight:700;color:var(--green);margin:0 0 5px}.scenario-copy p{font-size:13px;margin:0;color:var(--muted)}.scope-note{border-top:1px solid var(--border);padding-top:13px;font-size:11px;color:var(--muted);margin:0}.preview-stage{background:#edf3ed;border:1px solid #e2e9df;border-radius:24px;padding:17px 20px 14px;display:flex;flex-direction:column;align-items:center;min-width:0}.preview-label{display:flex;width:100%;justify-content:space-between;align-items:center;font-size:11px;color:var(--muted);margin-bottom:12px}.preview-label b{font-weight:650}.reset{border:0;background:transparent;color:var(--green);font-size:11px;padding:4px}.phone{width:286px;max-width:100%;height:508px;border:7px solid #24332d;border-radius:33px;background:#c7d8dc;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 14px 28px #213c2620}.phone-top{background:#f7faf7;text-align:center;font-size:9px;padding:5px;color:#55645e;flex:none}.phone-head{background:#f7faf7;border-bottom:1px solid #dbe4df;padding:7px 12px;display:flex;align-items:center;gap:9px;flex:none}.avatar{display:grid;place-items:center;background:#e0eee0;color:#317847;font-weight:750;width:30px;height:30px;border-radius:9px;font-size:12px}.phone-head strong{font-size:12px;display:block}.phone-head small{font-size:9px;display:block;color:var(--muted)}.chatbody{overflow-y:auto;overscroll-behavior:contain;min-height:0;flex:1;padding:12px;scrollbar-width:thin}.day{text-align:center;font-size:9px;color:#516a6d;margin:0 0 11px}.bubble{background:#fff;border-radius:3px 12px 12px;padding:10px 12px;font-size:12px;line-height:1.7;margin:0 15px 10px 0;box-shadow:0 1px 2px #38545110}.bubble.out{background:#a9e89a;margin-left:38px;margin-right:0;border-radius:12px 3px 12px 12px}.bubble b{font-weight:650}.choices{display:grid;gap:7px;margin:0 15px 12px 0}.chat-button{border:1px solid #97bfab;background:#fff;border-radius:8px;padding:9px 8px;color:#05683f;font-size:12px;line-height:1.45}.chat-button:hover{background:#edf8ed}.chat-button.primary{background:var(--green);border-color:var(--green);color:#fff}.chat-button.selected{background:#e7f7e7;box-shadow:inset 0 0 0 1px var(--green)}.slots{grid-template-columns:1fr 1fr}.mini-label{font-size:10px;color:#516a6d;margin:5px 0 7px}.richmenu{display:grid;grid-template-columns:repeat(3,1fr);background:#fff;gap:1px;border-top:1px solid #d6e5da;flex:none}.richmenu button{border:0;background:#f7faf7;color:#4e655b;font-size:10px;line-height:1.5;padding:10px 1px}.richmenu button[aria-pressed="true"]{background:#e4f2e7;color:#087b4e}.richmenu span{display:block;font-size:17px;margin-bottom:2px}.homebar{height:13px;background:#f7faf7;flex:none;position:relative}.homebar:after{content:"";position:absolute;height:3px;border-radius:5px;width:86px;background:#24332d;top:4px;left:50%;transform:translateX(-50%)}.preview-caption{font-size:10px;color:#65796c;margin:10px 0 0}.overview{padding:34px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border);background:#fff}.overview h2{font-size:23px;margin:0 0 20px;font-weight:650}.features{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}.feature{padding-left:15px;border-left:2px solid #a8c6af}.feature h3{font-size:15px;margin:0 0 7px}.feature p{font-size:13px;color:var(--muted);margin:0}.details{margin-top:23px;border-top:1px solid var(--border);padding-top:16px;font-size:13px}.details summary{cursor:pointer;font-weight:650}.details p{color:var(--muted);margin:12px 0 0;max-width:850px}.closing{padding:35px 0;display:flex;align-items:center;justify-content:space-between;gap:24px}.closing h2{font-size:22px;margin:0 0 6px}.closing p{font-size:13px;color:var(--muted);margin:0;max-width:600px}.actions{display:flex;flex-wrap:wrap;gap:9px;flex-shrink:0}.action{display:inline-flex;padding:11px 18px;border-radius:99px;background:var(--ink);color:#fff;text-decoration:none;font-size:12px;font-weight:600}.action.secondary{color:var(--ink);background:#e9efea}footer{padding:20px 0;border-top:1px solid var(--border);color:var(--muted);font-size:11px}footer .wrap{display:flex;justify-content:space-between;gap:20px}footer p{margin:0}footer b{color:var(--ink);font-weight:650}
+@media(max-width:800px){.workspace{gap:25px;grid-template-columns:minmax(0,1fr) 330px}.preview-stage{padding:14px}.closing{align-items:flex-start;flex-direction:column}.hero{padding-top:30px}.hero h1{font-size:34px}}
+@media(max-width:620px){.wrap{padding:0 20px}.hero{padding:27px 20px 18px}.hero h1{font-size:29px}.hero p.lead{font-size:13px}.eyebrow{font-size:10px}.demo-tag{font-size:10px}.workspace{grid-template-columns:1fr;gap:18px;padding:0 0 30px}.controls h2{font-size:16px}.hint{font-size:12px;margin-bottom:10px}.scenarios{grid-template-columns:repeat(3,1fr);gap:6px}.scenario{display:block;padding:10px 4px;text-align:center;border-radius:9px}.scenario .num,.scenario small,.scenario .arrow{display:none}.scenario strong{font-size:12px}.scenario[aria-pressed="true"]{box-shadow:inset 0 -2px var(--green)}.scenario-copy{min-height:0;padding:12px 0 0}.scenario-copy p{font-size:12px}.scenario-copy .label{display:none}.scope-note{margin-top:11px;font-size:10px;padding-top:10px}.preview-stage{width:100%;max-width:370px;justify-self:center;padding:12px 18px}.phone{height:470px}.preview-label{margin-bottom:7px}.features{grid-template-columns:1fr;gap:19px}.overview{padding:26px 0}.overview h2{font-size:21px}.closing{padding:28px 0}.closing h2{font-size:21px}footer .wrap{flex-direction:column;gap:8px}}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
 </style>
-</head>
-<body>
+</head><body>
 <!-- pfnav:start 全ページ共通ナビ(automation/hp_demos_inject_bar.py が生成・手で編集しない) -->
 <style>
 /* デザインの正= cases.html のヘッダー(白地+ヘアライン+aria-currentで現在地)。 */
@@ -349,7 +44,7 @@
 
 </style>
 <nav id="pfnav"><div class="in">
-<a class="brand" href="./index.html">自動化のミナト</a>
+<a class="brand" href="./index.html">ミナト AI・IT ラボ</a>
 <div class="links">
 <a href="./index.html" data-k="index">サービス</a>
 <a href="./pricing.html" data-k="pricing">料金</a>
@@ -396,335 +91,80 @@ document.querySelectorAll("#pfnav a[data-k]").forEach(function(a){if(a.getAttrib
 })();
 </script>
 <!-- pfnav:end -->
-
-
-
-<!-- ============ HERO ============ -->
-<div class="mintro">
-  <div class="wrap">
-    <span class="tag">LINE公式アカウント 構築デモ</span>
-    <h1><span class="nw">友だち追加から</span><span class="nw">予約まで、</span><br><span class="nw">LINEが自動で</span><span class="nw">接客する仕組み。</span></h1>
-    <p class="lead">架空の整体院「からだ整えラボ 大宮院」を題材に、あいさつメッセージ・自動診断・ステップ配信・予約リマインドまでを組み込んだ構築デモです。実際のトーク画面イメージと設計図でご覧いただけます。</p>
-    <p class="demo-note">※本ページは提案用の構築サンプル(デモ)です。店舗・数値はすべて架空です。</p>
-  </div>
+<main>
+<header class="hero wrap">
+<p class="eyebrow">LINE OFFICIAL ACCOUNT <span class="demo-tag">操作できる制作サンプル</span></p>
+<h1>予約の受付から、来店後のフォローまで。</h1>
+<p class="lead">お客様が迷わず予約でき、スタッフの確認・返信の手間を減らせる仕組みを設計します。<br>整体院を題材に、LINEでのやり取りを体験してください。</p>
+</header>
+<section class="wrap" aria-label="LINE操作デモ">
+<div class="workspace">
+<div class="controls">
+<h2>試したいシーンを選んでください</h2>
+<p class="hint">シーンを選び、スマホ内のボタンで操作できます。</p>
+<div class="scenarios" aria-label="シーン切替">
+<button class="scenario" data-scene="booking" aria-pressed="true"><span class="num">01</span><span><strong>予約受付</strong><small>メニュー → 日時 → 予約内容の確認</small></span><span class="arrow" aria-hidden="true">↗</span></button>
+<button class="scenario" data-scene="faq" aria-pressed="false"><span class="num">02</span><span><strong>よくある質問</strong><small>営業時間・駐車場の質問に回答</small></span><span class="arrow" aria-hidden="true">↗</span></button>
+<button class="scenario" data-scene="followup" aria-pressed="false"><span class="num">03</span><span><strong>来店フォロー</strong><small>予約前日のご案内 → 来店後のお礼</small></span><span class="arrow" aria-hidden="true">↗</span></button>
 </div>
-
-<!-- ============ 01 PHONES ============ -->
-<section id="mock">
-  <div class="wrap">
-    <div class="sec-label">SECTION 01</div>
-    <h2>実機イメージ ── お客様のスマホにはこう届きます</h2>
-    <p class="sec-desc">左は友だち追加直後の自動接客トーク、右はトーク画面の下に常時表示される「リッチメニュー」です。スタッフが1通も手打ちしなくても、この流れがすべて自動で動きます。</p>
-
-    <div class="phones">
-      <!-- phone 1 : talk -->
-      <div class="phone-set">
-        <div class="phone">
-          <div class="screen">
-            <div class="notch"></div>
-            <div class="lheader"><span class="back">‹</span> からだ整えラボ 大宮院 <span class="hicons">☎ ≡</span></div>
-            <div class="chatbody">
-              <div class="datechip">今日</div>
-              <div class="stepchip">① 友だち追加の直後に自動送信</div>
-              <div class="msg in">
-                <div class="avatar">整</div>
-                <div class="bubble">友だち追加ありがとうございます😊<br>まずは30秒のお悩み診断をどうぞ。</div>
-                <span class="time">10:00</span>
-              </div>
-              <div class="stepchip">② ボタンをタップするだけで診断</div>
-              <div class="msg in">
-                <div class="avatar">整</div>
-                <div class="ccard">
-                  <div class="ccard-hd">30秒お悩み診断</div>
-                  <div class="ccard-bd">近いお悩みをタップしてください</div>
-                  <button class="cbtn">肩こり・首のこり</button>
-                  <button class="cbtn">腰痛・骨盤まわり</button>
-                  <button class="cbtn" style="margin-bottom:10px;">その他の不調</button>
-                </div>
-                <div class="peek"></div>
-              </div>
-              <div class="msg out">
-                <span class="time">既読<br>10:01</span>
-                <div class="bubble">腰痛・骨盤まわり</div>
-              </div>
-              <div class="stepchip">③ 回答に合わせて自動返信 → そのまま予約へ</div>
-              <div class="msg in">
-                <div class="avatar">整</div>
-                <div class="bubble">腰痛でお悩みなのですね。デスクワークの方に多いお悩みです。初回は<b>姿勢チェック+骨盤調整60分</b>がおすすめです。</div>
-                <span class="time">10:01</span>
-              </div>
-              <div class="msg in">
-                <div class="avatar">整</div>
-                <div class="ccard">
-                  <div class="ccard-hd">友だち限定 初回クーポン</div>
-                  <div class="price"><b>60分 3,980円</b> <s>通常6,600円</s></div>
-                  <button class="cbtn primary">空き枠を見て予約する</button>
-                </div>
-                <span class="time">10:01</span>
-              </div>
-            </div>
-            <div class="inputbar"><span>＋</span><span class="field">メッセージを入力</span><span><svg viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-0.12em"><rect x="9" y="3" width="6" height="10" rx="3"/><path d="M6 11a6 6 0 0 0 12 0M12 17v4"/></svg></span></div>
-          </div>
-        </div>
-        <div class="phone-cap">
-          <b><span>トーク画面:</span>あいさつ → 診断 → 予約が全自動</b>
-          お客様がボタンを押すたびに、回答に合わせた返信が自動で届きます。深夜の問い合わせでも取りこぼしません。①〜③のラベルは説明用で、実際の画面には表示されません。
-        </div>
-      </div>
-
-      <!-- phone 2 : rich menu -->
-      <div class="phone-set">
-        <div class="phone">
-          <div class="screen">
-            <div class="notch"></div>
-            <div class="lheader"><span class="back">‹</span> からだ整えラボ 大宮院 <span class="hicons">☎ ≡</span></div>
-            <div class="chatbody">
-              <div class="datechip">今日</div>
-              <div class="msg in">
-                <div class="avatar">整</div>
-                <div class="bubble">ご予約・アクセス・ご質問は、下のメニューからいつでもどうぞ。</div>
-                <span class="time">10:05</span>
-              </div>
-              <div class="msg out">
-                <span class="time">既読<br>10:06</span>
-                <div class="bubble">駐車場はありますか?</div>
-              </div>
-              <div class="stepchip">よくある質問はキーワードに自動で回答</div>
-              <div class="msg in">
-                <div class="avatar">整</div>
-                <div class="bubble">はい、店舗前に提携駐車場が2台分ございます。満車の場合は近隣のコインパーキングをご利用ください(30分無料券をお渡しします)。</div>
-                <span class="time">10:06</span>
-              </div>
-              <div class="stepchip" style="margin-top:auto;">▼ 画面下半分が「リッチメニュー」</div>
-            </div>
-            <div class="rm-toggle">メニュー ▾</div>
-            <div class="richmenu">
-              <div class="rm-cell"><span class="ric"><svg viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-0.12em"><rect x="4" y="10" width="16" height="10" rx="1"/><path d="M4 10h16M12 10v10"/><path d="M12 10s-4.5 0-4.5-3c0-2 3.5-2 4.5 3 1-5 4.5-5 4.5-3 0 3-4.5 3-4.5 3z"/></svg></span>初回限定<small>クーポン配布</small></div>
-              <div class="rm-cell hot">
-                <span class="ric"><svg viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-0.12em"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 9h18M8 3v4M16 3v4"/></svg></span>予約する<small>24時間受付</small>
-                <span class="tapring"></span>
-              </div>
-              <div class="rm-cell"><span class="ric"><svg viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-0.12em"><path d="M12 21s-6-5.6-6-10a6 6 0 1 1 12 0c0 4.4-6 10-6 10z"/><circle cx="12" cy="11" r="2"/></svg></span>アクセス<small>大宮駅 徒歩5分</small></div>
-              <div class="rm-cell"><span class="ric">❓</span>よくある質問<small>自動で回答</small></div>
-              <div class="rm-cell"><span class="ric"><svg viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-0.12em"><path d="M12 3l2.7 5.6 6.1.8-4.5 4.2 1.1 6-5.4-3-5.4 3 1.1-6L3.2 9.4l6.1-.8z"/></svg></span>お客様の声<small>改善事例</small></div>
-              <div class="rm-cell"><span class="ric"><svg viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-0.12em"><path d="M12 20s-7-4.6-7-9.2A4 4 0 0 1 12 8a4 4 0 0 1 7 2.8C19 15.4 12 20 12 20z"/></svg></span>友だち紹介<small>特典あり</small></div>
-            </div>
-          </div>
-        </div>
-        <div class="phone-cap">
-          <b><span>リッチメニュー:</span>お店の「顔」になる固定メニュー</b>
-          トーク画面の下に常に表示される画像メニューです。6つの枠はそれぞれタップでき、予約ページ・地図・自動回答など行き先を自由に設定できます(デザイン制作込み)。
-        </div>
-      </div>
-    </div>
-  </div>
+<div class="scenario-copy" aria-live="polite"><p class="label">この仕組みで目指すこと</p><p id="scene-value">希望のメニューと日時を順番に選ぶだけ。電話やトークで何度も確認する手間を減らし、予約まで案内します。</p></div>
+<p class="scope-note">架空店舗のデモです。LINEとの実連携、実際の予約・送信・保存は行いません。<br>本番の連携方法は、現在の予約システムと運用に合わせて決めます。</p>
+</div>
+<div class="preview-stage">
+<div class="preview-label"><b id="preview-title">01 / 予約受付</b><button class="reset" id="reset">最初から試す ↺</button></div>
+<div class="phone" aria-label="LINE風のトークプレビュー">
+<div class="phone-top">LINE風プレビュー</div>
+<div class="phone-head"><span class="avatar">整</span><div><strong>からだ整えラボ 大宮院</strong><small>架空の整体院・操作デモ</small></div></div>
+<div class="chatbody" id="chat" role="region" aria-label="デモのトーク内容" tabindex="0"></div>
+<div class="richmenu" aria-label="固定メニュー"><button data-scene="booking"><span aria-hidden="true">▦</span>予約する</button><button data-scene="faq"><span aria-hidden="true">?</span>よくある質問</button><button data-scene="followup"><span aria-hidden="true">♡</span>来店フォロー</button></div>
+<div class="homebar"></div>
+</div>
+<p class="preview-caption">画面内はスクロールできます。すべてデモ用の内容です。</p>
+</div>
+</div>
 </section>
-
-<!-- ============ 02 FLOW ============ -->
-<section id="flow" style="background:#f2f8f4;">
-  <div class="wrap">
-    <div class="sec-label">SECTION 02</div>
-    <h2>シナリオ設計図 ── 裏側では、この流れが自動で動いています</h2>
-    <p class="sec-desc">友だち追加をきっかけに、決めておいたメッセージが決めておいた日に自動で届く仕組みを「ステップ配信」と呼びます。予約した方・まだの方で、その後に届く内容が自動で切り替わります。</p>
-
-    <div class="flow-box">
-      <div class="flow">
-        <div class="fnode start">友だち追加<small>店頭POP・ショップカード・Instagramから</small></div>
-        <div class="fconn"><span class="flabel">直後</span></div>
-        <div class="fnode">あいさつメッセージ+30秒お悩み診断<small>回答に合わせて初回メニューを自動でご案内</small></div>
-        <div class="fconn"><span class="flabel">3日後</span></div>
-        <div class="fnode">ステップ配信①  セルフケア動画<small>「腰痛の方に」など診断結果に合わせて出し分け</small></div>
-        <div class="fconn"><span class="flabel">7日後</span></div>
-        <div class="fnode">ステップ配信②  初回限定オファー<small>友だち限定価格+予約ボタンつき</small></div>
-
-        <div class="fbranch">
-          <div class="stub"></div>
-          <div class="hline"></div>
-          <div class="fcols">
-            <div class="fcol yes">
-              <div class="fconn long"></div>
-              <span class="branch-chip">予約した方</span>
-              <div class="fconn"></div>
-              <div class="fnode">前日リマインド<small>日時・持ち物・地図を自動送信</small></div>
-              <div class="fconn"></div>
-              <div class="fnode">ご来店</div>
-              <div class="fconn"></div>
-              <div class="fnode goal">来店後お礼+次回のご案内<small>口コミのお願い・2回目クーポンで再来店へ</small></div>
-            </div>
-            <div class="fcol no">
-              <div class="fconn long"></div>
-              <span class="branch-chip">まだ予約していない方</span>
-              <div class="fconn"></div>
-              <div class="fnode">14日後  掘り起こし配信<small>お客様の声+今月の空き枠をご案内</small></div>
-              <div class="fcol-note">ここで予約が入れば、自動で左側の「リマインド→来店」の流れに合流します。</div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <p class="flow-note">配信の日数・回数・文面は、お店の客層に合わせて自由に調整できます(納品後の変更方法もレクチャーします)。</p>
-    </div>
-  </div>
+<section class="overview">
+<div class="wrap"><h2>お店の業務に合わせて、ここまで作れます。</h2>
+<div class="features">
+<article class="feature"><h3>予約までの導線を整える</h3><p>メニュー画像、あいさつ文、予約案内をまとめて設計。お客様が次に押す場所をわかりやすくします。</p></article>
+<article class="feature"><h3>繰り返す問い合わせに備える</h3><p>よくある質問と回答を整理し、自動応答を設定。個別の相談はスタッフが対応する流れも決めます。</p></article>
+<article class="feature"><h3>来店前後の連絡を続ける</h3><p>予約のリマインドや来店後のお礼を設計。配信する条件と頻度を決め、運用後の見直しも支援します。</p></article>
+</div>
+<details class="details"><summary>構築範囲と、導入前に確認すること</summary><p>構築では、メニューのデザイン、メッセージ作成、自動応答・配信の設計、設定、運用手順のご案内を扱います。予約台帳への登録、空き枠の同期、予約状況による配信の出し分けは、利用する予約システムや連携ツールを確認して個別に見積もります。</p><p>LINEや連携ツールの利用料、配信数、スタッフによる確認の要否を整理してから構築します。このデモは画面上の体験を示すもので、導入済みの実績や業務効果の実測値ではありません。</p></details>
+</div>
 </section>
-
-<!-- ============ 03 TABLE ============ -->
-<section id="plan">
-  <div class="wrap">
-    <div class="sec-label">SECTION 03</div>
-    <h2>配信設計表 ── 1通ごとに「目的」と「見る数字」を決めて設計します</h2>
-    <p class="sec-desc">感覚で配信するのではなく、各メッセージの目的とKPI(開封→タップ→予約の割合)をあらかじめ決め、配信後に数字を見て文面を改善していきます。月額運用ではこの表を毎月更新してご報告します。</p>
-
-    <p class="swipe-hint">← 表は横にスクロールできます →</p>
-    <div class="table-scroll">
-      <table>
-        <thead>
-          <tr><th>#</th><th>配信</th><th>タイミング</th><th>目的</th><th>KPIの目安(開封→タップ→予約)</th></tr>
-        </thead>
-        <tbody>
-          <tr><td class="no">1</td><td>あいさつ+お悩み診断</td><td><span class="tag">追加直後</span></td><td>第一印象づくり・お悩みの把握(タグ付け)</td><td class="kpi"><span>85%</span><i>→</i><span>45%</span><i>→</i><span>—</span></td></tr>
-          <tr><td class="no">2</td><td>ステップ①  セルフケア動画</td><td><span class="tag">3日後</span></td><td>役立つ情報で信頼づくり(売り込まない回)</td><td class="kpi"><span>60%</span><i>→</i><span>25%</span><i>→</i><span>—</span></td></tr>
-          <tr><td class="no">3</td><td>ステップ②  初回限定オファー</td><td><span class="tag">7日後</span></td><td>初回予約の獲得(このシナリオの山場)</td><td class="kpi"><span>55%</span><i>→</i><span>20%</span><i>→</i><span>8%</span></td></tr>
-          <tr><td class="no">4</td><td>予約前日リマインド</td><td><span class="tag">予約前日 18時</span></td><td>無断キャンセル・うっかり忘れの防止</td><td class="kpi"><span>90%</span><i>→</i><span>—</span><i>→</i><span>—</span></td></tr>
-          <tr><td class="no">5</td><td>来店後お礼+口コミ依頼</td><td><span class="tag">来店翌日</span></td><td>口コミ獲得・2回目予約への橋渡し</td><td class="kpi"><span>70%</span><i>→</i><span>30%</span><i>→</i><span>15%</span></td></tr>
-          <tr><td class="no">6</td><td>掘り起こし配信</td><td><span class="tag or">14日後(未予約の方のみ)</span></td><td>迷っている方の後押し(お客様の声+空き枠)</td><td class="kpi"><span>50%</span><i>→</i><span>15%</span><i>→</i><span>4%</span></td></tr>
-        </tbody>
-      </table>
-    </div>
-    <p class="table-note">※ KPIの数値は本デモ用の架空の設計値です。実際は業種・客層により異なるため、運用開始後の実測値をもとに毎月チューニングします。</p>
-  </div>
-</section>
-
-<!-- ============ 04 EFFECTS ============ -->
-<section id="effect" style="background:#f2f8f4;">
-  <div class="wrap">
-    <div class="sec-label">SECTION 04</div>
-    <h2>導入効果のイメージ</h2>
-    <p class="sec-desc">LINE公式アカウントの自動化で狙う効果は、大きくこの3つです。</p>
-    <div class="effects">
-      <div class="ecard">
-        <div class="eicon">⏰</div>
-        <h3>無断キャンセル・<br>うっかり忘れの削減</h3>
-        <p>予約前日に日時・地図つきのリマインドが自動で届くため、「忘れていた」によるキャンセルを防ぎます。一般に、リマインド配信は無断キャンセルの削減に効果があると言われています。</p>
-        <div class="foot">※ 効果は店舗の状況により異なります(本デモは架空の設計例です)。</div>
-      </div>
-      <div class="ecard">
-        <div class="eicon"><svg viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-0.12em"><path d="M17 2l4 4-4 4"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><path d="M7 22l-4-4 4-4"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg></div>
-        <h3>「1回きり」で終わらせない<br>再来店の仕組み</h3>
-        <p>来店後のお礼・セルフケア情報・次回クーポンが自動で届き続けるため、お客様との接点が切れません。一般に、既存のお客様の再来店は新規集客より低コストと言われています。</p>
-        <div class="foot">※ 配信内容・頻度は客層に合わせて設計します。</div>
-      </div>
-      <div class="ecard">
-        <div class="eicon"><svg viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-0.12em"><path d="M5 4h4l2 5-2.5 1.5a12 12 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg></div>
-        <h3>予約・よくある質問の<br>対応を自動化</h3>
-        <p>24時間いつでもLINEから予約でき、営業時間・駐車場などのよくある質問には自動で回答。施術中に電話を取れず予約を逃す、という機会損失を減らします。</p>
-        <div class="foot">※ 自動応答で解決しないご質問は通常のトークに引き継げます。</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============ CLOSING ============ -->
-<section id="closing">
-  <div class="wrap">
-    <div class="closing">
-      <h2>ここまでの一式を、設計から運用まで。</h2>
-      <p>リッチメニューのデザイン、シナリオ設計、配信文面の作成、開設・各種設定までを構築としてお引き受けし、公開後は数字を見ながら毎月の配信改善まで伴走します。本ページと同様のデモを、貴店の業種・メニューに合わせてお作りすることも可能です。</p>
-    </div>
-  </div>
-</section>
-
-<footer>
-  <div class="wrap">
-    <div class="store">
-      からだ整えラボ 大宮院(架空の店舗です)<br>
-      埼玉県さいたま市大宮区◯◯町1-2-3(ダミー住所)  TEL 048-000-0000(ダミー番号)
-    </div>
-    <div class="disclaimer">※ 本ページはLINE公式アカウントの構築サンプル(デモ)です。店舗・配信内容・数値はすべて架空です。</div>
-  </div>
-</footer>
-
+<section class="wrap"><div class="closing"><div><h2>今の予約方法から、相談できます。</h2><p>業種・現在の予約方法・減らしたい対応をお知らせください。必要な機能と構築範囲を整理します。</p></div><div class="actions"><a class="action" href="./index.html#contact">LINE構築を相談する ↗</a><a class="action secondary" href="./pricing.html">料金を見る</a></div></div></section>
+</main>
+<footer><div class="wrap"><p><b>ミナト AI・IT ラボ</b>　<a href="./cases.html">制作サンプル一覧</a></p><p>架空の店舗を題材にした構築サンプルです。LINEとは実連携していません。</p></div></footer>
 <script>
-  // デモ用: リッチメニューのセルをタップ(クリック)すると軽く沈む
-  document.querySelectorAll('.rm-cell').forEach(function(cell){
-    cell.addEventListener('pointerdown',function(){cell.style.transform='scale(.96)';});
-    cell.addEventListener('pointerup',function(){cell.style.transform='';});
-    cell.addEventListener('pointerleave',function(){cell.style.transform='';});
-  });
+(function(){
+'use strict';
+const chat=document.getElementById('chat');
+let scene='booking', menu='', slot='';
+const descriptions={booking:'希望のメニューと日時を順番に選ぶだけ。電話やトークで何度も確認する手間を減らし、予約まで案内します。',faq:'営業時間や駐車場など、繰り返し届く質問にすぐ回答。個別の相談はスタッフ対応へ案内する流れを試せます。',followup:'予約前に日時を知らせ、来店後にはお礼を届ける設計例です。画面内のボタンで配信のタイミングを切り替えられます。'};
+const titles={booking:'01 / 予約受付',faq:'02 / よくある質問',followup:'03 / 来店フォロー'};
+function bubble(text,out){return '<div class="bubble'+(out?' out':'')+'">'+text+'</div>';}
+function btn(text,action,value,primary){return '<button class="chat-button'+(primary?' primary':'')+'" data-action="'+action+'"'+(value?' data-value="'+value+'"':'')+'>'+text+'</button>';}
+function paint(html,focus){chat.innerHTML=html;chat.scrollTop=0;if(focus)chat.focus({preventScroll:true});}
+function bookingStart(focus){menu='';slot='';paint('<p class="day">友だち追加後のご案内</p>'+bubble('友だち追加ありがとうございます。<br>ご希望のメニューを選んでください。')+'<div class="choices">'+btn('初回カウンセリング付き整体','menu','初回カウンセリング付き整体')+btn('通常の整体','menu','通常の整体')+'</div><p class="mini-label">個人情報の入力はありません。</p>',focus);}
+function faqStart(focus){paint('<p class="day">よくある質問</p>'+bubble('確認したい内容を選んでください。')+'<div class="choices">'+btn('営業時間を知りたい','faq','hours')+btn('駐車場はありますか？','faq','parking')+btn('スタッフに相談したい','faq','staff')+'</div>',focus);}
+function followupStart(focus){paint('<p class="day">予約前日の配信例</p>'+bubble('<b>明日のご予約について</b><br>整体のご予約は 10:00 です。<br>動きやすい服装でお越しください。<br>変更がある場合は店舗へご連絡ください。')+'<div class="choices">'+btn('来店後のお礼を見る →','after','',true)+'</div><p class="mini-label">日時はサンプルです。実際には配信されません。</p>',focus);}
+function select(next,focus){scene=next;document.querySelectorAll('[data-scene]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.scene===scene)));document.getElementById('scene-value').textContent=descriptions[scene];document.getElementById('preview-title').textContent=titles[scene];({booking:bookingStart,faq:faqStart,followup:followupStart})[scene](focus);}
+document.querySelectorAll('[data-scene]').forEach(b=>b.addEventListener('click',()=>select(b.dataset.scene,false)));
+document.getElementById('reset').addEventListener('click',()=>select(scene,false));
+chat.addEventListener('click',e=>{const b=e.target.closest('[data-action]');if(!b)return;const action=b.dataset.action,value=b.dataset.value;
+if(action==='menu'){menu=value;paint(bubble(menu,true)+bubble('ご希望の日時を選んでください。')+'<p class="mini-label">空き枠の表示例（実際の空き状況ではありません）</p><div class="choices slots">'+btn('明日 10:00','slot','明日 10:00')+btn('明日 14:00','slot','明日 14:00')+btn('明後日 11:00','slot','明後日 11:00')+'<button class="chat-button" disabled>明後日 15:00<br>満席（例）</button></div><div class="choices">'+btn('← メニューを選び直す','restart')+'</div>',true);}
+if(action==='slot'){slot=value;paint(bubble(slot,true)+bubble('<b>予約内容をご確認ください</b><br>'+menu+'<br>'+slot)+'<div class="choices">'+btn('この内容で試す（デモ）','confirm','',true)+btn('← メニューから選び直す','restart')+'</div><p class="mini-label">実際の予約・情報の保存は行われません。</p>',true);}
+if(action==='confirm'){paint('<p class="day">予約受付の完了イメージ</p>'+bubble('<b>デモの予約操作が完了しました。</b><br>'+menu+'<br>'+slot+'<br><br>実際の予約は作成されていません。')+'<div class="choices">'+btn('続けて来店フォローを見る','follow','',true)+btn('もう一度試す','restart')+'</div>',true);}
+if(action==='restart')bookingStart(true);
+if(action==='follow')select('followup',true);
+if(action==='faq'){const answers={hours:['営業時間を知りたい','営業時間は 10:00〜19:00、定休日は水曜日です。<br>※ 架空店舗の設定です。'],parking:['駐車場はありますか？','店舗前に駐車場が2台分あります。<br>※ 架空店舗の設定です。'],staff:['スタッフに相談したい','本番では、スタッフが確認して返信する流れを設計します。<br>このデモでは相談の送信は行いません。']};paint(bubble(answers[value][0],true)+bubble(answers[value][1])+'<div class="choices">'+btn('ほかの質問を見る','faq-back')+btn('予約メニューへ','booking','',true)+'</div>',true);}
+if(action==='faq-back')faqStart(true);
+if(action==='booking')select('booking',true);
+if(action==='after'){paint('<p class="day">来店翌日の配信例</p>'+bubble('<b>ご来店ありがとうございました。</b><br>その後、気になることはありませんか？<br>次回のご予約は、画面下のメニューからご確認いただけます。')+'<div class="choices">'+btn('次の予約を試す','booking','',true)+btn('前日の案内に戻る','before')+'</div><p class="mini-label">来店確認の方法や配信条件は、導入時に設計します。</p>',true);}
+if(action==='before')followupStart(true);
+});
+select('booking',false);
+})();
 </script>
-<!-- demo-fict:start 架空サンプルの注記(2026-09-04 上部の帯からフッターへ移設) -->
-<style>#demo-fict{margin:0;padding:20px 20px 28px;background:#fff;color:rgba(13,13,13,.6);border-top:1px solid rgba(13,13,13,.14);font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue","Hiragino Kaku Gothic ProN","Noto Sans JP","Yu Gothic",Meiryo,sans-serif;font-size:13px;line-height:1.7;text-align:center}@media print{#demo-fict{display:none}}</style>
-<div id="demo-fict">これは制作サンプル（架空の整体院を題材にしたLINE構築デモ）です。店名・数値はすべて架空です。</div>
-<!-- demo-fict:end -->
-<!-- mnt-portfolio-bar:begin (automation/hp_demos_inject_bar.py が生成・手で編集しない) -->
-<style>
-/* 作品集への導線帯。デザインの正= cases.html(白地・--tint-4カード・.btn radius 2.5rem)。
-   各ページの既存CSSと衝突しないよう mnt- 接頭辞+all:initial。 */
-.mnt-bar{all:initial;display:block;font-family:system-ui,-apple-system,"Helvetica Neue","Hiragino Sans","Hiragino Kaku Gothic ProN","Noto Sans JP","Yu Gothic",Meiryo,sans-serif;
-  background:#FFFFFF;color:#0D0D0D;border-top:1px solid rgba(13,13,13,.14);
-  padding:64px 0 56px;-webkit-font-smoothing:antialiased}
-.mnt-bar *{box-sizing:border-box}
-.mnt-in{max-width:1128px;margin:0 auto;padding:0 20px}
-.mnt-note{font-size:.875rem;line-height:1.435rem;letter-spacing:0;color:rgba(13,13,13,.6);margin:0 0 10px}
-.mnt-h{font-size:clamp(1.5rem,calc(1.5rem + .375*((100vw - 23.4375rem)/66.5625)),1.875rem);
-  line-height:clamp(1.98rem,calc(1.98rem + .495*((100vw - 23.4375rem)/66.5625)),2.475rem);
-  letter-spacing:-.01em;font-weight:500;color:#0D0D0D;margin:0 0 14px;text-wrap:balance}
-.mnt-lead{font-size:1.0625rem;line-height:1.75rem;letter-spacing:-.01em;color:rgba(13,13,13,.6);
-  margin:0 0 32px;max-width:720px;text-wrap:pretty}
-.mnt-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;margin:0 0 32px}
-a.mnt-card{display:block;text-decoration:none;color:inherit;border-radius:8px;overflow:hidden;
-  background:rgba(13,13,13,.04);padding:8px;transition:background-color .2s}
-a.mnt-card:hover{background:rgba(13,13,13,.12)}
-a.mnt-card:focus-visible{outline:2px solid #2563EB;outline-offset:2px}
-a.mnt-card img{display:block;width:100%;height:auto;aspect-ratio:1000/672;object-fit:cover;
-  border-radius:6px;background:rgba(13,13,13,.04)}
-.mnt-meta{padding:12px 8px 8px}
-.mnt-tag{display:block;font-size:.75rem;line-height:1.2rem;font-weight:500;color:rgba(13,13,13,.6);margin:0 0 2px}
-.mnt-name{display:block;font-size:.875rem;line-height:1.435rem;font-weight:500;color:#0D0D0D}
-.mnt-actions{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
-a.mnt-btn{display:inline-flex;align-items:center;justify-content:center;height:40px;padding:0 20px;
-  border-radius:2.5rem;font-size:.875rem;line-height:1;font-weight:500;text-decoration:none;
-  transition:background-color .2s,color .2s}
-a.mnt-btn:focus-visible{outline:2px solid #2563EB;outline-offset:2px}
-a.mnt-btn-primary{background:#0D0D0D;color:#FFFFFF}
-a.mnt-btn-primary:hover{background:rgba(13,13,13,.8)}
-a.mnt-btn-ghost{background:rgba(13,13,13,.08);color:#0D0D0D}
-a.mnt-btn-ghost:hover{background:rgba(13,13,13,.12)}
-.mnt-fine{font-size:.875rem;line-height:1.435rem;color:rgba(13,13,13,.6);margin:24px 0 0}
-/* 自前の position:fixed 下部CTAバーを持つページ用。最下部まで送っても帯の末尾が隠れないよう余白を積む。 */
-.mnt-bar.mnt-cta{padding-bottom:130px}
-@media(max-width:860px){.mnt-grid{grid-template-columns:repeat(2,1fr);gap:16px}}
-@media(max-width:480px){.mnt-grid{grid-template-columns:1fr}
-  .mnt-bar{padding:48px 0 44px}.mnt-bar.mnt-cta{padding-bottom:130px}}
-</style>
-<div class="mnt-bar">
-  <div class="mnt-in">
-    <p class="mnt-note">このページは制作サンプル(デモ)です</p>
-    <p class="mnt-h">ホームページ・LP・デザイン・自動化まで、実際に動くサンプルをご用意しています</p>
-    <p class="mnt-lead">制作＝自動化のミナト。AIで速く作り、品質は全件人の目で検品します。ご依頼の業種・目的に合わせて、この品質でお作りします。</p>
-    <div class="mnt-grid">
-      <a class="mnt-card" href="lp-gym.html" target="_blank" rel="noopener">
-        <img src="pf/lp-gym.jpg" alt="パーソナルジム 体験予約LPの制作サンプル" loading="lazy">
-        <div class="mnt-meta"><span class="mnt-tag">集客LP</span><span class="mnt-name">パーソナルジム 体験予約LP</span></div>
-      </a>
-      <a class="mnt-card" href="dental-sakura.html" target="_blank" rel="noopener">
-        <img src="pf/dental-sakura.jpg" alt="歯科医院(訪問歯科)の制作サンプル" loading="lazy">
-        <div class="mnt-meta"><span class="mnt-tag">ホームページ</span><span class="mnt-name">歯科医院(訪問歯科)</span></div>
-      </a>
-      <a class="mnt-card" href="corp.html" target="_blank" rel="noopener">
-        <img src="pf/corp.jpg" alt="コーポレート(人材会社)の制作サンプル" loading="lazy">
-        <div class="mnt-meta"><span class="mnt-tag">ホームページ</span><span class="mnt-name">コーポレート(人材会社)</span></div>
-      </a>
-      <a class="mnt-card" href="salon.html" target="_blank" rel="noopener">
-        <img src="pf/salon.jpg" alt="ヘアサロンの制作サンプル" loading="lazy">
-        <div class="mnt-meta"><span class="mnt-tag">ホームページ</span><span class="mnt-name">ヘアサロン</span></div>
-      </a>
-    </div>
-    <div class="mnt-actions">
-      <a class="mnt-btn mnt-btn-primary" href="./cases.html">事例・サンプル一覧を見る</a>
-      <a class="mnt-btn mnt-btn-ghost" href="./pricing.html">料金を見る</a>
-    </div>
-    <p class="mnt-fine">※各サンプルの店舗名・法人名・人物・数値はすべて架空です。図版はイラストです。</p>
-  </div>
-</div>
-<!-- mnt-portfolio-bar:end -->
-</body>
-</html>
+</body></html>
