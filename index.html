@@ -108,10 +108,11 @@ html{scroll-behavior:auto}
 @media (max-width:767px){
 #office{margin-top:48px;border-radius:16px}
 }
-.office-note{max-width:620px;margin:20px auto 0;text-align:center;color:var(--ink-60)}
-@media (max-width:767px){.office-note{margin-top:16px}}
+.office-title{max-width:720px;margin:28px auto 0;font-size:clamp(1.35rem,2vw,1.75rem);line-height:1.35;letter-spacing:-.025em}
+.office-note{max-width:720px;margin:12px auto 0;text-align:center;color:var(--ink-60)}
+@media (max-width:767px){.office-title{margin-top:22px;font-size:1.3rem}.office-note{margin-top:10px}}
 </style>
-<link rel="stylesheet" href="./minato-shell.css?v=6">
+<link rel="stylesheet" href="./minato-shell.css?v=7">
 </head>
 <body>
 <div class="glow-top" aria-hidden="true"></div>
@@ -136,9 +137,10 @@ html{scroll-behavior:auto}
 <section class="hero" id="top">
 <div class="container">
 <h1>IT担当がいない会社の外の相談先</h1>
-<p class="lead">Excelの集計が動かない。通販を始めたいのに、任せられる人がいない。そんな悩みを、業務の整理からAIの導入、導入後の改善まで引き受けます。</p>
+<p class="lead">Excelの集計が動かない。通販を始めたいのに、任せられる人がいない。<br>そんな悩みを、業務の整理からAIの導入、導入後の改善まで引き受けます。</p>
 <canvas id="office" role="img" aria-label="仕組みの説明用のドット絵。オフィスでAIの担当者が並んで机に向かい、実作業を進め、人が全体を見て検品と判断をしている様子"></canvas>
-<p class="office-note lead">AIで作業を速め、納品前に人が確認します。<br>自動化に任せきりにせず、最後は人が判断します。</p>
+<h2 class="office-title">AIエージェントが動き 人が仕上げる</h2>
+<p class="office-note lead">AIエージェントが調査や集計、制作を分担するため、少ない人数で作業を進められます。<br>その分料金を抑えられますが、最後の判断と納品前の確認は人が行います。</p>
 </div>
 </section>
 <script src="./scheme-pixel.js"></script>
@@ -147,7 +149,7 @@ html{scroll-behavior:auto}
 <div class="container">
 <div class="sec-head">
 <h2>頼み方は月額と単発の2つ</h2>
-<p class="lead">続けて任せるなら月額、作るものが決まっているなら単発です。相談窓口は変わりません。</p>
+<p class="lead">続けて任せるなら月額、作るものが決まっているなら単発です。<br>相談窓口は変わりません。</p>
 </div>
 <div class="grid2 sec-body">
 <article class="card">
@@ -235,7 +237,7 @@ html{scroll-behavior:auto}
 <h2>整理できていなくてもご相談ください</h2>
 <p class="lead">困っていることを、そのままの言葉でお知らせください。整理はこちらで引き受けます。</p>
 <div class="contact-cta"><a class="btn btn-primary" href="https://page.line.me/091usyfe" target="_blank" rel="noopener">相談内容を送る</a></div>
-<p class="contact-sub caption">ボタンからLINEのトーク画面が開きます。メールは <a href="mailto:r2g128@gmail.com">r2g128@gmail.com</a> へお送りください。クラウドソーシングでは<a href="https://crowdworks.jp/public/employees/7039234" target="_blank" rel="noopener">クラウドワークス</a>と<a href="https://www.lancers.jp/profile/minato_auto" target="_blank" rel="noopener">ランサーズ</a>からご連絡いただけます。</p>
+<p class="contact-sub caption">ボタンからLINEのトーク画面が開きます。メールは <a href="mailto:r2g128@gmail.com">r2g128@gmail.com</a> へお送りください。<br>クラウドソーシングでは<a href="https://crowdworks.jp/public/employees/7039234" target="_blank" rel="noopener">クラウドワークス</a>と<a href="https://www.lancers.jp/profile/minato_auto" target="_blank" rel="noopener">ランサーズ</a>からご連絡いただけます。</p>
 </div>
 </section>
 </main>
@@ -259,6 +261,6 @@ else{m.setAttribute("hidden","");b.setAttribute("aria-expanded","false");}
 });
 })();
 </script>
-<script src="./minato-shell.js?v=6"></script>
+<script src="./minato-shell.js?v=7"></script>
 </body>
 </html>
