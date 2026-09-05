@@ -107,9 +107,10 @@ html{scroll-behavior:auto}
 .plan .price-num{margin-top:14px}
 .price-cap{display:block;margin-top:6px}
 .plan .desc{margin-top:18px;margin-bottom:18px}
-.plan .meet{margin-top:auto;padding-top:14px;border-top:1px solid var(--hairline)}
-.plan-reco{background:var(--tint-12)}
-.reco-badge{position:absolute;top:16px;right:16px;background:var(--blue);color:var(--white);border-radius:2.5rem;padding:4px 12px;font-size:.875rem;line-height:1.25rem;font-weight:500}
+.plan-details{margin-top:auto;padding-top:14px;border-top:1px solid var(--hairline)}
+.plan-details div{display:flex;justify-content:space-between;gap:16px;padding:4px 0}
+.plan-details dt{font-weight:500;color:var(--black)}
+.plan-details dd{margin:0;text-align:right}
 .scale-row{margin-top:24px;background:var(--tint-4);border-radius:8px;padding:32px;display:flex;align-items:baseline;justify-content:space-between;gap:24px;flex-wrap:wrap}
 .scale-row h3{font-size:var(--fs-h4);line-height:var(--lh-h4)}
 .scale-row p{max-width:620px}
@@ -122,7 +123,7 @@ html{scroll-behavior:auto}
 }
 .time-note{margin-top:20px;text-align:center}
 </style>
-<link rel="stylesheet" href="./minato-shell.css?v=5">
+<link rel="stylesheet" href="./minato-shell.css?v=6">
 </head>
 <body>
 <div class="glow-top" aria-hidden="true"></div>
@@ -153,8 +154,8 @@ html{scroll-behavior:auto}
 <section class="sec" id="plans">
 <div class="container">
 <div class="sec-head">
-<h2><span class="nw">プランの違いは、</span><span class="nw">伴走の深さ</span></h2>
-<p class="lead">どのプランも、やり取りは基本チャットです。打ち合わせの頻度と、任せられる量が変わります。</p>
+<h2>月額プランは作業量で選べます</h2>
+<p class="lead">ご相談はチャットが中心です。プランごとに月の作業量と打ち合わせ回数が変わります。</p>
 </div>
 <div class="grid3 sec-body">
 <article class="card plan">
@@ -162,27 +163,26 @@ html{scroll-behavior:auto}
 <p class="price-num">30,000円</p>
 <span class="caption muted-caption price-cap">税別・月額</span>
 <p class="desc">相談相手を確保しておく使い方です。小さな改修や、困りごとの解消を続けます。</p>
-<p class="meet caption muted-caption">月の目安：5時間ほど／打ち合わせ：必要であれば月1回</p>
+<dl class="plan-details caption muted-caption"><div><dt>作業量</dt><dd>月5時間ほど</dd></div><div><dt>打ち合わせ</dt><dd>月1回まで</dd></div></dl>
 </article>
-<article class="card plan plan-reco">
-<span class="reco-badge">おすすめ</span>
+<article class="card plan">
 <p class="plan-name">スタンダード</p>
 <p class="price-num">50,000円</p>
 <span class="caption muted-caption price-cap">税別・月額</span>
 <p class="desc">複数の課題を整理しながら、試作と改善を毎月進めます。</p>
-<p class="meet caption muted-caption">月の目安：10時間ほど／打ち合わせ：月2回</p>
+<dl class="plan-details caption muted-caption"><div><dt>作業量</dt><dd>月10時間ほど</dd></div><div><dt>打ち合わせ</dt><dd>月2回まで</dd></div></dl>
 </article>
 <article class="card plan">
 <p class="plan-name">フル</p>
 <p class="price-num">100,000円〜</p>
 <span class="caption muted-caption price-cap">税別・月額</span>
 <p class="desc">優先度の高い業務の設計と実装を、続けて進めます。</p>
-<p class="meet caption muted-caption">月の目安：20時間ほど／打ち合わせ：必要であれば週1回</p>
+<dl class="plan-details caption muted-caption"><div><dt>作業量</dt><dd>月20時間ほど</dd></div><div><dt>打ち合わせ</dt><dd>月4回まで</dd></div></dl>
 </article>
 </div>
 <p class="time-note caption muted-caption">記載した時間は作業量の目安です。実際の作業時間に応じた請求ではなく、月額でお受けします。</p>
 <div class="scale-row">
-<h3><span class="nw">これ以上の規模は</span><span class="nw">ご相談ください</span></h3>
+<h3>大きな案件もご相談ください</h3>
 <p>複数の部署やシステムにまたがる場合、上の3つには収まりません。体制と対応範囲を伺って、個別にご提案します。</p>
 </div>
 </div>
@@ -190,7 +190,7 @@ html{scroll-behavior:auto}
 <section class="sec" id="single">
 <div class="container">
 <div class="sec-head">
-<h2><span class="nw">単発は、</span><span class="nw">完成条件を</span><span class="nw">決めてから</span></h2>
+<h2>単発は完成条件を決めてお見積り</h2>
 <p class="lead">作りたいものが決まっている場合は、範囲と完成条件をそろえ、納品して完結します。</p>
 </div>
 <div class="sec-body">
@@ -202,15 +202,15 @@ html{scroll-behavior:auto}
 <section class="sec" id="choose">
 <div class="container">
 <div class="sec-head">
-<h2><span class="nw">迷ったら、</span><span class="nw">続けて改善したいか</span><span class="nw">どうか</span></h2>
+<h2>月額か単発かの選び方</h2>
 </div>
 <div class="grid2 sec-body">
 <div class="choose">
-<h3>続けて改善したいなら、月額</h3>
+<h3>続けて改善するなら月額</h3>
 <p>相談・試作・改善を毎月回します。相談相手を決めておきたい方に向いています。</p>
 </div>
 <div class="choose">
-<h3>完成物が決まっているなら、単発</h3>
+<h3>完成物が決まっているなら単発</h3>
 <p>範囲と完成条件をそろえ、納品して完結します。まず1回試したい方にも向いています。</p>
 </div>
 </div>
@@ -218,10 +218,10 @@ html{scroll-behavior:auto}
 </section>
 <section class="contact" id="contact">
 <div class="container">
-<h2><span class="nw">合うプランから、</span><span class="nw">ご相談ください</span></h2>
+<h2>ご希望に合うプランをご提案します</h2>
 <p class="lead">ご状況を伺い、合う形をご提案します。ご相談後にお断りいただいても問題ありません。</p>
 <div class="contact-cta"><a class="btn btn-primary" href="https://page.line.me/091usyfe" target="_blank" rel="noopener">相談内容を送る</a></div>
-<p class="contact-sub caption">ボタンからLINEのトーク画面が開きます。メールをご希望の場合は <a href="mailto:r2g128@gmail.com">r2g128@gmail.com</a> へお送りください。<br>クラウドソーシング経由のご連絡は、<a href="https://crowdworks.jp/public/employees/7039234" target="_blank" rel="noopener">こちらの窓口</a>または<a href="https://www.lancers.jp/profile/minato_auto" target="_blank" rel="noopener">こちらの窓口</a>からも受け付けています。</p>
+<p class="contact-sub caption">ボタンからLINEのトーク画面が開きます。メールは <a href="mailto:r2g128@gmail.com">r2g128@gmail.com</a> へお送りください。クラウドソーシングでは<a href="https://crowdworks.jp/public/employees/7039234" target="_blank" rel="noopener">クラウドワークス</a>と<a href="https://www.lancers.jp/profile/minato_auto" target="_blank" rel="noopener">ランサーズ</a>からご連絡いただけます。</p>
 </div>
 </section>
 </main>
@@ -245,6 +245,6 @@ else{m.setAttribute("hidden","");b.setAttribute("aria-expanded","false");}
 });
 })();
 </script>
-<script src="./minato-shell.js?v=3"></script>
+<script src="./minato-shell.js?v=6"></script>
 </body>
 </html>

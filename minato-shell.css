@@ -26,12 +26,11 @@ body::after{content:"";position:absolute;inset:0 0 auto;height:760px;z-index:-2;
 .card{position:relative;border:1px solid rgba(255,255,255,.84);border-radius:22px;padding:34px;background:var(--shell-panel);box-shadow:0 12px 40px rgba(55,63,105,.07);-webkit-backdrop-filter:blur(18px);backdrop-filter:blur(18px);transition:transform .28s ease,box-shadow .28s ease,background-color .28s ease,border-color .28s ease}
 .card:hover{transform:translateY(-6px);background:rgba(255,255,255,.92);border-color:#fff;box-shadow:var(--shell-shadow)}
 .reason,.flow-item{padding-top:24px;border-top:1px solid var(--shell-line)}
-.reason .num,.flow-item .num{display:inline-flex;width:34px;height:34px;align-items:center;justify-content:center;border-radius:10px;background:#111;color:#fff}
 .contact{margin-top:0;padding:140px 0;background:linear-gradient(135deg,rgba(105,126,255,.92),rgba(157,132,246,.76) 50%,rgba(236,240,255,.9));overflow:hidden}
 .contact::before{inset:-30% auto auto 60%;width:520px;height:520px;border-radius:50%;background:rgba(255,255,255,.42);filter:blur(72px)}
 .contact h2{font-size:clamp(1.8rem,3vw,3rem);line-height:1.15;letter-spacing:-.035em}.contact-sub{color:rgba(13,13,13,.68)}
 .footer{background:#0f1014;color:#fff;padding:42px 0}.footer-nav a{color:rgba(255,255,255,.64)}.footer-nav a:hover{color:#fff}
-.price-num{letter-spacing:-.045em}.plan-reco{background:linear-gradient(145deg,rgba(227,232,255,.92),rgba(255,255,255,.86))}.reco-badge{background:#111}
+.price-num{letter-spacing:-.045em}
 .work-card{padding:9px}.work-img{border-radius:16px}.work-img img{transition:transform .5s ease}.work-card:hover .work-img img{transform:scale(1.025)}
 .case-main{background:linear-gradient(145deg,rgba(225,231,255,.92),rgba(255,255,255,.82))}
 .reveal-ready .sec-head,.reveal-ready .card,.reveal-ready .reason,.reveal-ready .flow-item{opacity:0;transform:translateY(22px);transition:opacity .58s ease,transform .58s ease}.reveal-ready .is-visible{opacity:1;transform:none}
