@@ -14,7 +14,7 @@
 --lh-h3:clamp(1.98rem,calc(1.98rem + .495*((100vw - 23.4375rem)/66.5625)),2.475rem)}
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth;background:var(--white)}
-body{position:relative;background:var(--white);color:var(--black);font-family:system-ui,-apple-system,"Helvetica Neue","Hiragino Sans","Hiragino Kaku Gothic ProN","Noto Sans JP","Yu Gothic",Meiryo,sans-serif;word-break:auto-phrase;-webkit-font-smoothing:antialiased}
+body{position:relative;background:var(--white);color:var(--black);font-family:system-ui,-apple-system,"Helvetica Neue","Hiragino Sans","Hiragino Kaku Gothic ProN","Noto Sans JP","Yu Gothic",Meiryo,sans-serif;line-break:strict;word-break:auto-phrase;-webkit-font-smoothing:antialiased}
 h1,h2,h3,p,li{text-wrap:pretty}
 h1,h2{text-wrap:balance}
 img{display:block;max-width:100%}
@@ -109,10 +109,10 @@ html{scroll-behavior:auto}
 #office{margin-top:48px;border-radius:16px}
 }
 .office-title{max-width:720px;margin:28px auto 0;font-size:clamp(1.35rem,2vw,1.75rem);line-height:1.35;letter-spacing:-.025em}
-.office-note{max-width:720px;margin:12px auto 0;text-align:center;color:var(--ink-60)}
+.hero .office-note.lead{max-width:900px;margin:12px auto 0;text-align:center;color:var(--ink-60);text-wrap:wrap}
 @media (max-width:767px){.office-title{margin-top:22px;font-size:1.3rem}.office-note{margin-top:10px}}
 </style>
-<link rel="stylesheet" href="./minato-shell.css?v=7">
+<link rel="stylesheet" href="./minato-shell.css?v=8">
 </head>
 <body>
 <div class="glow-top" aria-hidden="true"></div>
@@ -131,16 +131,17 @@ html{scroll-behavior:auto}
 <a href="./index.html" aria-current="page">サービス</a>
 <a href="./pricing.html">料金</a>
 <a href="./cases.html">事例</a>
+<a href="#contact">お問い合わせ</a>
 </nav>
 </header>
 <main>
 <section class="hero" id="top">
 <div class="container">
 <h1>IT担当がいない会社の外の相談先</h1>
-<p class="lead">Excelの集計が動かない。通販を始めたいのに、任せられる人がいない。<br>そんな悩みを、業務の整理からAIの導入、導入後の改善まで引き受けます。</p>
+<p class="lead">Excelの集計が動かない。通販を始めたいのに、任せられる人がいない。そんな悩みを、業務の整理からAIの導入、導入後の改善まで引き受けます。</p>
 <canvas id="office" role="img" aria-label="仕組みの説明用のドット絵。オフィスでAIの担当者が並んで机に向かい、実作業を進め、人が全体を見て検品と判断をしている様子"></canvas>
 <h2 class="office-title">AIエージェントが動き 人が仕上げる</h2>
-<p class="office-note lead">AIエージェントが調査や集計、制作を分担するため、少ない人数で作業を進められます。<br>その分料金を抑えられますが、最後の判断と納品前の確認は人が行います。</p>
+<p class="office-note lead">AIエージェントが調査や集計、制作を分担するため、少ない人数で作業を進められます。その分料金を抑えられますが、最後の判断と納品前の確認は人が行います。</p>
 </div>
 </section>
 <script src="./scheme-pixel.js"></script>
@@ -149,7 +150,7 @@ html{scroll-behavior:auto}
 <div class="container">
 <div class="sec-head">
 <h2>頼み方は月額と単発の2つ</h2>
-<p class="lead">続けて任せるなら月額、作るものが決まっているなら単発です。<br>相談窓口は変わりません。</p>
+<p class="lead">続けて任せるなら月額、作るものが決まっているなら単発です。相談窓口は変わりません。</p>
 </div>
 <div class="grid2 sec-body">
 <article class="card">
@@ -236,8 +237,8 @@ html{scroll-behavior:auto}
 <div class="container">
 <h2>整理できていなくてもご相談ください</h2>
 <p class="lead">困っていることを、そのままの言葉でお知らせください。整理はこちらで引き受けます。</p>
-<div class="contact-cta"><a class="btn btn-primary" href="https://page.line.me/091usyfe" target="_blank" rel="noopener">相談内容を送る</a></div>
-<p class="contact-sub caption">ボタンからLINEのトーク画面が開きます。メールは <a href="mailto:r2g128@gmail.com">r2g128@gmail.com</a> へお送りください。<br>クラウドソーシングでは<a href="https://crowdworks.jp/public/employees/7039234" target="_blank" rel="noopener">クラウドワークス</a>と<a href="https://www.lancers.jp/profile/minato_auto" target="_blank" rel="noopener">ランサーズ</a>からご連絡いただけます。</p>
+<div class="contact-cta"><a class="btn btn-primary" href="mailto:minato.ai.lab@gmail.com">メールで相談する</a></div>
+<p class="contact-sub caption">メールは <a href="mailto:minato.ai.lab@gmail.com">minato.ai.lab@gmail.com</a> へお送りください。クラウドソーシングでは<a href="https://crowdworks.jp/public/employees/7039234" target="_blank" rel="noopener">クラウドワークス</a>と<a href="https://www.lancers.jp/profile/minato_auto" target="_blank" rel="noopener">ランサーズ</a>からご連絡いただけます。</p>
 </div>
 </section>
 </main>

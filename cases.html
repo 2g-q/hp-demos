@@ -14,7 +14,7 @@
 --lh-h3:clamp(1.98rem,calc(1.98rem + .495*((100vw - 23.4375rem)/66.5625)),2.475rem)}
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth;background:var(--white)}
-body{position:relative;background:var(--white);color:var(--black);font-family:system-ui,-apple-system,"Helvetica Neue","Hiragino Sans","Hiragino Kaku Gothic ProN","Noto Sans JP","Yu Gothic",Meiryo,sans-serif;word-break:auto-phrase;-webkit-font-smoothing:antialiased}
+body{position:relative;background:var(--white);color:var(--black);font-family:system-ui,-apple-system,"Helvetica Neue","Hiragino Sans","Hiragino Kaku Gothic ProN","Noto Sans JP","Yu Gothic",Meiryo,sans-serif;line-break:strict;word-break:auto-phrase;-webkit-font-smoothing:antialiased}
 h1,h2,h3,p,li{text-wrap:pretty}
 h1,h2{text-wrap:balance}
 img{display:block;max-width:100%}
@@ -107,9 +107,10 @@ html{scroll-behavior:auto}
 .case-fee{font-weight:500;white-space:nowrap}
 .case-flow{position:relative;display:grid;gap:18px;margin-top:28px}
 .case-flow::before{content:"";position:absolute;left:23px;top:48px;bottom:48px;width:1px;background:rgba(13,13,13,.14)}
-.case-flow-row{position:relative;display:grid;grid-template-columns:150px 1fr;align-items:start;gap:24px}
+.case-flow-row{position:relative;display:grid;grid-template-columns:120px minmax(0,1fr);align-items:start;gap:24px}
 .case-person{position:relative;z-index:1;display:flex;align-items:center;gap:10px;font-size:.8125rem;line-height:1.3;font-weight:500}
 .case-avatar{display:inline-flex;flex:0 0 46px;width:46px;height:46px;align-items:center;justify-content:center;border-radius:50%;background:#fff;border:1px solid rgba(13,13,13,.12);box-shadow:0 8px 22px rgba(35,43,100,.1);font-size:.875rem}
+.case-avatar svg{width:20px;height:20px}
 .minato-avatar{background:#111;color:#fff;border-color:#111}
 .case-bubble{position:relative;padding:18px 20px;border-radius:16px;background:#fff;border:1px solid rgba(13,13,13,.08)}
 .case-bubble::before{content:"";position:absolute;left:-7px;top:18px;width:12px;height:12px;background:#fff;border-left:1px solid rgba(13,13,13,.08);border-bottom:1px solid rgba(13,13,13,.08);transform:rotate(45deg)}
@@ -135,7 +136,7 @@ html{scroll-behavior:auto}
 @media (max-width:1023px){.works-grid{grid-template-columns:repeat(2,1fr)}}
 @media (max-width:767px){.works-grid{grid-template-columns:1fr;gap:24px}}
 </style>
-<link rel="stylesheet" href="./minato-shell.css?v=6">
+<link rel="stylesheet" href="./minato-shell.css?v=8">
 </head>
 <body>
 <div class="glow-top" aria-hidden="true"></div>
@@ -154,6 +155,7 @@ html{scroll-behavior:auto}
 <a href="./index.html">サービス</a>
 <a href="./pricing.html">料金</a>
 <a href="./cases.html" aria-current="page">事例</a>
+<a href="#contact">お問い合わせ</a>
 </nav>
 </header>
 <main>
@@ -173,25 +175,25 @@ html{scroll-behavior:auto}
 <article class="card case-story">
 <div class="case-heading"><div><p class="case-tag caption">食品・飲料メーカー</p><h3 class="case-title">通販サイトの構築と運用</h3></div><p class="case-fee">フルプラン</p></div>
 <div class="case-flow">
-<div class="case-flow-row from-client"><div class="case-person"><span class="case-avatar" aria-hidden="true">客</span><span>食品・飲料メーカー</span></div><div class="case-bubble"><span class="step-label">困りごと</span><p>通販を始めたいものの、社内にサイトを作り運用できる人がいませんでした。<br>以前の外注先が抜けた後は作業が止まっていました。</p></div></div>
-<div class="case-flow-row from-minato"><div class="case-person"><span class="case-avatar minato-avatar" aria-hidden="true">港</span><span>ミナト</span></div><div class="case-bubble"><span class="step-label">提案</span><p>通販サイトを立ち上げ、注文から送り状発行、倉庫への出荷指示までをつなぐ計画を立てました。</p></div></div>
-<div class="case-flow-row from-minato"><div class="case-person"><span class="case-avatar minato-avatar" aria-hidden="true">港</span><span>ミナト</span></div><div class="case-bubble"><span class="step-label">対応内容</span><p>商品登録とサイト運用を続けています。<br>通常は月100〜200件、繁忙期は月500件規模の注文に対応しています。</p></div></div>
+<div class="case-flow-row from-client"><div class="case-person"><span class="case-avatar" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="3.5"/><path d="M5.5 20c.5-4 2.7-6 6.5-6s6 2 6.5 6"/></svg></span><span>お客様</span></div><div class="case-bubble"><span class="step-label">困りごと</span><p>通販を始めたいものの、社内にサイトを作り運用できる人がいませんでした。以前の外注先が抜けた後は作業が止まっていました。</p></div></div>
+<div class="case-flow-row from-minato"><div class="case-person"><span class="case-avatar minato-avatar" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="3.5"/><path d="M5.5 20c.5-4 2.7-6 6.5-6s6 2 6.5 6"/></svg></span><span>弊社</span></div><div class="case-bubble"><span class="step-label">提案</span><p>通販サイトを立ち上げ、注文から送り状発行、倉庫への出荷指示までをつなぐ計画を立てました。</p></div></div>
+<div class="case-flow-row from-minato"><div class="case-person"><span class="case-avatar minato-avatar" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="3.5"/><path d="M5.5 20c.5-4 2.7-6 6.5-6s6 2 6.5 6"/></svg></span><span>弊社</span></div><div class="case-bubble"><span class="step-label">対応内容</span><p>商品登録とサイト運用を続けています。通常は月100〜200件、繁忙期は月500件規模の注文に対応しています。</p></div></div>
 </div>
 </article>
 <article class="card case-story">
 <div class="case-heading"><div><p class="case-tag caption">建設業</p><h3 class="case-title">社内ITの代行</h3></div><p class="case-fee">スタンダードプラン</p></div>
 <div class="case-flow">
-<div class="case-flow-row from-client"><div class="case-person"><span class="case-avatar" aria-hidden="true">客</span><span>建設会社</span></div><div class="case-bubble"><span class="step-label">困りごと</span><p>Officeの更新後に報告書用のExcelが動かなくなりました。<br>原価集計も手入力とコピーで行っていました。</p></div></div>
-<div class="case-flow-row from-minato"><div class="case-person"><span class="case-avatar minato-avatar" aria-hidden="true">港</span><span>ミナト</span></div><div class="case-bubble"><span class="step-label">提案</span><p>Excelを止めていた設定を直し、費目ごとの合計が自動で出る集計表への作り替えをご提案しました。</p></div></div>
-<div class="case-flow-row from-minato"><div class="case-person"><span class="case-avatar minato-avatar" aria-hidden="true">港</span><span>ミナト</span></div><div class="case-bubble"><span class="step-label">対応内容</span><p>集計表2,817か所と壊れた計算式22か所を修正しました。<br>現在は社内のIT相談窓口も担当しています。</p></div></div>
+<div class="case-flow-row from-client"><div class="case-person"><span class="case-avatar" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="3.5"/><path d="M5.5 20c.5-4 2.7-6 6.5-6s6 2 6.5 6"/></svg></span><span>お客様</span></div><div class="case-bubble"><span class="step-label">困りごと</span><p>Officeの更新後に報告書用のExcelが動かなくなりました。原価集計も手入力とコピーで行っていました。</p></div></div>
+<div class="case-flow-row from-minato"><div class="case-person"><span class="case-avatar minato-avatar" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="3.5"/><path d="M5.5 20c.5-4 2.7-6 6.5-6s6 2 6.5 6"/></svg></span><span>弊社</span></div><div class="case-bubble"><span class="step-label">提案</span><p>Excelを止めていた設定を直し、費目ごとの合計が自動で出る集計表への作り替えをご提案しました。</p></div></div>
+<div class="case-flow-row from-minato"><div class="case-person"><span class="case-avatar minato-avatar" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="3.5"/><path d="M5.5 20c.5-4 2.7-6 6.5-6s6 2 6.5 6"/></svg></span><span>弊社</span></div><div class="case-bubble"><span class="step-label">対応内容</span><p>集計表2,817か所と壊れた計算式22か所を修正しました。現在は社内のIT相談窓口も担当しています。</p></div></div>
 </div>
 </article>
 <article class="card case-story">
 <div class="case-heading"><div><p class="case-tag caption">Webサービス運営</p><h3 class="case-title">AIパートナー</h3></div><p class="case-fee">ライトプラン</p></div>
 <div class="case-flow">
-<div class="case-flow-row from-client"><div class="case-person"><span class="case-avatar" aria-hidden="true">客</span><span>Webサービス運営会社</span></div><div class="case-bubble"><span class="step-label">困りごと</span><p>AIを組み込んだサービスを直せる人が社内におらず、開発者本人のパソコンでしか動かせませんでした。</p></div></div>
-<div class="case-flow-row from-minato"><div class="case-person"><span class="case-avatar minato-avatar" aria-hidden="true">港</span><span>ミナト</span></div><div class="case-bubble"><span class="step-label">提案</span><p>50〜100名が同時に使える構成へ改める案を提示しました。<br>利用者ごとのデータ分離、権限、利用上限も含めています。</p></div></div>
-<div class="case-flow-row from-minato"><div class="case-person"><span class="case-avatar minato-avatar" aria-hidden="true">港</span><span>ミナト</span></div><div class="case-bubble"><span class="step-label">対応内容</span><p>AIの応答速度を測り、遅延の条件を特定しました。<br>重複していた呼び出しもなくしました。</p></div></div>
+<div class="case-flow-row from-client"><div class="case-person"><span class="case-avatar" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="3.5"/><path d="M5.5 20c.5-4 2.7-6 6.5-6s6 2 6.5 6"/></svg></span><span>お客様</span></div><div class="case-bubble"><span class="step-label">困りごと</span><p>AIを組み込んだサービスを直せる人が社内におらず、開発者本人のパソコンでしか動かせませんでした。</p></div></div>
+<div class="case-flow-row from-minato"><div class="case-person"><span class="case-avatar minato-avatar" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="3.5"/><path d="M5.5 20c.5-4 2.7-6 6.5-6s6 2 6.5 6"/></svg></span><span>弊社</span></div><div class="case-bubble"><span class="step-label">提案</span><p>50〜100名が同時に使える構成へ改める案を提示しました。利用者ごとのデータ分離、権限、利用上限も含めています。</p></div></div>
+<div class="case-flow-row from-minato"><div class="case-person"><span class="case-avatar minato-avatar" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="3.5"/><path d="M5.5 20c.5-4 2.7-6 6.5-6s6 2 6.5 6"/></svg></span><span>弊社</span></div><div class="case-bubble"><span class="step-label">対応内容</span><p>AIの応答速度を測り、遅延の条件を特定しました。重複していた呼び出しもなくしました。</p></div></div>
 </div>
 </article>
 </div>
@@ -348,8 +350,8 @@ html{scroll-behavior:auto}
 <div class="container">
 <h2>近い事例がなくてもご相談ください</h2>
 <p class="lead">掲載の例と違う内容で構いません。困っていることの整理から、ご一緒します。</p>
-<div class="contact-cta"><a class="btn btn-primary" href="https://page.line.me/091usyfe" target="_blank" rel="noopener">相談内容を送る</a></div>
-<p class="contact-sub caption">ボタンからLINEのトーク画面が開きます。メールは <a href="mailto:r2g128@gmail.com">r2g128@gmail.com</a> へお送りください。<br>クラウドソーシングでは<a href="https://crowdworks.jp/public/employees/7039234" target="_blank" rel="noopener">クラウドワークス</a>と<a href="https://www.lancers.jp/profile/minato_auto" target="_blank" rel="noopener">ランサーズ</a>からご連絡いただけます。</p>
+<div class="contact-cta"><a class="btn btn-primary" href="mailto:minato.ai.lab@gmail.com">メールで相談する</a></div>
+<p class="contact-sub caption">メールは <a href="mailto:minato.ai.lab@gmail.com">minato.ai.lab@gmail.com</a> へお送りください。クラウドソーシングでは<a href="https://crowdworks.jp/public/employees/7039234" target="_blank" rel="noopener">クラウドワークス</a>と<a href="https://www.lancers.jp/profile/minato_auto" target="_blank" rel="noopener">ランサーズ</a>からご連絡いただけます。</p>
 </div>
 </section>
 </main>

@@ -14,7 +14,7 @@
 --lh-h3:clamp(1.98rem,calc(1.98rem + .495*((100vw - 23.4375rem)/66.5625)),2.475rem)}
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth;background:var(--white)}
-body{position:relative;background:var(--white);color:var(--black);font-family:system-ui,-apple-system,"Helvetica Neue","Hiragino Sans","Hiragino Kaku Gothic ProN","Noto Sans JP","Yu Gothic",Meiryo,sans-serif;word-break:auto-phrase;-webkit-font-smoothing:antialiased}
+body{position:relative;background:var(--white);color:var(--black);font-family:system-ui,-apple-system,"Helvetica Neue","Hiragino Sans","Hiragino Kaku Gothic ProN","Noto Sans JP","Yu Gothic",Meiryo,sans-serif;line-break:strict;word-break:auto-phrase;-webkit-font-smoothing:antialiased}
 h1,h2,h3,p,li{text-wrap:pretty}
 h1,h2{text-wrap:balance}
 img{display:block;max-width:100%}
@@ -123,7 +123,7 @@ html{scroll-behavior:auto}
 }
 .time-note{margin-top:20px;text-align:center}
 </style>
-<link rel="stylesheet" href="./minato-shell.css?v=6">
+<link rel="stylesheet" href="./minato-shell.css?v=8">
 </head>
 <body>
 <div class="glow-top" aria-hidden="true"></div>
@@ -142,20 +142,21 @@ html{scroll-behavior:auto}
 <a href="./index.html">サービス</a>
 <a href="./pricing.html" aria-current="page">料金</a>
 <a href="./cases.html">事例</a>
+<a href="#contact">お問い合わせ</a>
 </nav>
 </header>
 <main>
 <section class="hero" id="top">
 <div class="container">
 <h1>月額は30,000円から</h1>
-<p class="lead">ご依頼の範囲に合わせて、3つのプランをご用意しています。料金はすべて税別・月額です。<br>単発のご依頼は、内容を伺ってお見積りします。</p>
+<p class="lead">ご依頼の範囲に合わせて、3つのプランをご用意しています。料金はすべて税別・月額です。単発のご依頼は、内容を伺ってお見積りします。</p>
 </div>
 </section>
 <section class="sec" id="plans">
 <div class="container">
 <div class="sec-head">
 <h2>月額プランは作業量で選べます</h2>
-<p class="lead">ご相談はチャットが中心です。<br>プランごとに月の作業量と打ち合わせ回数が変わります。</p>
+<p class="lead">ご相談はチャットが中心です。プランごとに月の作業量と打ち合わせ回数が変わります。</p>
 </div>
 <div class="grid3 sec-body">
 <article class="card plan">
@@ -180,10 +181,10 @@ html{scroll-behavior:auto}
 <dl class="plan-details caption muted-caption"><div><dt>作業量</dt><dd>月20時間ほど</dd></div><div><dt>打ち合わせ</dt><dd>月4回まで</dd></div></dl>
 </article>
 </div>
-<p class="time-note caption muted-caption">記載した時間は作業量の目安です。<br>実際の作業時間に応じた請求ではなく、月額でお受けします。</p>
+<p class="time-note caption muted-caption">記載した時間は作業量の目安です。実際の作業時間に応じた請求ではなく、月額でお受けします。</p>
 <div class="scale-row">
 <h3>大きな案件もご相談ください</h3>
-<p>複数の部署やシステムにまたがる場合、上の3つには収まりません。<br>体制と対応範囲を伺って、個別にご提案します。</p>
+<p>複数の部署やシステムにまたがる場合、上の3つには収まりません。体制と対応範囲を伺って、個別にご提案します。</p>
 </div>
 </div>
 </section>
@@ -219,9 +220,9 @@ html{scroll-behavior:auto}
 <section class="contact" id="contact">
 <div class="container">
 <h2>ご希望に合うプランをご提案します</h2>
-<p class="lead">ご状況を伺い、合う形をご提案します。<br>ご相談後にお断りいただいても問題ありません。</p>
-<div class="contact-cta"><a class="btn btn-primary" href="https://page.line.me/091usyfe" target="_blank" rel="noopener">相談内容を送る</a></div>
-<p class="contact-sub caption">ボタンからLINEのトーク画面が開きます。メールは <a href="mailto:r2g128@gmail.com">r2g128@gmail.com</a> へお送りください。<br>クラウドソーシングでは<a href="https://crowdworks.jp/public/employees/7039234" target="_blank" rel="noopener">クラウドワークス</a>と<a href="https://www.lancers.jp/profile/minato_auto" target="_blank" rel="noopener">ランサーズ</a>からご連絡いただけます。</p>
+<p class="lead">ご状況を伺い、合う形をご提案します。ご相談後にお断りいただいても問題ありません。</p>
+<div class="contact-cta"><a class="btn btn-primary" href="mailto:minato.ai.lab@gmail.com">メールで相談する</a></div>
+<p class="contact-sub caption">メールは <a href="mailto:minato.ai.lab@gmail.com">minato.ai.lab@gmail.com</a> へお送りください。クラウドソーシングでは<a href="https://crowdworks.jp/public/employees/7039234" target="_blank" rel="noopener">クラウドワークス</a>と<a href="https://www.lancers.jp/profile/minato_auto" target="_blank" rel="noopener">ランサーズ</a>からご連絡いただけます。</p>
 </div>
 </section>
 </main>
