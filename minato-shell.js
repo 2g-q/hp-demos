@@ -1,4 +1,5 @@
 (function(){
+if(location.pathname.endsWith('/cases.html') && ['#tools','#design'].includes(location.hash)){location.replace(location.hash==='#tools'?'./tools.html':'./designs.html');return;}
 var items=document.querySelectorAll('.sec-head,.card,.reason,.flow-item');
 if(!items.length||!('IntersectionObserver' in window))return;
 document.documentElement.classList.add('reveal-ready');
@@ -13,9 +14,10 @@ function addPoint(x,y){points.push({x:x,y:y,life:1,size:5+Math.random()*8});if(p
 window.addEventListener('resize',resize,{passive:true});
 window.addEventListener('pointermove',function(e){mouse.x=e.clientX;mouse.y=e.clientY;mouse.active=true;addPoint(e.clientX,e.clientY);},{passive:true});
 window.addEventListener('pointerleave',function(){mouse.active=false;},{passive:true});
-function draw(){ctx.clearRect(0,0,innerWidth,innerHeight);ctx.globalCompositeOperation='lighter';
-if(mouse.active){glowPos.x+=(mouse.x-glowPos.x)*.018;glowPos.y+=(mouse.y-glowPos.y)*.018;var glow=ctx.createRadialGradient(glowPos.x,glowPos.y,0,glowPos.x,glowPos.y,220);glow.addColorStop(0,'rgba(130,165,255,.2)');glow.addColorStop(.35,'rgba(108,120,255,.1)');glow.addColorStop(1,'rgba(88,92,255,0)');ctx.fillStyle=glow;ctx.beginPath();ctx.arc(glowPos.x,glowPos.y,220,0,Math.PI*2);ctx.fill();}
-points=points.filter(function(p){p.life-=.004;return p.life>0;});points.forEach(function(p){ctx.fillStyle='rgba(170,205,255,'+(p.life*.14)+')';ctx.beginPath();ctx.arc(p.x,p.y,p.size*p.life,0,Math.PI*2);ctx.fill();});requestAnimationFrame(draw);}
+var previous=performance.now();
+function draw(now){now=now||performance.now();var dt=Math.min((now-previous)/1000,.05);previous=now;ctx.clearRect(0,0,innerWidth,innerHeight);ctx.globalCompositeOperation='lighter';
+if(mouse.active){glowPos.x+=(mouse.x-glowPos.x)*(1-Math.exp(-dt/.95));glowPos.y+=(mouse.y-glowPos.y)*(1-Math.exp(-dt/.95));var glow=ctx.createRadialGradient(glowPos.x,glowPos.y,0,glowPos.x,glowPos.y,220);glow.addColorStop(0,'rgba(130,165,255,.2)');glow.addColorStop(.35,'rgba(108,120,255,.1)');glow.addColorStop(1,'rgba(88,92,255,0)');ctx.fillStyle=glow;ctx.beginPath();ctx.arc(glowPos.x,glowPos.y,220,0,Math.PI*2);ctx.fill();}
+points=points.filter(function(p){p.life-=dt/4.2;return p.life>0;});points.forEach(function(p){ctx.fillStyle='rgba(170,205,255,'+(p.life*.14)+')';ctx.beginPath();ctx.arc(p.x,p.y,p.size*p.life,0,Math.PI*2);ctx.fill();});requestAnimationFrame(draw);}
 resize();draw();
 }
 })();

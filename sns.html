@@ -459,7 +459,7 @@
 #pfnav a{text-decoration:none;transition:color .2s,background-color .2s}
 #pfnav a:focus-visible{outline:2px solid #2563EB;outline-offset:2px}
 #pfnav .brand{color:#0D0D0D;font-size:1rem;font-weight:600;white-space:nowrap;padding:12px 0}
-#pfnav .links{display:flex;align-items:center;gap:24px}
+#pfnav .links{display:flex;align-items:center;gap:18px}
 #pfnav .links a{color:rgba(13,13,13,.6);font-size:.8125rem;line-height:1.23rem;font-weight:500;
   padding:12px 0;white-space:nowrap}
 #pfnav .links a:hover{color:#0D0D0D}
@@ -470,18 +470,22 @@
 #pfnav a.back:hover{background:rgba(13,13,13,.8)}
 @media(max-width:767px){#pfnav .brand{display:none}
   #pfnav .in{padding:0 20px;height:54px;justify-content:flex-start;gap:14px}
-  #pfnav .links{gap:14px;width:100%}
-  #pfnav a.back{margin-left:auto}}
+  #pfnav .links{gap:12px;width:100%}
+  #pfnav a.back{display:none}
+  #pfnav .links a{font-size:12px}}
+@media(max-width:1000px){#pfnav .brand{display:none}}
 @media print{#pfnav{display:none}}
 
 </style>
 <nav id="pfnav"><div class="in">
-<a class="brand" href="./index.html">自動化のミナト</a>
+<a class="brand" href="./index.html">ミナト AI・IT ラボ</a>
 <div class="links">
 <a href="./index.html" data-k="index">サービス</a>
 <a href="./pricing.html" data-k="pricing">料金</a>
 <a href="./cases.html" data-k="cases">事例</a>
-<a class="back" href="./cases.html">← 事例一覧へ</a>
+<a href="./tools.html" data-k="tools">ツール</a>
+<a href="./designs.html" data-k="designs">デザイン</a>
+<a class="back" href="./designs.html">← デザイン一覧へ</a>
 </div>
 </div>
 <script>(function(){var f=(location.pathname.split("/").pop()||"index.html").replace(".html","");
@@ -1023,19 +1027,19 @@ a.mnt-btn-ghost:hover{background:rgba(13,13,13,.12)}
     <p class="mnt-h">ホームページ・LP・デザイン・自動化まで、実際に動くサンプルをご用意しています</p>
     <p class="mnt-lead">制作＝自動化のミナト。AIで速く作り、品質は全件人の目で検品します。ご依頼の業種・目的に合わせて、この品質でお作りします。</p>
     <div class="mnt-grid">
-      <a class="mnt-card" href="lp-gym.html" target="_blank" rel="noopener">
+      <a class="mnt-card" href="lp-gym.html">
         <img src="pf/lp-gym.jpg" alt="パーソナルジム 体験予約LPの制作サンプル" loading="lazy">
         <div class="mnt-meta"><span class="mnt-tag">集客LP</span><span class="mnt-name">パーソナルジム 体験予約LP</span></div>
       </a>
-      <a class="mnt-card" href="dental-sakura.html" target="_blank" rel="noopener">
+      <a class="mnt-card" href="dental-sakura.html">
         <img src="pf/dental-sakura.jpg" alt="歯科医院(訪問歯科)の制作サンプル" loading="lazy">
         <div class="mnt-meta"><span class="mnt-tag">ホームページ</span><span class="mnt-name">歯科医院(訪問歯科)</span></div>
       </a>
-      <a class="mnt-card" href="corp.html" target="_blank" rel="noopener">
+      <a class="mnt-card" href="corp.html">
         <img src="pf/corp.jpg" alt="コーポレート(人材会社)の制作サンプル" loading="lazy">
         <div class="mnt-meta"><span class="mnt-tag">ホームページ</span><span class="mnt-name">コーポレート(人材会社)</span></div>
       </a>
-      <a class="mnt-card" href="salon.html" target="_blank" rel="noopener">
+      <a class="mnt-card" href="salon.html">
         <img src="pf/salon.jpg" alt="ヘアサロンの制作サンプル" loading="lazy">
         <div class="mnt-meta"><span class="mnt-tag">ホームページ</span><span class="mnt-name">ヘアサロン</span></div>
       </a>

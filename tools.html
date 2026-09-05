@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>料金｜ミナト AI・IT ラボ</title>
-<meta name="description" content="月額はライト30,000円、スタンダード50,000円、フル100,000円から。依頼内容と作業量に合わせて選べます。単発もお見積もりします。">
+<title>触って確かめる業務ツール｜ミナト AI・IT ラボ</title>
+<meta name="description" content="転記、集計、予約の流れを試せるサンプルです。各ツールは別タブで開きます。実際の顧客データは使用していません。">
 <link rel="icon" type="image/svg+xml" href="./minato-mark.svg">
 <link rel="icon" type="image/png" sizes="32x32" href="./minato-mark-32.png">
 <link rel="apple-touch-icon" href="./minato-mark-180.png">
@@ -36,7 +36,6 @@ p,li{font-size:1.0625rem;line-height:1.75rem;letter-spacing:-.01em}
 .lead{font-size:1.0625rem;line-height:1.75rem;letter-spacing:-.01em}
 .caption{font-size:.875rem;line-height:1.435rem;letter-spacing:0}
 .muted-caption{color:var(--ink-60)}
-.price-num{font-size:clamp(2rem,calc(2rem + 1*((100vw - 23.4375rem)/66.5625)),3rem);line-height:clamp(2.28rem,calc(2.28rem + 1.2*((100vw - 23.4375rem)/66.5625)),3.48rem);letter-spacing:-.02em;font-weight:500;font-variant-numeric:tabular-nums;white-space:nowrap}
 .glow-top{position:absolute;left:0;right:0;top:0;height:1100px;pointer-events:none;z-index:-1;background:linear-gradient(to bottom,rgba(37,99,235,.1) 0,rgba(37,99,235,.09) 420px,rgba(37,99,235,0) 1100px)}
 .header{position:sticky;top:0;z-index:10;background:rgba(255,255,255,.72);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px)}
 .header-in{margin-inline:auto;padding-inline:32px;height:64px;display:flex;align-items:center;justify-content:space-between;gap:24px}
@@ -70,9 +69,7 @@ p,li{font-size:1.0625rem;line-height:1.75rem;letter-spacing:-.01em}
 .card-link:hover{color:var(--ink-60)}
 a.card{display:block;color:inherit;text-decoration:none;transition:background-color .2s}
 a.card:hover{background:var(--tint-12)}
-.grid2{display:grid;grid-template-columns:1fr 1fr;gap:32px}
 .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
-.num{color:var(--ink-60);font-size:.875rem;line-height:1.435rem;font-weight:500;font-variant-numeric:tabular-nums}
 .contact{position:relative;text-align:center;margin-top:120px;padding:140px 0 160px;overflow:hidden}
 .contact::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(to top,rgba(37,99,235,.12),rgba(37,99,235,0) 85%)}
 .contact .lead{max-width:620px;margin:24px auto 0}
@@ -92,7 +89,7 @@ a.card:hover{background:var(--tint-12)}
 @media (max-width:767px){
 .header-in{padding-inline:20px;height:54px}
 .card{padding:24px}
-.grid2,.grid3{grid-template-columns:1fr;gap:24px}
+.grid3{grid-template-columns:1fr;gap:24px}
 .sec{margin-top:80px}
 .hero{padding:72px 0 0}
 .contact{margin-top:80px;padding:96px 0 112px}
@@ -107,26 +104,42 @@ a.card:hover{background:var(--tint-12)}
 html{scroll-behavior:auto}
 *{transition:none!important;animation:none!important}
 }
-.plan{position:relative;display:flex;flex-direction:column}
-.plan-name{font-size:.875rem;line-height:1.25rem;font-weight:500}
-.plan .price-num{margin-top:14px}
-.price-cap{display:block;margin-top:6px}
-.plan .desc{margin-top:18px;margin-bottom:18px}
-.plan-details{margin-top:auto;padding-top:14px;border-top:1px solid var(--hairline)}
-.plan-details div{display:flex;justify-content:space-between;gap:16px;padding:4px 0}
-.plan-details dt{font-weight:500;color:var(--black)}
-.plan-details dd{margin:0;text-align:right}
-.scale-row{margin-top:24px;background:var(--tint-4);border-radius:8px;padding:32px;display:flex;align-items:baseline;justify-content:space-between;gap:24px;flex-wrap:wrap}
-.scale-row h3{font-size:var(--fs-h4);line-height:var(--lh-h4)}
-.scale-row p{max-width:620px}
-.single-price{font-size:var(--fs-h3);line-height:var(--lh-h3);font-weight:500;text-align:center}
-.single-link{display:flex;justify-content:center}
-.choose h3{font-size:var(--fs-h4);line-height:var(--lh-h4)}
-.choose p{margin-top:18px}
+.cases-grid{display:grid;grid-template-columns:1fr;gap:28px}
+.case-story{padding:36px}
+.case-heading{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;padding-bottom:24px;border-bottom:1px solid var(--hairline)}
+.case-tag{color:var(--ink-60)}
+.case-title{margin-top:8px}
+.case-fee{font-weight:500;white-space:nowrap}
+.case-flow{position:relative;display:grid;gap:18px;margin-top:28px}
+.case-flow::before{content:"";position:absolute;left:23px;top:48px;bottom:48px;width:1px;background:rgba(13,13,13,.14)}
+.case-flow-row{position:relative;display:grid;grid-template-columns:120px minmax(0,1fr);align-items:start;gap:24px}
+.case-person{position:relative;z-index:1;display:flex;align-items:center;gap:10px;font-size:.8125rem;line-height:1.3;font-weight:500}
+.case-avatar{display:inline-flex;flex:0 0 46px;width:46px;height:46px;align-items:center;justify-content:center;border-radius:50%;background:#fff;border:1px solid rgba(13,13,13,.12);box-shadow:0 8px 22px rgba(35,43,100,.1);font-size:.875rem}
+.case-avatar svg{width:20px;height:20px}
+.minato-avatar{background:#111;color:#fff;border-color:#111}
+.case-bubble{position:relative;padding:18px 20px;border-radius:16px;background:#fff;border:1px solid rgba(13,13,13,.08)}
+.case-bubble::before{content:"";position:absolute;left:-7px;top:18px;width:12px;height:12px;background:#fff;border-left:1px solid rgba(13,13,13,.08);border-bottom:1px solid rgba(13,13,13,.08);transform:rotate(45deg)}
+.case-bubble .step-label{display:block;margin-bottom:5px;font-size:.8125rem;line-height:1.3;font-weight:600;color:var(--ink-60);letter-spacing:.02em}
+.work-card{padding:8px;overflow:hidden;display:flex;flex-direction:column}
+.work-img{aspect-ratio:16/10;overflow:hidden;border-radius:6px}
+.work-img img{width:100%;height:100%;object-fit:cover}
+.work-body{padding:20px 16px 12px;display:flex;flex-direction:column;flex:1}
+.work-meta{display:flex;justify-content:space-between;gap:12px;margin-bottom:10px}
+.work-body p.desc{margin-top:10px}
+.work-body .card-link{margin-top:auto;padding-top:14px}
 @media (max-width:767px){
-.scale-row{padding:24px}
+.case-story{padding:24px}
+.case-heading{display:block}.case-fee{margin-top:10px}
+.case-flow::before{display:none}
+.case-flow-row{grid-template-columns:1fr;gap:10px}
+.case-person{padding-left:2px}
+.case-bubble::before{left:18px;top:-7px;border-left:1px solid rgba(13,13,13,.08);border-top:1px solid rgba(13,13,13,.08);border-bottom:0}
+.work-body{padding:16px 12px 8px}
 }
-.time-note{margin-top:20px;text-align:center}
+.case-foot{margin-top:28px;text-align:center;color:var(--ink-60)}
+.works-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+@media (max-width:1023px){.works-grid{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:767px){.works-grid{grid-template-columns:1fr;gap:24px}}
 </style>
 <link rel="stylesheet" href="./minato-shell.css?v=9">
 </head>
@@ -137,9 +150,9 @@ html{scroll-behavior:auto}
 <a class="brand" href="./index.html">ミナト AI・IT ラボ</a>
 <nav class="nav" aria-label="メインナビゲーション">
 <a href="./index.html">サービス</a>
-<a href="./pricing.html" aria-current="page">料金</a>
+<a href="./pricing.html">料金</a>
 <a href="./cases.html">事例</a>
-<a href="./tools.html">ツール</a>
+<a href="./tools.html" aria-current="page">ツール</a>
 <a href="./designs.html">デザイン</a>
 <a class="nav-contact" href="#contact">お問い合わせ</a>
 <button class="menu-btn" type="button" aria-expanded="false" aria-controls="mnav">メニュー</button>
@@ -147,91 +160,76 @@ html{scroll-behavior:auto}
 </div>
 <nav class="mnav" id="mnav" hidden aria-label="メニュー">
 <a href="./index.html">サービス</a>
-<a href="./pricing.html" aria-current="page">料金</a>
+<a href="./pricing.html">料金</a>
 <a href="./cases.html">事例</a>
-<a href="./tools.html">ツール</a>
+<a href="./tools.html" aria-current="page">ツール</a>
 <a href="./designs.html">デザイン</a>
 <a href="#contact">お問い合わせ</a>
 </nav>
 </header>
 <main>
-<section class="hero" id="top">
-<div class="container">
-<h1>月額は30,000円から</h1>
-<p class="lead">月額はライト、スタンダード、フルの3プランです。単発は内容と完成条件を確認してからお見積もりします。料金はすべて税別です。</p>
-</div>
-</section>
-<section class="sec" id="plans">
+<section class="hero"><div class="container"><h1>触って確かめる業務ツール</h1><p class="lead">転記、集計、予約の流れを試せるサンプルです。各ツールは別タブで開きます。実際の顧客データは使用していません。</p></div></section>
+<section class="sec" id="tools">
 <div class="container">
 <div class="sec-head">
-<h2>任せたい内容に合わせて選べます</h2>
-<p class="lead">ご相談はメールやチャットが中心です。プランごとに、ひと月に対応できる作業量と打ち合わせ回数が変わります。</p>
+<h2>操作できる業務ツールのサンプル</h2>
+<p class="lead">手作業を減らす仕組み、数字を見やすくまとめる画面、サービス間の連携を操作できます。実際の案件内容ではなく、対応イメージを確認するためのサンプルです。</p>
 </div>
-<div class="grid3 sec-body">
-<article class="card plan">
-<p class="plan-name">ライト</p>
-<p class="price-num">30,000円</p>
-<span class="caption muted-caption price-cap">税別・月額</span>
-<p class="desc">Excelの修正や日々のIT相談など、優先度の高い小さな課題から進めます。</p>
-<dl class="plan-details caption muted-caption"><div><dt>作業量</dt><dd>月5時間ほど</dd></div><div><dt>打ち合わせ</dt><dd>月1回まで</dd></div></dl>
-</article>
-<article class="card plan">
-<p class="plan-name">スタンダード</p>
-<p class="price-num">50,000円</p>
-<span class="caption muted-caption price-cap">税別・月額</span>
-<p class="desc">集計の自動化や業務の見直しなど、複数の課題を優先度順に進めます。</p>
-<dl class="plan-details caption muted-caption"><div><dt>作業量</dt><dd>月10時間ほど</dd></div><div><dt>打ち合わせ</dt><dd>月2回まで</dd></div></dl>
-</article>
-<article class="card plan">
-<p class="plan-name">フル</p>
-<p class="price-num">100,000円〜</p>
-<span class="caption muted-caption price-cap">税別・月額</span>
-<p class="desc">通販サイトや業務システムなど、設計、制作、運用をまとめて進めます。</p>
-<dl class="plan-details caption muted-caption"><div><dt>作業量</dt><dd>月20時間ほど</dd></div><div><dt>打ち合わせ</dt><dd>月4回まで</dd></div></dl>
-</article>
+<div class="works-grid sec-body">
+<a class="card work-card" href="./api-link.html" target="_blank" rel="noopener">
+<div class="work-img"><img src="./pf/sample5-api.jpg" alt="サービス同士をつなぐ仕組みの図"></div>
+<div class="work-body">
+<p class="work-meta caption muted-caption"><span>API連携</span><span>自動処理</span></p>
+<h3>サービス同士をつなぐ</h3>
+<p class="desc">通販サイトの注文情報を、配送会社の送り状発行へ自動でつなぎます。</p>
+<span class="card-link">サンプルを見る</span>
 </div>
-<p class="time-note caption muted-caption">料金は定額です。記載した時間は、ひと月に対応できる作業量の目安です。</p>
-<div class="scale-row">
-<h3>大きな案件もご相談ください</h3>
-<p>3プランの作業量を超える場合は、必要な体制と範囲を伺って個別にご提案します。</p>
+</a>
+<a class="card work-card" href="./gyomu-system.html" target="_blank" rel="noopener">
+<div class="work-img"><img src="./pf/gyomu-system.jpg" alt="販売・購買・債権管理システムのデモ画面"></div>
+<div class="work-body">
+<p class="work-meta caption muted-caption"><span>業務システム</span></p>
+<h3>販売・購買・債権管理</h3>
+<p class="desc">見積から入金までの流れを、一つの画面で確認できます。</p>
+<span class="card-link">サンプルを見る</span>
 </div>
+</a>
+<a class="card work-card" href="./automation.html" target="_blank" rel="noopener">
+<div class="work-img"><img src="./pf/automation.jpg" alt="自動化・データ処理デモの実画面"></div>
+<div class="work-body">
+<p class="work-meta caption muted-caption"><span>自動処理</span><span>データ整理</span></p>
+<h3>自動化・データ処理</h3>
+<p class="desc">毎日の転記や集計を自動化します。</p>
+<span class="card-link">サンプルを見る</span>
 </div>
-</section>
-<section class="sec" id="single">
-<div class="container">
-<div class="sec-head">
-<h2>単発は納品物を決めてお見積もり</h2>
-<p class="lead">作るものと完成条件を決め、納品までの費用をお見積もりします。</p>
+</a>
+<a class="card work-card" href="./dashboard.html" target="_blank" rel="noopener">
+<div class="work-img"><img src="./pf/dashboard.jpg" alt="EC売上ダッシュボードの実画面"></div>
+<div class="work-body">
+<p class="work-meta caption muted-caption"><span>集計</span><span>可視化</span></p>
+<h3>売上ダッシュボード</h3>
+<p class="desc">複数の売上データを一画面にまとめ、毎朝確認できる形にします。</p>
+<span class="card-link">サンプルを見る</span>
 </div>
-<div class="sec-body">
-<p class="single-price">内容に応じてお見積り</p>
-<div class="single-link"><a class="card-link" href="./tools.html">制作サンプルを見る</a></div>
+</a>
+<a class="card work-card" href="./line.html" target="_blank" rel="noopener">
+<div class="work-img"><img src="./pf/line.jpg" alt="LINE公式アカウント構築デモの実画面"></div>
+<div class="work-body">
+<p class="work-meta caption muted-caption"><span>運用設計</span><span>動線設計</span></p>
+<h3>LINE公式アカウント構築</h3>
+<p class="desc">自動応答、配信、予約まで、お客様が迷わず進める流れを設計します。</p>
+<span class="card-link">サンプルを見る</span>
 </div>
-</div>
-</section>
-<section class="sec" id="choose">
-<div class="container">
-<div class="sec-head">
-<h2>月額か単発か 迷ったときの目安</h2>
-</div>
-<div class="grid2 sec-body">
-<div class="choose">
-<h3>相談先を継続して持つなら月額</h3>
-<p>小さな修正や相談を続けながら、優先度の高い課題から改善したい方に向いています。</p>
-</div>
-<div class="choose">
-<h3>完成物を一度で受け取るなら単発</h3>
-<p>作るものと完成条件が決まっている方、まず一度試したい方に向いています。</p>
-</div>
+</a>
 </div>
 </div>
 </section>
 <section class="contact" id="contact">
 <div class="container">
-<h2>迷ったら 依頼内容だけお聞かせください</h2>
-<p class="lead">月額か単発かは、ご相談を伺ってから決められます。状況に合う頼み方を整理します。ご相談後にお断りいただいても問題ありません。</p>
-<div class="contact-cta"><a class="btn btn-primary" href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=minato.ai.lab@gmail.com&amp;su=%E6%96%99%E9%87%91%E3%83%97%E3%83%A9%E3%83%B3%E3%81%AE%E3%81%94%E7%9B%B8%E8%AB%87">メールで相談する</a><a class="btn btn-ghost" href="https://page.line.me/091usyfe">LINEで相談する</a></div>
-<p class="contact-sub caption">メールは <a href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=minato.ai.lab@gmail.com&amp;su=%E6%96%99%E9%87%91%E3%83%97%E3%83%A9%E3%83%B3%E3%81%AE%E3%81%94%E7%9B%B8%E8%AB%87">minato.ai.lab@gmail.com</a> へお送りください。<a href="https://crowdworks.jp/public/employees/7039234">クラウドワークス</a>と<a href="https://www.lancers.jp/profile/minato_auto">ランサーズ</a>のプロフィールからもご連絡いただけます。</p>
+<h2>近い事例がなくてもご相談いただけます</h2>
+<p class="lead">内容が固まっていない段階でも、状況を伺って整理します。</p>
+<div class="contact-cta"><a class="btn btn-primary" href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=minato.ai.lab@gmail.com&amp;su=%E4%BA%8B%E4%BE%8B%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6%E3%81%AE%E3%81%94%E7%9B%B8%E8%AB%87">メールで相談する</a><a class="btn btn-ghost" href="https://page.line.me/091usyfe">LINEで相談する</a></div>
+<p class="contact-sub caption">メールは <a href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=minato.ai.lab@gmail.com&amp;su=%E4%BA%8B%E4%BE%8B%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6%E3%81%AE%E3%81%94%E7%9B%B8%E8%AB%87">minato.ai.lab@gmail.com</a> へお送りください。<a href="https://crowdworks.jp/public/employees/7039234">クラウドワークス</a>と<a href="https://www.lancers.jp/profile/minato_auto">ランサーズ</a>のプロフィールからもご連絡いただけます。</p>
 </div>
 </section>
 </main>
@@ -239,9 +237,9 @@ html{scroll-behavior:auto}
 <div class="container footer-in">
 <span class="footer-brand">ミナト AI・IT ラボ</span>
 <nav class="footer-nav" aria-label="フッターナビゲーション"><a href="./index.html">サービス</a>
-<a href="./pricing.html" aria-current="page">料金</a>
+<a href="./pricing.html">料金</a>
 <a href="./cases.html">事例</a>
-<a href="./tools.html">ツール</a>
+<a href="./tools.html" aria-current="page">ツール</a>
 <a href="./designs.html">デザイン</a></nav>
 </div>
 </footer>

@@ -38,3 +38,22 @@ body::after{content:"";position:absolute;inset:0 0 auto;height:760px;z-index:-2;
 @media (max-width:479px){.nav a.nav-contact{display:none}}
 @media (hover:none),(pointer:coarse){#cursor-field{display:none}}
 @media (prefers-reduced-motion:reduce){#cursor-field{display:none}.reveal-ready .sec-head,.reveal-ready .card,.reveal-ready .reason,.reveal-ready .flow-item{opacity:1;transform:none}}
+
+/* Five distinct destinations; compact Japanese type and blue-only atmosphere. */
+body::before{background:radial-gradient(76% 54% at 12% 0,rgba(78,125,242,.38),transparent 75%),radial-gradient(58% 42% at 94% 6%,rgba(115,173,246,.3),transparent 75%),linear-gradient(180deg,#e4edff 0,#f4f7fd 38rem,#fff 70rem)}
+.hero h1{font-size:clamp(1.65rem,2.65vw,2.5rem);line-height:1.55;text-wrap:pretty;letter-spacing:-.02em}
+.hero .lead,.office-note.lead{font-size:1.0625rem;line-height:1.9;max-width:850px;text-wrap:pretty;word-break:normal}
+.sec-head h2,.contact h2{font-size:clamp(1.5rem,2.2vw,2rem);line-height:1.55;text-wrap:pretty}
+.sec-head .lead{margin-top:20px;line-height:1.9;word-break:normal}
+.sec{padding:85px 0}.sec-body{margin-top:35px}
+.contact{background:linear-gradient(130deg,#bdd3fb,#e7f0ff);padding:95px 0}
+.nav a:not(.nav-contact){padding-inline:12px}.footer-nav{flex-wrap:wrap;gap:20px}
+.work-card{border:1px solid #dce3ed;box-shadow:none;background:#fff;padding:8px;overflow:hidden}
+.work-img{aspect-ratio:16/10;height:auto;background:#e8ecf3}
+.work-img img{width:100%;height:100%;object-fit:cover;object-position:top}
+.work-body{padding:22px}.work-body .desc{line-height:1.8}.work-meta{color:#405675}
+#featured .works-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+a.card:hover,.card:hover{border-color:#b6c7df;box-shadow:0 15px 35px #203a6010}
+@media(min-width:768px) and (max-width:980px){.brand{font-size:.875rem}.header-in{gap:12px}.nav a:not(.nav-contact){padding-inline:8px}.nav a.nav-contact{padding-inline:12px}}
+@media(max-width:767px){.hero h1{font-size:1.7rem}.hero .lead{font-size:1rem}.sec-head h2,.contact h2{font-size:1.5rem}.sec{padding:58px 0}.footer-nav{gap:16px}#featured .works-grid{grid-template-columns:1fr}.work-card{padding:8px}.work-body{padding:20px}.hero{padding-top:80px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.card,.work-img img{transition:none}.card:hover{transform:none}}

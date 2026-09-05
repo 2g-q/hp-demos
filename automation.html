@@ -99,7 +99,7 @@ html{scroll-behavior:auto}
 #pfnav a{text-decoration:none;transition:color .2s,background-color .2s}
 #pfnav a:focus-visible{outline:2px solid #2563EB;outline-offset:2px}
 #pfnav .brand{color:#0D0D0D;font-size:1rem;font-weight:600;white-space:nowrap;padding:12px 0}
-#pfnav .links{display:flex;align-items:center;gap:24px}
+#pfnav .links{display:flex;align-items:center;gap:18px}
 #pfnav .links a{color:rgba(13,13,13,.6);font-size:.8125rem;line-height:1.23rem;font-weight:500;
   padding:12px 0;white-space:nowrap}
 #pfnav .links a:hover{color:#0D0D0D}
@@ -110,18 +110,22 @@ html{scroll-behavior:auto}
 #pfnav a.back:hover{background:rgba(13,13,13,.8)}
 @media(max-width:767px){#pfnav .brand{display:none}
   #pfnav .in{padding:0 20px;height:54px;justify-content:flex-start;gap:14px}
-  #pfnav .links{gap:14px;width:100%}
-  #pfnav a.back{margin-left:auto}}
+  #pfnav .links{gap:12px;width:100%}
+  #pfnav a.back{display:none}
+  #pfnav .links a{font-size:12px}}
+@media(max-width:1000px){#pfnav .brand{display:none}}
 @media print{#pfnav{display:none}}
 
 </style>
 <nav id="pfnav"><div class="in">
-<a class="brand" href="./index.html">自動化のミナト</a>
+<a class="brand" href="./index.html">ミナト AI・IT ラボ</a>
 <div class="links">
 <a href="./index.html" data-k="index">サービス</a>
 <a href="./pricing.html" data-k="pricing">料金</a>
 <a href="./cases.html" data-k="cases">事例</a>
-<a class="back" href="./cases.html">← 事例一覧へ</a>
+<a href="./tools.html" data-k="tools">ツール</a>
+<a href="./designs.html" data-k="designs">デザイン</a>
+<a class="back" href="./tools.html">← ツール一覧へ</a>
 </div>
 </div>
 <script>(function(){var f=(location.pathname.split("/").pop()||"index.html").replace(".html","");
