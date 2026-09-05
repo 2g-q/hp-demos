@@ -1,0 +1,1540 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>〇〇美容サロンサンプル｜髪に、余白と品を。</title>
+  <meta name="description" content="清潔感とトレンド感を大切にした美容サロンの制作サンプルです。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600&family=Noto+Sans+JP:wght@400;500;600&family=Shippori+Mincho:wght@500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink: #171513;
+      --muted: #706b66;
+      --paper: #fcfaf7;
+      --white: #ffffff;
+      --accent: #bda58f;
+      --accent-dark: #8e7763;
+      --line: #e8e1da;
+      --soft: #f2ece6;
+      --shadow: 0 18px 50px rgba(55, 43, 34, 0.12);
+      --radius: 24px;
+      --sans: "Noto Sans JP", sans-serif;
+      --serif: "Shippori Mincho", serif;
+      --number: "Manrope", sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      overflow-x: hidden;
+    }
+
+    body {
+      margin: 0;
+      min-width: 0;
+      overflow-x: hidden;
+      color: var(--ink);
+      background: var(--paper);
+      font-family: var(--sans);
+      font-feature-settings: "palt";
+      line-height: 1.8;
+      letter-spacing: 0.04em;
+    }
+
+    body.menu-open {
+      overflow: hidden;
+    }
+
+    img {
+      display: block;
+      width: 100%;
+      max-width: 100%;
+      height: auto;
+      object-fit: cover;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button,
+    input,
+    select,
+    textarea {
+      font: inherit;
+    }
+
+    button {
+      color: inherit;
+    }
+
+    svg {
+      display: block;
+    }
+
+    .container {
+      width: min(1120px, calc(100% - 48px));
+      max-width: 100%;
+      margin-inline: auto;
+    }
+
+    .section {
+      padding-block: 104px;
+    }
+
+    .section-head {
+      display: grid;
+      gap: 16px;
+      margin-bottom: 52px;
+    }
+
+    .eyebrow {
+      margin: 0;
+      color: var(--accent-dark);
+      font-family: var(--number);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+
+    h1,
+    h2,
+    h3,
+    p {
+      margin-top: 0;
+    }
+
+    h1,
+    h2 {
+      font-family: var(--serif);
+      font-weight: 500;
+      line-height: 1.35;
+      letter-spacing: 0.06em;
+    }
+
+    h1 {
+      margin-bottom: 24px;
+      font-size: clamp(42px, 7vw, 80px);
+    }
+
+    h2 {
+      max-width: 720px;
+      margin-bottom: 0;
+      font-size: clamp(30px, 4vw, 48px);
+    }
+
+    h3 {
+      margin-bottom: 12px;
+      font-size: 19px;
+      font-weight: 600;
+      line-height: 1.6;
+    }
+
+    p {
+      color: var(--muted);
+    }
+
+    .lead {
+      max-width: 660px;
+      font-size: 16px;
+    }
+
+    .note {
+      font-size: 12px;
+      line-height: 1.7;
+    }
+
+    .button {
+      display: inline-flex;
+      min-height: 56px;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      padding: 14px 26px;
+      border: 1px solid var(--accent);
+      border-radius: 100px;
+      background: var(--accent);
+      box-shadow: 0 12px 28px rgba(142, 119, 99, 0.24);
+      color: var(--white);
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 16px 32px rgba(142, 119, 99, 0.3);
+    }
+
+    .button--ghost {
+      border-color: var(--ink);
+      background: transparent;
+      box-shadow: none;
+      color: var(--ink);
+    }
+
+    .button svg {
+      width: 18px;
+      height: 18px;
+      flex: 0 0 auto;
+    }
+
+    .site-header {
+      position: absolute;
+      z-index: 20;
+      top: 0;
+      left: 0;
+      width: 100%;
+      max-width: 100%;
+      color: var(--white);
+    }
+
+    .header-inner {
+      display: flex;
+      min-height: 88px;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .brand {
+      display: grid;
+      gap: 2px;
+      font-family: var(--serif);
+      font-size: 18px;
+      letter-spacing: 0.12em;
+    }
+
+    .brand small {
+      font-family: var(--number);
+      font-size: 9px;
+      letter-spacing: 0.22em;
+    }
+
+    .desktop-nav {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      font-size: 12px;
+      letter-spacing: 0.1em;
+    }
+
+    .desktop-nav a {
+      position: relative;
+    }
+
+    .desktop-nav a::after {
+      position: absolute;
+      right: 0;
+      bottom: -6px;
+      left: 0;
+      height: 1px;
+      background: currentColor;
+      content: "";
+      transform: scaleX(0);
+      transform-origin: right;
+      transition: transform 0.25s ease;
+    }
+
+    .desktop-nav a:hover::after {
+      transform: scaleX(1);
+      transform-origin: left;
+    }
+
+    .menu-button {
+      display: none;
+      width: 48px;
+      max-width: 100%;
+      height: 48px;
+      padding: 0;
+      border: 1px solid rgba(255, 255, 255, 0.55);
+      border-radius: 50%;
+      background: rgba(0, 0, 0, 0.08);
+    }
+
+    .menu-button span {
+      display: block;
+      width: 18px;
+      max-width: 100%;
+      height: 1px;
+      margin: 5px auto;
+      background: var(--white);
+      transition: transform 0.25s ease;
+    }
+
+    .mobile-nav {
+      position: fixed;
+      z-index: 40;
+      inset: 0;
+      display: grid;
+      width: 100%;
+      max-width: 100%;
+      place-content: center;
+      gap: 24px;
+      background: rgba(23, 21, 19, 0.97);
+      color: var(--white);
+      font-family: var(--serif);
+      font-size: 24px;
+      text-align: center;
+      visibility: hidden;
+      opacity: 0;
+      transition: opacity 0.25s ease, visibility 0.25s ease;
+    }
+
+    .mobile-nav.is-open {
+      visibility: visible;
+      opacity: 1;
+    }
+
+    .mobile-nav-close {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      width: 48px;
+      max-width: 100%;
+      height: 48px;
+      border: 1px solid rgba(255, 255, 255, 0.5);
+      border-radius: 50%;
+      background: transparent;
+      color: var(--white);
+      font-size: 24px;
+    }
+
+    .hero {
+      position: relative;
+      display: grid;
+      min-height: 760px;
+      align-items: end;
+      overflow: hidden;
+      background: var(--ink);
+      color: var(--white);
+    }
+
+    .hero-media {
+      position: absolute;
+      inset: 0;
+    }
+
+    .hero-media img {
+      width: 100%;
+      max-width: 100%;
+      height: 100%;
+    }
+
+    .hero-media::after {
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(90deg, rgba(23, 21, 19, 0.72) 0%, rgba(23, 21, 19, 0.28) 58%, rgba(23, 21, 19, 0.08) 100%),
+        linear-gradient(0deg, rgba(23, 21, 19, 0.5), transparent 50%);
+      content: "";
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      padding-block: 190px 78px;
+    }
+
+    .hero-copy {
+      max-width: 720px;
+    }
+
+    .hero .eyebrow,
+    .hero p {
+      color: rgba(255, 255, 255, 0.84);
+    }
+
+    .hero-description {
+      max-width: 560px;
+      margin-bottom: 34px;
+      font-size: 16px;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+
+    .hero .button--ghost {
+      border-color: rgba(255, 255, 255, 0.72);
+      color: var(--white);
+    }
+
+    .hero-number {
+      position: absolute;
+      right: 32px;
+      bottom: 22px;
+      font-family: var(--number);
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      writing-mode: vertical-rl;
+    }
+
+    .trust-strip {
+      position: relative;
+      z-index: 3;
+      border-bottom: 1px solid var(--line);
+      background: var(--white);
+    }
+
+    .trust-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .trust-item {
+      padding: 28px;
+      border-right: 1px solid var(--line);
+      text-align: center;
+    }
+
+    .trust-item:last-child {
+      border-right: 0;
+    }
+
+    .trust-item strong {
+      display: block;
+      margin-bottom: 4px;
+      font-family: var(--serif);
+      font-size: 19px;
+      font-weight: 500;
+    }
+
+    .trust-item span {
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .concept-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+      align-items: center;
+      gap: 72px;
+    }
+
+    .concept-image {
+      position: relative;
+    }
+
+    .concept-image img {
+      aspect-ratio: 4 / 5;
+      border-radius: 180px 180px 20px 20px;
+    }
+
+    .concept-label {
+      position: absolute;
+      right: -24px;
+      bottom: 40px;
+      max-width: 190px;
+      padding: 20px;
+      background: var(--white);
+      box-shadow: var(--shadow);
+      font-family: var(--serif);
+      line-height: 1.7;
+    }
+
+    .concept-copy {
+      max-width: 520px;
+    }
+
+    .concept-copy h2 {
+      margin-bottom: 28px;
+    }
+
+    .signature {
+      margin-top: 30px;
+      padding-left: 20px;
+      border-left: 2px solid var(--accent);
+      color: var(--ink);
+      font-family: var(--serif);
+      font-size: 20px;
+    }
+
+    .menu-section {
+      background: var(--white);
+    }
+
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 22px;
+    }
+
+    .menu-card {
+      position: relative;
+      padding: 32px;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--paper);
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .menu-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow);
+    }
+
+    .menu-card::before {
+      position: absolute;
+      top: 0;
+      left: 32px;
+      width: 42px;
+      max-width: 100%;
+      height: 3px;
+      background: var(--accent);
+      content: "";
+    }
+
+    .menu-index {
+      display: block;
+      margin-bottom: 32px;
+      color: var(--accent-dark);
+      font-family: var(--number);
+      font-size: 12px;
+    }
+
+    .menu-card p {
+      min-height: 88px;
+      margin-bottom: 24px;
+      font-size: 14px;
+    }
+
+    .price {
+      color: var(--ink);
+      font-family: var(--number);
+      font-size: 22px;
+    }
+
+    .price small {
+      margin-left: 4px;
+      color: var(--muted);
+      font-family: var(--sans);
+      font-size: 11px;
+    }
+
+    .visual-section {
+      padding-block: 0;
+      background: var(--white);
+    }
+
+    .visual-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      min-height: 620px;
+    }
+
+    .visual-photo img {
+      height: 100%;
+    }
+
+    .visual-copy {
+      display: grid;
+      align-content: center;
+      padding: clamp(44px, 7vw, 90px);
+      background: var(--soft);
+    }
+
+    .visual-copy h2 {
+      margin-bottom: 28px;
+    }
+
+    .detail-list {
+      display: grid;
+      gap: 0;
+      margin: 28px 0 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .detail-list li {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding-block: 14px;
+      border-bottom: 1px solid rgba(142, 119, 99, 0.22);
+      font-size: 14px;
+    }
+
+    .detail-list li::before {
+      width: 7px;
+      max-width: 100%;
+      height: 7px;
+      flex: 0 0 auto;
+      border-radius: 50%;
+      background: var(--accent);
+      content: "";
+    }
+
+    .stylist-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 0.95fr);
+      align-items: center;
+      gap: 68px;
+    }
+
+    .stylist-photo {
+      position: relative;
+    }
+
+    .stylist-photo img {
+      aspect-ratio: 5 / 6;
+      border-radius: 20px;
+    }
+
+    .stylist-copy {
+      max-width: 520px;
+    }
+
+    .stylist-copy h2 {
+      margin-bottom: 28px;
+    }
+
+    .stylist-name {
+      margin-block: 30px 4px;
+      color: var(--ink);
+      font-family: var(--serif);
+      font-size: 24px;
+    }
+
+    .stylist-role {
+      font-family: var(--number);
+      font-size: 11px;
+      letter-spacing: 0.16em;
+    }
+
+    .info-section {
+      background: var(--ink);
+      color: var(--white);
+    }
+
+    .info-section .eyebrow,
+    .info-section p {
+      color: rgba(255, 255, 255, 0.68);
+    }
+
+    .info-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+      gap: 80px;
+    }
+
+    .hours {
+      width: 100%;
+      max-width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+    }
+
+    .hours th,
+    .hours td {
+      padding: 18px 8px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.16);
+      text-align: left;
+    }
+
+    .hours th {
+      width: 38%;
+      max-width: 100%;
+      color: rgba(255, 255, 255, 0.58);
+      font-weight: 400;
+    }
+
+    .access-card {
+      padding: 34px;
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      border-radius: var(--radius);
+    }
+
+    .access-card h3 {
+      font-family: var(--serif);
+      font-size: 25px;
+      font-weight: 500;
+    }
+
+    .access-line {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      margin-top: 24px;
+    }
+
+    .access-line svg {
+      width: 20px;
+      max-width: 100%;
+      height: 20px;
+      flex: 0 0 auto;
+      margin-top: 5px;
+      stroke: var(--accent);
+    }
+
+    .access-line p {
+      margin-bottom: 0;
+    }
+
+    .faq-list {
+      max-width: 840px;
+      margin-inline: auto;
+      border-top: 1px solid var(--line);
+    }
+
+    .faq-item {
+      border-bottom: 1px solid var(--line);
+    }
+
+    .faq-question {
+      display: flex;
+      width: 100%;
+      max-width: 100%;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      padding: 24px 0;
+      border: 0;
+      background: transparent;
+      text-align: left;
+      cursor: pointer;
+    }
+
+    .faq-question span:first-child {
+      font-weight: 500;
+    }
+
+    .faq-mark {
+      position: relative;
+      width: 22px;
+      max-width: 100%;
+      height: 22px;
+      flex: 0 0 auto;
+    }
+
+    .faq-mark::before,
+    .faq-mark::after {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 14px;
+      max-width: 100%;
+      height: 1px;
+      background: var(--accent-dark);
+      content: "";
+      transform: translate(-50%, -50%);
+      transition: transform 0.25s ease;
+    }
+
+    .faq-mark::after {
+      transform: translate(-50%, -50%) rotate(90deg);
+    }
+
+    .faq-item.is-open .faq-mark::after {
+      transform: translate(-50%, -50%) rotate(0deg);
+    }
+
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+    }
+
+    .faq-answer p {
+      padding: 0 48px 24px 0;
+    }
+
+    .contact-section {
+      background: var(--soft);
+    }
+
+    .contact-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+      gap: 72px;
+    }
+
+    .contact-copy h2 {
+      margin-bottom: 24px;
+    }
+
+    .contact-phone {
+      display: inline-block;
+      margin-top: 20px;
+      color: var(--ink);
+      font-family: var(--number);
+      font-size: clamp(24px, 4vw, 34px);
+      letter-spacing: 0.04em;
+    }
+
+    .contact-form {
+      display: grid;
+      gap: 18px;
+      padding: 36px;
+      border-radius: var(--radius);
+      background: var(--white);
+      box-shadow: var(--shadow);
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .field {
+      display: grid;
+      gap: 8px;
+    }
+
+    .field label {
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .field input,
+    .field select,
+    .field textarea {
+      width: 100%;
+      max-width: 100%;
+      min-height: 52px;
+      padding: 13px 14px;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      background: var(--paper);
+      color: var(--ink);
+      font-size: 16px;
+      outline: none;
+      transition: border-color 0.2s ease;
+    }
+
+    .field textarea {
+      min-height: 110px;
+      resize: vertical;
+    }
+
+    .field input:focus,
+    .field select:focus,
+    .field textarea:focus {
+      border-color: var(--accent-dark);
+    }
+
+    .contact-form .button {
+      width: 100%;
+      max-width: 100%;
+      border: 0;
+      cursor: pointer;
+    }
+
+    .site-footer {
+      padding-block: 52px 110px;
+      background: var(--ink);
+      color: var(--white);
+    }
+
+    .footer-inner {
+      display: grid;
+      gap: 26px;
+    }
+
+    .footer-top {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 28px;
+    }
+
+    .footer-nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 18px 26px;
+      font-size: 12px;
+    }
+
+    .demo-disclaimer {
+      max-width: 800px;
+      margin-bottom: 0;
+      padding-top: 24px;
+      border-top: 1px solid rgba(255, 255, 255, 0.16);
+      color: rgba(255, 255, 255, 0.62);
+      font-size: 11px;
+    }
+
+    .sticky-cta {
+      position: fixed;
+      z-index: 30;
+      right: 24px;
+      bottom: 24px;
+      display: flex;
+      gap: 10px;
+    }
+
+    .sticky-cta .button {
+      min-height: 52px;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(22px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .reveal.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (max-width: 860px) {
+      .desktop-nav {
+        display: none;
+      }
+
+      .menu-button {
+        display: block;
+      }
+
+      .concept-layout,
+      .stylist-layout,
+      .info-grid,
+      .contact-layout {
+        grid-template-columns: 1fr;
+        gap: 48px;
+      }
+
+      .visual-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .visual-photo img {
+        aspect-ratio: 4 / 3;
+      }
+
+      .menu-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .menu-card p {
+        min-height: 0;
+      }
+
+      .concept-label {
+        right: 14px;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .container {
+        width: min(100% - 32px, 1120px);
+        max-width: 100%;
+      }
+
+      .section {
+        padding-block: 84px;
+      }
+
+      .header-inner {
+        min-height: 72px;
+      }
+
+      .hero {
+        min-height: 700px;
+      }
+
+      .hero-content {
+        padding-block: 150px 54px;
+      }
+
+      .hero-media img {
+        object-position: 62% center;
+      }
+
+      .hero-media::after {
+        background:
+          linear-gradient(90deg, rgba(23, 21, 19, 0.68), rgba(23, 21, 19, 0.18)),
+          linear-gradient(0deg, rgba(23, 21, 19, 0.72), transparent 65%);
+      }
+
+      .hero-actions {
+        display: grid;
+      }
+
+      .hero-actions .button {
+        width: 100%;
+        max-width: 100%;
+      }
+
+      .hero-number {
+        display: none;
+      }
+
+      .trust-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .trust-item {
+        padding: 20px;
+        border-right: 0;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .trust-item:last-child {
+        border-bottom: 0;
+      }
+
+      .concept-label {
+        right: 10px;
+        bottom: 20px;
+        max-width: 165px;
+        padding: 16px;
+        font-size: 13px;
+      }
+
+      .menu-card {
+        padding: 28px 24px;
+      }
+
+      .visual-copy {
+        padding: 54px 24px;
+      }
+
+      .access-card {
+        padding: 26px 22px;
+      }
+
+      .form-row {
+        grid-template-columns: 1fr;
+      }
+
+      .contact-form {
+        padding: 26px 20px;
+      }
+
+      .footer-top {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .sticky-cta {
+        right: 10px;
+        bottom: 10px;
+        left: 10px;
+        display: grid;
+        grid-template-columns: 0.7fr 1.3fr;
+        gap: 8px;
+      }
+
+      .sticky-cta .button {
+        width: 100%;
+        max-width: 100%;
+        min-height: 54px;
+        padding-inline: 12px;
+        font-size: 12px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+
+      .reveal {
+        opacity: 1;
+        transform: none;
+      }
+    }
+  </style>
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BeautySalon",
+      "name": "〇〇美容サロンサンプル",
+      "description": "清潔感とトレンド感を大切にした美容サロンの制作サンプル",
+      "telephone": "048-000-0000",
+      "priceRange": "¥¥",
+      "image": "https://images.unsplash.com/photo-1633681926022-84c23e8cb2d6?auto=format&fit=crop&w=1200&q=70"
+    }
+  </script>
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "初めてでも相談できますか？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "はい。髪のお悩みや普段のお手入れ方法を伺い、ご希望に合う施術をご提案します。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "予約の変更はできますか？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "変更をご希望の場合は、営業時間内にお電話でご連絡ください。"
+          }
+        }
+      ]
+    }
+  </script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="#top" aria-label="トップへ">
+        〇〇美容サロンサンプル
+        <small>HAIR &amp; BEAUTY</small>
+      </a>
+      <nav class="desktop-nav" aria-label="メインナビゲーション">
+        <a href="#concept">私たちの考え</a>
+        <a href="#menu">メニュー</a>
+        <a href="#stylist">スタイリスト</a>
+        <a href="#access">店舗案内</a>
+        <a href="#contact">ご予約</a>
+      </nav>
+      <button class="menu-button" type="button" aria-label="メニューを開く" aria-expanded="false">
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </header>
+
+  <nav class="mobile-nav" aria-label="スマートフォン用ナビゲーション">
+    <button class="mobile-nav-close" type="button" aria-label="メニューを閉じる">×</button>
+    <a href="#concept">私たちの考え</a>
+    <a href="#menu">メニュー</a>
+    <a href="#stylist">スタイリスト</a>
+    <a href="#access">店舗案内</a>
+    <a href="#contact">ご予約</a>
+  </nav>
+
+  <main>
+    <section class="hero" id="top">
+      <div class="hero-media">
+        <img src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&w=1200&q=70" alt="美しく整えられたロングヘアの後ろ姿">
+      </div>
+      <div class="container hero-content">
+        <div class="hero-copy reveal">
+          <p class="eyebrow">Quiet beauty, made for you.</p>
+          <h1>髪に、<br>余白と品を。</h1>
+          <p class="hero-description">
+            似合うだけで終わらない。
+            朝の支度まで軽くなる、静かで上質なヘアデザインを。
+          </p>
+          <div class="hero-actions">
+            <a class="button" href="#contact">
+              来店予約をする
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M5 12h14M14 7l5 5-5 5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </a>
+            <a class="button button--ghost" href="tel:0480000000">
+              048-000-0000
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="hero-number">HAIR SALON SAMPLE — 2026</div>
+    </section>
+
+    <section class="trust-strip" aria-label="サロンの特徴">
+      <div class="container trust-grid">
+        <div class="trust-item">
+          <strong>丁寧なカウンセリング</strong>
+          <span>髪質と暮らしから考えます</span>
+        </div>
+        <div class="trust-item">
+          <strong>駅から徒歩5分</strong>
+          <span>※アクセス情報は仮の内容です</span>
+        </div>
+        <div class="trust-item">
+          <strong>平日20時まで</strong>
+          <span>※営業時間は仮の内容です</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="concept">
+      <div class="container concept-layout">
+        <div class="concept-image reveal">
+          <img src="https://images.unsplash.com/photo-1633681926022-84c23e8cb2d6?auto=format&fit=crop&w=1200&q=70" alt="白を基調にした清潔感のあるサロン内装" loading="lazy">
+          <div class="concept-label">
+            光と緑がなじむ、落ち着いたサロン空間。
+          </div>
+        </div>
+        <div class="concept-copy reveal">
+          <p class="eyebrow">Our philosophy</p>
+          <h2>変えるより、<br>あなたらしさを整える。</h2>
+          <p>
+            トレンドをそのまま重ねるのではなく、骨格や髪質、
+            毎朝かけられる時間まで丁寧に伺います。
+          </p>
+          <p>
+            サロンを出た瞬間だけでなく、その先の日常にもなじむこと。
+            まとまりやすさと、鏡を見る楽しさを両立したスタイルを目指します。
+          </p>
+          <p class="signature">
+            何気ない一日が、少し好きになる髪へ。
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section menu-section" id="menu">
+      <div class="container">
+        <div class="section-head reveal">
+          <p class="eyebrow">Menu</p>
+          <h2>手触りまで設計する、<br>三つのベーシック。</h2>
+          <p class="lead">
+            デザイン、質感、扱いやすさ。
+            今の髪に必要なものを見極め、施術内容を組み立てます。
+          </p>
+        </div>
+        <div class="menu-grid">
+          <article class="menu-card reveal">
+            <span class="menu-index">01</span>
+            <h3>似合わせカット</h3>
+            <p>
+              骨格と毛流れを見ながら、乾かすだけで形になるスタイルへ整えます。
+            </p>
+            <div class="price">¥6,600<small>※仮の料金です</small></div>
+          </article>
+          <article class="menu-card reveal">
+            <span class="menu-index">02</span>
+            <h3>透明感カラー</h3>
+            <p>
+              肌の色や服の雰囲気になじむ、やわらかな色味をご提案します。
+            </p>
+            <div class="price">¥9,900<small>※仮の料金です</small></div>
+          </article>
+          <article class="menu-card reveal">
+            <span class="menu-index">03</span>
+            <h3>集中ヘアケア</h3>
+            <p>
+              乾燥や広がりに合わせて、潤いと自然なツヤを補うケアです。
+            </p>
+            <div class="price">¥4,400<small>※仮の料金です</small></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="visual-section">
+      <div class="visual-grid">
+        <div class="visual-photo reveal">
+          <img src="https://images.unsplash.com/photo-1600948836101-f9ffda59d250?auto=format&fit=crop&w=1200&q=70" alt="丸い鏡と落ち着いた色調でまとめたサロン空間" loading="lazy">
+        </div>
+        <div class="visual-copy reveal">
+          <p class="eyebrow">Private time</p>
+          <h2>急がない時間も、<br>きれいの一部。</h2>
+          <p>
+            席の間隔や照明の明るさにも配慮し、
+            自分のための時間をゆっくり過ごせる空間に整えています。
+          </p>
+          <ul class="detail-list">
+            <li>ご希望を言葉にしやすい丁寧なヒアリング</li>
+            <li>周囲を気にせず過ごせる落ち着いた席配置</li>
+            <li>ご自宅で再現しやすいスタイリングのご案内</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="stylist">
+      <div class="container stylist-layout">
+        <div class="stylist-copy reveal">
+          <p class="eyebrow">Stylist</p>
+          <h2>言葉にならない希望も、<br>一緒にほどきます。</h2>
+          <p>
+            「少し軽くしたい」「雰囲気を変えたい」など、
+            まだ輪郭のないご希望でも構いません。
+          </p>
+          <p>
+            写真や普段の服装も手がかりにしながら、
+            無理なく続けられるスタイルを一緒に見つけます。
+          </p>
+          <p class="stylist-name">スタイリスト　〇〇 〇〇</p>
+          <p class="stylist-role">※氏名・プロフィールは仮の内容です</p>
+        </div>
+        <div class="stylist-photo reveal">
+          <img src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&w=1200&q=70" alt="ヘアスタイルを見せる女性の後ろ姿" loading="lazy">
+          <p class="note">
+            ※写真はイメージです。実制作ではご提供写真や日本人モデルの素材に差し替えます。
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section info-section" id="access">
+      <div class="container info-grid">
+        <div class="reveal">
+          <p class="eyebrow">Opening hours</p>
+          <h2>店舗案内</h2>
+          <p>
+            お仕事帰りにも立ち寄りやすい時間帯まで営業する想定です。
+          </p>
+          <p class="note">
+            ※営業時間・定休日は制作サンプル用の仮情報です。
+          </p>
+        </div>
+        <div class="reveal">
+          <table class="hours">
+            <tbody>
+              <tr>
+                <th>平日</th>
+                <td>10:00–20:00</td>
+              </tr>
+              <tr>
+                <th>土・日・祝</th>
+                <td>9:00–19:00</td>
+              </tr>
+              <tr>
+                <th>定休日</th>
+                <td>毎週火曜日</td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="access-card">
+            <h3>〇〇美容サロンサンプル</h3>
+            <div class="access-line">
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M12 21s7-6.1 7-12A7 7 0 1 0 5 9c0 5.9 7 12 7 12Z" stroke-width="1.6"/>
+                <circle cx="12" cy="9" r="2.3" stroke-width="1.6"/>
+              </svg>
+              <p>
+                最寄り駅から徒歩5分<br>
+                <span class="note">※所在地と所要時間は仮の内容です</span>
+              </p>
+            </div>
+            <div class="access-line">
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M7.5 4.5h3l1.5 4-2 1.5a15 15 0 0 0 4 4l1.5-2 4 1.5v3A2.5 2.5 0 0 1 17 19C10.4 19 5 13.6 5 7a2.5 2.5 0 0 1 2.5-2.5Z" stroke-width="1.6" stroke-linejoin="round"/>
+              </svg>
+              <p>
+                <a href="tel:0480000000">048-000-0000</a><br>
+                <span class="note">※電話番号はダミーです</span>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="faq">
+      <div class="container">
+        <div class="section-head reveal">
+          <p class="eyebrow">Frequently asked questions</p>
+          <h2>ご来店前のご質問</h2>
+        </div>
+        <div class="faq-list reveal">
+          <div class="faq-item">
+            <button class="faq-question" type="button" aria-expanded="false">
+              <span>初めてでも相談できますか？</span>
+              <span class="faq-mark" aria-hidden="true"></span>
+            </button>
+            <div class="faq-answer">
+              <p>
+                はい。髪のお悩みや普段のお手入れ方法を伺い、
+                ご希望に合う施術をご提案します。
+              </p>
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question" type="button" aria-expanded="false">
+              <span>希望する髪型が決まっていなくても大丈夫ですか？</span>
+              <span class="faq-mark" aria-hidden="true"></span>
+            </button>
+            <div class="faq-answer">
+              <p>
+                問題ありません。
+                長さや雰囲気の好みを伺いながら、一緒に方向性を決めていきます。
+              </p>
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question" type="button" aria-expanded="false">
+              <span>予約の変更はできますか？</span>
+              <span class="faq-mark" aria-hidden="true"></span>
+            </button>
+            <div class="faq-answer">
+              <p>
+                変更をご希望の場合は、営業時間内にお電話でご連絡ください。
+              </p>
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question" type="button" aria-expanded="false">
+              <span>子どもと一緒に来店できますか？</span>
+              <span class="faq-mark" aria-hidden="true"></span>
+            </button>
+            <div class="faq-answer">
+              <p>
+                ご予約時にお知らせください。
+                店内の状況を確認したうえでご案内します。
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section contact-section" id="contact">
+      <div class="container contact-layout">
+        <div class="contact-copy reveal">
+          <p class="eyebrow">Reservation</p>
+          <h2>次の髪を、<br>一緒に考えませんか。</h2>
+          <p>
+            ご希望のメニューが決まっていない場合も、
+            来店時のカウンセリングでご相談いただけます。
+          </p>
+          <a class="contact-phone" href="tel:0480000000">048-000-0000</a>
+          <p class="note">※電話番号はダミーです</p>
+        </div>
+        <form class="contact-form reveal" action="#" method="post">
+          <div class="form-row">
+            <div class="field">
+              <label for="name">お名前</label>
+              <input id="name" name="name" type="text" autocomplete="name" placeholder="例：山田 花子">
+            </div>
+            <div class="field">
+              <label for="phone">電話番号</label>
+              <input id="phone" name="phone" type="tel" autocomplete="tel" placeholder="例：090-0000-0000">
+            </div>
+          </div>
+          <div class="field">
+            <label for="menu-select">ご希望のメニュー</label>
+            <select id="menu-select" name="menu">
+              <option value="">選択してください</option>
+              <option value="cut">似合わせカット</option>
+              <option value="color">透明感カラー</option>
+              <option value="care">集中ヘアケア</option>
+              <option value="consultation">相談して決めたい</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="message">ご希望・お悩み</label>
+            <textarea id="message" name="message" placeholder="現在の髪のお悩みや、ご希望の雰囲気をご記入ください"></textarea>
+          </div>
+          <button class="button" type="button">
+            予約内容を確認する
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M5 12h14M14 7l5 5-5 5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+          <p class="note">
+            ※フォームはデモ表示です。送信機能はありません。
+          </p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-top">
+        <div class="brand">
+          〇〇美容サロンサンプル
+          <small>HAIR &amp; BEAUTY</small>
+        </div>
+        <nav class="footer-nav" aria-label="フッターナビゲーション">
+          <a href="#concept">私たちの考え</a>
+          <a href="#menu">メニュー</a>
+          <a href="#stylist">スタイリスト</a>
+          <a href="#access">店舗案内</a>
+          <a href="#contact">ご予約</a>
+        </nav>
+      </div>
+      <p class="demo-disclaimer">
+        ※本ページは制作サンプル（デモ）です。掲載の内容・数値は仮のもので、写真はイメージです。
+        実制作では、店舗情報・料金・営業時間・ご提供写真に合わせて編集します。
+      </p>
+    </div>
+  </footer>
+
+  <div class="sticky-cta" aria-label="予約への固定導線">
+    <a class="button button--ghost" href="tel:0480000000">
+      電話する
+    </a>
+    <a class="button" href="#contact">
+      来店予約
+      <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <path d="M5 12h14M14 7l5 5-5 5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </a>
+  </div>
+
+  <script>
+    const menuButton = document.querySelector(".menu-button");
+    const mobileNav = document.querySelector(".mobile-nav");
+    const mobileNavClose = document.querySelector(".mobile-nav-close");
+    const mobileLinks = document.querySelectorAll(".mobile-nav a");
+
+    function openMenu() {
+      mobileNav.classList.add("is-open");
+      document.body.classList.add("menu-open");
+      menuButton.setAttribute("aria-expanded", "true");
+    }
+
+    function closeMenu() {
+      mobileNav.classList.remove("is-open");
+      document.body.classList.remove("menu-open");
+      menuButton.setAttribute("aria-expanded", "false");
+    }
+
+    menuButton.addEventListener("click", openMenu);
+    mobileNavClose.addEventListener("click", closeMenu);
+    mobileLinks.forEach((link) => link.addEventListener("click", closeMenu));
+
+    document.querySelectorAll(".faq-question").forEach((button) => {
+      button.addEventListener("click", () => {
+        const item = button.closest(".faq-item");
+        const answer = item.querySelector(".faq-answer");
+        const isOpen = item.classList.toggle("is-open");
+        button.setAttribute("aria-expanded", String(isOpen));
+        answer.style.maxHeight = isOpen ? `${answer.scrollHeight}px` : "0px";
+      });
+    });
+
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    if (reducedMotion) {
+      document.querySelectorAll(".reveal").forEach((element) => {
+        element.classList.add("is-visible");
+      });
+    } else {
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("is-visible");
+              observer.unobserve(entry.target);
+            }
+          });
+        },
+        {
+          threshold: 0.12
+        }
+      );
+
+      document.querySelectorAll(".reveal").forEach((element) => {
+        observer.observe(element);
+      });
+    }
+  </script>
+</body>
+</html>
