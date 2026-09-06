@@ -33,19 +33,27 @@
     ctx.globalCompositeOperation = 'source-over';
     const glowAlpha = Math.max(0, 1 - (now - lastMove) / 2600);
     if (glow && mouse && glowAlpha > 0) {
-      const follow = 1 - Math.exp(-dt / .85);
+      const follow = 1 - Math.exp(-dt / .95);
       glow.x += (mouse.x - glow.x) * follow; glow.y += (mouse.y - glow.y) * follow;
-      const gradient = ctx.createRadialGradient(glow.x, glow.y, 0, glow.x, glow.y, 150);
-      gradient.addColorStop(0, `rgba(67,132,239,${.12 * glowAlpha})`);
-      gradient.addColorStop(1, 'rgba(67,132,239,0)');
-      ctx.fillStyle = gradient; ctx.fillRect(glow.x - 150, glow.y - 150, 300, 300);
+      const gradient = ctx.createRadialGradient(glow.x, glow.y, 0, glow.x, glow.y, 220);
+      gradient.addColorStop(0, `rgba(105,156,245,${.24 * glowAlpha})`);
+      gradient.addColorStop(.35, `rgba(105,156,245,${.10 * glowAlpha})`);
+      gradient.addColorStop(1, 'rgba(105,156,245,0)');
+      ctx.fillStyle = gradient; ctx.fillRect(glow.x - 220, glow.y - 220, 440, 440);
     }
     points = points.filter(point => now - point.birth < 3800);
     points.forEach(point => {
       const age = (now - point.birth) / 1000;
       const progress = age / 3.8;
-      const alpha = Math.min(age / .35, 1) * Math.pow(1 - progress, 1.2) * .38;
+      const fade = Math.min(age / .35, 1) * Math.pow(1 - progress, 1.2);
+      const alpha = fade * .14;
       const radius = 43 * (1 + progress * .12);
+      // Soft circular light is the main trail; geometry is only a faint accent.
+      const halo = ctx.createRadialGradient(point.x, point.y, 0, point.x, point.y, radius * 2);
+      halo.addColorStop(0, `rgba(118,172,255,${fade * .09})`);
+      halo.addColorStop(1, 'rgba(118,172,255,0)');
+      ctx.fillStyle = halo;
+      ctx.fillRect(point.x - radius * 2, point.y - radius * 2, radius * 4, radius * 4);
       // Rounded hexagon: quadratic corners, no spinning or sharp spikes.
       const vertices = Array.from({length: 6}, (_, i) => {
         const angle = i * Math.PI / 3 - Math.PI / 6;
