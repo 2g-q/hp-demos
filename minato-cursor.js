@@ -22,8 +22,8 @@
       canvas = document.createElement('canvas'); ctx = canvas.getContext('2d');
       if (!ctx) { canvas = null; return; }
       canvas.id = 'cursor-field'; canvas.setAttribute('aria-hidden', 'true');
-      // Match the original lightening blend instead of painting blue spots.
-      canvas.style.mixBlendMode = 'screen'; canvas.style.opacity = '.62';
+      // Preserve blue contrast on white; screen blending washes it out.
+      canvas.style.mixBlendMode = 'normal'; canvas.style.opacity = '1';
       document.body.appendChild(canvas); resize();
     }
   }
@@ -32,17 +32,17 @@
     if (!ctx || document.hidden || !media.matches) return;
     const dt = Math.min((now - previous) / 1000, .05); previous = now;
     ctx.clearRect(0, 0, innerWidth, innerHeight);
-    ctx.globalCompositeOperation = 'lighter';
+    ctx.globalCompositeOperation = 'source-over';
     // Hold the light briefly, then fade over the original 4.2-second lifetime.
     const glowAlpha = Math.max(0, 1 - Math.max(0, now - lastMove - 1200) / 4200);
     if (glow && mouse && glowAlpha > 0) {
       const follow = 1 - Math.exp(-dt / .95);
       glow.x += (mouse.x - glow.x) * follow; glow.y += (mouse.y - glow.y) * follow;
-      const gradient = ctx.createRadialGradient(glow.x, glow.y, 0, glow.x, glow.y, 110);
-      gradient.addColorStop(0, `rgba(105,156,245,${.12 * glowAlpha})`);
-      gradient.addColorStop(.35, `rgba(105,156,245,${.04 * glowAlpha})`);
-      gradient.addColorStop(1, 'rgba(105,156,245,0)');
-      ctx.fillStyle = gradient; ctx.fillRect(glow.x - 110, glow.y - 110, 220, 220);
+      const gradient = ctx.createRadialGradient(glow.x, glow.y, 0, glow.x, glow.y, 60);
+      gradient.addColorStop(0, `rgba(65,125,235,${.10 * glowAlpha})`);
+      gradient.addColorStop(.35, `rgba(80,145,245,${.04 * glowAlpha})`);
+      gradient.addColorStop(1, 'rgba(80,145,245,0)');
+      ctx.fillStyle = gradient; ctx.fillRect(glow.x - 60, glow.y - 60, 120, 120);
     }
     points = points.filter(point => now - point.birth < 5400);
     const accents = points.filter(point => point.accent).slice(-3);
@@ -50,11 +50,16 @@
       const age = (now - point.birth) / 1000;
       const fade = Math.max(0, 1 - Math.max(0, age - 1.2) / 4.2);
       const radius = point.size * fade;
-      // Restore the original small luminous circles, not large hollow rings.
-      ctx.fillStyle = `rgba(170,205,255,${fade * .14})`;
-      ctx.beginPath(); ctx.arc(point.x, point.y, radius, 0, Math.PI * 2); ctx.fill();
+      // A small blue core remains visible on pale panels; its edge diffuses.
+      const light = ctx.createRadialGradient(point.x, point.y, 0, point.x, point.y, radius * 1.5);
+      light.addColorStop(0, `rgba(35,100,220,${fade * .48})`);
+      light.addColorStop(.25, `rgba(50,120,235,${fade * .38})`);
+      light.addColorStop(.6, `rgba(90,165,250,${fade * .16})`);
+      light.addColorStop(1, 'rgba(100,175,255,0)');
+      ctx.fillStyle = light;
+      ctx.beginPath(); ctx.arc(point.x, point.y, radius * 1.5, 0, Math.PI * 2); ctx.fill();
       if (!accents.includes(point)) return;
-      const alpha = fade * .06;
+      const alpha = fade * .12;
       // Rounded hexagon: quadratic corners, no spinning or sharp spikes.
       const vertices = Array.from({length: 6}, (_, i) => {
         const angle = i * Math.PI / 3 - Math.PI / 6;
