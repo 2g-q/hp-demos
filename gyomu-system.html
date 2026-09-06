@@ -437,7 +437,9 @@ footer b{color:#0D0D0D; font-weight:600}
 #pfnav a.back:hover{background:rgba(13,13,13,.8)}
 @media(max-width:767px){#pfnav .brand{display:none}
   #pfnav .in{padding:0 20px;height:54px;justify-content:flex-start;gap:14px}
-  #pfnav .links{gap:12px;width:100%}
+  #pfnav .links{gap:4px 12px;width:100%;flex-wrap:wrap}
+  #pfnav .in{height:auto;min-height:54px;padding-block:8px}
+  #pfnav .links a{padding-block:5px}
   #pfnav a.back{display:none}
   #pfnav .links a{font-size:12px}}
 @media(max-width:1000px){#pfnav .brand{display:none}}
@@ -448,11 +450,12 @@ footer b{color:#0D0D0D; font-weight:600}
 <a class="brand" href="./index.html">ミナト AI・IT ラボ</a>
 <div class="links">
 <a href="./index.html" data-k="index">サービス</a>
-<a href="./pricing.html" data-k="pricing">料金</a>
 <a href="./cases.html" data-k="cases">事例</a>
-<a href="./tools.html" data-k="tools">ツール</a>
-<a href="./designs.html" data-k="designs">デザイン</a>
-<a class="back" href="./tools.html">← ツール一覧へ</a>
+<a href="./tools.html" data-k="tools">業務改善</a>
+<a href="./designs.html" data-k="designs">LP・HP</a>
+<a href="./sns-support.html" data-k="sns-support">SNS支援</a>
+<a href="./pricing.html" data-k="pricing">料金</a>
+<a class="back" href="./tools.html">← 業務改善へ</a>
 </div>
 </div>
 <script>(function(){var f=(location.pathname.split("/").pop()||"index.html").replace(".html","");
