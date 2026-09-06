@@ -1,9 +1,8 @@
 (() => {
   'use strict';
-  // Fixed decorative snippets only. Never read input values or send pointer data.
+  // Decorative geometry only. Never read input values or send pointer data.
   const media = matchMedia('(hover:hover) and (pointer:fine) and (prefers-reduced-motion:no-preference)');
-  const snippets = ['const task = {}', 'await run()', 'data.map()', '<workflow />', '// human review', '[ input, output ]', 'check(data)', 'return result'];
-  let canvas, ctx, frame = 0, previous = 0, lastMove = 0, lastSpawn = 0, index = 0;
+  let canvas, ctx, frame = 0, previous = 0, lastMove = 0, lastSpawn = 0;
   let points = [], mouse = null, glow = null, origin = null;
   function clear() {
     if (frame) cancelAnimationFrame(frame);
@@ -42,12 +41,23 @@
       ctx.fillStyle = gradient; ctx.fillRect(glow.x - 150, glow.y - 150, 300, 300);
     }
     points = points.filter(point => now - point.birth < 3800);
-    ctx.font = '12px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace'; ctx.textBaseline = 'middle';
     points.forEach(point => {
       const age = (now - point.birth) / 1000;
-      const alpha = Math.min(age / .35, 1) * Math.pow(Math.max(0, 1 - age / 3.8), 1.2) * .4;
-      ctx.fillStyle = `rgba(36,94,170,${alpha})`;
-      ctx.fillText(point.text, point.x, point.y - age * 3);
+      const progress = age / 3.8;
+      const alpha = Math.min(age / .35, 1) * Math.pow(1 - progress, 1.2) * .38;
+      const radius = 43 * (1 + progress * .12);
+      // Rounded hexagon: quadratic corners, no spinning or sharp spikes.
+      const vertices = Array.from({length: 6}, (_, i) => {
+        const angle = i * Math.PI / 3 - Math.PI / 6;
+        return {x: point.x + Math.cos(angle) * radius, y: point.y + Math.sin(angle) * radius};
+      });
+      ctx.beginPath();
+      ctx.moveTo((vertices[5].x + vertices[0].x) / 2, (vertices[5].y + vertices[0].y) / 2);
+      vertices.forEach((vertex, i) => {
+        const next = vertices[(i + 1) % 6];
+        ctx.quadraticCurveTo(vertex.x, vertex.y, (vertex.x + next.x) / 2, (vertex.y + next.y) / 2);
+      });
+      ctx.closePath(); ctx.lineWidth = 1; ctx.strokeStyle = `rgba(45,112,213,${alpha})`; ctx.stroke();
     });
     if (points.length || glowAlpha > 0) frame = requestAnimationFrame(draw);
   }
@@ -60,13 +70,9 @@
     if (!glow) glow = {...mouse};
     lastMove = now;
     // Bound both emission rate and density, independent of event/frame frequency.
-    if (now - lastSpawn > 230 && distance > 32) {
-      const x = Math.min(Math.max(12, mouse.x + 24), Math.max(12, innerWidth - 175));
-      const y = Math.min(Math.max(20, mouse.y + 30), innerHeight - 20);
-      if (!points.some(point => Math.abs(point.x - x) < 155 && Math.abs(point.y - y) < 26)) {
-        points.push({x, y, text: snippets[index++ % snippets.length], birth: now});
-        if (points.length > 8) points.shift(); lastSpawn = now; origin = {...mouse};
-      }
+    if (now - lastSpawn > 280 && distance > 38) {
+      points.push({x: mouse.x, y: mouse.y, birth: now});
+      if (points.length > 3) points.shift(); lastSpawn = now; origin = {...mouse};
     }
     if (!frame) { previous = now; frame = requestAnimationFrame(draw); }
   }, {passive: true});
