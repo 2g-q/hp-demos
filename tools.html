@@ -142,6 +142,7 @@ html{scroll-behavior:auto}
 @media (max-width:767px){.works-grid{grid-template-columns:1fr;gap:24px}}
 </style>
 <link rel="stylesheet" href="./minato-shell.css?v=11">
+<link rel="stylesheet" href="./tools-thumbnails.css?v=1">
 </head>
 <body>
 <div class="glow-top" aria-hidden="true"></div>
@@ -180,19 +181,48 @@ html{scroll-behavior:auto}
 </div>
 <div class="works-grid sec-body">
 <a class="card work-card" href="./workbench.html#data" target="_blank" rel="noopener">
-<div class="work-preview" aria-hidden="true"><span>表記のばらつき・重複</span><b>元データ → 整理 → 確認</b><small>変更した箇所を見比べる</small></div>
+<div class="workflow-thumb" aria-hidden="true">
+<div class="wf-top"><span class="wf-appmark"></span><strong>データ整形</strong><span class="wf-sample">SAMPLE</span></div>
+<div class="wf-stage wf-compare">
+<div class="wf-pane"><div class="wf-pane-title">元のデータ<span class="wf-dot amber"></span></div><div class="wf-data-row"><span class="wf-cell-mark">A</span><span>ｻﾝﾌﾟﾙ商店</span></div><div class="wf-data-row wf-row-warn"><span class="wf-cell-mark">A</span><span>サンプル商店</span></div><div class="wf-data-row"><span class="wf-cell-mark">B</span><span>テスト工房</span></div></div>
+<div class="wf-pane wf-pane-result"><div class="wf-pane-title">整理後<span class="wf-dot"></span></div><div class="wf-data-row"><span class="wf-check">✓</span><span>サンプル商店</span></div><div class="wf-data-row"><span class="wf-check">✓</span><span>テスト工房</span></div><div class="wf-inline-note">表記と重複を確認</div></div>
+</div>
+<div class="wf-foot"><span>DATA</span><span>変更箇所を見比べる</span></div>
+</div>
 <div class="work-body"><p class="work-meta caption">データ整形 / 架空データのデモ</p><h3>CSVを整えて 確認する</h3><p class="desc">表記のばらつきや重複を見つけ、元のデータと比べながら確認できます。整理した結果はCSVで保存できます。</p><span class="card-link">操作してみる</span></div>
 </a>
 <a class="card work-card" href="./workbench.html#shipping" target="_blank" rel="noopener">
-<div class="work-preview" aria-hidden="true"><span>注文・在庫・住所</span><b>注文 → チェック → 出荷用CSV</b><small>確認が必要な注文を分ける</small></div>
+<div class="workflow-thumb" aria-hidden="true">
+<div class="wf-top"><span class="wf-appmark"></span><strong>出荷チェック</strong><span class="wf-sample">SAMPLE</span></div>
+<div class="wf-stage wf-shipping">
+<div class="wf-pane"><div class="wf-pane-title">注文一覧<span class="wf-dot"></span></div><div class="wf-order"><span class="wf-box-icon"></span><div><b>注文 A</b><span class="wf-lines"></span></div><span class="wf-tag">出荷可</span></div><div class="wf-order"><span class="wf-box-icon"></span><div><b>注文 B</b><span class="wf-lines short"></span></div><span class="wf-tag amber">要確認</span></div></div>
+<div class="wf-checklist"><div class="wf-check-item"><span class="wf-check">✓</span>在庫</div><div class="wf-check-item"><span class="wf-check">✓</span>住所</div><div class="wf-export">CSV<span>↓</span></div></div>
+</div>
+<div class="wf-foot"><span>SHIPPING</span><span>出荷前に不備を確認</span></div>
+</div>
 <div class="work-body"><p class="work-meta caption">受注・出荷 / 架空データのデモ</p><h3>出荷前の確認をまとめる</h3><p class="desc">在庫や住所の不備を調べ、出荷できる注文と確認待ちを分けます。実際の配送依頼は行いません。</p><span class="card-link">操作してみる</span></div>
 </a>
 <a class="card work-card" href="./workbench.html#review" target="_blank" rel="noopener">
-<div class="work-preview" aria-hidden="true"><span>問い合わせの対応手順</span><b>下書き → 人が修正 → 承認</b><small>最後の判断は人に残す</small></div>
+<div class="workflow-thumb" aria-hidden="true">
+<div class="wf-top"><span class="wf-appmark"></span><strong>下書きの確認</strong><span class="wf-sample">SAMPLE</span></div>
+<div class="wf-stage wf-review">
+<div class="wf-pane wf-editor"><div class="wf-pane-title">返信の下書き<span class="wf-edit-icon">✎</span></div><div class="wf-text-lines"><i></i><i class="wf-highlight"></i><i></i><i></i></div><div class="wf-editor-note"><span class="wf-dot amber"></span>人が内容を修正</div></div>
+<div class="wf-review-steps"><div class="wf-review-step"><span class="wf-step-icon">✓</span><span>下書き</span></div><div class="wf-review-step active"><span class="wf-step-icon">✎</span><span>確認中</span></div><div class="wf-review-step"><span class="wf-step-icon wf-step-empty"></span><span>承認</span></div></div>
+</div>
+<div class="wf-foot"><span>REVIEW</span><span>判断は人の手で</span></div>
+</div>
 <div class="work-body"><p class="work-meta caption">承認フロー / 架空データのデモ</p><h3>下書きを人が確認する</h3><p class="desc">問い合わせへの下書きを編集し、承認するまでの流れを試せます。AIや送信先には接続しない動作見本です。</p><span class="card-link">操作してみる</span></div>
 </a>
 <a class="card work-card" href="./api-link.html" target="_blank" rel="noopener">
-<div class="work-img"><img src="./pf/sample5-api.jpg" alt="サービス同士をつなぐ仕組みの図"></div>
+<div class="workflow-thumb" aria-hidden="true">
+<div class="wf-top"><span class="wf-appmark"></span><strong>サービス連携</strong><span class="wf-sample">SAMPLE</span></div>
+<div class="wf-stage wf-api">
+<div class="wf-service"><span class="wf-service-icon"><svg viewBox="0 0 32 32"><path d="M6 12h20v15H6zM4 5h24l-2 7H6zM12 27v-9h8v9M11 5v7m10-7v7"/></svg></span><b>注文</b><span class="wf-lines"></span></div>
+<div class="wf-connection"><span class="wf-wire"></span><div class="wf-api-hub">API</div><span class="wf-wire"></span><small>データ変換</small></div>
+<div class="wf-service"><span class="wf-service-icon"><svg viewBox="0 0 32 32"><path d="M8 4h11l6 6v18H8zM19 4v7h6M12 16h9m-9 5h9"/></svg></span><b>送り状</b><span class="wf-lines"></span></div>
+</div>
+<div class="wf-foot"><span>CONNECT</span><span>連携の流れを図解</span></div>
+</div>
 <div class="work-body">
 <p class="work-meta caption muted-caption"><span>API連携</span><span>自動処理</span></p>
 <h3>サービス同士をつなぐ</h3>
@@ -201,7 +231,14 @@ html{scroll-behavior:auto}
 </div>
 </a>
 <a class="card work-card" href="./gyomu-system.html" target="_blank" rel="noopener">
-<div class="work-img"><img src="./pf/gyomu-system.jpg" alt="販売・購買・債権管理システムのデモ画面"></div>
+<div class="workflow-thumb" aria-hidden="true">
+<div class="wf-top"><span class="wf-appmark"></span><strong>販売・購買管理</strong><span class="wf-sample">SAMPLE</span></div>
+<div class="wf-stage wf-business">
+<div class="wf-business-nav"><span class="selected">販売</span><span>購買</span><span>入金</span></div>
+<div class="wf-pane wf-ledger"><div class="wf-ledger-head"><span>取引</span><span>進行状況</span></div><div class="wf-ledger-row"><span>見積書</span><div class="wf-progress"><i></i><i></i><i class="pending"></i></div><span class="wf-tag">作成済</span></div><div class="wf-ledger-row"><span>発注書</span><div class="wf-progress"><i></i><i class="pending"></i><i class="pending"></i></div><span class="wf-tag amber">確認中</span></div><div class="wf-ledger-row"><span>請求書</span><div class="wf-progress"><i></i><i></i><i></i></div><span class="wf-tag">入金済</span></div></div>
+</div>
+<div class="wf-foot"><span>BUSINESS</span><span>取引の状況をひと目で</span></div>
+</div>
 <div class="work-body">
 <p class="work-meta caption muted-caption"><span>業務システム</span></p>
 <h3>販売・購買・債権管理</h3>
@@ -210,7 +247,14 @@ html{scroll-behavior:auto}
 </div>
 </a>
 <a class="card work-card" href="./automation.html" target="_blank" rel="noopener">
-<div class="work-img"><img src="./pf/automation.jpg" alt="自動化・データ処理デモの実画面"></div>
+<div class="workflow-thumb" aria-hidden="true">
+<div class="wf-top"><span class="wf-appmark"></span><strong>自動処理の流れ</strong><span class="wf-sample">SAMPLE</span></div>
+<div class="wf-stage wf-automation">
+<div class="wf-trigger"><span class="wf-clock"><svg viewBox="0 0 32 32"><circle cx="16" cy="16" r="11"/><path d="M16 9v8h6"/></svg></span><b>定期実行</b><span class="wf-trigger-ticks"><i></i><i></i><i></i><i></i></span></div>
+<div class="wf-pane wf-runlog"><div class="wf-run-row"><span class="wf-check">✓</span><b>取り込み</b><span class="wf-lines"></span></div><div class="wf-run-row"><span class="wf-check">✓</span><b>整形・集計</b><span class="wf-lines short"></span></div><div class="wf-run-row"><span class="wf-check">✓</span><b>結果を保存</b><span class="wf-lines"></span></div></div>
+</div>
+<div class="wf-foot"><span>AUTOMATION</span><span>毎日の作業をつなぐ</span></div>
+</div>
 <div class="work-body">
 <p class="work-meta caption muted-caption"><span>自動処理</span><span>データ整理</span></p>
 <h3>自動化・データ処理</h3>
@@ -219,7 +263,14 @@ html{scroll-behavior:auto}
 </div>
 </a>
 <a class="card work-card" href="./dashboard.html" target="_blank" rel="noopener">
-<div class="work-img"><img src="./pf/dashboard.jpg" alt="EC売上ダッシュボードの実画面"></div>
+<div class="workflow-thumb" aria-hidden="true">
+<div class="wf-top"><span class="wf-appmark"></span><strong>売上ダッシュボード</strong><span class="wf-sample">SAMPLE</span></div>
+<div class="wf-stage wf-dashboard">
+<div class="wf-pane wf-chart"><div class="wf-pane-title">売上の推移<span class="wf-dot"></span></div><svg viewBox="0 0 220 100" preserveAspectRatio="none"><defs><linearGradient id="wf-chart-fill" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5489f4" stop-opacity=".3"/><stop offset="1" stop-color="#5489f4" stop-opacity="0"/></linearGradient></defs><path class="wf-gridline" d="M0 20h220M0 50h220M0 80h220"/><path fill="url(#wf-chart-fill)" d="M0 72 35 52 72 61 110 30 148 44 185 20 220 35V100H0Z"/><path class="wf-chart-line" d="M0 72 35 52 72 61 110 30 148 44 185 20 220 35"/><circle cx="110" cy="30" r="4" fill="#fff" stroke="#3d72e3" stroke-width="3"/></svg></div>
+<div class="wf-pane wf-channel-chart"><div class="wf-pane-title">販売先別</div><div class="wf-bar-row"><span>A</span><i style="--bar:78%"></i></div><div class="wf-bar-row"><span>B</span><i style="--bar:52%"></i></div><div class="wf-bar-row"><span>C</span><i style="--bar:66%"></i></div></div>
+</div>
+<div class="wf-foot"><span>ANALYTICS</span><span>数字の動きを見渡す</span></div>
+</div>
 <div class="work-body">
 <p class="work-meta caption muted-caption"><span>集計</span><span>可視化</span></p>
 <h3>売上ダッシュボード</h3>
