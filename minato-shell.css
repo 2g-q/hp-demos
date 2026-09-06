@@ -19,7 +19,7 @@ body::after{content:"";position:absolute;inset:0 0 auto;height:760px;z-index:-2;
 .btn-ghost{background:rgba(255,255,255,.58);border:1px solid rgba(255,255,255,.72);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
 #office{width:min(980px,calc(100vw - 40px));margin-top:68px;border-radius:28px;border:10px solid rgba(17,17,20,.94);box-shadow:0 34px 90px rgba(35,43,100,.24),0 0 0 1px rgba(255,255,255,.35)}
 .office-note{margin-top:24px}.sec{margin-top:0;padding:128px 0}
-#cursor-field{position:fixed;inset:0;z-index:1;width:100%;height:100%;pointer-events:none;opacity:.62;mix-blend-mode:screen}
+#cursor-field{position:fixed;inset:0;z-index:1;width:100%;height:100%;pointer-events:none;opacity:1;mix-blend-mode:normal}
 .sec:nth-of-type(even){background:rgba(255,255,255,.58);border-block:1px solid rgba(255,255,255,.72)}
 .sec-head{text-align:left;max-width:1128px}.sec-head h2{max-width:880px;font-size:clamp(1.8rem,3vw,2.75rem);line-height:1.15;letter-spacing:-.035em}.sec-head .nw{display:inline;white-space:normal}
 .sec-head .lead{max-width:680px;margin-top:28px}.sec-body{margin-top:52px}
