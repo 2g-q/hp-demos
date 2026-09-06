@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="表データの整形、出荷前の確認、下書きの承認。架空データで3つの業務フローを操作できます。">
+  <title>業務改善の操作サンプル｜ミナト AI・IT ラボ</title>
+  <link rel="icon" href="minato-mark.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="workbench.css">
+  <script src="workbench.js" defer></script>
+</head>
+<body>
+  <a class="skip" href="#main">本文へ移動</a>
+  <header class="site-header"><a href="tools.html" class="back">← 業務改善へ戻る</a><span class="sample-tag"><span aria-hidden="true">●</span> 架空データの操作サンプル</span></header>
+  <main id="main" class="wrap">
+    <section class="intro" aria-labelledby="page-title">
+      <div><p class="eyebrow">MINATO LAB / WORKBENCH</p><h1 id="page-title">手作業が減る流れを<br>ここで試してみる</h1><p class="lead">整える、確かめる、人が決める。<br>日々の業務を想定した、3つの小さな操作サンプルです。</p></div>
+      <aside class="local-note"><span class="note-icon" aria-hidden="true">↳</span><strong>この画面の中だけで動きます</strong><p>入力は保存されず、外部へ送信されません。ページを閉じると初期状態に戻ります。</p><span>実際の個人情報は入力せず、架空の内容でお試しください。</span></aside>
+    </section>
+    <div class="tabs" role="tablist" aria-label="業務サンプル">
+      <button id="tab-data" role="tab" aria-controls="panel-data" aria-selected="true" tabindex="0" data-tab="data"><span>Excel / CSV 整形<small>表のばらつきを整える</small></span></button>
+      <button id="tab-shipping" role="tab" aria-controls="panel-shipping" aria-selected="false" tabindex="-1" data-tab="shipping"><span>EC 出荷チェック<small>出荷前に不備を見つける</small></span></button>
+      <button id="tab-review" role="tab" aria-controls="panel-review" aria-selected="false" tabindex="-1" data-tab="review"><span>AI 下書きの確認<small>人の確認を工程に入れる</small></span></button>
+    </div>
+    <section id="panel-data" role="tabpanel" aria-labelledby="tab-data" tabindex="0" class="panel">
+      <div class="panel-head"><div><p class="eyebrow">DATA CLEANUP</p><h2>表記をそろえ 空欄を見つける</h2><p>セルを書き換えてから整形できます。Excel由来の表を想定したサンプルです。</p></div><span class="chip">6行の架空売上データ</span></div>
+      <ol class="steps" aria-label="処理の流れ"><li>入力を確認</li><li>整形・検査</li><li>CSVで取り出す</li></ol>
+      <div class="card"><div class="card-head"><h3>処理前 <span class="subtle">編集できます</span></h3><button class="text-button" id="data-reset">初期状態に戻す</button></div><div class="table-scroll" role="region" aria-label="編集できる売上表。横にスクロールできます" tabindex="0"><table><thead><tr><th scope="col">行</th><th scope="col">売上ID</th><th scope="col">商品名</th><th scope="col">数量</th><th scope="col">単価（円）</th></tr></thead><tbody id="data-input"></tbody></table></div><div class="card-bottom"><p>前後の空白・全角英数字を整えます。全項目が同じ行だけ重複として除きます。</p><button class="primary" id="data-run">データを整形する <span aria-hidden="true">→</span></button></div></div>
+      <div id="data-empty" class="empty-state"><span aria-hidden="true">≡</span><p>整形すると、処理後の表と確認が必要な行がここに表示されます。</p></div>
+      <div id="data-result" hidden><div id="data-metrics" class="metrics"></div><div class="card"><div class="card-head"><h3>処理後</h3><button id="data-download" class="secondary">取込可能な行をCSVで保存</button></div><div class="table-scroll" role="region" aria-label="整形後の売上表。横にスクロールできます" tabindex="0"><table><thead><tr><th scope="col">元の行</th><th scope="col">売上ID</th><th scope="col">商品名</th><th scope="col">数量</th><th scope="col">単価</th><th scope="col">判定</th></tr></thead><tbody id="data-output"></tbody></table></div></div><div class="issue-card"><h3>エラー・確認事項</h3><ul id="data-issues"></ul><p class="hint">要確認の行はCSVに含めません。処理前のセルを直し、もう一度整形できます。</p></div></div>
+    </section>
+    <section id="panel-shipping" role="tabpanel" aria-labelledby="tab-shipping" tabindex="0" class="panel" hidden>
+      <div class="panel-head"><div><p class="eyebrow">SHIPPING CHECK</p><h2>出荷できる注文を分ける</h2><p>在庫数と住所を検査し、出荷可能な注文を振り分けます。</p></div><span class="chip">配送サービスへの連携なし</span></div>
+      <ol class="steps" aria-label="処理の流れ"><li>注文・在庫を確認</li><li>注文順に仮引当</li><li>送り状用CSV</li></ol>
+      <div class="inventory"><strong>架空の在庫</strong><label>サンプルマグ <input id="stock-mug" type="number" min="0" max="9999" step="1" value="4" aria-label="サンプルマグの在庫数"> 個</label><label>サンプルノート <input id="stock-note" type="number" min="0" max="9999" step="1" value="8" aria-label="サンプルノートの在庫数"> 冊</label></div>
+      <div class="card"><div class="card-head"><h3>架空の注文 <span class="subtle">住所を編集できます</span></h3><button class="text-button" id="shipping-reset">初期状態に戻す</button></div><div class="table-scroll" role="region" aria-label="注文表。横にスクロールできます" tabindex="0"><table><thead><tr><th scope="col">注文番号</th><th scope="col">宛名</th><th scope="col">商品 / 数量</th><th scope="col">住所（架空）</th></tr></thead><tbody id="shipping-input"></tbody></table></div><div class="card-bottom"><p>住所の空欄と番地の有無を簡易検査します。住所の実在は確認しません。</p><button id="shipping-run" class="primary">出荷前チェック <span aria-hidden="true">→</span></button></div></div>
+      <div id="shipping-empty" class="empty-state"><span aria-hidden="true">⇄</span><p>在庫不足と住所の不備を見つけ、出荷できる注文だけを取り出します。</p></div>
+      <div id="shipping-result" hidden><div id="shipping-metrics" class="metrics"></div><div class="card"><div class="card-head"><h3>振り分け結果</h3><button id="shipping-download" class="secondary">送り状用CSVを保存</button></div><div class="table-scroll" role="region" aria-label="出荷チェックの結果。横にスクロールできます" tabindex="0"><table><thead><tr><th scope="col">注文番号</th><th scope="col">判定</th><th scope="col">確認内容</th></tr></thead><tbody id="shipping-output"></tbody></table></div><div class="card-bottom"><p>架空の送り状データのプレビューです。実際の配送会社の取込仕様には対応していません。</p></div></div></div>
+    </section>
+    <section id="panel-review" role="tabpanel" aria-labelledby="tab-review" tabindex="0" class="panel" hidden>
+      <div class="panel-head"><div><p class="eyebrow">HUMAN REVIEW</p><h2>下書きを人が確認する</h2><p>内容の確認と編集を終えてから、承認する流れを試せます。</p></div><span class="chip">AI未接続 / テンプレート生成</span></div>
+      <ol class="steps" aria-label="処理の流れ"><li>問い合わせを選択</li><li>下書きを編集</li><li>人が承認</li></ol>
+      <div class="review-grid"><div class="card inquiry"><p class="eyebrow">SAMPLE INQUIRY</p><h3>架空の社内問い合わせ</h3><label for="inquiry-select">内容を選ぶ</label><select id="inquiry-select"><option value="expense">経費精算の手順</option><option value="account">社内ツールのアカウント申請</option><option value="leave">休暇申請の方法</option></select><blockquote id="inquiry-text"></blockquote><p class="hint">回答のルールも、このデモ用の架空設定です。</p><button class="primary" id="draft-generate">下書きをつくる <span aria-hidden="true">→</span></button><p class="hint">固定テンプレートを使います。AIのAPIには接続しません。</p></div><div class="card editor"><div class="card-head"><h3>確認用の下書き</h3><span id="review-badge" class="badge neutral">未作成</span></div><div class="editor-body"><label for="draft-text">文面を読んで、必要な箇所を編集してください</label><textarea id="draft-text" rows="10" placeholder="左の「下書きをつくる」を押すと表示されます。" disabled></textarea><label class="check-label"><input type="checkbox" id="review-check" disabled><span>内容・条件を確認しました</span></label><div class="review-actions"><button id="draft-approve" class="primary" disabled>この内容を承認する</button><button id="review-reset" class="text-button">初期状態に戻す</button></div><p id="review-message" class="hint">承認しても、メールやチャットは送信されません。</p></div></div></div>
+    </section>
+    <p id="live-status" class="live-status" role="status" aria-live="polite" aria-atomic="true">サンプルを選んで、処理を試せます。</p>
+    <noscript><p class="issue-card">操作サンプルを使うには、ブラウザのJavaScriptを有効にしてください。</p></noscript>
+  </main>
+  <footer class="footer"><span>ミナト AI・IT ラボ</span><p>架空データで一般的な処理を再現した操作サンプルです。納品実績や稼働中の実システムを示すものではありません。</p><a href="tools.html">業務改善へ戻る ↑</a></footer>
+</body>
+</html>

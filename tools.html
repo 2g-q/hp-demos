@@ -141,7 +141,7 @@ html{scroll-behavior:auto}
 @media (max-width:1023px){.works-grid{grid-template-columns:repeat(2,1fr)}}
 @media (max-width:767px){.works-grid{grid-template-columns:1fr;gap:24px}}
 </style>
-<link rel="stylesheet" href="./minato-shell.css?v=10">
+<link rel="stylesheet" href="./minato-shell.css?v=11">
 </head>
 <body>
 <div class="glow-top" aria-hidden="true"></div>
@@ -179,6 +179,18 @@ html{scroll-behavior:auto}
 <p class="lead">手作業を減らす仕組み、数字を見やすくまとめる画面、サービス間の連携を操作できます。実際の案件内容ではなく、対応イメージを確認するためのサンプルです。</p>
 </div>
 <div class="works-grid sec-body">
+<a class="card work-card" href="./workbench.html#data" target="_blank" rel="noopener">
+<div class="work-preview" aria-hidden="true"><span>表記のばらつき・重複</span><b>元データ → 整理 → 確認</b><small>変更した箇所を見比べる</small></div>
+<div class="work-body"><p class="work-meta caption">データ整形 / 架空データのデモ</p><h3>CSVを整えて 確認する</h3><p class="desc">表記のばらつきや重複を見つけ、元のデータと比べながら確認できます。整理した結果はCSVで保存できます。</p><span class="card-link">操作してみる</span></div>
+</a>
+<a class="card work-card" href="./workbench.html#shipping" target="_blank" rel="noopener">
+<div class="work-preview" aria-hidden="true"><span>注文・在庫・住所</span><b>注文 → チェック → 出荷用CSV</b><small>確認が必要な注文を分ける</small></div>
+<div class="work-body"><p class="work-meta caption">受注・出荷 / 架空データのデモ</p><h3>出荷前の確認をまとめる</h3><p class="desc">在庫や住所の不備を調べ、出荷できる注文と確認待ちを分けます。実際の配送依頼は行いません。</p><span class="card-link">操作してみる</span></div>
+</a>
+<a class="card work-card" href="./workbench.html#review" target="_blank" rel="noopener">
+<div class="work-preview" aria-hidden="true"><span>問い合わせの対応手順</span><b>下書き → 人が修正 → 承認</b><small>最後の判断は人に残す</small></div>
+<div class="work-body"><p class="work-meta caption">承認フロー / 架空データのデモ</p><h3>下書きを人が確認する</h3><p class="desc">問い合わせへの下書きを編集し、承認するまでの流れを試せます。AIや送信先には接続しない動作見本です。</p><span class="card-link">操作してみる</span></div>
+</a>
 <a class="card work-card" href="./api-link.html" target="_blank" rel="noopener">
 <div class="work-img"><img src="./pf/sample5-api.jpg" alt="サービス同士をつなぐ仕組みの図"></div>
 <div class="work-body">
@@ -215,15 +227,7 @@ html{scroll-behavior:auto}
 <span class="card-link">サンプルを見る</span>
 </div>
 </a>
-<a class="card work-card" href="./line.html" target="_blank" rel="noopener">
-<div class="work-img"><img src="./pf/line.jpg" alt="LINE公式アカウント構築デモの実画面"></div>
-<div class="work-body">
-<p class="work-meta caption muted-caption"><span>運用設計</span><span>動線設計</span></p>
-<h3>LINE公式アカウント構築</h3>
-<p class="desc">自動応答、配信、予約まで、お客様が迷わず進める流れを設計します。</p>
-<span class="card-link">サンプルを見る</span>
-</div>
-</a>
+
 </div>
 </div>
 </section>
