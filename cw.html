@@ -135,6 +135,17 @@ html{scroll-behavior:auto}
 @media (max-width:1023px){.works-grid{grid-template-columns:repeat(2,1fr)}}
 @media (max-width:767px){.works-grid{grid-template-columns:1fr;gap:24px}}
 .cw-head{padding-top:56px}
+.portfolio-nav{position:sticky;top:0;z-index:10;margin-top:40px;background:rgba(255,255,255,.84);border-block:1px solid var(--hairline);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px)}
+.portfolio-nav .container{display:flex;justify-content:center;gap:24px;overflow-x:auto;scrollbar-width:none}
+.portfolio-nav a{flex:0 0 auto;display:inline-flex;align-items:center;min-height:52px;color:var(--ink-60);font-size:.8125rem;font-weight:500;text-decoration:none}
+.portfolio-nav a:hover{color:var(--black)}
+.service-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.case-result{margin-top:14px;padding-top:14px;border-top:1px solid var(--hairline);font-size:.875rem;line-height:1.5rem;color:var(--ink-60)}
+.plan-name{font-weight:600}
+.plan-price{margin-top:10px;font-size:1.45rem;line-height:1.8rem;font-weight:500}
+.plan-detail{margin-top:14px;color:var(--ink-60)}
+@media (max-width:1023px){.service-grid{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:767px){.portfolio-nav .container{justify-content:flex-start}.service-grid{grid-template-columns:1fr}}
 </style>
 <meta name="robots" content="noindex">
 </head>
@@ -147,15 +158,48 @@ html{scroll-behavior:auto}
 <h1><span class="nw">これまでに</span><span class="nw">作ったもの。</span></h1>
 <p class="lead">実際に開いて動かせます。いずれも架空のサンプルで、会社名・数値は実在のものではありません。</p>
 <canvas id="office" role="img" aria-label="ドット絵のオフィス。AIの担当者が机に向かい、資料を運び、休憩スペースで話している様子が動いている"></canvas>
-<p class="office-note lead">これがうちの働き方です。多くのAIエージェントが同時に手を動かし、最後は人が目で確かめてからお渡しします。</p>
+<p class="office-note lead">AIエージェントが調査や集計、制作を分担します。作業を速めた分、費用を抑えながら、人の確認を通して仕上げます。</p>
 </div>
 </section>
 
-<section class="sec">
+<nav class="portfolio-nav" aria-label="制作例の分類"><div class="container">
+<a href="#services">サービス</a><a href="#cases">事例</a><a href="#tools">業務改善</a><a href="#ai">AI導入</a><a href="#web">LP・HP</a><a href="#sns">SNS支援</a><a href="#pricing">料金</a>
+</div></nav>
+
+<section class="sec" id="services"><div class="container">
+<div class="sec-head"><h2>ご相談いただけること</h2><p class="lead">社内にIT担当者がいない会社の相談先として、整理から制作、運用後の修正までお手伝いします。</p></div>
+<div class="service-grid sec-body">
+<article class="card"><h3>業務改善</h3><p class="body">Excelの修正、集計の自動化、通販や各種サービスの連携を進めます。</p></article>
+<article class="card"><h3>AI導入</h3><p class="body">使うAIの選定から、社内で迷わず使える手順づくりまで支援します。</p></article>
+<article class="card"><h3>LP・HP制作</h3><p class="body">文章、デザイン、実装をまとめ、問い合わせまでの流れを整えます。</p></article>
+<article class="card"><h3>SNS支援</h3><p class="body">LINEやSNSの投稿制作と、確認・公開・振り返りの手順を整えます。</p></article>
+</div></div></section>
+
+<section class="sec" id="cases"><div class="container">
+<div class="sec-head"><h2>実際の支援事例</h2><p class="lead">会社名は掲載せず、ご相談のきっかけと対応内容をまとめています。</p></div>
+<div class="grid3 sec-body">
+<article class="card"><p class="caption muted-caption">食品・飲料メーカー / フル</p><h3 class="case-title">通販サイトの構築と運用</h3><p class="body">サイトの立ち上げから、注文、送り状発行、倉庫への出荷指示までをつなぎました。</p><p class="case-result">現在も商品登録とサイト運用を継続して支援しています。</p></article>
+<article class="card"><p class="caption muted-caption">建設業 / スタンダード</p><h3 class="case-title">Excel修正と社内IT相談</h3><p class="body">動かなくなったExcelを直し、費目ごとの合計が自動で出る集計表に整えました。</p><p class="case-result">現在は社内のIT相談窓口も担当しています。</p></article>
+<article class="card"><p class="caption muted-caption">Webサービス運営 / ライト</p><h3 class="case-title">AIサービスの改修支援</h3><p class="body">複数人で使える構成を整理し、AIの応答が遅くなる条件と重複処理を見直しました。</p><p class="case-result">運用環境と権限、利用上限を含めて改善を進めています。</p></article>
+</div></div></section>
+
+<section class="sec" id="tools">
 <div class="container">
-<div class="sec-head"><h2><span class="nw">ツール群</span></h2>
-<p class="lead">仕事の手を減らすもの、数字を見える形にするもの、サービス同士をつなぐものです。</p></div>
+<div class="sec-head"><h2>操作できる業務ツール</h2>
+<p class="lead">手作業を減らす仕組み、数字を見やすくする画面、サービス間の連携を実際に操作できます。</p></div>
 <div class="works-grid sec-body">
+<a class="card work-card" href="./workbench.html#data" target="_blank" rel="noopener">
+<div class="work-img"><img src="./pf/sample4-cleansing.jpg" alt="CSVの整理と確認の制作例"></div>
+<div class="work-body"><h3>CSVを整えて確認する</h3><p class="desc">表記のばらつきや重複を見つけ、整理前後を見比べられます。</p><span class="card-link">操作してみる</span></div></a>
+<a class="card work-card" href="./workbench.html#shipping" target="_blank" rel="noopener">
+<div class="work-img"><img src="./pf/sample2-gas.jpg" alt="出荷前確認の制作例"></div>
+<div class="work-body"><h3>出荷前の確認をまとめる</h3><p class="desc">在庫や住所の不備を調べ、出荷できる注文と確認待ちを分けます。</p><span class="card-link">操作してみる</span></div></a>
+<a class="card work-card" href="./workbench.html#review" target="_blank" rel="noopener">
+<div class="work-img"><img src="./pf/sample7-classify.jpg" alt="下書き承認フローの制作例"></div>
+<div class="work-body"><h3>下書きを人が確認する</h3><p class="desc">AIの下書きを編集し、人が承認してから使う流れを試せます。</p><span class="card-link">操作してみる</span></div></a>
+<a class="card work-card" href="./ec-support.html" target="_blank" rel="noopener">
+<div class="work-img"><img src="./pf/sample3-pdf.jpg" alt="EC問い合わせ対応の制作例"></div>
+<div class="work-body"><h3>ECの問い合わせ対応</h3><p class="desc">回答資料を整え、返答を確認し、答えがない質問を担当者へ引き継ぎます。</p><span class="card-link">操作してみる</span></div></a>
 <a class="card work-card" href="./cw-api-link.html" target="_blank" rel="noopener">
 <div class="work-img"><img src="./pf/sample5-api.jpg" alt="サービス同士をつなぐの制作例"></div>
 <div class="work-body">
@@ -188,36 +232,32 @@ html{scroll-behavior:auto}
 <span class="card-link">開いて見る</span>
 </div>
 </a>
-<a class="card work-card" href="./cw-line.html" target="_blank" rel="noopener">
-<div class="work-img"><img src="./pf/line.jpg" alt="LINE公式アカウント構築の制作例"></div>
-<div class="work-body">
-<h3>LINE公式アカウント構築</h3>
-<p class="desc">自動応答、配信、予約までの導線を設計します。</p>
-<span class="card-link">開いて見る</span>
-</div>
-</a>
 </div>
 </div>
 </section>
 
-<section class="sec">
+<section class="sec" id="ai"><div class="container">
+<div class="sec-head"><h2>会社の仕事に合うAI導入</h2><p class="lead">ChatGPT・Codex、Claude・Claude Code、Geminiなどから、業務と予算に合う組み合わせを選びます。</p></div>
+<div class="grid3 sec-body">
+<article class="card"><h3>一つの仕事で試す</h3><p class="body">負担が大きい作業を選び、時間と品質がどう変わるか確かめます。</p></article>
+<article class="card"><h3>使い方を社内に残す</h3><p class="body">指示文、操作手順、人が確認する箇所を分かる形にまとめます。</p></article>
+<article class="card"><h3>導入後も直す</h3><p class="body">使いにくい点や新しい業務に合わせ、設定と手順を見直します。</p></article>
+</div></div></section>
+
+<section class="sec" id="web">
 <div class="container">
-<div class="sec-head"><h2><span class="nw">デザイン群</span></h2>
-<p class="lead">サイト、ランディングページ、バナー、ドット絵のアニメーションです。</p></div>
+<div class="sec-head"><h2>LP・HPの制作例</h2>
+<p class="lead">業種と目的に合わせて、情報の順番、見せ方、問い合わせまでの動線を作り分けています。</p></div>
 <div class="works-grid sec-body">
+<a class="card work-card" href="./studio-yohaku.html" target="_blank" rel="noopener"><div class="work-img"><img src="./pf/studio-yohaku.jpg" alt="建築・設計事務所のHP制作例"></div><div class="work-body"><h3>建築・設計事務所のHP</h3><p class="desc">素材と自然光を主役に、設計の考え方から相談まで伝えます。</p><span class="card-link">サイトを見る</span></div></a>
+<a class="card work-card" href="./stay-naginoma.html" target="_blank" rel="noopener"><div class="work-img"><img src="./pf/stay-naginoma.jpg" alt="宿泊施設のHP制作例"></div><div class="work-body"><h3>宿泊施設のHP</h3><p class="desc">その場で過ごすイメージを伝え、客室選びから相談へつなぎます。</p><span class="card-link">サイトを見る</span></div></a>
+<a class="card work-card" href="./relay.html" target="_blank" rel="noopener"><div class="work-img"><img src="./pf/relay.jpg" alt="業務サービスのLP制作例"></div><div class="work-body"><h3>業務サービスのLP</h3><p class="desc">操作できる製品画面で使い方を伝え、導入前の疑問に答えます。</p><span class="card-link">サイトを見る</span></div></a>
+<a class="card work-card" href="./custom/vintage-archive-inbound.html" target="_blank" rel="noopener"><div class="work-img"><img src="./pf/vintage-archive-inbound.jpg" alt="多言語インバウンドサイトの制作例"></div><div class="work-body"><h3>多言語インバウンドサイト</h3><p class="desc">日本語と英語を切り替え、海外のお客様が来店前に知りたい情報をまとめます。</p><span class="card-link">サイトを見る</span></div></a>
 <a class="card work-card" href="./cw-pixel-office.html" target="_blank" rel="noopener">
 <div class="work-img"><img src="./pf/pixel-office.png" alt="動くドット絵のオフィスの制作例"></div>
 <div class="work-body">
 <h3>動くドット絵のオフィス</h3>
 <p class="desc">会社の1日の動きを、色と社員を合わせて作ります。</p>
-<span class="card-link">開いて見る</span>
-</div>
-</a>
-<a class="card work-card" href="./cw-design.html" target="_blank" rel="noopener">
-<div class="work-img"><img src="./pf/design.jpg" alt="バナー・画像制作の制作例"></div>
-<div class="work-body">
-<h3>バナー・画像制作</h3>
-<p class="desc">広告バナーやチラシを、まとめて量産します。</p>
 <span class="card-link">開いて見る</span>
 </div>
 </a>
@@ -261,17 +301,26 @@ html{scroll-behavior:auto}
 <span class="card-link">開いて見る</span>
 </div>
 </a>
-<a class="card work-card" href="./cw-sns.html" target="_blank" rel="noopener">
-<div class="work-img"><img src="./pf/sns.jpg" alt="SNS運用の設計の制作例"></div>
-<div class="work-body">
-<h3>SNS運用の設計</h3>
-<p class="desc">投稿の型と配信の段取りを決めて、続く形にします。</p>
-<span class="card-link">開いて見る</span>
-</div>
-</a>
 </div>
 </div>
 </section>
+
+<section class="sec" id="sns"><div class="container">
+<div class="sec-head"><h2>SNS支援の制作例</h2><p class="lead">LINE、SNS、バナーの順に、発信内容と運用の流れを整えます。</p></div>
+<div class="works-grid sec-body">
+<a class="card work-card" href="./cw-line.html" target="_blank" rel="noopener"><div class="work-img"><img src="./pf/line.jpg" alt="LINE公式アカウント構築の制作例"></div><div class="work-body"><h3>LINE公式アカウント構築</h3><p class="desc">自動応答、配信、予約までの導線を設計します。</p><span class="card-link">開いて見る</span></div></a>
+<a class="card work-card" href="./cw-sns.html" target="_blank" rel="noopener"><div class="work-img"><img src="./pf/sns.jpg" alt="SNS運用設計の制作例"></div><div class="work-body"><h3>SNS運用の設計</h3><p class="desc">投稿の型と配信の段取りを決め、無理なく続く形にします。</p><span class="card-link">開いて見る</span></div></a>
+<a class="card work-card" href="./cw-design.html" target="_blank" rel="noopener"><div class="work-img"><img src="./pf/design.jpg" alt="バナー・画像制作の制作例"></div><div class="work-body"><h3>バナー・画像制作</h3><p class="desc">広告バナーや案内画像を、媒体に合わせて制作します。</p><span class="card-link">開いて見る</span></div></a>
+</div></div></section>
+
+<section class="sec" id="pricing"><div class="container">
+<div class="sec-head"><h2>料金の目安</h2><p class="lead">月額は3つのプランです。単発は作るものと完成条件を確認してからお見積もりします。</p></div>
+<div class="grid3 sec-body">
+<article class="card"><p class="plan-name">ライト</p><p class="plan-price">月額 30,000円</p><p class="plan-detail">作業量は月5時間ほど。打ち合わせは月1回まで。</p></article>
+<article class="card"><p class="plan-name">スタンダード</p><p class="plan-price">月額 50,000円</p><p class="plan-detail">作業量は月10時間ほど。打ち合わせは月2回まで。</p></article>
+<article class="card"><p class="plan-name">フル</p><p class="plan-price">月額 100,000円〜</p><p class="plan-detail">作業量は月20時間ほど。打ち合わせは月4回まで。</p></article>
+</div><p class="office-note caption">料金は税別です。ご契約とお支払いは、現在ご覧いただいているプラットフォーム内で行います。</p>
+</div></section>
 
 <section class="sec">
 <div class="container">
