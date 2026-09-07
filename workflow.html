@@ -35,14 +35,18 @@
 @media(prefers-reduced-motion:reduce){.workspace>.panel,#mobile-feedback{transition:none}}
 .start-flow{list-style:none;display:flex;gap:30px;padding:0;margin:0;flex-wrap:wrap;color:#263853;font-size:13px}.start-flow li{display:flex;align-items:center;gap:8px}.start-flow b{color:#3664b4;font-size:11px}.engagement p{margin:12px 0 0}.bottom>.wrap{flex-wrap:wrap}.bottom .consult-note{color:#bac4d5;font-size:12px;margin-top:8px}.consult-action{flex-shrink:0}.consult-action button{background:white;color:#172236;border:0;border-radius:30px;padding:15px 22px;font-size:13px;font-weight:600}.consult-action button:hover{background:#e7efff}.consult-action #copy-status{max-width:280px;font-size:12px;color:#d4e4ff;margin:8px 0 0}.consult-action #copy-status:empty{display:none}.consult-draft{flex-basis:100%;font-size:12px;border-top:1px solid #354052;padding-top:16px;color:#c6cfdc}.consult-draft summary{cursor:pointer;width:fit-content}.consult-draft label{display:block;margin:14px 0 8px}.consult-draft textarea{display:block;width:100%;max-width:720px;font:inherit;font-size:14px;line-height:1.8;color:#172236;background:#f9fbff;border:1px solid #ccd6e7;border-radius:8px;padding:12px;resize:vertical}.consult-action button:disabled{opacity:.65}@media(max-width:720px){.start-flow{gap:12px;flex-direction:column}.bottom>.wrap{gap:20px}.consult-action{width:100%}.consult-action button{width:100%}.consult-draft{width:100%}}
 .delivery-summary .start-flow li{border:0;padding:0}
+/* A single reading path: value, interactive example, then scope and next step. */
+.intro{display:block}.intro .demo-label{display:inline-flex;margin-top:18px}.usecase{max-width:880px}.simulation-note{margin-top:18px;max-width:880px}
+.process-history{margin:0 24px 22px;border-top:1px solid #dfe5ee;padding-top:14px}.process-history h3{font-size:12px;font-weight:600;color:#536176;margin:0 0 8px}.process-history .log{max-height:100px;overflow:auto;margin:0;font-size:12px}
+.service-summary{max-width:820px;padding:48px 0 38px}.service-summary h2{font-size:28px;font-weight:550;line-height:1.5;margin:0 0 16px}.service-summary h3{font-size:20px;font-weight:550;line-height:1.5;margin:32px 0 12px}.service-summary p{font-size:15px;line-height:1.9;color:#414e61;margin:0 0 12px}.service-summary .service-note{font-size:12px;color:#606b7e;margin-top:14px}.bottom>.wrap{display:block}.bottom h2{font-size:23px;line-height:1.6;margin:0 0 12px}.bottom p{max-width:760px;font-size:14px;line-height:1.9;margin:0;color:#c9d2df}
+@media(max-width:720px){.service-summary{padding:32px 0}.service-summary h2{font-size:23px}.service-summary h3{font-size:19px;margin-top:26px}.service-summary p{font-size:14px}.service-summary .service-note{font-size:12px}.process-history{margin:0 16px 18px}.bottom h2{font-size:20px}.bottom p{font-size:13px}}
 </style></head>
 <body>
 <header class="wrap header"><a class="brand" href="https://2g-q.github.io/hp-demos/">ミナト AI・IT ラボ</a><a class="back" href="https://2g-q.github.io/hp-demos/automation.html">自動化の作例一覧 ↗</a></header>
 <main>
 <section class="hero"><div class="wrap"><div class="eyebrow">実用例 / 見積依頼の受付</div><h1>見積依頼の転記と連絡を、<br><span class="keep">まとめて自動化。</span></h1><div class="intro"><p>「チェア20脚の見積もり」がメールで届いたら。<br>台帳への転記と、営業担当への連絡をまとめます。</p><a class="demo-label" href="#workflow"><span></span>デモを試す ↓</a></div>
 <div class="usecase"><div class="before"><span class="flow-label">導入前の困りごと</span><p><strong>転記に手間。連絡漏れも心配。</strong>メール・管理表・チャットを行き来。</p></div><div class="after"><span class="flow-label">導入後の運用イメージ</span><p><strong>担当者は、見積作成から。</strong>登録・通知は自動。重複や通知失敗も確認。</p></div></div>
-<div class="mechanism"><h2>つなぐ仕組み</h2><ol><li><b>01</b><strong>受付情報</strong><span>内容・番号・分類</span></li><li><b>02</b><strong>台帳へ登録</strong><span>同じ番号は追加しない</span></li><li><b>03</b><strong>担当者へ通知</strong><span>失敗した通知だけ再実行</span></li></ol><p>分類は選択式。AIの自動分類は含みません。</p></div>
-<a class="try-link" href="#workflow">この見積依頼で試す ↓</a><p class="simulation-note">自主制作・架空データ。メール受信後を再現する、外部接続のないデモです。</p></div></section>
+<p class="simulation-note">自主制作・架空データ。メール受信後を再現する、外部接続のないデモです。</p></div></section>
 <div class="wrap">
 <section class="app" id="workflow" aria-label="業務連携の操作デモ">
 <div class="app-top"><span class="window-lights" aria-hidden="true"><i></i><i></i><i></i></span><div class="app-title">受信メール → 受付台帳 → 担当者<small>操作できるデモ / 架空データ</small></div><button type="button" class="quiet" id="reset">最初の状態に戻す ↺</button></div>
@@ -54,17 +58,12 @@
 <section class="panel" id="notify-panel"><h2><span class="mobile-step">03</span>担当者への通知</h2><p class="sub">見積相談は営業、商品相談はサポートへ。</p><div class="notify-area" id="notify-area"><div class="empty"><svg viewBox="0 0 32 32" fill="none" stroke-width="1.5" aria-hidden="true"><path d="M7 23h18l-2-4v-7a7 7 0 0 0-14 0v7l-2 4Z"/><path d="M13 27h6M16 3V1"/></svg><strong>ここに通知が表示されます</strong><p>左の受付を実行すると、<br>担当者向けの内容が届きます。</p></div></div><p class="hint">模擬通知です。外部へは送信しません。</p></section>
 </div>
 <div class="result" role="status" aria-live="polite"><span class="result-symbol" aria-hidden="true">↳</span><div><strong id="result-title">受付を待っています</strong><p id="result-detail">台帳には見本が1件あります。新しい受付がどう追加されるか、お試しください。</p></div></div>
-<details class="log-details"><summary>処理の履歴を見る</summary><ol class="log" id="log"><li>この画面で実行した処理を記録します。</li></ol></details>
+<section class="process-history" aria-label="処理の履歴"><h3>処理の履歴</h3><ol class="log" id="log"><li>この画面で実行した処理を記録します。</li></ol></section>
 </section>
 <p class="scope-note">入力と履歴はこの画面内のみ。再読み込みで消えます。</p>
-<section class="delivery-summary" aria-label="担当範囲と導入準備"><div class="built"><span class="section-label">ラボの担当</span><h2>止まっても、<br>通知だけやり直せる。</h2><p class="section-note">このデモで設計・実装したもの</p><ul><li><strong>登録・担当振り分け</strong><span>受付内容を、そのまま次の担当へ。</span></li><li><strong>重複防止・通知の再実行</strong><span>二重登録せず、止まった処理を再開。</span></li><li><strong>履歴・CSV出力・検証</strong><span>処理結果を人が確認できる形に。</span></li></ul></div><div class="prepare"><span class="section-label">導入の準備</span><h2>まずは、<br>今の作業が分かれば。</h2><p class="section-note">仕様書がなくても、以下をもとに整理します。</p><dl><div><dt>受付の見本</dt><dd>メールやフォームの内容</dd></div><div><dt>今の管理表</dt><dd>残したい項目</dd></div><div><dt>通知のルール</dt><dd>通知先・担当の決め方</dd></div><div><dt>接続できる環境</dt><dd>サービス・管理者の承認</dd></div></dl></div><div class="engagement"><ol class="start-flow"><li><b>01</b>今の作業を共有</li><li><b>02</b>対象範囲・見積をご提案</li><li><b>03</b>設定・動作確認</li></ol><p>ご契約・仮払い後に着手。設定とあわせて、操作・復旧の手順をお渡しします。</p></div></section>
-<details class="applications"><summary>ほかに使える場面：採用応募・定例報告</summary><p>応募者の登録・採用担当への通知、報告の集約・未提出者へのリマインドにも応用できます。これらは別途設計する機能です。</p></details>
-
+<section class="service-summary" aria-label="依頼できること"><h2>つなぐ設定から、<br>復旧の手順まで。</h2><p>受付・転記・担当通知をつなぎ、重複防止と通知の再実行まで設計します。<br>設定とあわせて、操作・復旧の手順をお渡しします。</p><h3>まずは、作業の見本から。</h3><p>メール・管理表・通知先をもとに、構成と概算費用をご提案します。</p><p class="service-note">接続には、ご利用サービスの確認と管理者の承認が必要です。ご契約・仮払い後に着手します。</p><p class="service-note">採用応募の登録や定例報告の集約にも応用できます。内容に合わせて別途設計します。</p></section>
 </div>
-<section class="bottom" id="consultation"><div class="wrap"><div><h2>今の転記作業を、1つ教えてください。</h2><p>使っている道具と困りごとから、対象範囲と概算費用をご提案します。</p><p class="consult-note">応募・ご相談中のメッセージに貼り付けて送れます。</p></div><div class="consult-action"><button type="button" id="copy-consult">相談文をコピー</button><p id="copy-status" role="status" aria-live="polite"></p></div><details class="consult-draft" id="consult-draft"><summary>コピーする相談文を見る・編集する</summary><label for="consult-text">送る前に【 】の中を書き換えてください。</label><textarea id="consult-text" rows="5">受付・転記の自動化を相談したいです。
-使っている道具：【メール・管理表・チャットなど】
-困っている作業：【転記・連絡漏れなど】
-この作業に合う構成と、概算費用を教えていただけますか。</textarea></details></div></section>
+<section class="bottom" id="consultation"><div class="wrap"><h2>「この作業も、<br>自動化できますか？」</h2><p>ご相談中のメッセージで、使っている道具と困りごとをお知らせください。</p></div></section>
 </main><footer class="wrap footer"><span>ミナト AI・IT ラボ</span><span>自主制作サンプル / 実際の導入実績ではありません</span></footer>
 <script>
 'use strict';
@@ -90,6 +89,5 @@ async function retry(id){if(busy)return;const r=records.find(x=>x.id===id);if(!r
 function reset(){if(busy)return;records=[{id:'DEMO-021',category:'quote',message:'打ち合わせ用テーブル2台の見積もりをお願いします。',status:'sent'}];logs=[];choose('normal');$('log').replaceChildren(el('li','','この画面で実行した処理を記録します。'));result('受付を待っています','台帳には見本が1件あります。新しい受付がどう追加されるか、お試しください。');$('mobile-feedback').hidden=true;}
 function csvCell(value){let s=String(value);if(/^[=+@\-\t\r]/.test(s))s="'"+s;return '"'+s.replaceAll('"','""')+'"';}
 document.getElementById('export').addEventListener('click',()=>{const data=[['受付番号','種類','内容','担当','通知結果'],...records.map(r=>[r.id,labels[r.category],r.message,owners[r.category],{sent:'通知済み（模擬）',failed:'通知を要確認',pending:'通知待ち'}[r.status]])];const blob=new Blob(['\ufeff'+data.map(row=>row.map(csvCell).join(',')).join('\r\n')],{type:'text/csv;charset=utf-8'});const url=URL.createObjectURL(blob);const a=el('a');a.href=url;a.download='demo-intake-ledger.csv';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);});
-document.getElementById('copy-consult').addEventListener('click',async()=>{const button=$('copy-consult');button.disabled=true;try{await navigator.clipboard.writeText($('consult-text').value);$('copy-status').textContent='コピーしました。【 】を書き換え、元のメッセージで送ってください。';}catch{$('consult-draft').open=true;$('consult-text').focus({preventScroll:true});$('consult-text').select();$('copy-status').textContent='コピーできませんでした。下の相談文を選択してコピーしてください。';}finally{button.disabled=false;}});
 $('intake').addEventListener('submit',run);document.getElementById('reset').addEventListener('click',reset);document.querySelectorAll('.case').forEach(b=>b.addEventListener('click',()=>choose(b.dataset.case)));reset();
 </script></body></html>
