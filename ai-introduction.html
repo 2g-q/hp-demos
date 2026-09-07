@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>中小企業のAI導入支援｜ミナト AI・IT ラボ</title>
+<meta name="description" content="ChatGPT、Codex、Claude、Claude Codeなどの選定から、業務への組み込み、社内ルール、導入後の改善まで支援します。">
+<link rel="icon" type="image/svg+xml" href="./minato-mark.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="./minato-mark-32.png">
+<link rel="apple-touch-icon" href="./minato-mark-180.png">
+<meta property="og:title" content="中小企業のAI導入支援｜ミナト AI・IT ラボ">
+<meta property="og:description" content="使うツールを選ぶところから、実際の業務に定着するまで支援します。">
+<meta property="og:image" content="https://2g-q.github.io/hp-demos/minato-mark-512.png">
+<meta name="twitter:card" content="summary">
+<style>
+:root{--black:#0d0d0d;--white:#fff;--blue:#2563eb;--ink-60:rgba(13,13,13,.62);--tint-4:rgba(13,13,13,.04);--tint-8:rgba(13,13,13,.08);--tint-12:rgba(13,13,13,.12);--hairline:rgba(13,13,13,.14)}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;background:var(--white)}
+body{position:relative;background:var(--white);color:var(--black);font-family:system-ui,-apple-system,"Helvetica Neue","Hiragino Sans","Hiragino Kaku Gothic ProN","Noto Sans JP","Yu Gothic",Meiryo,sans-serif;line-break:strict;word-break:auto-phrase;-webkit-font-smoothing:antialiased}
+h1,h2,h3,p,li{text-wrap:pretty}h1,h2{text-wrap:balance}
+ul,ol{list-style:none}a:focus-visible,button:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+.container{max-width:1128px;margin-inline:auto;padding-inline:20px}
+h1{font-size:clamp(2rem,4vw,3.6rem);line-height:1.12;letter-spacing:-.035em;font-weight:500}
+h2{font-size:clamp(1.7rem,3vw,2.4rem);line-height:1.35;letter-spacing:-.025em;font-weight:500}
+h3{font-size:clamp(1.2rem,2vw,1.45rem);line-height:1.45;letter-spacing:-.015em;font-weight:500}
+p,li{font-size:1.0625rem;line-height:1.8;letter-spacing:-.01em}
+.caption{font-size:.8rem;line-height:1.4;letter-spacing:.08em;color:#405675}
+.lead{font-size:1.0625rem;line-height:1.9}
+.header{position:sticky;top:0;z-index:10}
+.header-in{margin-inline:auto;display:flex;align-items:center;justify-content:space-between}
+.brand{color:var(--black);font-size:1rem;font-weight:600;text-decoration:none}
+.nav{display:flex;align-items:center}.nav a{font-size:.8125rem;font-weight:500;text-decoration:none}.menu-btn{display:none}
+.mnav{display:none}
+.hero{text-align:center;padding:96px 0 0}.hero .lead{max-width:760px;margin:28px auto 0}
+.hero-cta{margin-top:34px;display:flex;justify-content:center;gap:10px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;justify-content:center;height:48px;padding:0 24px;border-radius:14px;font-size:.9375rem;font-weight:500;text-decoration:none}
+.btn-primary{background:var(--black);color:var(--white)}.btn-primary:hover{background:rgba(13,13,13,.8)}
+.btn-ghost{background:rgba(255,255,255,.58);border:1px solid rgba(255,255,255,.75);color:var(--black)}
+.sec{padding:85px 0}.sec-head{max-width:800px}.sec-head .lead{margin-top:20px;max-width:700px}
+.sec-body{margin-top:35px}.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px}.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px}.grid4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:20px}
+.card{position:relative;border:1px solid rgba(255,255,255,.84);border-radius:22px;padding:34px;background:rgba(255,255,255,.72);box-shadow:0 12px 40px rgba(55,63,105,.07);-webkit-backdrop-filter:blur(18px);backdrop-filter:blur(18px)}
+.card .body{margin-top:16px}.tool-card{min-height:240px;display:flex;flex-direction:column}.tool-name{font-size:.75rem;letter-spacing:.08em;color:#405675;margin-bottom:14px}.tool-card .fit{margin-top:auto;padding-top:22px;color:#526278;font-size:.9rem;line-height:1.65}
+.flow-item{padding-top:22px;border-top:1px solid rgba(13,13,13,.12)}.flow-item p{margin-top:12px}
+.guard-card{background:linear-gradient(145deg,rgba(226,235,255,.92),rgba(255,255,255,.82))}
+.contact{text-align:center;padding:95px 0}.contact .lead{max-width:650px;margin:20px auto 0}.contact-cta{margin-top:32px;display:flex;justify-content:center;gap:10px;flex-wrap:wrap}.contact-sub{margin:28px auto 0;max-width:680px;color:var(--ink-60);font-size:.875rem}.contact-sub a{color:var(--black)}
+.footer{padding:40px 0}.footer-in{display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap}.footer-brand{font-weight:600}.footer-nav{display:flex;gap:20px;flex-wrap:wrap}.footer-nav a{display:inline-flex;align-items:center;min-height:44px;color:#405675;font-size:.875rem;font-weight:500;text-decoration:none}
+@media(max-width:1023px){.grid4{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:767px){.hero{padding-top:80px}.hero h1{font-size:1.9rem}.hero .lead{font-size:1rem}.nav a:not(.nav-contact){display:none}.menu-btn{display:inline-flex}.mnav:not([hidden]){display:block}.grid2,.grid3,.grid4{grid-template-columns:1fr}.sec{padding:58px 0}.card{padding:25px}.tool-card{min-height:0}.contact{padding:80px 0}.hero-cta,.contact-cta{align-items:stretch}.hero-cta .btn,.contact-cta .btn{width:100%}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+<link rel="stylesheet" href="./minato-shell.css?v=12">
+</head>
+<body>
+<div class="glow-top" aria-hidden="true"></div>
+<header class="header">
+<div class="header-in">
+<a class="brand" href="./index.html">ミナト AI・IT ラボ</a>
+<nav class="nav" aria-label="メインナビゲーション">
+<a href="./index.html">サービス</a>
+<a href="./cases.html">事例</a>
+<a href="./tools.html">業務改善</a>
+<a href="./ai-introduction.html" aria-current="page">AI導入</a>
+<a href="./designs.html">LP・HP</a>
+<a href="./sns-support.html">SNS支援</a>
+<a href="./pricing.html">料金</a>
+<a class="nav-contact" href="#contact">相談する</a>
+<button class="menu-btn" type="button" aria-expanded="false" aria-controls="mnav">メニュー</button>
+</nav>
+</div>
+<nav class="mnav" id="mnav" hidden aria-label="メニュー">
+<a href="./index.html">サービス</a>
+<a href="./cases.html">事例</a>
+<a href="./tools.html">業務改善</a>
+<a href="./ai-introduction.html" aria-current="page">AI導入</a>
+<a href="./designs.html">LP・HP</a>
+<a href="./sns-support.html">SNS支援</a>
+<a href="./pricing.html">料金</a>
+<a href="#contact">相談する</a>
+</nav>
+</header>
+<main>
+<section class="hero" id="top">
+<div class="container">
+<p class="caption">AI INTRODUCTION FOR SMALL BUSINESS</p>
+<h1>会社の仕事に合うAI導入を</h1>
+<p class="lead">AIは契約しただけでは定着しません。いまの業務を整理し、使うツールを選び、社員が迷わず使える手順まで一緒に作ります。</p>
+<div class="hero-cta"><a class="btn btn-primary" href="#contact">AI導入を相談する</a><a class="btn btn-ghost" href="#approach">進め方を見る</a></div>
+</div>
+</section>
+
+<section class="sec" id="needs">
+<div class="container">
+<div class="sec-head"><h2>まず一つの仕事から試します</h2><p class="lead">最初から全社導入にはしません。負担が大きい仕事を選び、効果と使いやすさを確かめてから広げます。</p></div>
+<div class="grid3 sec-body">
+<article class="card"><h3>調査と文書作成</h3><p class="body">情報収集、議事録、メール、提案書の下書きを速めます。社内の言葉や確認手順も合わせます。</p></article>
+<article class="card"><h3>集計と定型作業</h3><p class="body">ExcelやCSVの整理、転記、定期レポートなど、繰り返し作業を減らします。</p></article>
+<article class="card"><h3>サイトと業務ツール</h3><p class="body">社内ツール、フォーム、LP・HPの制作や修正にAIエージェントを取り入れます。</p></article>
+</div>
+</div>
+</section>
+
+<section class="sec" id="tools">
+<div class="container">
+<div class="sec-head"><h2>目的に合わせてAIを選びます</h2><p class="lead">特定の製品に決め打ちしません。仕事の内容、予算、現在の環境を見て、必要な組み合わせを選びます。</p></div>
+<div class="grid4 sec-body">
+<article class="card tool-card"><p class="tool-name">OPENAI</p><h3>ChatGPT・Codex</h3><p class="body">調査や資料作成から、業務ツールやサイトの制作・修正まで。</p><p class="fit">候補: 文書、分析、開発、複数作業の並行化</p></article>
+<article class="card tool-card"><p class="tool-name">ANTHROPIC</p><h3>Claude・Claude Code</h3><p class="body">長い資料の整理や文章作成、既存システムの調査・改善などに。</p><p class="fit">候補: 文書、要件整理、開発、レビュー</p></article>
+<article class="card tool-card"><p class="tool-name">GOOGLE</p><h3>Gemini・Google Workspace</h3><p class="body">Gmail、ドキュメント、スプレッドシートを使う日常業務の支援に。</p><p class="fit">候補: メール、資料、表計算、社内共有</p></article>
+<article class="card tool-card"><p class="tool-name">AUTOMATION</p><h3>API・GAS・n8n・Make</h3><p class="body">AIの結果を他のサービスへつなぎ、繰り返し作業を自動化します。</p><p class="fit">候補: 転記、通知、定期処理、サービス連携</p></article>
+</div>
+</div>
+</section>
+
+<section class="sec" id="approach">
+<div class="container">
+<div class="sec-head"><h2>導入して終わりにしません</h2><p class="lead">実際の業務で使える状態を作り、使い始めてから出てくる困りごとも直します。</p></div>
+<ol class="grid4 sec-body">
+<li class="flow-item"><h3>仕事を整理</h3><p>時間がかかる作業、判断が必要な箇所、扱う情報を確認します。</p></li>
+<li class="flow-item"><h3>小さく試作</h3><p>一つの仕事で試し、時間や品質がどう変わるかを確かめます。</p></li>
+<li class="flow-item"><h3>使い方を整備</h3><p>指示文、操作手順、人が確認する箇所を分かる形にします。</p></li>
+<li class="flow-item"><h3>運用後に改善</h3><p>使いにくい点や新しい業務に合わせて、設定と手順を直します。</p></li>
+</ol>
+</div>
+</section>
+
+<section class="sec" id="rules">
+<div class="container">
+<div class="sec-head"><h2>安心して使うためのルールも作ります</h2><p class="lead">便利さだけで進めず、情報の扱いと人の確認を先に決めます。</p></div>
+<div class="grid3 sec-body">
+<article class="card guard-card"><h3>入力してよい情報を決める</h3><p class="body">個人情報、顧客情報、社外秘など、AIに渡してよい範囲を整理します。</p></article>
+<article class="card guard-card"><h3>権限を必要な範囲に絞る</h3><p class="body">メールやファイルへ接続する場合は、目的に必要な権限だけを設定します。</p></article>
+<article class="card guard-card"><h3>最後は人が確認する</h3><p class="body">金額、対外文書、公開内容など、誤りの影響が大きい箇所は人が判断します。</p></article>
+</div>
+</div>
+</section>
+
+<section class="sec" id="deliverables">
+<div class="container">
+<div class="sec-head"><h2>社内に使い方を残します</h2><p class="lead">担当者だけが分かる状態を避け、次に使う人が迷わない形でお渡しします。</p></div>
+<div class="grid2 sec-body">
+<article class="card"><h3>導入時に整えるもの</h3><p class="body">利用環境、指示文のひな形、操作手順、確認項目を業務に合わせてまとめます。</p></article>
+<article class="card"><h3>月額で続けられること</h3><p class="body">新しい使い方の追加、精度の見直し、エラー対応、社内からの相談を継続して受けます。</p></article>
+</div>
+<div class="hero-cta"><a class="btn btn-primary" href="./pricing.html">料金を見る</a><a class="btn btn-ghost" href="./tools.html">業務改善を見る</a></div>
+</div>
+</section>
+
+<section class="contact" id="contact">
+<div class="container">
+<h2>AIで減らしたい仕事をお聞かせください</h2>
+<p class="lead">使う製品が決まっていなくても大丈夫です。いまの仕事を伺い、試しやすいところから整理します。</p>
+<div class="contact-cta"><a class="btn btn-primary" href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=minato.ai.lab@gmail.com&amp;su=AI%E5%B0%8E%E5%85%A5%E3%81%AE%E3%81%94%E7%9B%B8%E8%AB%87">メールで相談する</a><a class="btn btn-ghost" href="https://page.line.me/091usyfe">LINEで相談する</a></div>
+<p class="contact-sub">メールは <a href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=minato.ai.lab@gmail.com&amp;su=AI%E5%B0%8E%E5%85%A5%E3%81%AE%E3%81%94%E7%9B%B8%E8%AB%87">minato.ai.lab@gmail.com</a> へお送りください。</p>
+</div>
+</section>
+</main>
+<footer class="footer">
+<div class="container footer-in">
+<span class="footer-brand">ミナト AI・IT ラボ</span>
+<nav class="footer-nav" aria-label="フッターナビゲーション">
+<a href="./index.html">サービス</a><a href="./cases.html">事例</a><a href="./tools.html">業務改善</a><a href="./ai-introduction.html" aria-current="page">AI導入</a><a href="./designs.html">LP・HP</a><a href="./sns-support.html">SNS支援</a><a href="./pricing.html">料金</a>
+</nav>
+</div>
+</footer>
+<script>
+(function(){var b=document.querySelector(".menu-btn"),m=document.getElementById("mnav");if(!b||!m)return;b.addEventListener("click",function(){if(m.hasAttribute("hidden")){m.removeAttribute("hidden");b.setAttribute("aria-expanded","true")}else{m.setAttribute("hidden","");b.setAttribute("aria-expanded","false")}})})();
+</script>
+<script src="./minato-shell.js?v=8"></script>
+<script src="./minato-cursor.js?v=6"></script>
+</body>
+</html>
