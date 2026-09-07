@@ -20,6 +20,19 @@
 .app-title{flex:1}.app-top .quiet{flex-shrink:0;background:#ffffffb3;border:1px solid #d7dce5;font-size:11px;padding:8px 10px}
 @media(max-width:720px){.app{border-radius:12px;box-shadow:0 16px 36px -15px #182b4b38,0 3px 10px #182b4b0f}.app-top{display:grid;grid-template-columns:auto 1fr auto;gap:9px;padding:15px 13px}.window-lights{gap:4px;margin-top:4px}.window-lights i{width:8px;height:8px}.app-title{font-size:12px;line-height:1.5}.app-title small{font-size:10px;line-height:1.6}.app-top .quiet{font-size:10px;padding:7px;max-width:75px;line-height:1.5}}
 .demo-label{text-decoration:none;font-weight:600;box-shadow:0 2px 6px #2559df0d}.demo-label:hover{background:#eaf0ff;border-color:#91adeb}
+/* Show which part of the demo is changing without moving the page. */
+.workspace>.panel{transition:border-color .25s ease,box-shadow .25s ease,background-color .25s ease}
+.workspace>.panel[data-state=active]{border-color:#3971ed;background:#fbfdff;box-shadow:0 0 0 2px #3971ed,0 0 24px #3971ed30}
+.workspace>.panel[data-state=done]{border-color:#80b49b;box-shadow:inset 0 0 0 1px #80b49b35}
+.workspace>.panel[data-state=error]{border-color:#b88028;background:#fffdf7;box-shadow:0 0 0 2px #b88028,0 0 20px #b8802826}
+.step-status{display:none;font-size:11px;font-weight:600;line-height:1.6;padding:2px 7px;border-radius:5px;margin-left:8px;vertical-align:middle;white-space:nowrap}
+.panel[data-state=active] .step-status{display:inline-block;color:#2453bb;background:#e9f0ff}
+.panel[data-state=done] .step-status{display:inline-block;color:#216544;background:#eaf5ee}
+.panel[data-state=error] .step-status{display:inline-block;color:#80500f;background:#fff0d4}
+#mobile-feedback{transition:border-color .25s ease,background-color .25s ease; border:1px solid #90b1f3;box-shadow:0 0 12px #3971ed18}
+#mobile-feedback[data-state=done]{border-color:#80b49b;background:#edf7f0;color:#216544}
+#mobile-feedback[data-state=error]{border-color:#b88028;background:#fff5df;color:#80500f}
+@media(prefers-reduced-motion:reduce){.workspace>.panel,#mobile-feedback{transition:none}}
 </style></head>
 <body>
 <header class="wrap header"><a class="brand" href="https://2g-q.github.io/hp-demos/">ミナト AI・IT ラボ</a><a class="back" href="https://2g-q.github.io/hp-demos/automation.html">自動化の作例一覧 ↗</a></header>
@@ -60,7 +73,7 @@ const pause=()=>new Promise(r=>setTimeout(r,1200));
 function el(tag,cls,text){const n=document.createElement(tag);if(cls)n.className=cls;if(text!==undefined)n.textContent=text;return n;}
 function log(text){logs.push({time:new Date().toLocaleTimeString('ja-JP',{hour12:false}),text});$('log').replaceChildren(...logs.map(x=>{const li=el('li');li.append(el('time','',x.time),document.createTextNode(x.text));return li;}));}
 function result(title,detail){$('result-title').textContent=title;$('result-detail').textContent=detail;$('near-result').textContent=title;$('mobile-feedback').hidden=false;}
-function nodes(states){states.forEach((v,i)=>$('node'+i).dataset.state=v);}
+function nodes(states){const panels=document.querySelectorAll('.workspace>.panel');states.forEach((v,i)=>{$('node'+i).dataset.state=v;const panel=panels[i];panel.dataset.state=v;panel.setAttribute('aria-busy',String(v==='active'));let status=panel.querySelector('.step-status');if(!status){status=el('span','step-status');panel.querySelector('h2').append(status);}status.textContent=v==='active'?['確認中','登録中','通知中'][i]:v==='done'?['確認済み','登録済み','通知済み'][i]:v==='error'?'要確認':'';});$('mobile-feedback').dataset.state=states.includes('error')?'error':states.includes('active')?'active':states.every(s=>s==='done')?'done':'';}
 function lock(value){busy=value;document.querySelectorAll('.case,#reset,#run,#category,#message,#retry').forEach(n=>n.disabled=value);$('run').textContent=value?'処理しています…':'受付を実行する →';}
 function render(){ $('record-count').textContent=records.length+'件';$('records').replaceChildren(...records.slice().reverse().map(r=>{const card=el('article','record'+(focusId===r.id?' highlight':''));const top=el('div','record-top');top.append(el('span','record-id',r.id),el('span','badge'+(r.status==='failed'?' error':''),{sent:'通知済み',failed:'通知を要確認',pending:'通知待ち'}[r.status]));card.append(top,el('h3','',r.message),el('div','record-meta',owners[r.category]+' · '+labels[r.category]));return card;}));}
 function empty(){const n=el('div','empty');n.append(el('strong','','次の処理結果がここに表示されます'),el('p','','「受付を実行する」を押してください。'));$('notify-area').replaceChildren(n);}
