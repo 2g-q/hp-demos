@@ -230,7 +230,7 @@
   .dintro .dcap{margin-top:16px;font-size:.875rem;line-height:1.435rem;color:rgba(13,13,13,.6)}
   @media (max-width:560px){.dintro{padding:52px 0 44px}}
 </style>
-</head>
+<style id="review-demo-window">body{background:#080808!important}.review-demo-window{box-sizing:border-box!important;display:flex;flex-direction:column;width:1040px!important;max-width:calc(100% - 40px)!important;height:min(650px,calc(100svh - 96px))!important;min-height:0!important;overflow:hidden!important;margin:40px auto 0!important;background:#fff!important;color:#17212d;border:1px solid #dce0e5;border-radius:16px;box-shadow:0 20px 70px #0006}.review-demo-titlebar{display:flex;align-items:center;gap:7px;flex:0 0 auto;padding:15px 18px;background:linear-gradient(#fff,#e9ecf1);border-bottom:1px solid #ccd3df;font:600 13px system-ui,sans-serif;color:#243347;min-height:48px}.review-demo-titlebar i{display:block;flex:none;width:10px;height:10px;background:#ed6a5f;border-radius:50%}.review-demo-titlebar i:nth-child(2){background:#f4bf50}.review-demo-titlebar i:nth-child(3){background:#61c454}.review-demo-titlebar span{margin-left:8px}.review-demo-content{box-sizing:border-box!important;flex:1 1 auto;min-height:0!important;width:100%!important;max-width:100%!important;overflow:auto!important;margin:0!important}.review-demo-content:focus-visible{outline:3px solid #7baaff;outline-offset:-4px}.review-demo-scroll-hint{box-sizing:border-box;width:1040px;max-width:calc(100% - 40px);margin:10px auto 30px;color:#b8c2d0;font:12px/1.8 system-ui,sans-serif}@media(max-width:760px){.review-demo-window{width:auto!important;max-width:calc(100% - 24px)!important;height:auto!important;max-height:none!important;overflow:visible!important;margin:18px auto 0!important;border-radius:12px}.review-demo-content{flex:none;overflow:visible!important}.review-demo-titlebar{border-radius:12px 12px 0 0;padding:12px;font-size:12px}.review-demo-scroll-hint{max-width:calc(100% - 24px);margin-bottom:18px}}@media print{body{background:white!important}.review-demo-window{display:block;height:auto!important;max-width:none!important;width:auto!important;overflow:visible!important;border:0!important;box-shadow:none!important;margin:0!important}.review-demo-content{overflow:visible!important;height:auto!important}.review-demo-titlebar,.review-demo-scroll-hint{display:none}}</style><meta name="robots" content="noindex,nofollow"><style>body>header{background:#fff}</style></head>
 <body>
 <!-- pfnav:start 全ページ共通ナビ(automation/hp_demos_inject_bar.py が生成・手で編集しない) -->
 <style>
@@ -322,7 +322,7 @@ document.querySelectorAll("#pfnav a[data-k]").forEach(function(a){if(a.getAttrib
 <section class="dintro">
   <div class="in">
     <h2>売上ダッシュボード</h2>
-    <p class="dlead">売上の記録(CSV)を所定の場所に置くだけで、集計・グラフ・前月比まで毎月自動で更新される仕組みの画面デモです。下の画面は実際に触れます。月を切り替えると、すべてのグラフと表が連動します。</p>
+    <p class="dlead">架空の売上データを集計した画面デモです。この画面ではCSV取込や自動更新は行いません。下の画面は実際に触れます。月を切り替えると、すべてのグラフと表が連動します。</p>
     <p class="dcap">※会社名・商品・数値はすべて架空です。</p>
   </div>
 </section>
@@ -339,7 +339,7 @@ document.querySelectorAll("#pfnav a[data-k]").forEach(function(a){if(a.getAttrib
   </div>
   <div class="head-meta">
     <div class="seg" id="seg" role="tablist" aria-label="対象月の選択"></div>
-    <div class="updated">最終更新: <b id="updatedAt">—</b>（CSV取込 → 自動集計）</div>
+    <div class="updated">最終更新: <b id="updatedAt">—</b>（固定の架空データを表示）</div>
   </div>
 </header>
 
@@ -973,5 +973,5 @@ a.mnt-btn-ghost:hover{background:rgba(13,13,13,.12)}
   </div>
 </div>
 <!-- mnt-portfolio-bar:end -->
-</body>
+<script>(()=>{const content=document.querySelector(".wrap");const frame=document.createElement('section');frame.className='review-demo-window';frame.setAttribute('aria-label',"ダッシュボードの操作デモ");const bar=document.createElement('div');bar.className='review-demo-titlebar';for(let i=0;i<3;i++){const dot=document.createElement('i');dot.setAttribute('aria-hidden','true');bar.append(dot);}const title=document.createElement('span');title.textContent="ダッシュボードの操作デモ";bar.append(title);content.before(frame);frame.append(bar,content);content.classList.add('review-demo-content');content.setAttribute('tabindex','0');content.setAttribute('aria-label','操作内容。PCではこの領域をスクロールできます');const hint=document.createElement('p');hint.className='review-demo-scroll-hint';hint.textContent='PCではウィンドウ内をスクロールできます。スマホではページを縦に読み進められます。';frame.after(hint);})();</script></body>
 </html>
