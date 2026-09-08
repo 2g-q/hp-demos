@@ -1,0 +1,19 @@
+/* The brand home stays light; dark presentation belongs to demo windows. */
+html{background:#fff}
+body.buyer-home{background:#fff;color:#17212d}
+.buyer-home .unified-header{max-width:1120px;width:calc(100% - 40px);margin:auto;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #dce3ec}
+.buyer-home .unified-header a{color:#334155;text-decoration:none;font-size:14px;padding:12px 0}
+.buyer-home .unified-header>a{font-weight:650;color:#17212d}
+.buyer-home .body,.buyer-home .reason p,.buyer-home .flow-item p,.buyer-home .case-result{color:#374151!important}
+.buyer-home .caption{color:#526174!important}
+.buyer-home .hero .lead{color:#475569!important}
+.buyer-home .sec-head .lead{color:#475569!important}
+.buyer-home .card{background:rgba(255,255,255,.82);border:1px solid #dce3ec;box-shadow:0 4px 20px #243a6010}
+.buyer-home .card h3{color:#17212d}
+.buyer-home .card-link{color:#2454aa}
+.buyer-home .office-symbol{margin:36px auto 0;max-width:800px}
+.buyer-home .office-symbol #office{display:block;width:100%;max-width:800px;height:auto;margin:0 auto}
+.buyer-home .office-title{font-size:clamp(21px,2.5vw,26px);line-height:1.6;margin:24px 0 12px}
+.buyer-home .office-note{font-size:16px!important;line-height:1.9;max-width:48em;margin:0 auto!important}
+.buyer-home .contact-sub a{color:#2454aa}
+@media(max-width:600px){.buyer-home .unified-header{align-items:flex-start}.buyer-home .office-symbol{margin-top:28px}.buyer-home .office-title{font-size:21px}}
