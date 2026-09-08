@@ -1,8 +1,9 @@
 <!DOCTYPE html>
+
 <html lang="ja">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>LINE公式アカウント構築デモ｜からだ整えラボ 大宮院(架空)</title>
 <style>
   :root{
@@ -317,273 +318,160 @@
     .closing{padding:36px 20px;}
   }
 </style>
-<meta name="robots" content="noindex">
-</head>
-<body>
-<!-- cw-bar:start クラウドワークス提案用の戻り帯(hp_demos_build_cw.py が生成) -->
+<meta content="noindex" name="robots"/>
 <style>
-#cwbar{position:sticky;top:0;z-index:99999;background:#fff;border-bottom:1px solid rgba(13,13,13,.14);
-font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue","Hiragino Kaku Gothic ProN","Noto Sans JP","Yu Gothic",Meiryo,sans-serif}
-#cwbar .in{max-width:1128px;margin-inline:auto;padding:0 20px;height:56px;display:flex;align-items:center;justify-content:space-between;gap:16px}
-#cwbar .bk{display:inline-flex;align-items:center;height:36px;padding:0 16px;border-radius:2.5rem;
-background:#0D0D0D;color:#fff;font-size:.8125rem;font-weight:500;text-decoration:none}
-#cwbar .nm{color:#0D0D0D;font-size:1rem;font-weight:600}
-@media print{#cwbar{display:none}}
-</style>
-<div id="cwbar"><div class="in"><span class="nm">ミナト AI・IT ラボ</span><a class="bk" href="./cw.html">← 制作例一覧へ</a></div></div>
-<!-- cw-bar:end -->
-
-
-
-
-
-<!-- ============ HERO ============ -->
-<div class="mintro">
-  <div class="wrap">
-    <span class="tag">LINE公式アカウント 構築デモ</span>
-    <h1><span class="nw">友だち追加から</span><span class="nw">予約まで、</span><br><span class="nw">LINEが自動で</span><span class="nw">接客する仕組み。</span></h1>
-    <p class="lead">架空の整体院「からだ整えラボ 大宮院」を題材に、あいさつメッセージ・自動診断・ステップ配信・予約リマインドまでを組み込んだ構築デモです。実際のトーク画面イメージと設計図でご覧いただけます。</p>
-    <p class="demo-note">※本ページは提案用の構築サンプル(デモ)です。店舗・数値はすべて架空です。</p>
-  </div>
+:root{--ink:#172c27;--muted:#60746d;--green:#087b4e;--border:#dce6df;--pale:#eaf4ec}
+*{box-sizing:border-box}body{margin:0;background:#fafcf9;color:var(--ink);font-family:system-ui,-apple-system,"Hiragino Sans",Meiryo,sans-serif;line-height:1.7}button,a{-webkit-tap-highlight-color:transparent}button{font:inherit;cursor:pointer}a{color:inherit}button:focus-visible,a:focus-visible,summary:focus-visible,[tabindex]:focus-visible{outline:3px solid #2563eb;outline-offset:4px}button:disabled{cursor:default;opacity:.45}.wrap{max-width:1100px;padding:0 28px;margin:auto}.hero{padding:44px 28px 20px}.eyebrow{color:var(--green);font-size:12px;font-weight:750;letter-spacing:.12em;margin:0 0 12px}.hero h1{font-size:clamp(30px,3.3vw,44px);line-height:1.35;letter-spacing:-.035em;margin:0 0 16px;font-weight:650}.hero p.lead{font-size:15px;color:var(--muted);margin:0;max-width:740px}.demo-tag{display:inline-block;border:1px solid #b9d2c0;border-radius:99px;font-size:11px;padding:3px 10px;letter-spacing:0;margin-left:10px;vertical-align:middle}.workspace{display:grid;grid-template-columns:minmax(0,1fr) 380px;gap:64px;align-items:center;padding:16px 0 42px}.controls h2{font-size:19px;margin:0 0 4px}.hint{font-size:13px;color:var(--muted);margin:0 0 18px}.scenarios{display:grid;gap:9px}.scenario{display:flex;gap:14px;text-align:left;background:#fff;border:1px solid var(--border);border-radius:12px;padding:13px 16px;color:var(--ink);align-items:center;width:100%;transition:background .15s,border-color .15s}.scenario[aria-pressed="true"]{background:var(--pale);border-color:var(--green);box-shadow:inset 3px 0 var(--green)}.scenario:hover{border-color:var(--green)}.num{color:var(--green);font-size:12px;font-weight:750;flex:none}.scenario strong{display:block;font-size:15px;font-weight:650}.scenario small{display:block;font-size:12px;color:var(--muted);margin-top:2px}.scenario .arrow{margin-left:auto;color:var(--green)}.scenario-copy{padding:18px 2px 0;min-height:112px}.scenario-copy .label{font-size:11px;font-weight:700;color:var(--green);margin:0 0 5px}.scenario-copy p{font-size:13px;margin:0;color:var(--muted)}.scope-note{border-top:1px solid var(--border);padding-top:13px;font-size:11px;color:var(--muted);margin:0}.preview-stage{background:#edf3ed;border:1px solid #e2e9df;border-radius:24px;padding:17px 20px 14px;display:flex;flex-direction:column;align-items:center;min-width:0}.preview-label{display:flex;width:100%;justify-content:space-between;align-items:center;font-size:11px;color:var(--muted);margin-bottom:12px}.preview-label b{font-weight:650}.reset{border:0;background:transparent;color:var(--green);font-size:11px;padding:4px}.phone{width:320px;max-width:100%;border:7px solid #24332d;border-radius:33px;background:#c7d8dc;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 14px 28px #213c2620}.phone-top{background:#f7faf7;text-align:center;font-size:9px;padding:5px;color:#55645e;flex:none}.phone-head{background:#f7faf7;border-bottom:1px solid #dbe4df;padding:7px 12px;display:flex;align-items:center;gap:9px;flex:none}.avatar{display:grid;place-items:center;background:#e0eee0;color:#317847;font-weight:750;width:30px;height:30px;border-radius:9px;font-size:12px}.phone-head strong{font-size:12px;display:block}.phone-head small{font-size:9px;display:block;color:var(--muted)}.chatbody{overflow-y:auto;overscroll-behavior:contain;min-height:0;flex:1;padding:12px;scrollbar-width:thin}.day{text-align:center;font-size:9px;color:#516a6d;margin:0 0 11px}.bubble{background:#fff;border-radius:3px 12px 12px;padding:10px 12px;font-size:12px;line-height:1.7;margin:0 15px 10px 0;box-shadow:0 1px 2px #38545110}.bubble.out{background:#a9e89a;margin-left:38px;margin-right:0;border-radius:12px 3px 12px 12px}.bubble b{font-weight:650}.choices{display:grid;gap:7px;margin:0 15px 12px 0}.chat-button{border:1px solid #97bfab;background:#fff;border-radius:8px;padding:9px 8px;color:#05683f;font-size:12px;line-height:1.45}.chat-button:hover{background:#edf8ed}.chat-button.primary{background:var(--green);border-color:var(--green);color:#fff}.chat-button.selected{background:#e7f7e7;box-shadow:inset 0 0 0 1px var(--green)}.slots{grid-template-columns:1fr 1fr}.mini-label{font-size:10px;color:#516a6d;margin:5px 0 7px}.richmenu{display:grid;grid-template-columns:repeat(3,1fr);background:#fff;gap:1px;border-top:1px solid #d6e5da;flex:none}.richmenu button{border:0;background:#f7faf7;color:#4e655b;font-size:10px;line-height:1.5;padding:10px 1px}.richmenu button[aria-pressed="true"]{background:#e4f2e7;color:#087b4e}.richmenu span{display:block;font-size:17px;margin-bottom:2px}.homebar{height:13px;background:#f7faf7;flex:none;position:relative}.homebar:after{content:"";position:absolute;height:3px;border-radius:5px;width:86px;background:#24332d;top:4px;left:50%;transform:translateX(-50%)}.preview-caption{font-size:10px;color:#65796c;margin:10px 0 0}.overview{padding:34px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border);background:#fff}.overview h2{font-size:23px;margin:0 0 20px;font-weight:650}.features{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}.feature{padding-left:15px;border-left:2px solid #a8c6af}.feature h3{font-size:15px;margin:0 0 7px}.feature p{font-size:13px;color:var(--muted);margin:0}.details{margin-top:23px;border-top:1px solid var(--border);padding-top:16px;font-size:13px}.details summary{cursor:pointer;font-weight:650}.details p{color:var(--muted);margin:12px 0 0;max-width:850px}.closing{padding:35px 0;display:flex;align-items:center;justify-content:space-between;gap:24px}.closing h2{font-size:22px;margin:0 0 6px}.closing p{font-size:13px;color:var(--muted);margin:0;max-width:600px}.actions{display:flex;flex-wrap:wrap;gap:9px;flex-shrink:0}.action{display:inline-flex;padding:11px 18px;border-radius:99px;background:var(--ink);color:#fff;text-decoration:none;font-size:12px;font-weight:600}.action.secondary{color:var(--ink);background:#e9efea}footer{padding:20px 0;border-top:1px solid var(--border);color:var(--muted);font-size:11px}footer .wrap{display:flex;justify-content:space-between;gap:20px}footer p{margin:0}footer b{color:var(--ink);font-weight:650}
+@media(max-width:800px){.workspace{gap:25px;grid-template-columns:minmax(0,1fr) 330px}.preview-stage{padding:14px}.closing{align-items:flex-start;flex-direction:column}.hero{padding-top:30px}.hero h1{font-size:34px}}
+@media(max-width:620px){.wrap{padding:0 20px}.hero{padding:27px 20px 18px}.hero h1{font-size:29px}.hero p.lead{font-size:13px}.eyebrow{font-size:10px}.demo-tag{font-size:10px}.workspace{grid-template-columns:1fr;gap:18px;padding:0 0 30px}.controls h2{font-size:16px}.hint{font-size:12px;margin-bottom:10px}.scenarios{grid-template-columns:repeat(3,1fr);gap:6px}.scenario{display:block;padding:10px 4px;text-align:center;border-radius:9px}.scenario .num,.scenario small,.scenario .arrow{display:none}.scenario strong{font-size:12px}.scenario[aria-pressed="true"]{box-shadow:inset 0 -2px var(--green)}.scenario-copy{min-height:0;padding:12px 0 0}.scenario-copy p{font-size:12px}.scenario-copy .label{display:none}.scope-note{margin-top:11px;font-size:10px;padding-top:10px}.preview-stage{width:100%;max-width:370px;justify-self:center;padding:12px 18px}.preview-label{margin-bottom:7px}.features{grid-template-columns:1fr;gap:19px}.overview{padding:26px 0}.overview h2{font-size:21px}.closing{padding:28px 0}.closing h2{font-size:21px}footer .wrap{flex-direction:column;gap:8px}}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
+.phone-screen{width:100%;aspect-ratio:393 / 852;display:flex;flex-direction:column;min-height:0;overflow:hidden}.phone-top{height:28px;position:relative;padding:6px 15px;text-align:left}.phone-top:after{content:"";position:absolute;left:50%;top:5px;transform:translateX(-50%);width:74px;height:19px;border-radius:20px;background:#18221e}.try-banner{display:flex;align-items:center;gap:18px;margin-top:20px}.try-button{border:0;background:#087b4e;color:#fff;padding:12px 23px;border-radius:99px;font-weight:700;font-size:14px}.try-banner p{font-size:12px;color:var(--muted);margin:0}.touch-guide{width:100%;background:#087b4e;border-radius:12px;padding:10px 8px;color:#fff;text-align:center;margin-bottom:14px}.touch-guide strong{display:block;font-size:14px}.touch-guide small{font-size:11px}.preview-stage{scroll-margin-top:85px}.scenarios{grid-template-columns:1fr 1fr}.scenario{padding:12px 10px;gap:8px}.scenario strong{font-size:13px}.scenario small{font-size:11px}.scenario .arrow{display:none}.scenario-copy{min-height:98px}.richmenu button{padding:8px 1px}.feature-badge{display:inline-block;font-size:10px;border-radius:99px;background:#edf4ed;color:#3d6850;padding:2px 8px;margin-bottom:7px}.feature-badge.extra{background:#f3eddf;color:#795b23}.coupon{background:#fffcef;border:1px dashed #b7a563;border-radius:12px;text-align:center;padding:18px 12px;margin-bottom:12px}.coupon strong{font-size:25px;display:block;color:#526533}.coupon small{display:block;font-size:10px}.stamp-card{background:#fff;border-radius:12px;padding:15px;margin-bottom:12px;text-align:center}.stamps{display:flex;justify-content:center;gap:8px;margin:16px 0}.stamp{display:grid;place-items:center;border:1px dashed #bccbbb;border-radius:50%;width:33px;height:33px;color:#a2b2a1}.stamp.filled{background:#087b4e;border-color:#087b4e;color:#fff}.tag-result{font-size:11px;color:#5b502e;background:#fff4d9;padding:10px;border-radius:8px;margin-bottom:12px}.operation-note{font-size:12px;color:var(--muted);margin:18px 0 0}
+@media(max-width:800px){.scenario small{display:none}}
+@media(max-width:620px){.scenarios{grid-template-columns:repeat(3,1fr)}.scenario{padding:11px 3px}.scenario strong{font-size:11px}.try-banner{align-items:flex-start;flex-direction:column;gap:7px}.try-button{width:100%}.phone{width:320px}.touch-guide{margin-bottom:10px}.scenario-copy{min-height:0}.preview-stage{padding:12px}.preview-caption{text-align:center}}
+</style><style>
+/* Unified portfolio shell: shared reading order and laptop-sized interaction. */
+html,body{background:#080808!important;color:#e9e9e9;margin:0!important;padding:0!important}body{font-family:system-ui,-apple-system,"Hiragino Sans",Meiryo,sans-serif!important}.u-nav,.u-hero,.u-compare,.u-scope,.u-close,.u-hint{box-sizing:border-box;width:calc(100% - 48px);max-width:1040px;margin-left:auto;margin-right:auto}.u-nav{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:24px 0;border-bottom:1px solid #292929;font-size:13px}.u-nav a{color:#d4d4d4;text-decoration:none}.u-hero{padding:64px 0 30px}.u-kicker{font-size:12px;letter-spacing:.1em;color:#aaa;margin:0 0 14px}.u-hero h1{font-size:clamp(28px,3.4vw,44px);line-height:1.4;letter-spacing:-.04em;color:#f5f5f5;margin:0 0 18px;font-weight:650}.u-hero p:not(.u-kicker){font-size:15px;line-height:1.9;color:#aaa;max-width:780px;margin:0}.u-compare{display:grid;grid-template-columns:1fr 1fr;gap:30px;padding:22px 0 30px}.u-compare article{border-top:1px solid #353535;padding-top:18px}.u-compare b{font-size:12px;color:#ddd}.u-compare p,.u-scope p,.u-close p{font-size:14px;line-height:1.9;color:#aaa;margin:8px 0 0}.u-hint{color:#b6b6b6;font-size:13px;line-height:1.8;margin-top:12px;margin-bottom:18px}.u-hint strong{color:#fafafa}.u-window{display:flex;flex-direction:column;width:calc(100% - 48px);max-width:1040px;height:min(650px,calc(100svh - 96px));margin:0 auto;border:1px solid #454545;border-radius:15px;overflow:hidden;box-shadow:0 22px 70px #0008;background:#fff;color:#17212d;box-sizing:border-box}.u-titlebar{display:flex;gap:7px;align-items:center;flex:none;min-height:46px;padding:0 16px;background:#f1f2f4;border-bottom:1px solid #d8dce2;color:#4a5360;font:600 12px system-ui;box-sizing:border-box}.u-titlebar i{width:10px;height:10px;background:#ed6a5f;border-radius:50%}.u-titlebar i:nth-child(2){background:#f4bf50}.u-titlebar i:nth-child(3){background:#61c454}.u-titlebar span{margin-left:8px}.u-content{flex:1;min-height:0;overflow:auto;background:#fff;color:#17212d;overscroll-behavior:contain}.u-content:focus-visible{outline:3px solid #578feb;outline-offset:-3px}.u-scope{display:grid;grid-template-columns:1fr 1fr;gap:32px;padding:42px 0;border-bottom:1px solid #292929}.u-scope h2,.u-close h2{font-size:21px;line-height:1.55;color:#eee;margin:0}.u-close{padding:42px 0 54px}.u-close a{display:inline-block;margin-top:20px;color:#ddd;text-decoration:underline}.u-content .workspace{margin:0;padding:24px;gap:24px;grid-template-columns:minmax(0,1fr) 360px}.u-content .preview-stage{padding:12px}.u-content .phone{width:280px;aspect-ratio:390/844;height:auto}.u-content>main{padding:24px;margin:0;width:auto;max-width:none}.u-content>.wrap{max-width:none;padding:22px;margin:0}.u-content>.app{min-height:0!important;margin:0;max-width:none}.u-content>header{position:static!important;padding:20px;color:#17212d;background:#fff}.u-content .side{position:sticky!important;top:0!important;max-height:none!important}.u-content .grid{padding:24px}.u-content .wrap .grid{padding:0}.u-content .workspace h2{color:#17212d}.u-content #mock,.u-content #flow,.u-content #plan{margin:0 auto;padding:24px;max-width:100%;background:#fff;color:#17212d}.u-content #mock .phone{max-height:606px;overflow:auto}.u-content #mock h2,.u-content #flow h2,.u-content #plan h2{color:#17212d}.u-content #mock .phone-wrap{min-width:0}.u-content .app .top{position:static!important}
+@media(max-width:760px){.u-nav,.u-hero,.u-compare,.u-scope,.u-close,.u-hint{width:calc(100% - 32px)}.u-nav{font-size:11px;padding:20px 0}.u-hero{padding:42px 0 20px}.u-hero h1{font-size:29px}.u-compare,.u-scope{grid-template-columns:1fr;gap:20px}.u-window{width:calc(100% - 24px);height:auto;overflow:visible;border-radius:12px}.u-titlebar{border-radius:12px 12px 0 0;font-size:11px}.u-content{overflow:visible;border-radius:0 0 12px 12px}.u-content .workspace{padding:16px 10px;grid-template-columns:1fr;gap:24px}.u-content .phone{width:280px;max-width:100%}.u-content .grid{padding:14px}.u-content>main,.u-content>.wrap{padding:14px}.u-content .app{display:block}.u-content .side{position:static!important}.u-content #mock,.u-content #flow,.u-content #plan{padding:16px}.u-content .phones{flex-direction:column}.u-hero h1 span{display:inline-block}.u-scope{padding:30px 0}.u-close{padding-top:30px}}
+@media print{.u-nav,.u-hero,.u-compare,.u-titlebar,.u-hint,.u-scope,.u-close{display:none!important}.u-window,.u-content{display:block;height:auto!important;overflow:visible!important;width:100%;max-width:none;box-shadow:none;border:0}}
+</style><style>.u-nav{height:72px;max-width:1120px;padding:0}.u-hero{padding-top:52px}.u-content .workspace{box-sizing:border-box}.u-content .side{height:auto!important}.u-content table{max-width:100%}@media(max-width:760px){.u-hero{padding-top:40px}.u-content .app>div{min-width:0}.u-content .top{flex-wrap:wrap;height:auto;gap:10px}.u-content .side{width:100%!important;box-sizing:border-box}.u-content .cards{grid-template-columns:1fr 1fr}.u-content .phone-set{max-width:100%}.u-content .tblwrap,.u-content .table-wrap{overflow:auto;max-width:100%}}</style><style>.u-window{padding:0!important}.u-content .phone{background:#c7d8dc}.u-content .workspace{padding:24px!important}.u-content #flow,.u-content #plan{box-sizing:border-box}.u-content #flow .container,.u-content #plan .container{padding:0;max-width:100%}@media(max-width:760px){.u-content .workspace{padding:16px 10px!important}}</style></head>
+<body><nav class="u-nav"><a href="index.html">ミナト AI・IT ラボ</a><a href="cw.html">作例一覧へ ↗</a></nav><section class="u-hero"><p class="u-kicker">LINE公式アカウント / 自主制作デモ</p><h1><span>予約の受付から、</span><span>来店後のフォローまで。</span></h1><p>予約・質問・クーポンなど、6つのシーンと配信の設計例を確認できます。</p></section><section class="u-compare"><article><b>導入前の困りごと</b><p>予約の案内や同じ質問への返信が、スタッフに集中。</p></article><article><b>仕組みを整えると</b><p>必要な案内を選べるようにし、個別対応が必要な相談を分けます。</p></article></section><p class="u-hint">この画面で試せます。シーンを選び、スマホ内のボタンを押してください。</p><section class="u-window"><div class="u-titlebar"><i></i><i></i><i></i><span>LINE公式アカウント — 操作サンプル</span></div><div aria-label="操作デモ" class="u-content" role="region" tabindex="0"><div class="workspace">
+<div class="controls">
+<h2>試したいシーンを選んでください</h2>
+<p class="hint">シーンを選び、スマホ内のボタンで操作できます。</p>
+<div aria-label="シーン切替" class="scenarios">
+<button aria-pressed="true" class="scenario" data-scene="booking"><span class="num">01</span><span><strong>予約受付</strong><small>メニュー → 日時 → 予約内容の確認</small></span><span aria-hidden="true" class="arrow">↗</span></button>
+<button aria-pressed="false" class="scenario" data-scene="faq"><span class="num">02</span><span><strong>よくある質問</strong><small>営業時間・駐車場の質問に回答</small></span><span aria-hidden="true" class="arrow">↗</span></button>
+<button aria-pressed="false" class="scenario" data-scene="followup"><span class="num">03</span><span><strong>来店フォロー</strong><small>予約前日のご案内 → 来店後のお礼</small></span><span aria-hidden="true" class="arrow">↗</span></button>
+<button aria-pressed="false" class="scenario" data-scene="coupon"><span class="num">04</span><span><strong>クーポン</strong><small>特典を表示 → 利用状態を切替</small></span><span aria-hidden="true" class="arrow">↗</span></button>
+<button aria-pressed="false" class="scenario" data-scene="points"><span class="num">05</span><span><strong>ショップカード</strong><small>来店ポイント → 特典を確認</small></span><span aria-hidden="true" class="arrow">↗</span></button>
+<button aria-pressed="false" class="scenario" data-scene="survey"><span class="num">06</span><span><strong>アンケート</strong><small>回答 → タグ → 配信の出し分け</small></span><span aria-hidden="true" class="arrow">↗</span></button>
 </div>
+<div aria-live="polite" class="scenario-copy"><p class="label">この仕組みで目指すこと</p><p id="scene-value">希望のメニューと日時を順番に選ぶだけ。電話やトークで何度も確認する手間を減らし、予約まで案内します。</p></div>
+<p class="scope-note">架空店舗のデモです。LINEとの実連携、実際の予約・送信・保存は行いません。<br/>本番の連携方法は、現在の予約システムと運用に合わせて決めます。</p>
+</div>
+<div class="preview-stage" id="interactive-preview">
+<div class="touch-guide"><strong>この画面は操作できます</strong><small>まず画面内のメニューをタップ ↓</small></div>
+<div class="preview-label"><b id="preview-title">01 / 予約受付</b><button class="reset" id="reset">最初から試す ↺</button></div>
+<div aria-label="LINE風のトークプレビュー" class="phone">
+<div class="phone-screen"><div class="phone-top">9:41</div>
+<div class="phone-head"><span class="avatar">整</span><div><strong>からだ整えラボ 大宮院</strong><small>架空の整体院・操作デモ</small></div></div>
+<div aria-label="デモのトーク内容" class="chatbody" id="chat" role="region" tabindex="0"></div>
+<div aria-label="固定メニュー" class="richmenu"><button data-scene="booking"><span aria-hidden="true">▦</span>予約する</button><button data-scene="faq"><span aria-hidden="true">?</span>よくある質問</button><button data-scene="followup"><span aria-hidden="true">♡</span>来店フォロー</button><button aria-pressed="false" data-scene="coupon"><span aria-hidden="true">◇</span>クーポン</button><button aria-pressed="false" data-scene="points"><span aria-hidden="true">☆</span>ショップカード</button><button aria-pressed="false" data-scene="survey"><span aria-hidden="true">✓</span>アンケート</button></div>
+<div class="homebar"></div></div>
+</div>
+<p class="preview-caption">画面内はスクロールできます。すべてデモ用の内容です。</p>
+</div>
+</div><section id="flow" style="background:#f2f8f4;">
+<div class="wrap">
+<div class="sec-label">SECTION 02</div>
+<h2>シナリオ設計図 ── 裏側では、この流れが自動で動いています</h2>
+<p class="sec-desc">友だち追加をきっかけに、決めておいたメッセージが決めておいた日に自動で届く仕組みを「ステップ配信」と呼びます。予約した方・まだの方で、その後に届く内容が自動で切り替わります。</p>
+<div class="flow-box">
+<div class="flow">
+<div class="fnode start">友だち追加<small>店頭POP・ショップカード・Instagramから</small></div>
+<div class="fconn"><span class="flabel">直後</span></div>
+<div class="fnode">あいさつメッセージ+30秒お悩み診断<small>回答に合わせて初回メニューを自動でご案内</small></div>
+<div class="fconn"><span class="flabel">3日後</span></div>
+<div class="fnode">ステップ配信①  セルフケア動画<small>「腰痛の方に」など診断結果に合わせて出し分け</small></div>
+<div class="fconn"><span class="flabel">7日後</span></div>
+<div class="fnode">ステップ配信②  初回限定オファー<small>友だち限定価格+予約ボタンつき</small></div>
+<div class="fbranch">
+<div class="stub"></div>
+<div class="hline"></div>
+<div class="fcols">
+<div class="fcol yes">
+<div class="fconn long"></div>
+<span class="branch-chip">予約した方</span>
+<div class="fconn"></div>
+<div class="fnode">前日リマインド<small>日時・持ち物・地図を自動送信</small></div>
+<div class="fconn"></div>
+<div class="fnode">ご来店</div>
+<div class="fconn"></div>
+<div class="fnode goal">来店後お礼+次回のご案内<small>口コミのお願い・2回目クーポンで再来店へ</small></div>
+</div>
+<div class="fcol no">
+<div class="fconn long"></div>
+<span class="branch-chip">まだ予約していない方</span>
+<div class="fconn"></div>
+<div class="fnode">14日後  掘り起こし配信<small>お客様の声+今月の空き枠をご案内</small></div>
+<div class="fcol-note">ここで予約が入れば、自動で左側の「リマインド→来店」の流れに合流します。</div>
+</div>
+</div>
+</div>
+</div>
+<p class="flow-note">配信の日数・回数・文面は、お店の客層に合わせて自由に調整できます(納品後の変更方法もレクチャーします)。</p>
+</div>
+</div>
+</section><section id="plan">
+<div class="wrap">
+<div class="sec-label">SECTION 03</div>
+<h2>配信設計表 ── 1通ごとに「目的」と「見る数字」を決めて設計します</h2>
+<p class="sec-desc">感覚で配信するのではなく、各メッセージの目的とKPI(開封→タップ→予約の割合)をあらかじめ決め、配信後に数字を見て文面を改善していきます。月額運用ではこの表を毎月更新してご報告します。</p>
+<p class="swipe-hint">← 表は横にスクロールできます →</p>
+<div class="table-scroll">
+<table>
+<thead>
+<tr><th>#</th><th>配信</th><th>タイミング</th><th>目的</th><th>KPIの目安(開封→タップ→予約)</th></tr>
+</thead>
+<tbody>
+<tr><td class="no">1</td><td>あいさつ+お悩み診断</td><td><span class="tag">追加直後</span></td><td>第一印象づくり・お悩みの把握(タグ付け)</td><td class="kpi"><span>85%</span><i>→</i><span>45%</span><i>→</i><span>—</span></td></tr>
+<tr><td class="no">2</td><td>ステップ①  セルフケア動画</td><td><span class="tag">3日後</span></td><td>役立つ情報で信頼づくり(売り込まない回)</td><td class="kpi"><span>60%</span><i>→</i><span>25%</span><i>→</i><span>—</span></td></tr>
+<tr><td class="no">3</td><td>ステップ②  初回限定オファー</td><td><span class="tag">7日後</span></td><td>初回予約の獲得(このシナリオの山場)</td><td class="kpi"><span>55%</span><i>→</i><span>20%</span><i>→</i><span>8%</span></td></tr>
+<tr><td class="no">4</td><td>予約前日リマインド</td><td><span class="tag">予約前日 18時</span></td><td>無断キャンセル・うっかり忘れの防止</td><td class="kpi"><span>90%</span><i>→</i><span>—</span><i>→</i><span>—</span></td></tr>
+<tr><td class="no">5</td><td>来店後お礼+口コミ依頼</td><td><span class="tag">来店翌日</span></td><td>口コミ獲得・2回目予約への橋渡し</td><td class="kpi"><span>70%</span><i>→</i><span>30%</span><i>→</i><span>15%</span></td></tr>
+<tr><td class="no">6</td><td>掘り起こし配信</td><td><span class="tag or">14日後(未予約の方のみ)</span></td><td>迷っている方の後押し(お客様の声+空き枠)</td><td class="kpi"><span>50%</span><i>→</i><span>15%</span><i>→</i><span>4%</span></td></tr>
+</tbody>
+</table>
+</div>
+<p class="table-note">※ KPIの数値は本デモ用の架空の設計値です。実際は業種・客層により異なるため、運用開始後の実測値をもとに毎月チューニングします。</p>
+</div>
+</section></div></section><p class="u-hint">架空の整体院を題材にした配信設計の見本です。LINEへの接続・配信は行いません。 PCではウィンドウ内をスクロールできます。</p><section class="u-scope"><article><h2>ラボが担当すること</h2><p>予約導線・配信文・メニュー・分岐の設計と動作確認。</p></article><article><h2>ご用意いただくもの</h2><p>現在の予約方法、メニュー、よくある質問。</p></article></section><section class="u-close"><h2>「この作業も、自動化できますか？」</h2><p>現在の作業と、減らしたい手間を元のやり取りでお知らせください。必要な範囲を整理します。</p><a href="index.html">ほかの作例を見る ↗</a></section><script>(function(){var f=(location.pathname.split("/").pop()||"index.html").replace(".html","");
+document.querySelectorAll("#pfnav a[data-k]").forEach(function(a){if(a.getAttribute("data-k")===f)a.setAttribute("aria-current","page");});})();</script><script>
+(function(){
+'use strict';
+const chat=document.getElementById('chat');
+let scene='booking', menu='', slot='', points=3, couponUsed=false;
+const descriptions={booking:'希望のメニューと日時を順番に選ぶだけ。電話やトークで何度も確認する手間を減らし、予約まで案内します。',faq:'営業時間や駐車場など、繰り返し届く質問にすぐ回答。個別の相談はスタッフ対応へ案内する流れを試せます。',followup:'予約前に日時を知らせ、来店後にはお礼を届ける設計例です。画面内のボタンで配信のタイミングを切り替えられます。'};
+const titles={booking:'01 / 予約受付',faq:'02 / よくある質問',followup:'03 / 来店フォロー'};
+descriptions.coupon='クーポンの内容を確認して、利用後の表示へ切り替えられます。来店のきっかけづくりを、特典と利用条件から設計します。';
+descriptions.points='来店ポイントを1つずつ追加し、特典に届くまでを体験できます。本番の付与は店頭での操作など、運用に合わせて設定します。';
+descriptions.survey='興味のある内容を選ぶと、付けるタグと案内文が変わります。拡張ツール連携の設計例です。実際のタグ登録・配信は行いません。';
+titles.coupon='04 / クーポン';titles.points='05 / ショップカード';titles.survey='06 / アンケート';
+function bubble(text,out){return '<div class="bubble'+(out?' out':'')+'">'+text+'</div>';}
+function btn(text,action,value,primary){return '<button class="chat-button'+(primary?' primary':'')+'" data-action="'+action+'"'+(value?' data-value="'+value+'"':'')+'>'+text+'</button>';}
+function paint(html,focus){chat.innerHTML=html;chat.scrollTop=0;if(focus)chat.focus({preventScroll:true});}
+function bookingStart(focus){menu='';slot='';paint('<p class="day">友だち追加後のご案内</p>'+bubble('友だち追加ありがとうございます。<br>ご希望のメニューを選んでください。')+'<div class="choices">'+btn('初回カウンセリング付き整体','menu','初回カウンセリング付き整体')+btn('通常の整体','menu','通常の整体')+'</div><p class="mini-label">個人情報の入力はありません。</p>',focus);}
+function faqStart(focus){paint('<p class="day">よくある質問</p>'+bubble('確認したい内容を選んでください。')+'<div class="choices">'+btn('営業時間を知りたい','faq','hours')+btn('駐車場はありますか？','faq','parking')+btn('スタッフに相談したい','faq','staff')+'</div>',focus);}
+function followupStart(focus){paint('<p class="day">予約前日の配信例</p>'+bubble('<b>明日のご予約について</b><br>整体のご予約は 10:00 です。<br>動きやすい服装でお越しください。<br>変更がある場合は店舗へご連絡ください。')+'<div class="choices">'+btn('来店後のお礼を見る →','after','',true)+'</div><p class="mini-label">日時はサンプルです。実際には配信されません。</p>',focus);}
+function couponStart(focus){couponUsed=false;couponPaint(focus);}
+function couponPaint(focus){paint('<p class="day">友だち向けクーポンの例</p><div class="coupon"><small>初回限定・デモ用の特典</small><strong>500円 OFF</strong><small>初回の整体メニューが対象／他の特典と併用不可<br>有効期限：このデモの体験中</small></div>'+bubble(couponUsed?'クーポンを利用済みに切り替えました。<br>実際の利用・割引は発生していません。':'会計時に提示するクーポンのイメージです。下のボタンで利用後の表示を試せます。')+'<div class="choices">'+(couponUsed?'<button class="chat-button" disabled>利用済み（デモ）</button>'+btn('もう一度試す','coupon-reset'):btn('クーポンを使ってみる（デモ）','coupon-use','',true))+'</div>',focus);}
+function pointsStart(focus){points=3;pointsPaint(focus);}
+function pointsPaint(focus){let marks='';for(let i=0;i<5;i++)marks+='<span class="stamp'+(i<points?' filled':'')+'">'+(i<points?'✓':i+1)+'</span>';paint('<p class="day">ショップカードの例</p><div class="stamp-card"><b>ご来店ポイント</b><div class="stamps">'+marks+'</div><b>'+points+' / 5 ポイント</b><p class="mini-label">5ポイントで次回500円OFF（架空の特典）</p></div>'+bubble(points<5?'「来店ポイントを追加」で、特典に届くまでを試せます。':'特典に到達しました。<br>実際のポイント・特典は発行されていません。')+'<div class="choices">'+(points<5?btn('来店ポイントを追加（デモ）','point-add','',true):'<button class="chat-button" disabled>特典に到達（デモ）</button>')+btn('3ポイントからやり直す','point-reset')+'</div><p class="mini-label">本番では店頭での付与方法と不正利用対策を決めます。</p>',focus);}
+function surveyStart(focus){paint('<p class="day">拡張ツール連携の設計例</p>'+bubble('どんな情報に興味がありますか？')+'<div class="choices">'+btn('デスクワーク中の体のケア','answer','desk')+btn('運動後のコンディショニング','answer','sports')+'</div><p class="mini-label">回答 → タグ付け → 案内の出し分けを体験できます。回答は保存されません。</p>',focus);}
+function select(next,focus){scene=next;document.querySelectorAll('[data-scene]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.scene===scene)));document.getElementById('scene-value').textContent=descriptions[scene];document.getElementById('preview-title').textContent=titles[scene];({booking:bookingStart,faq:faqStart,followup:followupStart,coupon:couponStart,points:pointsStart,survey:surveyStart})[scene](focus);}
+function revealPreview(){document.getElementById('interactive-preview').scrollIntoView({behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'start'});}
+document.querySelectorAll('[data-scene]').forEach(b=>b.addEventListener('click',()=>{select(b.dataset.scene,false);if(b.classList.contains('scenario'))revealPreview();}));
 
-<!-- ============ 01 PHONES ============ -->
-<section id="mock">
-  <div class="wrap">
-    <div class="sec-label">SECTION 01</div>
-    <h2>実機イメージ ── お客様のスマホにはこう届きます</h2>
-    <p class="sec-desc">左は友だち追加直後の自動接客トーク、右はトーク画面の下に常時表示される「リッチメニュー」です。スタッフが1通も手打ちしなくても、この流れがすべて自動で動きます。</p>
-
-    <div class="phones">
-      <!-- phone 1 : talk -->
-      <div class="phone-set">
-        <div class="phone">
-          <div class="screen">
-            <div class="notch"></div>
-            <div class="lheader"><span class="back">‹</span> からだ整えラボ 大宮院 <span class="hicons">☎ ≡</span></div>
-            <div class="chatbody">
-              <div class="datechip">今日</div>
-              <div class="stepchip">① 友だち追加の直後に自動送信</div>
-              <div class="msg in">
-                <div class="avatar">整</div>
-                <div class="bubble">友だち追加ありがとうございます😊<br>まずは30秒のお悩み診断をどうぞ。</div>
-                <span class="time">10:00</span>
-              </div>
-              <div class="stepchip">② ボタンをタップするだけで診断</div>
-              <div class="msg in">
-                <div class="avatar">整</div>
-                <div class="ccard">
-                  <div class="ccard-hd">30秒お悩み診断</div>
-                  <div class="ccard-bd">近いお悩みをタップしてください</div>
-                  <button class="cbtn">肩こり・首のこり</button>
-                  <button class="cbtn">腰痛・骨盤まわり</button>
-                  <button class="cbtn" style="margin-bottom:10px;">その他の不調</button>
-                </div>
-                <div class="peek"></div>
-              </div>
-              <div class="msg out">
-                <span class="time">既読<br>10:01</span>
-                <div class="bubble">腰痛・骨盤まわり</div>
-              </div>
-              <div class="stepchip">③ 回答に合わせて自動返信 → そのまま予約へ</div>
-              <div class="msg in">
-                <div class="avatar">整</div>
-                <div class="bubble">腰痛でお悩みなのですね。デスクワークの方に多いお悩みです。初回は<b>姿勢チェック+骨盤調整60分</b>がおすすめです。</div>
-                <span class="time">10:01</span>
-              </div>
-              <div class="msg in">
-                <div class="avatar">整</div>
-                <div class="ccard">
-                  <div class="ccard-hd">友だち限定 初回クーポン</div>
-                  <div class="price"><b>60分 3,980円</b> <s>通常6,600円</s></div>
-                  <button class="cbtn primary">空き枠を見て予約する</button>
-                </div>
-                <span class="time">10:01</span>
-              </div>
-            </div>
-            <div class="inputbar"><span>＋</span><span class="field">メッセージを入力</span><span><svg viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-0.12em"><rect x="9" y="3" width="6" height="10" rx="3"/><path d="M6 11a6 6 0 0 0 12 0M12 17v4"/></svg></span></div>
-          </div>
-        </div>
-        <div class="phone-cap">
-          <b><span>トーク画面:</span>あいさつ → 診断 → 予約が全自動</b>
-          お客様がボタンを押すたびに、回答に合わせた返信が自動で届きます。深夜の問い合わせでも取りこぼしません。①〜③のラベルは説明用で、実際の画面には表示されません。
-        </div>
-      </div>
-
-      <!-- phone 2 : rich menu -->
-      <div class="phone-set">
-        <div class="phone">
-          <div class="screen">
-            <div class="notch"></div>
-            <div class="lheader"><span class="back">‹</span> からだ整えラボ 大宮院 <span class="hicons">☎ ≡</span></div>
-            <div class="chatbody">
-              <div class="datechip">今日</div>
-              <div class="msg in">
-                <div class="avatar">整</div>
-                <div class="bubble">ご予約・アクセス・ご質問は、下のメニューからいつでもどうぞ。</div>
-                <span class="time">10:05</span>
-              </div>
-              <div class="msg out">
-                <span class="time">既読<br>10:06</span>
-                <div class="bubble">駐車場はありますか?</div>
-              </div>
-              <div class="stepchip">よくある質問はキーワードに自動で回答</div>
-              <div class="msg in">
-                <div class="avatar">整</div>
-                <div class="bubble">はい、店舗前に提携駐車場が2台分ございます。満車の場合は近隣のコインパーキングをご利用ください(30分無料券をお渡しします)。</div>
-                <span class="time">10:06</span>
-              </div>
-              <div class="stepchip" style="margin-top:auto;">▼ 画面下半分が「リッチメニュー」</div>
-            </div>
-            <div class="rm-toggle">メニュー ▾</div>
-            <div class="richmenu">
-              <div class="rm-cell"><span class="ric"><svg viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-0.12em"><rect x="4" y="10" width="16" height="10" rx="1"/><path d="M4 10h16M12 10v10"/><path d="M12 10s-4.5 0-4.5-3c0-2 3.5-2 4.5 3 1-5 4.5-5 4.5-3 0 3-4.5 3-4.5 3z"/></svg></span>初回限定<small>クーポン配布</small></div>
-              <div class="rm-cell hot">
-                <span class="ric"><svg viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-0.12em"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 9h18M8 3v4M16 3v4"/></svg></span>予約する<small>24時間受付</small>
-                <span class="tapring"></span>
-              </div>
-              <div class="rm-cell"><span class="ric"><svg viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-0.12em"><path d="M12 21s-6-5.6-6-10a6 6 0 1 1 12 0c0 4.4-6 10-6 10z"/><circle cx="12" cy="11" r="2"/></svg></span>アクセス<small>大宮駅 徒歩5分</small></div>
-              <div class="rm-cell"><span class="ric">❓</span>よくある質問<small>自動で回答</small></div>
-              <div class="rm-cell"><span class="ric"><svg viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-0.12em"><path d="M12 3l2.7 5.6 6.1.8-4.5 4.2 1.1 6-5.4-3-5.4 3 1.1-6L3.2 9.4l6.1-.8z"/></svg></span>お客様の声<small>改善事例</small></div>
-              <div class="rm-cell"><span class="ric"><svg viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-0.12em"><path d="M12 20s-7-4.6-7-9.2A4 4 0 0 1 12 8a4 4 0 0 1 7 2.8C19 15.4 12 20 12 20z"/></svg></span>友だち紹介<small>特典あり</small></div>
-            </div>
-          </div>
-        </div>
-        <div class="phone-cap">
-          <b><span>リッチメニュー:</span>お店の「顔」になる固定メニュー</b>
-          トーク画面の下に常に表示される画像メニューです。6つの枠はそれぞれタップでき、予約ページ・地図・自動回答など行き先を自由に設定できます(デザイン制作込み)。
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============ 02 FLOW ============ -->
-<section id="flow" style="background:#f2f8f4;">
-  <div class="wrap">
-    <div class="sec-label">SECTION 02</div>
-    <h2>シナリオ設計図 ── 裏側では、この流れが自動で動いています</h2>
-    <p class="sec-desc">友だち追加をきっかけに、決めておいたメッセージが決めておいた日に自動で届く仕組みを「ステップ配信」と呼びます。予約した方・まだの方で、その後に届く内容が自動で切り替わります。</p>
-
-    <div class="flow-box">
-      <div class="flow">
-        <div class="fnode start">友だち追加<small>店頭POP・ショップカード・Instagramから</small></div>
-        <div class="fconn"><span class="flabel">直後</span></div>
-        <div class="fnode">あいさつメッセージ+30秒お悩み診断<small>回答に合わせて初回メニューを自動でご案内</small></div>
-        <div class="fconn"><span class="flabel">3日後</span></div>
-        <div class="fnode">ステップ配信①  セルフケア動画<small>「腰痛の方に」など診断結果に合わせて出し分け</small></div>
-        <div class="fconn"><span class="flabel">7日後</span></div>
-        <div class="fnode">ステップ配信②  初回限定オファー<small>友だち限定価格+予約ボタンつき</small></div>
-
-        <div class="fbranch">
-          <div class="stub"></div>
-          <div class="hline"></div>
-          <div class="fcols">
-            <div class="fcol yes">
-              <div class="fconn long"></div>
-              <span class="branch-chip">予約した方</span>
-              <div class="fconn"></div>
-              <div class="fnode">前日リマインド<small>日時・持ち物・地図を自動送信</small></div>
-              <div class="fconn"></div>
-              <div class="fnode">ご来店</div>
-              <div class="fconn"></div>
-              <div class="fnode goal">来店後お礼+次回のご案内<small>口コミのお願い・2回目クーポンで再来店へ</small></div>
-            </div>
-            <div class="fcol no">
-              <div class="fconn long"></div>
-              <span class="branch-chip">まだ予約していない方</span>
-              <div class="fconn"></div>
-              <div class="fnode">14日後  掘り起こし配信<small>お客様の声+今月の空き枠をご案内</small></div>
-              <div class="fcol-note">ここで予約が入れば、自動で左側の「リマインド→来店」の流れに合流します。</div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <p class="flow-note">配信の日数・回数・文面は、お店の客層に合わせて自由に調整できます(納品後の変更方法もレクチャーします)。</p>
-    </div>
-  </div>
-</section>
-
-<!-- ============ 03 TABLE ============ -->
-<section id="plan">
-  <div class="wrap">
-    <div class="sec-label">SECTION 03</div>
-    <h2>配信設計表 ── 1通ごとに「目的」と「見る数字」を決めて設計します</h2>
-    <p class="sec-desc">感覚で配信するのではなく、各メッセージの目的とKPI(開封→タップ→予約の割合)をあらかじめ決め、配信後に数字を見て文面を改善していきます。月額運用ではこの表を毎月更新してご報告します。</p>
-
-    <p class="swipe-hint">← 表は横にスクロールできます →</p>
-    <div class="table-scroll">
-      <table>
-        <thead>
-          <tr><th>#</th><th>配信</th><th>タイミング</th><th>目的</th><th>KPIの目安(開封→タップ→予約)</th></tr>
-        </thead>
-        <tbody>
-          <tr><td class="no">1</td><td>あいさつ+お悩み診断</td><td><span class="tag">追加直後</span></td><td>第一印象づくり・お悩みの把握(タグ付け)</td><td class="kpi"><span>85%</span><i>→</i><span>45%</span><i>→</i><span>—</span></td></tr>
-          <tr><td class="no">2</td><td>ステップ①  セルフケア動画</td><td><span class="tag">3日後</span></td><td>役立つ情報で信頼づくり(売り込まない回)</td><td class="kpi"><span>60%</span><i>→</i><span>25%</span><i>→</i><span>—</span></td></tr>
-          <tr><td class="no">3</td><td>ステップ②  初回限定オファー</td><td><span class="tag">7日後</span></td><td>初回予約の獲得(このシナリオの山場)</td><td class="kpi"><span>55%</span><i>→</i><span>20%</span><i>→</i><span>8%</span></td></tr>
-          <tr><td class="no">4</td><td>予約前日リマインド</td><td><span class="tag">予約前日 18時</span></td><td>無断キャンセル・うっかり忘れの防止</td><td class="kpi"><span>90%</span><i>→</i><span>—</span><i>→</i><span>—</span></td></tr>
-          <tr><td class="no">5</td><td>来店後お礼+口コミ依頼</td><td><span class="tag">来店翌日</span></td><td>口コミ獲得・2回目予約への橋渡し</td><td class="kpi"><span>70%</span><i>→</i><span>30%</span><i>→</i><span>15%</span></td></tr>
-          <tr><td class="no">6</td><td>掘り起こし配信</td><td><span class="tag or">14日後(未予約の方のみ)</span></td><td>迷っている方の後押し(お客様の声+空き枠)</td><td class="kpi"><span>50%</span><i>→</i><span>15%</span><i>→</i><span>4%</span></td></tr>
-        </tbody>
-      </table>
-    </div>
-    <p class="table-note">※ KPIの数値は本デモ用の架空の設計値です。実際は業種・客層により異なるため、運用開始後の実測値をもとに毎月チューニングします。</p>
-  </div>
-</section>
-
-<!-- ============ 04 EFFECTS ============ -->
-<section id="effect" style="background:#f2f8f4;">
-  <div class="wrap">
-    <div class="sec-label">SECTION 04</div>
-    <h2>導入効果のイメージ</h2>
-    <p class="sec-desc">LINE公式アカウントの自動化で狙う効果は、大きくこの3つです。</p>
-    <div class="effects">
-      <div class="ecard">
-        <div class="eicon">⏰</div>
-        <h3>無断キャンセル・<br>うっかり忘れの削減</h3>
-        <p>予約前日に日時・地図つきのリマインドが自動で届くため、「忘れていた」によるキャンセルを防ぎます。一般に、リマインド配信は無断キャンセルの削減に効果があると言われています。</p>
-        <div class="foot">※ 効果は店舗の状況により異なります(本デモは架空の設計例です)。</div>
-      </div>
-      <div class="ecard">
-        <div class="eicon"><svg viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-0.12em"><path d="M17 2l4 4-4 4"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><path d="M7 22l-4-4 4-4"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg></div>
-        <h3>「1回きり」で終わらせない<br>再来店の仕組み</h3>
-        <p>来店後のお礼・セルフケア情報・次回クーポンが自動で届き続けるため、お客様との接点が切れません。一般に、既存のお客様の再来店は新規集客より低コストと言われています。</p>
-        <div class="foot">※ 配信内容・頻度は客層に合わせて設計します。</div>
-      </div>
-      <div class="ecard">
-        <div class="eicon"><svg viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-0.12em"><path d="M5 4h4l2 5-2.5 1.5a12 12 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg></div>
-        <h3>予約・よくある質問の<br>対応を自動化</h3>
-        <p>24時間いつでもLINEから予約でき、営業時間・駐車場などのよくある質問には自動で回答。施術中に電話を取れず予約を逃す、という機会損失を減らします。</p>
-        <div class="foot">※ 自動応答で解決しないご質問は通常のトークに引き継げます。</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============ CLOSING ============ -->
-<section id="closing">
-  <div class="wrap">
-    <div class="closing">
-      <h2>ここまでの一式を、設計から運用まで。</h2>
-      <p>リッチメニューのデザイン、シナリオ設計、配信文面の作成、開設・各種設定までを構築としてお引き受けし、公開後は数字を見ながら毎月の配信改善まで伴走します。本ページと同様のデモを、貴店の業種・メニューに合わせてお作りすることも可能です。</p>
-    </div>
-  </div>
-</section>
-
-
-
-<script>
-  // デモ用: リッチメニューのセルをタップ(クリック)すると軽く沈む
-  document.querySelectorAll('.rm-cell').forEach(function(cell){
-    cell.addEventListener('pointerdown',function(){cell.style.transform='scale(.96)';});
-    cell.addEventListener('pointerup',function(){cell.style.transform='';});
-    cell.addEventListener('pointerleave',function(){cell.style.transform='';});
-  });
-</script>
-<!-- demo-fict:start 架空サンプルの注記(2026-09-04 上部の帯からフッターへ移設) -->
-<style>#demo-fict{margin:0;padding:20px 20px 28px;background:#fff;color:rgba(13,13,13,.6);border-top:1px solid rgba(13,13,13,.14);font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue","Hiragino Kaku Gothic ProN","Noto Sans JP","Yu Gothic",Meiryo,sans-serif;font-size:13px;line-height:1.7;text-align:center}@media print{#demo-fict{display:none}}</style>
-<div id="demo-fict">これは制作サンプル（架空の整体院を題材にしたLINE構築デモ）です。店名・数値はすべて架空です。</div>
-<!-- demo-fict:end -->
-
-</body>
+document.getElementById('reset').addEventListener('click',()=>select(scene,false));
+chat.addEventListener('click',e=>{const b=e.target.closest('[data-action]');if(!b)return;const action=b.dataset.action,value=b.dataset.value;
+if(action==='menu'){menu=value;paint(bubble(menu,true)+bubble('ご希望の日時を選んでください。')+'<p class="mini-label">空き枠の表示例（実際の空き状況ではありません）</p><div class="choices slots">'+btn('明日 10:00','slot','明日 10:00')+btn('明日 14:00','slot','明日 14:00')+btn('明後日 11:00','slot','明後日 11:00')+'<button class="chat-button" disabled>明後日 15:00<br>満席（例）</button></div><div class="choices">'+btn('← メニューを選び直す','restart')+'</div>',true);}
+if(action==='slot'){slot=value;paint(bubble(slot,true)+bubble('<b>予約内容をご確認ください</b><br>'+menu+'<br>'+slot)+'<div class="choices">'+btn('この内容で試す（デモ）','confirm','',true)+btn('← メニューから選び直す','restart')+'</div><p class="mini-label">実際の予約・情報の保存は行われません。</p>',true);}
+if(action==='confirm'){paint('<p class="day">予約受付の完了イメージ</p>'+bubble('<b>デモの予約操作が完了しました。</b><br>'+menu+'<br>'+slot+'<br><br>実際の予約は作成されていません。')+'<div class="choices">'+btn('続けて来店フォローを見る','follow','',true)+btn('もう一度試す','restart')+'</div>',true);}
+if(action==='restart')bookingStart(true);
+if(action==='follow')select('followup',true);
+if(action==='faq'){const answers={hours:['営業時間を知りたい','営業時間は 10:00〜19:00、定休日は水曜日です。<br>※ 架空店舗の設定です。'],parking:['駐車場はありますか？','店舗前に駐車場が2台分あります。<br>※ 架空店舗の設定です。'],staff:['スタッフに相談したい','本番では、スタッフが確認して返信する流れを設計します。<br>このデモでは相談の送信は行いません。']};paint(bubble(answers[value][0],true)+bubble(answers[value][1])+'<div class="choices">'+btn('ほかの質問を見る','faq-back')+btn('予約メニューへ','booking','',true)+'</div>',true);}
+if(action==='faq-back')faqStart(true);
+if(action==='booking')select('booking',true);
+if(action==='after'){paint('<p class="day">来店翌日の配信例</p>'+bubble('<b>ご来店ありがとうございました。</b><br>その後、気になることはありませんか？<br>次回のご予約は、画面下のメニューからご確認いただけます。')+'<div class="choices">'+btn('次の予約を試す','booking','',true)+btn('前日の案内に戻る','before')+'</div><p class="mini-label">来店確認の方法や配信条件は、導入時に設計します。</p>',true);}
+if(action==='before')followupStart(true);
+if(action==='coupon-use'){couponUsed=true;couponPaint(true);}
+if(action==='coupon-reset')couponStart(true);
+if(action==='point-add'){points=Math.min(5,points+1);pointsPaint(true);}
+if(action==='point-reset')pointsStart(true);
+if(action==='answer'){const data={desk:['デスクワーク中の体のケア','デスクワークに関心','デスクワークの合間に読める、体のケア情報をご案内します。'],sports:['運動後のコンディショニング','運動後のケアに関心','運動後のケアに関する情報や、メニューをご案内します。']}[value];paint(bubble(data[0],true)+'<div class="tag-result">付けるタグの例：<b>'+data[1]+'</b><br>このタグに合わせて案内を出し分けます。</div>'+bubble(data[2])+'<div class="choices">'+btn('別の回答を試す','survey-reset','',true)+'</div><p class="mini-label">拡張ツール連携の設計例です。タグの登録やメッセージ送信は行っていません。</p>',true);}
+if(action==='survey-reset')surveyStart(true);
+});
+select('booking',false);
+})();
+</script></body>
 </html>

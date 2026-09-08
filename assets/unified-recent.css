@@ -1,0 +1,75 @@
+/* Shared presentation shell for the eleven interactive work samples.
+   App-specific layouts, processing rules, and exports remain in each page. */
+html:has(body.recent-demo),body.recent-demo{background:#080808;color:#ededed}
+.recent-demo{font-family:system-ui,-apple-system,"Hiragino Sans","Noto Sans JP",sans-serif;-webkit-font-smoothing:antialiased}
+.recent-demo .wrap,.recent-content>main,.recent-content>footer{width:min(1120px,calc(100% - 64px));margin-left:auto;margin-right:auto}
+.recent-demo .recent-header{width:min(1120px,calc(100% - 64px));height:72px;margin:auto;padding:0;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #292929;gap:20px}
+.recent-data>.wrap>.recent-header{width:100%}
+.recent-demo .recent-header .brand{color:#ededed;font-size:14px;font-weight:600;text-decoration:none}
+.recent-demo .recent-header .back{color:#b4b4b4;font-size:12px;font-weight:400;text-decoration:none;padding:12px 0}
+.recent-demo .hero{padding:48px 0 30px;background:#080808}
+.recent-demo .hero h1{font-size:clamp(32px,3.2vw,44px);font-weight:550;line-height:1.4;letter-spacing:-.035em;margin:16px 0;color:#f3f3f3}
+.recent-demo .phrase,.recent-demo .heading-phrase{display:inline-block;max-width:100%}
+.recent-demo .eyebrow{font-size:12px;font-weight:500;letter-spacing:.07em;color:#9db6ed}
+.recent-demo .eyebrow:before{display:none}
+.recent-demo .hero>.lead,.recent-demo .hero>.wrap>.lead,.recent-demo .hero>p:not(.note),.recent-demo .intro p{font-size:15px;line-height:1.9;max-width:810px;margin:0;color:#bcbcbc}
+.recent-demo .intro{display:block}
+.recent-demo .try,.recent-demo .demo-label{display:inline-block;margin:18px 0 0;padding:10px 16px;border:1px solid #465675;border-radius:24px;background:#18202e;color:#d5e2ff;font-size:12px;font-weight:600;text-decoration:none;box-shadow:none}
+.recent-demo .try:hover,.recent-demo .demo-label:hover{background:#23324a;border-color:#7291c6}
+.recent-demo .usecase,.recent-demo .beforeafter{display:grid;grid-template-columns:1fr 1fr;max-width:none;margin:26px 0 14px;border:1px solid #303030;border-radius:10px;overflow:hidden;background:#0e0e0e}
+.recent-demo .usecase>div,.recent-demo .beforeafter>div{padding:17px 22px;background:transparent}
+.recent-demo .usecase>div+div,.recent-demo .beforeafter>div+div{border:0;border-left:1px solid #303030;background:#131820}
+.recent-demo .usecase small,.recent-demo .beforeafter small,.recent-demo .flow-label{font-size:11px;color:#a2afc6;font-weight:500}
+.recent-demo .usecase strong,.recent-demo .beforeafter strong{display:block;font-size:16px;line-height:1.65;font-weight:550;color:#ededed;margin:6px 0}
+.recent-demo .usecase p,.recent-demo .beforeafter p{font-size:12px;line-height:1.8;margin:0;color:#aaa}
+.recent-demo .simulation-note,.recent-demo .hero .note{font-size:12px;line-height:1.8;color:#999;margin:12px 0 0;max-width:none}
+.recent-demo .window-guide{width:100%;max-width:1040px;margin:0 auto 12px;font-size:12px;line-height:1.8;color:#c2c2c2}
+.recent-demo .window-scroll-hint{font-weight:400;color:#929292;font-size:11px}
+.recent-demo .app{width:100%;max-width:1040px;margin:0 auto;border:1px solid #cdd3dd;border-radius:14px;background:#f6f8fb;color:#182338;box-shadow:0 24px 60px #0006,0 4px 12px #0004;scroll-margin-top:24px}
+.recent-demo .app-top,.recent-demo .titlebar,.recent-demo .top{min-height:68px;background:linear-gradient(#fafbfc,#eceff4);border-bottom:1px solid #d6dde7;padding:16px 22px;color:#182338;gap:10px;flex-shrink:0}
+.recent-demo .app-title,.recent-demo .titlebar>strong,.recent-demo .top>strong{font-size:13px;font-weight:600;line-height:1.6;min-width:0}
+.recent-demo .app-title small{font-size:10px;line-height:1.6;font-weight:400}
+.recent-demo .lights,.recent-demo .window-lights{display:flex;gap:7px;flex-shrink:0;align-self:center;margin:0}
+.recent-demo .lights i,.recent-demo .window-lights i,.recent-demo .dot{display:block;width:10px;height:10px;min-width:10px;border-radius:50%;flex-shrink:0}
+.recent-demo .app-top #reset,.recent-demo .titlebar #reset,.recent-demo .top #reset{font-size:11px;line-height:1.6;max-width:110px;flex-shrink:0;padding:8px 10px;background:#ffffffba;border:1px solid #d1d9e5;border-radius:7px;color:#53627b}
+.recent-demo .service,.recent-demo .delivery-summary{max-width:none;padding:48px 0 34px}
+.recent-demo .service h2,.recent-demo .delivery-summary h2{font-size:28px;font-weight:500;line-height:1.55;letter-spacing:-.025em;margin:0 0 18px;color:#eee}
+.recent-demo .service h3{font-size:18px;font-weight:500;line-height:1.7;margin:26px 0 10px;color:#ddd}
+.recent-demo .service p{font-size:14px;line-height:1.9;color:#aaa;max-width:870px;margin:0 0 14px}
+.recent-demo .service .note{font-size:12px;color:#999}
+.recent-demo .bottom,.recent-demo .contact,.recent-demo .recent-contact{background:#080808;border-top:1px solid #303030;padding:30px 0 36px}
+.recent-demo .bottom h2,.recent-demo .contact h2,.recent-demo .recent-contact h2{font-size:24px;font-weight:500;line-height:1.6;letter-spacing:-.02em;margin:0 0 12px;color:#eee}
+.recent-demo .bottom p,.recent-demo .contact p,.recent-demo .recent-contact p{font-size:14px;line-height:1.9;color:#aaa;margin:0;max-width:870px}
+.recent-demo .foot,.recent-demo .footer{font-size:11px;color:#888;line-height:1.7;padding:24px 0}
+@media(min-width:761px){
+ .recent-demo .app{height:min(650px,calc(100svh - 96px))}
+ .recent-original .app{overflow:auto}
+ .recent-original .app-top{position:sticky;top:0;z-index:5}
+ .recent-data .app,.recent-content .app{display:flex;flex-direction:column;overflow:hidden}
+ .recent-data .content,.recent-content .scroll{min-height:0;overflow:auto;flex:1}
+}
+@media(max-width:760px){
+ .recent-demo .wrap,.recent-content>main,.recent-content>footer,.recent-demo .recent-header{width:calc(100% - 32px)}
+ .recent-demo .recent-header{height:64px;gap:12px}
+ .recent-demo .recent-header .brand{font-size:12px}.recent-demo .recent-header .back{font-size:11px}
+ .recent-demo .hero{padding:30px 0 24px}
+ .recent-demo .hero h1{font-size:29px;line-height:1.45}
+ .recent-demo .hero h1 .phrase,.recent-demo .hero h1 .heading-phrase{white-space:normal}
+ .recent-demo .hero>.lead,.recent-demo .hero>.wrap>.lead,.recent-demo .hero>p:not(.note),.recent-demo .intro p{font-size:14px}
+ .recent-demo .usecase,.recent-demo .beforeafter{grid-template-columns:1fr;margin-top:22px}
+ .recent-demo .usecase>div,.recent-demo .beforeafter>div{padding:15px 17px}
+ .recent-demo .usecase>div+div,.recent-demo .beforeafter>div+div{border-left:0;border-top:1px solid #303030}
+ .recent-demo .window-scroll-hint{display:none}
+ .recent-demo .app{height:auto;max-height:none;overflow:hidden;border-radius:12px}
+ .recent-demo .app-top,.recent-demo .titlebar,.recent-demo .top{min-height:64px;padding:13px 12px;gap:8px;position:static}
+ .recent-demo .app-title,.recent-demo .titlebar>strong,.recent-demo .top>strong{font-size:12px}
+ .recent-demo .app-top #reset,.recent-demo .titlebar #reset,.recent-demo .top #reset{font-size:10px;max-width:78px;padding:7px}
+ .recent-demo .lights,.recent-demo .window-lights{gap:4px}
+ .recent-demo .lights i,.recent-demo .window-lights i,.recent-demo .dot{width:8px;height:8px;min-width:8px}
+ .recent-demo .service,.recent-demo .delivery-summary{padding:36px 0 28px}
+ .recent-demo .service h2,.recent-demo .delivery-summary h2{font-size:24px}
+ .recent-demo .bottom h2,.recent-demo .contact h2,.recent-demo .recent-contact h2{font-size:22px}
+ .recent-demo .service .phrase,.recent-demo .bottom .phrase,.recent-demo .contact .phrase{white-space:normal}
+}
+
+@media(max-width:760px){.recent-demo .window-guide{display:block}}

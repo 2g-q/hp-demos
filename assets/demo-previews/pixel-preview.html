@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+
+<html lang="ja"><head><base href="../../"/><meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="noindex,nofollow" name="robots"/>
+<title>ドット絵プレビュー｜自動化のミナト</title>
+<style>
+:root{--black:#0D0D0D;--white:#FFFFFF;--charcoal:#343541;--gray:#8E8EA0;--blue:#2563EB}
+*{box-sizing:border-box}
+body{margin:0;background:var(--black);color:var(--white);
+ font-family:system-ui,-apple-system,"Hiragino Sans","Yu Gothic",sans-serif;
+ padding:40px 20px;display:flex;flex-direction:column;align-items:center;gap:20px}
+h1{margin:0;font-size:clamp(1.1rem,3vw,1.4rem);font-weight:600;letter-spacing:-.01em}
+p{margin:0;color:var(--gray);font-size:.9rem;line-height:1.9;max-width:640px;text-align:center}
+.frame{width:min(1280px,100%);aspect-ratio:1280/800;border:1px solid var(--white);
+ border-radius:12px;overflow:hidden;background:var(--black)}
+canvas{width:100%;height:100%;display:block;image-rendering:pixelated}
+</style><style>header .brand{flex-shrink:0}header .menu a{white-space:nowrap}header .book{white-space:nowrap}header .brand small{display:none}@media(max-width:1100px){header .menu{display:none}header .menu.on,header .menu.open{display:flex}header .burger{display:flex}header .tel{display:none}}@media(max-width:600px){header .wrap{padding-left:16px;padding-right:16px}header .brand{font-size:17px;gap:7px;white-space:nowrap}header .leaf{width:22px;height:22px;flex-shrink:0}header .right{gap:12px}header .book{font-size:12px;padding:10px 12px}}</style></head><body>
+<a href="./pixel-office.html" style="color:#fff;text-underline-offset:4px">← ドット絵の制作案内へ</a><h1>AIオフィス（検討中）</h1>
+<div class="frame"><canvas id="scheme"></canvas></div>
+<p>AI社員が働いている様子。文字は置かず、持ち物と机の上の物で職種を分けています。</p>
+<p>※仕組みの説明用に作った図です。実際の稼働状況を映すものではありません。</p>
+<script src="./scheme-pixel.js"></script>
+<script>window.mountSchemePixel(document.getElementById('scheme'));</script>
+<script>document.addEventListener('click',function(e){const a=e.target.closest('a');if(!a)return;const h=a.getAttribute('href')||'';if(h.startsWith('#')){e.preventDefault();if(h.length>1){const t=document.getElementById(decodeURIComponent(h.slice(1)));if(t)t.scrollIntoView({behavior:'smooth',block:'start'});}return;}if(/^(tel:|mailto:)/i.test(h)){e.preventDefault();alert('制作サンプルです。電話・メールの送信は行いません。');return;}if(a.hasAttribute('download'))return;if(h){e.preventDefault();window.top.location.href=a.href;}},true);document.addEventListener('submit',function(e){e.preventDefault();},true);</script></body></html>

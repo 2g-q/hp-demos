@@ -1,0 +1,46 @@
+/* Shared presentation for the portfolio's service and sample indexes. */
+@media screen{
+html{background:#080808!important;scroll-padding-top:24px}
+body.unified-catalog{--black:#f5f5f5;--white:#080808;--charcoal:#b8b8b8;--gray:#aaa;--ink-60:#b8b8b8;--tint-4:#141414;--tint-8:#202020;--tint-12:#292929;--hairline:#303030;--blue:#9bbcff;--shell-panel:#141414;--shell-line:#303030;background:#080808!important;color:#f5f5f5;font-family:system-ui,-apple-system,"Hiragino Sans","Noto Sans JP",sans-serif}
+body.unified-catalog:before,body.unified-catalog:after,.glow-top,#cursor-field{display:none!important}
+.unified-header{box-sizing:border-box;max-width:1120px;width:calc(100% - 48px);height:72px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;gap:16px;border-bottom:1px solid #303030;font-size:13px;line-height:1.5}
+.unified-header a{color:#b8b8b8;text-decoration:none;padding:12px 0}.unified-header a:first-child{color:#f5f5f5;font-weight:600;font-size:14px}
+.unified-catalog .container{max-width:1168px;padding-inline:24px}
+.unified-catalog .hero{padding:56px 0 40px!important;background:#080808!important;text-align:left}
+.unified-catalog .hero h1{margin:0!important;max-width:1050px;font-size:clamp(32px,4vw,44px)!important;line-height:1.4!important;letter-spacing:-.03em;font-weight:650;text-align:left;text-wrap:pretty}
+.unified-catalog .hero h1 br{display:none}.unified-catalog .hero h1 .nw{white-space:normal}
+.unified-catalog .hero .lead{margin:24px 0 0!important;font-size:15px!important;line-height:1.85;max-width:850px;color:#b8b8b8!important;text-align:left}
+.unified-catalog .hero-cta,.unified-catalog .contact-cta{justify-content:flex-start}
+.unified-catalog .sec{margin-top:0!important;padding:64px 0!important;background:#080808!important;border-color:#303030!important}
+.unified-catalog .sec-head{max-width:none;text-align:left;margin-inline:0}
+.unified-catalog .sec-head h2,.unified-catalog .contact h2{font-size:clamp(24px,3vw,30px)!important;line-height:1.5!important;color:#f5f5f5!important;text-align:left}
+.unified-catalog .sec-head .lead{font-size:15px;color:#b8b8b8;max-width:850px;line-height:1.85}
+.unified-catalog .sec-body{margin-top:32px}
+.unified-catalog .card,.unified-catalog .case-main,.unified-catalog .price-card,.unified-catalog .work-card{background:#141414!important;border:1px solid #303030!important;box-shadow:none!important;backdrop-filter:none;border-radius:12px}
+.unified-catalog .card:hover,.unified-catalog .work-card:hover{transform:none!important;background:#1c1c1c!important;border-color:#555!important}
+.unified-catalog .card .body,.unified-catalog .card p,.unified-catalog .case-main p{color:#b8b8b8}
+.unified-catalog .btn{border-radius:8px;box-shadow:none!important;min-height:44px;font-size:14px}
+.unified-catalog .btn-primary{background:#f5f5f5!important;color:#141414!important}
+.unified-catalog .btn-ghost{background:#161616!important;color:#f5f5f5!important;border:1px solid #444!important}
+.unified-catalog .contact{margin:0;padding:56px 0!important;background:#080808!important;border-top:1px solid #303030;text-align:left}
+.unified-catalog .contact:before{display:none!important}.unified-catalog .contact .lead{margin:20px 0!important;color:#b8b8b8}.unified-catalog .contact-sub{color:#b8b8b8}
+.unified-catalog .footer{background:#080808!important;border-top:1px solid #303030;color:#aaa}
+.unified-catalog .portfolio-review{max-width:1120px;width:calc(100% - 48px);margin:32px auto 56px;padding:32px 0;border:0;border-top:1px solid #303030;border-radius:0;background:#080808;color:#f5f5f5;font-size:15px}
+.unified-catalog .portfolio-review h2{color:#f5f5f5;font-size:28px}.unified-catalog .portfolio-review p{color:#b8b8b8}.unified-catalog .portfolio-review a{color:#9bbcff}
+.unified-catalog .portfolio-review nav{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:24px}
+.unified-catalog .portfolio-review nav a{margin:0;padding:16px;border:1px solid #333;border-radius:8px;text-decoration:none;color:#eee;background:#141414;font-size:14px}
+.unified-catalog .portfolio-review nav a:hover{border-color:#9bbcff}.unified-catalog .portfolio-review nav small{display:block;color:#aaa;font-size:12px;line-height:1.7;margin-top:8px}
+.unified-catalog .reveal-ready,.unified-catalog .sec-head,.unified-catalog .card,.unified-catalog .reason,.unified-catalog .flow-item{opacity:1!important;transform:none!important}
+.unified-catalog a:focus-visible,.unified-catalog button:focus-visible{outline:3px solid #9bbcff;outline-offset:4px}
+@media(max-width:760px){.unified-header{width:calc(100% - 40px)}.unified-catalog .container{padding-inline:20px}.unified-catalog .hero{padding:40px 0 24px!important}.unified-catalog .sec{padding:44px 0!important}.unified-catalog .hero h1{font-size:32px!important;overflow-wrap:break-word}.unified-catalog .portfolio-review{width:calc(100% - 40px);margin:24px auto 40px}.unified-catalog .portfolio-review nav{grid-template-columns:1fr}.unified-catalog .hero-cta{align-items:flex-start}.unified-catalog .hero-cta .btn{width:auto}.unified-catalog .card{padding:24px}}
+}
+@media print{.unified-header{display:none}}
+@media screen{
+.unified-catalog .case-bubble{color:#202020;background:#fff!important}.unified-catalog .case-bubble p{color:#343434!important}.unified-catalog .case-bubble .step-label{color:#626262!important}
+.unified-catalog .portfolio-nav{background:#080808!important;border-color:#333;backdrop-filter:none}.unified-catalog .portfolio-nav a{color:#ccc}
+.unified-catalog .ex-shot{max-width:720px;margin-left:0;margin-right:auto}
+}
+
+@media screen{.catalog-phrase{display:inline-block;max-width:100%}}
+@media screen and (max-width:760px){.unified-catalog .flow:has(.flow-node){flex-direction:column;overflow:visible;gap:6px}.unified-catalog .flow-node{min-width:0;width:100%}.unified-catalog .flow-arrow{transform:rotate(90deg);padding:0;line-height:24px}}
+@media screen{.unified-catalog a{color:#9bbcff}.unified-catalog .unified-header a:first-child{color:#f5f5f5}.unified-catalog .unified-header a:last-child{color:#b8b8b8}}

@@ -1,8 +1,9 @@
 <!DOCTYPE html>
+
 <html lang="ja">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>(株)サンプル商事 オンラインストア｜月次売上ダッシュボード【デモ】</title>
 <style>
   :root{
@@ -230,144 +231,112 @@
   .dintro .dcap{margin-top:16px;font-size:.875rem;line-height:1.435rem;color:rgba(13,13,13,.6)}
   @media (max-width:560px){.dintro{padding:52px 0 44px}}
 </style>
-<meta name="robots" content="noindex">
-</head>
-<body>
-<!-- cw-bar:start クラウドワークス提案用の戻り帯(hp_demos_build_cw.py が生成) -->
+<meta content="noindex" name="robots"/>
 <style>
-#cwbar{position:sticky;top:0;z-index:99999;background:#fff;border-bottom:1px solid rgba(13,13,13,.14);
-font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue","Hiragino Kaku Gothic ProN","Noto Sans JP","Yu Gothic",Meiryo,sans-serif}
-#cwbar .in{max-width:1128px;margin-inline:auto;padding:0 20px;height:56px;display:flex;align-items:center;justify-content:space-between;gap:16px}
-#cwbar .bk{display:inline-flex;align-items:center;height:36px;padding:0 16px;border-radius:2.5rem;
-background:#0D0D0D;color:#fff;font-size:.8125rem;font-weight:500;text-decoration:none}
-#cwbar .nm{color:#0D0D0D;font-size:1rem;font-weight:600}
-@media print{#cwbar{display:none}}
-</style>
-<div id="cwbar"><div class="in"><span class="nm">ミナト AI・IT ラボ</span><a class="bk" href="./cw.html">← 制作例一覧へ</a></div></div>
-<!-- cw-bar:end -->
-
-
-
-
-
-<section class="dintro">
-  <div class="in">
-    <h2>売上ダッシュボード</h2>
-    <p class="dlead">売上の記録(CSV)を所定の場所に置くだけで、集計・グラフ・前月比まで毎月自動で更新される仕組みの画面デモです。下の画面は実際に触れます。月を切り替えると、すべてのグラフと表が連動します。</p>
-    <p class="dcap">※会社名・商品・数値はすべて架空です。</p>
-  </div>
+/* Unified portfolio shell: shared reading order and laptop-sized interaction. */
+html,body{background:#080808!important;color:#e9e9e9;margin:0!important;padding:0!important}body{font-family:system-ui,-apple-system,"Hiragino Sans",Meiryo,sans-serif!important}.u-nav,.u-hero,.u-compare,.u-scope,.u-close,.u-hint{box-sizing:border-box;width:calc(100% - 48px);max-width:1040px;margin-left:auto;margin-right:auto}.u-nav{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:24px 0;border-bottom:1px solid #292929;font-size:13px}.u-nav a{color:#d4d4d4;text-decoration:none}.u-hero{padding:64px 0 30px}.u-kicker{font-size:12px;letter-spacing:.1em;color:#aaa;margin:0 0 14px}.u-hero h1{font-size:clamp(28px,3.4vw,44px);line-height:1.4;letter-spacing:-.04em;color:#f5f5f5;margin:0 0 18px;font-weight:650}.u-hero p:not(.u-kicker){font-size:15px;line-height:1.9;color:#aaa;max-width:780px;margin:0}.u-compare{display:grid;grid-template-columns:1fr 1fr;gap:30px;padding:22px 0 30px}.u-compare article{border-top:1px solid #353535;padding-top:18px}.u-compare b{font-size:12px;color:#ddd}.u-compare p,.u-scope p,.u-close p{font-size:14px;line-height:1.9;color:#aaa;margin:8px 0 0}.u-hint{color:#b6b6b6;font-size:13px;line-height:1.8;margin-top:12px;margin-bottom:18px}.u-hint strong{color:#fafafa}.u-window{display:flex;flex-direction:column;width:calc(100% - 48px);max-width:1040px;height:min(650px,calc(100svh - 96px));margin:0 auto;border:1px solid #454545;border-radius:15px;overflow:hidden;box-shadow:0 22px 70px #0008;background:#fff;color:#17212d;box-sizing:border-box}.u-titlebar{display:flex;gap:7px;align-items:center;flex:none;min-height:46px;padding:0 16px;background:#f1f2f4;border-bottom:1px solid #d8dce2;color:#4a5360;font:600 12px system-ui;box-sizing:border-box}.u-titlebar i{width:10px;height:10px;background:#ed6a5f;border-radius:50%}.u-titlebar i:nth-child(2){background:#f4bf50}.u-titlebar i:nth-child(3){background:#61c454}.u-titlebar span{margin-left:8px}.u-content{flex:1;min-height:0;overflow:auto;background:#fff;color:#17212d;overscroll-behavior:contain}.u-content:focus-visible{outline:3px solid #578feb;outline-offset:-3px}.u-scope{display:grid;grid-template-columns:1fr 1fr;gap:32px;padding:42px 0;border-bottom:1px solid #292929}.u-scope h2,.u-close h2{font-size:21px;line-height:1.55;color:#eee;margin:0}.u-close{padding:42px 0 54px}.u-close a{display:inline-block;margin-top:20px;color:#ddd;text-decoration:underline}.u-content .workspace{margin:0;padding:24px;gap:24px;grid-template-columns:minmax(0,1fr) 360px}.u-content .preview-stage{padding:12px}.u-content .phone{width:280px;aspect-ratio:390/844;height:auto}.u-content>main{padding:24px;margin:0;width:auto;max-width:none}.u-content>.wrap{max-width:none;padding:22px;margin:0}.u-content>.app{min-height:0!important;margin:0;max-width:none}.u-content>header{position:static!important;padding:20px;color:#17212d;background:#fff}.u-content .side{position:sticky!important;top:0!important;max-height:none!important}.u-content .grid{padding:24px}.u-content .wrap .grid{padding:0}.u-content .workspace h2{color:#17212d}.u-content #mock,.u-content #flow,.u-content #plan{margin:0 auto;padding:24px;max-width:100%;background:#fff;color:#17212d}.u-content #mock .phone{max-height:606px;overflow:auto}.u-content #mock h2,.u-content #flow h2,.u-content #plan h2{color:#17212d}.u-content #mock .phone-wrap{min-width:0}.u-content .app .top{position:static!important}
+@media(max-width:760px){.u-nav,.u-hero,.u-compare,.u-scope,.u-close,.u-hint{width:calc(100% - 32px)}.u-nav{font-size:11px;padding:20px 0}.u-hero{padding:42px 0 20px}.u-hero h1{font-size:29px}.u-compare,.u-scope{grid-template-columns:1fr;gap:20px}.u-window{width:calc(100% - 24px);height:auto;overflow:visible;border-radius:12px}.u-titlebar{border-radius:12px 12px 0 0;font-size:11px}.u-content{overflow:visible;border-radius:0 0 12px 12px}.u-content .workspace{padding:16px 10px;grid-template-columns:1fr;gap:24px}.u-content .phone{width:280px;max-width:100%}.u-content .grid{padding:14px}.u-content>main,.u-content>.wrap{padding:14px}.u-content .app{display:block}.u-content .side{position:static!important}.u-content #mock,.u-content #flow,.u-content #plan{padding:16px}.u-content .phones{flex-direction:column}.u-hero h1 span{display:inline-block}.u-scope{padding:30px 0}.u-close{padding-top:30px}}
+@media print{.u-nav,.u-hero,.u-compare,.u-titlebar,.u-hint,.u-scope,.u-close{display:none!important}.u-window,.u-content{display:block;height:auto!important;overflow:visible!important;width:100%;max-width:none;box-shadow:none;border:0}}
+</style><style>.u-nav{height:72px;max-width:1120px;padding:0}.u-hero{padding-top:52px}.u-content .workspace{box-sizing:border-box}.u-content .side{height:auto!important}.u-content table{max-width:100%}@media(max-width:760px){.u-hero{padding-top:40px}.u-content .app>div{min-width:0}.u-content .top{flex-wrap:wrap;height:auto;gap:10px}.u-content .side{width:100%!important;box-sizing:border-box}.u-content .cards{grid-template-columns:1fr 1fr}.u-content .phone-set{max-width:100%}.u-content .tblwrap,.u-content .table-wrap{overflow:auto;max-width:100%}}</style></head>
+<body><nav class="u-nav"><a href="index.html">ミナト AI・IT ラボ</a><a href="cw.html">作例一覧へ ↗</a></nav><section class="u-hero"><p class="u-kicker">売上ダッシュボード / 自主制作デモ</p><h1><span>売上の変化を、</span><span>ひとつの画面で。</span></h1><p>月を切り替えると、売上・グラフ・商品一覧が連動します。</p></section><section class="u-compare"><article><b>導入前の困りごと</b><p>月ごとに表を作り直し、比較する数字を探している。</p></article><article><b>仕組みを整えると</b><p>同じ指標で月別・商品別の動きを確認できます。</p></article></section><p class="u-hint"><strong>この画面で試せます。</strong> 月を切り替え、商品一覧の列見出しを押してください。</p><section class="u-window"><div class="u-titlebar"><i></i><i></i><i></i><span>売上ダッシュボード — 操作サンプル</span></div><div aria-label="操作デモ" class="u-content" role="region" tabindex="0"><header>
+<div class="head-in">
+<div class="brand">
+<div class="brand-mark">S</div>
+<div>
+<h1>(株)サンプル商事 オンラインストア<span class="sub">　月次売上ダッシュボード</span></h1>
+<div class="sub">Monthly Sales Dashboard — 2026年上半期</div>
+</div>
+</div>
+</div>
+<div class="head-meta">
+<div aria-label="対象月の選択" class="seg" id="seg" role="tablist"></div>
+<div class="updated">最終更新: <b id="updatedAt">—</b>（固定の架空データを表示）</div>
+</div>
+</header><div class="wrap">
+<!-- KPI -->
+<section aria-label="主要KPI" class="kpis">
+<div class="kpi">
+<div class="label"><span class="ic">¥</span>売上高</div>
+<div class="val" id="kpiSales">—</div>
+<div class="delta" id="kpiSalesD"></div>
+</div>
+<div class="kpi">
+<div class="label"><span class="ic">件</span>注文数</div>
+<div class="val" id="kpiOrders">—</div>
+<div class="delta" id="kpiOrdersD"></div>
+</div>
+<div class="kpi">
+<div class="label"><span class="ic">単</span>客単価</div>
+<div class="val" id="kpiAov">—</div>
+<div class="delta" id="kpiAovD"></div>
+</div>
+<div class="kpi">
+<div class="label"><span class="ic">率</span>リピート率</div>
+<div class="val" id="kpiRepeat">—</div>
+<div class="delta" id="kpiRepeatD"></div>
+</div>
 </section>
-
-<header>
-  <div class="head-in">
-    <div class="brand">
-      <div class="brand-mark">S</div>
-      <div>
-        <h1>(株)サンプル商事 オンラインストア<span class="sub">　月次売上ダッシュボード</span></h1>
-        <div class="sub">Monthly Sales Dashboard — 2026年上半期</div>
-      </div>
-    </div>
-  </div>
-  <div class="head-meta">
-    <div class="seg" id="seg" role="tablist" aria-label="対象月の選択"></div>
-    <div class="updated">最終更新: <b id="updatedAt">—</b>（CSV取込 → 自動集計）</div>
-  </div>
-</header>
-
-<div class="wrap">
-
-  <!-- KPI -->
-  <section class="kpis" aria-label="主要KPI">
-    <div class="kpi">
-      <div class="label"><span class="ic">¥</span>売上高</div>
-      <div class="val" id="kpiSales">—</div>
-      <div class="delta" id="kpiSalesD"></div>
-    </div>
-    <div class="kpi">
-      <div class="label"><span class="ic">件</span>注文数</div>
-      <div class="val" id="kpiOrders">—</div>
-      <div class="delta" id="kpiOrdersD"></div>
-    </div>
-    <div class="kpi">
-      <div class="label"><span class="ic">単</span>客単価</div>
-      <div class="val" id="kpiAov">—</div>
-      <div class="delta" id="kpiAovD"></div>
-    </div>
-    <div class="kpi">
-      <div class="label"><span class="ic">率</span>リピート率</div>
-      <div class="val" id="kpiRepeat">—</div>
-      <div class="delta" id="kpiRepeatD"></div>
-    </div>
-  </section>
-
-  <!-- trend + category -->
-  <section class="grid g-main">
-    <div class="card">
-      <h2>月次売上推移 <span class="note">棒=売上高／折れ線=注文数（選択月をハイライト）</span></h2>
-      <div class="chart-box tall"><canvas id="trendChart"></canvas></div>
-    </div>
-    <div class="card">
-      <h2>カテゴリ別売上構成 <span class="note" id="donutNote"></span></h2>
-      <div class="chart-box donut">
-        <canvas id="catChart"></canvas>
-        <div class="donut-center">
-          <div class="t">売上合計</div>
-          <div class="v" id="donutTotal">—</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- heatmap + channel -->
-  <section class="grid g-sub">
-    <div class="card">
-      <h2>曜日 × 時間帯 売上ヒートマップ <span class="note" id="hmNote"></span></h2>
-      <div class="hm">
-        <div class="hm-grid" id="hmGrid"></div>
-        <div class="hm-legend">
+<!-- trend + category -->
+<section class="grid g-main">
+<div class="card">
+<h2>月次売上推移 <span class="note">棒=売上高／折れ線=注文数（選択月をハイライト）</span></h2>
+<div class="chart-box tall"><canvas id="trendChart"></canvas></div>
+</div>
+<div class="card">
+<h2>カテゴリ別売上構成 <span class="note" id="donutNote"></span></h2>
+<div class="chart-box donut">
+<canvas id="catChart"></canvas>
+<div class="donut-center">
+<div class="t">売上合計</div>
+<div class="v" id="donutTotal">—</div>
+</div>
+</div>
+</div>
+</section>
+<!-- heatmap + channel -->
+<section class="grid g-sub">
+<div class="card">
+<h2>曜日 × 時間帯 売上ヒートマップ <span class="note" id="hmNote"></span></h2>
+<div class="hm">
+<div class="hm-grid" id="hmGrid"></div>
+<div class="hm-legend">
           少ない
           <span class="sw" style="background:#eef2fc"></span>
-          <span class="sw" style="background:#c8d6f8"></span>
-          <span class="sw" style="background:#87a5f0"></span>
-          <span class="sw" style="background:#4a74e9"></span>
-          <span class="sw" style="background:#2448b8"></span>
+<span class="sw" style="background:#c8d6f8"></span>
+<span class="sw" style="background:#87a5f0"></span>
+<span class="sw" style="background:#4a74e9"></span>
+<span class="sw" style="background:#2448b8"></span>
           多い
         </div>
-      </div>
-    </div>
-    <div class="card">
-      <h2>チャネル別売上 <span class="note" id="chNote"></span></h2>
-      <div class="chart-box hbar"><canvas id="chChart"></canvas></div>
-    </div>
-  </section>
-
-  <!-- top10 table -->
-  <section class="card">
-    <h2>商品別売上 TOP10 <span class="note" id="tblNote">（列見出しクリックで並べ替え）</span></h2>
-    <div class="scroll-hint">※ 表は横にスクロールできます</div>
-    <div class="tbl-wrap">
-      <table id="topTable">
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>商品名</th>
-            <th>カテゴリ</th>
-            <th class="num sortable" data-key="units">販売数</th>
-            <th class="num sortable" data-key="price">単価</th>
-            <th class="num sortable" data-key="sales">売上<span class="arw" id="defArw">▼</span></th>
-            <th>構成比（TOP10内）</th>
-          </tr>
-        </thead>
-        <tbody id="topBody"></tbody>
-      </table>
-    </div>
-  </section>
-
-  
-
 </div>
-
-<script>
+</div>
+<div class="card">
+<h2>チャネル別売上 <span class="note" id="chNote"></span></h2>
+<div class="chart-box hbar"><canvas id="chChart"></canvas></div>
+</div>
+</section>
+<!-- top10 table -->
+<section class="card">
+<h2>商品別売上 TOP10 <span class="note" id="tblNote">（列見出しクリックで並べ替え）</span></h2>
+<div class="scroll-hint">※ 表は横にスクロールできます</div>
+<div class="tbl-wrap">
+<table id="topTable">
+<thead>
+<tr>
+<th>#</th>
+<th>商品名</th>
+<th>カテゴリ</th>
+<th class="num sortable" data-key="units">販売数</th>
+<th class="num sortable" data-key="price">単価</th>
+<th class="num sortable" data-key="sales">売上<span class="arw" id="defArw">▼</span></th>
+<th>構成比（TOP10内）</th>
+</tr>
+</thead>
+<tbody id="topBody"></tbody>
+</table>
+</div>
+</section>
+</div></div></section><p class="u-hint">架空データの操作サンプルです。入力はこの画面内で処理し、外部サービスには送信しません。 PCではウィンドウ内をスクロールできます。</p><section class="u-scope"><article><h2>ラボが担当すること</h2><p>集計指標の整理、画面の実装、元データとの数値照合。</p></article><article><h2>ご用意いただくもの</h2><p>売上データの見本、確認したい指標、更新頻度。</p></article></section><section class="u-close"><h2>「この作業も、自動化できますか？」</h2><p>現在の作業と、減らしたい手間を元のやり取りでお知らせください。必要な範囲を整理します。</p><a href="index.html">ほかの作例を見る ↗</a></section><script>
 /* =========================================================
    架空データ（2026年1〜6月 + 前月比用に2025年12月）
    実案件では CSV → 集計スクリプトがこの JSON を自動生成する想定
@@ -824,11 +793,5 @@ const hashIdx = MONTH_KEYS.indexOf((location.hash || "").replace("#",""));
 if(hashIdx >= 0) cur = hashIdx;
 buildSeg();
 setMonth(cur);
-</script>
-<!-- demo-fict:start 架空サンプルの注記(2026-09-04 上部の帯からフッターへ移設) -->
-<style>#demo-fict{margin:0;padding:20px 20px 28px;background:#fff;color:rgba(13,13,13,.6);border-top:1px solid rgba(13,13,13,.14);font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue","Hiragino Kaku Gothic ProN","Noto Sans JP","Yu Gothic",Meiryo,sans-serif;font-size:13px;line-height:1.7;text-align:center}@media print{#demo-fict{display:none}}</style>
-<div id="demo-fict">これは制作サンプル（売上ダッシュボードの画面デモ）です。会社名・数値はすべて架空です。</div>
-<!-- demo-fict:end -->
-
-</body>
+</script></body>
 </html>
