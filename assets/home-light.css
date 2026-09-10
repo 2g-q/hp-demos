@@ -16,7 +16,7 @@ body.buyer-home{background:#fff;color:#17212d}
 .buyer-home .office-title{font-size:clamp(21px,2.5vw,26px);line-height:1.6;margin:24px 0 12px}
 .buyer-home .office-note{font-size:16px!important;line-height:1.9;max-width:48em;margin:0 auto!important}
 .buyer-home .contact-sub a{color:#2454aa}
-.buyer-home .portfolio-nav{background:rgba(255,255,255,.92);border-color:#dce3ec}
+.buyer-home .portfolio-nav{background:transparent;border-color:rgba(98,126,170,.16);-webkit-backdrop-filter:none;backdrop-filter:none}
 .buyer-home .portfolio-nav a{color:#475569}
 .buyer-home .portfolio-nav a:hover{color:#17212d}
 .buyer-home .more-samples{border-color:#dce3ec}
