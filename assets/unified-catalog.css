@@ -4,7 +4,8 @@ html{background:#080808!important;scroll-padding-top:24px}
 body.unified-catalog{--black:#f5f5f5;--white:#080808;--charcoal:#b8b8b8;--gray:#aaa;--ink-60:#b8b8b8;--tint-4:#141414;--tint-8:#202020;--tint-12:#292929;--hairline:#303030;--blue:#9bbcff;--shell-panel:#141414;--shell-line:#303030;background:#080808!important;color:#f5f5f5;font-family:system-ui,-apple-system,"Hiragino Sans","Noto Sans JP",sans-serif}
 body.unified-catalog:before,body.unified-catalog:after,.glow-top,#cursor-field{display:none!important}
 .unified-header{box-sizing:border-box;max-width:1120px;width:calc(100% - 48px);height:72px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;gap:16px;border-bottom:1px solid #303030;font-size:13px;line-height:1.5}
-.unified-header a{color:#b8b8b8;text-decoration:none;padding:12px 0}.unified-header a:first-child{color:#f5f5f5;font-weight:600;font-size:14px}
+.unified-header a{color:#b8b8b8;text-decoration:none;padding:12px 0}.unified-header>a{color:#f5f5f5;font-weight:600;font-size:14px}
+.unified-header nav{display:flex;align-items:center;gap:24px;flex-wrap:wrap}
 .unified-catalog .container{max-width:1168px;padding-inline:24px}
 .unified-catalog .hero{padding:56px 0 40px!important;background:#080808!important;text-align:left}
 .unified-catalog .hero h1{margin:0!important;max-width:1050px;font-size:clamp(32px,4vw,44px)!important;line-height:1.4!important;letter-spacing:-.03em;font-weight:650;text-align:left;text-wrap:pretty}
@@ -32,7 +33,7 @@ body.unified-catalog:before,body.unified-catalog:after,.glow-top,#cursor-field{d
 .unified-catalog .portfolio-review nav a:hover{border-color:#9bbcff}.unified-catalog .portfolio-review nav small{display:block;color:#aaa;font-size:12px;line-height:1.7;margin-top:8px}
 .unified-catalog .reveal-ready,.unified-catalog .sec-head,.unified-catalog .card,.unified-catalog .reason,.unified-catalog .flow-item{opacity:1!important;transform:none!important}
 .unified-catalog a:focus-visible,.unified-catalog button:focus-visible{outline:3px solid #9bbcff;outline-offset:4px}
-@media(max-width:760px){.unified-header{width:calc(100% - 40px)}.unified-catalog .container{padding-inline:20px}.unified-catalog .hero{padding:40px 0 24px!important}.unified-catalog .sec{padding:44px 0!important}.unified-catalog .hero h1{font-size:32px!important;overflow-wrap:break-word}.unified-catalog .portfolio-review{width:calc(100% - 40px);margin:24px auto 40px}.unified-catalog .portfolio-review nav{grid-template-columns:1fr}.unified-catalog .hero-cta{align-items:flex-start}.unified-catalog .hero-cta .btn{width:auto}.unified-catalog .card{padding:24px}}
+@media(max-width:760px){.unified-header{width:calc(100% - 40px);height:auto;min-height:72px;padding-block:12px;flex-wrap:wrap}.unified-header nav{width:100%;justify-content:space-between;gap:8px}.unified-catalog .container{padding-inline:20px}.unified-catalog .hero{padding:40px 0 24px!important}.unified-catalog .sec{padding:44px 0!important}.unified-catalog .hero h1{font-size:32px!important;overflow-wrap:break-word}.unified-catalog .portfolio-review{width:calc(100% - 40px);margin:24px auto 40px}.unified-catalog .portfolio-review nav{grid-template-columns:1fr}.unified-catalog .hero-cta{align-items:flex-start}.unified-catalog .hero-cta .btn{width:auto}.unified-catalog .card{padding:24px}}
 }
 @media print{.unified-header{display:none}}
 @media screen{
@@ -43,4 +44,4 @@ body.unified-catalog:before,body.unified-catalog:after,.glow-top,#cursor-field{d
 
 @media screen{.catalog-phrase{display:inline-block;max-width:100%}}
 @media screen and (max-width:760px){.unified-catalog .flow:has(.flow-node){flex-direction:column;overflow:visible;gap:6px}.unified-catalog .flow-node{min-width:0;width:100%}.unified-catalog .flow-arrow{transform:rotate(90deg);padding:0;line-height:24px}}
-@media screen{.unified-catalog a{color:#9bbcff}.unified-catalog .unified-header a:first-child{color:#f5f5f5}.unified-catalog .unified-header a:last-child{color:#b8b8b8}}
+@media screen{.unified-catalog a{color:#9bbcff}.unified-catalog .unified-header>a{color:#f5f5f5}.unified-catalog .unified-header nav a{color:#b8b8b8}}
