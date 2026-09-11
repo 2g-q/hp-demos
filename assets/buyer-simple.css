@@ -49,5 +49,4 @@
  .buyer-home .hero-cta,.buyer-home .contact-cta{display:flex;flex-wrap:wrap;gap:12px}
  .buyer-home .hero-cta .btn,.buyer-home .contact-cta .btn{width:100%;justify-content:center}
  .buyer-home .sec,.buyer-catalog .sec{padding:36px 0!important}
- .buyer-catalog .unified-header{font-size:14px;gap:12px}
 }
