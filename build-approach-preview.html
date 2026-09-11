@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>社内業務プラットフォーム 構築方針</title>
+<style>
+:root{--navy:#102a43;--blue:#1769aa;--pale:#eaf3fb;--line:#d8e1ea;--ink:#243447;--muted:#647487}*{box-sizing:border-box}body{margin:0;background:#eef2f6;color:var(--ink);font-family:system-ui,-apple-system,"Hiragino Sans","Yu Gothic",Meiryo,sans-serif;line-height:1.75}.notice{background:#fff6d9;color:#59491e;padding:9px 18px;text-align:center;font-size:12px}.sheet{width:min(920px,calc(100% - 24px));margin:20px auto;background:#fff;border:1px solid var(--line);box-shadow:0 12px 35px rgba(16,42,67,.09)}header{background:var(--navy);color:#fff;padding:18px 30px;font-size:13px;letter-spacing:.04em}main{padding:42px 52px 56px}h1{margin:0 0 12px;color:var(--navy);font-size:clamp(27px,4vw,40px);line-height:1.35}h2{margin:38px 0 12px;color:var(--navy);font-size:clamp(21px,3vw,28px);line-height:1.45}h3{margin:25px 0 8px;color:var(--blue);font-size:19px}p{margin:0 0 14px}.lead{font-size:17px;color:var(--muted)}.box{background:var(--pale);border:1px solid #c8dceb;padding:14px 18px;margin:18px 0}.price{font-weight:700;color:var(--navy);font-size:18px}ul{padding-left:1.35em;margin:12px 0 20px}li+li{margin-top:7px}.flow{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:20px 0}.flow div{border:1px solid var(--line);border-radius:9px;padding:15px;background:#f8fafc}.flow b{display:block;color:var(--navy);margin-bottom:4px}table{width:100%;border-collapse:collapse;margin:18px 0;font-size:14px}th{background:var(--navy);color:#fff;text-align:left}th,td{padding:12px;border:1px solid var(--line);vertical-align:top}.cta{display:inline-block;background:var(--blue);color:#fff;text-decoration:none;font-weight:700;border-radius:7px;padding:11px 17px}@media(max-width:620px){.sheet{margin:0;width:100%;border:0}header{padding:14px 18px}main{padding:28px 18px 44px}.flow{grid-template-columns:1fr}table,thead,tbody,tr,th,td{display:block}thead{display:none}tr{border:1px solid var(--line);margin-bottom:12px}td{border:0;border-bottom:1px solid var(--line)}td:last-child{border-bottom:0}td:before{content:attr(data-label);display:block;color:var(--muted);font-size:11px;margin-bottom:3px}}
+</style>
+</head>
+<body>
+<div class="notice">確認用ページです。送付用PDFと同じ内容をスマートフォン向けに表示しています。</div>
+<article class="sheet">
+<header>MINATO AI・IT LAB ｜ BUILD APPROACH</header>
+<main>
+<h1>社内業務プラットフォーム<br>構築方針</h1>
+<p class="lead">Excelの見方を残し、案件情報を一つにつなげます。</p>
+
+<h2>現在の一覧性を残しながら、情報を一元化します</h2>
+<p>受領した受注台帳、月間工程表、週間工程表を確認しました。現在の一覧性を残しながら、案件、担当者、工程、原価を同じ情報から確認できるWeb型の業務画面を想定しています。</p>
+<div class="flow"><div><b>案件台帳</b>案件と担当、期間、金額を一覧で確認</div><div><b>工程表</b>同じ予定を週間・月間で切り替え</div><div><b>行先管理</b>スマートフォンから短時間で更新</div></div>
+<p>今回のUIデモは、操作イメージを確認いただくためのサンプルです。この画面のまま仕様を固定するものではありません。加える機能や表示項目は自由に変更でき、色や画面構成もご要望に合わせて調整します。</p>
+<p><a class="cta" href="project-operations-demo.html">操作できるUIデモを見る</a></p>
+
+<h2>初期設計で、実際の帳票に合わせます</h2>
+<div class="box"><span class="price">初期設計・試作 150,000円（税込）</span></div>
+<ul><li>受領Excelの項目、参照関係、計算条件の整理</li><li>使用ツールとシステム構成の提案</li><li>実際の業務に合わせた主要画面の試作</li><li>代表的な原価計算の検証と課題整理</li><li>最初に構築する範囲と確認方法をまとめた初期仕様</li></ul>
+<h3>デモと本番の役割</h3>
+<p>公開デモは、画面と操作の方向性を確認いただくためのサンプルです。初期設計では、受領した帳票に合わせて項目、権限、計算条件を具体化します。原価管理は代表的な計算を先に検証し、本構築へ進められる条件を整理します。</p>
+
+<h2>毎月の優先順位を確認しながら構築します</h2>
+<table><thead><tr><th>時期</th><th>進める内容</th><th>料金</th></tr></thead><tbody>
+<tr><td data-label="時期">初期設計・試作</td><td data-label="進める内容">Excel分析、構成提案、主要画面試作、代表計算の検証、初期仕様</td><td data-label="料金">150,000円（税込）</td></tr>
+<tr><td data-label="時期">10月〜12月</td><td data-label="進める内容">共通基盤、行先管理、工程表、掲示板、ファイル管理を優先順位に沿って構築</td><td data-label="料金">110,000円／月（税込）</td></tr>
+<tr><td data-label="時期">1月〜3月</td><td data-label="進める内容">原価管理、他アプリ連携、運用調整、テスト、導入支援</td><td data-label="料金">110,000円／月（税込）</td></tr>
+<tr><td data-label="時期">主要開発後</td><td data-label="進める内容">保守と小規模改善。作業内容に応じてプランを切り替え</td><td data-label="料金">55,000円または33,000円／月（税込）</td></tr>
+</tbody></table>
+<h3>進め方は固定しません</h3>
+<p>毎月の進捗を確認し、翌月に進める内容を相談して決めます。途中で機能の追加や削除、順番の変更も可能です。その場合は、月額の範囲とスケジュールへの影響を確認してから進めます。</p>
+<p>使用する製品やクラウド構成は、現在の利用環境とExcelの計算条件を確認してから決めます。年度内の全機能完成を固定で約束するものではなく、優先順位に沿って使える範囲から段階的に導入します。</p>
+<div class="box">この方針と金額で問題なければ、正式なお見積書をお送りします。</div>
+</main>
+</article>
+</body>
+</html>
