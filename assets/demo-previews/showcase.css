@@ -6,17 +6,17 @@
 .showcase-modern .exhibit-header .exhibit-back{color:#183a6b}
 .showcase-modern main{max-width:1600px;padding:0 28px}
 .showcase-modern .exhibit-intro{display:flex;align-items:center;justify-content:space-between;gap:35px;padding:21px 0}
-.showcase-modern .exhibit-intro .eyebrow{font-size:9px;color:#6b7d98;letter-spacing:.07em}
+.showcase-modern .exhibit-intro .eyebrow{font-size:9px;color:#596c87;letter-spacing:.07em}
 .showcase-modern .exhibit-intro h1{font-size:20px;font-weight:500;line-height:1.4;margin:5px 0 0;letter-spacing:-.025em}
-.showcase-modern .exhibit-intro p{max-width:42em;font-size:12px;line-height:1.7;color:#61748e}
+.showcase-modern .exhibit-intro p{max-width:42em;font-size:12px;line-height:1.7;color:#586b85}
 .showcase-modern .window{max-width:none;width:100%;height:calc(100svh - 166px);min-height:630px;border:1px solid #d1dce9;border-radius:8px;box-shadow:0 12px 45px #172f5910}
-.showcase-modern .bar{height:34px;flex-basis:34px;background:#e9eff7;color:#61758f;font-size:10px;border-color:#d6e0ed;padding:0 15px}
+.showcase-modern .bar{height:34px;flex-basis:34px;background:#e9eff7;color:#52657d;font-size:10px;border-color:#d6e0ed;padding:0 15px}
 .showcase-modern .bar span:last-child{margin-left:0}
 .showcase-modern .bar a{margin-left:auto;color:#38587f;text-decoration:none;font-size:10px}
 .showcase-modern .live-indicator{width:6px;height:6px;background:#418a74;border-radius:50%;margin-right:3px}
-.showcase-modern .note{font-size:11px;color:#6c7e96;margin-top:13px}
+.showcase-modern .note{font-size:11px;color:#596c84;margin-top:13px}
 .showcase-modern .exhibit-details{display:flex;justify-content:space-between;gap:45px;align-items:center;border-top:1px solid #dce4ef;margin-top:38px;padding:32px 0 45px}
 .showcase-modern .exhibit-details h2{font-size:18px;font-weight:500;margin:0 0 12px}
-.showcase-modern .exhibit-details p{font-size:13px;max-width:65em;color:#65758b}
+.showcase-modern .exhibit-details p{font-size:13px;max-width:65em;color:#586a80}
 .showcase-modern .exhibit-details>a{flex-shrink:0;font-size:13px;color:#2859a6;text-underline-offset:5px}
 @media(max-width:760px){.showcase-modern .exhibit-header{width:calc(100% - 32px);height:53px}.showcase-modern .exhibit-header a{font-size:10px}.showcase-modern main{padding:0 10px}.showcase-modern .exhibit-intro{display:block;padding:17px 7px}.showcase-modern .exhibit-intro h1{font-size:19px}.showcase-modern .exhibit-intro p{font-size:11px;margin-top:9px}.showcase-modern .window{height:auto;min-height:0;border-radius:5px}.showcase-modern iframe{height:800px}.showcase-modern .bar{padding:0 11px;font-size:9px}.showcase-modern .bar a{font-size:9px}.showcase-modern .note{padding-inline:7px;font-size:10px}.showcase-modern .exhibit-details{display:block;padding:25px 7px 35px;margin-top:28px}.showcase-modern .exhibit-details h2{font-size:17px}.showcase-modern .exhibit-details>a{display:inline-block;margin-top:18px}}
