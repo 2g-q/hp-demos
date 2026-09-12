@@ -85,7 +85,7 @@
         column.className = 'workflow-column';
         column.dataset.stage = state;
         const matching = tasks.filter(task => task.state === state);
-        column.innerHTML = `<div class="column-heading"><span>${label}</span><span class="count" aria-label="${label} ${matching.length}件">${matching.length}</span></div>`;
+        column.innerHTML = `<h2 class="column-heading"><span>${label}</span><span class="count" aria-label="${label} ${matching.length}件">${matching.length}</span></h2>`;
         matching.forEach(task => {
           const card = document.createElement('article');
           card.className = `task-card${state === 'done' ? ' complete' : ''}`;
