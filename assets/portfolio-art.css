@@ -1,0 +1,8 @@
+/* Artwork stays secondary to readable titles and real sample links. */
+.buyer-catalog .work-img img{transition:transform .45s cubic-bezier(.2,.65,.3,1)}
+@media (hover:hover) and (prefers-reduced-motion:no-preference){
+  .buyer-catalog .work-card:hover .work-img img{transform:scale(1.025)}
+}
+@media (prefers-reduced-motion:reduce){
+  .buyer-catalog .work-img img{transition:none}
+}
