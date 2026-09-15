@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="ja">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width,initial-scale=1" name="viewport"/>
+  <meta content="noindex,nofollow" name="robots"/>
+  <title>
+   健康記録レポート 自動化デモ
+  </title>
+  <style>
+   :root{--ink:#18302b;--muted:#667a75;--line:#dce8e4;--paper:#fbfdfc;--mint:#dff5eb;--green:#16785f;--lime:#c8ef7d;--navy:#153b45;--shadow:0 18px 50px rgba(29,68,58,.10)}
+    *{box-sizing:border-box} body{margin:0;background:linear-gradient(145deg,#f7fbf9 0%,#edf7f2 52%,#f8faf3 100%);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans JP",sans-serif;min-height:100vh}
+    button,select{font:inherit} button{cursor:pointer}.shell{display:grid;grid-template-columns:240px minmax(0,1fr);min-height:100vh}.side{padding:28px 20px;background:rgba(20,55,50,.96);color:#fff;position:sticky;top:0;height:100vh}.brand{display:flex;align-items:center;gap:11px;font-weight:750;letter-spacing:.02em}.mark{width:34px;height:34px;border-radius:11px;background:linear-gradient(145deg,var(--lime),#5ed8a8);display:grid;place-items:center;color:#173c34}.demo-tag{margin:22px 0 30px;padding:10px 12px;border:1px solid rgba(255,255,255,.18);border-radius:12px;font-size:12px;line-height:1.6;color:#d8eee7}.nav{display:grid;gap:8px}.nav button{border:0;text-align:left;padding:12px 14px;border-radius:12px;background:transparent;color:#cfe3dd}.nav button.active,.nav button:hover{background:rgba(255,255,255,.11);color:#fff}.foot{position:absolute;left:20px;right:20px;bottom:25px;color:#afcac2;font-size:11px;line-height:1.6}.main{padding:30px clamp(20px,4vw,54px) 60px;min-width:0}.top{display:flex;justify-content:space-between;align-items:center;gap:18px;margin-bottom:26px}.eyebrow{margin:0 0 5px;color:var(--green);font-size:12px;font-weight:760;letter-spacing:.08em}.top h1{margin:0;font-size:clamp(24px,3vw,36px);letter-spacing:-.04em}.controls{display:flex;gap:10px}.controls select,.ghost{border:1px solid var(--line);background:#fff;border-radius:12px;padding:10px 14px;color:var(--ink)}.grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}.card{background:rgba(255,255,255,.86);border:1px solid rgba(209,225,219,.9);border-radius:20px;box-shadow:var(--shadow)}.metric{padding:19px}.label{font-size:12px;color:var(--muted)}.value{font-size:29px;font-weight:780;margin:8px 0 3px;letter-spacing:-.04em}.delta{font-size:12px;color:var(--green)}.content{display:grid;grid-template-columns:minmax(0,1.65fr) minmax(280px,.8fr);gap:16px;margin-top:16px}.chart-card{padding:23px}.card-head{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}.card h2{font-size:17px;margin:0 0 5px}.sub{margin:0;color:var(--muted);font-size:12px;line-height:1.6}.seg{display:flex;padding:4px;border-radius:10px;background:#edf4f1}.seg button{border:0;border-radius:8px;padding:7px 10px;background:transparent;color:var(--muted);font-size:12px}.seg button.active{background:#fff;color:var(--ink);box-shadow:0 2px 10px rgba(20,55,50,.08)}.chart{width:100%;height:280px;margin-top:15px;overflow:visible}.gridline{stroke:#e8efec;stroke-width:1}.line{fill:none;stroke:var(--green);stroke-width:3;stroke-linecap:round;stroke-linejoin:round}.area{fill:url(#fade)}.dot{fill:#fff;stroke:var(--green);stroke-width:3}.axis{font-size:10px;fill:#82938f}.insight{padding:23px;display:flex;flex-direction:column}.insight-box{margin-top:15px;padding:17px;border-radius:16px;background:linear-gradient(145deg,#e9f8f0,#f5faec);line-height:1.75;font-size:13px}.bars{display:grid;gap:14px;margin-top:20px}.bar-row{display:grid;grid-template-columns:34px 1fr 48px;gap:9px;align-items:center;font-size:12px}.track{height:9px;background:#edf2ef;border-radius:99px;overflow:hidden}.fill{height:100%;border-radius:99px;background:var(--green)}.fill.f{background:#69b897}.fill.c{background:#d9b44a}.actions{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:auto;padding-top:22px}.primary,.secondary{border:0;border-radius:12px;padding:12px 14px;font-weight:700}.primary{background:var(--ink);color:#fff}.secondary{background:var(--mint);color:var(--green)}.flow{padding:23px;margin-top:16px}.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:17px}.step{padding:15px;border-radius:15px;background:#f6faf8;border:1px solid var(--line)}.step b{display:block;font-size:13px;margin-bottom:5px}.step span{font-size:11px;line-height:1.55;color:var(--muted)}.status{display:inline-flex;align-items:center;gap:7px;margin-top:11px;color:var(--green);font-size:11px}.status:before{content:"";width:7px;height:7px;border-radius:50%;background:#5bc897;box-shadow:0 0 0 4px #e0f5eb}.panel{display:none}.panel.active{display:block}.note-preview{padding:24px;line-height:1.9}.note-preview h2{font-size:23px}.notice{padding:13px 15px;background:#fff7d8;border:1px solid #f1dfa0;border-radius:13px;color:#665523;font-size:12px;margin-bottom:18px}.toast{position:fixed;right:24px;bottom:24px;background:#153b35;color:#fff;padding:13px 17px;border-radius:12px;box-shadow:var(--shadow);opacity:0;transform:translateY(10px);transition:.25s;pointer-events:none}.toast.show{opacity:1;transform:none}
+    @media(max-width:900px){.shell{grid-template-columns:1fr}.side{position:static;height:auto;padding:18px}.nav{grid-template-columns:repeat(3,1fr)}.nav button{text-align:center;padding:9px}.demo-tag,.foot{display:none}.main{padding:22px 16px 44px}.grid{grid-template-columns:1fr 1fr}.content{grid-template-columns:1fr}.top{align-items:flex-start}.steps{grid-template-columns:1fr 1fr}}
+    @media(max-width:540px){.top{display:grid}.controls{width:100%}.controls select{flex:1}.grid{grid-template-columns:1fr 1fr;gap:9px}.metric{padding:15px}.value{font-size:23px}.chart-card,.insight,.flow{padding:18px}.chart{height:230px}.steps{grid-template-columns:1fr}.actions{grid-template-columns:1fr}.nav button{font-size:11px;padding:9px 5px}}
+  </style>
+ </head>
+ <body>
+  <div class="shell">
+   <aside class="side">
+    <div class="brand">
+     <div class="mark">
+      ↗
+     </div>
+     <span>
+      Health Log
+     </span>
+    </div>
+    <div class="demo-tag">
+     操作イメージを確認するためのデモです
+     <br/>
+     表示値はすべて架空のデータです
+    </div>
+    <nav class="nav">
+     <button class="active" data-panel="dashboard">
+      月次レポート
+     </button>
+     <button data-panel="note">
+      NOTE下書き
+     </button>
+     <button data-panel="settings">
+      取込設定
+     </button>
+    </nav>
+    <div class="foot">
+     実際の項目や計算方法は
+     <br/>
+     お手元のExcelに合わせて調整します
+    </div>
+   </aside>
+   <main class="main">
+    <section class="panel active" id="dashboard">
+     <div class="top">
+      <div>
+       <p class="eyebrow">
+        MONTHLY REPORT
+       </p>
+       <h1>
+        からだの変化をひと目で
+       </h1>
+      </div>
+      <div class="controls">
+       <select id="month">
+        <option>
+         2024年12月
+        </option>
+        <option>
+         2024年11月
+        </option>
+        <option>
+         2024年10月
+        </option>
+       </select>
+       <button class="ghost" id="import">
+        ＋ データ取込
+       </button>
+      </div>
+     </div>
+     <div class="notice">
+      この画面は機能確認用です。個人の健康状態を評価・診断するものではありません。
+     </div>
+     <div class="grid">
+      <div class="card metric">
+       <div class="label">
+        平均体重
+       </div>
+       <div class="value" id="weight">
+        58.4 kg
+       </div>
+       <div class="delta">
+        前月比 −0.6 kg
+       </div>
+      </div>
+      <div class="card metric">
+       <div class="label">
+        平均体脂肪率
+       </div>
+       <div class="value">
+        15.1%
+       </div>
+       <div class="delta">
+        前月比 −0.4 pt
+       </div>
+      </div>
+      <div class="card metric">
+       <div class="label">
+        平均摂取カロリー
+       </div>
+       <div class="value">
+        2,086
+       </div>
+       <div class="delta">
+        目標内 21日
+       </div>
+      </div>
+      <div class="card metric">
+       <div class="label">
+        記録日数
+       </div>
+       <div class="value">
+        29日
+       </div>
+       <div class="delta">
+        入力率 94%
+       </div>
+      </div>
+     </div>
+     <div class="content">
+      <article class="card chart-card">
+       <div class="card-head">
+        <div>
+         <h2>
+          体重と体脂肪率の推移
+         </h2>
+         <p class="sub">
+          日々の上下ではなく月全体の傾向を確認できます
+         </p>
+        </div>
+        <div class="seg">
+         <button class="active" data-series="weight">
+          体重
+         </button>
+         <button data-series="fat">
+          体脂肪率
+         </button>
+        </div>
+       </div>
+       <svg aria-label="12月の推移グラフ" class="chart" role="img" viewbox="0 0 700 270">
+        <defs>
+         <lineargradient id="fade" x1="0" x2="0" y1="0" y2="1">
+          <stop offset="0" stop-color="#56ba94" stop-opacity=".28">
+          </stop>
+          <stop offset="1" stop-color="#56ba94" stop-opacity="0">
+          </stop>
+         </lineargradient>
+        </defs>
+        <g>
+         <line class="gridline" x1="38" x2="680" y1="30" y2="30">
+         </line>
+         <line class="gridline" x1="38" x2="680" y1="90" y2="90">
+         </line>
+         <line class="gridline" x1="38" x2="680" y1="150" y2="150">
+         </line>
+         <line class="gridline" x1="38" x2="680" y1="210" y2="210">
+         </line>
+        </g>
+        <path class="area" d="M40 73 L95 60 L150 94 L205 76 L260 121 L315 105 L370 141 L425 122 L480 163 L535 145 L590 181 L645 169 L680 188 L680 220 L40 220 Z" id="area">
+        </path>
+        <path class="line" d="M40 73 L95 60 L150 94 L205 76 L260 121 L315 105 L370 141 L425 122 L480 163 L535 145 L590 181 L645 169 L680 188" id="line">
+        </path>
+        <circle class="dot" cx="680" cy="188" r="5">
+        </circle>
+        <g class="axis">
+         <text x="36" y="244">
+          1日
+         </text>
+         <text x="194" y="244">
+          8日
+         </text>
+         <text x="350" y="244">
+          15日
+         </text>
+         <text x="510" y="244">
+          22日
+         </text>
+         <text x="650" y="244">
+          29日
+         </text>
+        </g>
+       </svg>
+      </article>
+      <aside class="card insight">
+       <div>
+        <h2>
+         今月のまとめ
+        </h2>
+        <p class="sub">
+         集計値から月次コメントの下書きを作成
+        </p>
+       </div>
+       <div class="insight-box" id="summary">
+        月の後半にかけて体重は緩やかに減少しました。記録できた日が多く、食事量との関係も追いやすい状態です。次月は週単位の平均も並べると変化を確認しやすくなります。
+       </div>
+       <div class="bars">
+        <div class="bar-row">
+         <b>
+          P
+         </b>
+         <div class="track">
+          <div class="fill" style="width:78%">
+          </div>
+         </div>
+         <span>
+          128g
+         </span>
+        </div>
+        <div class="bar-row">
+         <b>
+          F
+         </b>
+         <div class="track">
+          <div class="fill f" style="width:62%">
+          </div>
+         </div>
+         <span>
+          74g
+         </span>
+        </div>
+        <div class="bar-row">
+         <b>
+          C
+         </b>
+         <div class="track">
+          <div class="fill c" style="width:86%">
+          </div>
+         </div>
+         <span>
+          242g
+         </span>
+        </div>
+       </div>
+       <div class="actions">
+        <button class="secondary" id="pdf">
+         PDFを確認
+        </button>
+        <button class="primary" id="makeNote">
+         NOTE下書きへ
+        </button>
+       </div>
+      </aside>
+     </div>
+     <article class="card flow">
+      <div class="card-head">
+       <div>
+        <h2>
+         毎月の作業を一つの流れに
+        </h2>
+        <p class="sub">
+         Excelを選ぶだけで、集計から記事の下書きまで進みます
+        </p>
+       </div>
+      </div>
+      <div class="steps">
+       <div class="step">
+        <b>
+         Excelを読み込む
+        </b>
+        <span>
+         列名や月ごとの配置を判定
+        </span>
+        <div class="status">
+         読込済み
+        </div>
+       </div>
+       <div class="step">
+        <b>
+         数値をまとめる
+        </b>
+        <span>
+         平均・前月比・記録率を計算
+        </span>
+        <div class="status">
+         自動集計
+        </div>
+       </div>
+       <div class="step">
+        <b>
+         レポートを作る
+        </b>
+        <span>
+         グラフとPDFを同時に出力
+        </span>
+        <div class="status">
+         生成可能
+        </div>
+       </div>
+       <div class="step">
+        <b>
+         記事へ整える
+        </b>
+        <span>
+         確認後にNOTE用の文章へ
+        </span>
+        <div class="status">
+         編集可能
+        </div>
+       </div>
+      </div>
+     </article>
+    </section>
+    <section class="panel" id="note">
+     <div class="top">
+      <div>
+       <p class="eyebrow">
+        NOTE DRAFT
+       </p>
+       <h1>
+        月の記録を記事の下書きへ
+       </h1>
+      </div>
+      <button class="primary" id="copy">
+       文章をコピー
+      </button>
+     </div>
+     <article class="card note-preview">
+      <div class="notice">
+       自動生成した文章は、公開前に内容を確認して編集する想定です。
+      </div>
+      <h2>
+       12月の体づくりを振り返る
+      </h2>
+      <p>
+       12月は29日分を記録できました。平均体重は58.4kg、平均体脂肪率は15.1%でした。
+      </p>
+      <p>
+       月の前半は日ごとの変動がありましたが、後半にかけて体重は緩やかに下がっています。食事の記録も揃っているため、摂取量と数値の変化を一緒に振り返れます。
+      </p>
+      <p>
+       次月は週ごとの平均値を見ながら、短い変化に振り回されずに続けていきます。
+      </p>
+     </article>
+    </section>
+    <section class="panel" id="settings">
+     <div class="top">
+      <div>
+       <p class="eyebrow">
+        IMPORT SETTINGS
+       </p>
+       <h1>
+        今のExcelをそのまま活用
+       </h1>
+      </div>
+     </div>
+     <article class="card flow">
+      <h2>
+       読み込む項目
+      </h2>
+      <p class="sub">
+       正式版では、お預かりした表の列位置や計算式に合わせて設定します
+      </p>
+      <div class="steps">
+       <div class="step">
+        <b>
+         基本記録
+        </b>
+        <span>
+         日付・体重・体脂肪率
+        </span>
+       </div>
+       <div class="step">
+        <b>
+         自動計算
+        </b>
+        <span>
+         体脂肪量・除脂肪体重
+        </span>
+       </div>
+       <div class="step">
+        <b>
+         食事記録
+        </b>
+        <span>
+         カロリー・PFC
+        </span>
+       </div>
+       <div class="step">
+        <b>
+         追加項目
+        </b>
+        <span>
+         運動・メモ・目標値など
+        </span>
+       </div>
+      </div>
+     </article>
+    </section>
+   </main>
+  </div>
+  <div class="toast" id="toast">
+   デモ操作を反映しました
+  </div>
+  <script>
+   const panels=document.querySelectorAll('.panel'),nav=document.querySelectorAll('.nav button'),toast=document.getElementById('toast');
+function showToast(text){toast.textContent=text;toast.classList.add('show');setTimeout(()=>toast.classList.remove('show'),1800)}
+function openPanel(id){panels.forEach(p=>p.classList.toggle('active',p.id===id));nav.forEach(b=>b.classList.toggle('active',b.dataset.panel===id));window.scrollTo({top:0,behavior:'smooth'})}
+nav.forEach(b=>b.addEventListener('click',()=>openPanel(b.dataset.panel)));
+document.getElementById('makeNote').addEventListener('click',()=>openPanel('note'));
+document.getElementById('import').addEventListener('click',()=>showToast('Excelの読込画面を開く想定です'));
+document.getElementById('pdf').addEventListener('click',()=>showToast('月次PDFを生成する想定です'));
+document.getElementById('copy').addEventListener('click',()=>showToast('下書きをコピーしました'));
+document.getElementById('month').addEventListener('change',e=>{document.getElementById('weight').textContent=e.target.selectedIndex===0?'58.4 kg':e.target.selectedIndex===1?'59.0 kg':'59.3 kg';showToast(e.target.value+'へ切り替えました')});
+const series={weight:['M40 73 L95 60 L150 94 L205 76 L260 121 L315 105 L370 141 L425 122 L480 163 L535 145 L590 181 L645 169 L680 188','M40 73 L95 60 L150 94 L205 76 L260 121 L315 105 L370 141 L425 122 L480 163 L535 145 L590 181 L645 169 L680 188 L680 220 L40 220 Z'],fat:['M40 112 L95 95 L150 132 L205 107 L260 91 L315 127 L370 108 L425 147 L480 128 L535 156 L590 141 L645 174 L680 160','M40 112 L95 95 L150 132 L205 107 L260 91 L315 127 L370 108 L425 147 L480 128 L535 156 L590 141 L645 174 L680 160 L680 220 L40 220 Z']};
+document.querySelectorAll('[data-series]').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('[data-series]').forEach(x=>x.classList.remove('active'));b.classList.add('active');document.getElementById('line').setAttribute('d',series[b.dataset.series][0]);document.getElementById('area').setAttribute('d',series[b.dataset.series][1])}));
+  </script>
+ </body>
+</html>
