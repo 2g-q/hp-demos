@@ -36,8 +36,7 @@
     root.dataset.portfolioLayout = themes[key][4];
     themes[key].slice(0, 3).forEach((value, i) => root.style.setProperty(
       ['--portfolio-bg', '--portfolio-ink', '--portfolio-accent'][i], value));
-    // The orange cover needs darker text for readable small body copy.
-    root.style.setProperty('--portfolio-text', key === 'product-catalog' ? '#170e08' : themes[key][1]);
+    root.style.setProperty('--portfolio-text', '#28303b');
   }
   applyTheme();
   addEventListener('hashchange', applyTheme);

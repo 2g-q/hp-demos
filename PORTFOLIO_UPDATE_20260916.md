@@ -16,6 +16,8 @@ Each cover combines a captured demo/design image, a concrete Japanese headline, 
 
 ### Destination backgrounds
 
+Readability correction: one continuous white/light-grey sheet sits behind the whole content, not separate section cards. It is 94% opaque with 16px backdrop blur, max 1240px wide and narrower than the viewport (mobile leaves 6px outer margins). Outer text is dark grey. The original motif remains behind and around the sheet. Only the backdrop is blurred; text and demo windows remain sharp. Preserve this protection when changing motifs; the high-opacity surface remains readable without backdrop-filter support.
+
 Owner correction: matching only solid colours was insufficient. Preserve the cover's actual `motif` as well as its palette: paper, sun, orbit, stripes, grid, steps, route, radar and loop. The destination CSS recreates those cover geometries, angles, accent colours and opacity; viewport sizing/position adapts them to a scrolling page. Left-composed covers retain left placement. The static decorative layer stays behind the content and never captures input. Workbench changes motif together with palette. Do not replace these with one generic background texture.
 
 The 21 active new covers now share their base palette with their 19 destination HTML pages via `assets/portfolio-page-theme.{css,js}`. Workbench follows the data/shipping/review hash and tab changes. The 11 restored website examples remain unchanged. Theme selectors exclude application/window descendants; embedded documents are not modified. Orange product-catalog uses dark outer text for contrast. No public copy, navigation targets or processing logic changed.

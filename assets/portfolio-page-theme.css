@@ -3,8 +3,8 @@
 @media screen {
   html[data-portfolio-theme] {
     background: var(--portfolio-bg) !important;
-    --portfolio-line: color-mix(in srgb, var(--portfolio-text) 24%, var(--portfolio-bg));
-    --portfolio-panel: color-mix(in srgb, var(--portfolio-bg) 95%, var(--portfolio-text));
+    --portfolio-line: #d3d8df;
+    --portfolio-panel: #edf0f3;
   }
   html[data-portfolio-theme] body {
     background: var(--portfolio-bg) !important;
@@ -18,7 +18,7 @@
     content: "" !important;
     display: block !important;
     position: fixed !important;
-    z-index: -1 !important;
+    z-index: -2 !important;
     pointer-events: none !important;
     width: min(92vw, 1440px);
     height: min(72vw, 1120px);
@@ -87,17 +87,50 @@
   }
   html[data-portfolio-theme] body.unified-catalog {
     --black: var(--portfolio-text);
-    --white: var(--portfolio-bg);
+    --white: #f8f9fa;
+    --charcoal: #596373;
+    --gray: #596373;
+    --ink-60: #596373;
     --tint-4: var(--portfolio-panel);
     --tint-8: var(--portfolio-panel);
     --hairline: var(--portfolio-line);
   }
   html[data-portfolio-theme] .window { color: #f5f5f5; }
+  /* One continuous frosted sheet between the original artwork and content.
+     No content wrapper or per-section cards: demo layout remains untouched. */
+  html[data-portfolio-theme] body::after {
+    content: "" !important;
+    display: block !important;
+    position: absolute !important;
+    z-index: -1 !important;
+    pointer-events: none !important;
+    top: 12px;
+    bottom: 12px;
+    left: 50%;
+    width: min(1240px, calc(100% - 32px));
+    transform: translateX(-50%);
+    border-radius: 22px;
+    background: rgba(248, 249, 250, .94);
+    -webkit-backdrop-filter: blur(16px);
+    backdrop-filter: blur(16px);
+    box-shadow: 0 10px 50px #00000012;
+    opacity: 1;
+    filter: none;
+    animation: none;
+  }
+  @media(max-width:760px) {
+    html[data-portfolio-theme] body::after {
+      width: calc(100% - 12px);
+      top: 6px;
+      bottom: 6px;
+      border-radius: 14px;
+    }
+  }
   html[data-portfolio-theme] :is(.hero,.sec,.contact,.bottom,.recent-contact,.footer,.portfolio-review):not(.app *, .u-window *, .window *, .review-demo-window *) {
     background: transparent !important;
     border-color: var(--portfolio-line) !important;
   }
-  html[data-portfolio-theme] :is(h1,h2,h3,p,a,b,strong,small,.eyebrow,.flow-label,.window-guide,.window-scroll-hint,.u-hint,.foot,.contact-sub):not(.app *, .u-window *, .window *, .review-demo-window *) {
+  html[data-portfolio-theme] :is(h1,h2,h3,p,a,b,strong,small,.eyebrow,.flow-label,.window-guide,.window-scroll-hint,.u-hint,.foot,.footer,.contact-sub):not(.app *, .u-window *, .window *, .review-demo-window *) {
     color: var(--portfolio-text) !important;
   }
   html[data-portfolio-theme] :is(.recent-header,.unified-header,.u-nav,.u-compare article,.u-scope,.change,.scope,body>header) {
@@ -114,7 +147,7 @@
   }
   html[data-portfolio-theme] .btn-primary:not(.app *, .u-window *, .window *, .review-demo-window *) {
     background: var(--portfolio-text) !important;
-    color: var(--portfolio-bg) !important;
+    color: #fff !important;
   }
   html[data-portfolio-theme] a:focus-visible:not(.app *, .u-window *, .window *, .review-demo-window *) {
     outline: 2px solid var(--portfolio-text);

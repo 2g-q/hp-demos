@@ -24,6 +24,9 @@ with sync_playwright() as p:
         assert page.evaluate("getComputedStyle(document.documentElement).getPropertyValue('--portfolio-bg').trim()") == item['palette'][0], item['href']
         assert page.locator('html').get_attribute('data-portfolio-motif') == item['motif']
         assert page.locator('html').get_attribute('data-portfolio-layout') == item['layout']
+        assert page.locator('[data-portfolio-reading]').count() == 0
+        assert page.evaluate("""()=>{const c=getComputedStyle(document.body,'::after');
+          return c.content!=='none' && c.backdropFilter==='blur(16px)' && c.pointerEvents==='none' && c.zIndex==='-1';}""")
         assert page.evaluate("""() => {const c=getComputedStyle(document.body,'::before');
           return c.content!=='none' && c.display!=='none' && Number(c.opacity)>0 && c.pointerEvents==='none';} """)
         for width in [1440, 390]:
