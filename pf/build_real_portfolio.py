@@ -38,7 +38,7 @@ ART=[
 ('lp-recruit','働く姿が見える採用サイト','採用・求人','people','#edd47d','#393325','#807435','wide','orbit'),
 ('dental-sakura','受診前の不安に答えるサイト','クリニック','plus','#e4efef','#234b53','#2e8697','right','route'),
 ('salon','お店の雰囲気が伝わるサイト','サロン・店舗紹介','flower','#4a3443','#fff0e8','#dbb4bc','bottom','paper'),
-('ec-purchase','買い方に合わせた通販の画面','通販・購入画面','cart','#ad3c28','#fff8ee','#efc68b','wide','stripes'),
+('ec-purchase','買い方に合わせた通販の画面','通販・購入画面','cart','#684a35','#fff8ee','#efc68b','wide','stripes'),
 ('cw-line','予約から来店後のご案内まで','LINE公式アカウント','chat','#193e27','#f6fff1','#bce598','right','sun'),
 ('sns-workflow','投稿原稿をつくり、確認する','SNS制作・承認','pencil','#f0d5dd','#5a334c','#9c557d','left','paper'),
 ('cw-design','伝えたいことが届くバナー','バナー・画像制作','layers','#f4e6c7','#2f3a50','#d18b39','center','grid'),
@@ -119,6 +119,7 @@ def capture(page):
    page.locator(button).click();page.wait_for_timeout(2700 if button in ['#run','#draft-generate'] else 200)
    page.wait_for_function('(selector)=>!document.querySelector(selector).disabled',arg=button,timeout=30000)
   page.add_style_tag(content='.app,.content,.u-window,.u-window-body{max-height:none!important;height:auto!important;overflow:visible!important}html{scroll-behavior:auto!important}')
+  if slug == 'ec-purchase':page.add_style_tag(content='.app-top{position:static!important}')
   page.locator(selector).first.screenshot(path=str(target))
   print('CAPTURED',slug,flush=True)
 

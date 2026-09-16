@@ -49,3 +49,9 @@ The catalogue is now three same-tab pages: `cw.html` (16 business/AI demos), `cw
 ### Coffee purchase demo and contact correction
 
 The owner moved `ec-purchase.html` from website examples to business/AI tools: it demonstrates checkout behaviour rather than a complete marketing website. Current category counts are 17 / 10 / 5 (32 total). Its card content/image are unchanged and its return link leads to cw.html. All three catalogue-page closing CTAs now offer email (`mailto:minato.ai.lab@gmail.com`) and official LINE (`https://page.line.me/091usyfe`) instead of CrowdWorks. This is the owner's public-site contact choice, not authorization to bypass platform rules in individual client communications. Japanese CTA lint: zero findings.
+
+### Thumbnail distribution and coffee cover
+
+Reordered all three catalogues to alternate light/dark palettes, photography and screen compositions in desktop rows and mobile reading order. LINE remains first in the social category. Counts remain 17 / 10 / 5; card text and destinations are unchanged.
+
+Coffee now uses a real product-and-cart screenshot, cart icon and brown diagonal-stripe cover, replacing its old editorial illustration. Capture expands the app and disables its sticky header to prevent screenshot clipping. The destination outer background matches this palette and motif; its inner app remains unchanged. There are now 22 active real-screen covers. Local category, cover and destination-theme checks accompany visual review before publication.

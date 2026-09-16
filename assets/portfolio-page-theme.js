@@ -2,6 +2,7 @@
  * Keep application/window colours independent of the portfolio shell. */
 (() => {
   const themes = {
+    'ec-purchase': ['#684a35', '#fff8ee', '#efc68b', 'stripes', 'wide'],
     'document-intake': ['#f5f1e9', '#282824', '#d63d2e', 'paper', 'center'],
     'data-dashboard': ['#10151d', '#f6f7f8', '#c7f561', 'orbit', 'center'],
     'workflow': ['#12594d', '#ffffff', '#e4f49f', 'route', 'right'],

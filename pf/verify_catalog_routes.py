@@ -20,7 +20,7 @@ assert sorted(x for x in inventory(old) if x[0] not in refreshed) == sorted(x fo
 old_images = {a['href']:a.img['src'] for a in old.select('.work-card')}
 for soup in soups:
     for a in soup.select('.work-card'):
-        if a['href'] not in refreshed: assert a.img['src'] == old_images[a['href']]
+        if a['href'] not in refreshed | {'./ec-purchase.html'}: assert a.img['src'] == old_images[a['href']]
 assert [len(s.select('.work-card')) for s in soups] == [17, 10, 5]
 assert soups[0].select_one('#tools .work-card[href="./ec-purchase.html"]')
 assert not soups[1].select_one('.work-card[href="./ec-purchase.html"]')
