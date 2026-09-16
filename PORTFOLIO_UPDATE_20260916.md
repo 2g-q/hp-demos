@@ -16,6 +16,8 @@ Each cover combines a captured demo/design image, a concrete Japanese headline, 
 
 ### Destination backgrounds
 
+Latest owner adjustment: return the glass base opacity from 82% to 64%. Keep RGB(248,249,246), grain, blur, geometry and other styling unchanged. This supersedes the 82% setting described below.
+
 Readability correction: one continuous white/light-grey sheet sits behind the whole content, not separate section cards. Owner selected material proof A (fine embossed vintage glass), with stronger white than its original 64% opacity: final base opacity is 82%, with subtle SVG grain, edge highlights and 10px backdrop blur. It is max 1240px wide and narrower than the viewport (mobile leaves 6px outer margins). Outer text is dark grey. The original motif remains behind and around the sheet. Only the backdrop is blurred; text and demo windows remain sharp. Preserve this protection when changing motifs; the high-opacity surface remains readable without backdrop-filter support.
 
 Owner correction: matching only solid colours was insufficient. Preserve the cover's actual `motif` as well as its palette: paper, sun, orbit, stripes, grid, steps, route, radar and loop. The destination CSS recreates those cover geometries, angles, accent colours and opacity; viewport sizing/position adapts them to a scrolling page. Left-composed covers retain left placement. The static decorative layer stays behind the content and never captures input. Workbench changes motif together with palette. Do not replace these with one generic background texture.

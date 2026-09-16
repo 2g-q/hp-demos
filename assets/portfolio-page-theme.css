@@ -110,7 +110,7 @@
     width: min(1240px, calc(100% - 32px));
     transform: translateX(-50%);
     border-radius: 22px;
-    background-color: rgba(248, 249, 246, .82);
+    background-color: rgba(248, 249, 246, .64);
     background-image:
       url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.12' numOctaves='3' seed='7' stitchTiles='stitch' result='n'/%3E%3CfeDiffuseLighting in='n' surfaceScale='1.5' diffuseConstant='1' lighting-color='white'%3E%3CfeDistantLight azimuth='225' elevation='42'/%3E%3C/feDiffuseLighting%3E%3CfeColorMatrix type='matrix' values='1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 .08 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E"),
       linear-gradient(115deg,rgba(255,255,255,.22),rgba(255,255,255,0) 32%,rgba(204,220,208,.10) 72%,rgba(255,255,255,.18));
