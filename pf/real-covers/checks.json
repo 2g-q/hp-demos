@@ -1,0 +1,258 @@
+[
+  {
+    "slug": "document-intake",
+    "frameInside": true,
+    "titleClear": true,
+    "asideClear": true,
+    "ratioPreserved": true,
+    "titleFits": true
+  },
+  {
+    "slug": "data-dashboard",
+    "frameInside": true,
+    "titleClear": true,
+    "asideClear": true,
+    "ratioPreserved": true,
+    "titleFits": true
+  },
+  {
+    "slug": "workflow",
+    "frameInside": true,
+    "titleClear": true,
+    "asideClear": true,
+    "ratioPreserved": true,
+    "titleFits": true
+  },
+  {
+    "slug": "product-catalog",
+    "frameInside": true,
+    "titleClear": true,
+    "asideClear": true,
+    "ratioPreserved": true,
+    "titleFits": true
+  },
+  {
+    "slug": "web-watch",
+    "frameInside": true,
+    "titleClear": true,
+    "asideClear": true,
+    "ratioPreserved": true,
+    "titleFits": true
+  },
+  {
+    "slug": "case-management",
+    "frameInside": true,
+    "titleClear": true,
+    "asideClear": true,
+    "ratioPreserved": true,
+    "titleFits": true
+  },
+  {
+    "slug": "workbench-data",
+    "frameInside": true,
+    "titleClear": true,
+    "asideClear": true,
+    "ratioPreserved": true,
+    "titleFits": true
+  },
+  {
+    "slug": "workbench-shipping",
+    "frameInside": true,
+    "titleClear": true,
+    "asideClear": true,
+    "ratioPreserved": true,
+    "titleFits": true
+  },
+  {
+    "slug": "workbench-review",
+    "frameInside": true,
+    "titleClear": true,
+    "asideClear": true,
+    "ratioPreserved": true,
+    "titleFits": true
+  },
+  {
+    "slug": "ec-support",
+    "frameInside": true,
+    "titleClear": true,
+    "asideClear": true,
+    "ratioPreserved": true,
+    "titleFits": true
+  },
+  {
+    "slug": "cw-api-link",
+    "frameInside": true,
+    "titleClear": true,
+    "asideClear": true,
+    "ratioPreserved": true,
+    "titleFits": true
+  },
+  {
+    "slug": "cw-gyomu-system",
+    "frameInside": true,
+    "titleClear": true,
+    "asideClear": true,
+    "ratioPreserved": true,
+    "titleFits": true
+  },
+  {
+    "slug": "cw-automation",
+    "frameInside": true,
+    "titleClear": true,
+    "asideClear": true,
+    "ratioPreserved": true,
+    "titleFits": true
+  },
+  {
+    "slug": "cw-dashboard",
+    "frameInside": true,
+    "titleClear": true,
+    "asideClear": true,
+    "ratioPreserved": true,
+    "titleFits": true
+  },
+  {
+    "slug": "ai-improvement",
+    "frameInside": true,
+    "titleClear": true,
+    "asideClear": true,
+    "ratioPreserved": true,
+    "titleFits": true
+  },
+  {
+    "slug": "knowledge-search",
+    "frameInside": true,
+    "titleClear": true,
+    "asideClear": true,
+    "ratioPreserved": true,
+    "titleFits": true
+  },
+  {
+    "slug": "studio-yohaku",
+    "frameInside": true,
+    "titleClear": true,
+    "asideClear": true,
+    "ratioPreserved": true,
+    "titleFits": true
+  },
+  {
+    "slug": "stay-naginoma",
+    "frameInside": true,
+    "titleClear": true,
+    "asideClear": true,
+    "ratioPreserved": true,
+    "titleFits": true
+  },
+  {
+    "slug": "relay",
+    "frameInside": true,
+    "titleClear": true,
+    "asideClear": true,
+    "ratioPreserved": true,
+    "titleFits": true
+  },
+  {
+    "slug": "vintage-archive-inbound",
+    "frameInside": true,
+    "titleClear": true,
+    "asideClear": true,
+    "ratioPreserved": true,
+    "titleFits": true
+  },
+  {
+    "slug": "pixel-office",
+    "frameInside": true,
+    "titleClear": true,
+    "asideClear": true,
+    "ratioPreserved": true,
+    "titleFits": true
+  },
+  {
+    "slug": "corp",
+    "frameInside": true,
+    "titleClear": true,
+    "asideClear": true,
+    "ratioPreserved": true,
+    "titleFits": true
+  },
+  {
+    "slug": "lp-gym",
+    "frameInside": true,
+    "titleClear": true,
+    "asideClear": true,
+    "ratioPreserved": true,
+    "titleFits": true
+  },
+  {
+    "slug": "lp-recruit",
+    "frameInside": true,
+    "titleClear": true,
+    "asideClear": true,
+    "ratioPreserved": true,
+    "titleFits": true
+  },
+  {
+    "slug": "dental-sakura",
+    "frameInside": true,
+    "titleClear": true,
+    "asideClear": true,
+    "ratioPreserved": true,
+    "titleFits": true
+  },
+  {
+    "slug": "salon",
+    "frameInside": true,
+    "titleClear": true,
+    "asideClear": true,
+    "ratioPreserved": true,
+    "titleFits": true
+  },
+  {
+    "slug": "ec-purchase",
+    "frameInside": true,
+    "titleClear": true,
+    "asideClear": true,
+    "ratioPreserved": true,
+    "titleFits": true
+  },
+  {
+    "slug": "cw-line",
+    "frameInside": true,
+    "titleClear": true,
+    "asideClear": true,
+    "ratioPreserved": true,
+    "titleFits": true
+  },
+  {
+    "slug": "sns-workflow",
+    "frameInside": true,
+    "titleClear": true,
+    "asideClear": true,
+    "ratioPreserved": true,
+    "titleFits": true
+  },
+  {
+    "slug": "cw-design",
+    "frameInside": true,
+    "titleClear": true,
+    "asideClear": true,
+    "ratioPreserved": true,
+    "titleFits": true
+  },
+  {
+    "slug": "cw-sns",
+    "frameInside": true,
+    "titleClear": true,
+    "asideClear": true,
+    "ratioPreserved": true,
+    "titleFits": true
+  },
+  {
+    "slug": "sales-slides",
+    "frameInside": true,
+    "titleClear": true,
+    "asideClear": true,
+    "ratioPreserved": true,
+    "titleFits": true
+  }
+]

@@ -1,0 +1,578 @@
+[
+  {
+    "slug": "document-intake",
+    "href": "./document-intake.html",
+    "title": "請求書の転記を、確認する仕事に",
+    "category": "事務・経理",
+    "icon": "document",
+    "palette": [
+      "#f5f1e9",
+      "#282824",
+      "#d63d2e"
+    ],
+    "layout": "center",
+    "motif": "paper",
+    "source": "pf/real-covers/screens/document-intake.png",
+    "image": "pf/real-covers/document-intake.jpg",
+    "screenLabel": "実際の制作例画面",
+    "relatedDemo": null
+  },
+  {
+    "slug": "data-dashboard",
+    "href": "./data-dashboard.html",
+    "title": "売上集計を、ひとつの画面に",
+    "category": "売上・集計",
+    "icon": "chart",
+    "palette": [
+      "#10151d",
+      "#f6f7f8",
+      "#c7f561"
+    ],
+    "layout": "center",
+    "motif": "orbit",
+    "source": "pf/real-covers/screens/data-dashboard.png",
+    "image": "pf/real-covers/data-dashboard.jpg",
+    "screenLabel": "実際の制作例画面",
+    "relatedDemo": null
+  },
+  {
+    "slug": "workflow",
+    "href": "./workflow.html",
+    "title": "受付から担当者への連絡まで",
+    "category": "受付・連絡",
+    "icon": "link",
+    "palette": [
+      "#12594d",
+      "#ffffff",
+      "#e4f49f"
+    ],
+    "layout": "right",
+    "motif": "route",
+    "source": "pf/real-covers/screens/workflow.png",
+    "image": "pf/real-covers/workflow.jpg",
+    "screenLabel": "実際の制作例画面",
+    "relatedDemo": null
+  },
+  {
+    "slug": "product-catalog",
+    "href": "./product-catalog.html",
+    "title": "商品データを、使える形に",
+    "category": "通販・商品管理",
+    "icon": "tag",
+    "palette": [
+      "#e34e2f",
+      "#fff8f0",
+      "#ffdf7e"
+    ],
+    "layout": "center",
+    "motif": "sun",
+    "source": "pf/real-covers/screens/product-catalog.png",
+    "image": "pf/real-covers/product-catalog.jpg",
+    "screenLabel": "実際の制作例画面",
+    "relatedDemo": null
+  },
+  {
+    "slug": "web-watch",
+    "href": "./web-watch.html",
+    "title": "価格と在庫の変化を見つける",
+    "category": "情報収集・確認",
+    "icon": "radar",
+    "palette": [
+      "#191d37",
+      "#ffffff",
+      "#ffbf70"
+    ],
+    "layout": "left",
+    "motif": "radar",
+    "source": "pf/real-covers/screens/web-watch.png",
+    "image": "pf/real-covers/web-watch.jpg",
+    "screenLabel": "実際の制作例画面",
+    "relatedDemo": null
+  },
+  {
+    "slug": "case-management",
+    "href": "./case-management.html",
+    "title": "問い合わせの対応漏れを防ぐ",
+    "category": "問い合わせ管理",
+    "icon": "chat",
+    "palette": [
+      "#e7dced",
+      "#36283e",
+      "#715088"
+    ],
+    "layout": "wide",
+    "motif": "stripes",
+    "source": "pf/real-covers/screens/case-management.png",
+    "image": "pf/real-covers/case-management.jpg",
+    "screenLabel": "実際の制作例画面",
+    "relatedDemo": null
+  },
+  {
+    "slug": "workbench-data",
+    "href": "./workbench.html#data",
+    "title": "表のばらつきを整える",
+    "category": "表計算・データ整理",
+    "icon": "grid",
+    "palette": [
+      "#164aa0",
+      "#ffffff",
+      "#bde3ff"
+    ],
+    "layout": "bottom",
+    "motif": "grid",
+    "source": "pf/real-covers/screens/workbench-data.png",
+    "image": "pf/real-covers/workbench-data.jpg",
+    "screenLabel": "実際の制作例画面",
+    "relatedDemo": null
+  },
+  {
+    "slug": "workbench-shipping",
+    "href": "./workbench.html#shipping",
+    "title": "出荷前に、不備を見つける",
+    "category": "通販・出荷確認",
+    "icon": "box",
+    "palette": [
+      "#f2c967",
+      "#352e1c",
+      "#876028"
+    ],
+    "layout": "right",
+    "motif": "steps",
+    "source": "pf/real-covers/screens/workbench-shipping.png",
+    "image": "pf/real-covers/workbench-shipping.jpg",
+    "screenLabel": "実際の制作例画面",
+    "relatedDemo": null
+  },
+  {
+    "slug": "workbench-review",
+    "href": "./workbench.html#review",
+    "title": "AIの下書きを、人が確認",
+    "category": "文章・承認",
+    "icon": "check",
+    "palette": [
+      "#633f4f",
+      "#fff5ec",
+      "#edb8a0"
+    ],
+    "layout": "left",
+    "motif": "paper",
+    "source": "pf/real-covers/screens/workbench-review.png",
+    "image": "pf/real-covers/workbench-review.jpg",
+    "screenLabel": "実際の制作例画面",
+    "relatedDemo": null
+  },
+  {
+    "slug": "ec-support",
+    "href": "./ec-support.html",
+    "title": "お店の案内に沿って答える",
+    "category": "通販・問い合わせ",
+    "icon": "chat",
+    "palette": [
+      "#d6e6dd",
+      "#244b40",
+      "#438b71"
+    ],
+    "layout": "center",
+    "motif": "route",
+    "source": "pf/real-covers/screens/ec-support.png",
+    "image": "pf/real-covers/ec-support.jpg",
+    "screenLabel": "実際の制作例画面",
+    "relatedDemo": null
+  },
+  {
+    "slug": "cw-api-link",
+    "href": "./cw-api-link.html",
+    "title": "注文から出荷まで、つなぐ",
+    "category": "サービス連携",
+    "icon": "link",
+    "palette": [
+      "#102a45",
+      "#ffffff",
+      "#57d8d5"
+    ],
+    "layout": "wide",
+    "motif": "orbit",
+    "source": "pf/real-covers/screens/cw-api-link.png",
+    "image": "pf/real-covers/cw-api-link.jpg",
+    "screenLabel": "関連デモ / 出荷データの確認画面",
+    "relatedDemo": "workbench.html#shipping"
+  },
+  {
+    "slug": "cw-gyomu-system",
+    "href": "./cw-gyomu-system.html",
+    "title": "見積から入金まで、まとめて管理",
+    "category": "販売・購買管理",
+    "icon": "grid",
+    "palette": [
+      "#e8e1d3",
+      "#39372f",
+      "#a07246"
+    ],
+    "layout": "bottom",
+    "motif": "steps",
+    "source": "pf/real-covers/screens/cw-gyomu-system.png",
+    "image": "pf/real-covers/cw-gyomu-system.jpg",
+    "screenLabel": "実際の制作例画面",
+    "relatedDemo": null
+  },
+  {
+    "slug": "cw-automation",
+    "href": "./cw-automation.html",
+    "title": "毎日の手作業を、自動に",
+    "category": "業務自動化",
+    "icon": "repeat",
+    "palette": [
+      "#44225c",
+      "#fff8ff",
+      "#d4adff"
+    ],
+    "layout": "right",
+    "motif": "loop",
+    "source": "pf/real-covers/screens/cw-automation.png",
+    "image": "pf/real-covers/cw-automation.jpg",
+    "screenLabel": "関連デモ / 情報収集後の通知画面",
+    "relatedDemo": "web-watch.html"
+  },
+  {
+    "slug": "cw-dashboard",
+    "href": "./cw-dashboard.html",
+    "title": "売上の変化を見渡す",
+    "category": "売上分析",
+    "icon": "chart",
+    "palette": [
+      "#f3dace",
+      "#573126",
+      "#b55737"
+    ],
+    "layout": "wide",
+    "motif": "sun",
+    "source": "pf/real-covers/screens/cw-dashboard.png",
+    "image": "pf/real-covers/cw-dashboard.jpg",
+    "screenLabel": "実際の制作例画面",
+    "relatedDemo": null
+  },
+  {
+    "slug": "ai-improvement",
+    "href": "./ai-improvement.html",
+    "title": "AIを使う仕事を決める",
+    "category": "AI導入・業務整理",
+    "icon": "spark",
+    "palette": [
+      "#112c35",
+      "#f5fbf8",
+      "#8be2c2"
+    ],
+    "layout": "bottom",
+    "motif": "orbit",
+    "source": "pf/real-covers/screens/ai-improvement.png",
+    "image": "pf/real-covers/ai-improvement.jpg",
+    "screenLabel": "実際の制作例画面",
+    "relatedDemo": null
+  },
+  {
+    "slug": "knowledge-search",
+    "href": "./knowledge-search.html",
+    "title": "社内資料から、答えを探す",
+    "category": "社内の情報共有",
+    "icon": "search",
+    "palette": [
+      "#e9e5ce",
+      "#3b4434",
+      "#72834f"
+    ],
+    "layout": "left",
+    "motif": "stripes",
+    "source": "pf/real-covers/screens/knowledge-search.png",
+    "image": "pf/real-covers/knowledge-search.jpg",
+    "screenLabel": "実際の制作例画面",
+    "relatedDemo": null
+  },
+  {
+    "slug": "studio-yohaku",
+    "href": "./studio-yohaku.html",
+    "title": "設計の考え方が伝わるサイト",
+    "category": "建築・設計事務所",
+    "icon": "building",
+    "palette": [
+      "#383f38",
+      "#f5f2e7",
+      "#c6c7a2"
+    ],
+    "layout": "wide",
+    "motif": "paper",
+    "source": "pf/real-covers/screens/studio-yohaku.jpg",
+    "image": "pf/real-covers/studio-yohaku.jpg",
+    "screenLabel": "実際の制作例画面",
+    "relatedDemo": null
+  },
+  {
+    "slug": "stay-naginoma",
+    "href": "./stay-naginoma.html",
+    "title": "滞在を想像できる宿のサイト",
+    "category": "宿泊施設",
+    "icon": "moon",
+    "palette": [
+      "#dbe6e5",
+      "#24484c",
+      "#4c8a94"
+    ],
+    "layout": "bottom",
+    "motif": "orbit",
+    "source": "pf/real-covers/screens/stay-naginoma.jpg",
+    "image": "pf/real-covers/stay-naginoma.jpg",
+    "screenLabel": "実際の制作例画面",
+    "relatedDemo": null
+  },
+  {
+    "slug": "relay",
+    "href": "./relay.html",
+    "title": "使い方が伝わるサービス紹介",
+    "category": "業務サービス",
+    "icon": "window",
+    "palette": [
+      "#302d70",
+      "#ffffff",
+      "#a5b2ff"
+    ],
+    "layout": "right",
+    "motif": "steps",
+    "source": "pf/real-covers/screens/relay.jpg",
+    "image": "pf/real-covers/relay.jpg",
+    "screenLabel": "実際の制作例画面",
+    "relatedDemo": null
+  },
+  {
+    "slug": "vintage-archive-inbound",
+    "href": "./custom/vintage-archive-inbound.html",
+    "title": "海外のお客様にも伝わるサイト",
+    "category": "多言語・店舗案内",
+    "icon": "globe",
+    "palette": [
+      "#e9c4a1",
+      "#4f2820",
+      "#9b3c26"
+    ],
+    "layout": "left",
+    "motif": "sun",
+    "source": "pf/real-covers/screens/vintage-archive-inbound.jpg",
+    "image": "pf/real-covers/vintage-archive-inbound.jpg",
+    "screenLabel": "実際の制作例画面",
+    "relatedDemo": null
+  },
+  {
+    "slug": "pixel-office",
+    "href": "./pixel-office.html",
+    "title": "働く様子を、ドット絵で",
+    "category": "動くイラスト",
+    "icon": "pixel",
+    "palette": [
+      "#142d2c",
+      "#f0ffe5",
+      "#b2e995"
+    ],
+    "layout": "wide",
+    "motif": "grid",
+    "source": "pf/real-covers/screens/pixel-office.png",
+    "image": "pf/real-covers/pixel-office.jpg",
+    "screenLabel": "実際の制作例画面",
+    "relatedDemo": null
+  },
+  {
+    "slug": "corp",
+    "href": "./corp.html",
+    "title": "会社の強みを伝えるサイト",
+    "category": "会社案内",
+    "icon": "building",
+    "palette": [
+      "#e4eaf1",
+      "#1a3554",
+      "#547fa8"
+    ],
+    "layout": "center",
+    "motif": "stripes",
+    "source": "pf/real-covers/screens/corp.jpg",
+    "image": "pf/real-covers/corp.jpg",
+    "screenLabel": "実際の制作例画面",
+    "relatedDemo": null
+  },
+  {
+    "slug": "lp-gym",
+    "href": "./lp-gym.html",
+    "title": "体験の申込みにつながる案内",
+    "category": "店舗集客",
+    "icon": "bolt",
+    "palette": [
+      "#20201f",
+      "#ffffff",
+      "#ecb637"
+    ],
+    "layout": "left",
+    "motif": "steps",
+    "source": "pf/real-covers/screens/lp-gym.jpg",
+    "image": "pf/real-covers/lp-gym.jpg",
+    "screenLabel": "実際の制作例画面",
+    "relatedDemo": null
+  },
+  {
+    "slug": "lp-recruit",
+    "href": "./lp-recruit.html",
+    "title": "働く姿が見える採用サイト",
+    "category": "採用・求人",
+    "icon": "people",
+    "palette": [
+      "#edd47d",
+      "#393325",
+      "#807435"
+    ],
+    "layout": "wide",
+    "motif": "orbit",
+    "source": "pf/real-covers/screens/lp-recruit.jpg",
+    "image": "pf/real-covers/lp-recruit.jpg",
+    "screenLabel": "実際の制作例画面",
+    "relatedDemo": null
+  },
+  {
+    "slug": "dental-sakura",
+    "href": "./dental-sakura.html",
+    "title": "受診前の不安に答えるサイト",
+    "category": "クリニック",
+    "icon": "plus",
+    "palette": [
+      "#e4efef",
+      "#234b53",
+      "#2e8697"
+    ],
+    "layout": "right",
+    "motif": "route",
+    "source": "pf/real-covers/screens/dental-sakura.jpg",
+    "image": "pf/real-covers/dental-sakura.jpg",
+    "screenLabel": "実際の制作例画面",
+    "relatedDemo": null
+  },
+  {
+    "slug": "salon",
+    "href": "./salon.html",
+    "title": "お店の雰囲気が伝わるサイト",
+    "category": "サロン・店舗紹介",
+    "icon": "flower",
+    "palette": [
+      "#4a3443",
+      "#fff0e8",
+      "#dbb4bc"
+    ],
+    "layout": "bottom",
+    "motif": "paper",
+    "source": "pf/real-covers/screens/salon.jpg",
+    "image": "pf/real-covers/salon.jpg",
+    "screenLabel": "実際の制作例画面",
+    "relatedDemo": null
+  },
+  {
+    "slug": "ec-purchase",
+    "href": "./ec-purchase.html",
+    "title": "買い方に合わせた通販の画面",
+    "category": "通販・購入画面",
+    "icon": "cart",
+    "palette": [
+      "#ad3c28",
+      "#fff8ee",
+      "#efc68b"
+    ],
+    "layout": "wide",
+    "motif": "stripes",
+    "source": "pf/real-covers/screens/ec-purchase.png",
+    "image": "pf/real-covers/ec-purchase.jpg",
+    "screenLabel": "実際の制作例画面",
+    "relatedDemo": null
+  },
+  {
+    "slug": "cw-line",
+    "href": "./cw-line.html",
+    "title": "予約から来店後のご案内まで",
+    "category": "LINE公式アカウント",
+    "icon": "chat",
+    "palette": [
+      "#193e27",
+      "#f6fff1",
+      "#bce598"
+    ],
+    "layout": "right",
+    "motif": "sun",
+    "source": "pf/real-covers/screens/cw-line.png",
+    "image": "pf/real-covers/cw-line.jpg",
+    "screenLabel": "実際の制作例画面",
+    "relatedDemo": null
+  },
+  {
+    "slug": "sns-workflow",
+    "href": "./sns-workflow.html",
+    "title": "投稿原稿をつくり、確認する",
+    "category": "SNS制作・承認",
+    "icon": "pencil",
+    "palette": [
+      "#f0d5dd",
+      "#5a334c",
+      "#9c557d"
+    ],
+    "layout": "left",
+    "motif": "paper",
+    "source": "pf/real-covers/screens/sns-workflow.png",
+    "image": "pf/real-covers/sns-workflow.jpg",
+    "screenLabel": "実際の制作例画面",
+    "relatedDemo": null
+  },
+  {
+    "slug": "cw-design",
+    "href": "./cw-design.html",
+    "title": "伝えたいことが届くバナー",
+    "category": "バナー・画像制作",
+    "icon": "layers",
+    "palette": [
+      "#f4e6c7",
+      "#2f3a50",
+      "#d18b39"
+    ],
+    "layout": "center",
+    "motif": "grid",
+    "source": "pf/real-covers/screens/cw-design.jpg",
+    "image": "pf/real-covers/cw-design.jpg",
+    "screenLabel": "実際の制作例画面",
+    "relatedDemo": null
+  },
+  {
+    "slug": "cw-sns",
+    "href": "./cw-sns.html",
+    "title": "投稿の見せ方を整える",
+    "category": "SNSの投稿デザイン",
+    "icon": "heart",
+    "palette": [
+      "#4c326e",
+      "#fff5ff",
+      "#eca9c6"
+    ],
+    "layout": "wide",
+    "motif": "sun",
+    "source": "pf/real-covers/screens/cw-sns.png",
+    "image": "pf/real-covers/cw-sns.jpg",
+    "screenLabel": "実際の制作例画面",
+    "relatedDemo": null
+  },
+  {
+    "slug": "sales-slides",
+    "href": "./sales-slides.html",
+    "title": "伝える順番から、資料を整える",
+    "category": "営業資料・スライド",
+    "icon": "slides",
+    "palette": [
+      "#22344a",
+      "#ffffff",
+      "#e2aa55"
+    ],
+    "layout": "bottom",
+    "motif": "stripes",
+    "source": "pf/real-covers/screens/sales-slides.png",
+    "image": "pf/real-covers/sales-slides.jpg",
+    "screenLabel": "実際の制作例画面",
+    "relatedDemo": null
+  }
+]
