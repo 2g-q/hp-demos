@@ -1,0 +1,48 @@
+/* Only these explicitly opted-in portfolio pages are themed. Never enter a
+   demo window: its controls, charts and embedded pages retain their colours. */
+@media screen {
+  html[data-portfolio-theme] {
+    background: var(--portfolio-bg) !important;
+    --portfolio-line: color-mix(in srgb, var(--portfolio-text) 24%, var(--portfolio-bg));
+    --portfolio-panel: color-mix(in srgb, var(--portfolio-bg) 95%, var(--portfolio-text));
+  }
+  html[data-portfolio-theme] body {
+    background: var(--portfolio-bg) !important;
+    color: var(--portfolio-text) !important;
+  }
+  html[data-portfolio-theme] body.unified-catalog {
+    --black: var(--portfolio-text);
+    --white: var(--portfolio-bg);
+    --tint-4: var(--portfolio-panel);
+    --tint-8: var(--portfolio-panel);
+    --hairline: var(--portfolio-line);
+  }
+  html[data-portfolio-theme] .window { color: #f5f5f5; }
+  html[data-portfolio-theme] :is(.hero,.sec,.contact,.bottom,.recent-contact,.footer,.portfolio-review):not(.app *, .u-window *, .window *, .review-demo-window *) {
+    background: transparent !important;
+    border-color: var(--portfolio-line) !important;
+  }
+  html[data-portfolio-theme] :is(h1,h2,h3,p,a,b,strong,small,.eyebrow,.flow-label,.window-guide,.window-scroll-hint,.u-hint,.foot,.contact-sub):not(.app *, .u-window *, .window *, .review-demo-window *) {
+    color: var(--portfolio-text) !important;
+  }
+  html[data-portfolio-theme] :is(.recent-header,.unified-header,.u-nav,.u-compare article,.u-scope,.change,.scope,body>header) {
+    border-color: var(--portfolio-line) !important;
+  }
+  html[data-portfolio-theme] :is(.usecase,.beforeafter,.usecase>div,.beforeafter>div,.card,.case-main,.price-card):not(.app *, .u-window *, .window *, .review-demo-window *) {
+    background: var(--portfolio-panel) !important;
+    border-color: var(--portfolio-line) !important;
+  }
+  html[data-portfolio-theme] :is(.try,.demo-label,.btn-ghost):not(.app *, .u-window *, .window *, .review-demo-window *) {
+    color: var(--portfolio-text) !important;
+    background: var(--portfolio-panel) !important;
+    border-color: var(--portfolio-line) !important;
+  }
+  html[data-portfolio-theme] .btn-primary:not(.app *, .u-window *, .window *, .review-demo-window *) {
+    background: var(--portfolio-text) !important;
+    color: var(--portfolio-bg) !important;
+  }
+  html[data-portfolio-theme] a:focus-visible:not(.app *, .u-window *, .window *, .review-demo-window *) {
+    outline: 2px solid var(--portfolio-text);
+    outline-offset: 5px;
+  }
+}

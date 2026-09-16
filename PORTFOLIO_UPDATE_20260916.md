@@ -14,6 +14,12 @@ Each cover combines a captured demo/design image, a concrete Japanese headline, 
 
 ## Maintenance
 
+### Destination backgrounds
+
+The 21 active new covers now share their base palette with their 19 destination HTML pages via `assets/portfolio-page-theme.{css,js}`. Workbench follows the data/shipping/review hash and tab changes. The 11 restored website examples remain unchanged. Theme selectors exclude application/window descendants; embedded documents are not modified. Orange product-catalog uses dark outer text for contrast. No public copy, navigation targets or processing logic changed.
+
+Verification: `python3 pf/verify_page_themes.py` checks all 21 destinations at 1440 and 390 px, compares the palette to the active cover manifest, checks horizontal overflow, compares inner demo computed styles with the theme stylesheet disabled, and exercises the three workbench tabs. Screenshots and JSON evidence are stored outside the repository. Set `THEME_QA_URL` to repeat against a published base URL.
+
 - Render: `python3 pf/build_real_portfolio.py --render-only`
 - Browser QA: `python3 pf/verify_real_portfolio.py`
 - `COVER_QA_URL` changes the QA URL; `COVER_QA_BASE` changes the pre-edit comparison revision (default f26dfd6).
