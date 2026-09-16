@@ -11,8 +11,16 @@ files = ['cw.html', 'cw-web.html', 'cw-social.html']
 soups = [BeautifulSoup((root / file).read_text(), 'html.parser') for file in files]
 old = BeautifulSoup(subprocess.check_output(['git', 'show', 'c8ae9b0:cw.html'], text=True), 'html.parser')
 def inventory(s):
-    return [(a['href'], a.img['src'], a.select_one('.work-body').get_text(' ', strip=True)) for a in s.select('.work-card')]
-assert inventory(old) == sum([inventory(s) for s in soups], [])
+    return [(a['href'], a.select_one('.work-body').get_text(' ', strip=True)) for a in s.select('.work-card')]
+# The owner approved reordered web examples and three refreshed thumbnails.
+refreshed = {'./corp.html','./lp-recruit.html','./dental-sakura.html'}
+current_inventory = sum([inventory(s) for s in soups], [])
+assert sorted(h for h,_ in inventory(old)) == sorted(h for h,_ in current_inventory)
+assert sorted(x for x in inventory(old) if x[0] not in refreshed) == sorted(x for x in current_inventory if x[0] not in refreshed)
+old_images = {a['href']:a.img['src'] for a in old.select('.work-card')}
+for soup in soups:
+    for a in soup.select('.work-card'):
+        if a['href'] not in refreshed: assert a.img['src'] == old_images[a['href']]
 assert [len(s.select('.work-card')) for s in soups] == [16, 11, 5]
 for file, soup in zip(files, soups):
     assert not soup.select('details')
