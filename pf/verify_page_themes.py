@@ -26,11 +26,13 @@ with sync_playwright() as p:
         assert page.locator('html').get_attribute('data-portfolio-layout') == item['layout']
         assert page.locator('[data-portfolio-reading]').count() == 0
         assert page.evaluate("""()=>{const c=getComputedStyle(document.body,'::after');
-          return c.content!=='none' && c.backdropFilter==='blur(16px)' && c.pointerEvents==='none' && c.zIndex==='-1';}""")
+          return c.content!=='none' && c.backdropFilter==='blur(10px) saturate(0.85)' && c.backgroundColor==='rgba(248, 249, 246, 0.82)' && c.backgroundImage.includes('feTurbulence') && c.pointerEvents==='none' && c.zIndex==='-1';}""")
         assert page.evaluate("""() => {const c=getComputedStyle(document.body,'::before');
           return c.content!=='none' && c.display!=='none' && Number(c.opacity)>0 && c.pointerEvents==='none';} """)
         for width in [1440, 390]:
             page.set_viewport_size({'width': width, 'height': 1000})
+            # Embedded charts resize asynchronously after the viewport changes.
+            page.wait_for_function('document.documentElement.scrollWidth <= innerWidth', timeout=5000)
             assert page.evaluate('document.documentElement.scrollWidth <= innerWidth'), (item['href'], width)
             page.screenshot(path=str(out / f"{item['slug']}-{width}.png"), full_page=True)
         # Disabling only the new stylesheet must not change demo internals.
