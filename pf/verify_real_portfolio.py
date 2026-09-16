@@ -8,7 +8,7 @@ images = [root / a.img['src'].split('?')[0].removeprefix('./') for a in soup.sel
 assert len(images) == 32
 assert len({hashlib.sha256(p.read_bytes()).hexdigest() for p in images}) == 32
 assert len(soup.select('.work-card img[src^="./pf/real-covers/"]')) == 21
-assert len(soup.select('#web .work-card')) == 11
+assert len(soup.select('#web .work-card')) == 10
 manifest = json.loads((root/'pf/real-covers/manifest.json').read_text())
 assert len(manifest) == 32
 assert len({tuple(x['palette']) for x in manifest}) == 32

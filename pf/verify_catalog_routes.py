@@ -21,13 +21,18 @@ old_images = {a['href']:a.img['src'] for a in old.select('.work-card')}
 for soup in soups:
     for a in soup.select('.work-card'):
         if a['href'] not in refreshed: assert a.img['src'] == old_images[a['href']]
-assert [len(s.select('.work-card')) for s in soups] == [16, 11, 5]
+assert [len(s.select('.work-card')) for s in soups] == [17, 10, 5]
+assert soups[0].select_one('#tools .work-card[href="./ec-purchase.html"]')
+assert not soups[1].select_one('.work-card[href="./ec-purchase.html"]')
 for file, soup in zip(files, soups):
     assert not soup.select('details')
     assert len(soup.select('.portfolio-nav a')) == 3
     assert soup.select_one('.portfolio-nav [aria-current="page"]')['href'] == './' + file
     assert all(a.get('target') == '_blank' for a in soup.select('.work-card'))
     assert all(not a.get('target') for a in soup.select('.portfolio-nav a'))
+    assert soup.select_one('a[href="mailto:minato.ai.lab@gmail.com"]')
+    assert soup.select_one('a[href="https://page.line.me/091usyfe"]')
+    assert 'CWで相談する' not in soup.get_text()
     for item in soup.select('[src], link[href]'):
         value = item.get('src') or item.get('href')
         if value.startswith(('http:', 'https:', 'data:')): continue
