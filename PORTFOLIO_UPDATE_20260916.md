@@ -23,3 +23,5 @@ All 32 generated covers pass frame-bound, heading-separation, description-separa
 Japanese headline review used natural-japanese quick mode. Lint reported only two rhythm/length-uniformity warnings across the collection of 32 independent short headings. Retained intentionally: these are separate thumbnail labels with a shared size constraint, not continuous prose. No numbers, qualifications or performance claims were invented for the headline copy.
 
 Publication readback is recorded in the task handoff after deployment; a local pass is not a public-deployment claim.
+
+The catalog action-link colour was also made darker for readability on white cards. QA scrolls through every card to trigger the site's real reveal animation before saving the full-page evidence; image loading alone is not treated as visible-card verification.

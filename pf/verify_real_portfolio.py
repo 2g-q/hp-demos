@@ -25,6 +25,11 @@ with sync_playwright() as p:
  page.evaluate("document.querySelectorAll('details').forEach(e=>e.open=true);document.querySelectorAll('img').forEach(e=>e.loading='eager')")
  page.wait_for_function("Array.from(document.querySelectorAll('.work-card img')).every(i=>i.complete&&i.naturalWidth>0)")
  assert page.locator('.work-card img[src^="./pf/real-covers/"]').count()==32
+ # Trigger the site's actual once-only scroll reveals before full-page evidence.
+ for card in page.locator('.work-card').all():
+  card.scroll_into_view_if_needed();page.wait_for_timeout(100)
+ page.wait_for_timeout(700)
+ assert page.locator('.work-card').evaluate_all("els=>els.every(e=>Number(getComputedStyle(e).opacity)>.99)")
  for width in [1440,768,390,360]:
   page.set_viewport_size({'width':width,'height':1000})
   assert page.evaluate('document.documentElement.scrollWidth<=innerWidth')
