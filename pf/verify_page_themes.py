@@ -22,6 +22,10 @@ with sync_playwright() as p:
     for item in items:
         page.goto(base + item['href'].removeprefix('./'), wait_until='networkidle')
         assert page.evaluate("getComputedStyle(document.documentElement).getPropertyValue('--portfolio-bg').trim()") == item['palette'][0], item['href']
+        assert page.locator('html').get_attribute('data-portfolio-motif') == item['motif']
+        assert page.locator('html').get_attribute('data-portfolio-layout') == item['layout']
+        assert page.evaluate("""() => {const c=getComputedStyle(document.body,'::before');
+          return c.content!=='none' && c.display!=='none' && Number(c.opacity)>0 && c.pointerEvents==='none';} """)
         for width in [1440, 390]:
             page.set_viewport_size({'width': width, 'height': 1000})
             assert page.evaluate('document.documentElement.scrollWidth <= innerWidth'), (item['href'], width)
@@ -34,7 +38,7 @@ with sync_playwright() as p:
         after = page.evaluate(snapshot)
         assert before == after, ('demo_style_changed', item['href'])
         page.evaluate("document.querySelector('link[href*=\"portfolio-page-theme.css\"]').disabled=false")
-        results.append({'href': item['href'], 'palette': item['palette'], 'widths': [1440,390], 'demo_styles_unchanged': True})
+        results.append({'href': item['href'], 'palette': item['palette'], 'motif': item['motif'], 'layout': item['layout'], 'widths': [1440,390], 'demo_styles_unchanged': True})
     page.goto(base + 'workbench.html#data', wait_until='networkidle')
     for tab, bg in [('shipping','#f2c967'),('review','#633f4f'),('data','#164aa0')]:
         page.locator(f'[role=tab][data-tab={tab}]').click()

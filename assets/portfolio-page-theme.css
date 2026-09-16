@@ -9,6 +9,81 @@
   html[data-portfolio-theme] body {
     background: var(--portfolio-bg) !important;
     color: var(--portfolio-text) !important;
+    isolation: isolate;
+    position: relative;
+  }
+  /* Reuse the cover's actual motif, not a generic texture. A fixed decorative
+     plane keeps the motif visible alongside long demos without tiling seams. */
+  html[data-portfolio-motif] body::before {
+    content: "" !important;
+    display: block !important;
+    position: fixed !important;
+    z-index: -1 !important;
+    pointer-events: none !important;
+    width: min(92vw, 1440px);
+    height: min(72vw, 1120px);
+    top: 18vh;
+    left: 20vw;
+    background: none;
+    opacity: .2;
+    filter: none;
+    mask: none;
+    animation: none;
+    box-sizing: border-box;
+  }
+  html[data-portfolio-layout="left"] body::before { left: -12vw; }
+  html[data-portfolio-motif="paper"] body::before {
+    background: var(--portfolio-accent);
+    clip-path: polygon(4% 4%,95% 0,100% 100%,0 100%);
+    opacity: .13;
+  }
+  html[data-portfolio-motif="sun"] body::before {
+    background: var(--portfolio-accent);
+    border-radius: 50%;
+    width: min(86vw, 1200px);
+    height: min(86vw, 1200px);
+  }
+  html[data-portfolio-motif="orbit"] body::before {
+    border: 2px solid var(--portfolio-accent);
+    border-radius: 50%;
+    transform: rotate(-20deg);
+  }
+  html[data-portfolio-motif="stripes"] body::before {
+    background: repeating-linear-gradient(125deg,transparent 0 62px,var(--portfolio-accent) 63px 65px);
+  }
+  html[data-portfolio-motif="grid"] body::before {
+    background-image: linear-gradient(var(--portfolio-accent) 1px,transparent 1px),linear-gradient(90deg,var(--portfolio-accent) 1px,transparent 1px);
+    background-size: 57px 57px;
+    opacity: .1;
+  }
+  html[data-portfolio-motif="steps"] body::before {
+    background: linear-gradient(135deg,transparent 35%,var(--portfolio-accent) 35% 52%,transparent 52% 65%,var(--portfolio-accent) 65%);
+    opacity: .12;
+  }
+  html[data-portfolio-motif="route"] body::before {
+    border: 3px solid var(--portfolio-accent);
+    border-radius: 90px 0 150px 0;
+    transform: rotate(9deg);
+  }
+  html[data-portfolio-motif="radar"] body::before {
+    background: repeating-radial-gradient(circle,transparent 0 72px,var(--portfolio-accent) 73px 75px);
+    opacity: .16;
+  }
+  html[data-portfolio-motif="loop"] body::before {
+    border: 30px solid var(--portfolio-accent);
+    border-radius: 240px;
+    transform: rotate(-12deg);
+    opacity: .12;
+  }
+  @media(max-width:760px) {
+    html[data-portfolio-motif] body::before {
+      width: 150vw;
+      height: 180vw;
+      left: 15vw;
+      top: 22vh;
+    }
+    html[data-portfolio-layout="left"] body::before { left: -65vw; }
+    html[data-portfolio-motif="sun"] body::before { height:150vw; }
   }
   html[data-portfolio-theme] body.unified-catalog {
     --black: var(--portfolio-text);
