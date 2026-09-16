@@ -26,7 +26,7 @@ with sync_playwright() as p:
         assert page.locator('html').get_attribute('data-portfolio-layout') == item['layout']
         assert page.locator('[data-portfolio-reading]').count() == 0
         assert page.evaluate("""()=>{const c=getComputedStyle(document.body,'::after');
-          return c.content!=='none' && c.backdropFilter==='blur(10px) saturate(0.85)' && c.backgroundColor==='rgba(248, 249, 246, 0.64)' && c.backgroundImage.includes('feTurbulence') && c.pointerEvents==='none' && c.zIndex==='-1';}""")
+          return c.content!=='none' && c.backdropFilter==='blur(3px) saturate(1.2)' && c.backgroundColor==='rgba(255, 255, 255, 0.12)' && !c.backgroundImage.includes('feTurbulence') && c.pointerEvents==='none' && c.zIndex==='-1';}""")
         assert page.evaluate("""() => {const c=getComputedStyle(document.body,'::before');
           return c.content!=='none' && c.display!=='none' && Number(c.opacity)>0 && c.pointerEvents==='none';} """)
         for width in [1440, 390]:

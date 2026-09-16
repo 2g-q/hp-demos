@@ -16,6 +16,8 @@ Each cover combines a captured demo/design image, a concrete Japanese headline, 
 
 ### Destination backgrounds
 
+Approved clear-glass rollout supersedes the vintage settings below: grain removed, white base alpha12%, real backdrop blur3px/saturate1.2, directional edge highlights. Preserve all21 motifs; choose outer text from each palette. Product-catalog now uses blue-grey #b8cbd3 / ink#203743 / accent#e5f4f5 in both destination and thumbnail. The builder and manifest are synchronized; other31 thumbnail images are untouched. Native Apple optical simulation is not claimed. See `GLASS_DESIGN_REFERENCE.md` for design distinctions and accessibility considerations.
+
 Latest owner adjustment: return the glass base opacity from 82% to 64%. Keep RGB(248,249,246), grain, blur, geometry and other styling unchanged. This supersedes the 82% setting described below.
 
 Readability correction: one continuous white/light-grey sheet sits behind the whole content, not separate section cards. Owner selected material proof A (fine embossed vintage glass), with stronger white than its original 64% opacity: final base opacity is 82%, with subtle SVG grain, edge highlights and 10px backdrop blur. It is max 1240px wide and narrower than the viewport (mobile leaves 6px outer margins). Outer text is dark grey. The original motif remains behind and around the sheet. Only the backdrop is blurred; text and demo windows remain sharp. Preserve this protection when changing motifs; the high-opacity surface remains readable without backdrop-filter support.

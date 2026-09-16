@@ -5,7 +5,7 @@
     'document-intake': ['#f5f1e9', '#282824', '#d63d2e', 'paper', 'center'],
     'data-dashboard': ['#10151d', '#f6f7f8', '#c7f561', 'orbit', 'center'],
     'workflow': ['#12594d', '#ffffff', '#e4f49f', 'route', 'right'],
-    'product-catalog': ['#e34e2f', '#fff8f0', '#ffdf7e', 'sun', 'center'],
+    'product-catalog': ['#b8cbd3', '#203743', '#e5f4f5', 'sun', 'center'],
     'web-watch': ['#191d37', '#ffffff', '#ffbf70', 'radar', 'left'],
     'case-management': ['#e7dced', '#36283e', '#715088', 'stripes', 'wide'],
     'workbench-data': ['#164aa0', '#ffffff', '#bde3ff', 'grid', 'bottom'],
@@ -36,7 +36,7 @@
     root.dataset.portfolioLayout = themes[key][4];
     themes[key].slice(0, 3).forEach((value, i) => root.style.setProperty(
       ['--portfolio-bg', '--portfolio-ink', '--portfolio-accent'][i], value));
-    root.style.setProperty('--portfolio-text', '#28303b');
+    root.style.setProperty('--portfolio-text', themes[key][1]);
   }
   applyTheme();
   addEventListener('hashchange', applyTheme);

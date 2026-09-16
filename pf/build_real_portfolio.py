@@ -15,7 +15,7 @@ ART=[
 ('document-intake','請求書の転記を、確認する仕事に','事務・経理','document','#f5f1e9','#282824','#d63d2e','center','paper'),
 ('data-dashboard','売上集計を、ひとつの画面に','売上・集計','chart','#10151d','#f6f7f8','#c7f561','center','orbit'),
 ('workflow','受付から担当者への連絡まで','受付・連絡','link','#12594d','#ffffff','#e4f49f','right','route'),
-('product-catalog','商品データを、使える形に','通販・商品管理','tag','#e34e2f','#fff8f0','#ffdf7e','center','sun'),
+('product-catalog','商品データを、使える形に','通販・商品管理','tag','#b8cbd3','#203743','#e5f4f5','center','sun'),
 ('web-watch','価格と在庫の変化を見つける','情報収集・確認','radar','#191d37','#ffffff','#ffbf70','left','radar'),
 ('case-management','問い合わせの対応漏れを防ぐ','問い合わせ管理','chat','#e7dced','#36283e','#715088','wide','stripes'),
 ('workbench-data','表のばらつきを整える','表計算・データ整理','grid','#164aa0','#ffffff','#bde3ff','bottom','grid'),
@@ -139,6 +139,8 @@ def render(page):
   content=f'''<!doctype html><meta charset="utf-8"><style>{CSS}</style><article class="cover {layout} {motif}" style="{style}"><div class="decor"></div><div class="top"><div class="category"><span class="icon"><svg viewBox="0 0 24 24">{ICONS[icon]}</svg></span>{category}</div><span class="type">{typ}</span></div><h1>{html.escape(title)}</h1><div class="foot">MINATO AI・IT LAB / 制作例</div><div class="aside">{html.escape(short)}</div><div class="stage"><div class="screen"><div class="chrome"><i></i><i></i><i></i><span>実際の制作例画面</span></div><img src="{src.as_uri()}"></div></div><div class="arrow">↗</div></article>'''
   screen_label={'cw-api-link':'関連デモ / 出荷データの確認画面','cw-automation':'関連デモ / 情報収集後の通知画面'}.get(slug,'実際の制作例画面')
   content=content.replace('実際の制作例画面',screen_label)
+  if slug == 'product-catalog':
+   content=content.replace('class="icon"','class="icon" style="color:var(--ink)"')
   page.set_content(content);page.wait_for_function('Array.from(document.images).every(i=>i.complete&&i.naturalWidth>0)');page.evaluate('document.fonts.ready')
   c=page.locator('.cover')
   result=c.evaluate('''el=>{let c=el.getBoundingClientRect(),f=el.querySelector('.screen').getBoundingClientRect(),h=el.querySelector('h1').getBoundingClientRect(),a=el.querySelector('.aside').getBoundingClientRect(),i=el.querySelector('img');const overlap=(a,b)=>a.left<b.right&&a.right>b.left&&a.top<b.bottom&&a.bottom>b.top;return {frameInside:f.left>=c.left&&f.right<=c.right&&f.top>=c.top&&f.bottom<=c.bottom,titleClear:!overlap(h,f),asideClear:getComputedStyle(el.querySelector('.aside')).display==='none'||!overlap(a,f),ratioPreserved:Math.abs(i.offsetHeight/i.offsetWidth-i.naturalHeight/i.naturalWidth)<.005,titleFits:el.querySelector('h1').scrollHeight<=62}}''')

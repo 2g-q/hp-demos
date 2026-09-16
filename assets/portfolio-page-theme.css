@@ -3,8 +3,8 @@
 @media screen {
   html[data-portfolio-theme] {
     background: var(--portfolio-bg) !important;
-    --portfolio-line: #d3d8df;
-    --portfolio-panel: #edf0f3;
+    --portfolio-line: color-mix(in srgb, var(--portfolio-text) 24%, transparent);
+    --portfolio-panel: rgba(255,255,255,.09);
   }
   html[data-portfolio-theme] body {
     background: var(--portfolio-bg) !important;
@@ -87,10 +87,10 @@
   }
   html[data-portfolio-theme] body.unified-catalog {
     --black: var(--portfolio-text);
-    --white: #f8f9fa;
-    --charcoal: #596373;
-    --gray: #596373;
-    --ink-60: #596373;
+    --white: var(--portfolio-bg);
+    --charcoal: var(--portfolio-text);
+    --gray: var(--portfolio-text);
+    --ink-60: var(--portfolio-text);
     --tint-4: var(--portfolio-panel);
     --tint-8: var(--portfolio-panel);
     --hairline: var(--portfolio-line);
@@ -110,17 +110,19 @@
     width: min(1240px, calc(100% - 32px));
     transform: translateX(-50%);
     border-radius: 22px;
-    background-color: rgba(248, 249, 246, .64);
-    background-image:
-      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.12' numOctaves='3' seed='7' stitchTiles='stitch' result='n'/%3E%3CfeDiffuseLighting in='n' surfaceScale='1.5' diffuseConstant='1' lighting-color='white'%3E%3CfeDistantLight azimuth='225' elevation='42'/%3E%3C/feDiffuseLighting%3E%3CfeColorMatrix type='matrix' values='1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 .08 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E"),
-      linear-gradient(115deg,rgba(255,255,255,.22),rgba(255,255,255,0) 32%,rgba(204,220,208,.10) 72%,rgba(255,255,255,.18));
-    background-size: 220px 220px, 100% 100%;
-    -webkit-backdrop-filter: blur(10px) saturate(.85);
-    backdrop-filter: blur(10px) saturate(.85);
-    border: 1px solid rgba(255,255,255,.55);
-    border-radius: 16px;
+    background-color: rgba(255,255,255,.12);
+    background-image: radial-gradient(ellipse 65% 180px at 0 0,rgba(255,255,255,.18),transparent 75%),linear-gradient(115deg,rgba(255,255,255,.07),transparent 32%,transparent 76%,rgba(255,255,255,.045));
+    background-size: 100% 100%;
+    -webkit-backdrop-filter: blur(3px) saturate(1.2);
+    backdrop-filter: blur(3px) saturate(1.2);
+    border: 1px solid rgba(255,255,255,.45);
+    border-top-color: rgba(255,255,255,.75);
+    border-left-color: rgba(255,255,255,.48);
+    border-right-color: rgba(255,255,255,.22);
+    border-bottom-color: rgba(255,255,255,.16);
+    border-radius: 24px;
     box-sizing: border-box;
-    box-shadow: inset 2px 2px 1px rgba(255,255,255,.52), inset -2px -2px 2px rgba(66,88,73,.14), 0 14px 45px rgba(0,0,0,.16);
+    box-shadow: inset 0 1px 1px rgba(255,255,255,.65),inset 1px 0 1px rgba(255,255,255,.24),inset 0 -1px 1px rgba(255,255,255,.12),0 18px 44px rgba(0,0,0,.13);
     opacity: 1;
     filter: none;
     animation: none;
@@ -154,7 +156,10 @@
   }
   html[data-portfolio-theme] .btn-primary:not(.app *, .u-window *, .window *, .review-demo-window *) {
     background: var(--portfolio-text) !important;
-    color: #fff !important;
+    color: var(--portfolio-bg) !important;
+  }
+  html[data-portfolio-theme] .try:not(.app *, .u-window *, .window *, .review-demo-window *) {
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.35),0 3px 8px rgba(0,0,0,.06);
   }
   html[data-portfolio-theme] a:focus-visible:not(.app *, .u-window *, .window *, .review-demo-window *) {
     outline: 2px solid var(--portfolio-text);
