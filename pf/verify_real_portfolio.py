@@ -12,11 +12,13 @@ new=BeautifulSoup((root/'cw.html').read_text(),'html.parser')
 def inventory(s):return [(a['href'],a.get('target'),str(a.select_one('.work-body'))) for a in s.select('.work-card')]
 assert inventory(old)==inventory(new)
 assert len(manifest)==32
-assert len({hashlib.sha256((root/x['image']).read_bytes()).hexdigest() for x in manifest})==32
+displayed=[root/a.img['src'].split('?')[0].removeprefix('./') for a in new.select('.work-card')]
+assert len({hashlib.sha256(p.read_bytes()).hexdigest() for p in displayed})==32
 assert len({tuple(x['palette']) for x in manifest})==32
 assert all(all(v for k,v in c.items() if k!='slug') for c in json.loads((root/'pf/real-covers/checks.json').read_text()))
 url=os.environ.get('COVER_QA_URL','http://127.0.0.1:8876/cw.html')
-results={'url':url,'cards':32,'unique_images':32,'unique_palettes':32,'links_and_body_unchanged':True,'cover_bounds_passed':32,'widths':[]}
+assert [a.img['src'] for a in old.select('#web .work-card')]==[a.img['src'] for a in new.select('#web .work-card')]
+results={'url':url,'cards':32,'unique_images':32,'restored_website_covers':11,'links_and_body_unchanged':True,'new_cover_bounds_passed':21,'widths':[]}
 with sync_playwright() as p:
  b=p.chromium.launch(executable_path=str(chrome_real_bin()),headless=True)
  page=b.new_page(viewport={'width':1440,'height':1000},device_scale_factor=1)
@@ -24,7 +26,7 @@ with sync_playwright() as p:
  page.goto(url,wait_until='networkidle')
  page.evaluate("document.querySelectorAll('details').forEach(e=>e.open=true);document.querySelectorAll('img').forEach(e=>e.loading='eager')")
  page.wait_for_function("Array.from(document.querySelectorAll('.work-card img')).every(i=>i.complete&&i.naturalWidth>0)")
- assert page.locator('.work-card img[src^="./pf/real-covers/"]').count()==32
+ assert page.locator('.work-card img[src^="./pf/real-covers/"]').count()==21
  # Trigger the site's actual once-only scroll reveals before full-page evidence.
  for card in page.locator('.work-card').all():
   card.scroll_into_view_if_needed();page.wait_for_timeout(100)

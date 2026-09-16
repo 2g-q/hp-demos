@@ -1,5 +1,9 @@
 # Portfolio cover refresh — approved direction
 
+## Latest owner correction
+
+After publication the owner asked to keep the previous appearance of the section introduced by 「会社案内、集客、採用など、目的に合わせたサイトの制作例です。」. All 11 image references in `#web` are restored to f26dfd6. The other 21 covers remain new. Future updates must preserve the original `#web` thumbnails unless explicitly requested. The generated 32-cover manifest below remains an asset inventory, not the current selection of live image references. QA verifies the 11 restored references separately.
+
 ## Scope and design
 
 The owner approved the 2026-09-16 editorial proof and requested rollout and publication. All 32 cards currently listed in `cw.html` now reference individual covers in `pf/real-covers/`. No card destination, target, order, or existing card-body text is changed. The separately added health-report page is not listed in cw.html and was not added to the catalog by this task.
