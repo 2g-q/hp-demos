@@ -163,7 +163,8 @@ footer{background:#241f19;color:#9a8f7e;padding:54px 0 30px;font-size:.8rem}
 }
 </style>
 <meta content="noindex" name="robots"/>
-<style>header .brand{flex-shrink:0}header .menu a{white-space:nowrap}header .book{white-space:nowrap}header .brand small{display:none}@media(max-width:1100px){header .menu{display:none}header .menu.on,header .menu.open{display:flex}header .burger{display:flex}header .tel{display:none}}@media(max-width:600px){header .wrap{padding-left:16px;padding-right:16px}header .brand{font-size:17px;gap:7px;white-space:nowrap}header .leaf{width:22px;height:22px;flex-shrink:0}header .right{gap:12px}header .book{font-size:12px;padding:10px 12px}}</style><link rel="stylesheet" href="assets/demo-previews/dialog.css"></head>
+<style>header .brand{flex-shrink:0}header .menu a{white-space:nowrap}header .book{white-space:nowrap}header .brand small{display:none}@media(max-width:1100px){header .menu{display:none}header .menu.on,header .menu.open{display:flex}header .burger{display:flex}header .tel{display:none}}@media(max-width:600px){header .wrap{padding-left:16px;padding-right:16px}header .brand{font-size:17px;gap:7px;white-space:nowrap}header .leaf{width:22px;height:22px;flex-shrink:0}header .right{gap:12px}header .book{font-size:12px;padding:10px 12px}}</style><link rel="stylesheet" href="assets/demo-previews/dialog.css"><meta name="robots" content="noindex">
+</head>
 <body>
 
 <header id="hd">
@@ -294,5 +295,11 @@ document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 <style>#demo-fict{margin:0;padding:20px 20px 28px;background:#fff;color:rgba(13,13,13,.6);border-top:1px solid rgba(13,13,13,.14);font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue","Hiragino Kaku Gothic ProN","Noto Sans JP","Yu Gothic",Meiryo,sans-serif;font-size:13px;line-height:1.7;text-align:center}@media print{#demo-fict{display:none}}</style>
 <div id="demo-fict">これは制作サンプル（架空のヘアサロンサイト）です。店名・人物・数値はすべて架空です。地図・駅名のみ実在のものを使用しています。</div>
 <!-- demo-fict:end -->
-<script>document.addEventListener('click',function(e){const a=e.target.closest('a');if(!a)return;const h=a.getAttribute('href')||'';if(h.startsWith('#')){e.preventDefault();if(h.length>1){const t=document.getElementById(decodeURIComponent(h.slice(1)));if(t)t.scrollIntoView({behavior:'smooth',block:'start'});}return;}if(/^(tel:|mailto:)/i.test(h)){e.preventDefault();alert('制作サンプルです。電話・メールの送信は行いません。');return;}if(a.hasAttribute('download'))return;if(h){e.preventDefault();window.top.location.href=a.href;}},true);document.addEventListener('submit',function(e){e.preventDefault();},true);</script><script src="sample-interactions.js"></script></body>
+<script>document.addEventListener('click',function(e){const a=e.target.closest('a');if(!a)return;const h=a.getAttribute('href')||'';if(h.startsWith('#')){e.preventDefault();if(h.length>1){const t=document.getElementById(decodeURIComponent(h.slice(1)));if(t)t.scrollIntoView({behavior:'smooth',block:'start'});}return;}if(/^(tel:|mailto:)/i.test(h)){e.preventDefault();alert('制作サンプルです。電話・メールの送信は行いません。');return;}if(a.hasAttribute('download'))return;if(h){e.preventDefault();window.top.location.href=a.href;}},true);document.addEventListener('submit',function(e){e.preventDefault();},true);</script><script src="sample-interactions.js"></script><!-- cw-routing-note:start -->
+<aside id="cw-routing-note" class="cw-routing-note" style="margin:32px auto 0;max-width:1128px;padding:20px;background:#171717;color:#fff;font:inherit">
+<p style="margin:0 0 6px">ご相談は、元のクラウドワークスのメッセージから。</p>
+<p style="margin:0">気になる作例と、任せたい作業をお知らせください。</p>
+</aside>
+<!-- cw-routing-note:end -->
+</body>
 </html>
