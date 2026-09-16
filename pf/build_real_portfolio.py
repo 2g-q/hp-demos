@@ -89,7 +89,7 @@ CAPTURE={
 'cw-sns':('iframe',[])}
 
 def key(href):return href.removeprefix('./').replace('custom/','').replace('.html#','-').removesuffix('.html')
-cards=BeautifulSoup((ROOT/'cw.html').read_text(),'html.parser').select('.work-card')
+cards=BeautifulSoup(''.join((ROOT/file).read_text() for file in ['cw.html','cw-web.html','cw-social.html']),'html.parser').select('.work-card')
 cardmap={key(a['href']):a for a in cards}
 assert set(cardmap)=={a[0] for a in ART}
 

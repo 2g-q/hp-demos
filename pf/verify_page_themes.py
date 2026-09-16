@@ -7,7 +7,7 @@ from automation.chrome_bin import chrome_real_bin
 from playwright.sync_api import sync_playwright
 
 root = Path.cwd()
-catalog = (root / 'cw.html').read_text()
+catalog = ''.join((root / file).read_text() for file in ['cw.html', 'cw-web.html', 'cw-social.html'])
 items = [x for x in json.loads((root / 'pf/real-covers/manifest.json').read_text())
          if './' + x['image'] in catalog]
 base = os.environ.get('THEME_QA_URL', 'http://127.0.0.1:8876/')

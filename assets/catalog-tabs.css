@@ -1,0 +1,9 @@
+/* Three same-tab catalogue routes, distinct from actual client cases. */
+.buyer-catalog .portfolio-nav{background:rgba(247,250,253,.94);backdrop-filter:blur(12px)}
+.buyer-catalog .portfolio-nav .container{display:flex;gap:28px;flex-wrap:nowrap}
+.buyer-catalog .portfolio-nav a{color:#475569;border-bottom:3px solid transparent;font-size:14px;white-space:nowrap}
+.buyer-catalog .portfolio-nav a[aria-current="page"]{color:#17212d;border-color:#2563eb;font-weight:650}
+.buyer-catalog .portfolio-nav a:focus-visible{outline:2px solid #2563eb;outline-offset:3px}
+.buyer-catalog .works-grid+.works-grid{margin-top:24px}
+.buyer-catalog .unified-header nav a[aria-current="page"]{color:#17212d;font-weight:650}
+@media(max-width:600px){.buyer-catalog .portfolio-nav .container{gap:0;justify-content:space-between}.buyer-catalog .portfolio-nav a{min-height:52px;font-size:13px}.buyer-catalog .unified-header nav{column-gap:12px;justify-content:flex-start}}

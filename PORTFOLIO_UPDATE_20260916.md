@@ -43,3 +43,6 @@ Japanese headline review used natural-japanese quick mode. Lint reported only tw
 Publication readback is recorded in the task handoff after deployment; a local pass is not a public-deployment claim.
 
 The catalog action-link colour was also made darker for readability on white cards. QA scrolls through every card to trigger the site's real reveal animation before saving the full-page evidence; image loading alone is not treated as visible-card verification.
+### Catalogue category routes
+
+The catalogue is now three same-tab pages: `cw.html` (16 business/AI demos), `cw-web.html` (11 website examples), and `cw-social.html` (5 LINE/SNS/design examples). All 32 card images, descriptions and destinations are preserved; no examples are collapsed. Individual samples open in a new browser tab. Client support stories remain on the independent `cases.html` page, linked from the main header. Old `cw.html#web`, `#sns`, `#cases` and `#pricing` bookmarks redirect to the corresponding page. Navigation and the white catalogue background are shared. The new regression is `pf/verify_catalog_routes.py`; theme QA reads all three catalogues. Japanese label lint reported only uniform-length headings, intentionally retained for consistent navigation. Existing body copy was preserved.
