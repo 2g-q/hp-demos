@@ -33,10 +33,5 @@ function add(e){e.preventDefault();if(busy)return;const p=plans[mode],raw=$('qua
 async function review(){if(busy||!summary().quantity||(mode==='subscription'&&!$('agreement').checked))return;busy=true;document.querySelectorAll('button,input,select').forEach(n=>n.disabled=true);$('cart-panel').dataset.state='active';$('review').textContent='注文内容を確認しています…';await new Promise(r=>setTimeout(r,1200));const p=plans[mode],s=summary();$('review-result').replaceChildren(el('h3','','注文内容の確認（デモ）'));const list=el('ul');for(const item of carts[mode])list.append(el('li','',p.name+' / '+labels[item.variant]+' / '+item.quantity+'袋'));$('review-result').append(list,el('p','review-total',yen(s.total)+'（税込・送料込）'),el('p','',p.delivery),el('p','',p.terms));if(mode==='subscription')$('review-result').append(el('p','','2回目以降：4週間ごとに'+yen(s.total)+'（同じ内容の場合）。'));$('review-result').append(el('p','','ここまでが確認画面の見本です。注文・決済は行われていません。'));$('review-result').hidden=false;$('cart-panel').dataset.state='done';busy=false;document.querySelectorAll('button,input,select').forEach(n=>n.disabled=false);$('review').textContent='注文内容の確認を試す →';updateReviewButton();}
 function reset(){if(busy)return;carts={normal:[],subscription:[],preorder:[]};choose('normal');}
 document.getElementById('add-form').addEventListener('submit',add);document.getElementById('review').addEventListener('click',review);document.getElementById('reset').addEventListener('click',reset);document.getElementById('agreement').addEventListener('change',()=>{$('review-result').hidden=true;updateReviewButton();});document.querySelectorAll('[data-mode]').forEach(n=>n.addEventListener('click',()=>choose(n.dataset.mode)));reset();
-</script><!-- cw-routing-note:start -->
-<aside id="cw-routing-note" class="cw-routing-note" style="margin:32px auto 0;max-width:1128px;padding:20px;background:#171717;color:#fff;font:inherit">
-<p style="margin:0 0 6px">ご相談は、元のクラウドワークスのメッセージから。</p>
-<p style="margin:0">気になる作例と、任せたい作業をお知らせください。</p>
-</aside>
-<!-- cw-routing-note:end -->
+</script><aside class="direct-contact-note" style="margin:32px auto 40px;max-width:1128px;padding:24px;background:#f3f6fa;color:#17212d;font:inherit"><p style="margin:0 0 12px">ご相談はメール・LINEから</p><a href="./index.html#contact" target="_top" style="color:#2454aa;text-decoration:underline;text-underline-offset:4px">お問い合わせ先を見る →</a></aside>
 </body></html>

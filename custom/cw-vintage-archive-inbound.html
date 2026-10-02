@@ -20,10 +20,5 @@ function zoom(on){$('dialog-body').classList.toggle('zoomed',on);$('zoom-button'
 function openItem(p){active=p;textDetail();$('item-dialog').showModal();}
 function textDetail(){$('detail-number').textContent='SPECIMEN NO. '+active.id;$('detail-title').textContent=title(active);$('detail-price').textContent=money(active);$('detail-art').innerHTML=art(active);$('detail-specs').innerHTML=specs(active).map(s=>'<dt>'+s[0]+'</dt><dd>'+s[1]+'</dd>').join('');$('detail-art').onclick=()=>zoom(!$('dialog-body').classList.contains('zoomed'));zoom(false);updateCompare();}
 document.querySelectorAll('[data-lang]').forEach(button=>button.addEventListener('click',()=>{lang=button.dataset.lang;render();}));$('dialog-close').addEventListener('click',()=>$('item-dialog').close());$('item-dialog').addEventListener('click',e=>{if(e.target===$('item-dialog')){const r=$('item-dialog').getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)$('item-dialog').close();}});$('item-dialog').addEventListener('close',()=>{zoom(false);active=null;});$('zoom-button').addEventListener('click',()=>zoom(!$('dialog-body').classList.contains('zoomed')));$('detail-compare').addEventListener('click',()=>toggleCompare(active.id));render();})();
-</script><!-- cw-routing-note:start -->
-<aside id="cw-routing-note" class="cw-routing-note" style="margin:32px auto 0;max-width:1128px;padding:20px;background:#171717;color:#fff;font:inherit">
-<p style="margin:0 0 6px">ご相談は、元のクラウドワークスのメッセージから。</p>
-<p style="margin:0">気になる作例と、任せたい作業をお知らせください。</p>
-</aside>
-<!-- cw-routing-note:end -->
+</script><aside class="direct-contact-note" style="margin:32px auto 40px;max-width:1128px;padding:24px;background:#f3f6fa;color:#17212d;font:inherit"><p style="margin:0 0 12px">ご相談はメール・LINEから</p><a href="../index.html#contact" target="_top" style="color:#2454aa;text-decoration:underline;text-underline-offset:4px">お問い合わせ先を見る →</a></aside>
 </body></html>

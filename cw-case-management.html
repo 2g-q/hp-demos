@@ -41,10 +41,5 @@ function add(){if(busy||records.some(r=>r.id==='Q105'))return;records.unshift({i
 function csvCell(v){let s=String(v??'');if(/^[\s]*[=+@\-]/.test(s))s="'"+s;return '"'+s.replaceAll('"','""')+'"';}
 function exportCsv(){if(busy||!visible().length)return;const rows=[['受付ID','お客様','件名','担当者','進捗','次の対応','期限','要対応理由'],...visible().map(r=>[r.id,r.customer,r.title,r.owner,r.stage,r.next,r.due,reason(r)])];const url=URL.createObjectURL(new Blob(['\ufeff'+rows.map(r=>r.map(csvCell).join(',')).join('\r\n')],{type:'text/csv;charset=utf-8'}));const a=node('a');a.href=url;a.download='demo-inquiries-'+filter+'.csv';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);}
 $('edit-form').addEventListener('submit',save);$('stage').addEventListener('change',stageState);document.getElementById('reset').addEventListener('click',reset);document.getElementById('add').addEventListener('click',add);document.getElementById('export').addEventListener('click',exportCsv);document.querySelectorAll('[data-filter]').forEach(b=>b.addEventListener('click',()=>{if(busy)return;filter=b.dataset.filter;renderList();}));reset();
-</script><!-- cw-routing-note:start -->
-<aside id="cw-routing-note" class="cw-routing-note" style="margin:32px auto 0;max-width:1128px;padding:20px;background:#171717;color:#fff;font:inherit">
-<p style="margin:0 0 6px">ご相談は、元のクラウドワークスのメッセージから。</p>
-<p style="margin:0">気になる作例と、任せたい作業をお知らせください。</p>
-</aside>
-<!-- cw-routing-note:end -->
+</script><aside class="direct-contact-note" style="margin:32px auto 40px;max-width:1128px;padding:24px;background:#f3f6fa;color:#17212d;font:inherit"><p style="margin:0 0 12px">ご相談はメール・LINEから</p><a href="./index.html#contact" target="_top" style="color:#2454aa;text-decoration:underline;text-underline-offset:4px">お問い合わせ先を見る →</a></aside>
 </body></html>

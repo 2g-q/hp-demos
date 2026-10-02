@@ -52,10 +52,5 @@ function downloadCsv(rows,name){const content='\ufeff'+rows.map(r=>r.map(csvCell
 function diffRows(){return [['商品ID','商品名','変更内容','前回価格','今回価格','前回在庫','今回在庫'],...differences.map(d=>[d.id,d.name,d.kind,d.before?.price??'',d.after.price,d.before?.stock??'',d.after.stock])];}
 function allRows(){const old=new Map(previous.map(x=>[x.id,x]));return [['商品ID','商品名','今回価格','今回在庫','取得状態','前回価格','前回在庫'],...latest.filter(x=>!failures.has(x.id)).map(x=>[x.id,x.name,x.price,x.stock,'取得済み',old.get(x.id)?.price??'',old.get(x.id)?.stock??'']),...[...failures.keys()].map(id=>[id,productName(id),'','','未取得',old.get(id)?.price??'',old.get(id)?.stock??''])];}
 document.getElementById('run').addEventListener('click',run);document.getElementById('reset').addEventListener('click',()=>choose('changed'));document.getElementById('retry').addEventListener('click',retry);document.querySelectorAll('.case').forEach(b=>b.addEventListener('click',()=>choose(b.dataset.case)));document.getElementById('export-diff').addEventListener('click',()=>{if(ready&&!busy&&differences.length)downloadCsv(diffRows(),'demo-product-changes.csv');});document.getElementById('export-all').addEventListener('click',()=>{if(ready&&!busy)downloadCsv(allRows(),'demo-product-results.csv');});choose('changed');
-</script><!-- cw-routing-note:start -->
-<aside id="cw-routing-note" class="cw-routing-note" style="margin:32px auto 0;max-width:1128px;padding:20px;background:#171717;color:#fff;font:inherit">
-<p style="margin:0 0 6px">ご相談は、元のクラウドワークスのメッセージから。</p>
-<p style="margin:0">気になる作例と、任せたい作業をお知らせください。</p>
-</aside>
-<!-- cw-routing-note:end -->
+</script><aside class="direct-contact-note" style="margin:32px auto 40px;max-width:1128px;padding:24px;background:#f3f6fa;color:#17212d;font:inherit"><p style="margin:0 0 12px">ご相談はメール・LINEから</p><a href="./index.html#contact" target="_top" style="color:#2454aa;text-decoration:underline;text-underline-offset:4px">お問い合わせ先を見る →</a></aside>
 </body></html>

@@ -683,11 +683,6 @@ form.addEventListener('submit',e=>{
 <style>#demo-fict{margin:0;padding:20px 20px 28px;background:#fff;color:rgba(13,13,13,.6);border-top:1px solid rgba(13,13,13,.14);font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue","Hiragino Kaku Gothic ProN","Noto Sans JP","Yu Gothic",Meiryo,sans-serif;font-size:13px;line-height:1.7;text-align:center}@media print{#demo-fict{display:none}}</style>
 <div id="demo-fict">これは制作サンプル（架空の介護事業者の採用LP）です。社名・人物・数値はすべて架空です。</div>
 <!-- demo-fict:end -->
-<script>document.addEventListener('click',function(e){const a=e.target.closest('a');if(!a)return;const h=a.getAttribute('href')||'';if(h.startsWith('#')){e.preventDefault();if(h.length>1){const t=document.getElementById(decodeURIComponent(h.slice(1)));if(t)t.scrollIntoView({behavior:'smooth',block:'start'});}return;}if(/^(tel:|mailto:)/i.test(h)){e.preventDefault();alert('制作サンプルです。電話・メールの送信は行いません。');return;}if(a.hasAttribute('download'))return;if(h){e.preventDefault();window.top.location.href=a.href;}},true);document.addEventListener('submit',function(e){e.preventDefault();},true);</script><!-- cw-routing-note:start -->
-<aside id="cw-routing-note" class="cw-routing-note" style="margin:32px auto 0;max-width:1128px;padding:20px;background:#171717;color:#fff;font:inherit">
-<p style="margin:0 0 6px">ご相談は、元のクラウドワークスのメッセージから。</p>
-<p style="margin:0">気になる作例と、任せたい作業をお知らせください。</p>
-</aside>
-<!-- cw-routing-note:end -->
+<script>document.addEventListener('click',function(e){const a=e.target.closest('a');if(!a)return;const h=a.getAttribute('href')||'';if(h.startsWith('#')){e.preventDefault();if(h.length>1){const t=document.getElementById(decodeURIComponent(h.slice(1)));if(t)t.scrollIntoView({behavior:'smooth',block:'start'});}return;}if(/^(tel:|mailto:)/i.test(h)){e.preventDefault();alert('制作サンプルです。電話・メールの送信は行いません。');return;}if(a.hasAttribute('download'))return;if(h){e.preventDefault();window.top.location.href=a.href;}},true);document.addEventListener('submit',function(e){e.preventDefault();},true);</script>
 </body>
 </html>

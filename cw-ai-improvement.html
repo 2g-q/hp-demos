@@ -45,10 +45,5 @@ function reportText(){const d=reportData();if(!d)return '';const {t,s,review,aft
 function download(){if(busy||!result?.choice)return;const url=URL.createObjectURL(new Blob(['\ufeff'+reportText()],{type:'text/plain;charset=utf-8'}));const a=el('a');a.href=url;a.download='demo-ai-improvement-report.txt';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);}
 function reset(){if(busy)return;renderInputs();outcome='good';$('validation').textContent='';clearResult('入力例を用意しました。そのままでも試せます。');document.querySelectorAll('[data-outcome]').forEach(n=>n.setAttribute('aria-pressed',String(n.dataset.outcome===outcome)));}
 document.getElementById('diagnosis').addEventListener('submit',run);document.getElementById('reset').addEventListener('click',reset);document.getElementById('download').addEventListener('click',download);document.querySelectorAll('[data-outcome]').forEach(n=>n.addEventListener('click',()=>{if(busy||!result?.choice)return;outcome=n.dataset.outcome;renderReport();}));$('tasks').addEventListener('input',()=>{if(!busy)clearResult('条件が変わりました。もう一度、優先順位を整理してください。');});reset();
-</script><!-- cw-routing-note:start -->
-<aside id="cw-routing-note" class="cw-routing-note" style="margin:32px auto 0;max-width:1128px;padding:20px;background:#171717;color:#fff;font:inherit">
-<p style="margin:0 0 6px">ご相談は、元のクラウドワークスのメッセージから。</p>
-<p style="margin:0">気になる作例と、任せたい作業をお知らせください。</p>
-</aside>
-<!-- cw-routing-note:end -->
+</script><aside class="direct-contact-note" style="margin:32px auto 40px;max-width:1128px;padding:24px;background:#f3f6fa;color:#17212d;font:inherit"><p style="margin:0 0 12px">ご相談はメール・LINEから</p><a href="./index.html#contact" target="_top" style="color:#2454aa;text-decoration:underline;text-underline-offset:4px">お問い合わせ先を見る →</a></aside>
 </body></html>

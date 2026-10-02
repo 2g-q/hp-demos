@@ -102,10 +102,5 @@ function reset(){if(busy)return;records=[{id:'DEMO-021',category:'quote',message
 function csvCell(value){let s=String(value);if(/^[=+@\-\t\r]/.test(s))s="'"+s;return '"'+s.replaceAll('"','""')+'"';}
 document.getElementById('export').addEventListener('click',()=>{const data=[['受付番号','種類','内容','担当','通知結果'],...records.map(r=>[r.id,labels[r.category],r.message,owners[r.category],{sent:'通知済み（模擬）',failed:'通知を要確認',pending:'通知待ち'}[r.status]])];const blob=new Blob(['\ufeff'+data.map(row=>row.map(csvCell).join(',')).join('\r\n')],{type:'text/csv;charset=utf-8'});const url=URL.createObjectURL(blob);const a=el('a');a.href=url;a.download='demo-intake-ledger.csv';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);});
 $('intake').addEventListener('submit',run);document.getElementById('reset').addEventListener('click',reset);document.querySelectorAll('.case').forEach(b=>b.addEventListener('click',()=>choose(b.dataset.case)));reset();
-</script><!-- cw-routing-note:start -->
-<aside id="cw-routing-note" class="cw-routing-note" style="margin:32px auto 0;max-width:1128px;padding:20px;background:#171717;color:#fff;font:inherit">
-<p style="margin:0 0 6px">ご相談は、元のクラウドワークスのメッセージから。</p>
-<p style="margin:0">気になる作例と、任せたい作業をお知らせください。</p>
-</aside>
-<!-- cw-routing-note:end -->
+</script><aside class="direct-contact-note" style="margin:32px auto 40px;max-width:1128px;padding:24px;background:#f3f6fa;color:#17212d;font:inherit"><p style="margin:0 0 12px">ご相談はメール・LINEから</p><a href="./index.html#contact" target="_top" style="color:#2454aa;text-decoration:underline;text-underline-offset:4px">お問い合わせ先を見る →</a></aside>
 </body></html>
