@@ -1,0 +1,13 @@
+/* Keep EMBER's restaurant editorial identity; remove incidental decoration. */
+.kitchen-notes figure{transform:none;box-shadow:none;padding:0;background:none}
+.kitchen-notes figcaption{text-align:left;font-size:12px;padding-top:16px}
+.dinner-receipt{transform:none;box-shadow:none;border-top:2px solid var(--red)}
+.about-copy p,.kitchen-notes article>p,.plan-intro p{font-size:14px;line-height:2.05}
+.dish-picker b,.dish-picker em{font-size:14px}
+.dish-picker small{font-size:12px;line-height:1.8}
+.receipt-row{font-size:12px;line-height:1.7}
+.dinner-receipt>p{font-size:11px}
+.menu-note,.restaurant-disclosure{font-size:11px;line-height:1.9}
+.menu-tabs button{min-height:44px;padding-inline:18px}
+@media(min-width:1000px){.about{padding-block:100px}.menu{padding-block:95px}.kitchen-notes{padding-top:95px;padding-bottom:60px}.dinner-plan{gap:4%;padding-block:95px}}
+@media(max-width:760px){.kitchen-notes{padding-inline:24px;gap:32px}.kitchen-notes figure img{height:390px}.kitchen-notes article>p,.plan-intro p{font-size:14px}.dish-picker small{font-size:11px}.dinner-receipt{margin-inline:0}.hero-footer{gap:22px}.restaurant-disclosure{font-size:11px}}

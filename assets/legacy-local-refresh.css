@@ -1,0 +1,155 @@
+/* Dedicated visual refinement for the three original local-business demos. */
+.legacy-local .reveal{opacity:1;transform:none}
+.legacy-local :is(a,button):focus-visible{outline:3px solid currentColor;outline-offset:5px}
+.legacy-local .legacy-caption{font-size:11px!important;line-height:1.6!important;letter-spacing:.02em;opacity:.8;margin:12px 0 0!important}
+.legacy-local img{object-fit:cover}
+.legacy-local :is(.btn,.book){box-shadow:none}
+.legacy-local button.burger{background:none;border:0}
+.legacy-local section[id]{scroll-margin-top:88px}
+
+/* REBORN: an athletic, architectural grid with a generous photographic lead. */
+.legacy-local-gym{--accent:#eb542b;--base-warm:#f3f3ee;--radius:4px;--ink:#17211f}
+.legacy-local-gym .header{background:#fafaf5;border-bottom:1px solid #dfe2dc}
+.legacy-local-gym .header-inner{max-width:1320px;height:80px}
+.legacy-local-gym .hero{padding:120px 0 28px;background:#16231f;color:#fff}
+.legacy-local-gym .hero-grid{max-width:1320px;grid-template-columns:.92fr 1.08fr;gap:50px}
+.legacy-local-gym .hero h1{font-size:clamp(36px,4.3vw,62px);line-height:1.35;letter-spacing:-.04em}
+.legacy-local-gym .hero-label{color:#f89371;font-size:11px;letter-spacing:.18em}
+.legacy-local-gym .hero-lead,.legacy-local-gym .hero-note{color:#d0d9d1}
+.legacy-local-gym .hero-visual img{height:610px;border-radius:2px;object-position:48% center}
+.legacy-local-gym .hero-deco{display:none}
+.legacy-local-gym .hero-badge{left:20px;bottom:32px;border-radius:2px;color:#17211f;box-shadow:none}
+.legacy-local-gym .hero-visual::after{content:"写真はトレーニング空間のイメージです";display:block;font-size:10px;color:#bbc9c0;margin-top:8px}
+.legacy-local-gym .btn{border-radius:3px}
+.legacy-local-gym .hero-cta .btn-primary{padding:19px 26px;min-height:74px}
+.legacy-local-gym .btn-line{background:transparent;border:1px solid #718379;padding:15px 26px}
+.legacy-local-gym .hero .stats{max-width:1320px;margin-top:40px}
+.legacy-local-gym .stats-inner{background:none;border-top:1px solid #53615a;border-radius:0;padding:26px 0 10px}
+.legacy-local-gym .stats-note{color:#acbcb2}
+.legacy-local-gym .marker{background:none;border-bottom:3px solid var(--accent)}
+.legacy-local-gym :is(.feature-img,.feature-img img,.trainer-card,.plan-card,.worry-list li,.voice-card){border-radius:4px;box-shadow:none}
+.legacy-local-gym .sec-head{text-align:left}
+.legacy-local-gym .sec-head .en-label{font-size:11px;letter-spacing:.2em}
+.legacy-local-gym .sec-head h2{font-size:clamp(28px,3.4vw,44px);letter-spacing:-.03em}
+.legacy-local-gym .feature-row{gap:56px}
+.legacy-local-gym .trainer-photo img{height:260px}
+
+/* LUCE: large photography, cream paper, and quiet hair-salon typography. */
+.legacy-local-salon{--gold:#a58457;--gold-d:#775e3e;--cream:#eeece5;--paper:#faf9f4;--ink:#2a302a;--sub:#666b61}
+.legacy-local-salon .wrap{max-width:1240px}
+.legacy-local-salon header{padding:24px 0}
+.legacy-local-salon .brand{font-size:26px;letter-spacing:.15em}
+.legacy-local-salon .hero{height:780px;min-height:680px;background:url('../works/linen-salon/assets/salon.jpg') center 52%/cover}
+.legacy-local-salon .hero::before{display:none}
+.legacy-local-salon .hero::after{background:linear-gradient(90deg,rgba(22,30,24,.81),rgba(22,30,24,.38) 57%,rgba(22,30,24,.08))}
+.legacy-local-salon .hero .wrap{width:100%;padding-top:65px}
+.legacy-local-salon .hero h1{font-size:clamp(40px,4.8vw,68px);line-height:1.5;letter-spacing:.06em;font-weight:500;margin:26px 0}
+.legacy-local-salon .hero p{max-width:460px;line-height:2.15}
+.legacy-local-salon .hero .en{font-family:Georgia,serif;font-size:13px;letter-spacing:.2em;color:#f0e6d3}
+.legacy-local-salon .btn{padding:18px 31px}
+.legacy-local-salon .btn-gold{background:#f6f1e6;color:#2a302a}
+.legacy-local-salon .btn-gold:hover{background:#ded6c4}
+.legacy-local-salon .concept .grid{gap:100px;grid-template-columns:1fr 1fr}
+.legacy-local-salon .concept .photo{box-shadow:none;border-radius:0;aspect-ratio:4/5}
+.legacy-local-salon .concept .photo img{object-position:58% center}
+.legacy-local-salon .concept .photo::before{display:none}
+.legacy-local-salon .concept h3{font-size:32px;font-weight:500}
+.legacy-local-salon .head{margin-bottom:52px}
+.legacy-local-salon .head h2{font-weight:500}
+.legacy-local-salon .menu-list{max-width:none;gap:10px 72px}
+.legacy-local-salon .m-item{padding:25px 0}
+.legacy-local-salon .ggrid{grid-template-columns:1.4fr 1fr 1fr;grid-auto-rows:245px;gap:16px}
+.legacy-local-salon .ggrid .big{grid-column:span 1;grid-row:span 2}
+.legacy-local-salon .ggrid figure{border-radius:0}
+.legacy-local-salon .card{border:0;border-radius:0;background:none}
+.legacy-local-salon .card .ph{aspect-ratio:4/3}
+.legacy-local-salon .card .body{padding:25px 0}
+.legacy-local-salon #staff .head::after{content:"写真は施術・空間の参考イメージです。人物紹介は架空の設定です。";display:block;font-size:11px;color:var(--sub);margin-top:14px}
+.legacy-local-salon .card:hover{transform:none;box-shadow:none}
+.legacy-local-salon .v{border-radius:0;background:transparent;border-top:1px solid #c4c9bd;padding:28px 12px}
+.legacy-local-salon .v::before{display:none}
+.legacy-local-salon .cta-band{background:#35443b}
+.legacy-local-salon .access{background:#2a352e}
+
+/* SAKURA: a readable clinic page with photography and restrained rose accents. */
+.legacy-local-dental{--pink:#ad637a;--pink-d:#925066;--sakura:#f6eef0;--paper:#fafaf6;--wood:#f0f0e8;--ink:#293e38;--ink2:#385149;--sub:#65716a;--line:#e0e5dc;--r-lg:8px;--r-md:5px;--r-sm:4px;--shadow:none;--shadow-sm:none}
+.legacy-local-dental header{background:#fafaf6;border-bottom:1px solid var(--line);padding:19px 0}
+.legacy-local-dental .wrap{max-width:1280px}
+.legacy-local-dental .hero{background:#f0f2eb;padding:128px 0 65px}
+.legacy-local-dental .hero .grid{grid-template-columns:.95fr 1.05fr;gap:65px}
+.legacy-local-dental .hero h1{font-size:clamp(38px,4.2vw,57px);font-weight:700;line-height:1.48;letter-spacing:.02em}
+.legacy-local-dental .hero p{line-height:2;max-width:470px}
+.legacy-local-dental .hero .petal{display:none}
+.legacy-local-dental .hero h1 .u::after{display:none}
+.legacy-local-dental .hfig .ph{aspect-ratio:1/1.07;border:0;outline:0;border-radius:3px 3px 3px 110px}
+.legacy-local-dental .hfig .ph img{object-position:60% center}
+.legacy-local-dental .hfig::after{content:"診療室の写真調の生成イメージ";display:block;text-align:right;font-size:10px;color:var(--sub);margin-top:8px}
+.legacy-local-dental .hfig .fl{border:1px solid var(--line);border-radius:4px;padding:14px 18px}
+.legacy-local-dental .hfig .fl.a{left:-25px;top:38px}
+.legacy-local-dental .hfig .fl.b{right:20px;bottom:45px}
+.legacy-local-dental .btn,.legacy-local-dental .book{border-radius:4px}
+.legacy-local-dental .head h2{font-weight:700}
+.legacy-local-dental .visit{background:#fafaf6}
+.legacy-local-dental .visit .box{border:1px solid var(--line);border-radius:4px}
+.legacy-local-dental .visit .ph>img{position:absolute;inset:0;height:100%;object-position:45% center}
+.legacy-local-dental .visit .badge{z-index:1}
+.legacy-local-dental .visit .b{padding:44px}
+.legacy-local-dental .why{background:#eef1e9}
+.legacy-local-dental .rc{border:0;border-top:1px solid #b9c8bc;border-radius:0;background:none;padding:32px 18px}
+.legacy-local-dental .rc:hover{transform:none}
+.legacy-local-dental .cc .ph{aspect-ratio:2/1;max-height:165px}
+.legacy-local-dental .doc .ph{border-radius:3px;overflow:hidden}
+.legacy-local-dental .doc .ph>img{object-position:25% center}
+.legacy-local-dental .doc .q{border-radius:3px;background:#fff}
+.legacy-local-dental .hero .trust .t span{display:block}
+.legacy-local-dental .cform{box-shadow:none}
+
+/* The newer companion pages keep their interactive structure. */
+.legacy-local-companion .style-art{overflow:hidden}
+.legacy-local-companion .style-art img{width:100%;height:100%;object-fit:cover}
+.legacy-local-companion .gym-hero img{object-position:50% 45%}
+
+@media(max-width:860px){
+ .legacy-local section{padding:72px 0}
+ .legacy-local-gym .hero{padding:108px 0 24px}
+ .legacy-local-gym .hero-grid{grid-template-columns:1fr;gap:32px}
+ .legacy-local-gym .hero h1{font-size:39px}
+ .legacy-local-gym .hero-visual{order:-1}
+ .legacy-local-gym .hero-visual img{height:280px}
+ .legacy-local-gym .hero-lead{font-size:15px}
+ .legacy-local-gym .hero .stats{margin-top:28px}
+ .legacy-local-gym .stats-inner{padding-top:22px}
+ .legacy-local-gym .stat .value{font-size:30px}
+ .legacy-local-gym .hero-note{font-size:11px}
+ .legacy-local-salon .hero{height:760px;min-height:0;background-position:58% center}
+ .legacy-local-salon .hero .wrap{padding:70px 25px 0}
+ .legacy-local-salon .hero h1{font-size:39px;letter-spacing:.025em}
+ .legacy-local-salon .hero::after{background:linear-gradient(90deg,rgba(22,30,24,.76),rgba(22,30,24,.4))}
+ .legacy-local-salon .hero p{font-size:14px}
+ .legacy-local-salon .hero .cta{gap:12px}
+ .legacy-local-salon .btn{padding:16px 20px;font-size:12px}
+ .legacy-local-salon .concept .grid{grid-template-columns:1fr;gap:32px}
+ .legacy-local-salon .concept h3{font-size:27px}
+ .legacy-local-salon .concept .photo{aspect-ratio:4/3}
+ .legacy-local-salon .ggrid{grid-template-columns:1fr 1fr;grid-auto-rows:180px;gap:10px}
+ .legacy-local-salon .ggrid .big{grid-column:span 2;grid-row:span 2}
+ .legacy-local-salon .staff{gap:32px}
+ .legacy-local-salon .card .ph{aspect-ratio:3/2}
+ .legacy-local-dental .hero{padding:114px 0 45px}
+ .legacy-local-dental .hero .grid{grid-template-columns:1fr;gap:35px}
+ .legacy-local-dental .hero h1{font-size:32px;margin:20px 0}
+ .legacy-local-dental .hero p{font-size:15px}
+ .legacy-local-dental .hero .cta{gap:10px}
+ .legacy-local-dental .hero .btn{padding:14px 17px;font-size:12px}
+ .legacy-local-dental .hfig{order:-1}
+ .legacy-local-dental .hfig .ph{aspect-ratio:1.5/1;border-radius:3px 3px 3px 45px}
+ .legacy-local-dental .hfig .fl{font-size:11px;padding:11px 13px}
+ .legacy-local-dental .hfig .fl.a{left:10px;top:14px}
+ .legacy-local-dental .hfig .fl.b{right:10px;bottom:20px}
+ .legacy-local-dental .head h2{font-size:27px;line-height:1.6}
+ .legacy-local-dental .visit .ph{min-height:270px}
+ .legacy-local-dental .visit .b{padding:28px 24px}
+ .legacy-local-dental .rc{padding:24px 12px}
+ .legacy-local-dental .cc .ph{max-height:150px}
+}
+@media(prefers-reduced-motion:reduce){.legacy-local *{scroll-behavior:auto!important;transition:none!important;animation:none!important}}

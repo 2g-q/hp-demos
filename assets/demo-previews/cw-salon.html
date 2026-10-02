@@ -164,8 +164,9 @@ footer{background:#241f19;color:#9a8f7e;padding:54px 0 30px;font-size:.8rem}
 </style>
 <meta content="noindex" name="robots"/>
 <style>header .brand{flex-shrink:0}header .menu a{white-space:nowrap}header .book{white-space:nowrap}header .brand small{display:none}@media(max-width:1100px){header .menu{display:none}header .menu.on,header .menu.open{display:flex}header .burger{display:flex}header .tel{display:none}}@media(max-width:600px){header .wrap{padding-left:16px;padding-right:16px}header .brand{font-size:17px;gap:7px;white-space:nowrap}header .leaf{width:22px;height:22px;flex-shrink:0}header .right{gap:12px}header .book{font-size:12px;padding:10px 12px}}</style><link rel="stylesheet" href="assets/demo-previews/dialog.css"><meta name="robots" content="noindex">
+<link rel="stylesheet" href="assets/legacy-local-refresh.css">
 </head>
-<body>
+<body class="legacy-local legacy-local-salon">
 
 <header id="hd">
 <div class="wrap nav">
@@ -178,14 +179,14 @@ footer{background:#241f19;color:#9a8f7e;padding:54px 0 30px;font-size:.8rem}
 <a href="#access">Access</a>
 <a class="book" href="#reserve">ご予約</a>
 </nav>
-<div class="burger" id="bg"><span></span><span></span><span></span></div>
+<button class="burger" id="bg" type="button" aria-label="メニュー" aria-controls="mn" aria-expanded="false"><span></span><span></span><span></span></button>
 </div>
 </header>
 <section class="hero" style="padding:0">
 <div class="wrap">
 <span class="en">A hideaway for grown-ups</span>
-<h1>髪の"これから"を、<br/>整えるサロン。</h1>
-<p>流行を追うのではなく、あなたの髪質と骨格に静かに寄り添う。表参道の路地裏、1日6名限定の隠れ家で。</p>
+<h1>毎朝、手ぐしで<br/>まとまる髪へ。</h1>
+<p>髪質と骨格に合わせて、扱いやすいスタイルをご提案。表参道の路地裏にある、1日6名限定のヘアサロンです。</p>
 <div class="cta">
 <a class="btn btn-gold" href="#reserve">ネットで予約する</a>
 <a class="btn btn-line" href="#menu">メニューを見る</a>
@@ -199,11 +200,11 @@ footer{background:#241f19;color:#9a8f7e;padding:54px 0 30px;font-size:.8rem}
 <span class="en">Concept</span>
 <h3>「今日」だけでなく、<br/>三ヶ月先まで美しく。</h3>
 <p>Atelier LUCE がこだわるのは、仕上がりの一瞬ではなく"伸びても綺麗"な設計です。骨格と生えぐせを読み、乾かすだけで決まるカットを組み立てます。</p>
-<p>薬剤は髪と頭皮への負担を最小限に。オーガニック系のカラー・トリートメントを中心に、その日の髪の状態に合わせて調合します。所要も、無理に詰め込まず一人ひとりに。</p>
+<p>薬剤は髪と頭皮への負担を最小限に。オーガニック系のカラー・トリートメントを中心に、その日の髪の状態に合わせて調合します。施術の時間にも余裕を持たせ、一人ひとりに向き合います。</p>
 <p>だから、次にご来店いただくまでの毎日が、少し楽になる。それが私たちの目指すサロンです。</p>
 </div>
 <div class="photo reveal">
-<svg preserveaspectratio="xMidYMid slice" role="img" style="width:100%;height:100%;display:block" viewbox="0 0 720 900"><rect fill="#f7f3ec" height="900" width="720"></rect><rect fill="#efe8db" height="260" width="720" x="0" y="640"></rect><g transform="translate(360,330) scale(3.2)"><ellipse cx="0" cy="-20" fill="#f7f3ec" rx="52" ry="66" stroke="#b08d57" stroke-width="6"></ellipse><path d="M-34 -44 q18 -20 44 -12" fill="none" opacity=".9" stroke="#fff" stroke-linecap="round" stroke-width="7"></path><path d="M0 46v34M-26 84h52" fill="none" stroke="#b08d57" stroke-linecap="round" stroke-width="7"></path></g><rect fill="#b08d57" height="26" opacity=".85" rx="13" width="420" x="150" y="620"></rect><g fill="#fff" stroke="#cdbfa8" stroke-width="5"><rect height="60" rx="10" width="38" x="196" y="560"></rect><rect height="46" rx="10" width="34" x="248" y="574"></rect></g><g fill="none" stroke="#b08d57" stroke-linecap="round" stroke-width="6" transform="translate(500,590) scale(0.9)"><circle cx="-28" cy="34" r="14"></circle><circle cx="28" cy="34" r="14"></circle><path d="M-19 23 L30 -46M19 23 L-30 -46"></path></g><g fill="none" stroke="#8a9a7c" stroke-linecap="round" stroke-width="4" transform="translate(120,180) rotate(-15) scale(1.3)"><path d="M0 40 V-40"></path><path d="M0 20 q-22 -8 -26 -30M0 20 q22 -8 26 -30M0 -6 q-18 -6 -22 -24M0 -6 q18 -6 22 -24"></path></g><g fill="none" stroke="#8a9a7c" stroke-linecap="round" stroke-width="4" transform="translate(614,720) rotate(20) scale(1.5)"><path d="M0 40 V-40"></path><path d="M0 20 q-22 -8 -26 -30M0 20 q22 -8 26 -30M0 -6 q-18 -6 -22 -24M0 -6 q18 -6 22 -24"></path></g></svg>
+<img src="works/linen-salon/assets/cutting.jpg" alt="カットの施術イメージ" loading="lazy"/>
 </div>
 </div>
 </section>
@@ -227,13 +228,13 @@ footer{background:#241f19;color:#9a8f7e;padding:54px 0 30px;font-size:.8rem}
 </section>
 <section class="gallery" id="gallery">
 <div class="wrap">
-<div class="head reveal"><span class="en">Gallery</span><h2>店内と道具</h2></div>
+<div class="head reveal"><span class="en">Gallery</span><h2>サロンとヘアスタイル</h2></div>
 <div class="ggrid reveal">
-<figure class="big"><svg preserveaspectratio="xMidYMid slice" role="img" style="width:100%;height:100%;display:block" viewbox="0 0 900 640"><rect fill="#efe8db" height="640" width="900"></rect><circle cx="760" cy="90" fill="#f7f3ec" r="150"></circle><g transform="translate(300,260) scale(2.4)"><ellipse cx="0" cy="-20" fill="#f7f3ec" rx="52" ry="66" stroke="#b08d57" stroke-width="6"></ellipse><path d="M-34 -44 q18 -20 44 -12" fill="none" opacity=".9" stroke="#fff" stroke-linecap="round" stroke-width="7"></path><path d="M0 46v34M-26 84h52" fill="none" stroke="#b08d57" stroke-linecap="round" stroke-width="7"></path></g><g transform="translate(640,300) scale(1.9)"><ellipse cx="0" cy="-20" fill="#f7f3ec" rx="52" ry="66" stroke="#b08d57" stroke-width="6"></ellipse><path d="M-34 -44 q18 -20 44 -12" fill="none" opacity=".9" stroke="#fff" stroke-linecap="round" stroke-width="7"></path><path d="M0 46v34M-26 84h52" fill="none" stroke="#b08d57" stroke-linecap="round" stroke-width="7"></path></g><rect fill="#b08d57" height="22" opacity=".8" rx="11" width="660" x="120" y="520"></rect><g fill="none" stroke="#8a9a7c" stroke-linecap="round" stroke-width="4" transform="translate(820,520) rotate(15) scale(1.4)"><path d="M0 40 V-40"></path><path d="M0 20 q-22 -8 -26 -30M0 20 q22 -8 26 -30M0 -6 q-18 -6 -22 -24M0 -6 q18 -6 22 -24"></path></g></svg></figure>
-<figure><svg preserveaspectratio="xMidYMid slice" role="img" style="width:100%;height:100%;display:block" viewbox="0 0 500 400"><rect fill="#f7f3ec" height="400" width="500"></rect><g fill="none" stroke="#b08d57" stroke-linecap="round" stroke-width="6" transform="translate(250,210) scale(1.5)"><circle cx="-28" cy="34" r="14"></circle><circle cx="28" cy="34" r="14"></circle><path d="M-19 23 L30 -46M19 23 L-30 -46"></path></g><circle cx="90" cy="80" fill="#efe8db" r="56"></circle></svg></figure>
-<figure><svg preserveaspectratio="xMidYMid slice" role="img" style="width:100%;height:100%;display:block" viewbox="0 0 500 400"><rect fill="#efe8db" height="400" width="500"></rect><g fill="#fff" stroke="#b08d57" stroke-width="5"><rect height="130" rx="14" width="72" x="90" y="140"></rect><rect height="150" rx="14" width="72" x="214" y="120"></rect><rect height="130" rx="14" width="72" x="338" y="140"></rect></g><g fill="#b08d57" opacity=".55"><rect height="34" rx="8" width="44" x="104" y="154"></rect></g><g fill="#8a9a7c" opacity=".5"><rect height="34" rx="8" width="44" x="228" y="134"></rect></g><g fill="#a2836a" opacity=".5"><rect height="34" rx="8" width="44" x="352" y="154"></rect></g></svg></figure>
-<figure><svg preserveaspectratio="xMidYMid slice" role="img" style="width:100%;height:100%;display:block" viewbox="0 0 500 400"><rect fill="#f7f3ec" height="400" width="500"></rect><g fill="none" stroke="#b08d57" stroke-linecap="round" stroke-width="5" transform="translate(250,140) rotate(-18) scale(1.7)"><path d="M-40 -8 h80 v10 h-80z" fill="#fff"></path><path d="M-32 2v22M-20 2v22M-8 2v22M4 2v22M16 2v22M28 2v22"></path></g><path d="M120 300 q130 60 260 0" fill="none" stroke="#b08d57" stroke-linecap="round" stroke-width="6"></path><g fill="none" stroke="#8a9a7c" stroke-linecap="round" stroke-width="4" transform="translate(400,110) rotate(25) scale(1.1)"><path d="M0 40 V-40"></path><path d="M0 20 q-22 -8 -26 -30M0 20 q22 -8 26 -30M0 -6 q-18 -6 -22 -24M0 -6 q18 -6 22 -24"></path></g></svg></figure>
-<figure><svg preserveaspectratio="xMidYMid slice" role="img" style="width:100%;height:100%;display:block" viewbox="0 0 500 400"><rect fill="#efe8db" height="400" width="500"></rect><g fill="#f7f3ec" stroke="#b08d57" stroke-width="6"><path d="M150 260 a100 100 0 0 1 200 0z"></path></g><g fill="none" stroke="#8a9a7c" stroke-linecap="round" stroke-width="5"><path d="M210 140q-8 -26 12 -40M250 130q0 -30 22 -42M292 140q10 -24 -6 -44"></path></g><rect fill="#b08d57" height="16" opacity=".8" rx="8" width="240" x="130" y="264"></rect></svg></figure>
+<figure class="big"><img src="works/linen-salon/assets/salon.jpg" alt="明るいサロン内装の参考写真" loading="lazy"/></figure>
+<figure><img src="works/linen-salon/assets/cutting.jpg" alt="カットの施術イメージ" loading="lazy"/></figure>
+<figure><img src="works/linen-salon/assets/bob.jpg" alt="ボブスタイルの参考写真" loading="lazy"/></figure>
+<figure><img src="works/linen-salon/assets/portrait.jpg" alt="ヘアスタイルの参考写真" loading="lazy"/></figure>
+<figure><img src="works/linen-salon/assets/curl.jpg" alt="カールスタイルの参考写真" loading="lazy"/></figure>
 </div>
 </div>
 </section>
@@ -241,9 +242,9 @@ footer{background:#241f19;color:#9a8f7e;padding:54px 0 30px;font-size:.8rem}
 <div class="wrap">
 <div class="head reveal"><span class="en">Stylist</span><h2>スタイリスト</h2><p>少人数だから、いつも同じ担当があなたの髪を覚えています。</p></div>
 <div class="staff reveal">
-<div class="card"><div class="ph"><svg preserveaspectratio="xMidYMid slice" role="img" style="width:100%;height:100%;display:block" viewbox="0 0 500 500"><rect fill="#f7f3ec" height="500" width="500"></rect><circle cx="410" cy="90" fill="#efe8db" r="90"></circle><g fill="none" stroke="#b08d57" stroke-linecap="round" stroke-width="6" transform="translate(250,250) scale(1.8)"><circle cx="-28" cy="34" r="14"></circle><circle cx="28" cy="34" r="14"></circle><path d="M-19 23 L30 -46M19 23 L-30 -46"></path></g><g fill="none" stroke="#b08d57" stroke-linecap="round" stroke-width="5" transform="translate(250,390) rotate(0) scale(1.3)"><path d="M-40 -8 h80 v10 h-80z" fill="#fff"></path><path d="M-32 2v22M-20 2v22M-8 2v22M4 2v22M16 2v22M28 2v22"></path></g></svg></div><div class="body"><div class="role">DIRECTOR</div><h4>三浦 遥</h4><p>骨格補正カットが得意。「扱いやすさ」を何より大切に、毎朝のセット時間を短くする提案をします。</p></div></div>
-<div class="card"><div class="ph"><svg preserveaspectratio="xMidYMid slice" role="img" style="width:100%;height:100%;display:block" viewbox="0 0 500 500"><rect fill="#efe8db" height="500" width="500"></rect><circle cx="90" cy="90" fill="#f7f3ec" r="80"></circle><g fill="#fff" stroke="#b08d57" stroke-width="6"><path d="M140 300 a60 40 0 0 1 120 0z"></path><path d="M250 330 a60 40 0 0 1 120 0z"></path></g><g fill="none" stroke="#b08d57" stroke-linecap="round" stroke-width="6"><path d="M190 250 l60 -90"></path><path d="M250 160 a16 16 0 1 1 0.1 0z"></path></g><g fill="#a2836a" opacity=".5"><circle cx="330" cy="150" r="22"></circle></g><g fill="#8a9a7c" opacity=".5"><circle cx="390" cy="190" r="18"></circle></g></svg></div><div class="body"><div class="role">COLORIST</div><h4>大和 千夏</h4><p>透明感のあるグレージュと白髪ぼかしが人気。髪の負担を抑えた薬剤設計を担当します。</p></div></div>
-<div class="card"><div class="ph"><svg preserveaspectratio="xMidYMid slice" role="img" style="width:100%;height:100%;display:block" viewbox="0 0 500 500"><rect fill="#f7f3ec" height="500" width="500"></rect><circle cx="400" cy="400" fill="#efe8db" r="100"></circle><g fill="#fff" stroke="#8a9a7c" stroke-linejoin="round" stroke-width="6"><path d="M250 160 q40 46 0 90 q-40 -44 0 -90z"></path><path d="M180 250 q46 -8 70 24 q-42 22 -70 -24z"></path><path d="M320 250 q-46 -8 -70 24 q42 22 70 -24z"></path></g><path d="M150 380 q100 50 200 0" fill="none" stroke="#b08d57" stroke-linecap="round" stroke-width="6"></path><g fill="#c9ddea" opacity=".8"><circle cx="150" cy="140" r="8"></circle><circle cx="180" cy="110" r="5"></circle><circle cx="120" cy="110" r="5"></circle></g></svg></div><div class="body"><div class="role">SPA THERAPIST</div><h4>林 美咲</h4><p>頭皮ケアとヘッドスパのスペシャリスト。首肩のこわばりからほぐし、深いリラックスへ。</p></div></div>
+<div class="card"><div class="ph"><img src="works/linen-salon/assets/cutting.jpg" alt="カット技術の参考写真" loading="lazy"/></div><div class="body"><div class="role">DIRECTOR</div><h4>三浦 遥</h4><p>骨格補正カットが得意。「扱いやすさ」を何より大切に、毎朝のセット時間を短くする提案をします。</p></div></div>
+<div class="card"><div class="ph"><img src="works/linen-salon/assets/bob.jpg" alt="カラーの参考写真" loading="lazy"/></div><div class="body"><div class="role">COLORIST</div><h4>大和 千夏</h4><p>透明感のあるグレージュと白髪ぼかしが人気。髪の負担を抑えた薬剤設計を担当します。</p></div></div>
+<div class="card"><div class="ph"><img src="works/linen-salon/assets/salon.jpg" alt="リラックスできる空間の参考写真" loading="lazy"/></div><div class="body"><div class="role">SPA THERAPIST</div><h4>林 美咲</h4><p>頭皮ケアとヘッドスパのスペシャリスト。首肩のこわばりからほぐし、深いリラックスへ。</p></div></div>
 </div>
 </div>
 </section>
@@ -277,7 +278,7 @@ footer{background:#241f19;color:#9a8f7e;padding:54px 0 30px;font-size:.8rem}
 </section>
 <section class="cta-band" id="reserve" style="padding:0"><div class="reveal" style="padding:86px 0">
 <div class="wrap">
-<h2 class="mincho">その髪、ずっと気持ちよく。</h2>
+<h2 class="mincho">次のヘアスタイルをご相談ください。</h2>
 <p>初回はカウンセリングを長めに。まずはお気軽にご相談ください。</p>
 <a class="btn btn-gold" href="#">24時間ネット予約はこちら</a>
 </div>
@@ -293,7 +294,7 @@ document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 </script>
 <!-- demo-fict:start 架空サンプルの注記(2026-09-04 上部の帯からフッターへ移設) -->
 <style>#demo-fict{margin:0;padding:20px 20px 28px;background:#fff;color:rgba(13,13,13,.6);border-top:1px solid rgba(13,13,13,.14);font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue","Hiragino Kaku Gothic ProN","Noto Sans JP","Yu Gothic",Meiryo,sans-serif;font-size:13px;line-height:1.7;text-align:center}@media print{#demo-fict{display:none}}</style>
-<div id="demo-fict">これは制作サンプル（架空のヘアサロンサイト）です。店名・人物・数値はすべて架空です。地図・駅名のみ実在のものを使用しています。</div>
+<div id="demo-fict">これは制作サンプル（架空のヘアサロンサイト）です。店名・人物・数値はすべて架空です。地図・駅名のみ実在のものを使用しています。写真・生成画像はイメージで、実際の店舗・医院・スタッフ・施術例ではありません。</div>
 <!-- demo-fict:end -->
 <script>document.addEventListener('click',function(e){const a=e.target.closest('a');if(!a)return;const h=a.getAttribute('href')||'';if(h.startsWith('#')){e.preventDefault();if(h.length>1){const t=document.getElementById(decodeURIComponent(h.slice(1)));if(t)t.scrollIntoView({behavior:'smooth',block:'start'});}return;}if(/^(tel:|mailto:)/i.test(h)){e.preventDefault();alert('制作サンプルです。電話・メールの送信は行いません。');return;}if(a.hasAttribute('download'))return;if(h){e.preventDefault();window.top.location.href=a.href;}},true);document.addEventListener('submit',function(e){e.preventDefault();},true);</script><script src="sample-interactions.js"></script><!-- cw-routing-note:start -->
 <aside id="cw-routing-note" class="cw-routing-note" style="margin:32px auto 0;max-width:1128px;padding:20px;background:#171717;color:#fff;font:inherit">
