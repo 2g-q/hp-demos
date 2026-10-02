@@ -1,0 +1,47 @@
+[
+  {
+    "file": "assets/portrait.jpg",
+    "source": "https://unsplash.com/photos/young-woman-with-bob-haircut-in-a-field-0gUbtFNTgdU",
+    "image_url": "https://images.unsplash.com/photo-1762110109445-382cbb83c627?auto=format&fit=max&w=1800&q=86",
+    "author": "sammy swae",
+    "license": "https://unsplash.com/license",
+    "checked": "2026-10-02",
+    "usage": "Fictional original website study. Reference photograph, not an actual property, dish, hairstyle or customer of the fictional brand."
+  },
+  {
+    "file": "assets/bob.jpg",
+    "source": "https://unsplash.com/photos/womans-sleek-brown-bob-haircut-from-behind-TcWwRcf92GY",
+    "image_url": "https://images.unsplash.com/photo-1779350676620-fde279b1d023?auto=format&fit=max&w=1800&q=86",
+    "author": "luca romano",
+    "license": "https://unsplash.com/license",
+    "checked": "2026-10-02",
+    "usage": "Fictional original website study. Reference photograph, not an actual property, dish, hairstyle or customer of the fictional brand."
+  },
+  {
+    "file": "assets/salon.jpg",
+    "source": "https://unsplash.com/photos/a-hair-salon-with-chairs-and-a-mirror-ZkNxY2zErck",
+    "image_url": "https://images.unsplash.com/photo-1623171678074-1b04ff0e694f?auto=format&fit=max&w=1800&q=86",
+    "author": "Guilherme Petri",
+    "license": "https://unsplash.com/license",
+    "checked": "2026-10-02",
+    "usage": "Fictional original website study. Reference photograph, not an actual property, dish, hairstyle or customer of the fictional brand."
+  },
+  {
+    "file": "assets/cutting.jpg",
+    "source": "https://unsplash.com/photos/a-woman-getting-her-hair-cut-by-a-man-9MwT6PkKyEg",
+    "image_url": "https://images.unsplash.com/photo-1604427779224-09124a8f1029?auto=format&fit=max&w=1800&q=85",
+    "author": "sophia man",
+    "license": "https://unsplash.com/license",
+    "checked": "2026-10-03",
+    "usage": "Fictional original website study; reference imagery only, not actual staff or premises of the fictional business."
+  },
+  {
+    "file": "assets/curl.jpg",
+    "source": "https://unsplash.com/photos/young-woman-with-curly-hair-smiles-in-autumn-foliage-i_wKRHHoQ10",
+    "image_url": "https://images.unsplash.com/photo-1761561091219-e8147dad000c?auto=format&fit=max&w=1800&q=85",
+    "author": "Mattia Revelant",
+    "license": "https://unsplash.com/license",
+    "checked": "2026-10-03",
+    "usage": "Fictional original website study; reference imagery only, not actual staff or premises of the fictional business."
+  }
+]

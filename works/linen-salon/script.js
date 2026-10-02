@@ -1,0 +1,1 @@
+document.querySelector('#appointment-form').addEventListener('submit',event=>{event.preventDefault();const result=document.querySelector('#appointment-result');result.hidden=false;result.textContent='相談メモ：'+document.querySelector('#service').value+' / '+document.querySelector('#preference').value+'。ご来店時は普段のセット方法や気になる写真も、一緒にお伝えください。操作デモのため、予約・送信はされていません。';});

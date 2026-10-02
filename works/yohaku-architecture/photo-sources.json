@@ -1,0 +1,29 @@
+[
+  {
+    "file": "assets/facade.jpg",
+    "source": "https://unsplash.com/photos/white-and-gray-concrete-house-BJSLmyungtE",
+    "image_url": "https://images.unsplash.com/photo-1484589703317-ac06479d2e8f?auto=format&fit=max&w=1800&q=86",
+    "author": "Adam Birkett",
+    "license": "https://unsplash.com/license",
+    "checked": "2026-10-02",
+    "usage": "Fictional original website study. Reference photograph, not an actual property, dish, hairstyle or customer of the fictional brand."
+  },
+  {
+    "file": "assets/living.jpg",
+    "source": "https://unsplash.com/photos/modern-minimalist-living-room-with-white-furniture-4r9OKorlcTk",
+    "image_url": "https://images.unsplash.com/photo-1768609239321-1cfe14893e80?auto=format&fit=max&w=1800&q=86",
+    "author": "rawkkim",
+    "license": "https://unsplash.com/license",
+    "checked": "2026-10-02",
+    "usage": "Fictional original website study. Reference photograph, not an actual property, dish, hairstyle or customer of the fictional brand."
+  },
+  {
+    "file": "assets/studio.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:White_minimal_interior_(Unsplash).jpg",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/1/1f/White_minimal_interior_%28Unsplash%29.jpg",
+    "author": "Breather",
+    "license": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "checked": "2026-10-02",
+    "usage": "Fictional original website study. Reference photograph, not an actual property, dish, hairstyle or customer of the fictional brand."
+  }
+]

@@ -1,0 +1,47 @@
+[
+  {
+    "file": "assets/dish.jpg",
+    "source": "https://unsplash.com/photos/steak-with-vegetables-on-plate-XPvhzVIeETM",
+    "image_url": "https://images.unsplash.com/photo-1452967712862-0cca1839ff27?auto=format&fit=max&w=1800&q=86",
+    "author": "Mantra Media",
+    "license": "https://unsplash.com/license",
+    "checked": "2026-10-02",
+    "usage": "Fictional original website study. Reference photograph, not an actual property, dish, hairstyle or customer of the fictional brand."
+  },
+  {
+    "file": "assets/season.jpg",
+    "source": "https://unsplash.com/photos/a-plate-of-food-with-meat-and-vegetables-on-it-XEBhcKv6GFs",
+    "image_url": "https://images.unsplash.com/photo-1726802169413-ce138ccccca7?auto=format&fit=max&w=1800&q=86",
+    "author": "Hybrid Storytellers",
+    "license": "https://unsplash.com/license",
+    "checked": "2026-10-02",
+    "usage": "Fictional original website study. Reference photograph, not an actual property, dish, hairstyle or customer of the fictional brand."
+  },
+  {
+    "file": "assets/wine.jpg",
+    "source": "https://unsplash.com/photos/a-glass-of-wine-sitting-on-top-of-a-table-4oWLTf7_piA",
+    "image_url": "https://images.unsplash.com/photo-1682071308247-28ebd874d445?auto=format&fit=max&w=1800&q=86",
+    "author": "Ambitious Studio / Rick Barrett",
+    "license": "https://unsplash.com/license",
+    "checked": "2026-10-02",
+    "usage": "Fictional original website study. Reference photograph, not an actual property, dish, hairstyle or customer of the fictional brand."
+  },
+  {
+    "file": "assets/interior.jpg",
+    "source": "https://unsplash.com/photos/restaurant-interior-with-tables-and-bar-area-h2_8LFfjUUc",
+    "image_url": "https://images.unsplash.com/photo-1758537697448-dbfc1cb83e49?auto=format&fit=max&w=1800&q=85",
+    "author": "Adrien Olichon",
+    "license": "https://unsplash.com/license",
+    "checked": "2026-10-03",
+    "usage": "Fictional original website study; reference imagery only, not actual staff or premises of the fictional business."
+  },
+  {
+    "file": "assets/kitchen.jpg",
+    "source": "https://unsplash.com/photos/chef-preparing-foods-0sYLBZjgTTw",
+    "image_url": "https://images.unsplash.com/photo-1577219492769-b63a779fac28?auto=format&fit=max&w=1800&q=85",
+    "author": "Louis Hansel",
+    "license": "https://unsplash.com/license",
+    "checked": "2026-10-03",
+    "usage": "Fictional original website study; reference imagery only, not actual staff or premises of the fictional business."
+  }
+]

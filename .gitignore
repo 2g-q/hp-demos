@@ -1,0 +1,12 @@
+# Local evidence and working notes for the nine-site rebuild.
+/quality/
+/PORTFOLIO_REBUILD_20261003.md
+/works/*/qa/
+/works/*/qa-*.png
+/works/*/qa-results.json
+/works/*/preview-*.png
+/works/*/editorial-*.png
+/works/*/reference-*.png
+/works/*/copy-review.txt
+/works/*/EDITORIAL_HANDOFF.md
+/works/*/pass2.html.part

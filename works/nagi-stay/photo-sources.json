@@ -1,0 +1,38 @@
+[
+  {
+    "file": "assets/lake.jpg",
+    "source": "https://unsplash.com/photos/architectural-photography-of-brown-wooden-house-hFzIoD0F_i8",
+    "image_url": "https://images.unsplash.com/photo-1482192505345-5655af888cc4?auto=format&fit=max&w=1800&q=86",
+    "author": "Luca Bravo",
+    "license": "https://unsplash.com/license",
+    "checked": "2026-10-02",
+    "usage": "Fictional original website study. Reference photograph, not an actual property, dish, hairstyle or customer of the fictional brand."
+  },
+  {
+    "file": "assets/cabin.jpg",
+    "source": "https://unsplash.com/photos/a-cabin-sits-on-the-shore-of-a-lake-surrounded-by-trees-QCsgrFMEIjQ",
+    "image_url": "https://images.unsplash.com/photo-1696940171680-bb5b601a540b?auto=format&fit=max&w=1800&q=86",
+    "author": "Vasilis Karkalas",
+    "license": "https://unsplash.com/license",
+    "checked": "2026-10-02",
+    "usage": "Fictional original website study. Reference photograph, not an actual property, dish, hairstyle or customer of the fictional brand."
+  },
+  {
+    "file": "assets/room.jpg",
+    "source": "https://unsplash.com/photos/cozy-cabin-interior-overlooking-autumn-forest-and-lake-4iWgH8cGD8Q",
+    "image_url": "https://images.unsplash.com/photo-1761897190222-d222d88851c9?auto=format&fit=max&w=1800&q=86",
+    "author": "Benjamin Chambon",
+    "license": "https://unsplash.com/license",
+    "checked": "2026-10-02",
+    "usage": "Fictional original website study. Reference photograph, not an actual property, dish, hairstyle or customer of the fictional brand."
+  },
+  {
+    "file": "assets/fire.jpg",
+    "source": "https://unsplash.com/photos/a-wood-burning-stove-inside-of-a-wooden-cabin-DYMlVra-Tgw",
+    "image_url": "https://images.unsplash.com/photo-1698933787104-3f91cf25909c?auto=format&fit=max&w=1800&q=85",
+    "author": "Clay Banks",
+    "license": "https://unsplash.com/license",
+    "checked": "2026-10-03",
+    "usage": "Fictional original website study; reference imagery only, not actual staff or premises of the fictional business."
+  }
+]
