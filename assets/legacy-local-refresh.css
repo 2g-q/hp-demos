@@ -152,4 +152,12 @@
  .legacy-local-dental .rc{padding:24px 12px}
  .legacy-local-dental .cc .ph{max-height:150px}
 }
+@media(max-width:420px){
+ .legacy-local-dental .access .grid{grid-template-columns:minmax(0,1fr)}
+ .legacy-local-dental .access .grid>*{min-width:0}
+ .legacy-local-dental .htable{font-size:11px;table-layout:fixed}
+ .legacy-local-dental .htable th,.legacy-local-dental .htable td{padding:12px 2px}
+ .legacy-local-dental .htable th:first-child,.legacy-local-dental .htable td:first-child{width:78px;padding-left:6px}
+ .legacy-local-dental .irow .r{grid-template-columns:70px minmax(0,1fr);gap:10px;overflow-wrap:anywhere}
+}
 @media(prefers-reduced-motion:reduce){.legacy-local *{scroll-behavior:auto!important;transition:none!important;animation:none!important}}

@@ -1,0 +1,36 @@
+/* Shared Minato navigation, scoped away from the individual demo documents. */
+.minato-frame [hidden]{display:none!important}
+body.minato-frame{margin:0;background:#fff;color:#17212d;font-family:system-ui,-apple-system,"Helvetica Neue","Hiragino Sans","Noto Sans JP",Meiryo,sans-serif;-webkit-font-smoothing:antialiased}
+.minato-frame>.unified-header{box-sizing:border-box;position:relative;top:auto;z-index:30;width:calc(100% - 40px);max-width:1120px;min-height:72px;height:auto;margin:0 auto;padding:12px 0;display:flex;align-items:center;justify-content:space-between;gap:12px 24px;flex-wrap:wrap;border:0;border-bottom:1px solid #dce3ec;background:#fff}
+.minato-frame>.unified-header>a{display:inline-flex;align-items:center;gap:9px;color:#17212d;font-size:14px;font-weight:650;line-height:1.5;text-decoration:none;padding:12px 0;white-space:nowrap}
+.minato-frame>.unified-header>a img{width:22px;height:22px;display:block}
+.minato-frame>.unified-header nav{display:flex;flex-wrap:wrap;align-items:center;gap:24px}
+.minato-frame>.unified-header nav a{display:inline-flex;align-items:center;min-height:44px;padding:8px 0;border:0;border-radius:0;background:none;color:#334155;font-size:14px;font-weight:400;line-height:1.5;text-decoration:none}
+.minato-frame>.unified-header nav a[aria-current="page"]{font-weight:650;color:#17212d}
+.minato-frame>.unified-header a:hover,.minato-frame>.footer a:hover{color:#2454aa}
+.minato-frame>.footer{box-sizing:border-box;display:block;width:100%;max-width:none;margin:0;padding:42px 20px;background:transparent;color:#26354d;border-top:1px solid #dce3ec}
+.minato-frame>.footer .footer-in{max-width:1088px;margin:auto;padding:0;display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap}
+.minato-frame>.footer .footer-brand{font-size:16px;font-weight:600;line-height:1.5;color:#26354d;text-decoration:none}
+.minato-frame>.footer .footer-nav{display:flex;gap:20px;flex-wrap:wrap;margin:0}
+.minato-frame>.footer .footer-nav a{display:inline-flex;align-items:center;min-height:44px;padding:0;color:#405675;text-decoration:none;font-size:14px;line-height:1.5}
+.minato-frame>.footer .footer-nav a[aria-current="page"]{font-weight:650;color:#17212d}
+.minato-frame>.footer .footer-note{max-width:1088px;margin:20px auto 0;font-size:12px;color:#64748b;line-height:1.8}
+.minato-frame .minato-back{display:inline-flex;align-items:center;min-height:44px;color:#2454aa;font-size:13px;text-decoration:none;margin:12px 0 0}
+.minato-frame a:focus-visible,.minato-frame button:focus-visible{outline:2px solid #2563eb;outline-offset:4px}
+.minato-frame .minato-portfolio-tabs{display:flex;justify-content:flex-start;gap:28px;max-width:1120px;margin:8px auto 0;padding:0 20px;background:transparent;border:0;border-bottom:1px solid #dce3ec}
+.minato-frame .minato-portfolio-tabs a{display:flex;align-items:center;min-height:52px;padding:0;color:#475569;text-decoration:none;border-bottom:3px solid transparent;font-size:14px;white-space:nowrap}
+.minato-frame .minato-portfolio-tabs a[aria-current="page"]{color:#17212d;border-color:#2563eb;font-weight:650}
+.minato-frame.showcase-modern{background:#fff;color:#17212d}
+.minato-frame.showcase-modern main{max-width:1440px;padding-inline:28px}
+.minato-frame.showcase-modern .exhibit-intro{padding-top:14px}
+.minato-frame.showcase-modern .window{height:calc(100svh - 230px);min-height:570px}
+.minato-frame.showcase-modern .exhibit-details{margin-bottom:0}
+.minato-frame #cw-routing-note{scroll-margin-top:20px}
+@media(max-width:650px){
+ .minato-frame>.unified-header{align-items:flex-start;gap:0;width:calc(100% - 40px)}
+ .minato-frame>.unified-header nav{width:100%;justify-content:space-between;gap:4px 12px}
+ .minato-frame>.unified-header nav a{font-size:13px;min-height:44px}
+ .minato-frame>.footer{padding:30px 20px}.minato-frame>.footer .footer-in{display:block}.minato-frame>.footer .footer-nav{margin-top:18px;gap:8px 20px}
+ .minato-frame .minato-portfolio-tabs{gap:0;justify-content:space-between;margin:0 20px;padding:0}.minato-frame .minato-portfolio-tabs a{font-size:13px;min-height:50px}
+ .minato-frame.showcase-modern main{padding-inline:12px}.minato-frame.showcase-modern .window{height:auto;min-height:0}.minato-frame .minato-back{margin-top:5px;font-size:12px}
+}
