@@ -139,7 +139,7 @@
     background: transparent !important;
     border-color: var(--portfolio-line) !important;
   }
-  html[data-portfolio-theme] :is(h1,h2,h3,p,a,b,strong,small,.eyebrow,.flow-label,.window-guide,.window-scroll-hint,.u-hint,.foot,.footer,.contact-sub):not(.app *, .u-window *, .window *, .review-demo-window *) {
+  html[data-portfolio-theme] :is(h1,h2,h3,p,a,b,strong,small,.eyebrow,.flow-label,.window-guide,.window-scroll-hint,.u-hint,.foot,.footer,.contact-sub):not(.app *, .u-window *, .window *, .review-demo-window *, .unified-header *, .footer *, .direct-contact-note *) {
     color: var(--portfolio-text) !important;
   }
   html[data-portfolio-theme] :is(.recent-header,.unified-header,.u-nav,.u-compare article,.u-scope,.change,.scope,body>header) {

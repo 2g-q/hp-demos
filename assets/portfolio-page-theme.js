@@ -29,7 +29,9 @@
     const page = location.pathname.split('/').pop().replace(/\.html$/, '');
     const tab = ['data', 'shipping', 'review'].includes(location.hash.slice(1))
       ? location.hash.slice(1) : 'data';
-    const key = page === 'workbench' ? `${page}-${tab}` : page;
+    const base = page.replace(/^cw-/, '');
+    const key = base === 'workbench' ? `workbench-${tab}`
+      : themes[page] ? page : themes[base] ? base : `cw-${base}`;
     if (!themes[key]) return;
     const root = document.documentElement;
     root.dataset.portfolioTheme = key;

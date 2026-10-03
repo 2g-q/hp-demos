@@ -1,5 +1,25 @@
 /* Shared Minato navigation, scoped away from the individual demo documents. */
 .minato-frame [hidden]{display:none!important}
+/* The home is the visual source for all Minato navigation and service pages.
+   Brand demos and their iframe documents remain independent. */
+html:has(body.minato-main){background:#edf3fc!important}
+html:not([data-portfolio-theme]) body.minato-frame{
+ --black:#17212d;--white:#fff;--charcoal:#374151;--gray:#526174;--ink-60:#475569;
+ --tint-4:#f3f6fa;--tint-8:#e8eff8;--tint-12:#dce3ec;--hairline:#dce3ec;
+ --blue:#2454aa;--shell-panel:#fff;--shell-line:#dce3ec;
+ background:radial-gradient(100% 900px at 0 0,rgba(97,151,240,.25),transparent 80%),radial-gradient(90% 1100px at 100% 48%,rgba(159,190,243,.18),transparent 80%),linear-gradient(180deg,#e1ebfc 0,#f8faff 1000px,#fff 32%,#f6f9ff 65%,#edf4ff 88%,#d9e7fb 100%)!important;
+ color:#17212d!important;
+}
+body.minato-main::before,body.minato-main::after{display:none!important}
+body.minato-main.unified-catalog .hero,body.minato-main.unified-catalog .sec,body.minato-main.unified-catalog .contact,body.minato-main.unified-catalog .portfolio-review,body.minato-main .portfolio-nav{background:transparent!important;border-color:#dce3ec!important}
+body.minato-main.unified-catalog .card,body.minato-main.unified-catalog .work-card,body.minato-main.unified-catalog .price-card,body.minato-main.unified-catalog .case-main,body.minato-main.unified-catalog .portfolio-review nav a{background:rgba(255,255,255,.82)!important;border-color:#dce3ec!important;color:#17212d!important}
+body.minato-main.unified-catalog :is(h1,h2,h3,.sec-head h2,.contact h2){color:#17212d!important}
+body.minato-main.unified-catalog :is(.lead,.hero .lead,.sec-head .lead,.contact .lead,.contact-sub,.card p,.card .body,.portfolio-review p,.portfolio-review nav small){color:#475569!important}
+body.minato-main.unified-catalog a{color:#2454aa}
+body.minato-main.unified-catalog .btn-primary{background:#17212d!important;color:#fff!important}
+body.minato-main.unified-catalog .btn-ghost{background:rgba(255,255,255,.7)!important;color:#2454aa!important;border-color:#c5d2e2!important}
+body.minato-main.unified-catalog .portfolio-review{color:#17212d}
+body.minato-main.unified-catalog .hero h1{font-size:clamp(28px,3.2vw,38px)!important;line-height:1.5!important;text-wrap:balance}
 body.minato-frame{margin:0;background:#fff;color:#17212d;font-family:system-ui,-apple-system,"Helvetica Neue","Hiragino Sans","Noto Sans JP",Meiryo,sans-serif;-webkit-font-smoothing:antialiased}
 .minato-frame>.unified-header{box-sizing:border-box;position:relative;top:auto;z-index:30;width:calc(100% - 40px);max-width:1120px;min-height:72px;height:auto;margin:0 auto;padding:12px 0;display:flex;align-items:center;justify-content:space-between;gap:12px 24px;flex-wrap:wrap;border:0;border-bottom:1px solid #dce3ec;background:#fff}
 .minato-frame>.unified-header>a{display:inline-flex;align-items:center;gap:9px;color:#17212d;font-size:14px;font-weight:650;line-height:1.5;text-decoration:none;padding:12px 0;white-space:nowrap}
@@ -33,4 +53,40 @@ body.minato-frame{margin:0;background:#fff;color:#17212d;font-family:system-ui,-
  .minato-frame>.footer{padding:30px 20px}.minato-frame>.footer .footer-in{display:block}.minato-frame>.footer .footer-nav{margin-top:18px;gap:8px 20px}
  .minato-frame .minato-portfolio-tabs{gap:0;justify-content:space-between;margin:0 20px;padding:0}.minato-frame .minato-portfolio-tabs a{font-size:13px;min-height:50px}
  .minato-frame.showcase-modern main{padding-inline:12px}.minato-frame.showcase-modern .window{height:auto;min-height:0}.minato-frame .minato-back{margin-top:5px;font-size:12px}
+}
+/* Explicit chrome colours win over the legacy demo's broad theme selectors. */
+html body.minato-frame>.unified-header{
+ width:calc(100% - 40px);max-width:1120px;min-height:72px;height:auto;
+ padding:12px 0;margin:0 auto;border:0;border-bottom:1px solid #dce3ec!important;
+ background:transparent!important;box-shadow:none;backdrop-filter:none;
+}
+html[data-portfolio-theme] body.minato-frame>.unified-header{
+ padding-inline:20px;max-width:1160px;width:100%;
+ background:linear-gradient(120deg,#e4edfc,#f8faff)!important;
+}
+html body.minato-frame>.unified-header a{
+ color:#334155!important;font-size:14px!important;line-height:1.5;
+ min-height:44px;box-sizing:border-box;letter-spacing:normal;
+ text-decoration:none!important;text-transform:none;
+}
+html body.minato-frame>.unified-header>a{color:#17212d!important;font-weight:650}
+html body.minato-frame>.unified-header nav{display:flex!important;gap:24px;position:static;background:none;padding:0;margin:0;max-width:none;transform:none}
+html body.minato-frame>.unified-header nav a{display:inline-flex!important;padding:8px 0;border:0!important;background:none!important}
+html body.minato-frame>.footer{background:transparent!important;color:#26354d!important;border-top:1px solid #dce3ec!important}
+html[data-portfolio-theme] body.minato-frame>.footer{background:linear-gradient(120deg,#f8faff,#dfeafb)!important}
+html body.minato-frame>.footer .footer-brand{color:#26354d!important}
+html body.minato-frame>.footer .footer-brand{display:inline-flex;align-items:center;min-height:44px}
+html body.minato-frame>.footer .footer-nav a{color:#405675!important}
+html body.minato-frame>.footer .footer-note{color:#526174!important}
+html body.minato-frame>.direct-contact-note{
+ box-sizing:border-box;width:calc(100% - 40px);max-width:1120px;
+ background:rgba(243,246,250,.94)!important;border:1px solid #dce3ec;border-radius:12px;
+ color:#17212d!important;
+}
+html body.minato-frame>.direct-contact-note p{color:#17212d!important;font-size:16px;line-height:1.8}
+html body.minato-frame>.direct-contact-note a{color:#2454aa!important;display:inline-flex;align-items:center;min-height:44px;font-size:14px;line-height:1.6}
+@media(max-width:760px){
+ html body.minato-frame>.unified-header{align-items:flex-start;gap:0;flex-wrap:wrap}
+ html body.minato-frame>.unified-header nav{width:100%;justify-content:space-between;gap:4px 8px}
+ html body.minato-frame>.unified-header nav a{font-size:12px!important;white-space:nowrap}
 }
