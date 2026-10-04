@@ -1,0 +1,4 @@
+/* A quiet return path, clear of the site's own navigation and mobile CTA. */
+.minato-site-return{position:fixed;z-index:120;left:16px;bottom:16px;display:inline-flex;align-items:center;min-height:44px;box-sizing:border-box;padding:10px 15px;border:1px solid #d6dde5;border-radius:999px;background:rgba(255,255,255,.92);color:#243347!important;font:500 12px/1.5 system-ui,-apple-system,"Hiragino Sans",sans-serif;letter-spacing:0;text-decoration:none!important;box-shadow:0 3px 16px #142b4018;-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px)}
+.minato-site-return:focus-visible{outline:2px solid #2454aa;outline-offset:3px}
+@media(max-width:760px){.minato-site-return{left:12px;bottom:calc(80px + env(safe-area-inset-bottom));font-size:11px;padding:10px 13px}}

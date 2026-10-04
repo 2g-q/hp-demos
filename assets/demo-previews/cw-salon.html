@@ -165,6 +165,7 @@ footer{background:#241f19;color:#9a8f7e;padding:54px 0 30px;font-size:.8rem}
 <meta content="noindex" name="robots"/>
 <style>header .brand{flex-shrink:0}header .menu a{white-space:nowrap}header .book{white-space:nowrap}header .brand small{display:none}@media(max-width:1100px){header .menu{display:none}header .menu.on,header .menu.open{display:flex}header .burger{display:flex}header .tel{display:none}}@media(max-width:600px){header .wrap{padding-left:16px;padding-right:16px}header .brand{font-size:17px;gap:7px;white-space:nowrap}header .leaf{width:22px;height:22px;flex-shrink:0}header .right{gap:12px}header .book{font-size:12px;padding:10px 12px}}</style><link rel="stylesheet" href="assets/demo-previews/dialog.css"><meta name="robots" content="noindex">
 <link rel="stylesheet" href="assets/legacy-local-refresh.css">
+<script src="assets/standalone-sites.js?v=1" defer></script><link rel="stylesheet" href="assets/standalone-sites.css?v=1">
 </head>
 <body class="legacy-local legacy-local-salon">
 
@@ -297,5 +298,6 @@ document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 <div id="demo-fict">これは制作サンプル（架空のヘアサロンサイト）です。店名・人物・数値はすべて架空です。地図・駅名のみ実在のものを使用しています。写真・生成画像はイメージで、実際の店舗・医院・スタッフ・施術例ではありません。</div>
 <!-- demo-fict:end -->
 <script>document.addEventListener('click',function(e){const a=e.target.closest('a');if(!a)return;const h=a.getAttribute('href')||'';if(h.startsWith('#')){e.preventDefault();if(h.length>1){const t=document.getElementById(decodeURIComponent(h.slice(1)));if(t)t.scrollIntoView({behavior:'smooth',block:'start'});}return;}if(/^(tel:|mailto:)/i.test(h)){e.preventDefault();alert('制作サンプルです。電話・メールの送信は行いません。');return;}if(a.hasAttribute('download'))return;if(h){e.preventDefault();window.top.location.href=a.href;}},true);document.addEventListener('submit',function(e){e.preventDefault();},true);</script><script src="sample-interactions.js"></script>
+<a class="minato-site-return" href="./cw-web.html">← 制作例一覧に戻る</a>
 </body>
 </html>
