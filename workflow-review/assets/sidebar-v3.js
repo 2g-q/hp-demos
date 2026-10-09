@@ -16,13 +16,15 @@ if(['home','ledger','weekly'].includes(page)){
  for(const button of mount.querySelectorAll('[data-category]')){button.addEventListener('pointerdown',e=>e.preventDefault());button.addEventListener('click',()=>category(button.dataset.category));}
 
  const settings=document.createElement('dialog');settings.id='v3-settings';settings.setAttribute('aria-labelledby','v3-settings-title');
- settings.innerHTML='<header><h2 id="v3-settings-title">設定</h2><button id="v3-settings-close" aria-label="設定を閉じる">閉じる</button></header><fieldset><legend>外観</legend><label><input type="radio" name="v3-appearance" value="light">ライト</label><label><input type="radio" name="v3-appearance" value="dark">ダーク</label></fieldset><p id="v3-preference-status">この画面の外観を、このブラウザに保存します。</p>';
+ settings.innerHTML='<header><h2 id="v3-settings-title">設定</h2><button id="v3-settings-close" aria-label="設定を閉じる">閉じる</button></header><fieldset><legend>外観</legend><label><input type="radio" name="v3-appearance" value="light">ライト</label><label><input type="radio" name="v3-appearance" value="dark">ダーク</label></fieldset><p id="v3-preference-status"></p>';
+ const licensePrefix=page==='home'?'./assets/':'../assets/';
+ settings.insertAdjacentHTML('beforeend','<p><a href="'+licensePrefix+'THIRD_PARTY_NOTICES.txt">エディタライセンス</a> / <a href="'+licensePrefix+'xlsx-license.txt">読取ライセンス</a></p>');
  document.body.append(settings);
  const theme=document.querySelector('#theme');theme.hidden=true;settings.append(theme); // Keep existing theme handler and its node.
  const themeClass=page==='home'?'dark':'shell-dark',key='workflow-review:v1:appearance';
  const appearance=()=>document.body.classList.contains(themeClass)?'dark':'light';
  const reflect=()=>{for(const radio of settings.querySelectorAll('[name=v3-appearance]'))radio.checked=radio.value===appearance();theme.textContent=appearance()==='dark'?'ライト':'ダーク';};
- const remember=()=>{try{localStorage.setItem(key,appearance());document.querySelector('#v3-preference-status').textContent='この画面の外観を、このブラウザに保存します。';}catch{document.querySelector('#v3-preference-status').textContent='外観は反映しましたが、このブラウザでは保存できません。';}};
+ const remember=()=>{try{localStorage.setItem(key,appearance());document.querySelector('#v3-preference-status').textContent='';}catch{document.querySelector('#v3-preference-status').textContent='外観は反映しましたが、このブラウザでは保存できません。';}};
  try{document.body.classList.toggle(themeClass,localStorage.getItem(key)==='dark');}catch{/* Storage unavailable; never touch workbook state. */}
  reflect();
  for(const radio of settings.querySelectorAll('[name=v3-appearance]'))radio.addEventListener('change',()=>{if(!radio.checked)return;if(appearance()!==radio.value)theme.click();document.body.classList.toggle(themeClass,radio.value==='dark');reflect();remember();});
@@ -37,9 +39,14 @@ if(['home','ledger','weekly'].includes(page)){
 
  const actions=document.querySelector('#additional-actions'),saveStatus=document.querySelector('#status');
  if(actions&&saveStatus){
+  let recoveryNeeded=false;
   const revealRecovery=()=>{
-   if(!(window.layoutLab||window.weeklyLab)?.getState().uncertain)return;
-   actions.open=true;
+   const message=saveStatus.textContent.trim(),uncertain=!!(window.layoutLab||window.weeklyLab)?.getState().uncertain;
+   if(!message||message==='保存しました')recoveryNeeded=false;
+   recoveryNeeded=recoveryNeeded||uncertain||/別画面で更新|保存結果|保存でき|起動でき|読み直|確認でき|未確定/.test(message);
+   actions.hidden=!recoveryNeeded;actions.open=recoveryNeeded;
+   document.querySelector('.guide').hidden=!message;
+   if(!uncertain)return;
    if(/^(?:TypeError:\s*)?(?:Failed to fetch|NetworkError when attempting to fetch resource\.?|Load failed)$/i.test(saveStatus.textContent.trim()))saveStatus.textContent='保存結果を確認できません。「保存版の確認」を押してください。';
   };
   new MutationObserver(revealRecovery).observe(saveStatus,{childList:true,characterData:true,subtree:true});

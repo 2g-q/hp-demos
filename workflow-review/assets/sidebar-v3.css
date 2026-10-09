@@ -87,3 +87,5 @@
  .workflow-v3 footer{padding:4px 10px;font-size:10px}
  .workflow-v3:not([data-workflow-page=home]) #editor{min-height:220px}
 }
+
+#v3-preference-status:empty{display:none}
