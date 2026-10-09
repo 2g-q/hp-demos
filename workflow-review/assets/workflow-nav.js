@@ -17,7 +17,7 @@ function choose(){return new Promise(resolve=>{
   dialog.addEventListener('click',click);dialog.addEventListener('cancel',cancel);dialog.showModal();
 });}
 async function move(key){
-  if(busy)return;
+  if(busy||!destinations||!Object.hasOwn(destinations,key))return;
   const current=state();
   if(!destinations||!current)return tell('画面の準備ができるまでお待ちください');
   if(current.saving)return tell('保存中です。確認が終わるまでこの画面に残ってください');
@@ -40,8 +40,8 @@ async function move(key){
 }
 if(nav){
   nav.addEventListener('pointerdown',e=>{if(e.target.closest('[data-go]'))e.preventDefault();});
-  nav.addEventListener('click',e=>{const button=e.target.closest('[data-go]');if(button)move(button.dataset.go).catch(()=>tell('移動できません。入力を保持したままこの画面に残ります'));});
-  destinations={home:new URL('../',location.href).href,ledger:new URL('../ledger/',location.href).href,weekly:new URL('../weekly/',location.href).href};
+  nav.addEventListener('click',e=>{const button=e.target.closest('[data-go]');if(button&&!button.disabled&&button.getAttribute('aria-disabled')!=='true')move(button.dataset.go).catch(()=>tell('移動できません。入力を保持したままこの画面に残ります'));});
+  destinations={home:new URL("../",location.href).href,ledger:new URL("../ledger/",location.href).href,weekly:new URL("../weekly/",location.href).href,month:new URL("../?view=month",location.href).href,cost:new URL("../?view=cost",location.href).href,billing:new URL("../?view=billing",location.href).href,classification:new URL("../?view=classification",location.href).href,print:new URL("../?view=print",location.href).href,meeting:new URL("../?view=meeting",location.href).href,notifications:new URL("../?view=notifications",location.href).href,files:new URL("../?view=files",location.href).href,search:new URL("../?view=search",location.href).href,schedule:new URL("../?view=schedule",location.href).href,attendance:new URL("../?view=attendance",location.href).href};
 }
 window.addEventListener('pageshow',async e=>{
   window.timeincNavigationApproved=false;

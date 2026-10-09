@@ -89,3 +89,5 @@
 }
 
 #v3-preference-status:empty{display:none}
+
+.workflow-v3 .v3-panel{padding-bottom:64px}.workflow-v3 .v3-page-list{overflow-y:auto;min-height:0;flex:0 1 auto}.workflow-v3 .v3-sidebar-brand{bottom:8px}@media(max-width:700px){.workflow-v3 .v3-panel{padding-bottom:7px;min-width:0}.workflow-v3 .v3-page-list{flex-wrap:nowrap;overflow-x:auto;overflow-y:hidden;max-width:100%;flex-shrink:0}.workflow-v3 .v3-page-list button{flex:0 0 auto;white-space:nowrap}.workflow-v3 .v3-sidebar-brand{bottom:auto}}
