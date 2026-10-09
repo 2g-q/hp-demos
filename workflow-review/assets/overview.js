@@ -1,0 +1,1 @@
+export default {"fixtureSHA256":"90b94c01e53e453d6fa487d4f1d4d6086edeefd08835d308ff2bc8a15d585ba8","values":{"A4":"26","B4":"X","C4":"001","D4":"匿名・代表業務A","J4":"匿名契約先A"},"alias":"匿名業務A"};

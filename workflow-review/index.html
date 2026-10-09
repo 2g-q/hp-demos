@@ -1,0 +1,12 @@
+<!doctype html>
+<html lang="ja"><head><meta charset="utf-8"><meta name="robots" content="noindex,nofollow"><meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self' data:; connect-src 'none'; object-src 'none'; base-uri 'self'; form-action 'none'"><meta name="viewport" content="width=device-width,initial-scale=1"><title>timeInc. | Excel業務試作</title><link rel="stylesheet" href="./assets/home.css"><link rel="stylesheet" href="./assets/sidebar-v3.css"><script defer src="./assets/sidebar-v3.js"></script><script type="module" src="./assets/home.js"></script></head>
+<body class="workflow-v3" data-workflow-page="home">
+<main><header><img class="v3-home-wordmark" src="./assets/timeinc-wordmark.png" alt="timeInc."><div><h1>案件一覧</h1></div><button id="theme">ダーク</button></header><p class="preview-notice" role="note">匿名デモ：実際の個人・案件情報は入力しないでください。入力はこのブラウザだけに保存されます。共有・Excelファイルの更新は行いません。</p>
+<p>台帳で案件を確認し、週間の予定・実績を入力します。</p>
+<label class="search">案件を探す<input id="search" type="search" placeholder="工番・正式名・略称で検索" autocomplete="off"></label>
+<article id="case" hidden><div class="case-title"><h2 id="formal"></h2></div><dl><div><dt>工番</dt><dd id="identifier"></dd></div><div><dt>週間で使う名称</dt><dd id="alias"></dd></div><div><dt>入力する週</dt><dd>2026/3/23〜4/6</dd></div></dl>
+<div class="buttons"><a id="open-ledger" class="button primary" aria-disabled="true">台帳を開く</a><a id="open-weekly" class="button" aria-disabled="true">週間の予定・実績へ</a></div>
+<p class="note">名称は匿名サンプルから表示。試作の1案件だけを仮対応しています。自動転記・名称同期は行いません。</p>
+<details><summary>入力・保存できる範囲</summary><p>ブラウザのデータを消去すると、保存した入力も消えます。</p><p>台帳は工番3欄・業務名・契約先の5欄、週間は最初の4行の黄色い欄を保存できます。保存先はこのブラウザ内で、顧客の正本には接続していません。旧xls保存・月間連携・Excelの再計算・帳票は未検証です。</p></details></article>
+
+<p id="empty" hidden>該当する試験案件はありません。</p><p id="home-status" role="status">Excelを確認中…</p></main></body></html>

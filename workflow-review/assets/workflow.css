@@ -1,0 +1,7 @@
+[data-workflow-nav]{display:flex;align-items:center;gap:8px;padding:7px 18px;background:#102a43;color:#e9f2fb;font:14px system-ui,sans-serif;flex-wrap:wrap}
+[data-workflow-nav] span{margin-right:auto}[data-workflow-nav] button{font:inherit;border:1px solid #6483a2;border-radius:7px;background:transparent;color:inherit;padding:7px 12px;cursor:pointer}
+[data-workflow-nav] button:hover{background:#234765}[data-workflow-nav] button:focus-visible{outline:3px solid #7fc5ff;outline-offset:2px}
+#workflow-confirm{border:0;border-radius:12px;padding:22px;max-width:min(470px,90vw);font:15px system-ui;color:#102a43;box-shadow:0 20px 80px #0005}
+#workflow-confirm::backdrop{background:#102a4380}#workflow-confirm h2{font-size:19px;margin:0 0 12px}#workflow-confirm div{display:flex;gap:8px;flex-wrap:wrap}
+#workflow-confirm button{min-height:42px;border:1px solid #b8cadb;border-radius:7px;padding:9px 12px;font:inherit;background:#f3f6f9;color:#102a43;cursor:pointer}#workflow-confirm [data-choice=save]{background:#1769aa;color:white}
+@media(max-width:600px){[data-workflow-nav]{padding:7px 12px;gap:6px}[data-workflow-nav] span{font-size:12px}[data-workflow-nav] button{padding:7px 9px}}
