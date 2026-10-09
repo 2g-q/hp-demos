@@ -13,7 +13,7 @@ if(['home','ledger','weekly'].includes(page)){
  const requestedView=new URLSearchParams(location.search).get('view'),portalKeys=["month","cost","billing","classification","print","meeting","notifications","files","search","schedule","attendance"];
  const currentKey=page==='home'&&portalKeys.includes(requestedView)?requestedView:page;
  const current=panel.querySelector('[data-go="'+currentKey+'"]');current.setAttribute('aria-current','page');current.disabled=true;
- function category(next){for(const button of mount.querySelectorAll('[data-category]'))button.setAttribute('aria-pressed',String(button.dataset.category===next));for(const group of panel.querySelectorAll('[data-category-pages]'))group.hidden=group.dataset.categoryPages!==next;document.querySelector('#sidebar-heading').textContent=next==='home'?'ホーム':next==='info'?'社内情報':'Excel業務';}
+ function category(next){for(const button of mount.querySelectorAll('[data-category]'))button.setAttribute('aria-pressed',String(button.dataset.category===next));for(const group of panel.querySelectorAll('[data-category-pages]'))group.hidden=group.dataset.categoryPages!==next;document.querySelector('#sidebar-heading').hidden=next==='home';document.querySelector('#sidebar-heading').textContent=next==='home'?'ホーム':next==='info'?'社内情報':'Excel業務';}
  category(['notifications','files','search','schedule','attendance'].includes(currentKey)?'info':currentKey==='home'?'home':'excel');
  for(const button of mount.querySelectorAll('[data-category]')){button.addEventListener('pointerdown',e=>e.preventDefault());button.addEventListener('click',()=>category(button.dataset.category));}
 
