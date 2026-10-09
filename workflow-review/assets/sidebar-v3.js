@@ -44,7 +44,7 @@ if(['home','ledger','weekly'].includes(page)){
   let recoveryNeeded=false;
   const revealRecovery=()=>{
    const message=saveStatus.textContent.trim(),uncertain=!!(window.layoutLab||window.weeklyLab)?.getState().uncertain;
-   if(!message||message==='保存しました')recoveryNeeded=false;
+   if(!message||message==='この端末に保存しました')recoveryNeeded=false;
    recoveryNeeded=recoveryNeeded||uncertain||/別画面で更新|保存結果|保存でき|起動でき|読み直|確認でき|未確定/.test(message);
    actions.hidden=!recoveryNeeded;actions.open=recoveryNeeded;
    document.querySelector('.guide').hidden=!message;

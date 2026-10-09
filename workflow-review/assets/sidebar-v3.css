@@ -90,4 +90,6 @@
 
 #v3-preference-status:empty{display:none}
 
+.editor-scope,.editor-week{font-size:12px;color:#c9def2;white-space:nowrap}.editor-scope{padding:3px 7px;border:1px solid #486888;border-radius:5px}@media(max-width:700px){.workflow-v3>header{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 8px}.workflow-v3>header .label{grid-column:1;grid-row:1}.workflow-v3>header .editor-scope{grid-column:1;grid-row:2;justify-self:start}.workflow-v3>header .editor-week{grid-column:1;grid-row:3}.workflow-v3>header .actions{grid-column:2;grid-row:1 / span 3;align-self:center;margin:0}.workflow-v3>header #save{white-space:nowrap}}
+
 .workflow-v3 .v3-panel{padding-bottom:64px}.workflow-v3 .v3-page-list{overflow-y:auto;min-height:0;flex:0 1 auto}.workflow-v3 .v3-sidebar-brand{bottom:8px}@media(max-width:700px){.workflow-v3 .v3-panel{padding-bottom:7px;min-width:0}.workflow-v3 .v3-page-list{flex-wrap:nowrap;overflow-x:auto;overflow-y:hidden;max-width:100%;flex-shrink:0}.workflow-v3 .v3-page-list button{flex:0 0 auto;white-space:nowrap}.workflow-v3 .v3-sidebar-brand{bottom:auto}}
