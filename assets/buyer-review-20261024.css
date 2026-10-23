@@ -1,0 +1,30 @@
+/* Purpose-led entry points, scoped to the three reviewed catalogue pages. */
+.buyer-shortcuts{display:flex;justify-content:center;align-items:center;gap:8px 20px;flex-wrap:wrap;max-width:900px;margin:24px auto 0}
+.buyer-shortcuts>span{font-size:12px;color:#526174}
+.buyer-shortcuts a{display:inline-flex;align-items:center;min-height:44px;color:#2454aa;font-size:13px;line-height:1.6;text-decoration:underline;text-underline-offset:4px}
+.buyer-start{max-width:1128px;margin:28px auto 0;padding:0 20px}
+.buyer-start>p{font-size:14px;color:#475569;line-height:1.8}
+.buyer-start nav{display:flex;gap:8px 24px;flex-wrap:wrap;margin-top:6px}
+.buyer-start a{display:inline-flex;align-items:center;min-height:44px;color:#2454aa;font-size:14px;line-height:1.6;text-decoration:underline;text-underline-offset:4px}
+.buyer-start a:last-child{margin-left:auto}
+.buyer-web .intro,.buyer-web .consult{background:transparent;border-radius:0}
+.buyer-web .intro h1{font-size:clamp(28px,3.2vw,38px);line-height:1.5;text-wrap:balance}
+.buyer-web .intro-small{max-width:34em;font-size:14px;line-height:1.9;color:#475569}
+.buyer-web .intro-meta{font-size:12px;color:#475569}
+.buyer-web .collection-heading>p{font-size:14px;color:#475569;line-height:1.85;max-width:30em}
+.buyer-web .work-meta{font-size:12px;letter-spacing:0}
+.buyer-web .work-features{font-size:12px;color:#475569}
+.buyer-web .results-line{font-size:12px;color:#475569}
+@media(max-width:650px){
+ .buyer-shortcuts{gap:0 16px;margin-top:20px}
+ .buyer-shortcuts>span{width:100%}
+ .buyer-shortcuts a{font-size:12px}
+ .buyer-start{margin-top:20px}
+ .buyer-start nav{gap:0 18px}
+ .buyer-start a{font-size:13px}
+ .buyer-start a:last-child{margin-left:0}
+ .buyer-web .intro-small{font-size:13px}
+ .buyer-web .intro-meta{font-size:11px}
+ .buyer-web .collection-heading>p{font-size:13px}
+ .buyer-web .work-meta,.buyer-web .work-features{font-size:11px}
+}
