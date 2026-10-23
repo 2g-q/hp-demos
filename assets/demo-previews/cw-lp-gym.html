@@ -507,8 +507,14 @@ footer{background:#17181D;color:rgba(255,255,255,.75);padding:60px 0 48px;}
 <style>header .brand{flex-shrink:0}header .menu a{white-space:nowrap}header .book{white-space:nowrap}header .brand small{display:none}@media(max-width:1100px){header .menu{display:none}header .menu.on,header .menu.open{display:flex}header .burger{display:flex}header .tel{display:none}}@media(max-width:600px){header .wrap{padding-left:16px;padding-right:16px}header .brand{font-size:17px;gap:7px;white-space:nowrap}header .leaf{width:22px;height:22px;flex-shrink:0}header .right{gap:12px}header .book{font-size:12px;padding:10px 12px}}</style><link rel="stylesheet" href="assets/demo-previews/dialog.css"><meta name="robots" content="noindex">
 <link rel="stylesheet" href="assets/legacy-local-refresh.css">
 <script src="assets/standalone-sites.js?v=1" defer></script><link rel="stylesheet" href="assets/standalone-sites.css?v=1">
-</head>
+<style id="sample-review-style">
+:root{scroll-padding-top:105px} :focus-visible{outline:3px solid #b66a27;outline-offset:5px}button,input,select,textarea{font:inherit}button{cursor:pointer}select,input,textarea{max-width:100%} .review-disclosure{position:relative;z-index:1;padding:8px 20px;background:#f4f0e7;color:#453e32;font:12px/1.6 system-ui;text-align:center}.review-disclosure a{text-decoration:underline}.review-disclosure+header{top:37px}.review-form{max-width:680px;margin:30px auto 0;text-align:left;display:grid;gap:20px}.review-form label{display:grid;gap:8px;font-size:14px;font-weight:600}.review-form select,.review-form input{width:100%;padding:13px 14px;background:#fff;color:#242a2c;border:1px solid #b8b5ae;border-radius:3px;min-height:48px}.review-form button{border:0;min-height:48px}.review-form output,.review-confirmation{display:block;padding:18px;border-left:3px solid currentColor;font-size:14px;line-height:1.8;text-align:left}.review-form output:empty{display:none}.review-form small{font-size:12px;line-height:1.7}.review-note{font-size:13px;line-height:1.8;margin:18px 0;color:inherit}.review-questions{display:grid;gap:0;margin-top:30px;border-top:1px solid currentColor}.review-questions details{padding:18px 0;border-bottom:1px solid #b6aea355}.review-questions summary{font-weight:600;cursor:pointer}.review-questions p{margin-top:12px;max-width:65ch}.maker-contact{padding:42px max(24px,calc((100% - 1100px)/2));background:#f3f1ec;color:#333c3c;font:14px/1.9 system-ui;text-align:left;border-top:1px solid #d3d0c8}.maker-contact p{max-width:65ch;margin:9px 0 17px}.maker-contact strong{font-size:18px}.maker-contact .maker-links{display:flex;gap:12px;flex-wrap:wrap}.maker-contact a{display:inline-flex;align-items:center;min-height:44px;padding:8px 15px;border:1px solid #8b9390;color:#253e38;text-decoration:none}.maker-contact small{display:block;margin-top:14px;font-size:12px}.burger{border:0;background:transparent;position:relative;z-index:60;min-width:44px;min-height:44px;justify-content:center;align-items:center}body>.minato-site-return{position:static;margin:20px 24px}.review-summary{white-space:pre-line}.review-form fieldset{border:0;padding:0}.review-form legend{font-weight:700;margin-bottom:8px} .review-form .review-choice{display:flex;gap:10px;align-items:center}.review-form .review-choice input{width:20px;min-height:24px}
+@media(max-width:700px){.review-disclosure+header{top:0}.review-disclosure{padding-top:90px}.maker-contact{padding-bottom:115px}.review-disclosure+header .brand,.review-disclosure+header .menu a{color:var(--ink,#243347)}.review-disclosure+header{background:#fff}.review-disclosure+header .burger span{background:#263b42}.review-form{gap:16px}.review-disclosure+header .book{color:#5b4433;border-color:currentColor}section[id]{scroll-margin-top:90px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto!important}*,*::before,*::after{animation:none!important;transition:none!important}.reveal,.rv{opacity:1!important;transform:none!important}}
+</style>
+<style>.price-pop{line-height:1.5}.voice-title{font-size:1.25rem}.hero .stats .value{font-size:2.4rem}.form-done{color:#243a30}.table-scroll:focus-visible{outline:3px solid #b66a27}@media(max-width:600px){.review-disclosure{padding-top:90px}.hero-copy{padding-top:20px}.maker-contact{padding-bottom:110px}}</style></head>
 <body class="legacy-local legacy-local-gym">
+<div class="review-disclosure">架空の制作サンプルです。予約・応募は行われません。 <a href="#site-production">Web制作のご相談はこちら</a></div>
 
 <!-- ============ header ============ -->
 <header class="header" id="header">
@@ -518,7 +524,7 @@ footer{background:#17181D;color:rgba(255,255,255,.75);padding:60px 0 48px;}
 <a href="#reason">選ばれる理由</a>
 <a href="#trainer">トレーナー</a>
 <a href="#price">料金プラン</a>
-<a href="#voice">お客様の声</a>
+<a href="#voice">体験で確かめること</a>
 <a href="#faq">よくある質問</a>
 <a class="btn btn-primary" href="#reserve">体験予約(今なら0円)</a>
 </nav>
@@ -531,7 +537,7 @@ footer{background:#17181D;color:rgba(255,255,255,.75);padding:60px 0 48px;}
 <a href="#reason">選ばれる理由</a>
 <a href="#trainer">トレーナー</a>
 <a href="#price">料金プラン</a>
-<a href="#voice">お客様の声</a>
+<a href="#voice">体験で確かめること</a>
 <a href="#faq">よくある質問</a>
 <a class="btn btn-primary" href="#reserve">体験予約(今なら0円)</a>
 </nav>
@@ -542,10 +548,10 @@ footer{background:#17181D;color:rgba(255,255,255,.75);padding:60px 0 48px;}
 <div class="hero-copy">
 <span class="hero-label">PERSONAL TRAINING GYM｜OMIYA</span>
 <h1>「痩せたい」を、<br/><span class="marker">続けられる習慣に。</span></h1>
-<p class="hero-lead">完全個室のマンツーマン指導と、毎日の食事サポート。意志の強さに頼らない“続く仕組み”で、3ヶ月後、鏡の前に立つのが楽しみになる体へ。</p>
+<p class="hero-lead">完全個室で、1回60分のマンツーマントレーニング。週1回・2回・3回のプランから、生活に合う通い方を考えます。食事サポートの有無も比較できます。</p>
 <div class="hero-cta">
 <a class="btn btn-primary" href="#reserve">60分体験トレーニングを予約<span class="sub">通常8,800円 → 今月は無料</span></a>
-<a class="btn btn-line" href="#" onclick="return false;">LINEで気軽に相談</a>
+<a class="btn btn-line" href="#reserve">体験の内容を見る</a>
 </div>
 <p class="hero-note">✓ 無理な勧誘は一切ありません ✓ 手ぶらでOK(ウェア・シューズ無料)</p>
 </div>
@@ -555,23 +561,7 @@ footer{background:#17181D;color:rgba(255,255,255,.75);padding:60px 0 48px;}
 <div class="hero-badge">JR大宮駅 東口<br/><b>徒歩3分</b>・完全個室</div>
 </div>
 </div>
-<div class="stats reveal">
-<div class="stats-inner">
-<div class="stat">
-<div class="value en"><em>-6.8</em><span class="unit">kg</span></div>
-<div class="label">3ヶ月コース平均<sup>※1</sup></div>
-</div>
-<div class="stat">
-<div class="value en">96.2<span class="unit">%</span></div>
-<div class="label">プログラム継続率<sup>※2</sup></div>
-</div>
-<div class="stat">
-<div class="value en">4.9<span class="unit">/5.0</span></div>
-<div class="label">会員アンケート満足度<sup>※3</sup></div>
-</div>
-</div>
-<p class="stats-note">※1〜3:デモ用の架空データです。効果には個人差があります。</p>
-</div>
+<div class="stats reveal"><div class="stats-inner"><div class="stat"><div class="value en">60<span class="unit">分</span></div><div class="label">1回のマンツーマン指導</div></div><div class="stat"><div class="value en">3<span class="unit">プラン</span></div><div class="label">月4回・8回・12回から</div></div><div class="stat"><div class="value en">1<span class="unit">対1</span></div><div class="label">完全個室のトレーニング</div></div></div><p class="stats-note">架空のジムのサービス設定です。効果や実績を示す数値ではありません。</p></div>
 </div>
 <!-- ============ worries ============ -->
 <section class="worries" id="worry">
@@ -669,7 +659,7 @@ footer{background:#17181D;color:rgba(255,255,255,.75);padding:60px 0 48px;}
 <div class="trainer-role">代表トレーナー</div>
 <div class="trainer-name">神谷 亮<small>KAMIYA RYO</small></div>
 <div class="trainer-tags"><span>NSCA-CPT</span><span>指導歴10年</span><span>ボディメイク</span></div>
-<p class="trainer-msg">「きついだけのトレーニングは続きません。正しい優先順位で取り組めば、体は必ず応えてくれます。最短ルートは私が設計しますので、安心してついてきてください。」</p>
+<p class="trainer-msg">「どんな運動なら続けられそうか、まずはそこから聞かせてください。生活の中に無理なく組み込める通い方を、一緒に考えます。」</p>
 </div>
 </div>
 <div class="trainer-card reveal d1">
@@ -700,7 +690,7 @@ footer{background:#17181D;color:rgba(255,255,255,.75);padding:60px 0 48px;}
 <div class="sec-head reveal">
 <span class="en-label">PRICE</span>
 <h2>料金プラン</h2>
-<p class="sub">大手パーソナルジムの約1/2の価格<sup>※当スタジオ調べ・架空データ</sup>。すべて税込・追加料金なし。</p>
+<p class="sub">通う回数とサポート内容を比べてお選びください。以下はすべて税込・架空の料金設定です。</p>
 </div>
 <div class="price-grid">
 <div class="price-card reveal">
@@ -720,7 +710,7 @@ footer{background:#17181D;color:rgba(255,255,255,.75);padding:60px 0 48px;}
 <a class="btn btn-primary" href="#reserve">このプランで体験する</a>
 </div>
 <div class="price-card featured reveal d1">
-<span class="price-pop">一番人気|会員の約6割が選択</span>
+<span class="price-pop">週2回＋食事サポート</span>
 <div class="price-name">ボディメイク</div>
 <p class="price-for">3ヶ月で見た目を<br/>変えたい方に</p>
 <div class="price-amount">
@@ -738,7 +728,7 @@ footer{background:#17181D;color:rgba(255,255,255,.75);padding:60px 0 48px;}
 </div>
 <div class="price-card reveal d2">
 <div class="price-name">プレミアム</div>
-<p class="price-for">最短で、確実に<br/>仕上げたい方に</p>
+<p class="price-for">週3回のペースで<br/>取り組みたい方に</p>
 <div class="price-amount">
 <div class="num en"><span class="yen">¥</span>69,800</div>
 <div class="per">/ 月(税込)・月12回(週3ペース)</div>
@@ -760,108 +750,9 @@ footer{background:#17181D;color:rgba(255,255,255,.75);padding:60px 0 48px;}
 </div>
 </section>
 <!-- ============ compare ============ -->
-<section class="compare" id="compare">
-<div class="wrap">
-<div class="sec-head reveal">
-<span class="en-label">COMPARISON</span>
-<h2>他のジムとの違い</h2>
-</div>
-<p class="scroll-hint">→ 表は横にスクロールできます</p>
-<div class="table-scroll reveal">
-<table class="cmp">
-<thead>
-<tr>
-<th></th>
-<th class="hl">REBORN GYM</th>
-<th>大手パーソナル<br/>ジムA社</th>
-<th>月額制フィット<br/>ネスクラブ</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<th>月額の目安</th>
-<td class="hl">49,800円</td>
-<td>100,000円〜</td>
-<td>8,000円〜</td>
-</tr>
-<tr>
-<th>マンツーマン指導</th>
-<td class="hl"><span class="mark good">◎</span><br/>毎回60分専属</td>
-<td><span class="mark good">◎</span><br/>毎回専属</td>
-<td><span class="mark bad">✕</span><br/>基本なし</td>
-</tr>
-<tr>
-<th>食事サポート</th>
-<td class="hl"><span class="mark good">◎</span><br/>毎日LINEで返信</td>
-<td><span class="mark">△</span><br/>週1回の面談</td>
-<td><span class="mark bad">✕</span><br/>なし</td>
-</tr>
-<tr>
-<th>完全個室</th>
-<td class="hl"><span class="mark good">◎</span></td>
-<td><span class="mark">○</span><br/>店舗による</td>
-<td><span class="mark bad">✕</span></td>
-</tr>
-<tr>
-<th>続けやすさ</th>
-<td class="hl"><span class="mark good">◎</span><br/>継続率96.2%</td>
-<td><span class="mark">△</span><br/>短期集中型</td>
-<td><span class="mark bad">✕</span><br/>自己管理次第</td>
-</tr>
-<tr>
-<th>返金保証</th>
-<td class="hl"><span class="mark good">◎</span><br/>30日間全額</td>
-<td><span class="mark">○</span><br/>条件つき</td>
-<td><span class="mark bad">✕</span></td>
-</tr>
-</tbody>
-</table>
-</div>
-<p class="cmp-note">※本表は制作サンプル用の架空比較です。実在の事業者を示すものではありません。</p>
-</div>
-</section>
+<section class="compare" id="compare"><div class="wrap"><div class="sec-head"><span class="en-label">FIND YOUR PACE</span><h2>通える回数から、プランを選ぶ。</h2><p class="sub">生活の中で確保できる時間と、ほしいサポートを比べます。</p></div><div class="table-scroll"><table class="cmp"><thead><tr><th scope="col">比較する項目</th><th scope="col">ライト</th><th scope="col" class="hl">ボディメイク</th><th scope="col">プレミアム</th></tr></thead><tbody><tr><th scope="row">月額・税込</th><td>29,800円</td><td class="hl">49,800円</td><td>69,800円</td></tr><tr><th scope="row">1回60分の指導</th><td>月4回</td><td class="hl">月8回</td><td>月12回</td></tr><tr><th scope="row">毎日の食事サポート</th><td>含まれません</td><td class="hl">含まれます</td><td>含まれます</td></tr><tr><th scope="row">こんな通い方に</th><td>週1回から始めたい</td><td class="hl">週2回を生活に組み込みたい</td><td>週3回＋自主練習をしたい</td></tr></tbody></table></div><p class="cmp-note">架空の料金プランの比較です。入会金・キャンペーン条件は料金欄をご覧ください。</p></div></section>
 <!-- ============ voice ============ -->
-<section id="voice">
-<div class="wrap">
-<div class="sec-head reveal">
-<span class="en-label">VOICE</span>
-<h2>卒業生の声</h2>
-</div>
-<div class="voice-grid">
-<div class="voice-card reveal">
-<div class="voice-top">
-<div class="voice-avatar">M.K</div>
-<div class="voice-who"><b>M.K様</b>30代女性・事務職</div>
-</div>
-<span class="voice-result">3ヶ月で <em>-8.2kg</em></span>
-<div class="voice-stars">★★★★★</div>
-<p class="voice-title">「食べながら痩せられたのは初めて。結婚式のドレスが2サイズ下に」</p>
-<p class="voice-body">過去に3回リバウンド経験があり半信半疑でしたが、「これも食べていいんですか?」の連続でした。毎日LINEで見てもらえる安心感が大きく、式の3週間前に目標達成。挙式後も月2回ペースで続けています。</p>
-</div>
-<div class="voice-card reveal d1">
-<div class="voice-top">
-<div class="voice-avatar">T.S</div>
-<div class="voice-who"><b>T.S様</b>40代男性・営業職</div>
-</div>
-<span class="voice-result">4ヶ月で <em>体脂肪率-9.5%</em></span>
-<div class="voice-stars">★★★★★</div>
-<p class="voice-title">「健康診断の数値が全項目改善。接待の飲み会と両立できた」</p>
-<p class="voice-body">週3〜4回の会食があるため無理だと思っていましたが、「飲み会前後の調整方法」まで具体的に教えてもらえました。腹囲-11cm、肝機能値も改善。妻より私の方がジム通いを楽しみにしています。</p>
-</div>
-<div class="voice-card reveal d2">
-<div class="voice-top">
-<div class="voice-avatar">A.Y</div>
-<div class="voice-who"><b>A.Y様</b>30代女性・育休中</div>
-</div>
-<span class="voice-result">産後6ヶ月で <em>妊娠前の体型に</em></span>
-<div class="voice-stars">★★★★☆</div>
-<p class="voice-title">「産後の体型戻しと、抱っこで痛めた腰の改善を同時に」</p>
-<p class="voice-body">桜井トレーナーが産後の体に合わせて強度を調整してくれるので、不安なく通えました。理学療法士の田口さんに教わった腰痛ケアも効果てきめん。子連れ相談OKなのも助かりました。</p>
-</div>
-</div>
-<p class="voice-note">※掲載の声・数値はデモ用の架空事例です。効果には個人差があります。</p>
-</div>
-</section>
+<section id="voice"><div class="wrap"><div class="sec-head"><span class="en-label">YOUR FIRST SESSION</span><h2>体験で、確かめたいこと。</h2><p class="sub">入会を決める前に、動き方と通い方を相談します。</p></div><div class="voice-grid"><article class="voice-card"><span class="en-label">01 / MOVEMENT</span><h3 class="voice-title">今の動きやすさを知る</h3><p class="voice-body">運動経験や普段の活動量を伝え、基本の動きを確かめます。無理のないところから始めるための時間です。</p></article><article class="voice-card"><span class="en-label">02 / SCHEDULE</span><h3 class="voice-title">通える曜日を考える</h3><p class="voice-body">仕事帰りか、休日か。週に確保できる時間をもとに、月4回・8回・12回を比べます。</p></article><article class="voice-card"><span class="en-label">03 / SUPPORT</span><h3 class="voice-title">必要なサポートを選ぶ</h3><p class="voice-body">トレーニングだけか、日々の食事も相談したいか。各プランの内容と費用を確かめます。</p></article></div></div></section>
 <!-- ============ faq ============ -->
 <section class="faq" id="faq">
 <div class="wrap">
@@ -872,15 +763,15 @@ footer{background:#17181D;color:rgba(255,255,255,.75);padding:60px 0 48px;}
 <div class="faq-list reveal">
 <details>
 <summary><span class="faq-q">Q</span>運動がまったくの初心者でも大丈夫ですか?<span class="faq-toggle">+</span></summary>
-<p class="faq-a">はい、会員の約7割が運動未経験からのスタートです(※架空データ)。初回の体力測定をもとに、無理のない強度から始めますのでご安心ください。「腕立て伏せが1回もできない」状態から始めた方も多くいらっしゃいます。</p>
+<p class="faq-a">運動経験や、普段どのくらい体を動かしているかを初回に伺います。分からない動きや不安な点も、その場でご相談いただける想定です。</p>
 </details>
 <details>
 <summary><span class="faq-q">Q</span>食事制限はきついですか? お酒はやめないとダメ?<span class="faq-toggle">+</span></summary>
-<p class="faq-a">極端な制限は行いません。3食しっかり食べていただき、「量と選び方」を調整するスタイルです。お酒も種類と頻度の工夫で継続できます。我慢で痩せてもリバウンドするだけ、というのが当スタジオの考え方です。</p>
+<p class="faq-a">食事の相談を希望される場合は、普段の食事や生活リズムを伺う構成にしています。このページでは、具体的な食事指導や効果の案内は行いません。</p>
 </details>
 <details>
-<summary><span class="faq-q">Q</span>どのくらいの期間で結果が出ますか?<span class="faq-toggle">+</span></summary>
-<p class="faq-a">個人差はありますが、体の軽さや姿勢の変化は2〜4週間、見た目の変化は2〜3ヶ月が目安です。目標と期限(結婚式・健康診断など)がある方は、体験時にお伝えいただければ逆算プランをご提案します。※効果には個人差があります。</p>
+<summary><span class="faq-q">Q</span>目標がまだ決まっていなくても相談できますか?<span class="faq-toggle">+</span></summary>
+<p class="faq-a">「運動するきっかけがほしい」「日常でも体を動かしたい」といった相談から始める想定です。体験フォームでは、気になっていることを自由に記入できます。</p>
 </details>
 <details>
 <summary><span class="faq-q">Q</span>持ち物は何が必要ですか?<span class="faq-toggle">+</span></summary>
@@ -912,7 +803,7 @@ footer{background:#17181D;color:rgba(255,255,255,.75);padding:60px 0 48px;}
 </div>
 <div class="reserve-grid">
 <div class="form-card reveal">
-<form id="trialForm" novalidate="">
+<form id="trialForm">
 <div class="form-row">
 <label for="f-name">お名前<span class="req">必須</span></label>
 <input id="f-name" name="name" placeholder="例)山田 花子" required="" type="text"/>
@@ -942,19 +833,19 @@ footer{background:#17181D;color:rgba(255,255,255,.75);padding:60px 0 48px;}
 <label for="f-msg">ご質問・お悩みなど<span class="opt">任意</span></label>
 <textarea id="f-msg" name="message" placeholder="例)産後の体型戻しに興味があります" rows="3"></textarea>
 </div>
-<button class="btn btn-primary" type="submit">無料体験を予約する<span class="sub">所要1分|しつこい勧誘はありません</span></button>
-<div class="form-done" id="formDone">送信ありがとうございます(デモ表示)。<br/>※本ページは制作サンプルのため、実際には送信されていません。実際の制作では、メール通知・予約システム連携まで実装します。</div>
-<p class="form-note">※このフォームはデモのため、入力内容はどこにも送信されません。</p>
+<button class="btn btn-primary" type="submit">体験の希望内容を確認する<span class="sub">入力体験のみ・送信されません</span></button>
+<div class="form-done review-summary" id="formDone" role="status" aria-live="polite"></div>
+<p class="form-note">架空のお名前・電話番号でお試しください。希望日時は空き状況と連動していません。入力内容は保存・送信されません。</p>
 </form>
 </div>
 <div class="reserve-side reveal d1">
-<h3>お電話・LINEでもご予約OK</h3>
+<h3>体験当日の流れ</h3>
 <div class="tel-card">
 <a class="tel-num en" href="tel:0480000000">048-000-0000</a>
 <p>受付時間 7:00〜22:00(年中無休)<br/>「ホームページを見た」とお伝えいただくとスムーズです。</p>
 </div>
-<a class="btn btn-line" href="#" onclick="return false;">LINEで空き状況を確認する</a>
-<p class="line-note">友だち追加→希望日時を送るだけ。24時間受付・最短1分で予約完了。</p>
+<a class="btn btn-line" href="#reserve">希望のプランを選ぶ</a>
+<p class="line-note">この制作例では希望内容の確認までを体験できます。実際の予約受付や空き状況の照会は行っていません。</p>
 <ul class="flow">
 <li><span class="step">STEP 1</span>フォーム・電話・LINEで予約(1分)</li>
 <li><span class="step">STEP 2</span>ご来店・カウンセリング+体組成測定</li>
@@ -1004,6 +895,8 @@ const io = new IntersectionObserver(entries => {
 }, {threshold: 0.12, rootMargin: '0px 0px -40px 0px'});
 document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 
+document.querySelectorAll('.price-card a').forEach((a,index)=>a.addEventListener('click',()=>{document.getElementById('f-course').selectedIndex=index+1;document.getElementById('formDone').classList.remove('show');}));
+document.getElementById('trialForm').addEventListener('input',()=>document.getElementById('formDone').classList.remove('show'));
 // dummy form (demo: never sends anywhere)
 document.getElementById('trialForm').addEventListener('submit', e => {
   e.preventDefault();
@@ -1014,16 +907,20 @@ document.getElementById('trialForm').addEventListener('submit', e => {
     if (!el.value.trim()) { el.style.borderColor = '#F4562B'; ok = false; }
   });
   if (!ok) return;
-  document.getElementById('formDone').classList.add('show');
-  form.querySelector('button[type="submit"]').disabled = true;
-  form.querySelector('button[type="submit"]').style.opacity = '.55';
+  if(!form.reportValidity())return;
+  const out=document.getElementById('formDone');
+  out.textContent='ご希望のコース：'+form.elements.course.value+'\n希望日時：'+form.elements.date.value+'\nお名前：'+form.elements.name.value+'\n電話番号：'+form.elements.tel.value+'\nメールアドレス：'+(form.elements.email.value||'未入力')+'\nご質問・お悩み：'+(form.elements.message.value||'未入力')+'\n確認表示です。体験予約は行っていません。内容を変更して再確認できます。';
+  out.classList.add('show');
 });
 </script>
 <!-- demo-fict:start 架空サンプルの注記(2026-09-04 上部の帯からフッターへ移設) -->
 <style>#demo-fict{margin:0;padding:20px 20px 28px;background:#fff;color:rgba(13,13,13,.6);border-top:1px solid rgba(13,13,13,.14);font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue","Hiragino Kaku Gothic ProN","Noto Sans JP","Yu Gothic",Meiryo,sans-serif;font-size:13px;line-height:1.7;text-align:center}@media print{#demo-fict{display:none}}</style>
 <div id="demo-fict">これは制作サンプル（架空のパーソナルジムのLP）です。店名・人物・数値はすべて架空です。</div>
 <!-- demo-fict:end -->
-<script>document.addEventListener('click',function(e){const a=e.target.closest('a');if(!a)return;const h=a.getAttribute('href')||'';if(h.startsWith('#')){e.preventDefault();if(h.length>1){const t=document.getElementById(decodeURIComponent(h.slice(1)));if(t)t.scrollIntoView({behavior:'smooth',block:'start'});}return;}if(/^(tel:|mailto:)/i.test(h)){e.preventDefault();alert('制作サンプルです。電話・メールの送信は行いません。');return;}if(a.hasAttribute('download'))return;if(h){e.preventDefault();window.top.location.href=a.href;}},true);document.addEventListener('submit',function(e){e.preventDefault();},true);</script><script src="sample-interactions.js"></script>
+<script>document.addEventListener('click',function(e){const a=e.target.closest('a');if(!a||a.hasAttribute('data-production-contact'))return;const h=a.getAttribute('href')||'';if(h.startsWith('#')){e.preventDefault();if(h.length>1){const t=document.getElementById(decodeURIComponent(h.slice(1)));if(t)t.scrollIntoView({behavior:'smooth',block:'start'});}return;}if(/^(tel:|mailto:)/i.test(h)){e.preventDefault();alert('制作サンプルです。電話・メールの送信は行いません。');return;}if(a.hasAttribute('download'))return;if(h){e.preventDefault();window.top.location.href=a.href;}},true);document.addEventListener('submit',function(e){e.preventDefault();},true);</script>
 <p class="legacy-caption" style="text-align:center;padding:16px">写真はイメージです。実際の施設・トレーナー・利用者ではありません。</p><a class="minato-site-return" href="./cw-web.html">← 制作例一覧に戻る</a>
+<aside class="maker-contact" id="site-production"><small>このサンプルの制作について</small><strong>自社のジムサイトをご検討の方へ</strong><p>掲載しているのは架空の事業者の制作例です。実際のWeb制作のご相談は、ミナト AI・IT ラボへ。必要なページや予約・問い合わせの流れからご相談いただけます。</p><div class="maker-links"><a data-production-contact href="mailto:minato.ai.lab@gmail.com?subject=Web%E5%88%B6%E4%BD%9C%E3%81%AE%E7%9B%B8%E8%AB%87%EF%BC%9Alp-gym%20%E3%81%AE%E3%82%B5%E3%83%B3%E3%83%97%E3%83%AB%E3%82%92%E8%A6%8B%E3%81%A6">メールで制作を相談する ↗</a><a data-production-contact href="https://page.line.me/091usyfe" target="_blank" rel="noopener noreferrer">LINEで制作を相談する ↗</a><a href="./cw-web.html">制作例一覧へ</a></div><small>上の操作フォームは体験用です。この窓口ではWeb制作のご相談を承ります。</small></aside><script>
+(()=>{document.querySelectorAll('[data-preview-form]').forEach(form=>{const output=form.querySelector('output');form.addEventListener('change',()=>output.textContent='');form.addEventListener('submit',event=>{event.preventDefault();if(!form.reportValidity())return;const data=[...form.querySelectorAll('select[name]')].map(el=>el.name+'：'+el.selectedOptions[0].textContent);output.textContent=data.join(' ／ ')+'。確認表示です。送信・予約・応募は行っていません。選択を変えて何度でも試せます。';});});document.querySelectorAll('[data-preview-topic]').forEach(a=>a.addEventListener('click',()=>{const select=document.querySelector('[data-topic-select]');if(select){select.value=a.dataset.previewTopic;select.dispatchEvent(new Event('change',{bubbles:true}));}}));const menu=document.getElementById('mn')||document.getElementById('mnav')||document.getElementById('gnav');const toggle=document.getElementById('bg')||document.getElementById('menuBtn');if(menu&&toggle){toggle.setAttribute('aria-controls',menu.id);const sync=()=>toggle.setAttribute('aria-expanded',String(menu.classList.contains('open')||document.body.classList.contains('menu-open')));new MutationObserver(sync).observe(menu,{attributes:true,attributeFilter:['class']});new MutationObserver(sync).observe(document.body,{attributes:true,attributeFilter:['class']});sync();document.addEventListener('keydown',event=>{if(event.key==='Escape'&&toggle.getAttribute('aria-expanded')==='true'){toggle.click();toggle.focus();}});}})();
+</script>
 </body>
 </html>

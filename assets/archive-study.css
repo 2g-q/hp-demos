@@ -1,0 +1,26 @@
+.sample-banner{font-size:11px}
+.brand{max-width:14em}
+.brand small{font-size:10px}
+.lang-switch button,.item-actions button,.dialog-close{min-height:44px}
+.item-meta{font-size:11px}
+.hero h1{font-size:clamp(54px,6.5vw,88px)}
+.item-image span{font-size:10px}
+.selection-link{display:inline-flex;align-items:center;min-height:44px;font-size:13px;text-underline-offset:4px}
+.enquiry{padding:58px 0 72px;border-top:1px solid var(--line);display:grid;grid-template-columns:1fr 1fr;gap:65px;scroll-margin-top:24px}
+.enquiry h2{font:40px/1.25 Georgia,serif;margin-bottom:24px}
+.enquiry p{max-width:35em;color:var(--muted);font-size:15px}
+.enquiry .enquiry-disclosure{font-size:12px;border-left:2px solid #b5a48c;padding-left:16px;margin-top:24px}
+.enquiry-panel{border:1px solid #cdc3b2;background:#fbf8f0;padding:30px}
+.enquiry-panel h3{font-size:21px;letter-spacing:0;margin-bottom:12px}
+#enquiry-items{white-space:pre-line;font-size:14px;color:var(--ink)}
+.enquiry-panel label{display:block;font-size:14px;margin:20px 0 10px}
+.enquiry-panel select{display:block;width:100%;min-height:48px;border:1px solid #b7aa96;padding:10px;background:#fffdf7;color:var(--ink);font-size:14px}
+.enquiry-panel .btn{margin-top:20px;width:100%;font-size:14px}
+.enquiry-panel .btn:disabled{cursor:not-allowed;color:#70685f;background:#e3dcd0;border-color:#cbc0b1}
+.enquiry-result{white-space:pre-line;border-top:1px solid #cbbca6;padding-top:20px;margin-top:24px;font-size:14px}
+.visit h3{font-size:24px;margin-bottom:18px}
+.study-contact{display:flex;align-items:start;flex-direction:column;gap:20px;font-size:14px;margin-top:18px}
+.study-contact>a{min-height:44px;display:inline-flex;align-items:center}
+.footer{font-size:12px}
+@media(max-width:760px){.header{flex-wrap:wrap}.brand{font-size:19px}.head-actions{width:100%;justify-content:space-between}.head-actions>a.back-to-works{font-size:13px}.hero h1{font-size:58px}.enquiry{grid-template-columns:1fr;gap:28px;padding:36px 0}.enquiry h2{font-size:32px}.enquiry-panel{padding:22px}.item h3{min-height:0}.item-meta{font-size:10px}.item-actions button{font-size:12px}.item-actions{gap:0 14px}.catalog-grid{gap:32px 18px}html[lang=ja] .enquiry h2{font-size:29px;line-height:1.5}.detail-copy .btn{width:100%;font-size:13px}.footer{font-size:12px}}
+@media(max-width:360px){.catalog-grid{grid-template-columns:1fr}.item-image{aspect-ratio:1.1}.item h3{font-size:24px}.item-meta,.item-price{font-size:12px}.hero h1{font-size:50px}}

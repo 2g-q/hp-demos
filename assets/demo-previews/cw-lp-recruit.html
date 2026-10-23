@@ -245,7 +245,7 @@ section{padding:96px 0}
 .form-row textarea{min-height:110px;resize:vertical}
 .form-radio{display:flex;gap:10px;flex-wrap:wrap}
 .form-radio label{flex:1;min-width:140px;border:1.5px solid var(--line);border-radius:8px;padding:12px 10px;text-align:center;font-size:13.5px;font-weight:500;cursor:pointer;transition:.2s;margin-bottom:0;background:#fdfbf7}
-.form-radio input{display:none}
+.form-radio label{display:flex;align-items:center;justify-content:center;gap:8px}.form-radio input{display:inline-block;width:18px;height:18px;accent-color:var(--green);flex-shrink:0}.form-radio label:has(input:focus-visible){outline:3px solid var(--amber-deep);outline-offset:3px}
 .form-radio input:checked+span{color:var(--amber-deep);font-weight:700}
 .form-radio label:has(input:checked){border-color:var(--amber);background:var(--amber-pale)}
 .form-submit{text-align:center;margin-top:30px}
@@ -323,8 +323,14 @@ footer{background:#332b23;color:#d9d0c5;padding:56px 0 110px;font-size:13px}
 <meta content="noindex" name="robots"/>
 <style>header .brand{flex-shrink:0}header .menu a{white-space:nowrap}header .book{white-space:nowrap}header .brand small{display:none}@media(max-width:1100px){header .menu{display:none}header .menu.on,header .menu.open{display:flex}header .burger{display:flex}header .tel{display:none}}@media(max-width:600px){header .wrap{padding-left:16px;padding-right:16px}header .brand{font-size:17px;gap:7px;white-space:nowrap}header .leaf{width:22px;height:22px;flex-shrink:0}header .right{gap:12px}header .book{font-size:12px;padding:10px 12px}}</style><style>@media(max-width:900px){body:not(.menu-open) nav.gnav{display:none}}</style><style>@media(max-width:1100px){nav.gnav{position:fixed;inset:0;background:var(--base);display:none;align-items:center;justify-content:center;z-index:105;transform:none}.menu-open nav.gnav{display:flex}nav.gnav ul{flex-direction:column;text-align:center;gap:20px;font-size:17px}.menu-btn{display:block}.hd-cta{display:none}}</style><meta name="robots" content="noindex">
 <link rel="stylesheet" href="assets/legacy-business-refresh.css"><script src="assets/standalone-sites.js?v=1" defer></script><link rel="stylesheet" href="assets/standalone-sites.css?v=1">
-</head>
+<style id="sample-review-style">
+:root{scroll-padding-top:105px} :focus-visible{outline:3px solid #b66a27;outline-offset:5px}button,input,select,textarea{font:inherit}button{cursor:pointer}select,input,textarea{max-width:100%} .review-disclosure{position:relative;z-index:1;padding:8px 20px;background:#f4f0e7;color:#453e32;font:12px/1.6 system-ui;text-align:center}.review-disclosure a{text-decoration:underline}.review-disclosure+header{top:37px}.review-form{max-width:680px;margin:30px auto 0;text-align:left;display:grid;gap:20px}.review-form label{display:grid;gap:8px;font-size:14px;font-weight:600}.review-form select,.review-form input{width:100%;padding:13px 14px;background:#fff;color:#242a2c;border:1px solid #b8b5ae;border-radius:3px;min-height:48px}.review-form button{border:0;min-height:48px}.review-form output,.review-confirmation{display:block;padding:18px;border-left:3px solid currentColor;font-size:14px;line-height:1.8;text-align:left}.review-form output:empty{display:none}.review-form small{font-size:12px;line-height:1.7}.review-note{font-size:13px;line-height:1.8;margin:18px 0;color:inherit}.review-questions{display:grid;gap:0;margin-top:30px;border-top:1px solid currentColor}.review-questions details{padding:18px 0;border-bottom:1px solid #b6aea355}.review-questions summary{font-weight:600;cursor:pointer}.review-questions p{margin-top:12px;max-width:65ch}.maker-contact{padding:42px max(24px,calc((100% - 1100px)/2));background:#f3f1ec;color:#333c3c;font:14px/1.9 system-ui;text-align:left;border-top:1px solid #d3d0c8}.maker-contact p{max-width:65ch;margin:9px 0 17px}.maker-contact strong{font-size:18px}.maker-contact .maker-links{display:flex;gap:12px;flex-wrap:wrap}.maker-contact a{display:inline-flex;align-items:center;min-height:44px;padding:8px 15px;border:1px solid #8b9390;color:#253e38;text-decoration:none}.maker-contact small{display:block;margin-top:14px;font-size:12px}.burger{border:0;background:transparent;position:relative;z-index:60;min-width:44px;min-height:44px;justify-content:center;align-items:center}body>.minato-site-return{position:static;margin:20px 24px}.review-summary{white-space:pre-line}.review-form fieldset{border:0;padding:0}.review-form legend{font-weight:700;margin-bottom:8px} .review-form .review-choice{display:flex;gap:10px;align-items:center}.review-form .review-choice input{width:20px;min-height:24px}
+@media(max-width:700px){.review-disclosure+header{top:0}.review-disclosure{padding-top:90px}.maker-contact{padding-bottom:115px}.review-disclosure+header .brand,.review-disclosure+header .menu a{color:var(--ink,#243347)}.review-disclosure+header{background:#fff}.review-disclosure+header .burger span{background:#263b42}.review-form{gap:16px}.review-disclosure+header .book{color:#5b4433;border-color:currentColor}section[id]{scroll-margin-top:90px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto!important}*,*::before,*::after{animation:none!important;transition:none!important}.reveal,.rv{opacity:1!important;transform:none!important}}
+</style>
+<style>.form-thanks button{margin-top:22px}.form-thanks:focus{outline:2px solid #a85c2d}.hero-note{max-width:36em}@media(max-width:600px){.review-disclosure{padding-top:96px}.menu-open .menu-btn{z-index:110;position:relative}.hero-in{padding-top:35px!important}}</style><style>body.legacy-recruit .review-disclosure{padding:8px 20px!important}body.legacy-recruit .review-disclosure+header{top:0}</style><style>body.legacy-recruit .hero h1 .phrase{white-space:nowrap}@media(max-width:760px){body.legacy-recruit .hero h1{font-size:clamp(26px,7.2vw,30px);letter-spacing:0}}</style></head>
 <body class="legacy-recruit">
+<div class="review-disclosure">架空の制作サンプルです。予約・応募は行われません。 <a href="#site-production">Web制作のご相談はこちら</a></div>
 
 <header id="hd">
 <div class="hd-in">
@@ -354,11 +360,11 @@ footer{background:#332b23;color:#d9d0c5;padding:56px 0 110px;font-size:13px}
 <div class="hero">
 <div class="hero-in">
 <span class="hero-tag">さいたま市|介護スタッフ採用|未経験・無資格OK</span>
-<h1>やさしさを、<br/>すり減らさない<em>職場</em>へ。</h1>
-<p class="hero-lead">「介護の仕事は好き。でも、続けられるか不安」。有休消化率92%、月平均残業4.2時間。休みを取りやすく、先輩に相談できる職場で、介護の仕事を続けませんか。</p>
+<h1>やさしさを、<br/>すり減らさない<span class="phrase"><em>職場</em>へ。</span></h1>
+<p class="hero-lead">食事や入浴の介助、日々の記録、次のシフトへの申し送り。仕事内容と働く条件を確かめてから、応募や見学を選べます。</p>
 <div class="hero-cta">
 <a class="btn-main" href="#apply">応募してみる<span class="ar">→</span></a>
-<a class="btn-sub" href="#apply">まずは見学だけ(30分・手ぶらでOK)</a>
+<a class="btn-sub" href="#apply" data-entry-type="tour">まずは見学だけ(30分・手ぶらでOK)</a>
 </div>
 <p class="hero-note">※応募=面接ではありません。「話を聞いてみたい」だけでも大歓迎です。</p>
 </div>
@@ -370,12 +376,12 @@ footer{background:#332b23;color:#d9d0c5;padding:56px 0 110px;font-size:13px}
 <div class="sec-head rv">
 <span class="sec-en">DATA</span>
 <h2 class="sec-ttl">数字で見る、ひだまりの働きやすさ</h2>
-<p class="sec-sub">「働きやすい」を言葉だけで終わらせないために、実態を数字で公開しています。</p>
+<p class="sec-sub">休日・残業・研修など、応募前に知りたい項目をまとめています。以下はすべて架空の設定で、実測値ではありません。</p>
 </div>
 <div class="num-grid">
 <div class="num-card rv"><h3>有休消化率</h3><div class="num-val">92<small>%</small></div><p class="num-note">希望日に取れるよう<br/>シフトを先に調整します</p></div>
 <div class="num-card rv rv-d1"><h3>月平均残業時間</h3><div class="num-val">4.2<small>時間</small></div><p class="num-note">記録業務のICT化で<br/>「持ち帰り仕事」ゼロ</p></div>
-<div class="num-card rv rv-d2"><h3>入社3年定着率</h3><div class="num-val">88<small>%</small></div><p class="num-note">業界平均を大きく上回る<br/>「辞めない職場」です</p></div>
+<div class="num-card rv rv-d2"><h3>入社3年定着率</h3><div class="num-val">88<small>%</small></div><p class="num-note">定着状況を伝える<br/>項目の表示例です</p></div>
 <div class="num-card rv"><h3>年間休日</h3><div class="num-val">120<small>日</small></div><p class="num-note">希望休は月4日まで申請可<br/>連休の取得も歓迎</p></div>
 <div class="num-card rv rv-d1"><h3>産休・育休の復帰率</h3><div class="num-val">100<small>%</small></div><p class="num-note">時短勤務・日勤のみなど<br/>復帰後の働き方を選べます</p></div>
 <div class="num-card rv rv-d2"><h3>資格取得支援の利用</h3><div class="num-val">47<small>名</small></div><p class="num-note">受講費は全額会社負担<br/>勤務時間内の受講もOK</p></div>
@@ -506,7 +512,7 @@ footer{background:#332b23;color:#d9d0c5;padding:56px 0 110px;font-size:13px}
 <div class="sec-head rv">
 <span class="sec-en">CAREER PATH</span>
 <h2 class="sec-ttl">キャリアパスと給与モデル</h2>
-<p class="sec-sub">「介護は昇給しない」を終わりにする、評価と連動した4ステップ。</p>
+<p class="sec-sub">担当する仕事と、資格・役割による給与モデルの表示例です。</p>
 </div>
 <div class="career-steps">
 <div class="cs rv"><span class="cs-step">STEP 1</span><h4>ケアスタッフ</h4><p class="cs-y">入社〜1年目</p><p>先輩の専属サポートつきで基本介助を習得。初任者研修を会社負担で取得します。</p><p class="cs-sal">月給 23.8万円〜</p></div>
@@ -573,7 +579,7 @@ footer{background:#332b23;color:#d9d0c5;padding:56px 0 110px;font-size:13px}
 </details>
 <details>
 <summary>人間関係が不安です。職場の雰囲気は?</summary>
-<p class="faq-a">介護職の退職理由1位が人間関係であることを、私たちは重く受け止めています。「陰で言わず、その場で相談」のルール、月1回の1on1面談、匿名の相談窓口を整えています。何より、見学で実際の空気を確かめてください。</p>
+<p class="faq-a">仕事で困ったときに相談できるよう、「陰で言わず、その場で相談」のルール、月1回の1on1面談、匿名の相談窓口を整えています。何より、見学で実際の空気を確かめてください。</p>
 </details>
 <details>
 <summary>給与は本当に上がりますか?</summary>
@@ -596,10 +602,10 @@ footer{background:#332b23;color:#d9d0c5;padding:56px 0 110px;font-size:13px}
 <div class="sec-head rv">
 <span class="sec-en" style="color:#ffc48d">ENTRY</span>
 <h2 class="sec-ttl">応募・見学のご予約</h2>
-<p class="sec-sub">入力は30秒。履歴書は不要です。「見学だけ」も、もちろん歓迎です。</p>
+<p class="sec-sub">応募・見学・仕事内容の相談から選べます。架空の情報を入力して、確認画面までお試しください。</p>
 </div>
 <div class="form-box rv">
-<form id="entryForm" novalidate="">
+<form id="entryForm">
 <div class="form-row">
 <label>ご希望の内容<span class="req-b">必須</span></label>
 <div class="form-radio">
@@ -610,11 +616,11 @@ footer{background:#332b23;color:#d9d0c5;padding:56px 0 110px;font-size:13px}
 </div>
 <div class="form-row">
 <label for="f-name">お名前<span class="req-b">必須</span></label>
-<input autocomplete="name" id="f-name" name="name" placeholder="例)埼玉 はなこ" type="text"/>
+<input autocomplete="off" required id="f-name" name="name" placeholder="例)埼玉 はなこ" type="text"/>
 </div>
 <div class="form-row">
 <label for="f-tel">お電話番号<span class="req-b">必須</span></label>
-<input autocomplete="tel" id="f-tel" name="tel" placeholder="例)090-0000-0000" type="tel"/>
+<input autocomplete="off" required id="f-tel" name="tel" placeholder="例)090-0000-0000" type="tel"/>
 </div>
 <div class="form-row">
 <label for="f-mail">メールアドレス<span class="opt-b">任意</span></label>
@@ -636,13 +642,13 @@ footer{background:#332b23;color:#d9d0c5;padding:56px 0 110px;font-size:13px}
 </div>
 <div class="form-submit">
 <button class="btn-main" type="submit">入力内容を確認する<span class="ar">→</span></button>
-<p class="form-note">お預かりした個人情報は採用選考の目的以外には使用しません。<br/>※このフォームはデモのため、実際には送信されません。</p>
+<p class="form-note">架空のお名前・電話番号でお試しください。入力内容は保存・送信されません。</p>
 </div>
 </form>
-<div class="form-thanks" id="formThanks">
+<div class="form-thanks" id="formThanks" role="status" tabindex="-1">
 <div class="tk-ic"><svg fill="none" height="1em" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" style="vertical-align:-0.12em" viewbox="0 0 24 24" width="1em"><path d="M6 21C6 12 12 6 21 5c-1 9-7 15-15 16z"></path><path d="M6 21C8 15 12 10 17 7"></path></svg></div>
 <h3>入力内容を確認しました</h3>
-<p>制作サンプルのため、応募内容は送信されません。<br/>(本ページはデモのため、実際の送信は行われていません)</p>
+<p id="entry-summary" class="review-summary"></p><p>確認表示です。応募・見学予約は行っていません。</p><button class="btn-main" type="button" id="entry-edit">内容を修正する</button>
 </div>
 </div>
 <p style="text-align:center;margin-top:28px;font-size:14px;opacity:.95">お電話でのご応募・ご質問も歓迎です<br/><span style="font-family:var(--font-serif);font-size:26px;font-weight:700;letter-spacing:.06em">048-000-0000</span><br/><span style="font-size:12px;opacity:.85">(採用担当直通/平日9:00〜18:00)※ダミー番号です</span></p>
@@ -650,8 +656,8 @@ footer{background:#332b23;color:#d9d0c5;padding:56px 0 110px;font-size:13px}
 </section>
 </main>
 <div class="fix-cta">
-<a class="fc-sub" href="#apply">見学だけ予約</a>
-<a class="fc-main" href="#apply">応募する(30秒)</a>
+<a class="fc-sub" href="#apply" data-entry-type="tour">見学を相談</a>
+<a class="fc-main" href="#apply">応募内容を確認</a>
 </div>
 <script>
 // ===== Mobile menu =====
@@ -668,6 +674,8 @@ const io=new IntersectionObserver(entries=>{
 },{threshold:.12,rootMargin:'0px 0px -40px 0px'});
 document.querySelectorAll('.rv').forEach(el=>io.observe(el));
 
+document.querySelectorAll('[data-entry-type]').forEach(a=>a.addEventListener('click',()=>{document.querySelector('input[name="type"][value="'+a.dataset.entryType+'"]').checked=true;document.getElementById('entryForm').style.display='';document.getElementById('formThanks').classList.remove('show');}));
+document.getElementById('entry-edit').addEventListener('click',()=>{document.getElementById('entryForm').style.display='';document.getElementById('formThanks').classList.remove('show');document.getElementById('f-name').focus();});
 // ===== Dummy form =====
 const form=document.getElementById('entryForm');
 form.addEventListener('submit',e=>{
@@ -676,15 +684,22 @@ form.addEventListener('submit',e=>{
   const tel=document.getElementById('f-tel');
   if(!name.value.trim()){name.focus();name.style.borderColor='#d64545';return;}
   if(!tel.value.trim()){tel.focus();tel.style.borderColor='#d64545';return;}
+  if(!form.reportValidity())return;
+  const choice={apply:'応募',tour:'施設見学',talk:'仕事内容の相談'};
+  document.getElementById('entry-summary').textContent='ご希望：'+choice[form.elements.type.value]+'\nお名前：'+name.value+'\n電話番号：'+tel.value+'\nメールアドレス：'+(form.elements.email.value||'未入力')+'\n介護のご経験：'+(form.elements.exp.value||'未選択')+'\nご質問・ご希望：'+(form.elements.msg.value||'未入力');
   form.style.display='none';
   document.getElementById('formThanks').classList.add('show');
+  document.getElementById('formThanks').focus();
 });
 </script>
 <!-- demo-fict:start 架空サンプルの注記(2026-09-04 上部の帯からフッターへ移設) -->
 <style>#demo-fict{margin:0;padding:20px 20px 28px;background:#fff;color:rgba(13,13,13,.6);border-top:1px solid rgba(13,13,13,.14);font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue","Hiragino Kaku Gothic ProN","Noto Sans JP","Yu Gothic",Meiryo,sans-serif;font-size:13px;line-height:1.7;text-align:center}@media print{#demo-fict{display:none}}</style>
 <div id="demo-fict">これは制作サンプル（架空の介護事業者の採用LP）です。社名・人物・数値はすべて架空です。</div>
 <!-- demo-fict:end -->
-<script>document.addEventListener('click',function(e){const a=e.target.closest('a');if(!a)return;const h=a.getAttribute('href')||'';if(h.startsWith('#')){e.preventDefault();if(h.length>1){const t=document.getElementById(decodeURIComponent(h.slice(1)));if(t)t.scrollIntoView({behavior:'smooth',block:'start'});}return;}if(/^(tel:|mailto:)/i.test(h)){e.preventDefault();alert('制作サンプルです。電話・メールの送信は行いません。');return;}if(a.hasAttribute('download'))return;if(h){e.preventDefault();window.top.location.href=a.href;}},true);document.addEventListener('submit',function(e){e.preventDefault();},true);</script>
+<script>document.addEventListener('click',function(e){const a=e.target.closest('a');if(!a||a.hasAttribute('data-production-contact'))return;const h=a.getAttribute('href')||'';if(h.startsWith('#')){e.preventDefault();if(h.length>1){const t=document.getElementById(decodeURIComponent(h.slice(1)));if(t)t.scrollIntoView({behavior:'smooth',block:'start'});}return;}if(/^(tel:|mailto:)/i.test(h)){e.preventDefault();alert('制作サンプルです。電話・メールの送信は行いません。');return;}if(a.hasAttribute('download'))return;if(h){e.preventDefault();window.top.location.href=a.href;}},true);document.addEventListener('submit',function(e){e.preventDefault();},true);</script>
 <a class="minato-site-return" href="./cw-web.html">← 制作例一覧に戻る</a>
+<aside class="maker-contact" id="site-production"><small>このサンプルの制作について</small><strong>自社の採用サイトをご検討の方へ</strong><p>掲載しているのは架空の事業者の制作例です。実際のWeb制作のご相談は、ミナト AI・IT ラボへ。必要なページや予約・問い合わせの流れからご相談いただけます。</p><div class="maker-links"><a data-production-contact href="mailto:minato.ai.lab@gmail.com?subject=Web%E5%88%B6%E4%BD%9C%E3%81%AE%E7%9B%B8%E8%AB%87%EF%BC%9Alp-recruit%20%E3%81%AE%E3%82%B5%E3%83%B3%E3%83%97%E3%83%AB%E3%82%92%E8%A6%8B%E3%81%A6">メールで制作を相談する ↗</a><a data-production-contact href="https://page.line.me/091usyfe" target="_blank" rel="noopener noreferrer">LINEで制作を相談する ↗</a><a href="./cw-web.html">制作例一覧へ</a></div><small>上の操作フォームは体験用です。この窓口ではWeb制作のご相談を承ります。</small></aside><script>
+(()=>{document.querySelectorAll('[data-preview-form]').forEach(form=>{const output=form.querySelector('output');form.addEventListener('change',()=>output.textContent='');form.addEventListener('submit',event=>{event.preventDefault();if(!form.reportValidity())return;const data=[...form.querySelectorAll('select[name]')].map(el=>el.name+'：'+el.selectedOptions[0].textContent);output.textContent=data.join(' ／ ')+'。確認表示です。送信・予約・応募は行っていません。選択を変えて何度でも試せます。';});});document.querySelectorAll('[data-preview-topic]').forEach(a=>a.addEventListener('click',()=>{const select=document.querySelector('[data-topic-select]');if(select){select.value=a.dataset.previewTopic;select.dispatchEvent(new Event('change',{bubbles:true}));}}));const menu=document.getElementById('mn')||document.getElementById('mnav')||document.getElementById('gnav');const toggle=document.getElementById('bg')||document.getElementById('menuBtn');if(menu&&toggle){toggle.setAttribute('aria-controls',menu.id);const sync=()=>toggle.setAttribute('aria-expanded',String(menu.classList.contains('open')||document.body.classList.contains('menu-open')));new MutationObserver(sync).observe(menu,{attributes:true,attributeFilter:['class']});new MutationObserver(sync).observe(document.body,{attributes:true,attributeFilter:['class']});sync();document.addEventListener('keydown',event=>{if(event.key==='Escape'&&toggle.getAttribute('aria-expanded')==='true'){toggle.click();toggle.focus();}});}})();
+</script>
 </body>
 </html>

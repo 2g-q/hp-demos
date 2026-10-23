@@ -1,2 +1,12 @@
 const menu=document.querySelector('.menu'),nav=document.querySelector('nav');menu.addEventListener('click',()=>{const open=menu.getAttribute('aria-expanded')!=='true';menu.setAttribute('aria-expanded',String(open));nav.classList.toggle('open',open)});nav.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{nav.classList.remove('open');menu.setAttribute('aria-expanded','false')}));document.addEventListener('keydown',e=>{if(e.key==='Escape'&&nav.classList.contains('open')){nav.classList.remove('open');menu.setAttribute('aria-expanded','false');menu.focus()}});const dialog=document.querySelector('dialog');document.querySelector('#open-visit').addEventListener('click',()=>dialog.showModal());document.querySelector('.close').addEventListener('click',()=>dialog.close());document.querySelector('form').addEventListener('submit',e=>{e.preventDefault();const role=document.querySelector('#role').value,time=document.querySelector('#timing').value;document.querySelector('#visit-result').textContent=`選択内容：${role} / ${time}。実際のサイトでは、この後に連絡先の入力へ進みます。このデモでは予約・外部送信は行われません。`});
-document.querySelectorAll('.jobs-list details').forEach((item,index)=>item.querySelector('a').addEventListener('click',()=>{document.querySelector('#role').value=index===0?'木工製作':'設計・製作図'}));
+document.querySelectorAll('.jobs-list details').forEach((item,index)=>item.querySelector('a').addEventListener('click',()=>{document.querySelector('#role').value=index===0?'木工製作':'設計・製作図';document.querySelector('#visit-result').textContent='選択を変更しました。「見学メモを確認する」で内容を確認してください。外部送信は行いません。'}));
+
+const rolePreview=document.createElement('p');rolePreview.className='selection-note';rolePreview.setAttribute('role','status');rolePreview.textContent='見学したい仕事は、確認画面で選べます。';document.querySelector('#entry .entry-row').after(rolePreview);
+document.querySelectorAll('.jobs-list details').forEach(item=>item.querySelector('a').addEventListener('click',()=>{rolePreview.textContent='選んだ仕事：'+document.querySelector('#role').value+'。「見学の流れを体験する」から、確かめたいことを選べます。';}));
+document.querySelector('form').addEventListener('submit',()=>{
+  const topics=[...document.querySelectorAll('[name="visit-topic"]:checked')].map(input=>input.value);
+  const result=document.querySelector('#visit-result');
+  if(topics.length)result.textContent+=' 見学で確かめたいこと：'+topics.join('、')+'。';
+  if(document.querySelector('#role').value==='設計・製作図')result.textContent+=' 設計・製作図の給与・勤務条件は未設定のため、確認事項に含めています。';
+});
+document.querySelector('form').addEventListener('input',()=>document.querySelector('#visit-result').textContent='選択を変更しました。「見学メモを確認する」で内容を確認してください。外部送信は行いません。');
