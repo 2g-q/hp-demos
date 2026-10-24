@@ -27,7 +27,7 @@
   const cards = works.map(([href, image, name, title, type, purpose, tags, keywords, description, feature1, feature2]) => {
     const article = document.createElement('article');
     article.className = 'work';
-    article.innerHTML = `<a class="work-image" href="${href}" target="_blank" rel="noopener"><img src="${image}" alt="${name} ${title}の画面" width="1440" height="1000" loading="lazy"><span class="open-tag">サイトを開く ↗</span></a><div class="work-meta"><span>${type}</span><span>${purpose}</span></div><h3><a href="${href}" target="_blank" rel="noopener"><span class="work-name">${name}</span><span class="work-title">${title}</span><b aria-hidden="true">↗</b></a></h3><p>${description}</p><div class="work-features"><span>${feature1}</span><span>${feature2}</span></div>`;
+    article.innerHTML = `<a class="work-image" href="${href}" target="_blank" rel="noopener"><img src="${image}?v=visual-r3-20261024" alt="${name} ${title}の画面" width="1440" height="1000" loading="lazy"><span class="open-tag">サイトを開く ↗</span></a><div class="work-meta"><span>${type}</span><span>${purpose}</span></div><h3><a href="${href}" target="_blank" rel="noopener"><span class="work-name">${name}</span><span class="work-title">${title}</span><b aria-hidden="true">↗</b></a></h3><p>${description}</p><div class="work-features"><span>${feature1}</span><span>${feature2}</span></div>`;
     grid.append(article);
     return { element: article, categories: tags.split(' '), searchText: normalize([name, title, type, purpose, keywords, description, feature1, feature2].join(' ')) };
   });

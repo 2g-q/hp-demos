@@ -57,8 +57,9 @@
       pressed('button[data-room]', key, 'room');
       ['title', 'copy', 'feature', 'condition', 'number', 'kicker'].forEach(field => text(`room-${field}`, room[field]));
       text('room-people', `${room.max}名まで`);
-      $('room-photo').src = room.image;
-      $('room-photo').alt = room.alt;
+      const photo = $('room-photo');
+      photo.src = photo.dataset[`${key}Src`] || room.image;
+      photo.alt = photo.dataset[`${key}Alt`] || room.alt;
       $('room-figure').dataset.room = key;
       $('room-inquiry').value = key;
       options('room-guests', Array.from({ length: room.max }, (_, i) => `${i + 1}名`));

@@ -1,6 +1,330 @@
 @import url('https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@0,500;0,600;1,500&family=Noto+Serif+JP:wght@400;500&display=swap');
-:root{--cream:#f2ebd7;--red:#643827;--olive:#535835;--line:#a89d7e;--roman:'Bodoni Moda',Georgia,serif;--serif:'Noto Serif JP',serif}*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:25px}body{margin:0;background:var(--cream);color:var(--red);font:14px/1.9 -apple-system,BlinkMacSystemFont,'Hiragino Kaku Gothic ProN',sans-serif}a{color:inherit;text-decoration:none}button,input,select{font:inherit;color:inherit}button{cursor:pointer}img{display:block;width:100%;object-fit:cover}h1,h2,h3,h4,p,figure{margin:0}h1,h2,h3{font-weight:400}a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid #967226;outline-offset:5px}.demo{background:#dfd5b9;display:flex;justify-content:space-between;align-items:center;height:30px;padding:0 3%;font-size:10px}header{display:flex;justify-content:space-between;align-items:center;padding:26px 4%;border-bottom:1px solid var(--line)}.brand-small{font-family:var(--roman);font-size:27px;font-weight:600;letter-spacing:-.06em}header nav{display:flex;gap:35px;font-size:11px}.header-book{border-bottom:1px solid var(--red);font-size:11px;padding:5px 0;min-width:100px;display:flex;justify-content:space-between}.hero{padding:20px 5% 55px}.hero-top{display:flex;justify-content:space-between;font-size:9px;letter-spacing:.09em}.hero h1{display:flex;align-items:flex-end;justify-content:space-between;gap:20px;margin:20px 0 24px}.hero h1>span{font-family:var(--roman);font-weight:500;font-size:clamp(110px,17vw,255px);line-height:.87;letter-spacing:-.07em}.hero h1 small{font:12px var(--serif);letter-spacing:.15em;padding-bottom:15px;white-space:nowrap}.hero-composition{display:grid;grid-template-columns:21% 1fr 5%;gap:25px;position:relative}.hero-aside{padding-top:16px;display:flex;flex-direction:column;align-items:flex-start}.sun{font-size:90px;line-height:1;margin:0 0 30px -8px;color:var(--olive);font-family:Georgia,serif}.hero-aside p{font-family:var(--serif);font-size:19px;line-height:2;letter-spacing:.07em}.hero-aside a{font-size:10px;margin-top:auto;padding-bottom:28px;display:flex;gap:30px}.hero-food img{height:430px;object-position:50% 58%;border-radius:180px 180px 0 0}.hero-food figcaption{font-size:8px;letter-spacing:.1em;margin-top:10px}.hero-sideword{writing-mode:vertical-rl;font-family:var(--roman);font-size:24px;font-style:italic;align-self:center}.hero-footer{display:grid;grid-template-columns:1fr auto 1fr;gap:30px;align-items:center;margin-top:35px}.hero-footer>p{font-size:12px;line-height:2}.hero-footer>span{text-align:right;font-size:8px;letter-spacing:.08em;line-height:2}.circle-link{width:108px;height:108px;border:1px solid var(--red);border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:9px;letter-spacing:.07em;transform:rotate(-12deg);transition:background .2s}.circle-link span{font-size:26px;line-height:1.3}.circle-link:hover{background:#d7cba6}.about{padding:100px 12%;background:var(--olive);color:var(--cream);display:grid;grid-template-columns:1fr 1fr;gap:16%}.eyebrow{font-size:9px;letter-spacing:.12em;margin-bottom:30px}.about h2{font-family:var(--serif);font-size:32px;line-height:1.9;letter-spacing:.05em}.about-copy{font-size:13px;line-height:2.2}.about-copy p+p{margin-top:25px}.menu{padding:90px 8% 110px}.menu-header{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:60px}.menu-header h2{font-family:var(--roman);font-size:88px;line-height:.95;letter-spacing:-.04em}.menu-header h2 i{margin-left:75px}.menu-header>div{width:42%}.menu-header .eyebrow{margin-bottom:20px}.menu-header p{font-size:12px}.menu-tabs{display:flex;gap:25px;margin-top:30px}.menu-tabs button{background:transparent;border:0;border-bottom:1px solid transparent;padding:10px 0;font-size:11px;letter-spacing:.08em}.menu-tabs [aria-selected=true]{border-color:var(--red)}.menu-body{display:grid;grid-template-columns:1fr 1fr;gap:10%;align-items:center}.menu-body figure img{aspect-ratio:1;object-position:50% 50%}.menu-body figcaption{font-family:var(--serif);font-size:11px;margin-top:15px}.menu-time{font-size:10px;letter-spacing:.1em}.menu-body h3{font-family:var(--serif);font-size:25px;margin:20px 0 30px}.menu-body article{display:flex;justify-content:space-between;gap:20px;border-top:1px solid var(--line);padding:23px 0}.menu-body h4{font-size:14px;font-weight:400}.menu-body article p{font-size:10px;opacity:.8;margin-top:7px}.menu-body article>span{font-family:var(--roman);font-size:21px;white-space:nowrap}.menu-note{font-size:9px;line-height:1.8;margin-top:15px;max-width:380px;opacity:.75}.wine-story{position:relative;display:grid;grid-template-columns:1fr 1fr;background:#d9c5a8;align-items:center}.wine-title{padding:80px 18%}.wine-title h2{font-family:var(--serif);font-size:29px;line-height:1.9;margin-bottom:30px}.wine-title>p:not(.eyebrow){font-size:12px;line-height:2.3}.wine-story>img{height:680px;object-position:50% 55%}.underlink{border-bottom:1px solid var(--red);padding:13px 0;display:flex;justify-content:space-between;font-size:11px;margin-top:30px}.wine-script{position:absolute;bottom:30px;left:34%;font-family:var(--roman);font-size:70px;font-style:italic;color:var(--cream);transform:rotate(-10deg);text-shadow:0 1px 15px #30231450;pointer-events:none}.visit{padding:100px 8%}.visit h2{font-family:var(--serif);font-size:30px}.seats{display:grid;grid-template-columns:1fr 1fr;gap:10%;margin-top:50px}.seats article{border-top:1px solid var(--line);padding-top:25px}.seats article>span{font-family:var(--roman);font-size:28px}.seats h3{font-family:var(--serif);font-size:18px;margin:22px 0 15px}.seats p{font-size:12px;max-width:390px}.visit-detail{margin-top:60px;border-top:1px solid var(--line);padding-top:25px;display:flex;align-items:center;gap:50px}.visit-detail div>span{font-size:8px;letter-spacing:.08em}.visit-detail div p{font-size:14px;margin-top:6px;white-space:nowrap}.visit-detail>p{font-size:9px;max-width:210px;margin-left:auto}.reservation{background:var(--red);color:var(--cream);padding:85px 8%;display:grid;grid-template-columns:1fr 1fr;gap:12%}.reservation h2{font-family:var(--serif);font-size:35px;line-height:1.9}.reservation h2 i{font-style:normal;display:block}.reservation>div>p:not(.eyebrow){font-size:12px;margin-top:25px}.reservation label{display:block;font-size:10px}.reservation input,.reservation select{width:100%;border:0;border-bottom:1px solid #f2ebd770;background:none;border-radius:0;color:var(--cream);padding:12px 0;font-size:14px;color-scheme:dark}.reservation select option{background:var(--red)}.form-row{display:grid;grid-template-columns:1fr 1fr;gap:30px;margin-top:25px}.reservation button{display:flex;justify-content:space-between;background:var(--cream);color:var(--red);border:0;padding:18px 24px;font-size:12px;width:100%;margin-top:30px}.reservation form>p{font-size:9px;margin-top:14px;opacity:.8}output{display:block;font-size:12px;margin-top:25px;padding:18px;border:1px solid #ffffff70}output[hidden]{display:none}footer{padding:25px 5% 30px}.footer-word{font-family:var(--roman);font-size:21vw;letter-spacing:-.065em;line-height:1.1;display:block;text-align:center}footer>div{display:flex;justify-content:space-between;font-size:9px;border-top:1px solid var(--line);padding-top:25px}
-@media(max-width:760px){.demo{padding:0 20px;font-size:9px}header{padding:20px}.brand-small{font-size:24px}header nav{display:none}.header-book{font-size:10px}.hero{padding:20px 22px 40px}.hero-top{font-size:7px}.hero-top span:last-child{max-width:95px;text-align:right}.hero h1{display:block;margin:20px 0}.hero h1>span{font-size:24vw;line-height:1.1}.hero h1 small{display:block;font-size:11px;padding:7px 0 0;letter-spacing:.12em}.hero-composition{grid-template-columns:1fr 32px;gap:10px}.hero-aside{position:absolute;bottom:26px;left:20px;color:var(--cream);z-index:1;padding:0;pointer-events:none;text-shadow:0 2px 15px #000}.sun{display:none}.hero-aside p{font-size:20px;line-height:1.8}.hero-aside a{display:none}.hero-food img{height:390px;border-radius:150px 150px 0 0;object-position:50% 50%;filter:brightness(.88)}.hero-food figcaption{font-size:7px}.hero-sideword{font-size:20px}.hero-footer{grid-template-columns:1fr auto;gap:20px;margin-top:25px}.hero-footer>p{font-size:11px}.hero-footer>span{display:none}.circle-link{width:85px;height:85px;font-size:8px}.about{padding:65px 24px;grid-template-columns:1fr;gap:30px}.about h2{font-size:28px}.eyebrow{font-size:8px;margin-bottom:25px}.about-copy{font-size:12px}.menu{padding:65px 24px}.menu-header{display:block;margin-bottom:35px}.menu-header h2{font-size:67px}.menu-header h2 i{margin-left:60px}.menu-header>div{width:100%;margin-top:35px}.menu-header p{font-size:11px}.menu-tabs{margin-top:15px}.menu-body{grid-template-columns:1fr;gap:30px}.menu-body figure img{aspect-ratio:1.1}.menu-body h3{font-size:24px;margin-top:15px}.menu-body article{padding:20px 0}.menu-body h4{font-size:13px}.wine-story{grid-template-columns:1fr}.wine-title{padding:60px 24px}.wine-title h2{font-size:26px}.wine-story>img{height:430px;object-position:50% 45%}.wine-script{font-size:49px;left:9%;bottom:30px}.visit{padding:65px 24px}.visit h2{font-size:24px}.seats{gap:25px;margin-top:30px}.seats article>span{font-size:21px}.seats h3{font-size:15px}.seats p{font-size:11px}.visit-detail{gap:22px;flex-wrap:wrap;margin-top:35px}.visit-detail div p{font-size:12px}.visit-detail>p{max-width:none;margin:0;font-size:9px}.reservation{padding:65px 24px;grid-template-columns:1fr;gap:35px}.reservation h2{font-size:30px}.reservation h2 i{display:inline}.reservation>div>p:not(.eyebrow){font-size:11px}.reservation form>p{font-size:9px}footer{padding:30px 24px}.footer-word{font-size:22vw}footer>div{font-size:8px;gap:20px}footer>div>span:last-child{display:none}}
+:root{--cream:#f2ebd7;--red:#643827;--olive:#535835;--line:#a89d7e;--roman:'Bodoni Moda',Georgia,serif;--serif:'Noto Serif JP',serif}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:25px}
+body{margin:0;background:var(--cream);color:var(--red);font:14px/1.9 -apple-system,BlinkMacSystemFont,'Hiragino Kaku Gothic ProN',sans-serif}
+a{color:inherit;text-decoration:none}
+button,input,select{font:inherit;color:inherit}
+button{cursor:pointer}
+img{display:block;width:100%;object-fit:cover}
+h1,h2,h3,h4,p,figure{margin:0}
+h1,h2,h3{font-weight:400}
+a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid #967226;outline-offset:5px}
+.demo{background:#dfd5b9;display:flex;justify-content:space-between;align-items:center;height:30px;padding:0 3%;font-size:10px}
+header{display:flex;justify-content:space-between;align-items:center;padding:26px 4%;border-bottom:1px solid var(--line)}
+.brand-small{font-family:var(--roman);font-size:27px;font-weight:600;letter-spacing:-.06em}
+header nav{display:flex;gap:35px;font-size:11px}
+.header-book{border-bottom:1px solid var(--red);font-size:11px;padding:5px 0;min-width:100px;display:flex;justify-content:space-between}
+.sun{font-size:90px;line-height:1;margin:0 0 30px -8px;color:var(--olive);font-family:Georgia,serif}
+.circle-link{width:108px;height:108px;border:1px solid var(--red);border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:9px;letter-spacing:.07em;transform:rotate(-12deg);transition:background .2s}
+.circle-link span{font-size:26px;line-height:1.3}
+.circle-link:hover{background:#d7cba6}
+.about{padding:100px 12%;background:var(--olive);color:var(--cream);display:grid;grid-template-columns:1fr 1fr;gap:16%}
+.eyebrow{font-size:9px;letter-spacing:.12em;margin-bottom:30px}
+.about h2{font-family:var(--serif);font-size:32px;line-height:1.9;letter-spacing:.05em}
+.about-copy{font-size:13px;line-height:2.2}
+.about-copy p+p{margin-top:25px}
+.menu{padding:90px 8% 110px}
+.menu-header{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:60px}
+.menu-header h2{font-family:var(--roman);font-size:88px;line-height:.95;letter-spacing:-.04em}
+.menu-header h2 i{margin-left:75px}
+.menu-header>div{width:42%}
+.menu-header .eyebrow{margin-bottom:20px}
+.menu-header p{font-size:12px}
+.menu-tabs{display:flex;gap:25px;margin-top:30px}
+.menu-tabs button{background:transparent;border:0;border-bottom:1px solid transparent;padding:10px 0;font-size:11px;letter-spacing:.08em}
+.menu-tabs [aria-selected=true]{border-color:var(--red)}
+.menu-body{display:grid;grid-template-columns:1fr 1fr;gap:10%;align-items:center}
+.menu-body figure img{aspect-ratio:1;object-position:50% 50%}
+.menu-body figcaption{font-family:var(--serif);font-size:11px;margin-top:15px}
+.menu-time{font-size:10px;letter-spacing:.1em}
+.menu-body h3{font-family:var(--serif);font-size:25px;margin:20px 0 30px}
+.menu-body article{display:flex;justify-content:space-between;gap:20px;border-top:1px solid var(--line);padding:23px 0}
+.menu-body h4{font-size:14px;font-weight:400}
+.menu-body article p{font-size:10px;opacity:.8;margin-top:7px}
+.menu-body article>span{font-family:var(--roman);font-size:21px;white-space:nowrap}
+.menu-note{font-size:9px;line-height:1.8;margin-top:15px;max-width:380px;opacity:.75}
+.wine-story{position:relative;display:grid;grid-template-columns:1fr 1fr;background:#d9c5a8;align-items:center}
+.wine-title{padding:80px 18%}
+.wine-title h2{font-family:var(--serif);font-size:29px;line-height:1.9;margin-bottom:30px}
+.wine-title>p:not(.eyebrow){font-size:12px;line-height:2.3}
+.wine-story>img{height:680px;object-position:50% 55%}
+.underlink{border-bottom:1px solid var(--red);padding:13px 0;display:flex;justify-content:space-between;font-size:11px;margin-top:30px}
+.wine-script{position:absolute;bottom:30px;left:34%;font-family:var(--roman);font-size:70px;font-style:italic;color:var(--cream);transform:rotate(-10deg);text-shadow:0 1px 15px #30231450;pointer-events:none}
+.visit{padding:100px 8%}
+.visit h2{font-family:var(--serif);font-size:30px}
+.seats{display:grid;grid-template-columns:1fr 1fr;gap:10%;margin-top:50px}
+.seats article{border-top:1px solid var(--line);padding-top:25px}
+.seats article>span{font-family:var(--roman);font-size:28px}
+.seats h3{font-family:var(--serif);font-size:18px;margin:22px 0 15px}
+.seats p{font-size:12px;max-width:390px}
+.visit-detail{margin-top:60px;border-top:1px solid var(--line);padding-top:25px;display:flex;align-items:center;gap:50px}
+.visit-detail div>span{font-size:8px;letter-spacing:.08em}
+.visit-detail div p{font-size:14px;margin-top:6px;white-space:nowrap}
+.visit-detail>p{font-size:9px;max-width:210px;margin-left:auto}
+.reservation{background:var(--red);color:var(--cream);padding:85px 8%;display:grid;grid-template-columns:1fr 1fr;gap:12%}
+.reservation h2{font-family:var(--serif);font-size:35px;line-height:1.9}
+.reservation h2 i{font-style:normal;display:block}
+.reservation>div>p:not(.eyebrow){font-size:12px;margin-top:25px}
+.reservation label{display:block;font-size:10px}
+.reservation input,.reservation select{width:100%;border:0;border-bottom:1px solid #f2ebd770;background:none;border-radius:0;color:var(--cream);padding:12px 0;font-size:14px;color-scheme:dark}
+.reservation select option{background:var(--red)}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:30px;margin-top:25px}
+.reservation button{display:flex;justify-content:space-between;background:var(--cream);color:var(--red);border:0;padding:18px 24px;font-size:12px;width:100%;margin-top:30px}
+.reservation form>p{font-size:9px;margin-top:14px;opacity:.8}
+output{display:block;font-size:12px;margin-top:25px;padding:18px;border:1px solid #ffffff70}
+output[hidden]{display:none}
+footer{padding:25px 5% 30px}
+.footer-word{font-family:var(--roman);font-size:21vw;letter-spacing:-.065em;line-height:1.1;display:block;text-align:center}
+footer>div{display:flex;justify-content:space-between;font-size:9px;border-top:1px solid var(--line);padding-top:25px}
+
+@media(max-width:760px){.demo{padding:0 20px;font-size:9px}
+header{padding:20px}
+.brand-small{font-size:24px}
+header nav{display:none}
+.header-book{font-size:10px}
+.sun{display:none}
+.circle-link{width:85px;height:85px;font-size:8px}
+.about{padding:65px 24px;grid-template-columns:1fr;gap:30px}
+.about h2{font-size:28px}
+.eyebrow{font-size:8px;margin-bottom:25px}
+.about-copy{font-size:12px}
+.menu{padding:65px 24px}
+.menu-header{display:block;margin-bottom:35px}
+.menu-header h2{font-size:clamp(48px,17.2vw,67px)}
+.menu-header h2 i{margin-left:60px}
+.menu-header>div{width:100%;margin-top:35px}
+.menu-header p{font-size:11px}
+.menu-tabs{margin-top:15px}
+.menu-body{grid-template-columns:1fr;gap:30px}
+.menu-body figure img{aspect-ratio:1.1}
+.menu-body h3{font-size:24px;margin-top:15px}
+.menu-body article{padding:20px 0}
+.menu-body h4{font-size:13px}
+.wine-story{grid-template-columns:1fr}
+.wine-title{padding:60px 24px}
+.wine-title h2{font-size:26px}
+.wine-story>img{height:430px;object-position:50% 45%}
+.wine-script{font-size:49px;left:9%;bottom:30px}
+.visit{padding:65px 24px}
+.visit h2{font-size:24px}
+.seats{gap:25px;margin-top:30px}
+.seats article>span{font-size:21px}
+.seats h3{font-size:15px}
+.seats p{font-size:11px}
+.visit-detail{gap:22px;flex-wrap:wrap;margin-top:35px}
+.visit-detail div p{font-size:12px}
+.visit-detail>p{max-width:none;margin:0;font-size:9px}
+.reservation{padding:65px 24px;grid-template-columns:1fr;gap:35px}
+.reservation h2{font-size:30px}
+.reservation h2 i{display:inline}
+.reservation>div>p:not(.eyebrow){font-size:11px}
+.reservation form>p{font-size:9px}
+footer{padding:30px 24px}
+.footer-word{font-size:22vw}
+footer>div{font-size:8px;gap:20px}
+footer>div>span:last-child{display:none}
+}
 img{height:auto}
-@media(max-width:760px){.wine-script{font-size:clamp(30px,11vw,49px)}.menu-header h2{font-size:clamp(50px,17.2vw,67px)}}
-@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
+
+@media(max-width:760px){.wine-script{font-size:clamp(30px,11vw,49px)}
+.menu-header h2{font-size:clamp(50px,17.2vw,67px)}
+}
+
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}
+*{transition:none!important}
+}
+.circle-link{width:90px;height:90px;font-size:8px}
+.about{padding:75px 10%;gap:13%}
+.about h2{font-size:29px}
+.menu{padding-top:75px;padding-bottom:75px}
+.menu-header{margin-bottom:45px}
+.menu-header h2{font-size:68px}
+.menu-body figure img{aspect-ratio:1.12}
+.wine-story{display:none}
+.evening-story{padding-top:65px;background:#e3d6b9}
+.evening-head{padding:0 7% 40px;display:grid;grid-template-columns:.65fr 1.1fr 1fr;gap:5%;align-items:end}
+.evening-head>p{align-self:start;font-size:9px;letter-spacing:.1em}
+.evening-head h2{font:30px/1.85 var(--serif);letter-spacing:.04em}
+.evening-head>span{font:12px/2.2 var(--serif);text-align:right;padding-bottom:4px}
+.dining-panorama{height:570px;position:relative;overflow:hidden}
+.dining-panorama>img{height:100%;width:100%;object-position:50% 50%}
+.dining-panorama:after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,#151d15b3,transparent 75%)}
+.dining-panorama>div{position:absolute;left:8%;top:24%;z-index:1;color:#f3ead4}
+.dining-panorama>div>span{font-size:9px;letter-spacing:.14em}
+.dining-panorama>div p{font:24px/2.1 var(--serif);margin-top:25px}
+.kitchen-notes{padding:75px 12% 40px;display:grid;grid-template-columns:1fr 1fr;gap:14%;align-items:center}
+.kitchen-notes figure{transform:rotate(-3deg);background:#f6efdf;padding:15px 15px 20px;box-shadow:0 5px 18px #47302120}
+.kitchen-notes figure img{height:520px;object-position:50% 72%}
+.kitchen-notes figcaption{font-size:10px;text-align:center;padding-top:14px;letter-spacing:.06em}
+.kitchen-line{font-size:9px;letter-spacing:.1em}
+.kitchen-notes h3{font:29px/1.85 var(--serif);margin:25px 0}
+.kitchen-notes article>p{font-size:12px;line-height:2.2;margin-bottom:20px}
+.season-note{margin-top:30px;padding-top:18px;border-top:1px solid #a29371;display:flex;gap:30px}
+.season-note>span{font-size:10px;writing-mode:vertical-rl;letter-spacing:.12em}
+.season-note p{font:14px/1.7 var(--serif)}
+.season-note b{font-weight:400;font-size:12px;color:#8c7658}
+.restaurant-disclosure{font-size:9px;line-height:1.9;padding:15px 7% 35px;color:#746246}
+.dinner-plan{position:relative;padding:85px 6%;display:grid;grid-template-columns:.75fr 1.15fr .8fr;gap:5%;background:var(--cream)}
+.plan-intro>span{font-size:8px;letter-spacing:.1em}
+.plan-intro h2{font:30px/1.8 var(--serif);margin:25px 0}
+.plan-intro p{font-size:11px;line-height:2.2}
+.plan-intro small{font-size:8px;display:block;margin-top:25px}
+.dish-picker label{display:flex;align-items:center;gap:12px;padding:23px 0;border-top:1px solid var(--line);cursor:pointer}
+.dish-picker label:last-child{border-bottom:1px solid var(--line)}
+.dish-picker input{appearance:none;flex:none;width:18px;height:18px;border:1px solid var(--red);background:none;display:grid;place-content:center;margin:0}
+.dish-picker input:checked{background:var(--red)}
+.dish-picker input:checked:after{content:'✓';color:var(--cream);font-size:12px}
+.dish-picker label>span{flex:1}
+.dish-picker b{font-size:12px;font-weight:400;display:block}
+.dish-picker small{font-size:8px;display:block;margin-top:8px;line-height:1.7}
+.dish-picker em{font-style:normal;font-size:12px;white-space:nowrap}
+.dinner-receipt{background:#faf8ef;padding:28px 24px;box-shadow:0 8px 25px #44361d12;transform:rotate(2deg);align-self:start;border-top:1px solid #ded8c4;border-bottom:5px double #ded8c4;color:#3f4134}
+.receipt-brand{display:block;text-align:center;font:31px var(--roman);letter-spacing:-.04em}
+.receipt-title{display:block;text-align:center;font-size:7px;letter-spacing:.14em;margin:12px 0 25px}
+.receipt-row{display:flex;justify-content:space-between;font-size:9px;gap:12px;margin:12px 0}
+.receipt-total{display:flex;justify-content:space-between;align-items:center;border-top:1px dashed #a4a58f;border-bottom:1px dashed #a4a58f;padding:15px 0;margin-top:25px}
+.receipt-total>span{font-size:9px}
+.receipt-total strong{font:25px var(--roman)}
+.dinner-receipt>p{font-size:8px;line-height:1.9;margin-top:20px}
+.dinner-receipt>a{display:block;font-size:10px;margin-top:25px;border-bottom:1px solid #545b43;padding-bottom:8px}
+.visit{padding-top:65px;padding-bottom:65px;border-top:1px solid var(--line)}
+.reservation{padding-top:70px;padding-bottom:70px}
+
+@media(max-width:900px){.dinner-plan{grid-template-columns:1fr 1.1fr}
+.plan-intro{grid-column:1/-1}
+.plan-intro h2 br{display:none}
+.plan-intro p br{display:none}
+.plan-intro small{margin-top:15px}
+.dish-picker{margin-top:30px}
+.dinner-receipt{margin-top:30px}
+}
+@media(max-width:760px){.about{padding:55px 24px;gap:25px}
+.about h2{font-size:26px}
+.menu{padding:55px 24px}
+.menu-header h2{font-size:clamp(50px,17.2vw,67px)}
+.evening-story{padding-top:45px}
+.evening-head{padding:0 24px 30px;display:block}
+.evening-head h2{font-size:26px;margin-top:20px}
+.evening-head>span{display:none}
+.dining-panorama{height:440px}
+.dining-panorama>img{object-position:43% 50%}
+.dining-panorama>div{left:24px;top:auto;bottom:50px}
+.dining-panorama>div p{font-size:21px;line-height:2;margin-top:18px}
+.kitchen-notes{padding:50px 30px 20px;grid-template-columns:1fr;gap:45px}
+.kitchen-notes figure img{height:350px}
+.kitchen-notes h3{font-size:26px}
+.kitchen-notes article>p{font-size:11px}
+.season-note{gap:25px;margin-top:25px}
+.restaurant-disclosure{padding:20px 24px 30px;font-size:8px}
+.dinner-plan{padding:55px 24px;grid-template-columns:1fr;gap:0}
+.plan-intro h2{font-size:28px;margin:20px 0}
+.dish-picker{margin-top:30px}
+.dish-picker label{padding:22px 0}
+.dish-picker b{font-size:12px}
+.dish-picker small{font-size:9px}
+.dinner-receipt{margin:35px 12px 5px;transform:rotate(-2deg);padding:28px}
+.receipt-row{font-size:11px}
+.receipt-title{font-size:8px}
+.receipt-total>span{font-size:11px}
+.receipt-total strong{font-size:30px}
+.dinner-receipt>p{font-size:9px}
+.dinner-receipt>a{font-size:11px}
+.visit{padding:55px 24px}
+.reservation{padding:55px 24px}
+}
+.kitchen-notes figure{transform:none;box-shadow:none;padding:0;background:none}
+.kitchen-notes figcaption{text-align:left;font-size:12px;padding-top:16px}
+.dinner-receipt{transform:none;box-shadow:none;border-top:2px solid var(--red)}
+.about-copy p,.kitchen-notes article>p,.plan-intro p{font-size:14px;line-height:2.05}
+.dish-picker b,.dish-picker em{font-size:14px}
+.dish-picker small{font-size:12px;line-height:1.8}
+.receipt-row{font-size:12px;line-height:1.7}
+.dinner-receipt>p{font-size:11px}
+.menu-note,.restaurant-disclosure{font-size:11px;line-height:1.9}
+.menu-tabs button{min-height:44px;padding-inline:18px}
+
+@media(min-width:1000px){.about{padding-block:100px}
+.menu{padding-block:95px}
+.kitchen-notes{padding-top:95px;padding-bottom:60px}
+.dinner-plan{gap:4%;padding-block:95px}
+}
+
+@media(max-width:760px){.kitchen-notes{padding-inline:24px;gap:32px}
+.kitchen-notes figure img{height:390px}
+.kitchen-notes article>p,.plan-intro p{font-size:14px}
+.dish-picker small{font-size:11px}
+.dinner-receipt{margin-inline:0}
+.restaurant-disclosure{font-size:11px}
+}
+.site-enquiry{padding:44px max(6%,24px);border-top:1px solid currentColor;border-bottom:1px solid currentColor;display:grid;grid-template-columns:1.2fr 1fr;gap:7%;align-items:center}
+.site-enquiry .site-enquiry-label{font-size:11px;letter-spacing:.04em;margin:0 0 12px}
+.site-enquiry h2{font:inherit;font-size:21px;line-height:1.7;margin:0 0 14px}
+.site-enquiry p{font-size:14px;line-height:1.9;margin:0;max-width:56ch}
+.site-enquiry-action a{display:inline-block;font-size:14px;line-height:1.8;border-bottom:1px solid;padding:12px 0}
+.site-enquiry-action p{font-size:12px;line-height:1.8;margin-top:14px}
+.site-enquiry a:focus-visible{outline:3px solid currentColor;outline-offset:5px}
+.selection-note{font-size:14px;line-height:1.9;margin:18px 0}
+.field-hint{font-size:12px;line-height:1.8;margin:8px 0 18px}
+.field-error{font-size:13px;line-height:1.8;color:#9b3024}
+.field-error:empty{display:none}
+input,select,textarea{font:inherit}
+textarea{width:100%;min-height:110px;padding:12px;border:1px solid currentColor;background:transparent;color:inherit;resize:vertical}
+textarea:focus-visible{outline:3px solid currentColor;outline-offset:4px}
+dialog{max-height:calc(100svh - 32px);overflow-y:auto}
+input:focus,select:focus,textarea:focus{scroll-margin:24px}
+button,a,summary{-webkit-tap-highlight-color:transparent}
+@media(max-width:760px){.site-enquiry{grid-template-columns:1fr;gap:22px;padding:34px 24px}
+.site-enquiry h2{font-size:19px}
+input,select,textarea{font-size:16px!important}
+.site-enquiry-action a{min-height:44px;display:flex;align-items:center}
+}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}
+*,*::before,*::after{transition:none!important;animation:none!important}
+}
+
+
+@media(max-width:760px){header{height:auto;min-height:80px;flex-wrap:wrap;gap:12px 20px;padding-block:18px}
+header nav{position:static;display:flex;order:3;flex-basis:100%;justify-content:space-between;gap:10px;border-top:1px solid currentColor;padding-top:8px;font-size:12px}
+header nav a,header nav a:nth-child(2),header nav a:nth-child(3),header nav>a:not(.shop-link){display:flex;align-items:center;min-height:44px;margin:0}
+header nav .shop-link{padding:9px 12px;font-size:12px}
+.demo,.sample-bar{min-height:32px;height:auto;gap:12px;line-height:1.6;padding-block:7px}
+}
+.about-copy,.seats p,.kitchen-notes article>p,.plan-intro>p,.reservation>div>p:not(.eyebrow){font-size:14px;line-height:2}
+.menu-note,.restaurant-disclosure,.reservation form>p,.dish-picker small,.dinner-receipt>p{font-size:12px;line-height:1.9}
+.reservation label{font-size:14px}
+.reservation form>label{display:block;margin-bottom:16px}
+.menu-tabs button{min-height:44px}
+#booking-result{font-size:14px;line-height:2}
+#visit-date-error{color:#ffe0d2;font-size:13px}
+.reservation .field-hint{font-size:12px}
+.receipt-row{font-size:13px}
+.dinner-receipt>a{min-height:44px;display:flex;align-items:center}
+#booking-result{margin-top:28px;padding:24px;background:#f0e8d8;border-top:2px solid var(--red);color:var(--red)}
+#booking-result[hidden],#review-dinner[hidden]{display:none}
+#booking-result .review-kicker{font-size:11px;letter-spacing:.08em;margin-bottom:18px}
+.table-review{margin:0}
+.table-review>div{display:grid;grid-template-columns:100px minmax(0,1fr);gap:16px;padding:12px 0;border-bottom:1px solid #cbbda7}
+.table-review dt{font-size:12px}
+.table-review dd{font-size:14px;margin:0}
+#review-dinner{padding-top:22px}
+#review-dinner h3{font-size:14px;margin-bottom:9px}
+#review-dishes{font-size:13px;line-height:1.9}
+.review-total{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin-top:16px;font-size:13px}
+.review-total strong{font-size:26px;font-weight:500}
+#booking-result .review-note{font-size:12px;line-height:1.9;margin-top:16px}
+.reservation .review-edit{margin-top:18px;width:100%;min-height:44px;padding:13px 0;background:transparent;border:0;border-bottom:1px solid currentColor;color:var(--red);font-size:13px;text-align:left}
+.dish-picker label{cursor:pointer}
+.dish-picker label:has(input:checked){background:#fff3}
+.dish-picker input[type=checkbox]{min-width:18px;min-height:18px}
+.dinner-receipt>a{font-size:13px;line-height:1.8;min-height:44px}
+.receipt-title{font-size:11px}
+@media(max-width:420px){#booking-result{padding:20px}
+.table-review>div{grid-template-columns:88px minmax(0,1fr);gap:10px}
+}
+
+
+
+/* Food journal: a full-width masthead, close detail and a generous table photograph. */
+.bistro-cover{padding:20px 5% 40px}.bistro-masthead{border-top:1px solid var(--red);display:flex;justify-content:space-between;padding-top:16px;font-size:9px;letter-spacing:.1em}.bistro-cover>h1{font:400 clamp(100px,17.5vw,270px)/.95 var(--roman);letter-spacing:-.065em;display:flex;align-items:flex-end;justify-content:space-between;margin:22px 0 34px}.bistro-cover>h1>span{font:12px/2 var(--serif);letter-spacing:.07em;padding-bottom:12px;writing-mode:vertical-rl;height:125px}.bistro-spread{display:grid;grid-template-columns:.7fr .8fr 1.65fr;gap:4%;align-items:center}.bistro-spread figure{margin:0}.bistro-kitchen{align-self:start;padding-top:18px}.bistro-kitchen img{height:285px;object-position:50% 67%}.bistro-spread figcaption{font-size:8px;letter-spacing:.1em;padding-top:12px}.bistro-copy{padding-top:50px}.bistro-copy h2{font:24px/1.8 var(--serif);letter-spacing:.03em}.bistro-copy>p{font-size:12px;line-height:2.1;margin-top:25px}.bistro-copy>a{border-bottom:1px solid;display:flex;justify-content:space-between;gap:16px;margin-top:40px;padding:12px 0;font-size:11px}.bistro-table img{height:410px;object-position:50% 48%}.bistro-baseline{display:flex;justify-content:space-between;align-items:center;gap:30px;border-top:1px solid var(--line);padding-top:23px;margin-top:30px;font-size:10px}.bistro-baseline p{font:14px var(--serif)}.bistro-baseline>a{font-size:12px;border-bottom:1px solid;padding-bottom:8px}.about{padding:100px 12%;grid-template-columns:1.1fr .9fr;gap:15%}.about h2{font-size:34px}.menu{padding:110px 8%}.menu-header h2{font-size:85px}.menu-body{grid-template-columns:1.2fr 1fr;gap:9%}.menu-body figure img{aspect-ratio:1.2}.evening-head{padding-block:25px 60px}.dining-panorama{height:520px;margin:0 5%}.dining-panorama:after{background:linear-gradient(90deg,#151d1588,transparent 70%)}.kitchen-notes{padding:110px 12% 70px;gap:15%;grid-template-columns:.85fr 1.15fr}.kitchen-notes figure img{height:550px}.kitchen-notes h3{font-size:34px}.dinner-plan{padding-block:110px}
+@media(max-width:760px){.bistro-cover{padding:14px 22px 35px}.bistro-masthead{font-size:8px;padding-top:12px}.bistro-cover>h1{font-size:25vw;margin:22px 0 25px}.bistro-cover>h1>span{display:none}.bistro-spread{grid-template-columns:1fr 1fr;gap:20px}.bistro-table{grid-column:1/-1;grid-row:1}.bistro-table img{height:330px;object-position:center}.bistro-kitchen{grid-column:1;grid-row:2;padding-top:5px}.bistro-kitchen img{height:210px}.bistro-copy{padding-top:5px}.bistro-copy h2{font-size:18px;line-height:1.9}.bistro-copy>p{font-size:11px;margin-top:18px}.bistro-copy>a{margin-top:20px;font-size:10px;line-height:1.7}.bistro-spread figcaption{font-size:7px}.bistro-baseline{gap:20px;margin-top:25px;font-size:8px}.bistro-baseline p{display:none}.bistro-baseline>a{font-size:11px}.about{padding:65px 24px;grid-template-columns:1fr;gap:30px}.about h2{font-size:28px}.menu{padding:65px 24px}.menu-header h2{font-size:clamp(48px,17.2vw,67px)}.menu-body{grid-template-columns:1fr}.dining-panorama{margin:0 20px;height:420px}.dining-panorama>div{left:20px}.kitchen-notes{padding:65px 24px 35px;grid-template-columns:1fr;gap:35px}.kitchen-notes figure{width:80%}.kitchen-notes figure img{height:390px}.kitchen-notes h3{font-size:28px}.dinner-plan{padding-block:65px}}
