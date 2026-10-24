@@ -267,9 +267,13 @@ footer{background:var(--ink2);color:#c3aab1;padding:56px 0 28px;font-size:.84rem
 @media(max-width:700px){.review-disclosure+header{top:0}.review-disclosure{padding-top:90px}.maker-contact{padding-bottom:115px}.review-disclosure+header .brand,.review-disclosure+header .menu a{color:var(--ink,#243347)}.review-disclosure+header{background:#fff}.review-disclosure+header .burger span{background:#263b42}.review-form{gap:16px}.review-disclosure+header .book{color:#5b4433;border-color:currentColor}section[id]{scroll-margin-top:90px}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto!important}*,*::before,*::after{animation:none!important;transition:none!important}.reveal,.rv,.rgrid.reveal>*,.cgrid.reveal>*,.vsub.reveal>*,.vsteps>*{opacity:1!important;transform:none!important}}
 </style>
+<style id="refinement-style">
+.maker-contact{border-top:3px solid var(--case-accent,#53695a)}.maker-contact strong{display:block;max-width:45em;line-height:1.65}.maker-contact .case-features{display:flex;flex-wrap:wrap;gap:8px 20px;padding:0;margin:18px 0 22px;list-style:none;font-size:13px}.maker-contact .case-features li{padding-left:13px;position:relative}.maker-contact .case-features li::before{content:"";position:absolute;left:0;top:.8em;width:4px;height:4px;background:var(--case-accent,#53695a)}.maker-contact a:first-child{background:var(--case-accent,#53695a);border-color:var(--case-accent,#53695a);color:#fff}.confirmation-title,.confirmation-note,.confirmation-row{display:block}.confirmation-title{font-size:17px;margin-bottom:12px}.confirmation-row{padding:9px 0;border-bottom:1px solid currentColor}.confirmation-row>span{display:block;opacity:.8;font-size:12px}.confirmation-row>b{font-weight:500;overflow-wrap:anywhere}.confirmation-note{margin-top:14px;font-size:12px}.confirmation-edit{justify-self:start;min-height:44px;border:1px solid currentColor!important;border-radius:3px;padding:10px 18px;color:inherit;background:transparent;font-size:14px}.confirmation-edit[hidden]{display:none!important}.selection-guidance{padding:16px 18px;border-left:2px solid currentColor;font-size:13px;line-height:1.8;margin:14px 0}.selection-guidance:empty{display:none}.decision-link{display:inline-flex;align-items:center;min-height:44px;gap:8px;margin-top:14px;font-size:13px;font-weight:700;text-decoration:underline;text-underline-offset:5px}.form-done,.review-summary{overflow-wrap:anywhere}.refine-note{font-size:12px;line-height:1.8;opacity:.82;margin-top:14px}
+@media(max-width:600px){.maker-contact .case-features{display:grid;gap:10px}.maker-contact .maker-links{display:grid}.maker-contact a{justify-content:center}}
+</style><noscript><style>form{display:none!important}.reveal,.rv,.reveal>*{opacity:1!important;transform:none!important}</style></noscript>
 </head>
 <body class="legacy-local legacy-local-dental">
-<div class="review-disclosure">架空の制作サンプルです。予約・応募は行われません。 <a href="#site-production">Web制作のご相談はこちら</a></div>
+<div class="review-disclosure">架空の制作サンプルです。診療相談・予約は受け付けていません。 <a href="#site-production">Web制作のご相談はこちら</a></div>
 
 <header id="hd"><div class="wrap nav">
 <div class="brand"><span class="leaf"></span>さくら駅前歯科<small>SAKURA DENTAL</small></div>
@@ -278,7 +282,7 @@ footer{background:var(--ink2);color:#c3aab1;padding:56px 0 28px;font-size:.84rem
 <a href="#visit">訪問歯科</a><a href="#why">当院の特徴</a><a href="#care">診療案内</a>
 <a href="#doctor">院長</a><a href="#info">アクセス</a>
 </nav>
-<a class="tel" href="tel:0480000000"><b class="mono">048-000-0000</b><small>平日9:00-19:00 / 土9:00-17:00</small></a>
+<a class="tel" href="#contact" title="電話番号の表示例です。通話は行わず、確認フォームへ移動します"><b class="mono">048-000-0000</b><small>平日9:00-19:00 / 土9:00-17:00</small></a>
 <a class="book" href="#contact">ご相談</a>
 <button class="burger" id="bg" type="button" aria-label="メニュー" aria-controls="mn" aria-expanded="false"><span></span><span></span><span></span></button>
 </div>
@@ -333,13 +337,13 @@ footer{background:var(--ink2);color:#c3aab1;padding:56px 0 28px;font-size:.84rem
 <div class="vcard"><span class="vno mono">02</span><h4>対応エリア</h4>
 <p style="font-weight:700;color:var(--pink-d)">さいたま市 桜区・南区を中心に対応</p>
 <ul class="vdot cols"><li>西浦和</li><li>中浦和</li><li>南浦和</li><li>武蔵浦和</li><li>浦和</li><li>与野本町</li></ul>
-<p class="vnote">上記の周辺地域も伺える場合があります。まずはお電話でご相談ください（訪問可否を無料でお調べします）。</p></div>
+<p class="vnote">上記の周辺地域も伺える場合があります。訪問先と通院が難しい状況を伺い、対応できるか確認する流れです。</p></div>
 </div>
 <div class="vflow reveal">
 <h3 class="mincho" style="font-family:'Zen Maru Gothic';font-weight:900;text-align:center;font-size:1.4rem;margin-bottom:8px">訪問歯科・ご利用の流れ</h3>
 <div class="vsteps">
 <div class="vstep"><span class="s mono">STEP 1</span><b>お問い合わせ</b><p>お電話またはフォームから。ご家族・ケアマネ様の代理相談もOK。</p></div>
-<div class="vstep"><span class="s mono">STEP 2</span><b>訪問・お口の診察</b><p>ご希望日にご自宅・施設へ伺い、お口の状態を確認します。</p></div>
+<div class="vstep"><span class="s mono">STEP 2</span><b>訪問・お口の診察</b><p>訪問の可否と日程を確認してから、ご自宅・施設でお口の状態を診ます。</p></div>
 <div class="vstep"><span class="s mono">STEP 3</span><b>治療計画のご説明</b><p>治療内容・回数・費用をわかりやすくご説明します。</p></div>
 <div class="vstep"><span class="s mono">STEP 4</span><b>訪問診療・ケア</b><p>ご都合に合わせて定期的に伺い、治療と予防を続けます。</p></div>
 </div>
@@ -358,7 +362,7 @@ footer{background:var(--ink2);color:#c3aab1;padding:56px 0 28px;font-size:.84rem
 <div class="vfaq">
 <span class="eye">よくあるご質問</span>
 <details><summary>寝たきりでも治療できますか？</summary><p>はい。ベッドや車いすのままで受けられる体制で伺います。姿勢や体調に配慮しながら進めます。</p></details>
-<details><summary>家族や施設からの相談でも大丈夫ですか？</summary><p>もちろんです。ご本人に代わってご家族・ケアマネジャー様・施設のご担当者様からのご相談を多くいただいています。</p></details>
+<details><summary>家族や施設からの相談でも大丈夫ですか？</summary><p>もちろんです。ご本人に代わって、ご家族・ケアマネジャー様・施設のご担当者様から相談できる流れです。</p></details>
 <details><summary>費用はどのくらいかかりますか？</summary><p>このページの金額は架空の表示例です。実際の負担額は診療内容などで異なるため、医院へ確認することを想定しています。</p></details>
 <details><summary>どのエリアまで来てもらえますか？</summary><p>さいたま市桜区・南区を中心に対応しています。周辺地域も伺える場合がありますので、まずはご相談ください。</p></details>
 </div>
@@ -375,9 +379,9 @@ footer{background:var(--ink2);color:#c3aab1;padding:56px 0 28px;font-size:.84rem
 <section id="care"><div class="wrap">
 <div class="head reveal"><span class="eye" style="justify-content:center">Menu</span><h2>診療案内</h2><p>一般的な治療から予防・審美・矯正、訪問歯科まで幅広く対応しています。</p></div>
 <div class="cgrid reveal">
-<div class="cc"><div class="ph"><span class="lb">むし歯・根の治療</span><svg preserveaspectratio="xMidYMid slice" role="img" style="width:100%;height:100%;display:block" viewbox="0 0 600 375"><rect fill="#fdeef2" height="375" width="600"></rect><circle cx="520" cy="60" fill="#fbe3ea" r="115"></circle><circle cx="60" cy="330" fill="#f7e7da" r="95"></circle><g transform="translate(230,90) scale(1.8)"><path d="M50 16 C29 16 20 33 23 51 C25 65 33 74 35 89 C37 101 46 101 48 88 C49 79 51 79 52 88 C54 101 63 101 65 89 C67 74 75 65 77 51 C80 33 71 16 50 16 Z" fill="#fff" stroke="#e78ba6" stroke-linejoin="round" stroke-width="5"></path></g><g fill="none" stroke="#83bfa0" stroke-linecap="round" stroke-linejoin="round" stroke-width="9"><path d="M355 235l22 22 44 -46"></path></g></svg></div><div class="b"><h4>一般歯科</h4><p>できるだけ削らない・抜かない。早期発見で通院回数も抑えます。</p></div></div>
+<div class="cc"><div class="ph"><span class="lb">むし歯・根の治療</span><svg preserveaspectratio="xMidYMid slice" role="img" style="width:100%;height:100%;display:block" viewbox="0 0 600 375"><rect fill="#fdeef2" height="375" width="600"></rect><circle cx="520" cy="60" fill="#fbe3ea" r="115"></circle><circle cx="60" cy="330" fill="#f7e7da" r="95"></circle><g transform="translate(230,90) scale(1.8)"><path d="M50 16 C29 16 20 33 23 51 C25 65 33 74 35 89 C37 101 46 101 48 88 C49 79 51 79 52 88 C54 101 63 101 65 89 C67 74 75 65 77 51 C80 33 71 16 50 16 Z" fill="#fff" stroke="#e78ba6" stroke-linejoin="round" stroke-width="5"></path></g><g fill="none" stroke="#83bfa0" stroke-linecap="round" stroke-linejoin="round" stroke-width="9"><path d="M355 235l22 22 44 -46"></path></g></svg></div><div class="b"><h4>一般歯科</h4><p>歯の状態を確認し、治療の進め方をご説明します。気になることをお聞かせください。</p></div></div>
 <div class="cc"><div class="ph"><span class="lb">クリーニング</span><svg preserveaspectratio="xMidYMid slice" role="img" style="width:100%;height:100%;display:block" viewbox="0 0 600 375"><rect fill="#fdeef2" height="375" width="600"></rect><circle cx="520" cy="60" fill="#fbe3ea" r="115"></circle><circle cx="60" cy="330" fill="#f7e7da" r="95"></circle><g transform="rotate(-32 300 190)"><rect fill="#fff" height="34" rx="17" stroke="#e78ba6" stroke-width="5" width="190" x="180" y="172"></rect><rect fill="#e78ba6" height="50" rx="14" width="88" x="352" y="164"></rect><g stroke="#fdeef2" stroke-linecap="round" stroke-width="5"><path d="M368 172v34M386 170v38M404 172v34M422 172v30"></path></g></g><g fill="#f4b8c8" transform="translate(190,110) rotate(-20) scale(1.2)"><path d="M0 -16 C8 -8 8 2 0 12 C-8 2 -8 -8 0 -16 Z"></path><path d="M0 -3 l0 4 M-2 1l2 2 2 -2" fill="none" stroke="#e78ba6" stroke-width="1.6"></path></g><g fill="#f4b8c8" transform="translate(430,270) rotate(30) scale(1.3)"><path d="M0 -16 C8 -8 8 2 0 12 C-8 2 -8 -8 0 -16 Z"></path><path d="M0 -3 l0 4 M-2 1l2 2 2 -2" fill="none" stroke="#e78ba6" stroke-width="1.6"></path></g></svg></div><div class="b"><h4>予防歯科</h4><p>定期検診でお口の健康を確認します。担当衛生士制です。</p></div></div>
-<div class="cc"><div class="ph"><span class="lb">入れ歯</span><svg preserveaspectratio="xMidYMid slice" role="img" style="width:100%;height:100%;display:block" viewbox="0 0 600 375"><rect fill="#fdeef2" height="375" width="600"></rect><circle cx="520" cy="60" fill="#fbe3ea" r="115"></circle><circle cx="60" cy="330" fill="#f7e7da" r="95"></circle><path d="M160 230 q140 -140 280 0 q-34 66 -140 66 q-106 0 -140 -66z" fill="#fff" stroke="#e78ba6" stroke-width="7"></path><g fill="#fdeef2" stroke="#e78ba6" stroke-width="4"><rect height="52" rx="10" width="44" x="205" y="170"></rect><rect height="70" rx="10" width="42" x="257" y="152"></rect><rect height="70" rx="10" width="42" x="307" y="152"></rect><rect height="52" rx="10" width="44" x="357" y="170"></rect></g></svg></div><div class="b"><h4>入れ歯・義歯</h4><p>合わない入れ歯の調整・作製。よく噛める毎日を取り戻します。</p></div></div>
+<div class="cc"><div class="ph"><span class="lb">入れ歯</span><svg preserveaspectratio="xMidYMid slice" role="img" style="width:100%;height:100%;display:block" viewbox="0 0 600 375"><rect fill="#fdeef2" height="375" width="600"></rect><circle cx="520" cy="60" fill="#fbe3ea" r="115"></circle><circle cx="60" cy="330" fill="#f7e7da" r="95"></circle><path d="M160 230 q140 -140 280 0 q-34 66 -140 66 q-106 0 -140 -66z" fill="#fff" stroke="#e78ba6" stroke-width="7"></path><g fill="#fdeef2" stroke="#e78ba6" stroke-width="4"><rect height="52" rx="10" width="44" x="205" y="170"></rect><rect height="70" rx="10" width="42" x="257" y="152"></rect><rect height="70" rx="10" width="42" x="307" y="152"></rect><rect height="52" rx="10" width="44" x="357" y="170"></rect></g></svg></div><div class="b"><h4>入れ歯・義歯</h4><p>入れ歯が合わない、噛みにくい。調整や作製について相談します。</p></div></div>
 <div class="cc"><div class="ph"><span class="lb">目立たない</span><svg preserveaspectratio="xMidYMid slice" role="img" style="width:100%;height:100%;display:block" viewbox="0 0 600 375"><rect fill="#fdeef2" height="375" width="600"></rect><circle cx="520" cy="60" fill="#fbe3ea" r="115"></circle><circle cx="60" cy="330" fill="#f7e7da" r="95"></circle><path d="M170 210 q130 -120 260 0 q-30 60 -130 60 q-100 0 -130 -60z" fill="none" opacity=".9" stroke="#e78ba6" stroke-width="7"></path><path d="M195 205 q105 -92 210 0 q-26 44 -105 44 q-79 0 -105 -44z" fill="#ffffff" opacity=".8" stroke="#f4b8c8" stroke-width="4"></path><g stroke="#f4b8c8" stroke-width="4"><path d="M240 168v66M300 152v88M360 168v66"></path></g><g fill="#f4b8c8" transform="translate(440,130) rotate(20) scale(1.2)"><path d="M0 -16 C8 -8 8 2 0 12 C-8 2 -8 -8 0 -16 Z"></path><path d="M0 -3 l0 4 M-2 1l2 2 2 -2" fill="none" stroke="#e78ba6" stroke-width="1.6"></path></g></svg></div><div class="b"><h4>矯正・審美</h4><p>マウスピース矯正やホワイトニング。お口の状態に合わせてご相談を承ります。</p></div></div>
 <div class="cc"><div class="ph"><span class="lb">お子様の歯</span><svg preserveaspectratio="xMidYMid slice" role="img" style="width:100%;height:100%;display:block" viewbox="0 0 600 375"><rect fill="#fdeef2" height="375" width="600"></rect><circle cx="520" cy="60" fill="#fbe3ea" r="115"></circle><circle cx="60" cy="330" fill="#f7e7da" r="95"></circle><g transform="translate(180,110) scale(1.7)"><path d="M50 16 C29 16 20 33 23 51 C25 65 33 74 35 89 C37 101 46 101 48 88 C49 79 51 79 52 88 C54 101 63 101 65 89 C67 74 75 65 77 51 C80 33 71 16 50 16 Z" fill="#fff" stroke="#e78ba6" stroke-linejoin="round" stroke-width="5"></path></g><g transform="translate(330,150) scale(1.1)"><path d="M50 16 C29 16 20 33 23 51 C25 65 33 74 35 89 C37 101 46 101 48 88 C49 79 51 79 52 88 C54 101 63 101 65 89 C67 74 75 65 77 51 C80 33 71 16 50 16 Z" fill="#fff" stroke="#c9a15a" stroke-linejoin="round" stroke-width="6"></path></g><g fill="#f4b8c8" transform="translate(430,110) rotate(15) scale(1.3)"><path d="M0 -16 C8 -8 8 2 0 12 C-8 2 -8 -8 0 -16 Z"></path><path d="M0 -3 l0 4 M-2 1l2 2 2 -2" fill="none" stroke="#e78ba6" stroke-width="1.6"></path></g><g fill="#f4b8c8" transform="translate(150,90) rotate(-30) scale(1.0)"><path d="M0 -16 C8 -8 8 2 0 12 C-8 2 -8 -8 0 -16 Z"></path><path d="M0 -3 l0 4 M-2 1l2 2 2 -2" fill="none" stroke="#e78ba6" stroke-width="1.6"></path></g></svg></div><div class="b"><h4>小児歯科</h4><p>慣れることから始めます。フッ素塗布や歯みがき練習で予防を。</p></div></div>
 <div class="cc"><div class="ph"><span class="lb">ご自宅・施設へ</span><svg preserveaspectratio="xMidYMid slice" role="img" style="width:100%;height:100%;display:block" viewbox="0 0 600 375"><rect fill="#fdeef2" height="375" width="600"></rect><circle cx="520" cy="60" fill="#fbe3ea" r="115"></circle><circle cx="60" cy="330" fill="#f7e7da" r="95"></circle><path d="M200 190 L300 115 L400 190" fill="none" stroke="#c9a15a" stroke-linecap="round" stroke-linejoin="round" stroke-width="10"></path><rect fill="#fff" height="105" stroke="#c9a15a" stroke-width="6" width="150" x="225" y="185"></rect><g transform="translate(270,200) scale(0.82)"><path d="M50 16 C29 16 20 33 23 51 C25 65 33 74 35 89 C37 101 46 101 48 88 C49 79 51 79 52 88 C54 101 63 101 65 89 C67 74 75 65 77 51 C80 33 71 16 50 16 Z" fill="#fff" stroke="#e78ba6" stroke-linejoin="round" stroke-width="7"></path></g><g fill="#f4b8c8" transform="translate(430,140) rotate(25) scale(1.2)"><path d="M0 -16 C8 -8 8 2 0 12 C-8 2 -8 -8 0 -16 Z"></path><path d="M0 -3 l0 4 M-2 1l2 2 2 -2" fill="none" stroke="#e78ba6" stroke-width="1.6"></path></g></svg></div><div class="b"><h4>訪問歯科</h4><p>通院が難しい方へ、歯科医師がご自宅・施設へ伺います。</p></div></div>
@@ -420,7 +424,7 @@ footer{background:var(--ink2);color:#c3aab1;padding:56px 0 28px;font-size:.84rem
 <div class="head reveal"><span class="eye" style="justify-content:center">Contact</span><h2>ご相談・お問い合わせ</h2><p>通院のこと、訪問歯科のこと、費用のこと。ご家族・ケアマネジャー様からのご相談も歓迎します。</p></div>
 <div class="cwrap reveal">
 <div class="cinfo">
-<a class="ctel" href="tel:0480000000"><span>お電話でのご相談</span><b class="mono">048-000-0000</b><small>平日9:00-19:00 / 土9:00-17:00</small></a>
+<a class="ctel" href="#contact" title="電話番号の表示例です。通話は行わず、確認フォームへ移動します"><span>お電話でのご相談</span><b class="mono">048-000-0000</b><small>平日9:00-19:00 / 土9:00-17:00</small></a>
 <div class="cnote">通院か訪問か迷う場合は、受診方法から相談する流れです。右のフォームでは、ご家族や施設からの相談も選べます。電話番号は架空です。</div>
 </div>
 <form class="cform review-form" data-preview-form><label>ご相談の種類<select name="ご相談の種類" data-topic-select><option>通院について</option><option>訪問歯科について</option><option>費用について</option></select></label><label>ご相談される方<select name="ご相談される方"><option>ご本人</option><option>ご家族</option><option>ケアマネジャー・施設担当者</option></select></label><label>先に確認したいこと<select name="確認したいこと"><option>受診・訪問の流れ</option><option>対応する地域・場所</option><option>費用や準備するもの</option></select></label><button class="btn btn-p" type="submit">相談内容を確認する →</button><output role="status" aria-live="polite"></output><small>入力体験用です。症状や個人情報を記入する欄はありません。診療相談・予約は受け付けていません。</small></form>
@@ -429,15 +433,15 @@ footer{background:var(--ink2);color:#c3aab1;padding:56px 0 28px;font-size:.84rem
 <section class="cta" id="reserve"><div class="wrap reveal">
 <span class="eye">Contact</span>
 <h2 class="round">通院のことも、訪問のことも。</h2>
-<p>「うちの親は通えるかな」——そんなご相談だけでも大丈夫です。お気軽にお電話ください。</p>
+<p>「家族が通えるか分からない」ときは、受診方法から。下のボタンで相談内容を選べます。</p>
 <div class="row">
 <a class="btn btn-w" href="#contact">相談内容を確認する <span class="a">→</span></a>
 <div class="tel2 mono">048-000-0000<span>訪問歯科のご相談も受付中</span></div>
 </div>
 </div></section>
 <div class="mbar">
-<a class="m-tel" href="tel:0480000000">☎ 電話する</a>
-<a class="m-book" href="#contact">相談・予約</a>
+<a class="m-tel" href="#info">診療時間を見る</a>
+<a class="m-book" href="#contact">相談内容を選ぶ</a>
 </div>
 <script>
 const hd=document.getElementById('hd'),bg=document.getElementById('bg'),mn=document.getElementById('mn');
@@ -453,8 +457,38 @@ document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 <!-- demo-fict:end -->
 <script>document.addEventListener('click',function(e){const a=e.target.closest('a');if(!a||a.hasAttribute('data-production-contact'))return;const h=a.getAttribute('href')||'';if(h.startsWith('#')){e.preventDefault();if(h.length>1){const t=document.getElementById(decodeURIComponent(h.slice(1)));if(t)t.scrollIntoView({behavior:'smooth',block:'start'});}return;}if(/^(tel:|mailto:)/i.test(h)){e.preventDefault();alert('制作サンプルです。電話・メールの送信は行いません。');return;}if(a.hasAttribute('download'))return;if(h){e.preventDefault();window.top.location.href=a.href;}},true);document.addEventListener('submit',function(e){e.preventDefault();},true);</script>
 <a class="minato-site-return" href="./cw-web.html">← 制作例一覧に戻る</a>
-<aside class="maker-contact" id="site-production"><small>このサンプルの制作について</small><strong>自社の医院サイトをご検討の方へ</strong><p>掲載しているのは架空の事業者の制作例です。実際のWeb制作のご相談は、ミナト AI・IT ラボへ。必要なページや予約・問い合わせの流れからご相談いただけます。</p><div class="maker-links"><a data-production-contact href="mailto:minato.ai.lab@gmail.com?subject=Web%E5%88%B6%E4%BD%9C%E3%81%AE%E7%9B%B8%E8%AB%87%EF%BC%9Adental-sakura%20%E3%81%AE%E3%82%B5%E3%83%B3%E3%83%97%E3%83%AB%E3%82%92%E8%A6%8B%E3%81%A6">メールで制作を相談する ↗</a><a data-production-contact href="https://page.line.me/091usyfe" target="_blank" rel="noopener noreferrer">LINEで制作を相談する ↗</a><a href="./cw-web.html">制作例一覧へ</a></div><small>上の操作フォームは体験用です。この窓口ではWeb制作のご相談を承ります。</small></aside><script>
+<aside class="maker-contact" id="site-production" style="--case-accent:#925066"><small>このサンプルの制作について</small><strong>通院する方にも、ご家族にも。受診の相談に進みやすい医院サイトへ。</strong><ul class="case-features"><li>通院と訪問歯科を分けた案内</li><li>ご本人・ご家族・施設からの相談導線</li><li>診療時間とアクセスの整理</li></ul><p>診療科目や訪問診療の有無、現在の予約方法をお聞かせください。 Web制作のご相談は、ミナト AI・IT ラボへ。</p><div class="maker-links"><a data-production-contact href="mailto:minato.ai.lab@gmail.com?subject=Web%E5%88%B6%E4%BD%9C%E3%81%AE%E7%9B%B8%E8%AB%87%EF%BC%9Adental-sakura%20%E3%81%AE%E3%82%B5%E3%83%B3%E3%83%97%E3%83%AB%E3%82%92%E8%A6%8B%E3%81%A6">メールで制作を相談する ↗</a><a data-production-contact href="https://page.line.me/091usyfe" target="_blank" rel="noopener noreferrer">LINEで制作を相談する ↗</a><a href="./cw-web.html">制作例一覧へ</a></div><small>掲載内容は架空の制作例です。上の体験フォームと、こちらのWeb制作相談窓口は別です。</small></aside><script>
 (()=>{document.querySelectorAll('[data-preview-form]').forEach(form=>{const output=form.querySelector('output');form.addEventListener('change',()=>output.textContent='');form.addEventListener('submit',event=>{event.preventDefault();if(!form.reportValidity())return;const data=[...form.querySelectorAll('select[name]')].map(el=>el.name+'：'+el.selectedOptions[0].textContent);output.textContent=data.join(' ／ ')+'。確認表示です。送信・予約・応募は行っていません。選択を変えて何度でも試せます。';});});document.querySelectorAll('[data-preview-topic]').forEach(a=>a.addEventListener('click',()=>{const select=document.querySelector('[data-topic-select]');if(select){select.value=a.dataset.previewTopic;select.dispatchEvent(new Event('change',{bubbles:true}));}}));const menu=document.getElementById('mn')||document.getElementById('mnav')||document.getElementById('gnav');const toggle=document.getElementById('bg')||document.getElementById('menuBtn');if(menu&&toggle){toggle.setAttribute('aria-controls',menu.id);const sync=()=>toggle.setAttribute('aria-expanded',String(menu.classList.contains('open')||document.body.classList.contains('menu-open')));new MutationObserver(sync).observe(menu,{attributes:true,attributeFilter:['class']});new MutationObserver(sync).observe(document.body,{attributes:true,attributeFilter:['class']});sync();document.addEventListener('keydown',event=>{if(event.key==='Escape'&&toggle.getAttribute('aria-expanded')==='true'){toggle.click();toggle.focus();}});}})();
+</script>
+<script>
+(() => {
+  document.querySelectorAll('[data-preview-form], [data-demo-form]').forEach(form => {
+    const output = form.querySelector('output');
+    if (!output) return;
+    output.tabIndex = -1;
+    const edit = document.createElement('button');
+    edit.type = 'button'; edit.className = 'confirmation-edit'; edit.textContent = '選択内容を変更する'; edit.hidden = true;
+    output.after(edit);
+    edit.addEventListener('click', () => { output.textContent = ''; form.querySelector('select, input')?.focus(); });
+    new MutationObserver(() => { if (!output.textContent.trim()) edit.hidden = true; }).observe(output, {childList:true, subtree:true, characterData:true});
+    form.addEventListener('submit', event => {
+      event.preventDefault();
+      if (!form.reportValidity()) return;
+      const heading = document.createElement('strong');
+      heading.className = 'confirmation-title'; heading.textContent = '選んだ内容をご確認ください';
+      const rows = [...form.querySelectorAll('select[name]')].map(select => {
+        const row = document.createElement('span'); row.className = 'confirmation-row';
+        const label = document.createElement('span'); label.textContent = select.name;
+        const value = document.createElement('b'); value.textContent = select.selectedOptions[0]?.textContent || '未選択';
+        row.append(label, value); return row;
+      });
+      const note = document.createElement('span'); note.className = 'confirmation-note';
+      note.textContent = '確認表示です。外部への送信・予約・申し込みは行っていません。選択を変えて試せます。';
+      output.replaceChildren(heading, ...rows, note);
+      edit.hidden = false; output.focus({preventScroll:true});
+    });
+  });
+})();
 </script>
 </body>
 </html>

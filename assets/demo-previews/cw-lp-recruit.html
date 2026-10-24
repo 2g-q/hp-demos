@@ -328,7 +328,11 @@ footer{background:#332b23;color:#d9d0c5;padding:56px 0 110px;font-size:13px}
 @media(max-width:700px){.review-disclosure+header{top:0}.review-disclosure{padding-top:90px}.maker-contact{padding-bottom:115px}.review-disclosure+header .brand,.review-disclosure+header .menu a{color:var(--ink,#243347)}.review-disclosure+header{background:#fff}.review-disclosure+header .burger span{background:#263b42}.review-form{gap:16px}.review-disclosure+header .book{color:#5b4433;border-color:currentColor}section[id]{scroll-margin-top:90px}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto!important}*,*::before,*::after{animation:none!important;transition:none!important}.reveal,.rv{opacity:1!important;transform:none!important}}
 </style>
-<style>.form-thanks button{margin-top:22px}.form-thanks:focus{outline:2px solid #a85c2d}.hero-note{max-width:36em}@media(max-width:600px){.review-disclosure{padding-top:96px}.menu-open .menu-btn{z-index:110;position:relative}.hero-in{padding-top:35px!important}}</style><style>body.legacy-recruit .review-disclosure{padding:8px 20px!important}body.legacy-recruit .review-disclosure+header{top:0}</style><style>body.legacy-recruit .hero h1 .phrase{white-space:nowrap}@media(max-width:760px){body.legacy-recruit .hero h1{font-size:clamp(26px,7.2vw,30px);letter-spacing:0}}</style></head>
+<style>.form-thanks button{margin-top:22px}.form-thanks:focus{outline:2px solid #a85c2d}.hero-note{max-width:36em}@media(max-width:600px){.review-disclosure{padding-top:96px}.menu-open .menu-btn{z-index:110;position:relative}.hero-in{padding-top:35px!important}}</style><style>body.legacy-recruit .review-disclosure{padding:8px 20px!important}body.legacy-recruit .review-disclosure+header{top:0}</style><style>body.legacy-recruit .hero h1 .phrase{white-space:nowrap}@media(max-width:760px){body.legacy-recruit .hero h1{font-size:clamp(26px,7.2vw,30px);letter-spacing:0}}</style><style id="refinement-style">
+.maker-contact{border-top:3px solid var(--case-accent,#53695a)}.maker-contact strong{display:block;max-width:45em;line-height:1.65}.maker-contact .case-features{display:flex;flex-wrap:wrap;gap:8px 20px;padding:0;margin:18px 0 22px;list-style:none;font-size:13px}.maker-contact .case-features li{padding-left:13px;position:relative}.maker-contact .case-features li::before{content:"";position:absolute;left:0;top:.8em;width:4px;height:4px;background:var(--case-accent,#53695a)}.maker-contact a:first-child{background:var(--case-accent,#53695a);border-color:var(--case-accent,#53695a);color:#fff}.confirmation-title,.confirmation-note,.confirmation-row{display:block}.confirmation-title{font-size:17px;margin-bottom:12px}.confirmation-row{padding:9px 0;border-bottom:1px solid currentColor}.confirmation-row>span{display:block;opacity:.8;font-size:12px}.confirmation-row>b{font-weight:500;overflow-wrap:anywhere}.confirmation-note{margin-top:14px;font-size:12px}.confirmation-edit{justify-self:start;min-height:44px;border:1px solid currentColor!important;border-radius:3px;padding:10px 18px;color:inherit;background:transparent;font-size:14px}.confirmation-edit[hidden]{display:none!important}.selection-guidance{padding:16px 18px;border-left:2px solid currentColor;font-size:13px;line-height:1.8;margin:14px 0}.selection-guidance:empty{display:none}.decision-link{display:inline-flex;align-items:center;min-height:44px;gap:8px;margin-top:14px;font-size:13px;font-weight:700;text-decoration:underline;text-underline-offset:5px}.form-done,.review-summary{overflow-wrap:anywhere}.refine-note{font-size:12px;line-height:1.8;opacity:.82;margin-top:14px}
+@media(max-width:600px){.maker-contact .case-features{display:grid;gap:10px}.maker-contact .maker-links{display:grid}.maker-contact a{justify-content:center}}
+</style><noscript><style>form{display:none!important}.reveal,.rv,.reveal>*{opacity:1!important;transform:none!important}</style></noscript>
+</head>
 <body class="legacy-recruit">
 <div class="review-disclosure">架空の制作サンプルです。予約・応募は行われません。 <a href="#site-production">Web制作のご相談はこちら</a></div>
 
@@ -340,13 +344,13 @@ footer{background:#332b23;color:#d9d0c5;padding:56px 0 110px;font-size:13px}
 </a>
 <nav class="gnav" id="gnav">
 <ul>
-<li><a href="#numbers">数字で見る職場</a></li>
+<li><a href="#numbers">働く条件</a></li>
 <li><a href="#work">仕事内容</a></li>
-<li><a href="#voice">先輩の声</a></li>
+<li><a href="#voice">見学で確かめること</a></li>
 <li><a href="#benefit">待遇・福利厚生</a></li>
 <li><a href="#requirements">募集要項</a></li>
 <li><a href="#faq">よくある質問</a></li>
-<li><a href="#apply">応募する</a></li>
+<li><a href="#apply" data-entry-type="apply">応募する</a></li>
 </ul>
 </nav>
 <a class="hd-cta" href="#apply">応募・見学のご予約</a>
@@ -363,7 +367,7 @@ footer{background:#332b23;color:#d9d0c5;padding:56px 0 110px;font-size:13px}
 <h1>やさしさを、<br/>すり減らさない<span class="phrase"><em>職場</em>へ。</span></h1>
 <p class="hero-lead">食事や入浴の介助、日々の記録、次のシフトへの申し送り。仕事内容と働く条件を確かめてから、応募や見学を選べます。</p>
 <div class="hero-cta">
-<a class="btn-main" href="#apply">応募してみる<span class="ar">→</span></a>
+<a class="btn-main" href="#apply" data-entry-type="apply">応募内容を選ぶ<span class="ar">→</span></a>
 <a class="btn-sub" href="#apply" data-entry-type="tour">まずは見学だけ(30分・手ぶらでOK)</a>
 </div>
 <p class="hero-note">※応募=面接ではありません。「話を聞いてみたい」だけでも大歓迎です。</p>
@@ -374,19 +378,19 @@ footer{background:#332b23;color:#d9d0c5;padding:56px 0 110px;font-size:13px}
 <section class="numbers" id="numbers">
 <div class="wrap">
 <div class="sec-head rv">
-<span class="sec-en">DATA</span>
-<h2 class="sec-ttl">数字で見る、ひだまりの働きやすさ</h2>
-<p class="sec-sub">休日・残業・研修など、応募前に知りたい項目をまとめています。以下はすべて架空の設定で、実測値ではありません。</p>
+<span class="sec-en">WORKING CONDITIONS</span>
+<h2 class="sec-ttl">応募前に、働く条件を確かめる</h2>
+<p class="sec-sub">休日、勤務時間、研修。自分の生活と照らし合わせたい条件をまとめました。以下は制作サンプルの架空設定です。</p>
 </div>
 <div class="num-grid">
-<div class="num-card rv"><h3>有休消化率</h3><div class="num-val">92<small>%</small></div><p class="num-note">希望日に取れるよう<br/>シフトを先に調整します</p></div>
-<div class="num-card rv rv-d1"><h3>月平均残業時間</h3><div class="num-val">4.2<small>時間</small></div><p class="num-note">記録業務のICT化で<br/>「持ち帰り仕事」ゼロ</p></div>
-<div class="num-card rv rv-d2"><h3>入社3年定着率</h3><div class="num-val">88<small>%</small></div><p class="num-note">定着状況を伝える<br/>項目の表示例です</p></div>
-<div class="num-card rv"><h3>年間休日</h3><div class="num-val">120<small>日</small></div><p class="num-note">希望休は月4日まで申請可<br/>連休の取得も歓迎</p></div>
-<div class="num-card rv rv-d1"><h3>産休・育休の復帰率</h3><div class="num-val">100<small>%</small></div><p class="num-note">時短勤務・日勤のみなど<br/>復帰後の働き方を選べます</p></div>
-<div class="num-card rv rv-d2"><h3>資格取得支援の利用</h3><div class="num-val">47<small>名</small></div><p class="num-note">受講費は全額会社負担<br/>勤務時間内の受講もOK</p></div>
+<div class="num-card rv"><h3>年間休日</h3><div class="num-val">120<small>日</small></div><p class="num-note">仕事と休みのペースを<br/>募集要項で確認</p></div>
+<div class="num-card rv rv-d1"><h3>毎月の希望休</h3><div class="num-val">4<small>日</small></div><p class="num-note">希望を聞いてから<br/>シフトを作成</p></div>
+<div class="num-card rv rv-d2"><h3>日勤の休憩時間</h3><div class="num-val">60<small>分</small></div><p class="num-note">8:30〜17:30の日勤例<br/>交代で休憩</p></div>
+<div class="num-card rv"><h3>夜勤を始める時期</h3><div class="num-val">6<small>ヶ月以降</small></div><p class="num-note">入社後・希望者のみ<br/>日勤の相談も可能</p></div>
+<div class="num-card rv rv-d1"><h3>初任者研修</h3><div class="num-val" style="font-size:28px">会社負担</div><p class="num-note">資格取得の費用を補助<br/>勤務時間内の受講も可能</p></div>
+<div class="num-card rv rv-d2"><h3>担当者との面談</h3><div class="num-val"><small>月</small>1<small>回</small></div><p class="num-note">1on1で、仕事や<br/>働き方について相談</p></div>
 </div>
-<p class="num-foot">※数値はいずれも2025年度実績(架空のデモ用データです)。</p>
+<p class="num-foot">※すべて架空の募集条件です。実在する施設の採用情報ではありません。</p>
 </div>
 </section>
 <!-- ===== Message ===== -->
@@ -400,7 +404,7 @@ footer{background:#332b23;color:#d9d0c5;padding:56px 0 110px;font-size:13px}
 <span class="sec-en">MESSAGE</span>
 <h2 class="sec-ttl">私たちの想い</h2>
 </div>
-<p class="rv">介護の現場で人が辞めていく理由は、仕事がきついからではありません。<strong>「がんばっても報われない」と感じたとき</strong>に、人は現場を去っていきます。給与が上がらない。休みが取れない。相談できる相手がいない——。</p>
+<p class="rv">介護の仕事を選ぶとき、仕事内容と同じくらい気になるのは、<strong>無理なく働き続けられるかどうか</strong>。勤務時間や休日、仕事で困ったときの相談先まで、応募前に知っていただきたいと考えています。</p>
 <p class="rv">ひだまり介護グループは、その一つひとつを「仕組み」で解決することにこだわってきました。処遇改善加算は全額をスタッフに還元し、シフトは希望を先に聞いてから組む。記録はスマホで入力し、事務作業を減らす。新人には必ず専属の先輩がつき、独り立ちまで一緒に仕事を覚える。</p>
 <p class="rv">利用者さまの「ありがとう」は、介護の仕事にしかない報酬です。でも、それだけに甘えない。<strong>やさしさに、待遇と環境で応える会社</strong>でありたいと思っています。</p>
 <p class="msg-sign rv">ひだまり介護グループ 代表<br/><b>日向 あかり</b>(架空の人物です)</p>
@@ -418,9 +422,9 @@ footer{background:#332b23;color:#d9d0c5;padding:56px 0 110px;font-size:13px}
 <div class="work-cols">
 <ul class="work-list">
 <li class="rv"><span class="ic"><svg fill="none" height="1em" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" style="vertical-align:-0.12em" viewbox="0 0 24 24" width="1em"><path d="M4 12h16a8 8 0 0 1-16 0z"></path><path d="M9 9V6M15 9V6"></path></svg></span><div><h4>生活のサポート</h4><p>食事・入浴・お手洗いの介助など、利用者さまの毎日を支える基本のお仕事。マニュアルと先輩の同行で覚えていきます。</p></div></li>
-<li class="rv rv-d1"><span class="ic"><svg fill="none" height="1em" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" style="vertical-align:-0.12em" viewbox="0 0 24 24" width="1em"><path d="M12 3a9 9 0 1 0 0 18c1.5 0 2-1 1.5-2-.6-1.2 0-2.5 1.5-2.5H17a4 4 0 0 0 4-4c0-5-4-9.5-9-9.5z"></path><circle cx="8" cy="10" r="1"></circle><circle cx="12" cy="7.5" r="1"></circle><circle cx="16" cy="10" r="1"></circle></svg></span><div><h4>レクリエーション</h4><p>体操・工作・季節行事の企画と進行。「利用者さまの笑顔を一番近くで見られる時間」と人気の業務です。</p></div></li>
-<li class="rv rv-d2"><span class="ic"><svg fill="none" height="1em" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" style="vertical-align:-0.12em" viewbox="0 0 24 24" width="1em"><path d="M5 4h4l2 5-2.5 1.5a12 12 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"></path></svg></span><div><h4>記録・連絡(スマホで完結)</h4><p>介助内容や体調の記録はタブレット・スマホ入力。手書きの日誌はありません。残業が少ない最大の理由です。</p></div></li>
-<li class="rv rv-d3"><span class="ic"><svg fill="none" height="1em" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" style="vertical-align:-0.12em" viewbox="0 0 24 24" width="1em"><path d="M12 20s-7-4.6-7-9.2A4 4 0 0 1 12 8a4 4 0 0 1 7 2.8C19 15.4 12 20 12 20z"></path></svg></span><div><h4>ご家族との連携</h4><p>日々の様子をご家族へ共有。「家族の代わりに見ていてくれてありがとう」と言っていただける瞬間です。</p></div></li>
+<li class="rv rv-d1"><span class="ic"><svg fill="none" height="1em" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" style="vertical-align:-0.12em" viewbox="0 0 24 24" width="1em"><path d="M12 3a9 9 0 1 0 0 18c1.5 0 2-1 1.5-2-.6-1.2 0-2.5 1.5-2.5H17a4 4 0 0 0 4-4c0-5-4-9.5-9-9.5z"></path><circle cx="8" cy="10" r="1"></circle><circle cx="12" cy="7.5" r="1"></circle><circle cx="16" cy="10" r="1"></circle></svg></span><div><h4>レクリエーション</h4><p>体操・工作・季節行事の企画と進行。利用者さまの体調や関心に合わせ、内容をチームで考えます。</p></div></li>
+<li class="rv rv-d2"><span class="ic"><svg fill="none" height="1em" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" style="vertical-align:-0.12em" viewbox="0 0 24 24" width="1em"><path d="M5 4h4l2 5-2.5 1.5a12 12 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"></path></svg></span><div><h4>記録・連絡(スマホで完結)</h4><p>介助内容や体調の記録はタブレット・スマホ入力。記録した内容を、次の担当者への申し送りに使います。</p></div></li>
+<li class="rv rv-d3"><span class="ic"><svg fill="none" height="1em" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" style="vertical-align:-0.12em" viewbox="0 0 24 24" width="1em"><path d="M12 20s-7-4.6-7-9.2A4 4 0 0 1 12 8a4 4 0 0 1 7 2.8C19 15.4 12 20 12 20z"></path></svg></span><div><h4>ご家族との連携</h4><p>日々の様子をご家族へ共有。食事や体調の変化など、気づいたことを担当者へつなぎます。</p></div></li>
 </ul>
 <div class="tl-box rv">
 <h3>日勤スタッフの1日(例)</h3>
@@ -430,64 +434,15 @@ footer{background:#332b23;color:#d9d0c5;padding:56px 0 110px;font-size:13px}
 <li><span class="tl-time">9:00</span><h4>入浴介助・水分補給</h4><p>必ず2名体制。無理な力仕事にならないよう、リフト等の設備も揃えています。<span class="pt">Point:身体への負担を設備で軽減</span></p></li>
 <li><span class="tl-time">12:00</span><h4>昼食の介助 → 交代で休憩</h4><p>休憩は別室でしっかり60分。仮眠・外出も自由です。</p></li>
 <li><span class="tl-time">14:00</span><h4>レクリエーション</h4><p>今日は歌の会。企画はやりたい人が手を挙げる方式で、強制はありません。</p></li>
-<li><span class="tl-time">16:00</span><h4>記録・翌日の準備</h4><p>スマホ入力なので10分程度で完了。<span class="pt">Point:記録のICT化で残業を防止</span></p></li>
-<li><span class="tl-time">17:30</span><h4>申し送り・退勤</h4><p>「残って当然」の空気はありません。17:40にはほとんどのスタッフが帰宅しています。</p></li>
+<li><span class="tl-time">16:00</span><h4>記録・翌日の準備</h4><p>その日の介助内容と気づいたことを入力し、申し送りを準備します。<span class="pt">Point:次の担当者に必要な情報を残す</span></p></li>
+<li><span class="tl-time">17:30</span><h4>申し送り・退勤</h4><p>次のシフトへ必要事項を伝えて退勤。勤務時間や申し送りの進め方は、見学でも確認できます。</p></li>
 </ul>
 </div>
 </div>
 </div>
 </section>
 <!-- ===== Voices ===== -->
-<section class="voice" id="voice">
-<div class="wrap">
-<div class="sec-head rv">
-<span class="sec-en">INTERVIEW</span>
-<h2 class="sec-ttl">先輩スタッフの声</h2>
-<p class="sec-sub">未経験から始めた人、他施設から転職した人、子育て中の人。3人が働く様子をご紹介します。</p>
-</div>
-<div class="voice-grid">
-<div class="voice-card rv">
-<img alt="イメージイラスト" loading="lazy" src="data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20800%20600%22%3E%3Crect%20width%3D%22100%25%22%20height%3D%22100%25%22%20fill%3D%22%23f6efe5%22%2F%3E%3Ccircle%20cx%3D%22660%22%20cy%3D%22110%22%20r%3D%22120%22%20fill%3D%22%23efe6d6%22%2F%3E%3Cg%3E%3Crect%20x%3D%22150%22%20y%3D%22360%22%20width%3D%22240%22%20height%3D%22150%22%20rx%3D%2214%22%20fill%3D%22%23fff%22%20stroke%3D%22%23dccdb4%22%20stroke-width%3D%226%22%2F%3E%3Cpath%20d%3D%22M270%20360v150%22%20stroke%3D%22%23dccdb4%22%20stroke-width%3D%226%22%2F%3E%3Cg%20stroke%3D%22%23c9b493%22%20stroke-width%3D%226%22%20stroke-linecap%3D%22round%22%3E%3Cpath%20d%3D%22M180%20400h60M180%20430h60M300%20400h60M300%20430h60%22%2F%3E%3C%2Fg%3E%3C%2Fg%3E%3Cg%20stroke%3D%22%237da864%22%20stroke-width%3D%2212%22%20fill%3D%22none%22%20stroke-linecap%3D%22round%22%3E%3Cpath%20d%3D%22M560%20500%20V360%22%2F%3E%3Cpath%20d%3D%22M560%20420%20q-50%20-16%20-58%20-70%20q54%204%2058%2070z%22%20fill%3D%22%23a5c68f%22%2F%3E%3Cpath%20d%3D%22M560%20380%20q50%20-16%2058%20-70%20q-54%204%20-58%2070z%22%20fill%3D%22%23a5c68f%22%2F%3E%3C%2Fg%3E%3Crect%20x%3D%22120%22%20y%3D%22510%22%20width%3D%22560%22%20height%3D%2216%22%20rx%3D%228%22%20fill%3D%22%23e2d5bf%22%2F%3E%3C%2Fsvg%3E"/>
-<div class="voice-body">
-<span class="voice-tag">未経験入社・3年目</span>
-<p class="voice-name">佐藤 みなみ<small>元アパレル販売(架空)</small></p>
-<dl class="voice-qa">
-<dt>未経験で不安はなかった?</dt>
-<dd>正直、ありました。でも最初の3ヶ月は先輩が必ず隣にいてくれて、「できる仕事から」で本当に大丈夫でした。初任者研修も会社のお金で取らせてもらえました。</dd>
-<dt>入ってよかったと思う瞬間は?</dt>
-<dd>認知症の利用者さまが私の名前を覚えてくれた日。販売の仕事も好きでしたが、「ありがとう」の重みが違います。</dd>
-</dl>
-</div>
-</div>
-<div class="voice-card rv rv-d1">
-<img alt="イメージイラスト" loading="lazy" src="data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20800%20600%22%3E%3Crect%20width%3D%22100%25%22%20height%3D%22100%25%22%20fill%3D%22%23f6efe5%22%2F%3E%3Ccircle%20cx%3D%22140%22%20cy%3D%22120%22%20r%3D%22110%22%20fill%3D%22%23efe6d6%22%2F%3E%3Crect%20x%3D%22180%22%20y%3D%22140%22%20width%3D%22180%22%20height%3D%22320%22%20rx%3D%2226%22%20fill%3D%22%23fff%22%20stroke%3D%22%23dccdb4%22%20stroke-width%3D%227%22%2F%3E%3Cg%20stroke%3D%22%237da864%22%20stroke-width%3D%228%22%20stroke-linecap%3D%22round%22%3E%3Cpath%20d%3D%22M215%20220h110M215%20260h110M215%20300h72%22%2F%3E%3C%2Fg%3E%3Cg%20stroke%3D%22%237da864%22%20stroke-width%3D%229%22%20fill%3D%22none%22%20stroke-linecap%3D%22round%22%3E%3Cpath%20d%3D%22M215%20350l18%2018%2034%20-36%22%2F%3E%3C%2Fg%3E%3Cg%20transform%3D%22translate%28560%2C300%29%22%3E%3Ccircle%20r%3D%22110%22%20fill%3D%22%23fff%22%20stroke%3D%22%238a6d4e%22%20stroke-width%3D%2210%22%2F%3E%3Cpath%20d%3D%22M0%20-64%20V0%20H52%22%20stroke%3D%22%233a332c%22%20stroke-width%3D%2210%22%20fill%3D%22none%22%20stroke-linecap%3D%22round%22%2F%3E%3Cg%20fill%3D%22%23dccdb4%22%3E%3Ccircle%20cx%3D%220%22%20cy%3D%22-90%22%20r%3D%227%22%2F%3E%3Ccircle%20cx%3D%2290%22%20cy%3D%220%22%20r%3D%227%22%2F%3E%3Ccircle%20cx%3D%220%22%20cy%3D%2290%22%20r%3D%227%22%2F%3E%3Ccircle%20cx%3D%22-90%22%20cy%3D%220%22%20r%3D%227%22%2F%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E"/>
-<div class="voice-body">
-<span class="voice-tag">他施設から転職・5年目</span>
-<p class="voice-name">田中 大輔<small>介護福祉士(架空)</small></p>
-<dl class="voice-qa">
-<dt>前の職場と何が違う?</dt>
-<dd>残業と記録の量です。前職は手書き日誌で毎日1時間残業でしたが、ここはスマホ入力で定時に帰れます。給与も資格手当込みで月3万円上がりました。</dd>
-<dt>職場の人間関係は?</dt>
-<dd>「陰で言わず、その場で相談する」ルールが浸透していて、変な派閥がない。転職して人間関係のストレスが一番減りました。</dd>
-</dl>
-</div>
-</div>
-<div class="voice-card rv rv-d2">
-<img alt="イメージイラスト" loading="lazy" src="data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20800%20600%22%3E%3Crect%20width%3D%22100%25%22%20height%3D%22100%25%22%20fill%3D%22%23f6efe5%22%2F%3E%3Ccircle%20cx%3D%22670%22%20cy%3D%22470%22%20r%3D%22120%22%20fill%3D%22%23efe6d6%22%2F%3E%3Cpath%20d%3D%22M200%20300%20L360%20180%20L520%20300%22%20fill%3D%22none%22%20stroke%3D%22%238a6d4e%22%20stroke-width%3D%2214%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%2F%3E%3Crect%20x%3D%22240%22%20y%3D%22295%22%20width%3D%22240%22%20height%3D%22170%22%20fill%3D%22%23fff%22%20stroke%3D%22%238a6d4e%22%20stroke-width%3D%228%22%2F%3E%3Crect%20x%3D%22330%22%20y%3D%22365%22%20width%3D%2260%22%20height%3D%22100%22%20rx%3D%226%22%20fill%3D%22%23efe6d6%22%20stroke%3D%22%23c9b493%22%20stroke-width%3D%226%22%2F%3E%3Cg%20fill%3D%22%237da864%22%20opacity%3D%22.9%22%3E%3Cpath%20d%3D%22M560%20200%20q30%2024%200%2052%20q-30%20-28%200%20-52z%22%2F%3E%3Cpath%20d%3D%22M600%20240%20q26%2020%200%2044%20q-26%20-24%200%20-44z%22%2F%3E%3C%2Fg%3E%3Crect%20x%3D%22170%22%20y%3D%22470%22%20width%3D%22460%22%20height%3D%2216%22%20rx%3D%228%22%20fill%3D%22%23e2d5bf%22%2F%3E%3C%2Fsvg%3E"/>
-<div class="voice-body">
-<span class="voice-tag">子育て中・時短勤務</span>
-<p class="voice-name">鈴木 ゆき<small>2児の母・7年目(架空)</small></p>
-<dl class="voice-qa">
-<dt>子育てとの両立はできる?</dt>
-<dd>産休・育休を2回取って、いまは9〜16時の時短勤務です。子どもの発熱で急に休むときも「お互いさま」と言ってくれる職場で、罪悪感なく働けています。</dd>
-<dt>これから入る人にひとこと</dt>
-<dd>見学に来て、スタッフの表情を見てほしいです。職場の本当の雰囲気は、働いている人の顔が一番正直だと思うので。</dd>
-</dl>
-</div>
-</div>
-</div>
-</div>
-</section>
+<section class="voice" id="voice"><div class="wrap"><div class="sec-head rv"><span class="sec-en">BEFORE YOU JOIN</span><h2 class="sec-ttl">見学で、確かめてほしいこと。</h2><p class="sec-sub">見学するだけでも大丈夫です。今の経験や生活に合わせて、気になることからお聞かせください。</p></div><div class="voice-grid"><article class="voice-card rv"><img alt="イメージイラスト" loading="lazy" src="data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20800%20600%22%3E%3Crect%20width%3D%22100%25%22%20height%3D%22100%25%22%20fill%3D%22%23f6efe5%22%2F%3E%3Ccircle%20cx%3D%22660%22%20cy%3D%22110%22%20r%3D%22120%22%20fill%3D%22%23efe6d6%22%2F%3E%3Cg%3E%3Crect%20x%3D%22150%22%20y%3D%22360%22%20width%3D%22240%22%20height%3D%22150%22%20rx%3D%2214%22%20fill%3D%22%23fff%22%20stroke%3D%22%23dccdb4%22%20stroke-width%3D%226%22%2F%3E%3Cpath%20d%3D%22M270%20360v150%22%20stroke%3D%22%23dccdb4%22%20stroke-width%3D%226%22%2F%3E%3Cg%20stroke%3D%22%23c9b493%22%20stroke-width%3D%226%22%20stroke-linecap%3D%22round%22%3E%3Cpath%20d%3D%22M180%20400h60M180%20430h60M300%20400h60M300%20430h60%22%2F%3E%3C%2Fg%3E%3C%2Fg%3E%3Cg%20stroke%3D%22%237da864%22%20stroke-width%3D%2212%22%20fill%3D%22none%22%20stroke-linecap%3D%22round%22%3E%3Cpath%20d%3D%22M560%20500%20V360%22%2F%3E%3Cpath%20d%3D%22M560%20420%20q-50%20-16%20-58%20-70%20q54%204%2058%2070z%22%20fill%3D%22%23a5c68f%22%2F%3E%3Cpath%20d%3D%22M560%20380%20q50%20-16%2058%20-70%20q-54%204%20-58%2070z%22%20fill%3D%22%23a5c68f%22%2F%3E%3C%2Fg%3E%3Crect%20x%3D%22120%22%20y%3D%22510%22%20width%3D%22560%22%20height%3D%2216%22%20rx%3D%228%22%20fill%3D%22%23e2d5bf%22%2F%3E%3C%2Fsvg%3E"/><div class="voice-body"><span class="voice-tag">未経験から始める方へ</span><h3 class="voice-name">一人で任される前に。</h3><dl class="voice-qa"><dt>最初に覚える仕事は？</dt><dd>生活のサポート、記録、申し送り。それぞれを誰と一緒に覚えるか、研修の進め方を確認します。</dd><dt>分からないときは誰に聞く？</dt><dd>専属の先輩によるサポートと資格取得支援について、相談したいことを整理できます。</dd></dl><a class="decision-link" href="#apply" data-entry-type="tour">見学の希望を選ぶ →</a></div></article><article class="voice-card rv"><img alt="イメージイラスト" loading="lazy" src="data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20800%20600%22%3E%3Crect%20width%3D%22100%25%22%20height%3D%22100%25%22%20fill%3D%22%23f6efe5%22%2F%3E%3Ccircle%20cx%3D%22140%22%20cy%3D%22120%22%20r%3D%22110%22%20fill%3D%22%23efe6d6%22%2F%3E%3Crect%20x%3D%22180%22%20y%3D%22140%22%20width%3D%22180%22%20height%3D%22320%22%20rx%3D%2226%22%20fill%3D%22%23fff%22%20stroke%3D%22%23dccdb4%22%20stroke-width%3D%227%22%2F%3E%3Cg%20stroke%3D%22%237da864%22%20stroke-width%3D%228%22%20stroke-linecap%3D%22round%22%3E%3Cpath%20d%3D%22M215%20220h110M215%20260h110M215%20300h72%22%2F%3E%3C%2Fg%3E%3Cg%20stroke%3D%22%237da864%22%20stroke-width%3D%229%22%20fill%3D%22none%22%20stroke-linecap%3D%22round%22%3E%3Cpath%20d%3D%22M215%20350l18%2018%2034%20-36%22%2F%3E%3C%2Fg%3E%3Cg%20transform%3D%22translate%28560%2C300%29%22%3E%3Ccircle%20r%3D%22110%22%20fill%3D%22%23fff%22%20stroke%3D%22%238a6d4e%22%20stroke-width%3D%2210%22%2F%3E%3Cpath%20d%3D%22M0%20-64%20V0%20H52%22%20stroke%3D%22%233a332c%22%20stroke-width%3D%2210%22%20fill%3D%22none%22%20stroke-linecap%3D%22round%22%2F%3E%3Cg%20fill%3D%22%23dccdb4%22%3E%3Ccircle%20cx%3D%220%22%20cy%3D%22-90%22%20r%3D%227%22%2F%3E%3Ccircle%20cx%3D%2290%22%20cy%3D%220%22%20r%3D%227%22%2F%3E%3Ccircle%20cx%3D%220%22%20cy%3D%2290%22%20r%3D%227%22%2F%3E%3Ccircle%20cx%3D%22-90%22%20cy%3D%220%22%20r%3D%227%22%2F%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E"/><div class="voice-body"><span class="voice-tag">経験を生かしたい方へ</span><h3 class="voice-name">今の働き方と、比べる。</h3><dl class="voice-qa"><dt>介助や記録の進め方は？</dt><dd>移乗の設備、記録に使う端末、申し送りの方法。これまでの職場との違いを確認します。</dd><dt>経験や資格はどう生かせる？</dt><dd>担当する仕事や資格手当、リーダーの役割を、募集要項と給与モデルで確かめます。</dd></dl><a class="decision-link" href="#apply" data-entry-type="tour">見学の希望を選ぶ →</a></div></article><article class="voice-card rv"><img alt="イメージイラスト" loading="lazy" src="data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20800%20600%22%3E%3Crect%20width%3D%22100%25%22%20height%3D%22100%25%22%20fill%3D%22%23f6efe5%22%2F%3E%3Ccircle%20cx%3D%22670%22%20cy%3D%22470%22%20r%3D%22120%22%20fill%3D%22%23efe6d6%22%2F%3E%3Cpath%20d%3D%22M200%20300%20L360%20180%20L520%20300%22%20fill%3D%22none%22%20stroke%3D%22%238a6d4e%22%20stroke-width%3D%2214%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%2F%3E%3Crect%20x%3D%22240%22%20y%3D%22295%22%20width%3D%22240%22%20height%3D%22170%22%20fill%3D%22%23fff%22%20stroke%3D%22%238a6d4e%22%20stroke-width%3D%228%22%2F%3E%3Crect%20x%3D%22330%22%20y%3D%22365%22%20width%3D%2260%22%20height%3D%22100%22%20rx%3D%226%22%20fill%3D%22%23efe6d6%22%20stroke%3D%22%23c9b493%22%20stroke-width%3D%226%22%2F%3E%3Cg%20fill%3D%22%237da864%22%20opacity%3D%22.9%22%3E%3Cpath%20d%3D%22M560%20200%20q30%2024%200%2052%20q-30%20-28%200%20-52z%22%2F%3E%3Cpath%20d%3D%22M600%20240%20q26%2020%200%2044%20q-26%20-24%200%20-44z%22%2F%3E%3C%2Fg%3E%3Crect%20x%3D%22170%22%20y%3D%22470%22%20width%3D%22460%22%20height%3D%2216%22%20rx%3D%228%22%20fill%3D%22%23e2d5bf%22%2F%3E%3C%2Fsvg%3E"/><div class="voice-body"><span class="voice-tag">家庭と両立したい方へ</span><h3 class="voice-name">一週間の予定から考える。</h3><dl class="voice-qa"><dt>希望する時間に働ける？</dt><dd>日勤のみ、時短勤務、扶養内など。希望する働き方と、募集している雇用形態を確認します。</dd><dt>休みはどう相談する？</dt><dd>希望休の出し方やシフト作成の流れを、見学時に聞きたいこととして整理します。</dd></dl><a class="decision-link" href="#apply" data-entry-type="tour">見学の希望を選ぶ →</a></div></article></div></div></section>
 <!-- ===== Benefits ===== -->
 <section class="benefit" id="benefit">
 <div class="wrap">
@@ -500,7 +455,7 @@ footer{background:#332b23;color:#d9d0c5;padding:56px 0 110px;font-size:13px}
 <div class="bene-card rv"><span class="bi">¥</span><h4>処遇改善加算を全額還元</h4><p>国の処遇改善加算は運営経費に回さず、全額をスタッフの手当として支給します。</p></div>
 <div class="bene-card rv rv-d1"><span class="bi"><svg fill="none" height="1em" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" style="vertical-align:-0.12em" viewbox="0 0 24 24" width="1em"><path d="M4 19V5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2z"></path><path d="M19 19v2H6"></path></svg></span><h4>資格取得費用を全額補助</h4><p>初任者研修・実務者研修・介護福祉士受験対策まで会社負担。勤務時間内の受講もできます。</p></div>
 <div class="bene-card rv rv-d2"><span class="bi"><svg fill="none" height="1em" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" style="vertical-align:-0.12em" viewbox="0 0 24 24" width="1em"><rect height="16" rx="2" width="18" x="3" y="5"></rect><path d="M3 9h18M8 3v4M16 3v4"></path></svg></span><h4>希望休 月4日+有休</h4><p>シフトは希望を聞いてから作成。連休での旅行や推し活も、遠慮なくどうぞ。</p></div>
-<div class="bene-card rv"><span class="bi"><svg fill="none" height="1em" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" style="vertical-align:-0.12em" viewbox="0 0 24 24" width="1em"><circle cx="12" cy="8" r="4"></circle><path d="M5 21c0-3.9 3.1-7 7-7s7 3.1 7 7"></path></svg></span><h4>産休・育休・時短勤務</h4><p>復帰率100%。日勤のみ・扶養内など、ライフステージに合わせて働き方を変えられます。</p></div>
+<div class="bene-card rv"><span class="bi"><svg fill="none" height="1em" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" style="vertical-align:-0.12em" viewbox="0 0 24 24" width="1em"><circle cx="12" cy="8" r="4"></circle><path d="M5 21c0-3.9 3.1-7 7-7s7 3.1 7 7"></path></svg></span><h4>産休・育休・時短勤務</h4><p>日勤のみ・扶養内など、家庭の事情に合わせた働き方をご相談いただけます。</p></div>
 <div class="bene-card rv rv-d1"><span class="bi"><svg fill="none" height="1em" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" style="vertical-align:-0.12em" viewbox="0 0 24 24" width="1em"><rect height="18" rx="4" width="18" x="3" y="3"></rect><path d="M12 8v8M8 12h8"></path></svg></span><h4>腰痛予防・健康サポート</h4><p>移乗リフト・スライディングシートを全館配備。年1回の健康診断に加え腰痛検診も実施。</p></div>
 <div class="bene-card rv rv-d2"><span class="bi"><svg fill="none" height="1em" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" style="vertical-align:-0.12em" viewbox="0 0 24 24" width="1em"><path d="M4 12h16a8 8 0 0 1-16 0z"></path><path d="M9 9V6M15 9V6"></path></svg></span><h4>食事補助・退職金制度</h4><p>1食250円の職員食、退職金制度(勤続3年〜)、誕生日休暇など小さな「うれしい」も大切に。</p></div>
 </div>
@@ -536,8 +491,8 @@ footer{background:#332b23;color:#d9d0c5;padding:56px 0 110px;font-size:13px}
 <tr><th>応募資格</th><td><b>無資格・未経験OK。</b>学歴・年齢・ブランク不問。「人と話すことが好き」なら大丈夫です。</td></tr>
 <tr><th>勤務地</th><td>ひだまりの家 大宮/浦和/与野(さいたま市内3施設)※希望勤務地を考慮。マイカー通勤可(駐車場無料)</td></tr>
 <tr><th>勤務時間</th><td>シフト制(早番7:00〜16:00/日勤8:30〜17:30/遅番11:00〜20:00/夜勤16:30〜翌9:30)※夜勤は入社6ヶ月以降・希望者のみ</td></tr>
-<tr><th>給与</th><td><b>月給 238,000円〜322,000円</b>+賞与年2回(昨年度実績3.2ヶ月)<br/>※各種手当込み。夜勤手当1回8,000円、資格手当(介護福祉士15,000円/月)別途</td></tr>
-<tr><th>休日休暇</th><td>年間休日120日/希望休 月4日/有給休暇(消化率92%)/誕生日休暇/産休・育休(復帰率100%)</td></tr>
+<tr><th>給与</th><td><b>月給 238,000円〜322,000円</b>+賞与年2回(3.2ヶ月分の表示例)<br/>※各種手当込み。夜勤手当1回8,000円、資格手当(介護福祉士15,000円/月)別途</td></tr>
+<tr><th>休日休暇</th><td>年間休日120日/希望休 月4日/有給休暇/誕生日休暇/産休・育休</td></tr>
 <tr><th>待遇・保険</th><td>社会保険完備/交通費全額支給/退職金制度/資格取得費用全額補助/食事補助/インフルエンザ予防接種無料</td></tr>
 </table>
 <p class="req-note">※本要項はデモ用の架空の内容です。</p>
@@ -549,13 +504,13 @@ footer{background:#332b23;color:#d9d0c5;padding:56px 0 110px;font-size:13px}
 <div class="sec-head rv">
 <span class="sec-en">FLOW</span>
 <h2 class="sec-ttl">応募から入社まで、4ステップ</h2>
-<p class="sec-sub">応募から内定まで最短1週間。在職中の方は面接日程を柔軟に調整します。</p>
+<p class="sec-sub">見学で仕事内容を確かめてから、面接に進むかを選べます。在職中の方は、日程や入社時期もご相談ください。</p>
 </div>
 <div class="flow-grid">
-<div class="flow-card rv"><span class="fn">01</span><h4>応募・見学予約</h4><p>下のフォームから30秒で完了。履歴書はまだ不要です。「見学だけ」「話を聞くだけ」も選べます。</p></div>
+<div class="flow-card rv"><span class="fn">01</span><h4>応募・見学予約</h4><p>希望する内容を選ぶところから。履歴書はまだ不要です。「見学だけ」「話を聞くだけ」も選べます。</p></div>
 <div class="flow-card rv rv-d1"><span class="fn">02</span><h4>施設見学(30分)</h4><p>実際の現場とスタッフの表情を見てください。おやつの時間帯が一番雰囲気が伝わるのでおすすめです。</p></div>
 <div class="flow-card rv rv-d2"><span class="fn">03</span><h4>面接(1回のみ)</h4><p>堅い試験はありません。これまでのこと、不安なこと、希望の働き方を率直にお聞かせください。</p></div>
-<div class="flow-card rv rv-d3"><span class="fn">04</span><h4>内定・入社</h4><p>面接から3日以内にご連絡。入社日は現職の引き継ぎに合わせて調整できます(最大3ヶ月先まで)。</p></div>
+<div class="flow-card rv rv-d3"><span class="fn">04</span><h4>内定・入社</h4><p>選考結果をご連絡したうえで、入社時期を相談します。現職の引き継ぎがある場合もお聞かせください。</p></div>
 </div>
 <p class="flow-foot">選考結果にかかわらず、<b>応募いただいた方全員に必ずご連絡</b>します。</p>
 </div>
@@ -571,11 +526,11 @@ footer{background:#332b23;color:#d9d0c5;padding:56px 0 110px;font-size:13px}
 <div class="faq-list rv">
 <details>
 <summary>本当に未経験・無資格でも大丈夫ですか?</summary>
-<p class="faq-a">はい。現スタッフの約4割が未経験からのスタートです。入社後3ヶ月は専属の先輩がつき、初任者研修(受講費約8万円)は全額会社負担で取得できます。「体力に自信がない」という方も、リフト等の設備で身体の負担を減らしています。</p>
+<p class="faq-a">はい。無資格・未経験からの応募も受け付ける設定です。入社後3ヶ月は専属の先輩がつき、初任者研修(受講費約8万円)は全額会社負担で取得できます。「体力に自信がない」という方も、リフト等の設備で身体の負担を減らしています。</p>
 </details>
 <details>
 <summary>夜勤は必ずやらないといけませんか?</summary>
-<p class="faq-a">いいえ。夜勤は入社6ヶ月以降で、かつ希望者のみです。日勤のみで働き続けているスタッフも多数います。逆に「夜勤中心でしっかり稼ぎたい」という夜勤専従の働き方も選べます。</p>
+<p class="faq-a">いいえ。夜勤は入社6ヶ月以降で、かつ希望者のみです。日勤のみでの勤務も相談できます。逆に「夜勤中心でしっかり稼ぎたい」という夜勤専従の働き方も選べます。</p>
 </details>
 <details>
 <summary>人間関係が不安です。職場の雰囲気は?</summary>
@@ -583,7 +538,7 @@ footer{background:#332b23;color:#d9d0c5;padding:56px 0 110px;font-size:13px}
 </details>
 <details>
 <summary>給与は本当に上がりますか?</summary>
-<p class="faq-a">昇給は年1回+資格・役職手当の積み上げ式です。評価基準を全員に公開しているため「なぜ上がらないのか分からない」という状態にはなりません。モデル例:未経験入社3年で介護福祉士を取得した場合、月給は約5.6万円上がっています(架空データ)。</p>
+<p class="faq-a">昇給は年1回+資格・役職手当の積み上げ式です。担当する仕事と資格・役割ごとの金額は、上の給与モデルで確認できます。掲載している金額は架空の設定で、昇給を保証するものではありません。</p>
 </details>
 <details>
 <summary>ブランクがあります(元介護職)。歓迎されますか?</summary>
@@ -601,7 +556,7 @@ footer{background:#332b23;color:#d9d0c5;padding:56px 0 110px;font-size:13px}
 <div class="wrap">
 <div class="sec-head rv">
 <span class="sec-en" style="color:#ffc48d">ENTRY</span>
-<h2 class="sec-ttl">応募・見学のご予約</h2>
+<h2 class="sec-ttl">応募・見学の希望を選ぶ</h2>
 <p class="sec-sub">応募・見学・仕事内容の相談から選べます。架空の情報を入力して、確認画面までお試しください。</p>
 </div>
 <div class="form-box rv">
@@ -657,7 +612,7 @@ footer{background:#332b23;color:#d9d0c5;padding:56px 0 110px;font-size:13px}
 </main>
 <div class="fix-cta">
 <a class="fc-sub" href="#apply" data-entry-type="tour">見学を相談</a>
-<a class="fc-main" href="#apply">応募内容を確認</a>
+<a class="fc-main" href="#apply" data-entry-type="apply">応募内容を確認</a>
 </div>
 <script>
 // ===== Mobile menu =====
@@ -686,7 +641,8 @@ form.addEventListener('submit',e=>{
   if(!tel.value.trim()){tel.focus();tel.style.borderColor='#d64545';return;}
   if(!form.reportValidity())return;
   const choice={apply:'応募',tour:'施設見学',talk:'仕事内容の相談'};
-  document.getElementById('entry-summary').textContent='ご希望：'+choice[form.elements.type.value]+'\nお名前：'+name.value+'\n電話番号：'+tel.value+'\nメールアドレス：'+(form.elements.email.value||'未入力')+'\n介護のご経験：'+(form.elements.exp.value||'未選択')+'\nご質問・ご希望：'+(form.elements.msg.value||'未入力');
+  const fields=[['ご希望',choice[form.elements.type.value]],['お名前',name.value],['電話番号',tel.value],['メールアドレス',form.elements.email.value||'未入力'],['介護のご経験',form.elements.exp.value||'未選択'],['ご質問・ご希望',form.elements.msg.value||'未入力']];
+  document.getElementById('entry-summary').replaceChildren(...fields.map(([label,value])=>{const row=document.createElement('span');row.className='confirmation-row';const key=document.createElement('span');key.textContent=label+'：';const text=document.createElement('b');text.textContent=value;row.append(key,text);return row;}));
   form.style.display='none';
   document.getElementById('formThanks').classList.add('show');
   document.getElementById('formThanks').focus();
@@ -698,8 +654,38 @@ form.addEventListener('submit',e=>{
 <!-- demo-fict:end -->
 <script>document.addEventListener('click',function(e){const a=e.target.closest('a');if(!a||a.hasAttribute('data-production-contact'))return;const h=a.getAttribute('href')||'';if(h.startsWith('#')){e.preventDefault();if(h.length>1){const t=document.getElementById(decodeURIComponent(h.slice(1)));if(t)t.scrollIntoView({behavior:'smooth',block:'start'});}return;}if(/^(tel:|mailto:)/i.test(h)){e.preventDefault();alert('制作サンプルです。電話・メールの送信は行いません。');return;}if(a.hasAttribute('download'))return;if(h){e.preventDefault();window.top.location.href=a.href;}},true);document.addEventListener('submit',function(e){e.preventDefault();},true);</script>
 <a class="minato-site-return" href="./cw-web.html">← 制作例一覧に戻る</a>
-<aside class="maker-contact" id="site-production"><small>このサンプルの制作について</small><strong>自社の採用サイトをご検討の方へ</strong><p>掲載しているのは架空の事業者の制作例です。実際のWeb制作のご相談は、ミナト AI・IT ラボへ。必要なページや予約・問い合わせの流れからご相談いただけます。</p><div class="maker-links"><a data-production-contact href="mailto:minato.ai.lab@gmail.com?subject=Web%E5%88%B6%E4%BD%9C%E3%81%AE%E7%9B%B8%E8%AB%87%EF%BC%9Alp-recruit%20%E3%81%AE%E3%82%B5%E3%83%B3%E3%83%97%E3%83%AB%E3%82%92%E8%A6%8B%E3%81%A6">メールで制作を相談する ↗</a><a data-production-contact href="https://page.line.me/091usyfe" target="_blank" rel="noopener noreferrer">LINEで制作を相談する ↗</a><a href="./cw-web.html">制作例一覧へ</a></div><small>上の操作フォームは体験用です。この窓口ではWeb制作のご相談を承ります。</small></aside><script>
+<aside class="maker-contact" id="site-production" style="--case-accent:#6a8058"><small>このサンプルの制作について</small><strong>仕事内容と働く条件が伝わり、見学から選べる採用サイトへ。</strong><ul class="case-features"><li>一日の仕事と募集条件の整理</li><li>応募・見学・相談の選び分け</li><li>入力内容の確認と修正</li></ul><p>募集職種と、応募前によく聞かれることをお聞かせください。 Web制作のご相談は、ミナト AI・IT ラボへ。</p><div class="maker-links"><a data-production-contact href="mailto:minato.ai.lab@gmail.com?subject=Web%E5%88%B6%E4%BD%9C%E3%81%AE%E7%9B%B8%E8%AB%87%EF%BC%9Alp-recruit%20%E3%81%AE%E3%82%B5%E3%83%B3%E3%83%97%E3%83%AB%E3%82%92%E8%A6%8B%E3%81%A6">メールで制作を相談する ↗</a><a data-production-contact href="https://page.line.me/091usyfe" target="_blank" rel="noopener noreferrer">LINEで制作を相談する ↗</a><a href="./cw-web.html">制作例一覧へ</a></div><small>掲載内容は架空の制作例です。上の体験フォームと、こちらのWeb制作相談窓口は別です。</small></aside><script>
 (()=>{document.querySelectorAll('[data-preview-form]').forEach(form=>{const output=form.querySelector('output');form.addEventListener('change',()=>output.textContent='');form.addEventListener('submit',event=>{event.preventDefault();if(!form.reportValidity())return;const data=[...form.querySelectorAll('select[name]')].map(el=>el.name+'：'+el.selectedOptions[0].textContent);output.textContent=data.join(' ／ ')+'。確認表示です。送信・予約・応募は行っていません。選択を変えて何度でも試せます。';});});document.querySelectorAll('[data-preview-topic]').forEach(a=>a.addEventListener('click',()=>{const select=document.querySelector('[data-topic-select]');if(select){select.value=a.dataset.previewTopic;select.dispatchEvent(new Event('change',{bubbles:true}));}}));const menu=document.getElementById('mn')||document.getElementById('mnav')||document.getElementById('gnav');const toggle=document.getElementById('bg')||document.getElementById('menuBtn');if(menu&&toggle){toggle.setAttribute('aria-controls',menu.id);const sync=()=>toggle.setAttribute('aria-expanded',String(menu.classList.contains('open')||document.body.classList.contains('menu-open')));new MutationObserver(sync).observe(menu,{attributes:true,attributeFilter:['class']});new MutationObserver(sync).observe(document.body,{attributes:true,attributeFilter:['class']});sync();document.addEventListener('keydown',event=>{if(event.key==='Escape'&&toggle.getAttribute('aria-expanded')==='true'){toggle.click();toggle.focus();}});}})();
+</script>
+<script>
+(() => {
+  document.querySelectorAll('[data-preview-form], [data-demo-form]').forEach(form => {
+    const output = form.querySelector('output');
+    if (!output) return;
+    output.tabIndex = -1;
+    const edit = document.createElement('button');
+    edit.type = 'button'; edit.className = 'confirmation-edit'; edit.textContent = '選択内容を変更する'; edit.hidden = true;
+    output.after(edit);
+    edit.addEventListener('click', () => { output.textContent = ''; form.querySelector('select, input')?.focus(); });
+    new MutationObserver(() => { if (!output.textContent.trim()) edit.hidden = true; }).observe(output, {childList:true, subtree:true, characterData:true});
+    form.addEventListener('submit', event => {
+      event.preventDefault();
+      if (!form.reportValidity()) return;
+      const heading = document.createElement('strong');
+      heading.className = 'confirmation-title'; heading.textContent = '選んだ内容をご確認ください';
+      const rows = [...form.querySelectorAll('select[name]')].map(select => {
+        const row = document.createElement('span'); row.className = 'confirmation-row';
+        const label = document.createElement('span'); label.textContent = select.name;
+        const value = document.createElement('b'); value.textContent = select.selectedOptions[0]?.textContent || '未選択';
+        row.append(label, value); return row;
+      });
+      const note = document.createElement('span'); note.className = 'confirmation-note';
+      note.textContent = '確認表示です。外部への送信・予約・申し込みは行っていません。選択を変えて試せます。';
+      output.replaceChildren(heading, ...rows, note);
+      edit.hidden = false; output.focus({preventScroll:true});
+    });
+  });
+})();
 </script>
 </body>
 </html>

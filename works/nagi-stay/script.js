@@ -19,5 +19,11 @@ document.querySelector('#booking-form').addEventListener('submit',event=>{
   const checkout=new Date(dateInput.value+'T12:00:00');checkout.setDate(checkout.getDate()+nights);
   const end=[checkout.getFullYear(),String(checkout.getMonth()+1).padStart(2,'0'),String(checkout.getDate()).padStart(2,'0')].join('-');
   const result=document.querySelector('#booking-result');result.hidden=false;
-  result.textContent=document.querySelector('#selected-room').value+' / '+guestInput.value+'名 / '+nights+'泊。チェックイン '+dateInput.value+'、チェックアウト '+end+'。客室・日程の確認デモです。空室や料金は照会しておらず、予約は成立していません。';
+  document.querySelector('#review-room').textContent=document.querySelector('#selected-room').value;
+  document.querySelector('#review-party').textContent=guestInput.value+'名 / '+nights+'泊';
+  document.querySelector('#review-checkin').textContent=dateInput.value+' / 15:00';
+  document.querySelector('#review-checkout').textContent=end+' / 11:00';
+  result.focus({preventScroll:true});result.scrollIntoView({block:'nearest'});
 });
+document.querySelector('.review-edit').addEventListener('click',()=>{document.querySelector('#booking-result').hidden=true;dateInput.focus();});
+document.querySelector('#room-panel .text-link').addEventListener('click',()=>dateInput.focus({preventScroll:true}));

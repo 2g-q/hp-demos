@@ -2,7 +2,9 @@ const menu=document.querySelector('.menu'),nav=document.querySelector('nav');men
 const messages={'試作':'つくりたい形・用途・必要な数量をお知らせください。図面やスケッチがあると、より具体的に検討できます。','量産':'予定数量・材質・必要な品質条件をお知らせください。検査基準や継続生産の進め方も一緒に整理します。','加工方法':'用途と、いま困っていることをお知らせください。形状・素材・工程のどこに工夫できるかを検討します。'};document.querySelectorAll('[data-type]').forEach(button=>button.addEventListener('click',()=>{document.querySelectorAll('[data-type]').forEach(b=>b.setAttribute('aria-pressed',String(b===button)));document.querySelector('#consult-title').textContent=button.dataset.type+'についてのご相談';document.querySelector('#consult-text').textContent=messages[button.dataset.type]}));const dialog=document.querySelector('dialog');document.querySelector('.request').addEventListener('click',()=>dialog.showModal());dialog.querySelectorAll('.close,.dialog-done').forEach(b=>b.addEventListener('click',()=>dialog.close()));dialog.addEventListener('click',e=>{if(e.target===dialog){const r=dialog.getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)dialog.close()}});
 
 document.querySelector('.request').addEventListener('click',()=>{
-  const summary=document.querySelector('#consult-summary');
   const memo=document.querySelector('#part-purpose').value.trim();
-  summary.textContent=document.querySelector('#consult-title').textContent+'。'+document.querySelector('#consult-text').textContent+(memo?' 相談メモ：'+memo:'');
+  document.querySelector('#review-topic').textContent=document.querySelector('#consult-title').textContent;
+  document.querySelector('#review-check').textContent=document.querySelector('#consult-text').textContent;
+  document.querySelector('#review-purpose').textContent=memo||'まだ整理中です。用途の相談から始められます。';
 });
+document.querySelector('.dialog-done').addEventListener('click',()=>document.querySelector('#part-purpose').focus());

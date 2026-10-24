@@ -30,3 +30,6 @@
 
 /* Reading and choosing should remain comfortable on a phone. */
 .product-info legend,.product-info label small,.price-note,.demo-note,.dialog-notice{font-size:13px!important;line-height:1.9}.recipe-detail dl{font-size:15px}.recipe-shop{font-size:14px;min-height:44px}.product-info .selection-note{padding:12px 0;border-block:1px solid var(--line)}.faq details p,.faq summary{font-size:14px;line-height:1.9}#order-recipe{padding-top:18px;border-top:1px solid var(--line)}
+
+/* Keep the set, quantity and product subtotal easy to distinguish. */
+.order-review{margin:26px 0 20px}.order-review>div{display:grid;grid-template-columns:85px minmax(0,1fr);gap:18px;padding:14px 0;border-top:1px solid var(--line)}.order-review dt{font-size:12px;line-height:1.9}.order-review dd{font-size:14px;line-height:1.9;margin:0}.order-review .order-price{align-items:center;border-bottom:1px solid var(--line)}.order-price strong{display:block;font-size:28px;line-height:1.5;font-weight:500}.order-price small{display:block;font-size:11px}.product-info fieldset label{cursor:pointer}.product-info fieldset label:has(input:checked){background:#e6e9d7}.product-info input[type=radio]{accent-color:var(--green);min-width:18px;min-height:18px}#order-recipe{font-size:13px;line-height:1.9}dialog .field-hint{font-size:12px;line-height:1.9}
