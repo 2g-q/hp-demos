@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+
+<html lang="ja">
+<head><base href="https://2g-q.github.io/hp-demos/"/>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>株式会社ミライブリッジ｜人と企業の、これからをつなぐ人材会社</title>
+<meta content="人材紹介・人材派遣・採用支援を紹介する架空企業のWeb制作サンプルです。採用担当者と求職者、それぞれの相談導線を体験できます。" name="description"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&amp;family=Montserrat:wght@500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --ink:#131b2e; --sub:#5b6579; --line:#e6eaf1;
+  --bg:#f5f7fb; --paper:#fff; --brand:#2f6bff; --brand-d:#1f4fd0; --accent:#00c2a8;
+  --shadow:0 24px 60px -28px rgba(20,40,90,.4);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:"Noto Sans JP",sans-serif;color:var(--ink);background:var(--paper);
+  line-height:1.9;font-weight:400;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+img{display:block;width:100%;height:100%;object-fit:cover}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:1160px;margin:0 auto;padding:0 24px}
+.mont{font-family:"Montserrat",sans-serif}
+.en{font-family:"Montserrat",sans-serif;letter-spacing:.2em;font-size:.72rem;color:var(--brand);font-weight:700;text-transform:uppercase}
+.btn{display:inline-block;padding:15px 32px;border-radius:6px;font-size:.9rem;font-weight:700;transition:.3s}
+.btn-b{background:var(--brand);color:#fff;box-shadow:0 14px 30px -12px rgba(47,107,255,.6)}
+.btn-b:hover{background:var(--brand-d);transform:translateY(-2px)}
+.btn-g{border:1.5px solid var(--line);color:var(--ink);background:#fff}
+.btn-g:hover{border-color:var(--brand);color:var(--brand)}
+
+/* header */
+header{position:fixed;inset:0 0 auto 0;z-index:50;transition:.3s;padding:18px 0}
+header.scrolled{background:rgba(255,255,255,.92);backdrop-filter:blur(10px);box-shadow:0 1px 0 var(--line);padding:12px 0}
+.nav{display:flex;align-items:center;justify-content:space-between}
+.brand{display:flex;align-items:center;gap:11px;font-weight:900;font-size:1.24rem;color:#fff;transition:.3s;letter-spacing:.02em}
+header.scrolled .brand{color:var(--ink)}
+.logo{width:34px;height:34px;border-radius:9px;background:linear-gradient(135deg,var(--brand),var(--accent));position:relative}
+.logo::after{content:"";position:absolute;inset:10px 9px;border-left:3px solid #fff;border-bottom:3px solid #fff;border-radius:0 0 0 4px}
+.menu{display:flex;gap:30px;align-items:center}
+.menu a{font-size:.85rem;font-weight:500;color:#fff;transition:.3s}
+header.scrolled .menu a{color:var(--ink)}
+.menu a:hover{color:var(--accent)!important}
+.menu .cta{background:#fff;color:var(--brand-d)!important;padding:9px 20px;border-radius:6px;font-weight:700}
+header.scrolled .menu .cta{background:var(--brand);color:#fff!important}
+.burger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:6px}
+.burger span{width:26px;height:2px;background:#fff;transition:.3s}
+header.scrolled .burger span{background:var(--ink)}
+
+/* hero */
+.hero{position:relative;min-height:640px;height:calc(var(--demo-screen-height, 800px) * 0.92);display:flex;align-items:center;color:#fff;
+  background:linear-gradient(120deg,#0f1e3d 0%,#1b3a7a 55%,#2f6bff 120%);overflow:hidden}
+.hero::before{content:"";position:absolute;inset:0;opacity:.5;
+  background:repeating-linear-gradient(115deg,rgba(255,255,255,.10) 0 2px,transparent 2px 90px),repeating-linear-gradient(25deg,rgba(255,255,255,.06) 0 1px,transparent 1px 52px)}
+.hero::after{content:"";position:absolute;right:-120px;top:-120px;width:520px;height:520px;border-radius:50%;
+  background:radial-gradient(circle,rgba(0,194,168,.5),transparent 60%);filter:blur(20px)}
+.hero .wrap{position:relative;z-index:2}
+.hero h1{font-weight:900;font-size:clamp(2.1rem,5.6vw,4rem);line-height:1.35;letter-spacing:.01em;margin:20px 0 22px}
+.hero h1 span{color:var(--accent)}
+.hero p{max-width:480px;opacity:.9;font-weight:300;margin-bottom:36px}
+.hero .cta{display:flex;gap:14px;flex-wrap:wrap}
+.hero .btn-g{background:transparent;border-color:rgba(255,255,255,.5);color:#fff}
+.hero .btn-g:hover{background:#fff;color:var(--ink)}
+.stat-bar{position:absolute;left:0;right:0;bottom:0;z-index:2;background:rgba(255,255,255,.08);
+  backdrop-filter:blur(6px);border-top:1px solid rgba(255,255,255,.15)}
+.stat-bar .wrap{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;padding:22px 24px}
+.stat{text-align:center;color:#fff}
+.stat b{font-family:"Montserrat";font-size:1.9rem;font-weight:800;display:block;line-height:1}
+.stat b i{font-size:1rem;font-style:normal;color:var(--accent)}
+.stat span{font-size:.72rem;opacity:.85}
+
+section{padding:104px 0}
+.head{text-align:center;margin-bottom:58px}
+.head h2{font-weight:900;font-size:clamp(1.7rem,3.6vw,2.4rem);margin-top:10px;letter-spacing:.02em}
+.head p{color:var(--sub);font-size:.94rem;margin-top:14px}
+
+/* service */
+.svc{display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
+.scard{background:var(--paper);border:1px solid var(--line);border-radius:16px;overflow:hidden;transition:.35s}
+.scard .ph{aspect-ratio:16/10;position:relative}
+.scard .ph::after{content:"";position:absolute;inset:0;background:linear-gradient(transparent 50%,rgba(15,30,61,.5))}
+.scard .no{position:absolute;left:18px;top:14px;z-index:2;font-family:"Montserrat";font-weight:800;color:#fff;font-size:.8rem;letter-spacing:.15em}
+.scard .b{padding:26px}
+.scard h3{font-weight:700;font-size:1.2rem;margin-bottom:12px;display:flex;align-items:center;gap:10px}
+.scard h3::before{content:"";width:22px;height:3px;background:var(--brand);border-radius:2px}
+.scard p{font-size:.86rem;color:var(--sub)}
+
+/* strength */
+.str{background:var(--bg)}
+.str .grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
+.str .photo{aspect-ratio:4/3;border-radius:18px;overflow:hidden;box-shadow:var(--shadow)}
+.plist{display:grid;gap:18px;margin-top:8px}
+.pitem{display:flex;gap:16px;background:#fff;border:1px solid var(--line);border-radius:12px;padding:20px 22px}
+.pitem .n{font-family:"Montserrat";font-weight:800;color:var(--brand);font-size:1.4rem;line-height:1}
+.pitem h4{font-size:1.02rem;font-weight:700;margin-bottom:5px}
+.pitem p{font-size:.82rem;color:var(--sub)}
+
+/* flow */
+.flow{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;position:relative}
+.fstep{background:#fff;border:1px solid var(--line);border-radius:14px;padding:28px 22px;position:relative}
+.fstep .st{font-family:"Montserrat";font-size:.7rem;font-weight:700;color:var(--accent);letter-spacing:.16em}
+.fstep h4{font-weight:700;margin:8px 0;font-size:1.05rem}
+.fstep p{font-size:.8rem;color:var(--sub)}
+
+/* message */
+.msg{background:linear-gradient(120deg,#0f1e3d,#1b3a7a);color:#eaf0ff}
+.msg .grid{display:grid;grid-template-columns:.8fr 1.2fr;gap:52px;align-items:center}
+.msg .photo{aspect-ratio:1/1;border-radius:18px;overflow:hidden;box-shadow:var(--shadow)}
+.msg .en{color:var(--accent)}
+.msg h3{font-weight:900;font-size:1.8rem;margin:12px 0 22px;line-height:1.6}
+.msg p{opacity:.88;font-weight:300;margin-bottom:16px;font-size:.94rem}
+.msg .sign{font-weight:700;margin-top:10px}.msg .sign span{opacity:.7;font-weight:400;font-size:.8rem}
+
+/* company */
+.co .grid{display:grid;grid-template-columns:1.1fr .9fr;gap:52px}
+.otable{width:100%;border-collapse:collapse;font-size:.9rem}
+.otable th,.otable td{text-align:left;padding:16px 8px;border-bottom:1px solid var(--line);vertical-align:top}
+.otable th{width:140px;color:var(--brand-d);font-weight:700;white-space:nowrap}
+.map{aspect-ratio:1/1;border-radius:16px;overflow:hidden;background:var(--bg)}
+.map iframe{width:100%;height:100%;border:0}
+
+.cta-band{background:var(--brand);color:#fff;text-align:center;padding:82px 0;position:relative;overflow:hidden}
+.cta-band::before{content:"";position:absolute;left:-80px;bottom:-100px;width:360px;height:360px;border-radius:50%;background:rgba(0,194,168,.4);filter:blur(30px)}
+.cta-band .wrap{position:relative;z-index:2}
+.cta-band h2{font-weight:900;font-size:clamp(1.7rem,3.8vw,2.5rem);margin-bottom:14px}
+.cta-band p{opacity:.95;margin-bottom:30px}
+.cta-band .row{display:inline-flex;gap:14px;flex-wrap:wrap;justify-content:center}
+.cta-band .btn-w{background:#fff;color:var(--brand-d)}
+.cta-band .btn-o{border:1.5px solid rgba(255,255,255,.7);color:#fff}
+.cta-band .btn-o:hover{background:rgba(255,255,255,.12)}
+
+footer{background:#0d1526;color:#8592ab;padding:56px 0 28px;font-size:.82rem}
+.fg{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:30px}
+.fb{color:#fff;font-weight:900;font-size:1.2rem;display:flex;gap:10px;align-items:center;margin-bottom:14px}
+.fcol h5{color:#c3ccdd;font-size:.78rem;letter-spacing:.1em;margin-bottom:12px}
+.fcol a{display:block;padding:5px 0;font-size:.82rem}.fcol a:hover{color:var(--accent)}
+.copy{text-align:center;margin-top:40px;padding-top:22px;border-top:1px solid rgba(255,255,255,.08);font-size:.7rem;letter-spacing:.08em}
+
+.reveal{opacity:0;transform:translateY(28px);transition:.85s cubic-bezier(.2,.8,.2,1)}
+.reveal.in{opacity:1;transform:none}
+@media(max-width:880px){
+  section{padding:70px 0}
+  .menu{position:fixed;inset:0 0 0 auto;width:80%;max-width:320px;background:#fff;flex-direction:column;
+    justify-content:center;gap:24px;transform:translateX(100%);transition:.4s;box-shadow:var(--shadow)}
+  .menu.open{transform:none}.menu a{color:var(--ink)!important}.burger{display:flex}
+  .stat-bar .wrap{grid-template-columns:1fr 1fr;gap:18px}
+  .svc,.str .grid,.msg .grid,.co .grid{grid-template-columns:1fr;gap:32px}
+  .flow{grid-template-columns:1fr 1fr}.fg{grid-template-columns:1fr}
+}
+</style>
+<meta content="noindex" name="robots"/>
+<style>header .brand{flex-shrink:0}header .menu a{white-space:nowrap}header .book{white-space:nowrap}header .brand small{display:none}@media(max-width:1100px){header .menu{display:none}header .menu.on,header .menu.open{display:flex}header .burger{display:flex}header .tel{display:none}}@media(max-width:600px){header .wrap{padding-left:16px;padding-right:16px}header .brand{font-size:17px;gap:7px;white-space:nowrap}header .leaf{width:22px;height:22px;flex-shrink:0}header .right{gap:12px}header .book{font-size:12px;padding:10px 12px}}</style><link href="assets/demo-previews/dialog.css" rel="stylesheet"/><meta content="noindex" name="robots"/>
+<link href="assets/legacy-business-refresh.css" rel="stylesheet"/><script defer="" src="assets/standalone-sites.js?v=1"></script><link href="assets/standalone-sites.css?v=1" rel="stylesheet"/>
+<style id="sample-review-style">
+:root{scroll-padding-top:105px} :focus-visible{outline:3px solid #b66a27;outline-offset:5px}button,input,select,textarea{font:inherit}button{cursor:pointer}select,input,textarea{max-width:100%} .review-disclosure{position:relative;z-index:1;padding:8px 20px;background:#f4f0e7;color:#453e32;font:12px/1.6 system-ui;text-align:center}.review-disclosure a{text-decoration:underline}.review-disclosure+header{top:37px}.review-form{max-width:680px;margin:30px auto 0;text-align:left;display:grid;gap:20px}.review-form label{display:grid;gap:8px;font-size:14px;font-weight:600}.review-form select,.review-form input{width:100%;padding:13px 14px;background:#fff;color:#242a2c;border:1px solid #b8b5ae;border-radius:3px;min-height:48px}.review-form button{border:0;min-height:48px}.review-form output,.review-confirmation{display:block;padding:18px;border-left:3px solid currentColor;font-size:14px;line-height:1.8;text-align:left}.review-form output:empty{display:none}.review-form small{font-size:12px;line-height:1.7}.review-note{font-size:13px;line-height:1.8;margin:18px 0;color:inherit}.review-questions{display:grid;gap:0;margin-top:30px;border-top:1px solid currentColor}.review-questions details{padding:18px 0;border-bottom:1px solid #b6aea355}.review-questions summary{font-weight:600;cursor:pointer}.review-questions p{margin-top:12px;max-width:65ch}.maker-contact{padding:42px max(24px,calc((100% - 1100px)/2));background:#f3f1ec;color:#333c3c;font:14px/1.9 system-ui;text-align:left;border-top:1px solid #d3d0c8}.maker-contact p{max-width:65ch;margin:9px 0 17px}.maker-contact strong{font-size:18px}.maker-contact .maker-links{display:flex;gap:12px;flex-wrap:wrap}.maker-contact a{display:inline-flex;align-items:center;min-height:44px;padding:8px 15px;border:1px solid #8b9390;color:#253e38;text-decoration:none}.maker-contact small{display:block;margin-top:14px;font-size:12px}.burger{border:0;background:transparent;position:relative;z-index:60;min-width:44px;min-height:44px;justify-content:center;align-items:center}body>.minato-site-return{position:static;margin:20px 24px}.review-summary{white-space:pre-line}.review-form fieldset{border:0;padding:0}.review-form legend{font-weight:700;margin-bottom:8px} .review-form .review-choice{display:flex;gap:10px;align-items:center}.review-form .review-choice input{width:20px;min-height:24px}
+@media(max-width:700px){.review-disclosure+header{top:0}.review-disclosure{padding-top:90px}.maker-contact{padding-bottom:115px}.review-disclosure+header .brand,.review-disclosure+header .menu a{color:var(--ink,#243347)}.review-disclosure+header{background:#fff}.review-disclosure+header .burger span{background:#263b42}.review-form{gap:16px}.review-disclosure+header .book{color:#5b4433;border-color:currentColor}section[id]{scroll-margin-top:90px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto!important}*,*::before,*::after{animation:none!important;transition:none!important}.reveal,.rv{opacity:1!important;transform:none!important}}
+</style>
+<style>@media(max-width:880px){.legacy-corp .hero{min-height:860px}.legacy-corp .flow{grid-template-columns:1fr}.otable th{width:95px;white-space:normal}.menu{height:100dvh}.hero h1{font-size:clamp(2rem,8vw,3rem)}}.hero .cta{margin-bottom:90px}</style><style>body.legacy-corp .review-disclosure{padding:8px 20px!important}body.legacy-corp .review-disclosure+header{top:0}</style><style>@media(max-width:760px){body.legacy-corp .hero h1{font-size:clamp(28px,8vw,36px);letter-spacing:-.025em}}</style><style id="refinement-style">
+.cta-band h2{text-wrap:balance;line-break:strict}.maker-contact{border-top:3px solid var(--case-accent,#53695a)}.maker-contact strong{display:block;max-width:45em;line-height:1.65}.maker-contact .case-features{display:flex;flex-wrap:wrap;gap:8px 20px;padding:0;margin:18px 0 22px;list-style:none;font-size:13px}.maker-contact .case-features li{padding-left:13px;position:relative}.maker-contact .case-features li::before{content:"";position:absolute;left:0;top:.8em;width:4px;height:4px;background:var(--case-accent,#53695a)}.maker-contact a:first-child{background:var(--case-accent,#53695a);border-color:var(--case-accent,#53695a);color:#fff}.confirmation-title,.confirmation-note,.confirmation-row{display:block}.confirmation-title{font-size:17px;margin-bottom:12px}.confirmation-row{padding:9px 0;border-bottom:1px solid currentColor}.confirmation-row>span{display:block;opacity:.8;font-size:12px}.confirmation-row>b{font-weight:500;overflow-wrap:anywhere}.confirmation-note{margin-top:14px;font-size:12px}.confirmation-edit{justify-self:start;min-height:44px;border:1px solid currentColor!important;border-radius:3px;padding:10px 18px;color:inherit;background:transparent;font-size:14px}.confirmation-edit[hidden]{display:none!important}.selection-guidance{padding:16px 18px;border-left:2px solid currentColor;font-size:13px;line-height:1.8;margin:14px 0}.selection-guidance:empty{display:none}.decision-link{display:inline-flex;align-items:center;min-height:44px;gap:8px;margin-top:14px;font-size:13px;font-weight:700;text-decoration:underline;text-underline-offset:5px}.form-done,.review-summary{overflow-wrap:anywhere}.refine-note{font-size:12px;line-height:1.8;opacity:.82;margin-top:14px}
+@media(max-width:600px){.maker-contact .case-features{display:grid;gap:10px}.maker-contact .maker-links{display:grid}.maker-contact a{justify-content:center}}
+</style><noscript><style>form{display:none!important}.reveal,.rv,.reveal>*{opacity:1!important;transform:none!important}</style></noscript>
+<link href="assets/demo-previews/editorial-r3.css" rel="stylesheet"/></head>
+<body class="editorial-r3 legacy-corp">
+<div class="review-disclosure">架空の制作サンプルです。予約・応募は行われません。 <a href="#site-production">Web制作のご相談はこちら</a></div>
+<header id="hd"><div class="wrap nav">
+<div class="brand"><span class="logo"></span>株式会社ミライブリッジ</div>
+<nav class="menu" id="mn">
+<a href="#service">事業内容</a><a href="#strength">強み</a><a href="#flow">ご利用の流れ</a>
+<a href="#message">代表挨拶</a><a href="#company">会社概要</a>
+<a class="cta" href="#contact">お問い合わせ</a>
+</nav>
+<button aria-controls="mn" aria-expanded="false" aria-label="メニューを開閉" class="burger" id="bg"><span></span><span></span><span></span></button>
+</div></header>
+<section class="hero" style="padding:0"><div class="wrap">
+<span class="en" style="color:#8fe6d8">Human Resources</span>
+<h1>人と企業の、<br/><span>これから</span>をつなぐ。</h1>
+<p>"合う人"を採用したい企業と、"合う会社"を探す方へ。仕事内容や働き方を丁寧に伺い、入社後も担当者がご相談を受け付けます。</p>
+<div class="cta">
+<a class="btn btn-b" data-preview-topic="採用を考えている企業" href="#contact" style="background:#fff;color:var(--brand-d)">採用について相談する</a>
+<a class="btn btn-g" data-preview-topic="仕事を探している" href="#contact">仕事を探している方へ</a>
+</div>
+</div>
+<figure class="legacy-business-hero-photo"><img alt="仕事について話す人たちの参考写真" fetchpriority="high" height="1067" src="assets/demo-previews/photo-editorial/corp-conversation.webp" width="1600"/><figcaption>掲載写真は参考素材です。実際のスタッフ・オフィスではありません。</figcaption></figure>
+<div class="stat-bar"><div class="wrap"><div class="stat"><b style="font-size:1.2rem">人材紹介</b><span>採用したい企業へ</span></div><div class="stat"><b style="font-size:1.2rem">人材派遣</b><span>必要な期間の人材を</span></div><div class="stat"><b style="font-size:1.2rem">採用支援</b><span>募集・選考の進め方を</span></div><div class="stat"><b style="font-size:1.2rem">仕事探し</b><span>働き方を相談したい方へ</span></div></div></div></section>
+<section id="service"><div class="wrap">
+<div class="head reveal"><span class="en">Service</span><h2>事業内容</h2><p>採用の入口から定着まで、3つのサービスで支えます。</p></div>
+<div class="svc reveal">
+<div class="scard"><div class="ph"><span class="no">01</span><svg preserveaspectratio="xMidYMid slice" role="img" style="width:100%;height:100%;display:block" viewbox="0 0 700 438"><rect fill="#eef3fd" height="438" width="700"></rect><circle cx="620" cy="60" fill="#dfe9fc" r="150"></circle><circle cx="70" cy="400" fill="#e6eefd" r="120"></circle><g fill="#fff" stroke="#2f6bff" stroke-linecap="round" stroke-linejoin="round" stroke-width="7"><rect height="200" rx="16" width="170" x="120" y="120"></rect><rect height="200" rx="16" width="170" x="410" y="120"></rect></g><g stroke="#9db8f2" stroke-linecap="round" stroke-width="9"><path d="M150 170h110M150 205h110M150 240h76"></path><path d="M440 170h110M440 205h110M440 240h76"></path></g><g fill="none" stroke="#00c2a8" stroke-linecap="round" stroke-linejoin="round" stroke-width="10"><path d="M305 200h80M368 178l24 22-24 22"></path><path d="M395 250h-80M332 272l-24-22 24-22"></path></g></svg></div><div class="b"><h3>人材紹介</h3><p>職種・カルチャーの相性まで見極めたマッチング。採用条件をすり合わせ、成功報酬型でご支援します。</p><a class="decision-link" data-corp-topic="採用したい職種・人数" data-preview-topic="採用を考えている企業" href="#contact">採用したい人について相談する →</a></div></div>
+<div class="scard"><div class="ph"><span class="no">02</span><svg preserveaspectratio="xMidYMid slice" role="img" style="width:100%;height:100%;display:block" viewbox="0 0 700 438"><rect fill="#eef3fd" height="438" width="700"></rect><circle cx="620" cy="60" fill="#dfe9fc" r="150"></circle><circle cx="70" cy="400" fill="#e6eefd" r="120"></circle><g fill="#fff" stroke="#2f6bff" stroke-linejoin="round" stroke-width="7"><rect height="190" rx="10" width="130" x="130" y="150"></rect><rect height="250" rx="10" width="150" x="300" y="90"></rect><rect height="160" rx="10" width="110" x="490" y="180"></rect></g><g fill="#c9d9fb"><rect height="26" rx="5" width="26" x="152" y="176"></rect><rect height="26" rx="5" width="26" x="200" y="176"></rect><rect height="26" rx="5" width="26" x="152" y="222"></rect><rect height="26" rx="5" width="26" x="200" y="222"></rect><rect height="28" rx="5" width="28" x="326" y="116"></rect><rect height="28" rx="5" width="28" x="376" y="116"></rect><rect height="28" rx="5" width="28" x="326" y="166"></rect><rect height="28" rx="5" width="28" x="376" y="166"></rect><rect height="28" rx="5" width="28" x="326" y="216"></rect><rect height="28" rx="5" width="28" x="376" y="216"></rect><rect height="24" rx="5" width="24" x="512" y="206"></rect><rect height="24" rx="5" width="24" x="554" y="206"></rect><rect height="24" rx="5" width="24" x="512" y="250"></rect><rect height="24" rx="5" width="24" x="554" y="250"></rect></g><circle cx="560" cy="120" fill="#fff" r="52" stroke="#00c2a8" stroke-width="8"></circle><path d="M560 92v28l20 14" fill="none" stroke="#00c2a8" stroke-linecap="round" stroke-linejoin="round" stroke-width="8"></path></svg></div><div class="b"><h3>人材派遣</h3><p>繁忙期・プロジェクト単位の即戦力を、スピーディに。就業後のフォローも担当者が継続します。</p><a class="decision-link" data-corp-topic="必要な時期・期間" data-preview-topic="採用を考えている企業" href="#contact">必要な時期・期間を相談する →</a></div></div>
+<div class="scard"><div class="ph"><span class="no">03</span><svg preserveaspectratio="xMidYMid slice" role="img" style="width:100%;height:100%;display:block" viewbox="0 0 700 438"><rect fill="#eef3fd" height="438" width="700"></rect><circle cx="620" cy="60" fill="#dfe9fc" r="150"></circle><circle cx="70" cy="400" fill="#e6eefd" r="120"></circle><g fill="none" stroke="#9db8f2" stroke-width="6"><path d="M350 150v-30M350 120h-160v60M350 120h160v60"></path></g><g fill="#fff" stroke="#2f6bff" stroke-width="7"><rect height="64" rx="14" width="140" x="280" y="52"></rect><rect height="64" rx="14" width="140" x="120" y="180"></rect><rect height="64" rx="14" width="140" x="280" y="180"></rect><rect height="64" rx="14" width="140" x="440" y="180"></rect></g><g stroke="#c9d9fb" stroke-linecap="round" stroke-width="8"><path d="M305 78h90M305 98h58"></path><path d="M145 206h90M145 226h58"></path><path d="M305 206h90M305 226h58"></path><path d="M465 206h90M465 226h58"></path></g><g fill="none" stroke="#00c2a8" stroke-linecap="round" stroke-linejoin="round" stroke-width="9"><path d="M170 330c60 40 300 40 360-16"></path><path d="M508 300l26 12-8 28"></path></g></svg></div><div class="b"><h3>採用・組織支援</h3><p>求人票の作成から面接の進め方、入社後のフォローまで。募集から入社までの進め方を整理します。</p><a class="decision-link" data-corp-topic="募集や選考の進め方" data-preview-topic="採用を考えている企業" href="#contact">募集・選考について相談する →</a></div></div>
+</div>
+</div></section>
+<section class="str" id="strength"><div class="wrap grid">
+<div class="photo reveal"><img alt="資料を囲んで話し合う仕事場の参考写真" height="801" loading="lazy" src="assets/demo-previews/photo-editorial/corp-working-table.webp" width="1200"/></div>
+<div class="reveal">
+<span class="en">Our Strength</span>
+<h2 style="text-align:left;font-size:1.9rem;margin:10px 0 24px">採用後も頼れる、3つのサポート。</h2>
+<div class="plist">
+<div class="pitem"><div class="n">01</div><div><h4>業界特化のコンサルタント</h4><p>各分野の専任担当が、現場の言葉で企業と求職者の橋渡しをします。</p></div></div>
+<div class="pitem"><div class="n">02</div><div><h4>入社後の定着まで伴走</h4><p>紹介して終わりにしません。6ヶ月間の定着フォローで、双方の"その後"を支えます。</p></div></div>
+<div class="pitem"><div class="n">03</div><div><h4>スピードと透明性</h4><p>採用時期と優先条件を確認し、候補者の提案状況と費用を共有します。</p></div></div>
+</div>
+</div>
+</div></section>
+<section id="flow"><div class="wrap">
+<div class="head reveal"><span class="en">Flow</span><h2>相談から、採用・就業まで。</h2><p>企業の採用条件と、求職者の希望。双方を確認して進めます。</p></div>
+<div class="flow reveal">
+<div class="fstep"><div class="st">STEP 01</div><h4>お問い合わせ</h4><p>採用を考えている企業、仕事を探す方。まずは立場と相談内容をお聞かせください。</p></div>
+<div class="fstep"><div class="st">STEP 02</div><h4>ヒアリング</h4><p>企業には任せたい仕事を、求職者には経験と働き方の希望を伺います。</p></div>
+<div class="fstep"><div class="st">STEP 03</div><h4>ご提案</h4><p>仕事内容・働く条件を共有し、双方が確認したうえで選考へ進みます。</p></div>
+<div class="fstep"><div class="st">STEP 04</div><h4>入社・定着支援</h4><p>採用後も担当者が継続フォロー。長期活躍を支えます。</p></div>
+</div>
+</div></section>
+<section class="msg" id="message"><div class="wrap grid">
+<div class="photo reveal"><p aria-hidden="true" class="corp-message-word">Work with<br/>possibility.</p></div>
+<div class="reveal">
+<span class="en">Message</span>
+<h3>"働く"を、もっと前向きに。</h3>
+<p>私たちは、人材紹介を単なる「仲介」だとは考えていません。一人ひとりのキャリアと、一社一社の未来に、本気で向き合うこと。それが私たちの仕事です。</p>
+<p>採用は、企業にとっても求職者にとっても大きな決断です。だからこそ、数字だけでなく"人"を見る。合う人と合う会社が出会えたとき、働くことはもっと前向きになれると信じています。</p>
+<div class="sign">代表取締役　三輪 拓真<br><span>Takuma Miwa, CEO</span></br></div>
+</div>
+</div></section>
+<section class="co" id="company"><div class="wrap">
+<div class="head reveal"><span class="en">Company</span><h2>会社概要</h2></div>
+<div class="grid reveal">
+<table class="otable">
+<tr><th>会社名</th><td>株式会社ミライブリッジ</td></tr>
+<tr><th>設立</th><td>架空企業の設定です</td></tr>
+<tr><th>代表者</th><td>代表取締役　三輪 拓真</td></tr>
+<tr><th>資本金</th><td>1,000万円</td></tr>
+<tr><th>事業内容</th><td>有料職業紹介事業 / 労働者派遣事業 / 採用・組織コンサルティング</td></tr>
+<tr><th>所在地</th><td>東京都千代田区鍛冶町◯-○-○ ◯◯ビル 8F（JR神田駅 東口 徒歩3分）</td></tr>
+<tr><th>許可番号</th><td>制作サンプルのため取得・申請していません</td></tr>
+</table>
+<div class="map"><iframe loading="lazy" src="https://www.google.com/maps?q=神田駅&amp;output=embed" title="地図"></iframe></div>
+</div>
+</div></section>
+<section class="cta-band" id="contact"><div class="wrap"><h2>採用の相談も、仕事探しも。</h2><p>立場と相談したい内容を選んでください。初回に整理するポイントを確認できます。</p><form class="review-form" data-preview-form=""><label>ご相談される方<select data-topic-select="" name="ご相談される方"><option>採用を考えている企業</option><option>仕事を探している</option></select></label><label>いちばん相談したいこと<select id="corp-topic" name="ご相談内容"><option>採用したい職種・人数</option><option>必要な時期・期間</option><option>募集や選考の進め方</option></select></label><p id="corp-help">募集の背景・任せたい仕事・採用したい時期を伺う想定です。</p><button class="btn btn-w" type="submit">相談内容を確認する →</button><output aria-live="polite" role="status"></output><small>入力体験用です。個人情報の入力や実際の相談受付は行いません。</small></form></div></section><script>(()=>{const a=document.querySelector('[data-topic-select]'),t=document.getElementById('corp-topic');a.addEventListener('change',()=>{const work=a.value==='仕事を探している';t.replaceChildren(...(work?['希望する仕事内容','勤務できる時間・場所','就業までの流れ']:['採用したい職種・人数','必要な時期・期間','募集や選考の進め方']).map(v=>new Option(v,v)));document.getElementById('corp-help').textContent=work?'これまでの経験・希望する働き方・仕事を始めたい時期を伺う想定です。':'募集の背景・任せたい仕事・採用したい時期を伺う想定です。';});})();</script>
+<script>
+const hd=document.getElementById('hd'),bg=document.getElementById('bg'),mn=document.getElementById('mn');
+addEventListener('scroll',()=>hd.classList.toggle('scrolled',scrollY>60));
+bg.onclick=()=>{const open=mn.classList.toggle('open');bg.setAttribute('aria-expanded',String(open));};
+mn.querySelectorAll('a').forEach(a=>a.onclick=()=>{mn.classList.remove('open');bg.setAttribute('aria-expanded','false');});
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.12});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+</script>
+<!-- demo-fict:start 架空サンプルの注記(2026-09-04 上部の帯からフッターへ移設) -->
+<style>#demo-fict{margin:0;padding:20px 20px 28px;background:#fff;color:rgba(13,13,13,.6);border-top:1px solid rgba(13,13,13,.14);font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue","Hiragino Kaku Gothic ProN","Noto Sans JP","Yu Gothic",Meiryo,sans-serif;font-size:13px;line-height:1.7;text-align:center}@media print{#demo-fict{display:none}}</style>
+<div id="demo-fict">これは制作サンプル（架空の会社サイト）です。社名・人物・数値はすべて架空です。地図・駅名のみ実在のものを使用しています。</div>
+<!-- demo-fict:end -->
+<script>document.addEventListener('click',function(e){const a=e.target.closest('a');if(!a||a.hasAttribute('data-production-contact'))return;const h=a.getAttribute('href')||'';if(h.startsWith('#')){e.preventDefault();if(h.length>1){const t=document.getElementById(decodeURIComponent(h.slice(1)));if(t)t.scrollIntoView({behavior:'smooth',block:'start'});}return;}if(/^(tel:|mailto:)/i.test(h)){e.preventDefault();alert('制作サンプルです。電話・メールの送信は行いません。');return;}if(a.hasAttribute('download'))return;if(h){e.preventDefault();window.top.location.href=a.href;}},true);document.addEventListener('submit',function(e){e.preventDefault();},true);</script>
+<a class="minato-site-return" href="#">自主制作サンプル</a>
+<aside class="maker-contact" id="site-production" style="--case-accent:#2f6bff"><small>このサンプルの制作について</small><strong>採用担当者と求職者、それぞれが迷わず相談できるサイトへ。</strong><ul class="case-features"><li>立場に合わせた相談内容の切り替え</li><li>サービス紹介から相談への接続</li><li>会社情報と採用支援の整理</li></ul><p>掲載したいサービスと、企業・求職者どちらからの相談を増やしたいかをお聞かせください。 Web制作のご相談は、ミナト AI・IT ラボへ。</p><div class="maker-links"><a href="#">自主制作サンプル</a></div><small>掲載内容は架空の制作例です。上の体験フォームと、こちらのWeb制作相談窓口は別です。</small></aside><script>
+(()=>{document.querySelectorAll('[data-preview-form]').forEach(form=>{const output=form.querySelector('output');form.addEventListener('change',()=>output.textContent='');form.addEventListener('submit',event=>{event.preventDefault();if(!form.reportValidity())return;const data=[...form.querySelectorAll('select[name]')].map(el=>el.name+'：'+el.selectedOptions[0].textContent);output.textContent=data.join(' ／ ')+'。確認表示です。送信・予約・応募は行っていません。選択を変えて何度でも試せます。';});});document.querySelectorAll('[data-preview-topic]').forEach(a=>a.addEventListener('click',()=>{const select=document.querySelector('[data-topic-select]');if(select){select.value=a.dataset.previewTopic;select.dispatchEvent(new Event('change',{bubbles:true}));}}));const menu=document.getElementById('mn')||document.getElementById('mnav')||document.getElementById('gnav');const toggle=document.getElementById('bg')||document.getElementById('menuBtn');if(menu&&toggle){toggle.setAttribute('aria-controls',menu.id);const sync=()=>toggle.setAttribute('aria-expanded',String(menu.classList.contains('open')||document.body.classList.contains('menu-open')));new MutationObserver(sync).observe(menu,{attributes:true,attributeFilter:['class']});new MutationObserver(sync).observe(document.body,{attributes:true,attributeFilter:['class']});sync();document.addEventListener('keydown',event=>{if(event.key==='Escape'&&toggle.getAttribute('aria-expanded')==='true'){toggle.click();toggle.focus();}});}})();
+</script>
+<script>
+(() => {
+  document.querySelectorAll('[data-preview-form], [data-demo-form]').forEach(form => {
+    const output = form.querySelector('output');
+    if (!output) return;
+    output.tabIndex = -1;
+    const edit = document.createElement('button');
+    edit.type = 'button'; edit.className = 'confirmation-edit'; edit.textContent = '選択内容を変更する'; edit.hidden = true;
+    output.after(edit);
+    edit.addEventListener('click', () => { output.textContent = ''; form.querySelector('select, input')?.focus(); });
+    new MutationObserver(() => { if (!output.textContent.trim()) edit.hidden = true; }).observe(output, {childList:true, subtree:true, characterData:true});
+    form.addEventListener('submit', event => {
+      event.preventDefault();
+      if (!form.reportValidity()) return;
+      const heading = document.createElement('strong');
+      heading.className = 'confirmation-title'; heading.textContent = '選んだ内容をご確認ください';
+      const rows = [...form.querySelectorAll('select[name]')].map(select => {
+        const row = document.createElement('span'); row.className = 'confirmation-row';
+        const label = document.createElement('span'); label.textContent = select.name;
+        const value = document.createElement('b'); value.textContent = select.selectedOptions[0]?.textContent || '未選択';
+        row.append(label, value); return row;
+      });
+      const note = document.createElement('span'); note.className = 'confirmation-note';
+      note.textContent = '確認表示です。外部への送信・予約・申し込みは行っていません。選択を変えて試せます。';
+      output.replaceChildren(heading, ...rows, note);
+      edit.hidden = false; output.focus({preventScroll:true});
+    });
+  });
+})();
+</script>
+<script>document.querySelectorAll("[data-corp-topic]").forEach(link=>link.addEventListener("click",()=>{const topic=document.getElementById("corp-topic");topic.value=link.dataset.corpTopic;topic.dispatchEvent(new Event("change",{bubbles:true}));}));</script>
+<script>document.addEventListener('click',e=>{const a=e.target.closest('a[href]');if(!a)return;const h=a.getAttribute('href');if(h.startsWith('#')){e.preventDefault();const t=document.getElementById(h.slice(1));if(t)t.scrollIntoView({behavior:'auto'});}},true);</script></body>
+</html>

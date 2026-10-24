@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+
+<html lang="ja">
+<head><base href="https://2g-q.github.io/hp-demos/"/>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Atelier LUCE｜大人のための隠れ家サロン｜表参道</title>
+<meta content="表参道の隠れ家ヘアサロン Atelier LUCE。髪と頭皮の健康から整える、丁寧なカウンセリングとオーガニックケア。" name="description"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;600;700&amp;family=Noto+Sans+JP:wght@300;400;500;700&amp;display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --ink:#2b2620; --sub:#6f665b; --line:#e7e0d6;
+  --cream:#f7f3ec; --paper:#fdfbf7; --gold:#b08d57; --gold-d:#96774a;
+  --shadow:0 18px 50px -20px rgba(60,48,32,.35);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:"Noto Sans JP",sans-serif; color:var(--ink);
+  background:var(--paper); line-height:1.9; font-weight:300;
+  -webkit-font-smoothing:antialiased; overflow-x:hidden;
+}
+.mincho{font-family:"Shippori Mincho",serif;font-weight:600;letter-spacing:.04em}
+img{display:block;width:100%;height:100%;object-fit:cover}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:1100px;margin:0 auto;padding:0 24px}
+.en{font-family:"Shippori Mincho",serif;letter-spacing:.28em;font-size:.72rem;color:var(--gold);text-transform:uppercase}
+
+/* header */
+header{position:fixed;inset:0 0 auto 0;z-index:50;padding:20px 0;
+  transition:.4s;mix-blend-mode:normal}
+header.scrolled{background:rgba(253,251,247,.92);backdrop-filter:blur(10px);
+  box-shadow:0 1px 0 var(--line);padding:12px 0}
+.nav{display:flex;align-items:center;justify-content:space-between}
+.brand{font-family:"Shippori Mincho",serif;font-size:1.35rem;font-weight:700;letter-spacing:.12em;color:#fff;transition:.4s}
+.brand small{display:block;font-size:.52rem;letter-spacing:.4em;font-weight:400;opacity:.8}
+header.scrolled .brand{color:var(--ink)}
+.menu{display:flex;gap:34px;align-items:center}
+.menu a{font-size:.82rem;letter-spacing:.14em;color:#fff;transition:.3s;position:relative}
+.menu a::after{content:"";position:absolute;left:0;bottom:-6px;width:0;height:1px;background:var(--gold);transition:.3s}
+.menu a:hover::after{width:100%}
+header.scrolled .menu a{color:var(--ink)}
+.book{border:1px solid rgba(255,255,255,.6);padding:9px 20px !important;border-radius:2px;font-weight:500}
+header.scrolled .book{border-color:var(--gold);color:var(--gold-d)}
+.book:hover{background:var(--gold);border-color:var(--gold);color:#fff !important}
+.burger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:6px}
+.burger span{width:26px;height:2px;background:#fff;transition:.3s}
+header.scrolled .burger span{background:var(--ink)}
+
+/* hero */
+.hero{position:relative;height:calc(var(--demo-screen-height, 800px) * 1.0);min-height:620px;display:flex;align-items:center;
+  background:#3a3128 linear-gradient(115deg,#2b241b 0%,#4a3e2e 55%,#6a5a41 120%)}
+.hero::before{content:"";position:absolute;inset:0;opacity:.5;background:repeating-linear-gradient(115deg,rgba(231,201,154,.10) 0 1px,transparent 1px 64px),repeating-linear-gradient(295deg,rgba(255,255,255,.05) 0 1px,transparent 1px 38px)}
+.hero::after{content:"";position:absolute;inset:0;background:linear-gradient(105deg,rgba(30,24,16,.62),rgba(30,24,16,.18))}
+.hero .wrap{position:relative;z-index:2;color:#fff}
+.hero .en{color:#e7c99a}
+.hero h1{font-family:"Shippori Mincho",serif;font-weight:600;
+  font-size:clamp(2.1rem,5.4vw,3.9rem);line-height:1.5;margin:18px 0 22px;letter-spacing:.03em;
+  text-shadow:0 2px 30px rgba(0,0,0,.3)}
+.hero p{max-width:420px;font-weight:300;opacity:.92;font-size:.98rem}
+.hero .cta{display:inline-flex;gap:14px;margin-top:38px;flex-wrap:wrap}
+.btn{display:inline-block;padding:15px 34px;border-radius:2px;font-size:.86rem;letter-spacing:.1em;font-weight:500;transition:.35s}
+.btn-gold{background:var(--gold);color:#fff}
+.btn-gold:hover{background:var(--gold-d);transform:translateY(-2px);box-shadow:var(--shadow)}
+.btn-line{border:1px solid rgba(255,255,255,.65);color:#fff}
+.btn-line:hover{background:#fff;color:var(--ink)}
+.scroll-ind{position:absolute;left:50%;bottom:28px;transform:translateX(-50%);z-index:2;color:#fff;font-size:.6rem;letter-spacing:.3em;opacity:.8}
+.scroll-ind::before{content:"";display:block;width:1px;height:44px;background:#fff;margin:0 auto 10px;animation:drop 2s infinite}
+@keyframes drop{0%{transform:scaleY(0);transform-origin:top}45%{transform:scaleY(1);transform-origin:top}55%{transform:scaleY(1);transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+
+/* sections */
+section{padding:110px 0}
+.head{text-align:center;margin-bottom:60px}
+.head h2{font-family:"Shippori Mincho",serif;font-weight:600;font-size:clamp(1.6rem,3.4vw,2.3rem);margin-top:12px;letter-spacing:.05em}
+.head p{color:var(--sub);font-size:.92rem;margin-top:14px}
+
+.concept{background:var(--cream)}
+.concept .grid{display:grid;grid-template-columns:1.05fr .95fr;gap:64px;align-items:center}
+.concept .txt .en{margin-bottom:14px;display:block}
+.concept h3{font-family:"Shippori Mincho",serif;font-weight:600;font-size:1.7rem;line-height:1.7;margin-bottom:24px}
+.concept p{color:var(--sub);margin-bottom:18px;font-size:.94rem}
+.concept .photo{aspect-ratio:4/5;border-radius:3px;overflow:hidden;box-shadow:var(--shadow);position:relative}
+.concept .photo::before{content:"since 2016";position:absolute;left:-14px;top:24px;z-index:2;
+  background:var(--gold);color:#fff;font-size:.62rem;letter-spacing:.2em;padding:8px 16px}
+
+/* menu */
+.menu-list{display:grid;grid-template-columns:1fr 1fr;gap:14px 56px;max-width:860px;margin:0 auto}
+.m-item{display:flex;justify-content:space-between;align-items:baseline;gap:16px;
+  padding:20px 4px;border-bottom:1px solid var(--line)}
+.m-item .l .name{font-weight:500;font-size:1.02rem}
+.m-item .l .desc{font-size:.78rem;color:var(--sub);font-weight:300}
+.m-item .price{font-family:"Shippori Mincho",serif;color:var(--gold-d);font-size:1.05rem;white-space:nowrap}
+.m-item .price small{font-size:.7rem;color:var(--sub)}
+.note{text-align:center;color:var(--sub);font-size:.78rem;margin-top:34px}
+
+/* gallery */
+.gallery{background:var(--cream)}
+.ggrid{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:200px;gap:12px}
+.ggrid figure{overflow:hidden;border-radius:2px;position:relative;background:#e4dccf}
+.ggrid figure img{transition:1.2s cubic-bezier(.2,.8,.2,1)}
+.ggrid figure:hover img{transform:scale(1.08)}
+.ggrid .big{grid-column:span 2;grid-row:span 2}
+
+/* stylist */
+.staff{display:grid;grid-template-columns:repeat(3,1fr);gap:34px}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:3px;overflow:hidden;transition:.4s}
+.card .ph{aspect-ratio:1/1;background:#e4dccf}
+.card .body{padding:24px}
+.card .role{font-size:.66rem;letter-spacing:.24em;color:var(--gold)}
+.card h4{font-family:"Shippori Mincho",serif;font-size:1.2rem;margin:6px 0 12px}
+.card p{font-size:.82rem;color:var(--sub)}
+
+/* voice */
+.voice .head h2{color:var(--ink)}
+.vgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.v{padding:34px 28px;background:var(--cream);border-radius:3px;position:relative}
+.v::before{content:"“";font-family:"Shippori Mincho",serif;position:absolute;top:6px;left:20px;font-size:3.4rem;color:var(--gold);opacity:.4}
+.v p{font-size:.88rem;color:var(--ink);margin:18px 0 16px;position:relative;z-index:2}
+.v .who{font-size:.74rem;color:var(--sub)}
+.stars{color:var(--gold);letter-spacing:3px;font-size:.8rem}
+
+/* access / cta */
+.access{background:var(--ink);color:#efe9df}
+.access .grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
+.access .en{color:#e7c99a}
+.access h2{font-family:"Shippori Mincho",serif;font-size:2rem;margin:12px 0 26px}
+.info{display:grid;gap:14px;font-size:.9rem}
+.info .row{display:grid;grid-template-columns:92px 1fr;gap:16px;padding-bottom:14px;border-bottom:1px solid rgba(255,255,255,.12)}
+.info .row span:first-child{color:#b7ab99;letter-spacing:.1em;font-size:.78rem}
+.map{aspect-ratio:4/3;border-radius:3px;overflow:hidden;background:#3a3128;filter:grayscale(.2)}
+.map iframe{width:100%;height:100%;border:0}
+.cta-band{text-align:center;padding:86px 0;background:linear-gradient(115deg,#241f19 0%,#3a3128 60%,#54462f 120%);color:#fff}
+.cta-band h2{font-family:"Shippori Mincho",serif;font-size:clamp(1.6rem,3.6vw,2.4rem);margin-bottom:14px}
+.cta-band p{opacity:.9;margin-bottom:30px;font-size:.92rem}
+
+footer{background:#241f19;color:#9a8f7e;padding:54px 0 30px;font-size:.8rem}
+.fgrid{display:flex;justify-content:space-between;flex-wrap:wrap;gap:30px;align-items:flex-start}
+.fbrand{font-family:"Shippori Mincho",serif;color:#efe9df;font-size:1.3rem;letter-spacing:.1em}
+.fbrand small{display:block;font-size:.55rem;letter-spacing:.35em;margin-top:4px;color:#9a8f7e}
+.fnav{display:flex;gap:26px;flex-wrap:wrap}
+.fnav a:hover{color:var(--gold)}
+.copy{text-align:center;margin-top:40px;padding-top:22px;border-top:1px solid rgba(255,255,255,.08);font-size:.7rem;letter-spacing:.1em}
+
+/* reveal */
+.reveal{opacity:0;transform:translateY(28px);transition:.9s cubic-bezier(.2,.8,.2,1)}
+.reveal.in{opacity:1;transform:none}
+
+@media(max-width:860px){
+  section{padding:74px 0}
+  .menu{position:fixed;inset:0 0 0 auto;width:78%;max-width:320px;background:var(--paper);
+    flex-direction:column;justify-content:center;gap:26px;transform:translateX(100%);transition:.4s;box-shadow:var(--shadow)}
+  .menu.open{transform:none}
+  .menu a{color:var(--ink) !important;font-size:1rem}
+  .menu .book{border-color:var(--gold);color:var(--gold-d) !important}
+  .burger{display:flex}
+  .concept .grid,.access .grid{grid-template-columns:1fr;gap:36px}
+  .menu-list,.staff,.vgrid{grid-template-columns:1fr}
+  .ggrid{grid-template-columns:1fr 1fr;grid-auto-rows:150px}
+  .cta-band{background-attachment:scroll}
+}
+</style>
+<meta content="noindex" name="robots"/>
+<style>header .brand{flex-shrink:0}header .menu a{white-space:nowrap}header .book{white-space:nowrap}header .brand small{display:none}@media(max-width:1100px){header .menu{display:none}header .menu.on,header .menu.open{display:flex}header .burger{display:flex}header .tel{display:none}}@media(max-width:600px){header .wrap{padding-left:16px;padding-right:16px}header .brand{font-size:17px;gap:7px;white-space:nowrap}header .leaf{width:22px;height:22px;flex-shrink:0}header .right{gap:12px}header .book{font-size:12px;padding:10px 12px}}</style><link href="assets/demo-previews/dialog.css" rel="stylesheet"/><meta content="noindex" name="robots"/>
+<link href="assets/legacy-local-refresh.css" rel="stylesheet"/>
+<script defer="" src="assets/standalone-sites.js?v=1"></script><link href="assets/standalone-sites.css?v=1" rel="stylesheet"/>
+<style id="sample-review-style">
+:root{scroll-padding-top:105px} :focus-visible{outline:3px solid #b66a27;outline-offset:5px}button,input,select,textarea{font:inherit}button{cursor:pointer}select,input,textarea{max-width:100%} .review-disclosure{position:relative;z-index:1;padding:8px 20px;background:#f4f0e7;color:#453e32;font:12px/1.6 system-ui;text-align:center}.review-disclosure a{text-decoration:underline}.review-disclosure+header{top:37px}.review-form{max-width:680px;margin:30px auto 0;text-align:left;display:grid;gap:20px}.review-form label{display:grid;gap:8px;font-size:14px;font-weight:600}.review-form select,.review-form input{width:100%;padding:13px 14px;background:#fff;color:#242a2c;border:1px solid #b8b5ae;border-radius:3px;min-height:48px}.review-form button{border:0;min-height:48px}.review-form output,.review-confirmation{display:block;padding:18px;border-left:3px solid currentColor;font-size:14px;line-height:1.8;text-align:left}.review-form output:empty{display:none}.review-form small{font-size:12px;line-height:1.7}.review-note{font-size:13px;line-height:1.8;margin:18px 0;color:inherit}.review-questions{display:grid;gap:0;margin-top:30px;border-top:1px solid currentColor}.review-questions details{padding:18px 0;border-bottom:1px solid #b6aea355}.review-questions summary{font-weight:600;cursor:pointer}.review-questions p{margin-top:12px;max-width:65ch}.maker-contact{padding:42px max(24px,calc((100% - 1100px)/2));background:#f3f1ec;color:#333c3c;font:14px/1.9 system-ui;text-align:left;border-top:1px solid #d3d0c8}.maker-contact p{max-width:65ch;margin:9px 0 17px}.maker-contact strong{font-size:18px}.maker-contact .maker-links{display:flex;gap:12px;flex-wrap:wrap}.maker-contact a{display:inline-flex;align-items:center;min-height:44px;padding:8px 15px;border:1px solid #8b9390;color:#253e38;text-decoration:none}.maker-contact small{display:block;margin-top:14px;font-size:12px}.burger{border:0;background:transparent;position:relative;z-index:60;min-width:44px;min-height:44px;justify-content:center;align-items:center}body>.minato-site-return{position:static;margin:20px 24px}.review-summary{white-space:pre-line}.review-form fieldset{border:0;padding:0}.review-form legend{font-weight:700;margin-bottom:8px} .review-form .review-choice{display:flex;gap:10px;align-items:center}.review-form .review-choice input{width:20px;min-height:24px}
+@media(max-width:700px){.review-disclosure+header{top:0}.review-disclosure{padding-top:90px}.maker-contact{padding-bottom:115px}.review-disclosure+header .brand,.review-disclosure+header .menu a{color:var(--ink,#243347)}.review-disclosure+header{background:#fff}.review-disclosure+header .burger span{background:#263b42}.review-form{gap:16px}.review-disclosure+header .book{color:#5b4433;border-color:currentColor}section[id]{scroll-margin-top:90px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto!important}*,*::before,*::after{animation:none!important;transition:none!important}.reveal,.rv{opacity:1!important;transform:none!important}}
+</style>
+<style>.v::before{content:none}.review-form .btn{justify-self:start}.concept .photo::before{content:"CUT & CARE"}@media(max-width:600px){.hero h1{font-size:2.4rem}.info .row{grid-template-columns:80px 1fr;gap:12px}.hero .wrap{padding-top:60px}.menu{height:100dvh}}</style><style>@media(max-width:760px){body.legacy-local-salon .hero h1{font-size:clamp(30px,8.2vw,39px);letter-spacing:.015em}body.legacy-local-salon .review-disclosure{padding-top:104px}}</style><style id="refinement-style">
+.cta-band h2{text-wrap:balance;line-break:strict}.cta-band .heading-phrase{display:inline-block}@media(max-width:360px){.cta-band h2{font-size:24px}}.maker-contact{border-top:3px solid var(--case-accent,#53695a)}.maker-contact strong{display:block;max-width:45em;line-height:1.65}.maker-contact .case-features{display:flex;flex-wrap:wrap;gap:8px 20px;padding:0;margin:18px 0 22px;list-style:none;font-size:13px}.maker-contact .case-features li{padding-left:13px;position:relative}.maker-contact .case-features li::before{content:"";position:absolute;left:0;top:.8em;width:4px;height:4px;background:var(--case-accent,#53695a)}.maker-contact a:first-child{background:var(--case-accent,#53695a);border-color:var(--case-accent,#53695a);color:#fff}.confirmation-title,.confirmation-note,.confirmation-row{display:block}.confirmation-title{font-size:17px;margin-bottom:12px}.confirmation-row{padding:9px 0;border-bottom:1px solid currentColor}.confirmation-row>span{display:block;opacity:.8;font-size:12px}.confirmation-row>b{font-weight:500;overflow-wrap:anywhere}.confirmation-note{margin-top:14px;font-size:12px}.confirmation-edit{justify-self:start;min-height:44px;border:1px solid currentColor!important;border-radius:3px;padding:10px 18px;color:inherit;background:transparent;font-size:14px}.confirmation-edit[hidden]{display:none!important}.selection-guidance{padding:16px 18px;border-left:2px solid currentColor;font-size:13px;line-height:1.8;margin:14px 0}.selection-guidance:empty{display:none}.decision-link{display:inline-flex;align-items:center;min-height:44px;gap:8px;margin-top:14px;font-size:13px;font-weight:700;text-decoration:underline;text-underline-offset:5px}.form-done,.review-summary{overflow-wrap:anywhere}.refine-note{font-size:12px;line-height:1.8;opacity:.82;margin-top:14px}
+@media(max-width:600px){.maker-contact .case-features{display:grid;gap:10px}.maker-contact .maker-links{display:grid}.maker-contact a{justify-content:center}}
+</style><noscript><style>form{display:none!important}.reveal,.rv,.reveal>*{opacity:1!important;transform:none!important}</style></noscript>
+<link href="assets/demo-previews/editorial-r3.css" rel="stylesheet"/></head>
+<body class="editorial-r3 legacy-local legacy-local-salon">
+<div class="review-disclosure">架空の制作サンプルです。予約・外部への送信は行われません。 <a href="#site-production">Web制作のご相談はこちら</a></div>
+<header id="hd">
+<div class="wrap nav">
+<div class="brand mincho">Atelier LUCE<small>HAIR &amp; SPA / OMOTESANDO</small></div>
+<nav class="menu" id="mn">
+<a href="#concept">Concept</a>
+<a href="#menu">Menu</a>
+<a href="#gallery">Gallery</a>
+<a href="#staff">Stylist</a>
+<a href="#access">Access</a>
+<a class="book" href="#reserve">ご予約</a>
+</nav>
+<button aria-controls="mn" aria-expanded="false" aria-label="メニュー" class="burger" id="bg" type="button"><span></span><span></span><span></span></button>
+</div>
+</header>
+<section class="hero" style="padding:0">
+<div class="wrap">
+<p aria-hidden="true" class="editorial-salon-word">LUCE</p><span class="en">A hideaway for grown-ups</span>
+<h1>毎朝、手ぐしで<br/>まとまる髪へ。</h1>
+<p>髪質と骨格に合わせて、扱いやすいスタイルをご提案。表参道の路地裏にある、1日6名限定のヘアサロンです。</p>
+<div class="cta">
+<a class="btn btn-gold" href="#reserve">メニューを選んで相談する</a>
+<a class="btn btn-line" href="#menu">メニューを見る</a>
+</div>
+</div>
+<figure class="editorial-salon-cover"><img alt="短いウェーブヘアの参考写真" fetchpriority="high" height="1067" src="assets/demo-previews/photo-editorial/salon-portrait.webp" width="1600"/><figcaption>ヘアスタイルの参考写真。施術例・スタッフ本人ではありません。</figcaption></figure><div class="scroll-ind">SCROLL</div>
+</section>
+<section class="concept" id="concept">
+<div class="wrap grid">
+<div class="txt reveal">
+<span class="en">Concept</span>
+<h3>家でのスタイリングまで、<br/>一緒に考えるカット。</h3>
+<p>Atelier LUCE がこだわるのは、仕上がりの一瞬ではなく"伸びても綺麗"な設計です。骨格と生えぐせを読み、乾かすだけで決まるカットを組み立てます。</p>
+<p>髪と頭皮の状態を確認してから、使う薬剤を検討します。オーガニック系のカラー・トリートメントを中心に、その日の髪の状態に合わせて調合します。施術の時間にも余裕を持たせ、一人ひとりに向き合います。</p>
+<p>だから、次にご来店いただくまでの毎日が、少し楽になる。それが私たちの目指すサロンです。</p>
+</div>
+<div class="photo reveal">
+<img alt="カットの施術イメージ" height="1800" loading="lazy" src="assets/demo-previews/photo-editorial/salon-cut.webp" width="1200"/>
+</div>
+</div>
+</section>
+<section id="menu">
+<div class="wrap">
+<div class="head reveal">
+<span class="en">Menu &amp; Price</span>
+<h2>メニュー</h2>
+<p>すべて丁寧なカウンセリング・シャンプー・スタイリング込みの価格です。</p>
+</div>
+<div class="menu-list reveal">
+<div class="m-item"><div class="l"><div class="name"><a data-preview-topic="カット" href="#reserve" style="text-decoration:underline;text-underline-offset:5px">カット ↗</a></div><div class="desc">骨格診断＋生えぐせを見ながら形を整える</div></div><div class="price">¥5,500</div></div>
+<div class="m-item"><div class="l"><div class="name"><a data-preview-topic="カット＋カラー" href="#reserve" style="text-decoration:underline;text-underline-offset:5px">カット＋カラー ↗</a></div><div class="desc">オーガニック系・白髪染めも同料金</div></div><div class="price">¥11,000</div></div>
+<div class="m-item"><div class="l"><div class="name"><a data-preview-topic="カット＋パーマ" href="#reserve" style="text-decoration:underline;text-underline-offset:5px">カット＋パーマ ↗</a></div><div class="desc">髪に優しいコスメ系薬剤を使用</div></div><div class="price">¥12,100</div></div>
+<div class="m-item"><div class="l"><div class="name"><a data-preview-topic="髪質改善トリートメント" href="#reserve" style="text-decoration:underline;text-underline-offset:5px">髪質改善トリートメント ↗</a></div><div class="desc">広がりや手触りに合わせた集中ケア</div></div><div class="price">¥8,800</div></div>
+<div class="m-item"><div class="l"><div class="name"><a data-preview-topic="頭皮スパ 40分" href="#reserve" style="text-decoration:underline;text-underline-offset:5px">頭皮スパ 40分 ↗</a></div><div class="desc">首肩のほぐし＋炭酸クレンジング</div></div><div class="price">¥6,600</div></div>
+<div class="m-item"><div class="l"><div class="name"><a data-preview-topic="ブライダル / 撮影" href="#reserve" style="text-decoration:underline;text-underline-offset:5px">ブライダル / 撮影 ↗</a></div><div class="desc">ヘアメイク・出張はご相談ください</div></div><div class="price">¥16,500<small>〜</small></div></div>
+</div>
+<p class="note">表示は税込価格です。ロング料金・指名料はいただいておりません。</p>
+</div>
+</section>
+<section class="gallery" id="gallery">
+<div class="wrap">
+<div class="head reveal"><span class="en">Gallery</span><h2>空間と、髪を整える時間</h2><p>空間とスタイルの参考写真です。実際の店舗・施術例ではありません。</p></div>
+<div class="ggrid reveal">
+<figure class="big"><img alt="明るいサロン内装の参考写真" height="952" loading="lazy" src="assets/demo-previews/photo-editorial/salon-space.webp" width="1400"/></figure>
+<figure><img alt="カットの施術イメージ" height="1800" loading="lazy" src="assets/demo-previews/photo-editorial/salon-cut.webp" width="1200"/></figure>
+<figure><img alt="ボブスタイルの参考写真" height="1067" loading="lazy" src="assets/demo-previews/photo-editorial/salon-portrait.webp" width="1600"/></figure>
+<figure><img alt="ヘアスタイルの参考写真" height="1500" loading="lazy" src="assets/demo-previews/photo-editorial/salon-detail.webp" width="1000"/></figure>
+</div>
+</div>
+</section>
+<section id="staff">
+<div class="wrap">
+<div class="head reveal"><span class="en">Stylist</span><h2>スタイリスト</h2><p>担当分野ごとの紹介例です。氏名・プロフィールは架空の設定です。</p></div>
+<div class="staff reveal">
+<div class="card"><div class="body"><div class="role">DIRECTOR</div><h4>三浦 遥</h4><p>骨格補正カットが得意。「扱いやすさ」を何より大切に、毎朝のセット時間を短くする提案をします。</p></div></div>
+<div class="card"><div class="body"><div class="role">COLORIST</div><h4>大和 千夏</h4><p>グレージュや白髪ぼかしなど、色の見え方をご相談いただけます。髪の負担を抑えた薬剤設計を担当します。</p></div></div>
+<div class="card"><div class="body"><div class="role">SPA THERAPIST</div><h4>林 美咲</h4><p>頭皮ケアとヘッドスパのスペシャリスト。首肩のこわばりからほぐし、深いリラックスへ。</p></div></div>
+</div>
+</div>
+</section>
+<section class="voice gallery"><div class="wrap"><div class="head"><span class="en">Before your visit</span><h2>初めての方へ</h2><p>長さだけでなく、いつものお手入れもお聞かせください。</p></div><div class="vgrid"><article class="v"><h3>朝、髪にかける時間</h3><p>乾かすだけで出かけたい日も、アイロンを使う日も。普段のスタイリングに合う形を相談します。</p></article><article class="v"><h3>色や長さのイメージ</h3><p>参考写真があればご用意ください。まだ決まっていないときは、避けたい長さや気になる部分から。</p></article><article class="v"><h3>これまでの施術</h3><p>カラーやパーマの履歴、頭皮で気になること。施術前に共有して、メニューを検討します。</p></article></div></div></section>
+<section class="access" id="access">
+<div class="wrap grid">
+<div class="reveal">
+<span class="en">Access</span>
+<h2>ご来店案内</h2>
+<div class="info">
+<div class="row"><span>住所</span><span>東京都渋谷区神宮前5-○-○ LUCEビル 2F</span></div>
+<div class="row"><span>アクセス</span><span>表参道駅 A1出口より徒歩4分 / 明治神宮前駅 徒歩7分</span></div>
+<div class="row"><span>営業時間</span><span>平日 11:00–20:00 / 土日祝 10:00–19:00</span></div>
+<div class="row"><span>定休日</span><span>毎週火曜・第3月曜</span></div>
+<div class="row"><span>ご予約</span><span>03-0000-0000 / ネット予約 24時間受付</span></div>
+</div>
+</div>
+<div class="map reveal">
+<iframe loading="lazy" src="https://www.google.com/maps?q=表参道駅&amp;output=embed" title="地図"></iframe>
+</div>
+</div>
+</section>
+<section class="cta-band" id="reserve"><div class="wrap"><span class="en">Your next style</span><h2><span class="heading-phrase">次のヘアスタイルを</span><wbr/><span class="heading-phrase">相談する</span></h2><p>メニューが未定でも大丈夫です。ご希望の内容を選んで、予約前の確認をお試しください。</p><form class="review-form" data-preview-form=""><label>ご希望のメニュー<select data-topic-select="" name="メニュー"><option>相談して決めたい</option><option>カット</option><option>カット＋カラー</option><option>カット＋パーマ</option><option>髪質改善トリートメント</option><option>頭皮スパ 40分</option><option>ブライダル / 撮影</option></select></label><label>いちばん気になること<select name="気になること"><option>家で扱いやすい形にしたい</option><option>カラーについて相談したい</option><option>髪や頭皮のケアを相談したい</option><option>イメージを相談して決めたい</option></select></label><p aria-live="polite" class="selection-guidance" id="salon-menu-note">メニューが決まらない場合は、気になることから相談できます。</p><button class="btn btn-gold" type="submit">予約前の内容を確認する →</button><output aria-live="polite" role="status"></output><small>架空サロンの操作体験です。予約や外部への送信は行いません。</small></form></div></section>
+<script>
+const hd=document.getElementById('hd');
+addEventListener('scroll',()=>hd.classList.toggle('scrolled',scrollY>60));
+const bg=document.getElementById('bg'),mn=document.getElementById('mn');
+bg.onclick=()=>mn.classList.toggle('open');
+mn.querySelectorAll('a').forEach(a=>a.onclick=()=>mn.classList.remove('open'));
+const io=new IntersectionObserver((es)=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.15});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+</script>
+<!-- demo-fict:start 架空サンプルの注記(2026-09-04 上部の帯からフッターへ移設) -->
+<style>#demo-fict{margin:0;padding:20px 20px 28px;background:#fff;color:rgba(13,13,13,.6);border-top:1px solid rgba(13,13,13,.14);font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue","Hiragino Kaku Gothic ProN","Noto Sans JP","Yu Gothic",Meiryo,sans-serif;font-size:13px;line-height:1.7;text-align:center}@media print{#demo-fict{display:none}}</style>
+<div id="demo-fict">これは制作サンプル（架空のヘアサロンサイト）です。店名・プロフィール・数値はすべて架空です。地図・駅名のみ実在のものを使用しています。掲載写真は参考素材で、実際の店舗・スタッフ・施術例ではありません。</div>
+<!-- demo-fict:end -->
+<script>document.addEventListener('click',function(e){const a=e.target.closest('a');if(!a||a.hasAttribute('data-production-contact'))return;const h=a.getAttribute('href')||'';if(h.startsWith('#')){e.preventDefault();if(h.length>1){const t=document.getElementById(decodeURIComponent(h.slice(1)));if(t)t.scrollIntoView({behavior:'smooth',block:'start'});}return;}if(/^(tel:|mailto:)/i.test(h)){e.preventDefault();alert('制作サンプルです。電話・メールの送信は行いません。');return;}if(a.hasAttribute('download'))return;if(h){e.preventDefault();window.top.location.href=a.href;}},true);document.addEventListener('submit',function(e){e.preventDefault();},true);</script>
+<a class="minato-site-return" href="#">自主制作サンプル</a>
+<aside class="maker-contact" id="site-production" style="--case-accent:#775e3e"><small>このサンプルの制作について</small><strong>サロンの雰囲気とメニューを伝え、来店前の相談につながるサイトへ。</strong><ul class="case-features"><li>写真を生かした空間とスタイルの紹介</li><li>メニュー選択をフォームへ引き継ぎ</li><li>未定のままでも相談できる選択肢</li></ul><p>掲載したい写真やメニュー、現在の予約方法をお聞かせください。 Web制作のご相談は、ミナト AI・IT ラボへ。</p><div class="maker-links"><a href="#">自主制作サンプル</a></div><small>掲載内容は架空の制作例です。上の体験フォームと、こちらのWeb制作相談窓口は別です。</small></aside><script>
+(()=>{document.querySelectorAll('[data-preview-form]').forEach(form=>{const output=form.querySelector('output');form.addEventListener('change',()=>output.textContent='');form.addEventListener('submit',event=>{event.preventDefault();if(!form.reportValidity())return;const data=[...form.querySelectorAll('select[name]')].map(el=>el.name+'：'+el.selectedOptions[0].textContent);output.textContent=data.join(' ／ ')+'。確認表示です。送信・予約・応募は行っていません。選択を変えて何度でも試せます。';});});document.querySelectorAll('[data-preview-topic]').forEach(a=>a.addEventListener('click',()=>{const select=document.querySelector('[data-topic-select]');if(select){select.value=a.dataset.previewTopic;select.dispatchEvent(new Event('change',{bubbles:true}));}}));const menu=document.getElementById('mn')||document.getElementById('mnav')||document.getElementById('gnav');const toggle=document.getElementById('bg')||document.getElementById('menuBtn');if(menu&&toggle){toggle.setAttribute('aria-controls',menu.id);const sync=()=>toggle.setAttribute('aria-expanded',String(menu.classList.contains('open')||document.body.classList.contains('menu-open')));new MutationObserver(sync).observe(menu,{attributes:true,attributeFilter:['class']});new MutationObserver(sync).observe(document.body,{attributes:true,attributeFilter:['class']});sync();document.addEventListener('keydown',event=>{if(event.key==='Escape'&&toggle.getAttribute('aria-expanded')==='true'){toggle.click();toggle.focus();}});}})();
+</script>
+<script>
+(() => {
+  document.querySelectorAll('[data-preview-form], [data-demo-form]').forEach(form => {
+    const output = form.querySelector('output');
+    if (!output) return;
+    output.tabIndex = -1;
+    const edit = document.createElement('button');
+    edit.type = 'button'; edit.className = 'confirmation-edit'; edit.textContent = '選択内容を変更する'; edit.hidden = true;
+    output.after(edit);
+    edit.addEventListener('click', () => { output.textContent = ''; form.querySelector('select, input')?.focus(); });
+    new MutationObserver(() => { if (!output.textContent.trim()) edit.hidden = true; }).observe(output, {childList:true, subtree:true, characterData:true});
+    form.addEventListener('submit', event => {
+      event.preventDefault();
+      if (!form.reportValidity()) return;
+      const heading = document.createElement('strong');
+      heading.className = 'confirmation-title'; heading.textContent = '選んだ内容をご確認ください';
+      const rows = [...form.querySelectorAll('select[name]')].map(select => {
+        const row = document.createElement('span'); row.className = 'confirmation-row';
+        const label = document.createElement('span'); label.textContent = select.name;
+        const value = document.createElement('b'); value.textContent = select.selectedOptions[0]?.textContent || '未選択';
+        row.append(label, value); return row;
+      });
+      const note = document.createElement('span'); note.className = 'confirmation-note';
+      note.textContent = '確認表示です。外部への送信・予約・申し込みは行っていません。選択を変えて試せます。';
+      output.replaceChildren(heading, ...rows, note);
+      edit.hidden = false; output.focus({preventScroll:true});
+    });
+  });
+})();
+</script>
+<script>(()=>{const menu=document.querySelector('[data-topic-select]'),note=document.getElementById('salon-menu-note');const prices={'カット':'5,500円','カット＋カラー':'11,000円','カット＋パーマ':'12,100円','髪質改善トリートメント':'8,800円','頭皮スパ 40分':'6,600円','ブライダル / 撮影':'16,500円〜'};const update=()=>{note.textContent=prices[menu.value]?menu.value+'：'+prices[menu.value]+'（税込・架空の料金設定）。希望する仕上がりと、これまでの施術を確認してからメニューを決める想定です。':'メニューが決まらない場合は、気になることから相談できます。';};menu.addEventListener('change',update);})();</script>
+<script>document.addEventListener('click',e=>{const a=e.target.closest('a[href]');if(!a)return;const h=a.getAttribute('href');if(h.startsWith('#')){e.preventDefault();const t=document.getElementById(h.slice(1));if(t)t.scrollIntoView({behavior:'auto'});}},true);</script></body>
+</html>
