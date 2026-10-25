@@ -44,7 +44,7 @@
 .plate-image{position:absolute;width:100%;aspect-ratio:1;left:0;top:50%;transform:translateY(-50%);background-image:url('assets/plated-food-v1.png');background-size:300% 200%;background-repeat:no-repeat;pointer-events:none}
 .plate.rice{left:44%;top:75%;width:38%}
 .plate.soup{left:79%;top:75%;width:36%}
-.plate.main{left:65%;top:25%;width:68%;aspect-ratio:1.85;border-radius:10px}
+.plate.main{left:65%;top:27%;width:68%;aspect-ratio:1.85;border-radius:10px}
 .plate.side1{left:17%;top:25%;width:33%}
 .plate.side2{left:17%;top:66%;width:30%}
 .plate.missing{border:1px dashed #c7aaa0;background:#543b35;color:#eee1d9;padding:8px;display:flex;flex-direction:column;justify-content:center;gap:5px;font-size:11px;line-height:1.7}
@@ -65,3 +65,5 @@
 @media(max-width:600px){.meal-view-switch button{font-size:10px}.plating-heading{font-size:10px}.plating-heading small{font-size:8px}.meal-tray{border-radius:7px;box-shadow:inset 0 0 0 4px #38251e,inset 0 0 0 5px #725046,0 4px 10px #3e302312}.plate.missing{font-size:9px;padding:4px;gap:1px}.plate.missing small{font-size:7px}.tray-menu{column-gap:12px}.tray-menu button{gap:6px;padding:10px 0}.tray-menu strong{font-size:10px}.tray-menu span{font-size:8px}.color-review{gap:7px;font-size:9px}.plating-note{font-size:8px}}
 
 .plate.missing.soup{width:30%;top:72%}
+
+svg.plate-image,svg.course-photo{background-image:none;overflow:hidden}svg.course-photo{display:block}
