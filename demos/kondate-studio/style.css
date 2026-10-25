@@ -4,9 +4,9 @@
 /* 一汁三菜：左手前=ご飯、右手前=汁物、右奥=主菜、左奥=副菜、中央=小鉢。 */
 .tray-dish{aspect-ratio:1;height:auto;transform:translate(-50%,-50%);font-size:clamp(9px,1.2vw,12px);line-height:1.6;overflow-wrap:anywhere}
 .tray-dish:hover{transform:translate(-50%,calc(-50% - 3px))}
-.tray-dish.rice{width:28%;left:23%;top:75%;right:auto;bottom:auto}
-.tray-dish.soup{width:28%;left:77%;top:75%;right:auto;bottom:auto}
-.tray-dish.main{width:30%;left:80%;top:27%;right:auto;bottom:auto}
-.tray-dish.side2{width:24%;left:18%;top:26%;right:auto;bottom:auto}
-.tray-dish.side1{width:21%;left:49%;top:34%;right:auto;bottom:auto}
+.tray-dish.rice{width:24%;left:25%;top:77%;right:auto;bottom:auto}
+.tray-dish.soup{width:23%;left:78%;top:77%;right:auto;bottom:auto}
+.tray-dish.main{width:36%;left:75%;top:30%;right:auto;bottom:auto}
+.tray-dish.side2{width:21%;left:19%;top:29%;right:auto;bottom:auto}
+.tray-dish.side1{width:18%;left:44%;top:40%;right:auto;bottom:auto}
 .tray .empty-state{position:absolute;inset:0;display:grid;place-items:center}
