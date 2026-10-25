@@ -14,7 +14,8 @@ add('pork-ginger','豚肉のしょうが焼き','main',[['pork',80],['onion',30]
 add('beef-simmer','牛肉のしぐれ煮','main',[['beef',75],['burdock',30],['soy',7],['sugar',4]],'kettle');
 add('saba-miso','さばのみそ煮','main',[['mackerel',85],['miso',9],['sugar',5]],'kettle');
 add('cod-steam','たらの蒸し物','main',[['cod',90],['mushroom',25],['soy',5]],'oven');
-add('omelet','野菜入り卵焼き','main',[['egg',90],['corn',15],['sugar',4]],'oven');
+add('omelet','だし巻き卵','main',[['egg',90],['dashi',20],['soy',2],['oil',2]],'pan');
+D.recipes.find(r=>r.id==='omelet').revision=2;
 add('mapo','麻婆豆腐','main',[['tofu',110],['pork',30],['soy',7],['oil',3]],'kettle');
 add('atsuage-simmer','厚揚げの含め煮','main',[['atsuage',100],['daikon',30],['soy',7],['sugar',3]],'kettle');
 add('chicken-tomato','鶏肉のトマト煮','main',[['chicken',90],['tomato',50],['onion',20],['oil',3]],'kettle');
