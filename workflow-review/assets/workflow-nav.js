@@ -5,7 +5,7 @@ let destinations=null, busy=false;
 const lab=()=>window.layoutLab||window.weeklyLab||window.xlsxLab||window.ledgerLab;
 const state=()=>lab()?.getState();
 const editing=()=>!!lab()?.api.getActiveWorkbook().isCellEditing();
-const tell=text=>{if(status)status.textContent=text;};
+const tell=text=>{const target=new URL(location.href).searchParams.get('legacy')==='1'?status:document.querySelector('#multicase-status')||status;if(target)target.textContent=text;};
 const dialog=document.createElement('dialog');
 dialog.id='workflow-confirm';
 dialog.innerHTML='<h2>入力を保存して移動しますか？</h2><p>未保存の入力があります。</p><div><button data-choice="stay">この画面に残る</button><button data-choice="discard">破棄して移動</button><button data-choice="save">保存して移動</button></div>';
@@ -19,7 +19,12 @@ function choose(){return new Promise(resolve=>{
 async function move(key,caseSelection=false){
   if(busy||!destinations||!Object.hasOwn(destinations,key))return;
   const current=state();
-  if(!destinations||!current)return tell('画面の準備ができるまでお待ちください');
+  if(!destinations)return tell('画面切替を確認できません。');
+  if(!current){
+    if(new URL(location.href).searchParams.get('legacy')==='1')return tell('旧Excel見本の準備ができるまでお待ちください');
+    const multi=window.timeincMultiCase;if(!multi)return tell('画面の準備ができるまでお待ちください');
+    multi.guardNavigate(()=>{window.timeincNavigationApproved=true;location.assign(destinations[key]);});return;
+  }
   if(current.saving)return tell('保存中です。確認が終わるまでこの画面に残ってください');
   if(current.uncertain)return tell('保存結果が未確定です。「保存版の確認」で確認してから移動してください');
   let discarded=false;
@@ -38,19 +43,23 @@ async function move(key,caseSelection=false){
     }
     if(caseSelection){
       try{window.timeincCaseHandoff.prepare({discard:discarded});}catch(error){tell(error.message);return;}
+      const legacyTarget=new URL(destinations[key]);legacyTarget.searchParams.delete('board');legacyTarget.searchParams.set('legacy','1');window.timeincNavigationApproved=true;location.assign(legacyTarget.href);return;
     }
     window.timeincNavigationApproved=true;
-    location.assign(destinations[key]);
+    const destination=new URL(destinations[key]);
+    if(key==='weekly'&&document.body.dataset.workflowPage==='weekly'&&new URL(location.href).searchParams.get('legacy')==='1'){const currentURL=new URL(location.href);for(const name of ['case','week','search','boardSearch','boardRecorded'])if(currentURL.searchParams.has(name))destination.searchParams.set(name,currentURL.searchParams.get(name));}
+    location.assign(destination.href);
   }finally{busy=false;}
 }
 if(nav){
   nav.addEventListener('pointerdown',e=>{if(e.target.closest('[data-go]'))e.preventDefault();});
   nav.addEventListener('click',e=>{const button=e.target.closest('[data-go]');if(button&&!button.disabled&&button.getAttribute('aria-disabled')!=='true')move(button.dataset.go).catch(()=>tell('移動できません。入力を保持したままこの画面に残ります'));});
-  destinations={home:new URL("../",location.href).href,ledger:new URL("../ledger/",location.href).href,weekly:new URL("../weekly/",location.href).href,cost:new URL("../?view=cost",location.href).href,billing:new URL("../?view=billing",location.href).href,graph:new URL("../?view=graph",location.href).href,print:new URL("../?view=print",location.href).href,meeting:new URL("../?view=meeting",location.href).href,schedule:new URL("../?view=schedule",location.href).href,notifications:new URL("../?view=notifications",location.href).href,files:new URL("../?view=files",location.href).href,search:new URL("../?view=search",location.href).href,attendance:new URL("../?view=attendance",location.href).href};
+  destinations={home:new URL("../?v=e1b2234b1d42",location.href).href,ledger:new URL("../ledger/?v=e1b2234b1d42",location.href).href,weekly:new URL("../weekly/?board=1&v=e1b2234b1d42",location.href).href,cost:new URL("../?view=cost&v=e1b2234b1d42",location.href).href,billing:new URL("../?view=billing&v=e1b2234b1d42",location.href).href,graph:new URL("../?view=graph&v=e1b2234b1d42",location.href).href,print:new URL("../?view=print&v=e1b2234b1d42",location.href).href,meeting:new URL("../?view=meeting&v=e1b2234b1d42",location.href).href,schedule:new URL("../?view=schedule&v=e1b2234b1d42",location.href).href,notifications:new URL("../?view=notifications&v=e1b2234b1d42",location.href).href,files:new URL("../?view=files&v=e1b2234b1d42",location.href).href,search:new URL("../?view=search&v=e1b2234b1d42",location.href).href,attendance:new URL("../?view=attendance&v=e1b2234b1d42",location.href).href};
 }
 window.addEventListener('pageshow',async e=>{
   window.timeincNavigationApproved=false;
   if(!e.persisted)return;
+  if(new URL(location.href).searchParams.get('legacy')!=='1'){window.timeincMultiCase?.activate();return;}
   // BFCache keeps old JS state. Do not silently call it the latest saved version.
   tell('戻った画面です。保存版を確認しています…');
   const button=document.querySelector('#readback');
@@ -59,3 +68,5 @@ window.addEventListener('pageshow',async e=>{
 });
 
 document.addEventListener('timeinc:case-weekly',()=>move('weekly',true).catch(()=>tell('案件を選択できません。入力を保持したまま確認してください')));
+
+document.addEventListener('timeinc:weekly-board',()=>move('weekly').catch(()=>tell('週間一覧へ移動できません。入力を保持しています')));
