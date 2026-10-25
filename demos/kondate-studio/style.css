@@ -30,3 +30,38 @@
 @media(max-width:900px){.day-panel{display:block}.main-course{grid-template-columns:210px minmax(0,1fr);gap:26px}.main-course h3{font-size:24px}.menu-course .course-photo{width:65px}.meal-board{margin-left:22px;margin-right:22px}.daily-nutrition{margin-top:0}}
 @media(max-width:600px){.meal-board{margin:4px 18px 0;padding-top:18px}.main-course{grid-template-columns:128px minmax(0,1fr);gap:17px;padding-bottom:18px}.main-course h3{font-size:19px;margin:7px 0}.main-course .course-parts{font-size:10px}.main-course .swap-link{margin-top:10px}.menu-courses{grid-template-columns:1fr;gap:0}.menu-course{gap:14px;padding:12px 0}.menu-course .course-photo{width:58px}.menu-course h4{font-size:13px}.menu-course .course-parts{font-size:10px}.menu-course .course-copy{position:relative;padding-right:54px}.menu-course .swap-link{position:absolute;right:0;top:50%;transform:translateY(-50%);padding:5px 0}.menu-section-label{margin-top:16px}.dish-list{padding:14px 18px 17px}.meal-memo{width:100%}.meal-memo input{flex:1;width:auto}.day-meta{padding-left:18px;padding-right:18px}}
 @media(max-width:350px){.main-course{grid-template-columns:100px minmax(0,1fr);gap:13px}.main-course h3{font-size:17px}.main-course .course-parts{font-size:9px}.menu-course .course-photo{width:48px}.menu-course{gap:10px}}
+
+/* An entire meal stays visible for color review. Photo transparency preserves vessel edges. */
+.meal-view-switch{display:flex;gap:4px;background:#f2f5f2;border-radius:6px;padding:3px;margin-bottom:16px}
+.meal-view-switch button{flex:1;border:0;background:none;color:#839087;font-size:11px;padding:8px;border-radius:4px}
+.meal-view-switch button[aria-pressed=true]{background:#fff;color:var(--green);font-weight:600;box-shadow:0 1px 3px #21352a0c}
+.plating-heading{display:flex;align-items:center;justify-content:space-between;margin:0 0 12px;font-size:11px;font-weight:500;color:#4d6053}
+.plating-heading small{font-size:9px;font-weight:400;color:#89958c}
+.meal-tray{position:relative;isolation:isolate;width:100%;aspect-ratio:1.46;background:linear-gradient(160deg,#593b35,#432c28 52%,#3e2926);border:1px solid #68493f;border-radius:9px;box-shadow:inset 0 0 0 6px #38251e,inset 0 0 0 7px #725046,0 8px 16px #3e302312;overflow:hidden}
+.plate{position:absolute;display:block;transform:translate(-50%,-50%);border:0;background:none;padding:0;aspect-ratio:1;cursor:pointer;border-radius:50%;transition:filter .15s}
+.plate:hover{filter:brightness(1.08)}
+.plate:focus-visible{outline:2px solid #fff;outline-offset:0}
+.plate-image{position:absolute;width:100%;aspect-ratio:1;left:0;top:50%;transform:translateY(-50%);background-image:url('assets/plated-food-v1.png');background-size:300% 200%;background-repeat:no-repeat;pointer-events:none}
+.plate.rice{left:44%;top:75%;width:38%}
+.plate.soup{left:79%;top:75%;width:36%}
+.plate.main{left:65%;top:25%;width:68%;aspect-ratio:1.85;border-radius:10px}
+.plate.side1{left:17%;top:25%;width:33%}
+.plate.side2{left:17%;top:66%;width:30%}
+.plate.missing{border:1px dashed #c7aaa0;background:#543b35;color:#eee1d9;padding:8px;display:flex;flex-direction:column;justify-content:center;gap:5px;font-size:11px;line-height:1.7}
+.plate.missing.main{width:53%;aspect-ratio:1.7}
+.plate.missing small{font-size:9px;color:#d9c3b8}
+.plating-note{margin:11px 0 10px;font-size:9px;color:#8a948b;line-height:1.8}
+.photo-gap{color:#aa7234;font-size:10px;margin:10px 0;padding:8px 10px;background:#fff8ed;border:1px solid #f0e2c8;border-radius:5px;line-height:1.8}
+.color-review{display:flex;flex-wrap:wrap;align-items:center;gap:8px;padding:12px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);font-size:10px;color:#7b887e}
+.color-review-label{margin-right:4px;color:#4f6254;font-weight:500}
+.color-swatch{display:inline-flex;align-items:center;gap:4px}
+.color-swatch i{height:9px;width:9px;border:1px solid #00000012;border-radius:50%;background:var(--swatch)}
+.tray-menu{display:grid;grid-template-columns:1fr 1fr;column-gap:18px;margin-top:6px}
+.tray-menu button{display:flex;align-items:baseline;gap:8px;background:none;border:0;border-bottom:1px solid #edf0eb;text-align:left;padding:11px 0;min-width:0}
+.tray-menu button:first-child{grid-column:1/-1}
+.tray-menu span{font-size:9px;color:#87938b;white-space:nowrap}
+.tray-menu strong{font-size:11px;font-weight:500;line-height:1.7;flex:1;overflow-wrap:anywhere}
+.tray-menu em{font-style:normal;font-size:10px;color:#7a947e}
+@media(max-width:600px){.meal-view-switch button{font-size:10px}.plating-heading{font-size:10px}.plating-heading small{font-size:8px}.meal-tray{border-radius:7px;box-shadow:inset 0 0 0 4px #38251e,inset 0 0 0 5px #725046,0 4px 10px #3e302312}.plate.missing{font-size:9px;padding:4px;gap:1px}.plate.missing small{font-size:7px}.tray-menu{column-gap:12px}.tray-menu button{gap:6px;padding:10px 0}.tray-menu strong{font-size:10px}.tray-menu span{font-size:8px}.color-review{gap:7px;font-size:9px}.plating-note{font-size:8px}}
+
+.plate.missing.soup{width:30%;top:72%}
