@@ -57,3 +57,11 @@ body[data-portal-view=home] .portal-heading{display:none}
 
 @media(max-width:700px){.home-canvas-toolbar{top:78px}}
 .home-canvas-editing .dash-panel-heading{padding-right:80px}.home-canvas-editing .dash-quick .dash-arrow{visibility:hidden}
+
+/* Home keeps one primary rail and one page title. Secondary lists serve sibling pages only. */
+.workflow-v3[data-nav-category=home]{margin-left:var(--v3-rail,56px)}
+.workflow-v3 #sidebar-pages[hidden]{display:none!important}
+.workflow-v3 .dash-footer .v3-sidebar-brand{position:static;inset:auto;margin:0 0 0 auto;padding:0;flex-shrink:0}
+.workflow-v3 .dash-footer .v3-sidebar-brand img{width:112px;height:28px}
+.dash-footer{align-items:center;flex-wrap:wrap}
+@media(max-width:700px){.workflow-v3[data-nav-category=home] .home-canvas-toolbar{top:8px}.workflow-v3 .dash-footer .v3-sidebar-brand img{width:88px;height:24px}}
