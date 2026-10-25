@@ -1,2 +1,59 @@
 .billing-report>p,.billing-report a{overflow-wrap:anywhere;white-space:pre-wrap}.billing-report .billing-toolbar{justify-content:flex-start;margin-top:18px}.billing-report .billing-field{max-width:100%;flex:1;min-width:200px}.billing-report table{min-width:0;table-layout:fixed}.billing-report th,.billing-report td{overflow-wrap:anywhere}.billing-report td:nth-child(2){font-variant-numeric:tabular-nums}.billing-report a{display:inline-block;min-height:44px;padding:8px 0;box-sizing:border-box}@media(max-width:650px){.billing-report .billing-field{min-width:0;flex-basis:100%}.billing-report thead{display:none}.billing-report tr,.billing-report td{display:block}.billing-report td{border:0;padding:3px 12px}.billing-report td:first-child{font-weight:600}.billing-report td:nth-child(3){font-size:12px;color:#55708a}.billing-report tbody tr{border-bottom:1px solid #b8cada;padding:8px 0}.dark .billing-report td:nth-child(3),.shell-dark .billing-report td:nth-child(3){color:#b2cce1}}
 .billing-report a{color:#1c5e96}.dark .billing-report a,.shell-dark .billing-report a{color:#9ed2ff}
+@media print{
+  @page{size:A4;margin:14mm}
+  :root:has(body[data-portal-view="print"]){background:#fff!important}
+  body[data-portal-view="print"]{margin:0!important;min-height:0!important;height:auto!important;background:#fff!important;color:#111!important;font-size:10pt}
+  body[data-portal-view="print"]>*:not(main),body[data-portal-view="print"] .portal-heading,body[data-portal-view="print"] #home-status{display:none!important}
+  body[data-portal-view="print"] main{margin:0!important;padding:0!important;max-width:none!important;width:auto!important}
+  .billing-report{padding:0!important;background:#fff!important;color:#111!important;font-size:10pt}
+  .billing-report>button,.billing-report .billing-toolbar,.billing-report a{display:none!important}
+  .billing-report h2{font-size:15pt;margin:12pt 0 8pt;break-after:avoid}
+  .billing-report p{margin:7pt 0;line-height:1.5;orphans:3;widows:3}
+  .billing-report .billing-identity{display:block;white-space:pre-wrap;background:#fff!important;color:#111!important;border:0!important;padding:0!important}
+  .billing-report .billing-identity>*{display:block;overflow-wrap:anywhere;color:#111!important}
+  .billing-report .billing-table-wrap{overflow:visible;border:0}
+  .billing-report .billing-table-wrap,.billing-report table,.billing-report tbody,.billing-report tr{background:#fff!important}
+  .billing-report table{width:100%;border-collapse:collapse;table-layout:fixed;font-size:9pt}
+  .billing-report thead{display:table-header-group}
+  .billing-report tbody{display:table-row-group}
+  .billing-report tr{display:table-row;break-inside:avoid}
+  .billing-report th,.billing-report td{display:table-cell;border:1px solid #aaa!important;padding:5pt!important;background:#fff!important;color:#111!important;white-space:pre-wrap;overflow-wrap:anywhere}
+  .billing-report td:before{display:none!important}
+  .billing-report td:nth-child(3){font-size:9pt;color:#333!important}
+}
+.invoice-source-block{margin-top:24px}.invoice-source-table{break-inside:auto}.invoice-source-table tr{break-inside:avoid}.invoice-source-table thead{display:table-header-group}
+@media print{.billing-current-ledger{break-inside:avoid}}
+@media print{.invoice-source-block h2,.invoice-source h2,.invoice-source h3{break-after:avoid}.invoice-source-table{overflow:visible!important}.invoice-source-table table{width:100%;min-width:0!important;table-layout:fixed}.invoice-source-table th,.invoice-source-table td{font-size:10pt;padding:6px;overflow-wrap:anywhere}.invoice-source-block>h3:not(:first-child){break-before:auto}.invoice-source-table th:first-child{width:40px}}
+.original-ledger{margin-top:20px}.original-ledger-scroll{max-width:100%;overflow:auto;border:1px solid #b8cada;border-radius:6px}.original-ledger-scroll:focus-visible{outline:2px solid #3687c8;outline-offset:2px}
+.billing-report #original-ledger-table{width:2100px;min-width:2100px;font-size:13px;table-layout:fixed}
+.billing-report #original-ledger-table th,.billing-report #original-ledger-table td{padding:7px 4px;white-space:pre-wrap;vertical-align:middle;border-right:1px solid #b8cada}
+.billing-report #original-ledger-table th{text-align:center}.billing-report #original-ledger-table td{font-variant-numeric:tabular-nums}.billing-report #original-ledger-table thead{display:table-header-group}.billing-report #original-ledger-table tr{display:table-row}.billing-report #original-ledger-table td{display:table-cell}.billing-report #original-ledger-table td:before{display:none}
+.billing-report #original-ledger-table td:is([data-source-column="L"],[data-source-column="M"],[data-source-column="N"],[data-source-column="O"],[data-source-column="P"],[data-source-column="U"],[data-source-column="Z"],[data-source-column="AA"]){white-space:pre!important;overflow-wrap:normal!important}
+.billing-report #original-ledger-table td:is([data-source-column="Q"],[data-source-column="R"],[data-source-column="S"],[data-source-column="T"],[data-source-column="V"],[data-source-column="W"],[data-source-column="X"],[data-source-column="Y"],[data-source-column="AB"],[data-source-column="AC"],[data-source-column="AD"]){white-space:pre!important;overflow-wrap:normal!important}
+#original-ledger-difference{color:#9d3f1d}.dark #original-ledger-difference,.shell-dark #original-ledger-difference{color:#ffc1a0}
+@media print{
+  @page original-ledger{size:A3 landscape;margin:12mm}
+  body[data-report-format="original"],body[data-report-format="original"] .billing-report,body[data-report-format="all"],body[data-report-format="all"] .billing-report{page:original-ledger}
+  .billing-report-original>h2{display:none}.original-ledger{margin:0}.original-ledger h2{font-size:16pt}.original-ledger p{font-size:9pt}
+  .original-ledger-scroll{overflow:visible;border:0;border-radius:0}.billing-report #original-ledger-table{min-width:0!important;width:100%!important;font-size:9pt!important;table-layout:fixed}
+  .billing-report #original-ledger-table th,.billing-report #original-ledger-table td{padding:5pt 2pt!important;font-size:9pt!important;line-height:1.5;white-space:pre-wrap!important;overflow-wrap:anywhere!important}
+  #original-ledger-difference{color:#111!important}
+  .all-ledger-summary{break-before:page}.all-ledger-summary table{font-size:10pt}.all-ledger-summary h2{break-after:avoid}.all-ledger-summary th,.all-ledger-summary td{padding:4pt!important}.all-ledger-summary .billing-table-wrap{break-inside:avoid}
+}
+.all-ledger-summary{margin-top:24px}.all-ledger-summary td{overflow-wrap:anywhere}.all-ledger-summary tr{break-inside:avoid}
+@media screen{body[data-report-format="all"] .original-ledger-scroll{max-height:65vh}body[data-report-format="all"] #original-ledger-table thead{position:sticky;top:0;z-index:1}}
+#all-ledger-coverage{margin:16px 0}#all-ledger-coverage p{margin:6px 0}#all-ledger-coverage summary{cursor:pointer;padding:8px 0}#all-ledger-coverage h3{margin:0 0 8px}#all-ledger-coverage-details .billing-table-wrap{margin-top:10px}
+@media print{#all-ledger-coverage{font-size:9pt;break-inside:avoid}#all-ledger-coverage h3{font-size:10pt}#all-ledger-coverage-details{display:none!important}}
+#full-ledger-root{overflow-x:auto;max-width:100%;background:#fff;color:#111}.full-ledger-page{margin:0 0 24px;min-width:1800px}.billing-report .full-ledger-table{width:100%;table-layout:fixed;border-collapse:collapse;background:white;color:#111}.billing-report .full-ledger-table thead{display:table-header-group}#full-ledger-root .full-ledger-table th{background:#fff!important;color:#111!important}.billing-report .full-ledger-table tbody{display:table-row-group}.billing-report .full-ledger-table tr{display:table-row;padding:0}.billing-report .full-ledger-table td,.billing-report .full-ledger-table th{display:table-cell;padding:1pt!important;line-height:1.1;white-space:pre-wrap;overflow-wrap:anywhere;color:inherit;box-sizing:border-box}.billing-report .full-ledger-table td:before{display:none}.billing-report .full-ledger-table td[data-cell-type="number"]{white-space:pre;overflow-wrap:normal;font-variant-numeric:tabular-nums}.billing-report .full-ledger-table td:nth-child(3){font-size:inherit;color:inherit}
+.billing-report .full-ledger-title-cell{position:relative;overflow:visible!important;white-space:pre!important}.full-ledger-title{position:relative;display:inline-block;left:1pt;top:0;white-space:pre;z-index:1}.full-ledger-footer{text-align:center;font-size:9pt;color:#111}
+.billing-report .full-ledger-table td,.billing-report .full-ledger-table th{font-size:var(--full-source-font,9pt)!important}
+@media print{
+  @page full-ledger{size:A3 landscape;margin:10mm 5mm 5mm 25mm}
+  .billing-report .full-ledger-table thead{display:table-row-group!important}
+  body[data-report-format="full"],body[data-report-format="full"] .billing-report{page:full-ledger}
+  body[data-report-format="full"] .billing-report>*:not(#full-ledger-root){display:none!important}
+  body[data-report-format="full"][data-full-ledger-print="false"] #full-ledger-root{display:none!important}
+  #full-ledger-root{overflow:visible!important;max-width:none!important}.full-ledger-page{display:block;position:relative;min-width:0;min-height:calc(var(--full-page-height,282mm) - 1pt);margin:0;break-before:page;break-after:auto;break-inside:avoid}.full-ledger-page:first-child{break-before:auto}.full-ledger-footer{position:absolute;left:0;right:0;bottom:0;margin:0;font-size:calc(9pt * var(--full-print-scale,1))}
+  .billing-report .full-ledger-table{width:var(--full-print-width,100%)!important;font-size:9pt!important}.billing-report .full-ledger-table td,.billing-report .full-ledger-table th{font-size:calc(var(--full-source-font,9pt) * var(--full-print-scale,1))!important;padding:calc(1pt * var(--full-print-scale,1))!important;line-height:1.1!important;border-color:#333!important}.billing-report .full-ledger-table tr{break-inside:avoid;height:calc(var(--full-source-height,15pt) * var(--full-print-scale,1))!important}
+}

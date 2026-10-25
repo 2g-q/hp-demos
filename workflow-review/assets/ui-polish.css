@@ -1,0 +1,187 @@
+/* Screen-only presentation. Preserve the editor, store, navigation and print contracts. */
+@media screen {
+  .workflow-v3 {
+    --ui-bg: #f5f7fa;
+    --ui-surface: #ffffff;
+    --ui-soft: #edf2f7;
+    --ui-line: #d6dfe8;
+    --ui-input-line: #7c8fa3;
+    --ui-text: #203348;
+    --ui-muted: #52677d;
+    --ui-blue: #205e91;
+    --ui-hover: #e7f0f8;
+    --ui-selected: #e1edf8;
+    --ui-focus: #1878bd;
+    --ui-shadow: 0 2px 7px #102a4306;
+    background: var(--ui-bg);
+    color: var(--ui-text);
+    font-family: system-ui, -apple-system, 'Hiragino Kaku Gothic ProN', sans-serif;
+  }
+  .workflow-v3:is(.dark, .shell-dark) {
+    --ui-bg: #142334;
+    --ui-surface: #1c3044;
+    --ui-soft: #253d53;
+    --ui-line: #41596e;
+    --ui-input-line: #7c93a7;
+    --ui-text: #e7eef5;
+    --ui-muted: #b7c8d7;
+    --ui-blue: #3278ad;
+    --ui-hover: #29465e;
+    --ui-selected: #294a65;
+    --ui-focus: #85caff;
+    --ui-shadow: none;
+    color-scheme: dark;
+  }
+
+  /* Familiar two-column navigation; a clear current position, no extra menu. */
+  .workflow-v3 .v3-rail { background: #102a43; border-color: #26445d; }
+  .workflow-v3 .v3-rail button { border-radius: 12px; }
+  .workflow-v3 .v3-panel,
+  .workflow-v3 .v3-panel[data-workflow-nav] {
+    background: var(--ui-soft); color: var(--ui-text); border-color: var(--ui-line);
+    padding-top: 24px;
+  }
+  .workflow-v3 .v3-panel-title { font-size: 13px; color: var(--ui-muted); letter-spacing: .04em; padding-bottom: 22px; }
+  .workflow-v3 .v3-page-list { gap: 6px; }
+  .workflow-v3 .v3-panel button[aria-current] {
+    background: var(--ui-surface); color: var(--ui-text); box-shadow: inset 3px 0 var(--ui-focus), var(--ui-shadow);
+    font-weight: 650;
+  }
+  .workflow-v3 .v3-panel button:not([aria-current]):hover { background: var(--ui-hover); }
+  .workflow-v3 > header { background: #142e49; border-bottom: 1px solid #28445f; min-height: 64px; padding-inline: 28px; }
+  .workflow-v3 > header .label { font-size: 18px; font-weight: 600; letter-spacing: .025em; }
+  .workflow-v3[data-workflow-page=home] main { max-width: 1440px; padding: 28px 32px; }
+  .workflow-v3 .portal-heading { min-height: 36px; margin-bottom: 24px; }
+  .workflow-v3 .portal-heading h1 { font-size: 26px; line-height: 1.4; letter-spacing: .02em; }
+  .workflow-v3 .badge { border-radius: 6px; font-weight: 500; }
+
+  /* One visual language for forms and the existing business screens. */
+  .workflow-v3 :is(.multicase, .weekly-case, .weekly-actual, .billing, .billing-graph) {
+    color: var(--ui-text); font-size: 15px; line-height: 1.6;
+  }
+  .workflow-v3 :is(.multicase, .weekly-case) { background: var(--ui-bg); }
+  .workflow-v3 :is(.multicase, .multicase-weekly-board) { padding: 24px 28px; }
+  .workflow-v3 :is(.multicase h1, .multicase-weekly-board #weekly-board h1) { font-size: 24px; font-weight: 650; }
+  .workflow-v3 :is(.portal-card, .multicase-form fieldset, .billing-form, .graph-card, .weekly-board-panels>section) {
+    background: var(--ui-surface); border: 1px solid var(--ui-line); border-radius: 12px; box-shadow: var(--ui-shadow);
+  }
+  .workflow-v3 :is(.portal-card, .graph-card) { padding: 22px 24px; }
+  .workflow-v3 :is(.portal-card h2, .graph-card h2, .billing h2) { font-size: 19px; font-weight: 650; }
+  .workflow-v3 :is(.multicase-toolbar, .weekly-board-toolbar) { gap: 16px; margin-bottom: 20px; }
+  .workflow-v3 :is(.multicase-count, .multicase-search>span, .multicase-format, .weekly-board-controls label,
+    .weekly-board-heading span, .weekly-case-week, .weekly-ledger-values dt, .graph-axis, .graph-small-note, .muted-text) { color: var(--ui-muted); }
+
+  .workflow-v3 :is(.multicase, .weekly-case, .billing, .weekly-actual, .billing-graph, .portal-card)
+    :is(button, input:not([type=checkbox]):not([type=radio]), textarea, select) {
+    border-radius: 8px;
+  }
+  .workflow-v3 :is(.multicase, .weekly-case, .billing, .weekly-actual, .billing-graph)
+    :is(input:not([type=checkbox]):not([type=radio]), textarea, select) {
+    background: var(--ui-surface); color: var(--ui-text); border: 1px solid var(--ui-input-line);
+    min-height: 44px; font-size: 16px;
+  }
+  .workflow-v3 :is(.multicase, .weekly-case, .billing) :is(input, textarea)[readonly] {
+    background: var(--ui-soft); color: var(--ui-muted); border-style: dashed;
+  }
+  .workflow-v3 :is(.multicase, .weekly-case, .billing, .weekly-actual, .billing-graph) button {
+    min-height: 44px; border-color: var(--ui-line); background: var(--ui-surface); color: var(--ui-text);
+    font-weight: 500;
+  }
+  .workflow-v3 :is(.multicase, .weekly-case, .billing, .weekly-actual, .billing-graph) button:not(:disabled):hover {
+    border-color: var(--ui-input-line); background: var(--ui-hover);
+  }
+  .workflow-v3 :is(.multicase, .weekly-case, .billing) button.primary {
+    background: var(--ui-blue); border-color: var(--ui-blue); color: #fff; font-weight: 650;
+    padding-inline: 20px;
+  }
+  .workflow-v3 :is(.multicase, .weekly-case, .billing) button.primary:not(:disabled):hover { background: #194e7b; border-color: #194e7b; }
+  .workflow-v3 :is(.multicase, .weekly-case, .billing, .weekly-actual, .billing-graph) :is(button, a, input, textarea, select, summary):focus-visible {
+    outline: 3px solid var(--ui-focus); outline-offset: 3px;
+  }
+  .workflow-v3 :is(.weekly-case-tabs, .billing-tabs) { gap: 4px; width: fit-content; padding: 4px; background: var(--ui-soft); border-radius: 10px; }
+  .workflow-v3 :is(.weekly-case-tabs, .billing-tabs) button { border-color: transparent; background: transparent; padding-inline: 22px; }
+  .workflow-v3 :is(.weekly-case-tabs, .billing-tabs) [aria-pressed=true] {
+    background: var(--ui-surface); border-color: var(--ui-line); color: var(--ui-text); font-weight: 650; box-shadow: var(--ui-shadow);
+  }
+
+  /* Keep all Excel fields; make entry sections and the existing save action easy to scan. */
+  .workflow-v3 .multicase-form { gap: 20px; }
+  .workflow-v3 .multicase-form fieldset { padding: 18px 22px 22px; }
+  .workflow-v3 .multicase-form legend { font-size: 16px; color: var(--ui-text); padding-inline: 8px; }
+  .workflow-v3 .multicase-grid { gap: 16px 22px; }
+  .workflow-v3 .multicase-field { gap: 6px; }
+  .workflow-v3 .multicase-field>span { font-weight: 500; }
+  .workflow-v3 .multicase-form-actions {
+    position: sticky; bottom: 0; z-index: 5; padding: 12px 16px; border: 1px solid var(--ui-line);
+    border-radius: 10px; background: var(--ui-surface); box-shadow: 0 -4px 16px #102a430a;
+  }
+  .workflow-v3 .multicase { scroll-padding-bottom: 96px; }
+  .workflow-v3 .multicase-field { scroll-margin-block: 20px 100px; }
+  .workflow-v3 :is(.multicase-status, .weekly-case-status, .billing-status, .weekly-actual-error):not(:empty) {
+    padding: 10px 14px; border-left: 3px solid var(--ui-focus); border-radius: 4px;
+    background: var(--ui-soft); margin-bottom: 18px;
+  }
+
+  /* Tables stay tables: fixed columns and narrow-screen cards remain owned by existing CSS. */
+  .workflow-v3 :is(.multicase-table-wrap, .weekly-case-table-wrap, .billing-table-wrap, .weekly-actual-table-wrap) {
+    background: var(--ui-surface); border-color: var(--ui-line); border-radius: 10px;
+  }
+  .workflow-v3 :is(.multicase-table-wrap, .weekly-case-table-wrap, .billing-table-wrap, .weekly-actual-table-wrap) th {
+    background: var(--ui-soft); color: var(--ui-muted); border-color: var(--ui-line); font-weight: 600;
+  }
+  .workflow-v3 :is(.multicase-table-wrap, .weekly-case-table-wrap, .billing-table-wrap, .weekly-actual-table-wrap) td { border-color: var(--ui-line); }
+  .workflow-v3 .multicase-table-wrap:not(.multicase-ledger-preview) td { vertical-align: middle; }
+  .workflow-v3 .multicase-table-wrap:not(.multicase-ledger-preview) td:nth-child(2) { font-weight: 600; }
+  .workflow-v3 .multicase-table-wrap:not(.multicase-ledger-preview) td .multicase-actions { gap: 6px; }
+  .workflow-v3 .multicase-table-wrap:not(.multicase-ledger-preview) td button { background: transparent; border-color: transparent; color: var(--ui-text); }
+  .workflow-v3 .multicase-table-wrap:not(.multicase-ledger-preview) td button:hover { background: var(--ui-hover); border-color: var(--ui-line); }
+  .workflow-v3 .multicase-table-wrap tr.selected td { background: var(--ui-selected); }
+  .workflow-v3 #weekly-board-cases { background: var(--ui-surface); }
+  .workflow-v3 #weekly-board-cases td { border-color: var(--ui-line); }
+  .workflow-v3 .multicase #weekly-board #weekly-board-cases th { background: var(--ui-soft); color: var(--ui-text); }
+  .workflow-v3 .multicase #weekly-board #weekly-board-cases th:nth-child(2) { box-shadow: inset 0 3px #3979ae; }
+  .workflow-v3 .multicase #weekly-board #weekly-board-cases th:nth-child(3) { background: #edf5f1; box-shadow: inset 0 3px #58816d; }
+  .workflow-v3:is(.dark,.shell-dark) .multicase #weekly-board #weekly-board-cases th:nth-child(3) { background: #23453f; }
+  .workflow-v3 #weekly-board td small { color: var(--ui-muted); }
+  .workflow-v3 .weekly-board-entry { border-color: var(--ui-line); }
+  .workflow-v3 .weekly-case-table-wrap th { font-size: 13px; }
+  .workflow-v3 .weekly-case-table-wrap textarea { background: var(--ui-surface); }
+  .workflow-v3 .weekly-case-table-wrap td:first-child { background: var(--ui-soft); }
+  .workflow-v3 :is(.multicase-reference, .weekly-actual-identity, .billing-identity, .weekly-ledger-inputs) {
+    background: var(--ui-surface); border-color: var(--ui-line); border-radius: 10px;
+  }
+  .workflow-v3 :is(.weekly-actual-identity, .billing-identity) { border-left: 3px solid var(--ui-focus); }
+  .workflow-v3 .case-quantity-target { background: var(--ui-soft); border-left: 3px solid var(--ui-focus); border-radius: 8px; padding: 16px 18px; }
+  .workflow-v3 .weekly-actual-month-actions a { background: var(--ui-surface); border-color: var(--ui-input-line); border-radius: 8px; }
+  .workflow-v3 .graph-value-table th { background: var(--ui-soft); color: var(--ui-text); }
+  .workflow-v3 .graph-value-table :is(th, td) { border-color: var(--ui-line); padding-block: 14px; }
+  .workflow-v3 .graph-total { font-size: 20px; font-weight: 650; margin-top: 6px; font-variant-numeric: tabular-nums; }
+  .workflow-v3 .graph-value-table td { font-size: 16px; }
+  .workflow-v3 .graph-value-table tbody th { background: transparent; }
+  .workflow-v3 .graph-composition { height: 14px; border-radius: 4px; margin: 20px 0 16px; }
+  .workflow-v3 .portal-card .app { background: var(--ui-surface); border-color: var(--ui-line); }
+  .workflow-v3 .portal-card .app:hover { background: var(--ui-hover); }
+
+  @media (min-width: 1100px) {
+    .workflow-v3 .multicase-table-wrap:not(.multicase-ledger-preview) th:last-child { width: 262px; }
+    .workflow-v3 .multicase-table-wrap:not(.multicase-ledger-preview) :is(th,td) { padding: 12px 16px; }
+    .workflow-v3 .multicase-table-wrap:not(.multicase-ledger-preview) td .multicase-actions { flex-wrap: nowrap; }
+    .workflow-v3 .multicase-table-wrap:not(.multicase-ledger-preview) td button { padding-inline: 10px; }
+  }
+  @media (max-width: 700px) {
+    .workflow-v3 .v3-panel, .workflow-v3 .v3-panel[data-workflow-nav] { padding: 7px 8px; }
+    .workflow-v3 .v3-panel-title { font-size: 12px; padding-bottom: 2px; }
+    .workflow-v3 .v3-panel button, .workflow-v3 .v3-panel[data-workflow-nav] button { min-height: 44px; }
+    .workflow-v3 > header { min-height: 56px; padding: 10px 14px; }
+    .workflow-v3 > header .label { font-size: 16px; }
+    .workflow-v3[data-workflow-page=home] main { padding: 20px 14px; }
+    .workflow-v3 :is(.multicase, .multicase-weekly-board, .weekly-case) { padding: 18px 12px; }
+    .workflow-v3 :is(.multicase h1, .multicase-weekly-board #weekly-board h1, .portal-heading h1) { font-size: 22px; }
+    .workflow-v3 :is(.portal-card, .graph-card, .multicase-form fieldset) { padding: 16px 14px; }
+    .workflow-v3 .multicase-form-actions { position: static; padding: 12px; }
+    .workflow-v3 .graph-total { font-size: 18px; }
+    .workflow-v3 .graph-value-table td { font-size: 14px; }
+    .workflow-v3 .case-quantity-target { border-top: 0; padding: 14px; }
+    .workflow-v3 .weekly-case-tabs button { padding-inline: 24px; }
+  }
+}
