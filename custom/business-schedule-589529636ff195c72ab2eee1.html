@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; connect-src 'none'; img-src data:; base-uri 'none'; form-action 'none'">
+<title>業務フローの操作PoC</title>
+<style>
+*{box-sizing:border-box}body{font-family:system-ui,sans-serif;margin:0;background:#f4f5f6;color:#19202b;line-height:1.65}main{max-width:1120px;margin:auto;padding:28px}header{border-bottom:2px solid #253d56;margin-bottom:24px}h1{font-size:clamp(23px,4vw,32px);line-height:1.35}h2{font-size:18px;margin-top:28px}.tag{color:#344963;font-size:13px}.note{padding:14px;background:#fff6dd;border-left:4px solid #b97c00}.grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}textarea{font:14px/1.5 ui-monospace,monospace;width:100%;height:190px;resize:vertical;border:1px solid #8e9ca9;padding:10px}label{display:block;font-weight:600;margin:10px 0}button,select,input{font:inherit;min-height:40px;border:1px solid #738496;border-radius:4px;padding:6px 12px}button{background:#254c72;color:white;cursor:pointer;margin:5px 8px 5px 0}button.secondary{background:white;color:#253d56}button:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible{outline:3px solid #b47800;outline-offset:2px}button:disabled{opacity:.5;cursor:not-allowed}.table-wrap{overflow:auto;background:white}table{border-collapse:collapse;width:100%;font-size:14px}th,td{border-bottom:1px solid #d5dce3;padding:9px;text-align:left}td input{width:112px;max-width:100%}th{background:#e8edf2}#alerts{background:#fff;padding:14px 32px;border-left:4px solid #b06030}#summary{font-weight:600}#error{color:#a62626;white-space:pre-wrap}footer{border-top:1px solid #c5ced5;margin-top:32px;padding-top:12px;font-size:13px}.hidden{display:none}@media(max-width:650px){main{padding:16px}.grid{grid-template-columns:1fr}th,td{padding:6px}}
+</style>
+</head>
+<body><main>
+<header><p class="tag">ミナト AI・IT ラボ ／ 自主制作・営業用PoC</p><h1 id="title"></h1><p id="scope"></p></header>
+<p class="note" id="limits"></p>
+<p>すべて架空のデモデータです。入力はこのブラウザ内だけで処理し、送信・保存しません。実際の個人情報や顧客データは入力しないでください。</p>
+<div class="grid"><section><label id="input-label" for="source"></label><textarea id="source" spellcheck="false"></textarea></section><section id="master-section"><label for="master">管理表CSV（同じIDの複数部門はweight比で按分）</label><textarea id="master" spellcheck="false"></textarea></section></div>
+<label id="absence-label" for="absence">欠勤する担当<select id="absence"><option value="">なし</option><option>担当A</option><option>担当B</option><option value="ALL">全員</option></select></label>
+<div><button id="calculate" type="button">作成・再計算</button><button id="reset" class="secondary" type="button">架空データへ戻す</button><button id="export" class="secondary" type="button" disabled>現在の結果をCSV出力</button></div>
+<p id="error" role="alert"></p><p id="summary" aria-live="polite">入力を確認して「作成・再計算」を押してください。</p>
+<h2>確認が必要な箇所と理由</h2><ul id="alerts" aria-live="polite"><li>未計算</li></ul>
+<h2>結果一覧 <small id="edit-note"></small></h2><div class="table-wrap"><table id="result"><thead></thead><tbody></tbody></table></div>
+<section id="totals-section"><h2>部門別集計</h2><div class="table-wrap"><table id="totals"><thead><tr><th>部門</th><th>金額</th></tr></thead><tbody></tbody></table></div></section>
+<footer>本ページは架空データの自主制作サンプルです。ルールベースの限定PoCであり、実AI実行・本番連携・制度適合・会計上の正確性を保証する完成製品ではありません。条件を確認し、人が最終判断します。</footer>
+</main>
+<script id="poc-spec" type="application/json">{"version": 1, "family": "schedule", "title": "週間計画・変更と例外確認", "scope": "架空の訪問条件から予定を作り、欠勤時の再計算、時間重複・利用終了の確認、修正とCSV出力を試せます。", "limits": "ルールベースの操作PoCです。実際のExcel/PDF取込、外部AI、制度・医療判断、必要回数の正式判定は未実装です。募集の全工程に対する開発・検証範囲とは別です。", "input_label": "訪問条件CSV（1行をデモの必要な1訪問とします）", "input": "id,user,day,start,duration,staff,status\nV1,利用者A,月,09:00,60,担当A,利用中\nV2,利用者B,月,09:30,60,担当A,利用中\nV3,利用者C,火,10:00,30,担当B,終了\nV4,利用者D,水,11:00,30,担当B,利用中", "master": "", "caption": "架空データで週間計画、欠勤時の再計算・例外確認・CSV出力を試せる自主PoCです。Excel/PDF取込・外部AI・制度判断は未実装です。"}</script>
+<script>
+'use strict';
+const spec=JSON.parse(document.getElementById('poc-spec').textContent);
+const $=id=>document.getElementById(id);
+let result=[],warnings=[],totals=Object.create(null),csvHeaders=[];
+for(const k of ['title','scope','limits'])$(k).textContent=spec[k];
+$('input-label').textContent=spec.input_label;
+$('master-section').classList.toggle('hidden',spec.family==='schedule');
+$('absence-label').classList.toggle('hidden',spec.family!=='schedule');
+$('totals-section').classList.toggle('hidden',spec.family==='schedule');
+$('edit-note').textContent=spec.family==='schedule'?'時刻・担当を変更すると再検査します。デモの勤務枠は09:00〜18:00です。':'';
+function parseCSV(text,headers){
+ if(text.length>1000000)throw Error('このPoCの入力は1MBまでです');
+ const rows=[];let row=[],cell='',quoted=false;
+ for(let i=0;i<text.length;i++){let c=text[i];if(c==='"'){if(quoted&&text[i+1]==='"'){cell+='"';i++;}else quoted=!quoted;}
+ else if(c===','&&!quoted){row.push(cell);cell='';}else if((c==='\n'||c==='\r')&&!quoted){if(c==='\r'&&text[i+1]==='\n')i++;row.push(cell);rows.push(row);row=[];cell='';}else cell+=c;}
+ if(quoted)throw Error('CSVの引用符が閉じていません');if(cell||row.length){row.push(cell);rows.push(row);}const clean=rows.filter(r=>r.some(v=>v.trim()));
+ if(!clean.length)throw Error('CSVが空です');const head=clean.shift().map(s=>s.trim().replace(/^\uFEFF/,''));if(headers.some(h=>!head.includes(h)))throw Error('列名を確認してください：'+headers.join(','));
+ if(clean.length>1000)throw Error('このPoCは1000行までです');return clean.map((r,i)=>{if(r.length!==head.length)throw Error('CSV '+(i+2)+'行目の列数が一致しません');return Object.fromEntries(head.map((h,n)=>[h,r[n].trim()]));});
+}
+function minutes(s){if(!/^\d{2}:\d{2}$/.test(s))return NaN;const [h,m]=s.split(':').map(Number);return h<24&&m<60?h*60+m:NaN;}
+function clock(m){return String(Math.floor(m/60)).padStart(2,'0')+':'+String(m%60).padStart(2,'0');}
+function overlap(a,b){return a.day===b.day&&a.staff===b.staff&&minutes(a.start)<minutes(b.start)+b.duration&&minutes(b.start)<minutes(a.start)+a.duration;}
+function checkSchedule(){
+ const issues=[...warnings];for(let i=0;i<result.length;i++){const a=result[i];if(a.staff===$('absence').value||$('absence').value==='ALL')issues.push(a.id+'：欠勤担当への割当');
+ if(!Number.isFinite(minutes(a.start)))issues.push(a.id+'：時刻不正');
+ if(minutes(a.start)<9*60||minutes(a.start)+a.duration>18*60)issues.push(a.id+'：勤務枠外（デモ09:00〜18:00）');
+ for(let n=i+1;n<result.length;n++)if(overlap(a,result[n]))issues.push(a.id+' / '+result[n].id+'：時間重複（同じ担当・曜日）');}
+ return issues;
+}
+function schedule(){
+ const rows=parseCSV($('source').value,['id','user','day','start','duration','staff','status']);const ids=new Set();result=[];warnings=[];csvHeaders=['id','user','day','start','duration','staff'];
+ for(const r of rows){if(!r.id||ids.has(r.id))throw Error('訪問IDが空または重複しています');ids.add(r.id);r.duration=Number(r.duration);
+ if(!['月','火','水','木','金','土','日'].includes(r.day)||!Number.isFinite(minutes(r.start))||!Number.isInteger(r.duration)||r.duration<=0||r.duration>480)throw Error(r.id+'：曜日・開始時刻・所要分を確認してください');
+ if(r.status!=='利用中'){warnings.push(r.id+'：利用終了等のため不要訪問候補として作成対象外');continue;}
+ const workers=['担当A','担当B'].filter(w=>$('absence').value!=='ALL'&&w!==$('absence').value);let placed=null;
+ for(let offset=0;offset<=240&&!placed;offset+=30){for(const staff of [...new Set([r.staff,...workers])].filter(s=>workers.includes(s))){const start=minutes(r.start)+offset;if(start<9*60||start+r.duration>18*60)continue;const a={...r,staff,start:clock(start)};if(!result.some(b=>overlap(a,b))){placed=a;break;}}}
+ if(placed)result.push(placed);else warnings.push(r.id+'：担当・時刻の候補なし（訪問不足、管理者確認）');}
+ renderSchedule();show(checkSchedule());
+}
+function renderSchedule(){
+ renderTable('result',csvHeaders,result,(td,key,r)=>{if(key==='start'||key==='staff'){const el=document.createElement(key==='staff'?'select':'input');if(key==='staff'){for(const w of ['担当A','担当B']){const o=document.createElement('option');o.textContent=w;el.append(o);}}else el.type='time';el.value=r[key];el.dataset.row=r.id;el.dataset.field=key;el.addEventListener('change',()=>{r[key]=el.value;show(checkSchedule());});td.append(el);}else td.textContent=r[key];});
+}
+function allocate(){
+ const bills=parseCSV($('source').value,['id','amount']);const master=parseCSV($('master').value,['id','department','weight']);const ids=new Set();const map=Object.create(null);result=[];warnings=[];totals=Object.create(null);csvHeaders=['id','department','amount'];
+ for(const r of master){const w=Number(r.weight);if(!r.id||!r.department||!Number.isFinite(w)||w<=0)throw Error('管理表のID・部門・weightを確認してください');(map[r.id]??=[]).push({...r,weight:w});}
+ for(const r of bills){if(!r.id||ids.has(r.id))throw Error('明細IDが空または重複しています');ids.add(r.id);const value=Number(r.amount);if(r.amount===''||!Number.isSafeInteger(value)||value<0){warnings.push(r.id+'：金額不正（集計対象外）');continue;}
+ const groups=map[r.id];if(!groups){warnings.push(r.id+'：管理表未登録（集計対象外）');continue;}
+ const sum=groups.reduce((s,g)=>s+g.weight,0);if(!Number.isFinite(sum)||sum<=0)throw Error('weight合計が不正です');let used=0;
+ groups.forEach((g,i)=>{const amount=i===groups.length-1?value-used:Math.floor(value*(g.weight/sum));if(!Number.isSafeInteger(amount)||amount<0)throw Error('按分金額が不正です');used+=amount;const total=(totals[g.department]||0)+amount;if(!Number.isSafeInteger(total))throw Error('集計額が安全な整数範囲を超えました');result.push({id:r.id,department:g.department,amount});totals[g.department]=total;});}
+ renderTable('result',csvHeaders,result);renderTable('totals',['department','amount'],Object.entries(totals).map(([department,amount])=>({department,amount})));show(warnings);
+}
+function renderTable(id,keys,rows,cell){
+ const table=$(id);table.tHead.replaceChildren();const tr=document.createElement('tr');keys.forEach(k=>{const th=document.createElement('th');th.textContent=k;tr.append(th);});table.tHead.append(tr);table.tBodies[0].replaceChildren();
+ rows.forEach(r=>{const tr=document.createElement('tr');tr.dataset.id=r.id||r.department;keys.forEach(k=>{const td=document.createElement('td');if(cell)cell(td,k,r);else td.textContent=r[k];tr.append(td);});table.tBodies[0].append(tr);});
+}
+function show(issues){$('error').textContent='';$('summary').textContent='結果 '+result.length+'行 ／ 確認事項 '+issues.length+'件';$('alerts').replaceChildren();for(const s of issues.length?issues:['検出された確認事項はありません（正式な制度・実務判定ではありません）']){const li=document.createElement('li');li.textContent=s;$('alerts').append(li);}$('export').disabled=!result.length||issues.some(x=>!x.includes('作成対象外'));}
+function clearResult(){result=[];warnings=[];totals=Object.create(null);$('result').tHead.replaceChildren();$('result').tBodies[0].replaceChildren();$('totals').tBodies[0].replaceChildren();$('alerts').replaceChildren();$('export').disabled=true;}
+function calculate(){try{if(spec.family==='schedule')schedule();else allocate();}catch(e){clearResult();$('error').textContent=e.message;$('summary').textContent='入力エラー：結果を使用できません';}}
+function reset(){clearResult();$('source').value=spec.input;$('master').value=spec.master;$('absence').value='';$('error').textContent='';$('summary').textContent='入力を確認して「作成・再計算」を押してください。';}
+function csvCell(value){let s=String(value);if(/^[=+\-@\t\r]/.test(s))s="'"+s;return '"'+s.replaceAll('"','""')+'"';}
+function exportCSV(){const content='\uFEFF'+[csvHeaders,...result.map(r=>csvHeaders.map(k=>r[k]))].map(r=>r.map(csvCell).join(',')).join('\r\n');const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([content],{type:'text/csv;charset=utf-8'}));a.download='poc-result.csv';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000);}
+document.getElementById('calculate').addEventListener('click',calculate);document.getElementById('reset').addEventListener('click',reset);document.getElementById('export').addEventListener('click',exportCSV);for(const id of ['source','master'])$(id).addEventListener('input',()=>{clearResult();$('summary').textContent='入力を変更しました。再計算してください。';});$('absence').addEventListener('change',calculate);reset();
+</script></body></html>
